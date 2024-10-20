@@ -38,7 +38,7 @@ banner = """
  ....  ................................................
 """
 
-# Mostra banner
+# Mostrar banner
 
 table_data = [
 
