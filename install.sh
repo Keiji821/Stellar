@@ -108,5 +108,4 @@ clear
 echo
 printf "$gris[$verde2✔$gris]${blanco2} Instalación completada.\n"
 echo
-cd
 bash
