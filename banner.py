@@ -48,5 +48,5 @@ table_data = [
 
 print(Fore.RED + Back.BLACK + tabulate(table_data + tablefmt="fancy_grid") + Style.RESET_ALL)
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.WHITE + "Stellar [V1.0]" + Style.RESET_ALL)
-print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]", Fore.WHITE + "Comandos: menu", Style.RESET_ALL)
+print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]", Fore.WHITE + "Para ver comandos utilice: menu", Style.RESET_ALL)
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]", Fore.WHITE + "Hora actual: " + hour_string + " │ Fecha: " + date_string + Style.RESET_ALL)
