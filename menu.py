@@ -5,11 +5,13 @@ from tabulate import tabulate
 init()
 
 menu_data = [
-    ["ipinfo", "Osint"],
-    ["phoneinfo", "Osint"],
-    ["urlinfo", "Osint"],
+    ["reload", "RECARGAR BANNER"],
+    ["ipinfo", "OSINT"],
+    ["phoneinfo", "OSINT"],
+    ["urlinfo", "OSINT"],
+    ["ia", "IA"],
 ]
 
 headers = ["Comando", "Descripción"]
 
-print(Fore.BLACK + Back.RED + tabulate(menu_data, headers, tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Fore.RED + tabulate(menu_data, headers, tablefmt="fancy_grid"), Style.RESET_ALL)

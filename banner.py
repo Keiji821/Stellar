@@ -23,9 +23,7 @@ hour_string = now.strftime("%I:%M%p")
 os.system("""
 cd
 
-jp2a --color https://cdn.mos.cms.futurecdn.net/5CMoThMWnZPipk2rw95SaM-320-80.png
-
-""")
+jp2a --color https://cdn.mos.cms.futurecdn.net/5CMoThMWnZPipk2rw95SaM-320-80.png""")
 
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Stellar [V1.0]" + Style.RESET_ALL)
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Para ver comandos utilice: menu", Style.RESET_ALL)

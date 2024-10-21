@@ -2,29 +2,39 @@ import requests
 from colorama import init, Fore, Back, Style
 import textwrap
 import os
+from tabulate import tabulate
 
 init()
 
-api_key = "Kastg_fKlIk2c1LRc8969in2g9_free"
+API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
+
+def get_ai_response(user_input):
+    try:
+        url = f"https://api.kastg.xyz/api/ai/llamaV3-large?key={API_KEY}&prompt={user_input}"
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()["result"][0]["response"]
+    except requests.exceptions.RequestException as e:
+        print(Fore.RED + "Error: " + str(e) + Style.RESET_ALL)
+        return None
+
+def print_ai_response(response):
+    wrapped_response = textwrap.fill(response, width=50)
+    response_table = [[wrapped_response]]
+    print(Style.RESET_ALL)
+    print(tabulate(response_table, headers=["Stellar IA"], tablefmt="fancy_grid"))
+
+def execute_command(command):
+    print(f"Ejecutando comando: {command}")
+    os.system(command)
 
 while True:
     user_input = input(Fore.GREEN + Style.BRIGHT + "> ")
-    url = f"https://api.kastg.xyz/api/ai/llamaV3-large?key={api_key}&prompt={user_input}"
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        result = response.json()['result'][0]['response']
-        block_size = 50
-        blocks = [Style.BRIGHT + result[i:i+block_size] for i in range(0, len(result), block_size)]
-        print(Fore.RED + Style.BRIGHT + "Stellar IA" + Style.RESET_ALL)
-        for block in blocks:
-            print(block)
-
-
-        if "ejecutar " in result:
-            command = result.split("ejecutar ")[1]
-            print(f"Ejecutando comando: {command}")
-            os.system(command)
-
+    response = get_ai_response(user_input)
+    if response:
+        print_ai_response(response)
+        if "ejecutar " in response:
+            command = response.split("ejecutar ")[1]
+            execute_command(command)
     else:
-        print(Fore.RED + "Error: " + str(response.status_code) + Style.RESET_ALL)
+        print(Fore.RED + "Error" + Style.RESET_ALL)
