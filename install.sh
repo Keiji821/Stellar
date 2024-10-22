@@ -44,6 +44,21 @@ clear
 
 # Instalar dependencias bash necesarias
 
+clear
+
+sleep 0.1
+
+echo
+printf "$gris[$verde2+$gris]${blanco} Instalando termux-tools...$SECONDS\n"
+echo
+
+sleep 1
+
+printf "${verde2}"
+pkg install termux-tools --wait &>> /dev/null
+
+sleep 1
+
 echo
 printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 echo
