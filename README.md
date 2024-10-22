@@ -1,3 +1,3 @@
-**Stellar V1.0**
+**Stellar**
 
-Herramienta de hacking para termux
+Herramienta de hacking para termux, 
