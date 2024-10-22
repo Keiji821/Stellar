@@ -37,6 +37,7 @@ ___Stellar V1.0___
 
 # 
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
+# 
 
 # 📄 Guía de uso:
 
