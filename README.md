@@ -36,7 +36,7 @@ ___Stellar V1.0___
 - Chat Tor
 
 # 
-> ```La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.```
+> `La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.`
 # 
 
 # 📄 Guía de uso:
