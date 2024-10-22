@@ -59,6 +59,8 @@ pkg install termux-api --wait &>> /dev/null
 
 sleep 1
 
+clear
+
 echo
 printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 echo
