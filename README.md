@@ -14,7 +14,7 @@ Pasos de instalación:
 
 # Características:
 
-__Stellar V1.0__
+___Stellar V1.0___
 
 - Osint
 
