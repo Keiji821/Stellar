@@ -29,9 +29,7 @@ clear
 
 sleep 0.1
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
-echo
 
 sleep 1
 
@@ -48,9 +46,7 @@ clear
 
 sleep 0.1
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
-echo
 
 sleep 1
 
@@ -61,9 +57,7 @@ sleep 1
 
 clear
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
-echo
 
 sleep 1
 
@@ -73,18 +67,14 @@ sleep 1
 
 clear
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
-echo
 
 sleep 1
 
 pkg install tor &>> /dev/null                                                                                                                                  sleep 1                                                                          
 clear
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
-echo
 
 sleep 1
 
@@ -93,62 +83,40 @@ clear
 
 # Instalar dependencias python necesarias
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 
 sleep 1
 
 clear
 
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install beautifulsoup4 &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install bs4 &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install colorama &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install phonenumbers &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install psutil &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install PySocks &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install requests &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install tabulate &>> /dev/null
 clear
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install tqdm &>> /dev/null
 clear
-echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
-echo
 reload
 sleep 1
 termux-toast ✅️ Stellar Instalado correctamente
