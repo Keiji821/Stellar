@@ -14,6 +14,8 @@ Pasos de instalación:
 
 # Características:
 
+__Stellar V1.0__
+
 - Osint
 
 - Pentesting
