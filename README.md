@@ -12,7 +12,7 @@ Pasos de instalación:
 
 - ```bash install.sh```
 
-# Características:
+# 🧩 Características:
 
 ___Stellar V1.0___
 
