@@ -11,3 +11,19 @@ Pasos de instalación:
 **Esto instalará las dependencias necesarias para la Herramienta.**
 
 • ```bash install.sh```
+
+# Características:
+
+- Osint
+
+- Pentesting
+
+- Phising
+
+- Encryption
+
+- Misc
+
+- IA
+
+- Chat Tor
