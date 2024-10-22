@@ -17,6 +17,22 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
+# Configurar .bashrc a home
+
+cd
+
+rm -rf .bashrc
+
+cd Stellar
+
+git pull
+
+mv .bashrc ~/
+
+git pull
+
+cd
+
 # Actualizar paquetes
 
 clear
@@ -24,7 +40,7 @@ clear
 sleep 0.1
 
 echo
-printf "$gris[$verde2+$gris]${blanco2} Actualizando paquetes.\n"
+printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 echo
 
 sleep 1
@@ -39,7 +55,7 @@ clear
 # Instalar dependencias bash necesarias
 
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando python.\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 echo
 
 sleep 1
@@ -50,10 +66,28 @@ sleep 1
 
 clear
 
+echo
+printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
+echo
+
+sleep 1
+
+pkg install tor &>> /dev/null                                                                                                                                  sleep 1                                                                          
+clear
+
+echo
+printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
+echo
+
+sleep 1
+
+pkg install cloudflared &>> /dev/null                                                                                                                                  sleep 1                                                                          
+clear
+
 # Instalar dependencias python necesarias
 
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 
 sleep 1
@@ -61,51 +95,51 @@ sleep 1
 clear
 
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install beautifulsoup4 &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install bs4 &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install colorama &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install phonenumbers &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install psutil &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install PySocks &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install requests &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install tabulate &>> /dev/null
 clear
 echo
-printf "$gris[$verde2+$gris]${blanco2} Instalando paquetes python...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install tqdm &>> /dev/null
 clear
 echo
-printf "$gris[$verde2✔$gris]${blanco2} Instalación completada.\n"
+printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 echo
 bash

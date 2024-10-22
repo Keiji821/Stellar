@@ -23,6 +23,7 @@ def print_ai_response(response):
     response_table = [[wrapped_response]]
     print(Style.RESET_ALL)
     print(tabulate(response_table, headers=["Stellar IA"], tablefmt="fancy_grid"))
+    print(" ")
 
 def execute_command(command):
     print(f"Ejecutando comando: {command}")
