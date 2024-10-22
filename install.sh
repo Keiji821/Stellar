@@ -149,6 +149,6 @@ clear
 echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 echo
-bash
+bash --wait
 sleep 1
-termux-toast ✅️ Stellar Instalado correctamente
+echo termux-toast ✅️ Stellar Instalado correctamente
