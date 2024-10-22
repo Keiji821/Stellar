@@ -21,19 +21,7 @@ cyan="$b\033[38;2;23;147;209m"
 
 clear
 
-cd
-
-rm -rf .bashrc
-
-cd Stellar
-
-git pull
-
 mv .bashrc ~/
-
-git pull
-
-cd
 
 # Actualizar paquetes
 
