@@ -19,6 +19,8 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Configurar .bashrc a home
 
+clear
+
 cd
 
 rm -rf .bashrc
