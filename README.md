@@ -9,4 +9,5 @@ Pasos de instalación:
 ```cd Stellar```
 
 **Esto instalará las dependencias necesarias para la Herramienta.**
+
 ```bash install.sh```
