@@ -37,6 +37,6 @@ ___Stellar V1.0___
 
 _La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux._
 
-# Guía de uso:
+# 📄 Guía de uso:
 
 Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar.
