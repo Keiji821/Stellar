@@ -150,4 +150,5 @@ echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 echo
 bash
+sleep 1
 termux-toast ✅️ Stellar Instalado correctamente
