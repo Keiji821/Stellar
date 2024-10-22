@@ -2,9 +2,7 @@
 
 [![Bash Shell](https://badges.frapsoft.com/bash/v1/bash.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-[![GitHub version]
-
-(https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/Keiji821/Stellar)
+[![GitHub version](https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/Keiji821/Stellar)
 
 # Stellar
 
