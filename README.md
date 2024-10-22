@@ -42,3 +42,4 @@ ___Stellar V1.0___
 # 📄 Guía de uso:
 
 > Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar.
+# 
