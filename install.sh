@@ -49,13 +49,13 @@ clear
 sleep 0.1
 
 echo
-printf "$gris[$verde2+$gris]${blanco} Instalando termux-tools...$SECONDS\n"
+printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 echo
 
 sleep 1
 
 printf "${verde2}"
-pkg install termux-tools --wait &>> /dev/null
+pkg install termux-api --wait &>> /dev/null
 
 sleep 1
 
@@ -148,3 +148,4 @@ echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 echo
 bash
+termux-toast Instalación completada
