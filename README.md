@@ -1,16 +1,12 @@
-**Stellar**
+# Stellar
 
 Herramienta de hacking para termux, dedicado a termux.
 
 Pasos de instalación:
 
-```git clone https://github.com/Keiji821/Stellar
-```
+```git clone https://github.com/Keiji821/Stellar```
 
-```
-cd Stellar
-```
-# Esto instalará las dependencias necesarias para la Herramienta.
-```
-bash install.sh
-```
+```cd Stellar```
+
+**Esto instalará las dependencias necesarias para la Herramienta.**
+```bash install.sh```
