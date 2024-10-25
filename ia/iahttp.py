@@ -10,7 +10,7 @@ API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 
 def get_ai_response(user_input):
     try:
-        url = f"https://api.kastg.xyz/api/ai/llamaV3-large?key={API_KEY}&prompt={user_input}"
+        url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={API_KEY}&prompt={user_input}"
         response = requests.get(url)
         response.raise_for_status()
         return response.json()["result"][0]["response"]

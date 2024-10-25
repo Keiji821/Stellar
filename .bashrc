@@ -30,34 +30,32 @@ function cd() {
 
 clear
 
-echo
-printf "${amarillo}[${verde}+${amarillo}]${blanco} Exportando SOCKS5...$SECONDS"
-echo
+termux-toast -c green -b black "Cerrando puerto 9050."
+pkill 9050
+termux-toast -c green -b black "Matando proceso Tor."
+pkill tor
+termux-toast -c green -b black "Matando proceso Cloudflared."
+pkill cloudflared
 
-export ALL_PROXY=socks5://localhost:9050
+termux-toast -c green -b black "Exportando SOCKS5...s$SECONDS"
 
-clear
-
-echo
-printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando tor...$SECONDS"
-echo
-
-tor &>>/dev/null
+export ALL_PROXY=socks5h://localhost:9050
 
 clear
 
-echo
-printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando cloudflare...$SECONDS"
-echo
+termux-toast -c green -b black "Iniciando Tor...s$SECONDS"
+
+tor --detach
+
+clear
+
+termux-toast -c green -b black "Iniciando Cloudflared...s$SECONDS"
 
 cloudflared tunnel --url socks5://localhost:9050 &>>/dev/null
 
 clear
 
-echo
-printf "${amarillo}[${verde}✔${amarillo}]${blanco} Operación completada."
-echo
-
+termux-toast -c green -b black "✔ Operación completada."
 
 # Mostrar banner al final
 
