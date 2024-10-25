@@ -30,7 +30,7 @@ ___Stellar V1.0___
 
 ~/Stellar
 
-- Osint
+- Osint `(4 comandos)`
 
 - Pentesting `(En desarrollo)`  
 
