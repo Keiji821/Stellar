@@ -1,8 +1,8 @@
+[![Imagen de Stellar](images/anti-spiral1.jpg)](https://github.com/Keiji821/Stellar)
+
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)[![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/)
-
-[![Imagen de Stellar](images/anti-spiral1.jpg)](https://github.com/Keiji821/Stellar)
 
 
 # Stellar
