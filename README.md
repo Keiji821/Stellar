@@ -12,7 +12,7 @@ Herramienta de hacking para termux, dedicado a termux.
 <details>
   <summary>Pasos de instalación</summary>
 
-*Nota:* asegúrate de tener descargado termux:api desde F-Droid para el correcto funcionamiento de la herramienta.
+**Nota:** asegúrate de tener descargado termux:api desde F-Droid para el correcto funcionamiento de la herramienta.
 
 - ```git clone https://github.com/Keiji821/Stellar```
 
@@ -25,7 +25,6 @@ Herramienta de hacking para termux, dedicado a termux.
 
 <details>
   <summary>Características</summary>
-# 🧩 Características:
 
 ___Stellar V1.0___
 
@@ -50,8 +49,10 @@ La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en s
 
 <details>
   <summary>Guía de uso</summary>
+
 > Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar.
 
 #
 </details>
+
 **🍁 Hecho por Keiji821 para termux**```...```
