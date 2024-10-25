@@ -28,19 +28,19 @@ Herramienta de hacking para termux, dedicado a termux.
 
 ___Stellar V1.0___
 
+~/Stellar
+
 - Osint
 
-- Pentesting
+- Pentesting `(En desarrollo)`  
 
-- Phising
+- Phising `(En desarrollo)`  
 
-- Encryption
+- Encryption `(En desarrollo)`  
 
-- Misc
+- Misc `(En desarrollo)`  
 
-- IA
-
-- Chat Tor
+- Chat Tor `(En desarrollo)`  
 
 # 🛡 Seguridad
 La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
