@@ -21,11 +21,11 @@ try:
     response2.raise_for_status()
     data2 = response2.json()
 except requests.exceptions.RequestException as e:
-    print(Fore.RED + " |〔Error〕: " + str(e), Style.RESET_ALL)
+    print(Fore.RED + "Error: " + str(e), Style.RESET_ALL)
 except ValueError as e:
-    print(Fore.RED + " |〔Error〕: " + str(e), Style.RESET_ALL)
+    print(Fore.RED + "Error: " + str(e), Style.RESET_ALL)
 except Exception as e:
-    print(Fore.RED + " |〔Error〕: " + str(e), Style.RESET_ALL)
+    print(Fore.RED + "Error: " + str(e), Style.RESET_ALL)
 
 
 table_data1 = [
