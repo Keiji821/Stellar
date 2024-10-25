@@ -109,14 +109,14 @@ ddos() {
 ipinfohistory() {
   cd
   cd Stellar/database
-  ips_info_db_consult.py
+  python ips_info_db_consult.py
   cd
 }
 
 phoneinfohistory() {
   cd
   cd Stellar/database
-  phone_info_db_consult.py
+  python phone_info_db_consult.py
   cd
 }
 
