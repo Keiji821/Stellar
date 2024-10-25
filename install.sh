@@ -120,6 +120,6 @@ pip install tqdm &>> /dev/null
 clear
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 clear
-python Stellar/banner.py
+python banner.py
 sleep 0.1
 termux-toast -c green -b black "✔ Stellar instalado correctamente"
