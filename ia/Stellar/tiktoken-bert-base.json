@@ -1,8 +1,0 @@
-{
-  "model": "bert-base-uncased",
-  "vocab_size": 30522,
-  "max_len": 512,
-  "truncation": true,
-  "padding": "max_length",
-  "special_tokens": ["[CLS]", "[SEP]", "[PAD]", "[UNK]", "[MASK]"]
-}
