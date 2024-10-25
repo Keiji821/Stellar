@@ -29,11 +29,8 @@ clear
 
 sleep 0.1
 
-<<<<<<< HEAD
-=======
 termux-toast -c green -b black "❕️ Iniciando instalación"
 
->>>>>>> 2086317 (Stellar V1.0)
 printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 
 sleep 1
