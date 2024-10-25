@@ -30,8 +30,6 @@ function cd() {
 
 clear
 
-termux-toast -c green -b black "Cerrando puerto 9050"
-pkill 9050
 termux-toast -c green -b black "Matando proceso Tor"
 pkill tor
 termux-toast -c green -b black "Matando proceso Cloudflared"
@@ -39,7 +37,7 @@ pkill cloudflared
 
 termux-toast -c green -b black "Exportando SOCKS5...s$SECONDS"
 
-export ALL_PROXY=socks5h://localhost:9050
+export ALL_PROXY=socks5h://localhost:0000
 
 clear
 
@@ -51,7 +49,7 @@ clear
 
 termux-toast -c green -b black "Iniciando Cloudflared...s$SECONDS"
 
-cloudflared tunnel --url socks5://localhost:9050 &>>/dev/null
+cloudflared tunnel --url $ALL_PROXY &>>/dev/null
 
 clear
 
