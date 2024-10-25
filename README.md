@@ -4,7 +4,18 @@
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)[![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/)
 
-# Stellar
+<html>
+  <head>
+    <style>
+      body {
+        background-image: url(imagenes/anti-spiral1.jpg);
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!--# Stellar
 
 Herramienta de hacking para termux, dedicado a termux.
 
@@ -54,4 +65,6 @@ La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en s
 #
 </details>
 
-**🍁 Hecho por Keiji821 para termux**```...```
+**🍁 Hecho por Keiji821 para termux**```...```-->
+  </body>
+</html>
