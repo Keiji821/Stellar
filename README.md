@@ -59,7 +59,7 @@ La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en s
   <summary>📚 Registro de cambios</summary>
 
 #
-Actualización/00/00/0000
+Actualización/00/00/2024
 
 #
 </details>
