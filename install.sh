@@ -29,14 +29,14 @@ clear
 
 sleep 0.1
 
-termux-toast -c green -b black "❕️ Iniciando instalación"
+termux-toast -c green -b black "Iniciando instalación"
 
 printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 
 sleep 1
 
 printf "${verde2}"
-pkg update && pkg upgrade --wait &>> /dev/null
+pkg update && pkg upgrade &>> /dev/null
 
 sleep 1
 
@@ -53,7 +53,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
-pkg install termux-api --wait &>> /dev/null
+pkg install termux-api &>> /dev/null
 
 sleep 1
 
@@ -119,13 +119,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 pip install tqdm &>> /dev/null
 clear
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
-<<<<<<< HEAD
-reload
-sleep 1
-termux-toast ✅️ Stellar Instalado correctamente
-=======
 clear
 python Stellar/banner.py
 sleep 0.1
 termux-toast -c green -b black "✔ Stellar instalado correctamente"
->>>>>>> 2086317 (Stellar V1.0)
