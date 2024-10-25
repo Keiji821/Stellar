@@ -30,11 +30,11 @@ function cd() {
 
 clear
 
-termux-toast -c green -b black "Cerrando puerto 9050."
+termux-toast -c green -b black "Cerrando puerto 9050"
 pkill 9050
-termux-toast -c green -b black "Matando proceso Tor."
+termux-toast -c green -b black "Matando proceso Tor"
 pkill tor
-termux-toast -c green -b black "Matando proceso Cloudflared."
+termux-toast -c green -b black "Matando proceso Cloudflared"
 pkill cloudflared
 
 termux-toast -c green -b black "Exportando SOCKS5...s$SECONDS"
@@ -55,9 +55,11 @@ cloudflared tunnel --url socks5://localhost:9050 &>>/dev/null
 
 clear
 
-termux-toast -c green -b black "✔ Operación completada."
+termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
+
+sleep 15
 
 cd
 
@@ -130,19 +132,21 @@ menu() {
 }
 
 reload() {
-  cd
-  clear
-  cd Stellar
-  python banner.py
-  cd
+  bash
 }
 
 # Utilidades - herramientas
 
 ia() {
  cd
- cd Stellar/ia
+ cd Stellar/misc/utilidades
  python iahttp.py
  cd
 
+}
+
+# Actualizaciones
+
+update() {
+  git pull /sdcard/Stellar &>/dev/null && termux-toast -c green -b black "Actualizado con éxito" || termux-toast -c red -b black "Error al actualizar"
 }
