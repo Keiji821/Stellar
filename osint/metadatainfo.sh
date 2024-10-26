@@ -19,3 +19,14 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Metadatainfo
 
+read -p 'Directorio: ' directory
+cd $directory
+
+read -p 'Archivo: ' image
+
+exiftool --tag Writing $image
+
+
+
+
+
