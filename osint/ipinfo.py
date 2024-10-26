@@ -12,7 +12,7 @@ init()
 
 IpQuery = input(Fore.GREEN + Style.BRIGHT + "Ingrese la IP: ")
 
-try: 
+try:
     response1 = requests.get('https://ipapi.co/' + IpQuery + '/json/')
     response1.raise_for_status()
     data1 = response1.json()
