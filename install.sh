@@ -83,6 +83,13 @@ sleep 1
 apt install cloudflared &>>/dev/null                                                                                                                             sleep 1                                                                          
 clear
 
+printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
+
+sleep 1
+
+apt install exiftool &>>/dev/null                                                                                                                             sleep 1                                                                          
+clear
+
 # Instalar dependencias python necesarias
 
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
