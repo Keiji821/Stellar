@@ -22,11 +22,11 @@ cyan="$b\033[38;2;23;147;209m"
 printf "${amarillo}"
 read -p 'Directorio: ' directorio
 cd
-cd "$directorio"
+cd "${directorio}"
 
 read -sp 'Archivo: ' imagen
 
-exiftool --tag Writing "$imagen"
+exiftool --tag Writing "${imagen}"
 
 
 
