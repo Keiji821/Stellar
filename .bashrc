@@ -30,34 +30,20 @@ function cd() {
 
 clear
 
-termux-toast -c green -b black "Matando proceso Tor"
+termux-toast -c green -b black "Iniciando Tor y Cloudflared"
 pkill tor
-termux-toast -c green -b black "Matando proceso Cloudflared"
 pkill cloudflared
-
-termux-toast -c green -b black "Exportando SOCKS5...s$SECONDS"
-
-export ALL_PROXY=socks5h://localhost:0000
-
-clear
-
-termux-toast -c green -b black "Iniciando Tor...s$SECONDS"
-
-tor --detach
+sleep 1
+export ALL_PROXY=socks5h://localhost:9050
+sleep 1
+tor &
+cloudflared --url Stellar &
 
 clear
-
-termux-toast -c green -b black "Iniciando Cloudflared...s$SECONDS"
-
-cloudflared tunnel --url $ALL_PROXY &>>/dev/null
-
-clear
-
+sleep 10
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
-
-sleep 15
 
 cd
 
@@ -130,7 +116,7 @@ menu() {
 }
 
 reload() {
-  bash
+  source .bashrc
 }
 
 # Utilidades - herramientas
