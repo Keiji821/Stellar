@@ -20,13 +20,13 @@ cyan="$b\033[38;2;23;147;209m"
 # Metadatainfo
 
 printf "${amarillo}"
-read -p 'Carpeta: ' carpeta
+read -p 'Directorio: ' directorio
 cd
-cd storage/dcim/$carpeta
+cd "$directorio"
 
 read -sp 'Archivo: ' imagen
 
-exiftool --tag Writing $imagen
+exiftool --tag Writing "$imagen"
 
 
 
