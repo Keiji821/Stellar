@@ -40,7 +40,7 @@ tor &
 cloudflared --url Stellar &
 
 clear
-sleep 10
+sleep 15
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
