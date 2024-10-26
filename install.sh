@@ -36,7 +36,7 @@ printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
-pkg update && pkg upgrade &
+apt update && apt upgrade &>>/dev/null
 
 sleep 1
 
@@ -53,7 +53,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
-pkg install termux-api &
+apt install termux-api &>>/dev/null
 
 sleep 1
 
@@ -63,7 +63,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 
 sleep 1
 
-pkg install python &
+apt install python &>>/dev/null
 
 sleep 1
 
@@ -73,14 +73,14 @@ printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
 
 sleep 1
 
-pkg install tor &                                                                                                                                  sleep 1                                                                          
+apt install tor &>>/dev/null                                                                                                                     sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
 
 sleep 1
 
-pkg install cloudflared &                                                                                                                                sleep 1                                                                          
+apt install cloudflared &>>/dev/null                                                                                                                             sleep 1                                                                          
 clear
 
 # Instalar dependencias python necesarias
