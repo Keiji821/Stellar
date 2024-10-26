@@ -24,7 +24,7 @@ read -p 'Directorio: ' directorio
 cd
 cd "${directorio}"
 
-read -sp 'Archivo: ' imagen
+read -p 'Archivo: ' imagen
 
 exiftool --tag Writing "${imagen}"
 
