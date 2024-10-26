@@ -38,7 +38,7 @@ ___Stellar V1.0___
 
 - Encryption `(En desarrollo)`  
 
-- Misc `(4 comandos)`  
+- Misc `(2 comandos)`  
 
 - Chat Tor `(En desarrollo)`  
 
