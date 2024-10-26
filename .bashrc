@@ -79,7 +79,7 @@ urlinfo() {
 metadatainfo() {
   cd
   cd Stellar/osint
-  python metadatainfo.py
+  bash metadatainfo.sh
   cd
 }
 
