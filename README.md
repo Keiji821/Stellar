@@ -5,7 +5,7 @@
 [![hecho-con-python](https://img.shields.io/badge/Hecho%20con-Python-1f425f.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![hecho-con-bash](https://img.shields.io/badge/Hecho%20con-Bash-1f425f.svg?logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
-> [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
+> [![GitHub watchers](https://img.shields.io/github/Vistas/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 [![GitHub forks](https://img.shields.io/github/forks/Keiji821/Stellar.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/network/)
 
 
