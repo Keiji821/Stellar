@@ -36,6 +36,7 @@ printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
+echo
 apt update && apt upgrade &
 
 sleep 1
@@ -53,6 +54,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
+echo
 apt install termux-api &
 
 sleep 1
@@ -63,6 +65,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 
 sleep 1
 
+echo
 apt install python &
 
 sleep 1
@@ -73,6 +76,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
 
 sleep 1
 
+echo
 apt install tor &                                                                                                                   sleep 1                                                                          
 clear
 
@@ -80,6 +84,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
 
 sleep 1
 
+echo
 apt install cloudflared &                                                                                                                         sleep 1                                                                          
 clear
 
@@ -87,6 +92,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
 
 sleep 1
 
+echo
 apt install exiftool &                                                                                                                      sleep 1                                                                          
 clear
 
@@ -99,33 +105,43 @@ sleep 1
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install beautifulsoup4 &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install bs4 &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install colorama &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install phonenumbers &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install psutil &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install PySocks &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install requests &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install tabulate &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
 pip install tqdm &
 clear
 sleep 5
+echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 sleep 1
 clear
