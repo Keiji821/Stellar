@@ -49,7 +49,8 @@ termux-toast -c green -b black "✔ Operación completada"
 
 # .bashrc
 
-trap ' bash ~/Stellar/update.sh' MV
+chmod +x Stellar/update.sh
+trap 'bash Stellar/update.sh' MV
 
 # Mostrar banner al final
 
