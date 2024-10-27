@@ -6,7 +6,7 @@
 [![hecho-con-bash](https://img.shields.io/badge/Hecho%20con-Bash-1f425f.svg?logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-[![watchers](https://img.shields.io/github/watchers/keiji/stellar?style=social)](https://github.com/Keiji821/Stellar)
+[![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 
 [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 
