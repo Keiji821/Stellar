@@ -1,7 +1,7 @@
 [![Imagen de Stellar](imagenes/anti-spiral1.jpg)](https://github.com/Keiji821/Stellar)
 
-[![Amor por el Código Abierto](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![ Estado de Mantenimiento](https://img.shields.io/badge/Estado%20de%20Mantenimiento-activo verde.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Código Abierto](https://img.shields.io/badge/Código%20Abierto-yes-blue.svg)](https://github.com/ellerbrock/open-source-badges/)
+[![Mantenido por el desarrollador](https://img.shields.io/badge/Mantenido%20por%20el%20desarrollador-sí-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
 [![hecho-con-python](https://img.shields.io/badge/Hecho%20con-Python-1f425f.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![hecho-con-bash](https://img.shields.io/badge/Hecho%20con-Bash-1f425f.svg?logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
