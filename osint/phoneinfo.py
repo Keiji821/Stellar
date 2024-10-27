@@ -46,28 +46,3 @@ while True:
         break
     except phonenumbers.phonenumberutil.NumberParseException:
         print(Fore.RED + "Error: El número de teléfono ingresado no es válido. Por favor, inténtalo de nuevo." + Fore.RESET)
-
-# Guardar numeros
-
-conn = sqlite3.connect('/data/data/com.termux/files/home/Stellar/database/phone_info_history.db', isolation_level=None)
-cursor = conn.cursor()
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS phone_info_history (
-id INTEGER PRIMARY KEY,
-phone_number TEXT,
-timestamp TEXT
-)
-''')
-
-now = datetime.datetime.now()
-timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
-
-cursor.execute("INSERT INTO phone_info_history (id, phone_number, timestamp) VALUES (NULL,?,?)",
-(phone_number, timestamp))
-
-
-# Confirmar los cambios
-conn.commit()
-
-# Cerrar la conexión
-conn.close()
