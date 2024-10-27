@@ -47,6 +47,10 @@ cd
 sleep 17
 termux-toast -c green -b black "✔ Operación completada"
 
+# .bashrc
+
+trap ' bash Stellar/update.sh' MV
+
 # Mostrar banner al final
 
 cd
