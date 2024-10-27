@@ -7,7 +7,7 @@
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 `Stellar`
-[![Stellar-versión](https://img.shields.io/badge/Stellar-versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
+[![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
 [![Vistas del repositorio](https://img.shields.io/github/watchers/keiji/stellar?style=social)](https://github.com/Keiji821/Stellar)
 
