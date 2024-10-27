@@ -7,7 +7,6 @@
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 > [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
-
 > [![GitHub forks](https://img.shields.io/github/forks/Keiji821/Stellar.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/network/)
 
 
