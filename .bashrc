@@ -40,7 +40,7 @@ tor &
 cloudflared --url Stellar &
 
 clear
-cd 
+cd
 cd Stellar
 git pull
 cd
@@ -128,5 +128,4 @@ ia() {
  cd Stellar/misc/utilidades
  python iahttp.py
  cd
-
 }
