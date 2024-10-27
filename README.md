@@ -64,5 +64,3 @@ Actualización/00/00/2024
 
 #
 </details>
-
-**🍁 Hecho por Keiji821 para termux**```...```
