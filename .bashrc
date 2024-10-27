@@ -40,7 +40,11 @@ tor &
 cloudflared --url Stellar &
 
 clear
-sleep 15
+cd 
+cd Stellar
+git pull
+cd
+sleep 17
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
@@ -127,13 +131,4 @@ ia() {
  python iahttp.py
  cd
 
-}
-
-# Actualizaciones
-
-update() {
- cd 
- cd Stellar
- git pull
- cd
 }
