@@ -4,7 +4,8 @@
 [![Mantenido por el desarrollador](https://img.shields.io/badge/Mantenido%20por%20el%20desarrollador-sí-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 [![hecho-con-python](https://img.shields.io/badge/Hecho%20con-Python-1f425f.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![hecho-con-bash](https://img.shields.io/badge/Hecho%20con-Bash-1f425f.svg?logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
-[![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)[![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/tu-usuario/tu-repositorio/releases)[![Vistas del repositorio](https://img.shields.io/github/watchers/keiji/stellar?style=social)](https://github.com/keiji/stellar)
+[![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Stellar versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/tu-usuario/tu-repositorio/releases)[![Vistas del repositorio](https://img.shields.io/github/watchers/keiji/stellar?style=social)](https://github.com/keiji/stellar)
 
 
 # Stellar
