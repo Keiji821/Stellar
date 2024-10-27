@@ -8,6 +8,8 @@
 
 [![watchers](https://img.shields.io/github/watchers/keiji/stellar?style=social)](https://github.com/Keiji821/Stellar)
 
+[![GitHub watchers](https://img.shields.io/github/watchers/Naereen/StrapDown.js.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
+
 
 # Stellar
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
