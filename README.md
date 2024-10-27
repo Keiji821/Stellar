@@ -43,8 +43,8 @@ Herramienta de hacking para termux, dedicado a termux.
 
 - Chat Tor `(En desarrollo)`  
 
-# 🛡 Seguridad
-La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
+🛡 Seguridad
+> La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
 # 
 </details>
 
