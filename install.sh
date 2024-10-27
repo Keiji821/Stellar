@@ -21,6 +21,7 @@ cyan="$b\033[38;2;23;147;209m"
 
 clear
 
+mv .bash_profile ~/
 mv .bashrc ~/
 
 # Actualizar paquetes

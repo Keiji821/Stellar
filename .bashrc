@@ -47,19 +47,12 @@ cd
 sleep 17
 termux-toast -c green -b black "✔ Operación completada"
 
-# .bashrc
-
-chmod +x Stellar/update.sh
-trap 'bash Stellar/update.sh' MV
-
 # Mostrar banner al final
 
 cd
-
+cd Stellar
 clear
-
-python Stellar/banner.py
-
+python banner.py
 cd
 
 # Comandos y scripts
