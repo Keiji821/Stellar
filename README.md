@@ -20,7 +20,7 @@ Herramienta de hacking para termux, dedicado a termux.
 
 - ```cd Stellar```
 
-**Esto instalará las dependencias necesarias para la Herramienta.**
+**Esto instalará las dependencias necesarias para la Herramienta:**
 
 - ```bash install.sh```
 </details>
