@@ -125,8 +125,9 @@ clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 pip install tqdm &
 clear
-printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 sleep 5
+printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
+sleep 1
 clear
 python banner.py
 sleep 0.1
