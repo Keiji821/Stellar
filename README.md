@@ -28,8 +28,6 @@ Herramienta de hacking para termux, dedicado a termux.
 <details>
   <summary>🧩 2. Características</summary>
 
-___Stellar V1.0___
-
 ~/Stellar
 
 - Osint `(4 comandos)`
