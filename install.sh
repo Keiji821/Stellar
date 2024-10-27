@@ -36,7 +36,7 @@ printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
-apt update && apt upgrade &>>/dev/null
+apt update && apt upgrade &
 
 sleep 1
 
@@ -53,7 +53,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 sleep 1
 
 printf "${verde2}"
-apt install termux-api &>>/dev/null
+apt install termux-api &
 
 sleep 1
 
@@ -63,7 +63,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 
 sleep 1
 
-apt install python &>>/dev/null
+apt install python &
 
 sleep 1
 
@@ -73,21 +73,21 @@ printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
 
 sleep 1
 
-apt install tor &>>/dev/null                                                                                                                     sleep 1                                                                          
+apt install tor &                                                                                                                   sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
 
 sleep 1
 
-apt install cloudflared &>>/dev/null                                                                                                                             sleep 1                                                                          
+apt install cloudflared &                                                                                                                         sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
 
 sleep 1
 
-apt install exiftool &>>/dev/null                                                                                                                             sleep 1                                                                          
+apt install exiftool &                                                                                                                      sleep 1                                                                          
 clear
 
 # Instalar dependencias python necesarias
