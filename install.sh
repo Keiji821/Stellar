@@ -35,11 +35,10 @@ printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 
 sleep 1
 
-printf "${verde}"
 echo
 apt update && apt upgrade &
 
-sleep 1
+sleep 3
 
 clear
 
@@ -53,7 +52,6 @@ printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 
 sleep 1
 
-printf "${verde}"
 echo
 apt install termux-api &
 
@@ -106,7 +104,6 @@ clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-printf "${amarillo}"
 pip install beautifulsoup4 &
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
