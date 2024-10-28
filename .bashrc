@@ -38,7 +38,12 @@ export ALL_PROXY=socks5h://localhost:9050
 sleep 1
 tor &
 cloudflared --url Stellar &
-
+sleep 1
+cd
+cd Stellar
+bash update.sh
+cd 
+sleep 1
 clear
 cd
 cd Stellar
