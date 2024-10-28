@@ -96,7 +96,7 @@ ddos() {
 # Base de datos
 
 hola() {
-echo "Hola"
+echo "Hola 123"
 }
 
 # Menu y reload
