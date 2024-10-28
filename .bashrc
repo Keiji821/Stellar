@@ -60,7 +60,6 @@ clear
 python banner.py
 cd
 sleep 1
-echo "Hola"
 
 # Comandos y scripts
 
