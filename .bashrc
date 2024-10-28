@@ -107,13 +107,7 @@ menu() {
 }
 
 reload() {
-  cd
-  cd Stellar
-  git pull --force
-  bash update.sh
-  clear
-  python banner.py
-  cd
+  source .bashrc
 }
 
 # Utilidades - herramientas
