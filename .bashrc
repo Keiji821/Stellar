@@ -39,10 +39,7 @@ sleep 1
 tor &
 cloudflared --url Stellar &
 sleep 1
-cd
-cd Stellar
-bash update.sh
-cd 
+
 sleep 1
 clear
 cd
@@ -125,6 +122,8 @@ menu() {
 
 reload() {
   cd
+  cd Stellar 
+  bash update.sh
   source .bashrc
   cd
 }
