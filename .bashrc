@@ -110,7 +110,7 @@ reload() {
   cd
   cd Stellar 
   bash update.sh
-  source .bashrc
+  python banner.py
   cd
 }
 
