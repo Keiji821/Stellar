@@ -95,19 +95,7 @@ ddos() {
 
 # Base de datos
 
-ipinfohistory() {
-  cd
-  cd Stellar/database
-  python ips_info_db_consult.py
-  cd
-}
 
-phoneinfohistory() {
-  cd
-  cd Stellar/database
-  python phone_info_db_consult.py
-  cd
-}
 
 # Menu y reload
 
