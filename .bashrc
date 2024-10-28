@@ -107,7 +107,9 @@ menu() {
 }
 
 reload() {
+  cd
   source .bashrc
+  cd
 }
 
 # Utilidades - herramientas
