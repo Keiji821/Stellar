@@ -120,7 +120,7 @@ reload() {
 
 ia() {
  cd
- cd Stellar/misc/utilidades
+ cd Stellar/misc/utilidade
  python iahttp.py
  cd
 }
