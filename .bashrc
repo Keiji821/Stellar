@@ -39,12 +39,10 @@ sleep 1
 tor &
 cloudflared --url Stellar &
 sleep 1
-
-sleep 1
 clear
 cd
 cd Stellar
-git pull
+git pull --force
 cd
 sleep 17
 termux-toast -c green -b black "✔ Operación completada"
