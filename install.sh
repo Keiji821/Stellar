@@ -21,7 +21,7 @@ cyan="$b\033[38;2;23;147;209m"
 
 clear
 
-cp ~/stellar/.bashrc ~/.
+cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes
 
