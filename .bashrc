@@ -93,12 +93,6 @@ ddos() {
  cd
 }
 
-# Base de datos
-
-hola() {
-echo "Hola 123"
-}
-
 # Menu y reload
 
 menu() {
