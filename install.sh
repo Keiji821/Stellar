@@ -26,7 +26,6 @@ cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes
 clear
-sleep 0.1
 
 termux-toast -c green -b black "Iniciando instalación"
 
@@ -40,15 +39,12 @@ else
   echo "No se actualizaran los paquetes de termux."
 fi
 
-sleep 1
 clear
 
 # Instalar dependencias bash necesarias
 
 clear
-sleep 0.1
 printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
-sleep 1
 
 echo "¿Desea instalar termux-api? (Y/N)"
 read -r respuesta
@@ -58,13 +54,9 @@ else
   echo "No se instalará termux-api."
 fi
 
-sleep 1
-
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
-
-sleep 1
 
 echo "¿Desea instalar python? (Y/N)"
 read -r respuesta
@@ -74,12 +66,9 @@ else
   echo "No se instalará python."
 fi
 
-sleep 1
-
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
-sleep 1
 
 echo "¿Desea instalar tor? (Y/N)"
 read -r respuesta
@@ -88,12 +77,10 @@ if [[ $respuesta =~ ^[Yy]$ ]]; then
 else
   echo "No se instalará tor."
 fi
-                                                                                                             sleep 1                                                                          
+                                                           
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
-
-sleep 1
 
 echo "¿Desea instalar cloudflared? (Y/N)"
 read -r respuesta
@@ -102,12 +89,10 @@ if [[ $respuesta =~ ^[Yy]$ ]]; then
 else
   echo "No se instalará cloudflared."
 fi 
-                                                                                                                   sleep 1                                                                          
+              
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
-
-sleep 1
 
 echo "¿Desea instalar exiftool? (Y/N)"
 read -r respuesta
@@ -116,7 +101,7 @@ if [[ $respuesta =~ ^[Yy]$ ]]; then
 else
   echo "No se instalará exiftool."
 fi
-                                                                                                                  sleep 1                                                                          
+                                                   
 clear
 
 # Instalar dependencias python necesarias
