@@ -28,7 +28,7 @@ cp ~/Stellar/.bashrc ~/.
 
 termux-toast -c green -b black "Iniciando instalación"
 
-pkg install translate-shell --wait
+pkg install translate-shell
 sleep 2
 echo "n"
 
