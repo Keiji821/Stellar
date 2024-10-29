@@ -64,12 +64,13 @@ printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 
 sleep 1
 
-expect -c "
-spawn pkg install python
-expect "Do you want to continue? [Y/n] "
-send "y"
-expect eof
-"
+echo "¿Desea instalar python? (Y/N)"
+read -r respuesta
+if [[ $respuesta =~ ^[Yy]$ ]]; then
+  pkg install python
+else
+  echo "No se instalará python3"
+fi
 
 sleep 1
 
