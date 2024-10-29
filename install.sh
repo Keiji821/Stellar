@@ -25,93 +25,20 @@ cp ~/Stellar/.bash_profile ~/.
 cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes
-clear
 
 termux-toast -c green -b black "Iniciando instalación"
 
-printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
-sleep 1
-echo "¿Desea actualizar los paquetes de su termux? (Y/N)"
-read -r respuesta
-if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg update && pkg upgrade -y
-else
-  echo "No se actualizaran los paquetes de termux."
-fi
-
-clear
+yes | pkg upgrade && pkg update
 
 # Instalar dependencias bash necesarias
 
-clear
-printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 
-echo "¿Desea instalar termux-api? (Y/N)"
-read -r respuesta
-if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg install termux-api
-else
-  echo "No se instalará termux-api."
-fi
-
-clear
-
-printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
-
-echo "¿Desea instalar python? (Y/N)"
-read -r respuesta
-if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg install python
-else
-  echo "No se instalará python."
-fi
-
-clear
-
-printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
-
-echo "¿Desea instalar tor? (Y/N)"
-read -r respuesta
-if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg install tor
-else
-  echo "No se instalará tor."
-fi
-                                                           
-clear
-
-printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
-
-echo "¿Desea instalar cloudflared? (Y/N)"
-read -r respuesta
-if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg install cloudflared 
-else
-  echo "No se instalará cloudflared."
-fi 
-              
-clear
-
-printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
-
-echo "¿Desea instalar exiftool? (Y/N)"
-read -r respuesta
-if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg install exiftool
-else
-  echo "No se instalará exiftool."
-fi
-                                                   
-clear
 
 # Instalar dependencias python necesarias
 
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-
 sleep 1
-
 clear
-
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install beautifulsoup4 &
