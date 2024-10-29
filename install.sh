@@ -39,7 +39,7 @@ sleep 1
 echo
 pkg update && apt upgrade &
 
-sleep 3
+sleep 10
 
 clear
 
@@ -64,8 +64,12 @@ printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 
 sleep 1
 
-echo
-pkg install python & --wait
+expect -c "
+spawn pkg install python
+expect "Do you want to continue? [Y/n] "
+send "y"
+expect eof
+"
 
 sleep 1
 
