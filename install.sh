@@ -78,45 +78,43 @@ sleep 1
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install beautifulsoup4 &
+pip install beautifulsoup4
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install bs4 &
+pip install bs4
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install colorama &
+pip install colorama
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install phonenumbers &
+pip install phonenumbers
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install psutil &
+pip install psutil
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install PySocks &
+pip install PySocks
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install requests &
+pip install requests
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install tabulate &
+pip install tabulate
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install tqdm &
+pip install tqdm
 clear
 sleep 5
 echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
-sleep 1
-clear
-python banner.py
-sleep 0.1
+sleep 15
+bash
 termux-toast -c green -b black "✔ Stellar instalado correctamente"
