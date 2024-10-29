@@ -34,7 +34,7 @@ sleep 1
 echo "¿Desea actualizar los paquetes de su termux? (Y/N)"
 read -r respuesta
 if [[ $respuesta =~ ^[Yy]$ ]]; then
-  pkg update && pkg upgrade
+  pkg update && pkg upgrade -y
 else
   echo "No se actualizaran los paquetes de termux."
 fi
