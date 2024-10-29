@@ -17,7 +17,7 @@ utilidades_data = [
     ["ia", "Chatbot de inteligencia artificial."],
 ]
 
-Tabla de comandos de utilidad
+# Tabla de comandos de utilidad
 print(Style.BRIGHT + Fore.RED + tabulate(utiliades_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
 
 osint_data = [
@@ -27,5 +27,5 @@ osint_data = [
     ["metadatainfo", "Recupera los metadatos de una imagen, audio o video."],
 ]
 
-Tabla de comandos osint
+# Tabla de comandos osint
 print(Style.BRIGHT + Fore.RED + tabulate(osint_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
