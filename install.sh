@@ -28,7 +28,9 @@ cp ~/Stellar/.bashrc ~/.
 
 termux-toast -c green -b black "Iniciando instalación"
 
-yes | pkg upgrade && pkg update
+pkg upgrade && pkg update --wait
+sleep 2
+echo "y"
 
 # Instalar dependencias bash necesarias
 
