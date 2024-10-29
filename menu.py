@@ -18,7 +18,7 @@ utilidades_data = [
 ]
 
 # Tabla de comandos de utilidad
-print(Style.BRIGHT + Fore.RED + tabulate(utiliades_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Fore.RED + tabulate(utilidades_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
 
 osint_data = [
     ["ipinfo", "Obtiene la información de una ip."],
