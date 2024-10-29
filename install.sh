@@ -37,7 +37,7 @@ printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
 sleep 1
 
 echo
-apt update && apt upgrade &
+pkg update && apt upgrade &
 
 sleep 3
 
@@ -54,7 +54,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
 sleep 1
 
 echo
-apt install termux-api &
+pkg install termux-api &
 
 sleep 1
 
@@ -65,7 +65,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando python...$SECONDS\n"
 sleep 1
 
 echo
-apt install python &
+pkg install python & --wait
 
 sleep 1
 
@@ -76,7 +76,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
 sleep 1
 
 echo
-apt install tor &                                                                                                                   sleep 1                                                                          
+pkg install tor &                                                                                                                   sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
@@ -84,7 +84,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
 sleep 1
 
 echo
-apt install cloudflared &                                                                                                                         sleep 1                                                                          
+pkg install cloudflared &                                                                                                                         sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
@@ -92,7 +92,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
 sleep 1
 
 echo
-apt install exiftool &                                                                                                                      sleep 1                                                                          
+pkg install exiftool &                                                                                                                      sleep 1                                                                          
 clear
 
 # Instalar dependencias python necesarias
