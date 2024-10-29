@@ -25,36 +25,38 @@ cp ~/Stellar/.bash_profile ~/.
 cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes
-
 clear
-
 sleep 0.1
 
 termux-toast -c green -b black "Iniciando instalación"
 
 printf "$gris[$verde2+$gris]${blanco} Actualizando paquetes...$SECONDS\n"
+sleep 1
+echo "¿Desea actualizar los paquetes de su termux? (Y/N)"
+read -r respuesta
+if [[ $respuesta =~ ^[Yy]$ ]]; then
+  pkg update && pkg upgrade
+else
+  echo "No se actualizaran los paquetes de termux."
+fi
 
 sleep 1
-
-echo
-pkg update && apt upgrade &
-
-sleep 10
-
 clear
 
 # Instalar dependencias bash necesarias
 
 clear
-
 sleep 0.1
-
 printf "$gris[$verde2+$gris]${blanco} Instalando termux-api...$SECONDS\n"
-
 sleep 1
 
-echo
-pkg install termux-api &
+echo "¿Desea instalar termux-api? (Y/N)"
+read -r respuesta
+if [[ $respuesta =~ ^[Yy]$ ]]; then
+  pkg install termux-api
+else
+  echo "No se instalará termux-api."
+fi
 
 sleep 1
 
@@ -69,7 +71,7 @@ read -r respuesta
 if [[ $respuesta =~ ^[Yy]$ ]]; then
   pkg install python
 else
-  echo "No se instalará python3"
+  echo "No se instalará python."
 fi
 
 sleep 1
@@ -77,27 +79,44 @@ sleep 1
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando tor...$SECONDS\n"
-
 sleep 1
 
-echo
-pkg install tor &                                                                                                                   sleep 1                                                                          
+echo "¿Desea instalar tor? (Y/N)"
+read -r respuesta
+if [[ $respuesta =~ ^[Yy]$ ]]; then
+  pkg install tor
+else
+  echo "No se instalará tor."
+fi
+                                                                                                             sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando cloudflared...$SECONDS\n"
 
 sleep 1
 
-echo
-pkg install cloudflared &                                                                                                                         sleep 1                                                                          
+echo "¿Desea instalar cloudflared? (Y/N)"
+read -r respuesta
+if [[ $respuesta =~ ^[Yy]$ ]]; then
+  pkg install cloudflared 
+else
+  echo "No se instalará cloudflared."
+fi 
+                                                                                                                   sleep 1                                                                          
 clear
 
 printf "$gris[$verde2+$gris]${blanco} Instalando exiftool...$SECONDS\n"
 
 sleep 1
 
-echo
-pkg install exiftool &                                                                                                                      sleep 1                                                                          
+echo "¿Desea instalar exiftool? (Y/N)"
+read -r respuesta
+if [[ $respuesta =~ ^[Yy]$ ]]; then
+  pkg install exiftool
+else
+  echo "No se instalará exiftool."
+fi
+                                                                                                                  sleep 1                                                                          
 clear
 
 # Instalar dependencias python necesarias
