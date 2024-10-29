@@ -31,10 +31,7 @@ termux-toast -c green -b black "Iniciando instalación"
 pkg update && pkg upgrade
 sleep 5
 
-printf "
-╒══════════════════════════════════════════╕              
-│Actualizando paquetes 
-╞══════════════════════════════════════════╡"
+printf "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿"
 
 # Instalar dependencias bash necesarias
 
