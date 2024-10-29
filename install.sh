@@ -28,27 +28,29 @@ cp ~/Stellar/.bashrc ~/.
 
 termux-toast -c green -b black "Iniciando instalación"
 
-pkg update && pkg upgrade
-sleep 5
-
-printf "＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿"
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ pkg update && pkg upgrade
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
 # Instalar dependencias bash necesarias
 
-pkg install python 
-sleep 5
-
-pkg install termux-api
-sleep 5
-
-pkg install tor
-sleep 5
-
-pkg install cloudflared 
-sleep 5
-
-pkg install exiftool
-sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ pkg install python 
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ pkg install termux-api
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ pkg install tor
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ pkg install cloudflared 
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ pkg install exiftool
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
 # Instalar dependencias python necesarias
 
