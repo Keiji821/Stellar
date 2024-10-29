@@ -30,7 +30,8 @@ termux-toast -c green -b black "Iniciando instalación"
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes." 
+ printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes."
+ echo
  pkg update && pkg upgrade
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
@@ -40,26 +41,31 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿$
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando python."
+ echo
  pkg install python 
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api."
+ echo
  pkg install termux-api
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando tor."
+ echo
  pkg install tor
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando cloudflared."
+ echo
  pkg install cloudflared 
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool."
+ echo
  pkg install exiftool
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
