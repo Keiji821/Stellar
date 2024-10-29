@@ -113,7 +113,6 @@ echo
 pip install tqdm
 clear
 sleep 5
-echo
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 sleep 15
 bash
