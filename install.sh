@@ -28,11 +28,25 @@ cp ~/Stellar/.bashrc ~/.
 
 termux-toast -c green -b black "Iniciando instalación"
 
-pkg install translate-shell | echo "n"
+pkg update && pkg upgrade
+sleep 5
 
 # Instalar dependencias bash necesarias
 
+pkg install python 
+sleep 5
 
+pkg install termux-api
+sleep 5
+
+pkg install tor
+sleep 5
+
+pkg install cloudflared 
+sleep 5
+
+pkg install exiftool
+sleep 5
 
 # Instalar dependencias python necesarias
 
