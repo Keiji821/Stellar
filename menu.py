@@ -1,18 +1,33 @@
-from colorama import init, Fore, Back, Style
-import pyfiglet
-from tabulate import tabulate
+import yattag
+import subprocess
 
-init()
+# Crear un objeto Doc
+doc, tag, text = yattag.Doc().tagtext()
 
-# Tabla de comandos principales
-comandos_data = [
-    ["reload", "Reinicia su sesión de termux."],
-    ["ia", "Chatbot de inteligencia artificial."],
-    ["ipinfo", "Obtiene la información de una ip."],
-    ["phoneinfo", "Obtiene la información de un numero de teléfono."],
-    ["urlinfo", "Obtiene información sobre una url."],
-    ["metadatainfo", "Recupera los metadatos de una imagen, audio o video."],
-    ["CTRL + Z, para detener cualquier proceso o comando."],
-]
+# Crear un título para el menú
+with tag('h1'):
+    text('Menú de Opciones')
 
-print(Style.BRIGHT + Back.WHITE + Fore.BLACK + tabulate(comandos_data, headers=("⭐️ Comandos de Stellar", "Descripción"), tablefmt="fancy_grid"), Style.RESET_ALL)
+# Crear un tabla para el menú
+with tag('table', border='1'):
+    # Crear una fila de título
+    with tag('tr'):
+        with tag('th'):
+            text('Opción')
+        with tag('th'):
+            text('Descripción')
+
+    # Crear filas para cada opción del menú
+    for option in menu_options:
+        with tag('tr'):
+            with tag('td'):
+                text(option['name'])
+            with tag('td'):
+                text(option['description'])
+
+# Crear un archivo HTML temporal
+with open('menu.html', 'w') as f:
+    f.write(doc.getvalue())
+
+# Abrir el archivo HTML en la aplicación predeterminada de Termux
+subprocess.run(['termux-open', 'menu.html'])
