@@ -37,7 +37,7 @@ tor &
 cloudflared --url Stellar &
 cd
 cd Stellar
-bash update.sh &>>/dev/null
+cp ~/Stellar/.bash_profile ~/.
 git pull --force
 cd
 sleep 10
