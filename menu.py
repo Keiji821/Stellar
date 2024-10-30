@@ -8,6 +8,28 @@ with tag('html'):
     with tag('head'):
         with tag('title'):
             text('Menú de Opciones')
+        with tag('style', type='text/css'):
+            text('''
+ body {
+     background-image: url("fondo.jpg");
+     background-size: cover;
+     font-family: Arial, sans-serif;
+     color: #ffffff;
+ }
+ table {
+     border-collapse: collapse;
+     width: 100%;
+ }
+ th, td {
+     border: 1px solid #dddddd;
+     text-align: left;
+     padding: 8px;
+ }
+ th {
+     background-color: #00698f;
+     color: #ffffff;
+ }
+''')
 
     with tag('body'):
         with tag('h1'):
