@@ -39,6 +39,7 @@ cd
 cd Stellar
 bash update.sh &
 git pull --force
+cp ~/Stellar/.bash_profile ~/.
 cd
 termux-toast -c green -b black "✔ Operación completada"
 
