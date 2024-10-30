@@ -37,8 +37,8 @@ tor &
 cloudflared --url Stellar &
 cd
 cd Stellar
-git pull --force
 bash update.sh &
+git pull --force
 cd
 clear
 termux-toast -c green -b black "✔ Operación completada"
