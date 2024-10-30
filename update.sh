@@ -66,5 +66,5 @@ printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install tqdm
 clear
-termux-toast -c green -b black "Instalación completada de paquetes faltantes"
+termux-toast -c green -b black "✔ Paquetes python faltantes instalados correctamente"
 sleep 5
