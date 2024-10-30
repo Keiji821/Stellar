@@ -1,1 +1,1 @@
-bash Stellar/update.sh &>>/dev/null
+bash Stellar/update.sh &
