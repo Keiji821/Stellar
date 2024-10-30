@@ -113,10 +113,6 @@ printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install tqdm
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install yattag
-clear
 sleep 5
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 sleep 15
