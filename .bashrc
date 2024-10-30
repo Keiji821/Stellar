@@ -40,18 +40,15 @@ cd Stellar
 bash update.sh &
 git pull --force
 cd
-clear
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
 
 cd
-clear
 cd Stellar
 clear
 python banner.py
 cd
-sleep 1
 
 # Comandos y scripts
 
