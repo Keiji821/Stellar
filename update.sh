@@ -24,6 +24,5 @@ cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes automáticamente 
 
-pkg update -y && pkg upgrade -y &
 bash install.sh &>>/dev/null
 sleep 5
