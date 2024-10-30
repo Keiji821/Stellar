@@ -71,7 +71,7 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando jp2a."
  echo
  pkg install -y jp2a
  sleep 5
