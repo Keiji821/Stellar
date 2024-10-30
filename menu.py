@@ -6,11 +6,8 @@ init()
 
 # Tabla de comandos principales
 comandos_data = [
-    ["Comandos principales", "Información"],
     ["reload", "Reinicia su sesión de termux."],
-    ["Comandos de utilidades", "Información"],
     ["ia", "Chatbot de inteligencia artificial."],
-    ["Comandos de osint", "Información"],
     ["ipinfo", "Obtiene la información de una ip."],
     ["phoneinfo", "Obtiene la información de un numero de teléfono."],
     ["urlinfo", "Obtiene información sobre una url."],
