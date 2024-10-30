@@ -18,6 +18,13 @@ with tag('table', border='1'):
             text('Descripción')
 
     # Crear filas para cada opción del menú
+
+menu_options = [
+    {'name': 'Opción 1', 'description': 'Descripción de la opción 1'},
+    {'name': 'Opción 2', 'description': 'Descripción de la opción 2'},
+    {'name': 'Opción 3', 'description': 'Descripción de la opción 3'},
+]
+
     for option in menu_options:
         with tag('tr'):
             with tag('td'):
