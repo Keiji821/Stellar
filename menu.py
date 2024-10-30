@@ -4,20 +4,21 @@ from tabulate import tabulate
 
 init()
 
+# Tabla de comandos principales
 principales_data = [
     ["reload", "Reinicia su sesión de termux."],
 ]
 
-# Tabla de comandos principales
 print(Style.BRIGHT + Fore.RED + tabulate(principales_data, headers=("Comando principales", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
 
+# Tabla de comandos de utilidad
 utilidades_data = [
     ["ia", "Chatbot de inteligencia artificial."],
 ]
 
-# Tabla de comandos de utilidad
 print(Style.BRIGHT + Fore.RED + tabulate(utilidades_data, headers=("Comando de utilidades", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
 
+# Tabla de comandos osint
 osint_data = [
     ["ipinfo", "Obtiene la información de una ip."],
     ["phoneinfo", "Obtiene la información de un numero de teléfono."],
@@ -25,5 +26,4 @@ osint_data = [
     ["metadatainfo", "Recupera los metadatos de una imagen, audio o video."],
 ]
 
-# Tabla de comandos osint
 print(Style.BRIGHT + Fore.RED + tabulate(osint_data, headers=("Comandos osint", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
