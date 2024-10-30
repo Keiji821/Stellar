@@ -1,40 +1,38 @@
 import yattag
 import subprocess
 
-# Crear un objeto Doc
 doc, tag, text = yattag.Doc().tagtext()
 
-# Crear un título para el menú
-with tag('h1'):
-    text('Menú de Opciones')
+with tag('html'):
+    with tag('head'):
+        with tag('title'):
+            text('Menú de Opciones')
 
-# Crear un tabla para el menú
-with tag('table', border='1'):
-    # Crear una fila de título
-    with tag('tr'):
-        with tag('th'):
-            text('Opción')
-        with tag('th'):
-            text('Descripción')
+    with tag('body'):
+        with tag('h1'):
+            text('Menú de Opciones')
 
-    # Crear filas para cada opción del menú
+        with tag('table', border='1'):
+            with tag('tr'):
+                with tag('th'):
+                    text('Opción')
+                with tag('th'):
+                    text('Descripción')
 
-menu_options = [
-    {'name': 'Opción 1', 'description': 'Descripción de la opción 1'},
-    {'name': 'Opción 2', 'description': 'Descripción de la opción 2'},
-    {'name': 'Opción 3', 'description': 'Descripción de la opción 3'},
-]
+            menu_options = [
+                {'name': 'Opción 1', 'description': 'Descripción de la opción 1'},
+                {'name': 'Opción 2', 'description': 'Descripción de la opción 2'},
+                {'name': 'Opción 3', 'description': 'Descripción de la opción 3'},
+            ]
 
-    for option in menu_options:
-        with tag('tr'):
-            with tag('td'):
-                text(option['name'])
-            with tag('td'):
-                text(option['description'])
+            for option in menu_options:
+                with tag('tr'):
+                    with tag('td'):
+                        text(option['name'])
+                    with tag('td'):
+                        text(option['description'])
 
-# Crear un archivo HTML temporal
 with open('menu.html', 'w') as f:
     f.write(doc.getvalue())
 
-# Abrir el archivo HTML en la aplicación predeterminada de Termux
 subprocess.run(['termux-open', 'menu.html'])
