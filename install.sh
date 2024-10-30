@@ -26,6 +26,13 @@ cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes
 
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api."
+ echo
+ pkg install -y termux-api
+ sleep 5
+
 termux-toast -c green -b black "Iniciando instalación"
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
@@ -43,12 +50,6 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando python."
  echo
  pkg install -y python 
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api."
- echo
- pkg install -y termux-api
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
