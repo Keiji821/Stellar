@@ -70,6 +70,12 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  pkg install -y exiftool
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool."
+ echo
+ pkg install -y jp2a
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
 # Instalar dependencias python necesarias
 
