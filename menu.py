@@ -8,17 +8,15 @@ principales_data = [
     ["reload", "Reinicia su sesión de termux."],
 ]
 
-headers = ["Comando", "Descripción"]
-
 # Tabla de comandos principales
-print(Style.BRIGHT + Fore.RED + tabulate(principales_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Fore.RED + tabulate(principales_data, headers=("Comando principales", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
 
 utilidades_data = [
     ["ia", "Chatbot de inteligencia artificial."],
 ]
 
 # Tabla de comandos de utilidad
-print(Style.BRIGHT + Fore.RED + tabulate(utilidades_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Fore.RED + tabulate(utilidades_data, headers=("Comando de utilidades", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
 
 osint_data = [
     ["ipinfo", "Obtiene la información de una ip."],
@@ -28,4 +26,4 @@ osint_data = [
 ]
 
 # Tabla de comandos osint
-print(Style.BRIGHT + Fore.RED + tabulate(osint_data, headers=("Comando", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Fore.RED + tabulate(osint_data, headers=("Comandos osint", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
