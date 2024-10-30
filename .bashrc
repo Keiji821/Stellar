@@ -41,7 +41,7 @@ cd Stellar
 bash update.sh
 git pull --force
 cd
-sleep 17
+sleep 20
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
