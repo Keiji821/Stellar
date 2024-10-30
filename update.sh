@@ -17,8 +17,9 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
-# Actualizar .bashrc
+# Actualizar .bashrc y .bash_profile
 
+cp ~/Stellar/.bash_profile ~/.
 cp ~/Stellar/.bashrc ~/.
 
 # Verificar paquetes pip no instalados
