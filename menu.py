@@ -14,4 +14,4 @@ comandos_data = [
     ["metadatainfo", "Recupera los metadatos de una imagen, audio o video."],
 ]
 
-print(Style.BRIGHT + Back.WHITE + Fore.BLACK + tabulate(comandos_data, headers=("⭐️ Comandos de Stellar", "Descripción"), tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Back.WHITE + Fore.BLACK + tabulate(comandos_data, headers=("⭐️ Comandos de Stellar", "Descripción"), tablefmt="fancy_grid"), Fore.RESET + Back.RESET)
