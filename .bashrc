@@ -29,7 +29,6 @@ function cd() {
 # Iniciar sistema
 
 clear
-
 termux-toast -c green -b black "Iniciando Tor y Cloudflared"
 pkill tor
 pkill cloudflared
