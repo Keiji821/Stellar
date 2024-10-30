@@ -19,10 +19,48 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Actualizar .bashrc y .bash_profile
 
-cp ~/Stellar/.bash_profile ~/.
 cp ~/Stellar/.bashrc ~/.
 
-# Actualizar paquetes automáticamente 
+# Verificar paquetes pip no instalados
 
-bash install.sh &>>/dev/null
+echo
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+sleep 1
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install beautifulsoup4
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install bs4
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install colorama
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install phonenumbers
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install psutil
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install PySocks
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install requests
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install tabulate
+clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install tqdm
+clear
 sleep 5
