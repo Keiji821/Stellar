@@ -38,10 +38,12 @@ cloudflared --url Stellar &
 cd
 cd Stellar
 bash update.sh &
+sleep 10
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
 termux-toast -c green -b black "✔ Operación completada"
+sleep 10
 
 # Mostrar banner al final
 
