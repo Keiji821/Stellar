@@ -2,7 +2,6 @@ from colorama import init, Fore, Back, Style
 import datetime
 import os
 import platform
-from tabulate import tabulate
 
 init()
 
