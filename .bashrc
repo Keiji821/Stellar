@@ -40,12 +40,15 @@ cd Stellar
 bash update.sh &>>/dev/null
 git pull --force
 cd
-sleep 20
+sleep 10
+clear
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
 
 cd
+sleep 10
+clear
 cd Stellar
 clear
 python banner.py
