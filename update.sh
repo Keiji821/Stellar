@@ -24,6 +24,8 @@ cp ~/Stellar/.bashrc ~/.
 
 # Verificar paquetes pip no instalados
 
+termux-toast -c green -b black "Verificando paquetes pip no instalados..."
+
 echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 sleep 1
@@ -64,4 +66,5 @@ printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install tqdm
 clear
+termux-toast -c green -b black "Instalación completada de paquetes faltantes"
 sleep 5
