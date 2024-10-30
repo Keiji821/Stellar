@@ -36,4 +36,4 @@ with tag('html'):
 with open('menu.html', 'w') as f:
     f.write(doc.getvalue())
 
-os.system("termux-open menu.html")
+os.system("w3m menu.html")
