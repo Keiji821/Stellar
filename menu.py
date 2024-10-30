@@ -12,6 +12,7 @@ comandos_data = [
     ["phoneinfo", "Obtiene la información de un numero de teléfono."],
     ["urlinfo", "Obtiene información sobre una url."],
     ["metadatainfo", "Recupera los metadatos de una imagen, audio o video."],
+    [CTRL + Z, para detener cualquier proceso o comando.],
 ]
 
 print(Style.BRIGHT + Back.WHITE + Fore.BLACK + tabulate(comandos_data, headers=("⭐️ Comandos de Stellar", "Descripción"), tablefmt="fancy_grid"), Style.RESET_ALL)
