@@ -1,2 +1,1 @@
-bash Stellar/update.sh
-sleep 5
+bash Stellar/update.sh &>>/dev/null
