@@ -33,13 +33,9 @@ clear
 termux-toast -c green -b black "Iniciando Tor y Cloudflared"
 pkill tor
 pkill cloudflared
-sleep 1
 export ALL_PROXY=socks5h://localhost:9050
-sleep 1
 tor &
 cloudflared --url Stellar &
-sleep 1
-clear
 cd
 cd Stellar
 bash update.sh
