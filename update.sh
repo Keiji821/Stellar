@@ -17,10 +17,6 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
-# Actualizar .bashrc y .bash_profile
-
-cp ~/Stellar/.bash_profile ~/.
-
 # Verificar paquetes pip no instalados
 
 termux-toast -c green -b black "Verificando paquetes pip no instalados..."
