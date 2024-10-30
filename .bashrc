@@ -38,7 +38,7 @@ cloudflared --url Stellar &
 cd
 cd Stellar
 git pull --force
-cp ~/Stellar/.bash_profile ~/.
+bash update.sh &
 cd
 sleep 10
 clear
