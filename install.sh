@@ -121,6 +121,5 @@ pip install tqdm
 clear
 sleep 5
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
-sleep 15
 bash
 termux-toast -c green -b black "✔ Stellar instalado correctamente"
