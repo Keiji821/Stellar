@@ -25,4 +25,5 @@ cp ~/Stellar/.bashrc ~/.
 # Actualizar paquetes automáticamente 
 
 pkg update -y && pkg upgrade -y &
+pip install yattag &
 sleep 5
