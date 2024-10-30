@@ -6,7 +6,7 @@ init()
 
 # Tabla de comandos principales
 comandos_data = [
-    headers=["Comandos principales", "Información"],
+    headers=("Comandos principales", "Información"),
     ["reload", "Reinicia su sesión de termux."],
     ["Comandos de utilidades", "Información"],
     ["ia", "Chatbot de inteligencia artificial."],
