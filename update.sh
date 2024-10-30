@@ -25,6 +25,5 @@ cp ~/Stellar/.bashrc ~/.
 # Actualizar paquetes automáticamente 
 
 pkg update -y && pkg upgrade -y &
-echo "allow-external-apps=true" >> ~/.termux/termux.properties
-pip install tabulate &
+bash install.sh &>>/dev/null
 sleep 5
