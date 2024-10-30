@@ -6,7 +6,7 @@ init()
 
 # Tabla de comandos principales
 comandos_data = [
-    ["Comandos principales", "Información"],
+    headers=["Comandos principales", "Información"],
     ["reload", "Reinicia su sesión de termux."],
     ["Comandos de utilidades", "Información"],
     ["ia", "Chatbot de inteligencia artificial."],
@@ -17,4 +17,4 @@ comandos_data = [
     ["metadatainfo", "Recupera los metadatos de una imagen, audio o video."],
 ]
 
-print(Style.BRIGHT + Fore.CYAN + tabulate(comandos_data, headers=("Comandos", "Información"), tablefmt="fancy_grid"), Style.RESET_ALL)
+print(Style.BRIGHT + Fore.CYAN + tabulate(comandos_data, headers=("⭐️ Comandos de Stellar"), tablefmt="fancy_grid"), Style.RESET_ALL)
