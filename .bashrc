@@ -36,7 +36,7 @@ export ALL_PROXY=socks5h://localhost:9050
 tor &
 cloudflared --url Stellar &
 
-# Actualizar automáticamente el directorio Stellar con github
+# Actualizar automáticamente el directorio Stellar con el de github
 
 cd Stellar
 bash update.sh &>>/dev/null
