@@ -50,5 +50,9 @@ echo
 pip install tabulate
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+pip install tabulate
+clear
 pip install tqdm
 termux-toast -c green -b black "✔ Paquetes python verificados correctamente"
