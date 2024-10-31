@@ -26,7 +26,7 @@ function cd() {
   PS1="""${gris}[${rojo}~ ${amarillo}/${pwd_relative}${gris}]${verde} $ """
 }
 
-# Iniciar sistema
+# Iniciar tor y cloudflared
 
 clear
 termux-toast -c green -b black "Iniciando Tor y Cloudflared"
@@ -35,7 +35,9 @@ pkill cloudflared
 export ALL_PROXY=socks5h://localhost:9050
 tor &
 cloudflared --url Stellar &
-cd
+
+# Actualizar automáticamente el directorio Stellar con github
+
 cd Stellar
 bash update.sh &>>/dev/null
 git pull --force
