@@ -19,7 +19,7 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Verificar paquetes pip no instalados
 
-termux-toast -c green -b black "Verificando paquetes pip no instalados..."
+termux-toast -c green -b black "Verificando paquetes python no instalados..."
 
 echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
@@ -51,4 +51,4 @@ pip install tabulate
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install tqdm
-termux-toast -c green -b black "✔ Paquetes python faltantes instalados correctamente"
+termux-toast -c green -b black "✔ Paquetes python verificados correctamente"
