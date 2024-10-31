@@ -1,9 +1,13 @@
+from rich.console import Console
+from rich.markdown import Markdown
 from colorama import init, Fore, Back, Style
 
 init()
 
 print("")
-print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "Comandos de Stellar", Style.RESET_ALL)
+MARKDOWN = """
+# Comandos de Stellar
+"""
 print("")
 print(Style.BRIGHT + Fore.GREEN + "  PRINCIPALES", Style.RESET_ALL)
 print("   reload", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Reinicia su sesion de termux/bash.")
@@ -21,3 +25,9 @@ print("   metadatainfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Re
 
 print("")
 print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "CTRL + Z", Style.RESET_ALL + Fore.GREEN + " Esto detendrá cualquier comando o preceso existente.", Style.RESET_ALL)
+
+# Markdown
+
+console = Console()
+md = Markdown(MARKDOWN)
+console.print(md)
