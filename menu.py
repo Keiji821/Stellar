@@ -4,6 +4,7 @@ init()
 
 print("")
 print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "Comandos de Stellar", Style.RESET_ALL)
+print("")
 print(Style.BRIGHT + Fore.GREEN + "  PRINCIPALES", Style.RESET_ALL)
 print("   reload", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Reinicia su sesion de termux/bash.")
 
