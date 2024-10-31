@@ -53,6 +53,7 @@ echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install rich
+pip install "rich[jupyter]"
 clear
 pip install tqdm
 termux-toast -c green -b black "✔ Paquetes python verificados correctamente"
