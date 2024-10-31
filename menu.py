@@ -17,3 +17,6 @@ print("   ipinfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Obtiene 
 print("   phoneinfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Obtiene la información de un numero de teléfono.")
 print("   urlinfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Obtiene información de una url o enlace sin necesidad de entrar.")
 print("   metadatainfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Recupera los metadatos de una imagen, archivo o video.")
+
+print("")
+print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "CTRL + Z", " Esto detendrá cualquier comando o preceso existente.", Style.RESET_ALL)
