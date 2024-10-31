@@ -19,4 +19,4 @@ print("   urlinfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Obtiene
 print("   metadatainfo", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Recupera los metadatos de una imagen, archivo o video.")
 
 print("")
-print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "CTRL + Z", " Esto detendrá cualquier comando o preceso existente.", Style.RESET_ALL)
+print(Style.BRIGHT + Fore.WHITE + Back.GREEN + "CTRL + Z", Style.RESET_ALL + Fore.GREEN + " Esto detendrá cualquier comando o preceso existente.", Style.RESET_ALL)
