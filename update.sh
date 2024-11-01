@@ -93,9 +93,6 @@ echo
 pip install requests
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install tabulate
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install rich
