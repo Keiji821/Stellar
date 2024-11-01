@@ -17,16 +17,16 @@ def analyze_url(url):
         meta_description = soup.find('meta', attrs={'name': 'description'})
         meta_keywords = soup.find('meta', attrs={'name': 'keywords'})
 
+        ip_address = socket.gethostbyname(url.split("//")[-1].split('/')[0])
+
+        server_info = response.headers.get('Server')
+
         nmap_output = subprocess.check_output(['nmap', '-v', '-A', ip_address])
 
         open_ports = []
         for line in nmap_output.decode('utf-8').splitlines():
             if 'open' in line:
                 open_ports.append(line.split()[0])
-
-        ip_address = socket.gethostbyname(url.split("//")[-1].split('/')[0])
-
-        server_info = response.headers.get('Server')
 
         data = [
             ['URL', url],
