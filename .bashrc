@@ -39,8 +39,7 @@ cloudflared --url Stellar &
 # Actualizar automáticamente el directorio Stellar con el de github
 
 cd Stellar
-bash update.sh &
-sleep 20
+bash update.sh &>>/dev/null
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
