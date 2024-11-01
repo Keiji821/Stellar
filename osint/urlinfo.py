@@ -34,7 +34,7 @@ def analyze_url(url):
             ['Meta Description', meta_description['content'] if meta_description else ''],
             ['Meta Keywords', meta_keywords['content'] if meta_keywords else ''],
             ['Puertos abiertos', ', '.join(open_ports)],
-            ['Dirección IP, ip_address],
+            ['Dirección IP', ip_address],
             ['Servidor', server_info],
         ]
 
