@@ -2,6 +2,9 @@ from googletrans import Translator
 from rich import print
 from rich.console import Console
 from rich.markdown import Markdown
+import os
+
+os.environ['NO_PROXY'] = 'localhost'
 
 console = Console()
 
