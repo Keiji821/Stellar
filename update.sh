@@ -17,6 +17,65 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
+# Actualizar paquetes
+
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
+ echo
+ pkg install -y termux-api
+ sleep 5
+
+termux-toast -c green -b black "Iniciando instalación"
+
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes"
+ echo
+ pkg update -y && pkg upgrade -y
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+
+# Verificar dependencias bash necesarias no instaladas
+
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
+ echo
+ pkg install -y python 
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando tor"
+ echo
+ pkg install -y tor
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando cloudflared"
+ echo
+ pkg install -y cloudflared 
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool"
+ echo
+ pkg install -y exiftool
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando jp2a"
+ echo
+ pkg install -y jp2a
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando nmap"
+ echo
+ pkg install -y nmap
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+
 # Verificar paquetes pip no instalados
 
 termux-toast -c green -b black "Verificando paquetes python no instalados..."
