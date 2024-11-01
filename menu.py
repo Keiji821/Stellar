@@ -10,7 +10,7 @@ MARKDOWN = """
 """
 console = Console()
 md = Markdown(MARKDOWN)
-console.print(Fore.GREEN + md, Style.RESET_ALL)
+console.print(Fore.GREEN, md, Style.RESET_ALL)
 print("")
 print(Style.BRIGHT + Fore.GREEN + "  PRINCIPALES", Style.RESET_ALL)
 print("   reload", Style.BRIGHT + Fore.YELLOW + ">", Style.RESET_ALL + "Reinicia su sesion de termux/bash.")
