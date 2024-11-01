@@ -17,7 +17,7 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
-# Actualizar paquetes
+# Verificar dependencias bash necesarias no instaladas
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
@@ -25,19 +25,6 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  pkg install -y termux-api
  sleep 5
-
-termux-toast -c green -b black "Iniciando instalación"
-
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes"
- echo
- pkg update -y && pkg upgrade -y
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
-
-# Verificar dependencias bash necesarias no instaladas
-
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
@@ -114,5 +101,4 @@ echo
 pip install rich
 pip install "rich[jupyter]"
 clear
-pip install tqdm
 termux-toast -c green -b black "✔ Paquetes python verificados correctamente"
