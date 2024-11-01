@@ -35,6 +35,8 @@ pkill cloudflared
 export ALL_PROXY=socks5h://localhost:9050
 tor &
 cloudflared --url Stellar &
+sleep 10
+clear
 
 # Actualizar automáticamente el directorio Stellar con el de github
 
@@ -44,7 +46,6 @@ git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
 termux-toast -c green -b black "✔ Operación completada"
-sleep 10
 
 # Mostrar banner al final
 
