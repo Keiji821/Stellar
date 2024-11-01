@@ -28,7 +28,7 @@ cp ~/Stellar/.bashrc ~/.
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
  echo
  pkg install -y termux-api
  sleep 5
@@ -37,7 +37,7 @@ termux-toast -c green -b black "Iniciando instalación"
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes."
+ printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes"
  echo
  pkg update -y && pkg upgrade -y
  sleep 5
@@ -47,33 +47,39 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando python."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
  echo
  pkg install -y python 
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando tor."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando tor"
  echo
  pkg install -y tor
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando cloudflared."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando cloudflared"
  echo
  pkg install -y cloudflared 
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool"
  echo
  pkg install -y exiftool
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando jp2a."
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando jp2a"
  echo
  pkg install -y jp2a
+ sleep 5
+printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando nmap"
+ echo
+ pkg install -y nmap
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
