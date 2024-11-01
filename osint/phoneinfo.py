@@ -4,9 +4,6 @@ from tabulate import tabulate
 from phonenumbers import carrier, geocoder, number_type
 from phonenumbers.phonenumberutil import NumberParseException
 from colorama import init, Fore, Back, Style
-from rich import print
-from rich.console import Console
-from rich.markdown import Markdown
 
 init()
 
