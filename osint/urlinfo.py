@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import subprocess
 from colorama import init, Fore, Back, Style
 import socket
+from rich import print
+from rich.table import Table
 
 init()
 
@@ -34,6 +36,11 @@ def analyze_url(url):
         print("Puertos abiertos", ', '.join(open_ports))
         print("Dirección IP", ip_address)
         print("Servidor", server_info)
+        grid = Table.grid(expand=True)
+        grid.add_column()
+        grid.add_column(justify="right")
+        grid.add_row("Raising shields", "[bold magenta]COMPLETED [green]:heavy_check_mark:")
+        print(grid)
 
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
