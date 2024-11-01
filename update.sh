@@ -19,6 +19,8 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Verificar dependencias bash necesarias no instaladas
 
+termux-toast -c green -b black "Verificando paquetes bash no instalados..."
+
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
@@ -62,6 +64,8 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  pkg install -y nmap
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+
+termux-toast -c green -b black "✔ Paquetes bash verificados correctamente"
 
 # Verificar paquetes pip no instalados
 
