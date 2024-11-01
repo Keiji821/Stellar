@@ -114,3 +114,10 @@ ia() {
  python iahttp.py
  cd
 }
+
+traductor() {
+ cd
+ cd Stellar/misc/utilidades
+ python traductor.py
+ cd
+}
