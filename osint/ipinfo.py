@@ -1,9 +1,10 @@
 import requests
 from tabulate import tabulate
 from colorama import init, Fore, Back, Style
+from rich import print
+from rich.table import Table
 import os
 import datetime
-import sqlite3
 
 init()
 
