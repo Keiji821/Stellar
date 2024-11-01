@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import subprocess
-from tabulate import tabulate
 from colorama import init, Fore, Back, Style
 import socket
 
@@ -28,15 +27,13 @@ def analyze_url(url):
             if 'open' in line:
                 open_ports.append(line.split()[0])
 
-        data = [
-            ['URL', url],
-            ['Título', title],
-            ['Meta Description', meta_description['content'] if meta_description else ''],
-            ['Meta Keywords', meta_keywords['content'] if meta_keywords else ''],
-            ['Puertos abiertos', ', '.join(open_ports)],
-            ['Dirección IP', ip_address],
-            ['Servidor', server_info],
-        ]
+        print("URL", url)
+        print("Título", title)
+        print("Meta Description", meta_description['content'] if meta_description else '')
+        print("Meta Keywords", meta_keywords['content'] if meta_keywords else '')
+        print("Puertos abiertos", ', '.join(open_ports))
+        print("Dirección IP", ip_address)
+        print("Servidor", server_info)
 
         print(Fore.GREEN + Back.BLACK + tabulate(data, headers=["Información", "Valor"], tablefmt="fancy_grid") + Style.RESET_ALL)
 
