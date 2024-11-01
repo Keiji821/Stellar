@@ -1,9 +1,6 @@
 import requests
 from tabulate import tabulate
 from colorama import init, Fore, Back, Style
-from rich import print
-from rich.console import Console
-from rich.markdown import Markdown
 import os
 import datetime
 
