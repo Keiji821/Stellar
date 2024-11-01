@@ -35,8 +35,6 @@ def analyze_url(url):
         print("Dirección IP", ip_address)
         print("Servidor", server_info)
 
-        print(Fore.GREEN + Back.BLACK + tabulate(data, headers=["Información", "Valor"], tablefmt="fancy_grid") + Style.RESET_ALL)
-
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
 
