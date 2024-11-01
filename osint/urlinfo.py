@@ -30,13 +30,23 @@ def analyze_url(url):
             if 'open' in line:
                 open_ports.append(line.split()[0])
 
-        print("URL: ", url)
-        print("Título: ", title)
-        print("Descripción: ", meta_description['content'] if meta_description else '')
-        print("Palabras clave: ", meta_keywords['content'] if meta_keywords else '')
-        print("Puertos abiertos: ", ', '.join(open_ports))
-        print("Dirección IP: ", ip_address)
-        print("Servidor: ", server_info)
+from rich.table import Table
+
+table = Table(title="Información del sitio web")
+
+        table.add_column("Información",
+style="cyan", no_wrap=True)
+        table.add_column("Valor", style="magenta", no_wrap=True)
+
+        table.add_row("URL", url)
+        table.add_row("Título", title)
+        table.add_row("Meta Description", meta_description['content'] if meta_description else '')
+        table.add_row("Meta Keywords", meta_keywords['content'] if meta_keywords else '')
+        table.add_row("Puertos abiertos", ', '.join(open_ports))
+        table.add_row("Dirección IP", ip_address)
+        table.add_row("Servidor", server_info)
+
+        console.print(table)
 
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
