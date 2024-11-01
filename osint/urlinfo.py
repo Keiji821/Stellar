@@ -17,7 +17,7 @@ def analyze_url(url):
         meta_description = soup.find('meta', attrs={'name': 'description'})
         meta_keywords = soup.find('meta', attrs={'name': 'keywords'})
 
-nmap_output = subprocess.check_output(['sudo', 'nmap', '-p', '1-1000', '-sT', '-sU', url])
+        nmap_output = subprocess.check_output(['sudo', 'nmap', '-p', '1-1000', '-sT', '-sU', url])
 
         open_ports = []
         for line in nmap_output.decode('utf-8').splitlines():
