@@ -1,7 +1,9 @@
-from colorama import init, Fore, Back, Style
 import datetime
 import os
 import platform
+from rich.console import Console
+from rich.markdown import Markdown
+from colorama import init, Fore, Back, Style
 
 init()
 
@@ -27,7 +29,13 @@ jp2a --color Stellar/imagenes/anti-spiral1.jpg
 
 """)
 
-print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Stellar [V1.0]" + Style.RESET_ALL)
+print("")
+MARKDOWN = """
+# Stellar V1.0
+"""
+console = Console()
+md = Markdown(MARKDOWN)
+console.print(md)
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Para ver comandos utilice: menu", Style.RESET_ALL)
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Hora actual: " + hour_string + " │ Fecha: " + date_string + Style.RESET_ALL)
 print("")
