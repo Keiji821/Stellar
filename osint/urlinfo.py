@@ -1,12 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 import subprocess
-from colorama import init, Fore, Style
 import socket
 from rich.console import Console
 from rich.table import Table
 
-init()
+console = Console()
 
 def analyze_url(url):
     try:
@@ -33,22 +32,21 @@ def analyze_url(url):
         table.add_column("Información", style="cyan", no_wrap=False)
         table.add_column("Valor", style="magenta", no_wrap=False)
 
-        table.add_row("URL", url, style="green")
-        table.add_row("Título", title, style="yellow")
-        table.add_row("Meta Description", meta_description['content'] if meta_description else 'No disponible', style="blue")
-        table.add_row("Meta Keywords", meta_keywords['content'] if meta_keywords else 'No disponible', style="blue")
-        table.add_row("Puertos abiertos", ', '.join(open_ports) if open_ports else 'No disponible', style="red")
-        table.add_row("Dirección IP", ip_address, style="green")
-        table.add_row("Servidor", server_info, style="yellow")
+        table.add_row("URL", url)
+        table.add_row("Título", title)
+        table.add_row("Meta Description", meta_description['content'] if meta_description else 'No disponible')
+        table.add_row("Meta Keywords", meta_keywords['content'] if meta_keywords else 'No disponible')
+        table.add_row("Puertos abiertos", ', '.join(open_ports) if open_ports else 'No disponible')
+        table.add_row("Dirección IP", ip_address)
+        table.add_row("Servidor", server_info)
 
-        console = Console()
         console.print(table)
 
     except requests.exceptions.RequestException as e:
-        print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
+        console.print(f"[bold red]Error: {e}[/bold red]")
 
 def main():
-    url = input(Fore.GREEN + Style.BRIGHT + "Ingrese la URL: ")
+    url = console.input("[bold green]Ingrese la URL: [/bold green]")
     analyze_url(url)
 
 if __name__ == "__main__":
