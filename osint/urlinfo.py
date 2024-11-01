@@ -28,8 +28,8 @@ def analyze_url(url):
 
         open_ports = []
         for line in nmap_output.decode('utf-8').splitlines():
-if 'open' in line:
-open_ports.append(line.split()[0])
+            if 'open' in line:
+                open_ports.append(line.split()[0])
 
         table = Table(title="Información del sitio web", title_justify="center", title_style="bold magenta")
 
