@@ -9,7 +9,7 @@ MARKDOWN = """
 # Comandos de Stellar
 """
 console = Console()
-md = Markdown(Fore.GREEN + MARKDOWN + Style.RESET_ALL)
+md = Markdown(MARKDOWN)
 console.print(md)
 print("")
 print(Style.BRIGHT + Fore.GREEN + "  PRINCIPALES", Style.RESET_ALL)
