@@ -4,7 +4,7 @@ import subprocess
 from colorama import init, Fore, Back, Style
 import socket
 from rich import print
-from rich.console import Console
+from rich.console import console
 from rich.markdown import Markdown
 from rich.table import Table
 
@@ -44,7 +44,7 @@ def analyze_url(url):
         table.add_row("Dirección IP", ip_address, style="green")
         table.add_row("Servidor", server_info, style="yellow")
 
-        Console.print(table)
+        console.print(table)
 
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
