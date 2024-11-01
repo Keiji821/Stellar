@@ -119,10 +119,6 @@ pip install requests
 clear
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install tabulate
-clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
 pip install rich
 pip install "rich[jupyter]"
 clear
