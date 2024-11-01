@@ -31,7 +31,6 @@ def analyze_url(url):
             if 'open' in line:
                 open_ports.append(line.split()[0])
 
-
         table = Table(title="Información del sitio web", title_justify="center", title_style="bold magenta")
 
         table.add_column("Información", style="cyan", no_wrap=True)
@@ -45,7 +44,7 @@ def analyze_url(url):
         table.add_row("Dirección IP", ip_address, style="green")
         table.add_row("Servidor", server_info, style="yellow")
 
-console.print(table)
+        console.print(table)
 
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
