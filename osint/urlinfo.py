@@ -44,7 +44,7 @@ def analyze_url(url):
         table.add_row("Dirección IP", ip_address, style="green")
         table.add_row("Servidor", server_info, style="yellow")
 
-        console.print(table)
+        Console.print(table)
 
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error: {e}{Style.RESET_ALL}")
