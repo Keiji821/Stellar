@@ -40,6 +40,7 @@ cloudflared --url Stellar &
 
 cd Stellar
 bash update.sh &
+sleep 20
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
