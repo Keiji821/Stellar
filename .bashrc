@@ -33,8 +33,10 @@ termux-toast -c green -b black "Iniciando Tor y Cloudflared"
 pkill tor
 pkill cloudflared
 export ALL_PROXY=socks5h://localhost:9050
-tor &>>/dev/null
-cloudflared --url Stellar &>>/dev/null
+sleep 0.1
+tor &
+sleep 10
+cloudflared --url Stellar &
 sleep 10
 
 # Actualizar automáticamente el directorio Stellar con el de github
