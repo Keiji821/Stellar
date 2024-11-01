@@ -4,7 +4,7 @@ import subprocess
 from colorama import init, Fore, Back, Style
 import socket
 from rich import print
-from rich.console import console
+from rich.console import Console
 from rich.markdown import Markdown
 from rich.table import Table
 
