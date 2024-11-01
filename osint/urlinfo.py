@@ -33,8 +33,8 @@ def analyze_url(url):
 
         table = Table(title="Información del sitio web", title_justify="center", title_style="bold magenta")
 
-        table.add_column("Información", style="cyan", no_wrap=True)
-        table.add_column("Valor", style="magenta", no_wrap=True)
+        table.add_column("Información", style="cyan", no_wrap=False)
+        table.add_column("Valor", style="magenta", no_wrap=False)
 
         table.add_row("URL", url, style="green")
         table.add_row("Título", title, style="yellow")
