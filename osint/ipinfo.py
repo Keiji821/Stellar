@@ -24,9 +24,9 @@ except Exception as e:
     console.print(f"[bold red]Error inesperado: {e}[/bold red]")
     exit()
 
-table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
+table = Table(title="Datos de la IP", title_justify="center", title_style="bold magenta")
 
-table.add_column("Información de red", style="cyan", no_wrap=False)
+table.add_column("Información", style="cyan", no_wrap=False)
 table.add_column("Valor", style="magenta")
 
 table.add_row("Red", str(data1.get("network", "No disponible")),)
@@ -43,11 +43,6 @@ table.add_row("Es una red Tor", str(data2.get("is_tor", "No disponible")),)
 table.add_row("Es un proxy", str(data2.get("is_proxy", "No disponible")),)
 table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")),)
 table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")),)
-
-table2 = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
-
-table2.add_column("Información de geográfica", style="cyan", no_wrap=False)
-table2.add_column("Valor", style="magenta")
 
 table.add_row("País", str(data1.get("country", "No disponible")),)
 table.add_row("Capital", str(data1.get("country_capital", "No disponible")),)
@@ -74,4 +69,4 @@ table.add_row("Área del país", str(data1.get("country_area", "No disponible"))
 table.add_row("Población del país", str(data1.get("country_population", "No disponible")),)
 
 console = Console()
-console.print(table, table2)
+console.print(table)
