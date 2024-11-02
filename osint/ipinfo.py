@@ -25,7 +25,6 @@ except Exception as e:
     exit()
 
 table_data1 = [
-    (" "),
     ("Red", data1.get("network", "No disponible")),
     ("Tipo de IP", data1.get("version", "No disponible")),
     ("TLD", data1.get("country_tld", "No disponible")),
@@ -40,11 +39,9 @@ table_data1 = [
     ("Es un proxy", data2.get("is_proxy", "No disponible")),
     ("Es una VPN", data2.get("is_vpn", "No disponible")),
     ("Es una IP sospechosa", data2.get("is_abuser", "No disponible")),
-    (" "),
 ]
 
 table_data2 = [
-    (" "),
     ("País", data1.get("country", "No disponible")),
     ("Capital", data1.get("country_capital", "No disponible")),
     ("Ciudad", data1.get("city", "No disponible")),
@@ -66,7 +63,6 @@ table_data2 = [
     ("Idioma", data1.get("languages", "No disponible")),
     ("Área del país", data1.get("country_area", "No disponible")),
     ("Población del país", data1.get("country_population", "No disponible")),
-    (" "),
 ]
 
 table1 = Table(title="Información de red", title_justify="center", title_style="bold magenta")
