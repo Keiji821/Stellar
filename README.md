@@ -1,4 +1,4 @@
-[![Imagen de Stellar](imágenes/Stellar.png)](https://github.com/Keiji821/Stellar)
+[![Imagen de Stellar](imágenes/Stellar2.png)](https://github.com/Keiji821/Stellar)
 
 [![Código Abierto](https://img.shields.io/badge/Código%20Abierto-yes-blue.svg)](https://github.com/ellerbrock/open-source-badges/)
 [![Mantenido por el desarrollador](https://img.shields.io/badge/Mantenido%20por%20el%20desarrollador-sí-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
