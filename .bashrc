@@ -30,7 +30,7 @@ function cd() {
 
 clear
 
-termux-toast -c green -b black "Iniciando Tor y Cloudflared"
+printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando Tor y Cloudflared"
 
 pkill tor && pkill cloudflared &
 
@@ -42,18 +42,18 @@ sleep 10
 cloudflared --url Stellar &>>/dev/null &
 sleep 10
 
-termux-toast -c green -b black "✔ Tor y Cloudflared iniciados correctamente"
+printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciados correctamente"
 
 # Actualizar automáticamente el directorio Stellar con el de github
 
-termux-toast -c green -b black "Vericando actualizaciones..."
+printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Vericando actualizaciones..."
 
 cd Stellar
 bash update.sh &>>/dev/null &
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
-termux-toast -c green -b black "✔ Actualizaciones verificadas correctamente"
+printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Actualizaciones verificadas correctamente"
 sleep 1
 termux-toast -c green -b black "✔ Operación completada"
 
