@@ -2,7 +2,8 @@ import requests
 from colorama import init, Fore, Back, Style
 import textwrap
 import os
-from tabulate import tabulate
+from rich.console import Console
+from rich.table import Table
 
 init()
 
@@ -20,10 +21,11 @@ def get_ai_response(user_input):
 
 def print_ai_response(response):
     wrapped_response = textwrap.fill(response, width=50)
-    response_table = [[wrapped_response]]
-    print(Style.RESET_ALL)
-    print(tabulate(response_table, headers=["Stellar IA"], tablefmt="fancy_grid"))
-    print(" ")
+    table = Table(title="Llama IA", title_justify="center", title_style="bold magenta")
+    table.add_column("Respuesta", style="cyan", no_wrap=False)
+    table.add_row(wrapped_response)
+    console = Console()
+    print(table)
 
 def execute_command(command):
     print(f"Ejecutando comando: {command}")
