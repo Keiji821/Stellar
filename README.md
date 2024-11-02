@@ -14,7 +14,7 @@
 Herramienta de hacking para termux, dedicado a termux.
 
 <details>
-  <summary>📥 1. Pasos de instalación</summary>
+  <summary>1. Pasos de instalación</summary>
 
 **Nota:** asegúrate de tener descargado termux:api desde F-Droid para el correcto funcionamiento de la herramienta, abre tu termux y a continuación copia y pega lo siguiente:
 - ```pkg install -y git```
@@ -29,7 +29,7 @@ Herramienta de hacking para termux, dedicado a termux.
 </details>
 
 <details>
-  <summary>🧩 2. Características</summary>
+  <summary>2. Características</summary>
 
 ~/Stellar
 
@@ -45,13 +45,13 @@ Herramienta de hacking para termux, dedicado a termux.
 
 - Chat Tor `(En desarrollo)`  
 
-🛡 Seguridad
+Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
 # 
 </details>
 
 <details>
-  <summary>📄 3. Guía de uso</summary>
+  <summary>3. Guía de uso</summary>
 
 > Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar, cada comando representa un script, una función disponible para usar.
 
@@ -59,7 +59,7 @@ Herramienta de hacking para termux, dedicado a termux.
 </details>
 
 <details>
-  <summary>📚 Registro de cambios</summary>
+  <summary>Registro de cambios</summary>
 
 #
 Actualización/00/00/2024
