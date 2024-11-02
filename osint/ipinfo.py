@@ -63,7 +63,7 @@ table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible"
 table.add_row(" ", " ", "UTC Offset", str(data1.get("utc_offset", "No disponible")),)
 
 table.add_row(" ", " ", "Código de llamada",
-str(data1.get(" ", " ", "country_calling_code", "No disponible")),)
+str(data1.get("country_calling_code", "No disponible")),)
 
 table.add_row(" ", " ", "Moneda", str(data1.get("currency", "No disponible")),)
 
