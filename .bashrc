@@ -23,7 +23,7 @@ function cd() {
   builtin cd "$@"
   local pwd_relative="${PWD/#$HOME}"
   pwd_relative=${pwd_relative#/}
-  PS1="""${gris}[${rojo}~ ${amarillo}/${pwd_relative}${gris}]${verde} $ """
+  PS1="""${gris}[${rojo}~ ${amarillo}/${pwd_relative}${gris}]${verde} $ ${blanco2}"""
 }
 
 # Iniciar tor y cloudflared
