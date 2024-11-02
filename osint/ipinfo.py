@@ -44,6 +44,8 @@ table.add_row("Es un proxy", str(data2.get("is_proxy", "No disponible")),)
 table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")),)
 table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")),)
 
+Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
+
 table.add_column(Column(justify="center", no_wrap=True), "Información de la dirección IP")
 
 table.add_row("País", str(data1.get("country", "No disponible")),)
