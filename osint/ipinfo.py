@@ -63,7 +63,7 @@ table_data1 = [
     ("Población del país", data1.get("country_population", "No disponible")),
 ]
 
-table1.add_column("Información", style="cyan", no_wrap=True)
+table1 = table1.add_column("Información", style="cyan", no_wrap=True)
 table1.add_column("Valor", style="magenta")
 
 for info, valor in table_data1:
