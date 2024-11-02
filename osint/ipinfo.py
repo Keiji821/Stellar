@@ -74,4 +74,4 @@ table.add_row("Área del país", str(data1.get("country_area", "No disponible"))
 table.add_row("Población del país", str(data1.get("country_population", "No disponible")),)
 
 console = Console()
-console.print(table + table2)
+console.print(table, table2)
