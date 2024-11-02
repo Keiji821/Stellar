@@ -46,8 +46,6 @@ table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible"
 
 Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
 
-table.add_column(Column(justify="center", no_wrap=True), "Información de la dirección IP")
-
 table.add_row("País", str(data1.get("country", "No disponible")),)
 table.add_row("Capital", str(data1.get("country_capital", "No disponible")),)
 table.add_row("Ciudad", str(data1.get("city", "No disponible")),)
