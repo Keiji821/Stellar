@@ -36,10 +36,10 @@ pkill tor && pkill cloudflared
 
 export ALL_PROXY=socks5h://localhost:9050
 
-tor &>>/dev/null
+tor &>>/dev/null &
 sleep 10
 
-cloudflared --url Stellar &>>/dev/null
+cloudflared --url Stellar &>>/dev/null &
 sleep 10
 
 termux-toast -c green -b black "✔ Tor y Cloudflared iniciados correctamente"
@@ -49,7 +49,7 @@ termux-toast -c green -b black "✔ Tor y Cloudflared iniciados correctamente"
 termux-toast -c green -b black "Vericando actualizaciones..."
 
 cd Stellar
-bash update.sh &>>/dev/null
+bash update.sh &>>/dev/null &
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
