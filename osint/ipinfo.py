@@ -26,8 +26,9 @@ except Exception as e:
 
 table = Table(title="Datos de la IP", title_justify="center", title_style="bold magenta")
 
-table.add_column("Información", style="cyan", no_wrap=False)
+table.add_column("Información de red", style="cyan", no_wrap=False)
 table.add_column("Valor", style="magenta")
+table.add_column("Información geográfica", style="cyan")
 table.add_column("Valor", style="magenta")
 
 table.add_row("Red", str(data1.get("network", "No disponible")),)
