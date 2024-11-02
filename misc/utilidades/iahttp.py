@@ -24,7 +24,10 @@ def print_ai_response(response):
 
     table = Table(title="Llama IA", title_justify="center", title_style="bold magenta")
     table.add_column("Respuesta", style="cyan", no_wrap=False)
-    table.add_row(wrapped_response)
+    
+    MARKDOWN = wrapped_response
+    md = Markdown(MARKDOWN)
+    table.add_row(md)
     console = Console()
     console.print(table)
 
