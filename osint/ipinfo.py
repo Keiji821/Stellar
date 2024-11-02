@@ -45,7 +45,7 @@ table.add_row("Es un proxy", str(data2.get("is_proxy", "No disponible")),)
 table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")),)
 table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")),)
 
-table.add_row("País", str(data1.get("country", "No disponible")),)
+table.add_row(" ", " ", "País", str(data1.get("country", "No disponible")),)
 table.add_row("Capital", str(data1.get("country_capital", "No disponible")),)
 table.add_row("Ciudad", str(data1.get("city", "No disponible")),)
 table.add_row("Región", str(data1.get("region", "No disponible")),)
