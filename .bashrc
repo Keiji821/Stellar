@@ -29,12 +29,18 @@ function cd() {
 # Iniciar tor y cloudflared
 
 clear
+
 termux-toast -c green -b black "Iniciando Tor y Cloudflared"
-pkill tor
-pkill cloudflared
+
+pkill tor && pkill cloudflared
+
 export ALL_PROXY=socks5h://localhost:9050
-tor &
-cloudflared --url Stellar &
+
+tor &>>/dev/null
+sleep 10
+
+cloudflared --url Stellar &>>/dev/null
+sleep 10
 
 # Actualizar automáticamente el directorio Stellar con el de github
 
