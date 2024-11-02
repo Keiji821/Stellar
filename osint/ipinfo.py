@@ -29,7 +29,7 @@ table = Table(title="Información de la IP", title_justify="center", title_style
 table.add_column("Información", style="cyan", no_wrap=True)
 table.add_column("Valor", style="magenta")
 
-table.add_row("Red", data1.get("network", "No disponible"))
+table.add_row("Red", str(data1.get("network", "No disponible")))
 table.add_row("Tipo de IP", data1.get("version", "No disponible"))
 table.add_row("TLD", data1.get("country_tld", "No disponible"))
 table.add_row("ASN", data1.get("asn", "No disponible"))
@@ -66,9 +66,6 @@ table.add_row("Nombre de moneda", data1.get("currency_name", "No disponible"))
 table.add_row("Idioma", data1.get("languages", "No disponible"))
 table.add_row("Área del país", data1.get("country_area", "No disponible"))
 table.add_row("Población del país", data1.get("country_population", "No disponible"))
-
-for info, valor in table:
-    table1.add_row(info, str(valor))
 
 console = Console()
 console.print(table)
