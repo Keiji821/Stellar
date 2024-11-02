@@ -42,14 +42,19 @@ sleep 10
 cloudflared --url Stellar &>>/dev/null
 sleep 10
 
+termux-toast -c green -b black "✔ Tor y Cloudflared iniciados correctamente"
+
 # Actualizar automáticamente el directorio Stellar con el de github
+
+termux-toast -c green -b black "Vericando actualizaciones..."
 
 cd Stellar
 bash update.sh &>>/dev/null
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
-sleep 10
+termux-toast -c green -b black "✔ Actualizaciones verificadas correctamente"
+sleep 1
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
