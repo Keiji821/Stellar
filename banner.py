@@ -25,7 +25,7 @@ os.system("""
 
 cd
 
-jp2a --color Stellar/imágenes/2001306b434b5f90d0977876d9641492.jpg
+jp2a --color Stellar/imágenes/Stellar.png
 
 """)
 
