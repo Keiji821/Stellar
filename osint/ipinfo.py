@@ -39,9 +39,9 @@ table_data1 = [
     ("Es un proxy", data2.get("is_proxy", "No disponible")),
     ("Es una VPN", data2.get("is_vpn", "No disponible")),
     ("Es una IP sospechosa", data2.get("is_abuser", "No disponible")),
-    table1.add_column("Información", style="cyan", no_wrap=True)
+    table1.add_column("Información", style="cyan", no_wrap=True),
     table1.add_column("Valor",
-style="magenta")
+style="magenta"),
     ("País", data1.get("country", "No disponible")),
     ("Capital", data1.get("country_capital", "No disponible")),
     ("Ciudad", data1.get("city", "No disponible")),
