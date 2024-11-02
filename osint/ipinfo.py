@@ -60,15 +60,20 @@ table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")), "Longitud
 
 table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")), "Zona horaria", str(data1.get("timezone", "No disponible")),)
 
+table.add_row(" ", " ", "UTC Offset", str(data1.get("utc_offset", "No disponible")),)
 
-table.add_row("UTC Offset", str(data1.get("utc_offset", "No disponible")),)
-table.add_row("Código de llamada",
-str(data1.get("country_calling_code", "No disponible")),)
-table.add_row("Moneda", str(data1.get("currency", "No disponible")),)
-table.add_row("Nombre de moneda", str(data1.get("currency_name", "No disponible")),)
-table.add_row("Idioma", str(data1.get("languages", "No disponible")),)
-table.add_row("Área del país", str(data1.get("country_area", "No disponible")),)
-table.add_row("Población del país", str(data1.get("country_population", "No disponible")),)
+table.add_row(" ", " ", "Código de llamada",
+str(data1.get(" ", " ", "country_calling_code", "No disponible")),)
+
+table.add_row(" ", " ", "Moneda", str(data1.get("currency", "No disponible")),)
+
+table.add_row(" ", " ", "Nombre de moneda", str(data1.get("currency_name", "No disponible")),)
+
+table.add_row(" ", " ", "Idioma", str(data1.get("languages", "No disponible")),)
+
+table.add_row(" ", " ", "Área del país", str(data1.get("country_area", "No disponible")),)
+
+table.add_row(" ", " ", "Población del país", str(data1.get("country_population", "No disponible")),)
 
 console = Console()
 console.print(table)
