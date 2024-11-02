@@ -39,9 +39,7 @@ table_data1 = [
     ("Es un proxy", data2.get("is_proxy", "No disponible")),
     ("Es una VPN", data2.get("is_vpn", "No disponible")),
     ("Es una IP sospechosa", data2.get("is_abuser", "No disponible")),
-]
 
-table_data2 = [
     ("País", data1.get("country", "No disponible")),
     ("Capital", data1.get("country_capital", "No disponible")),
     ("Ciudad", data1.get("city", "No disponible")),
@@ -65,19 +63,10 @@ table_data2 = [
     ("Población del país", data1.get("country_population", "No disponible")),
 ]
 
-table1 = Table(title="Información de red", title_justify="center", title_style="bold magenta")
 table1.add_column("Información", style="cyan", no_wrap=True)
 table1.add_column("Valor", style="magenta")
 
 for info, valor in table_data1:
     table1.add_row(info, str(valor))
 
-table2 = Table(title="Información Geográfica", title_justify="center", title_style="bold magenta")
-table2.add_column("Información", style="cyan", no_wrap=True)
-table2.add_column("Valor", style="magenta")
-
-for info, valor in table_data2:
-    table2.add_row(info, str(valor))
-
 console.print(table1)
-console.print(table2)
