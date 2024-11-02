@@ -25,7 +25,7 @@ def print_ai_response(response):
     table.add_column("Respuesta", style="cyan", no_wrap=False)
     table.add_row(wrapped_response)
     console = Console()
-    print(table)
+    console.print(table)
 
 def execute_command(command):
     print(f"Ejecutando comando: {command}")
