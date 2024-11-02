@@ -97,3 +97,6 @@ table.add_row("Idioma", data1.get("languages", "No disponible"))
 table.add_row("Área del país", data1.get("country_area", "No disponible"))
 
 table.add_row("Población del país", data1.get("country_population", "No disponible"))
+
+console = Console()
+console.print(table1)
