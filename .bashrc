@@ -32,7 +32,7 @@ clear
 
 termux-toast -c green -b black "Iniciando Tor y Cloudflared"
 
-pkill tor && pkill cloudflared
+pkill tor && pkill cloudflared &
 
 export ALL_PROXY=socks5h://localhost:9050
 
