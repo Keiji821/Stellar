@@ -32,15 +32,17 @@ clear
 
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando Tor y Cloudflared"
 
-pkill tor && pkill cloudflared &
+pkill tor &
+pkill cloudflared &
+sleep 5
 
 export ALL_PROXY=socks5h://localhost:9050
 
 tor &
-sleep 10
+sleep 5
 
 cloudflared --url Stellar &
-sleep 10
+sleep 5
 
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciados correctamente"
 
