@@ -32,7 +32,7 @@ os.system(f"jp2a --color {imágenes}")
 
 print("")
 MARKDOWN = """
-# Stellar V1.0
+> Stellar V1.0
 """
 console = Console()
 md = Markdown(MARKDOWN)
