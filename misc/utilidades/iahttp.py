@@ -23,7 +23,7 @@ def get_ai_response(user_input):
 def print_ai_response(response):
     wrapped_response = textwrap.fill(response, width=50)
     print(" ")
-    table = Table(title="Llama IA", title_justify="center", title_style="bold magenta")
+    table = Table(title="LlaMa IA", title_justify="center", title_style="bold magenta")
     table.add_column("Respuesta", style="white", no_wrap=False)
     
     MARKDOWN = wrapped_response
