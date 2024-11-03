@@ -28,7 +28,7 @@ data = response.json()
 
 imágenes = random.choice([imagen1, data.get("url")])
 
-os.system(f"jp2a --color ")
+os.system(f"jp2a --color {imágenes}")
 
 print("")
 MARKDOWN = """
