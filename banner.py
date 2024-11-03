@@ -21,13 +21,9 @@ hour_string = now.strftime("%I:%M%p")
 
 # Definir banners
 
-os.system("""
+imagen1 = https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg
 
-cd
-
-jp2a --color https://static.vecteezy.com/system/resources/thumbnails/022/385/025/small_2x/a-cute-surprised-black-haired-anime-girl-under-the-blooming-sakura-ai-generated-photo.jpg
-
-""")
+os.system("cd", "jp2a --color ", imagen1)
 
 print("")
 MARKDOWN = """
