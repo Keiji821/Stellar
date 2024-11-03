@@ -38,7 +38,7 @@ sleep 5
 echo
 export ALL_PROXY=socks5h://localhost:9050
 echo
-tor &>>/dev/null
+tor &
 sleep 5
 echo
 cloudflared --url Stellar &
