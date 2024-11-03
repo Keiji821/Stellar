@@ -31,17 +31,17 @@ function cd() {
 clear
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando Tor y Cloudflared"
 echo
-pkill tor &
+pkill tor &>>/dev/null &
 echo
-pkill cloudflared &
+pkill cloudflared &>>/dev/null &
 sleep 5
 echo
 export ALL_PROXY=socks5h://localhost:9050
 echo
-tor &
+tor &>>/dev/null
 sleep 5
 echo
-cloudflared --url Stellar &
+cloudflared --url Stellar &>>/dev/null &
 sleep 5
 echo
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciados correctamente"
