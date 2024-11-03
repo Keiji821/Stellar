@@ -34,8 +34,8 @@ def analyze_url(url):
 
         table.add_row("URL", url)
         table.add_row("Título", title)
-        table.add_row("Meta Description", meta_description['content'] if meta_description else 'No disponible')
-        table.add_row("Meta Keywords", meta_keywords['content'] if meta_keywords else 'No disponible')
+        table.add_row("Descripción", meta_description['content'] if meta_description else 'No disponible')
+        table.add_row("Palabras clave", meta_keywords['content'] if meta_keywords else 'No disponible')
         table.add_row("Puertos abiertos", ', '.join(open_ports) if open_ports else 'No disponible')
         table.add_row("Dirección IP", ip_address)
         table.add_row("Servidor", server_info)
