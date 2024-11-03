@@ -26,7 +26,7 @@ function cd() {
   PS1="""${gris}[${rojo}~ ${amarillo}/${pwd_relative}${gris}]${verde} $ ${blanco2}"""
 }
 
-# Iniciar tor y cloudflared
+# Iniciar tor y cloudflared 
 
 clear
 pkill tor &
