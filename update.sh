@@ -19,14 +19,9 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Verificar dependencias bash necesarias no instaladas
 
-termux-toast -c green -b black "Verificando paquetes bash no instalados..."
-
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
- echo
- pkg install -y termux-api
- sleep 5
+echo
+printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando paquetes bash no instalados..."
+echo
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
@@ -64,13 +59,14 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  pkg install -y nmap
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
-
-termux-toast -c green -b black "✔ Paquetes bash verificados correctamente"
+echo
+printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Paquetes bash verificados correctamente"
+echo
 
 # Verificar paquetes pip no instalados
 
-termux-toast -c green -b black "Verificando paquetes python no instalados..."
-
+echo
+printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando paquetes python no instalados..."
 echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 sleep 1
@@ -102,4 +98,5 @@ echo
 pip install rich
 pip install "rich[jupyter]"
 clear
-termux-toast -c green -b black "✔ Paquetes python verificados correctamente"
+printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Paquetes python verificados correctamente"
+clear
