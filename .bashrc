@@ -31,9 +31,9 @@ function cd() {
 clear
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando Tor y Cloudflared"
 echo
-pkill tor &>>/dev/null &
+pkill tor &>>/dev/null 
 echo
-pkill cloudflared &>>/dev/null &
+pkill cloudflared &>>/dev/null 
 sleep 5
 echo
 export ALL_PROXY=socks5h://localhost:9050
@@ -41,7 +41,7 @@ echo
 tor &>>/dev/null
 sleep 5
 echo
-cloudflared --url Stellar &>>/dev/null &
+cloudflared --url Stellar &>>/dev/null
 sleep 5
 echo
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciados correctamente"
@@ -55,7 +55,7 @@ cd Stellar
 echo
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando actualizaciones..."
 echo
-bash update.sh &>>/dev/null &
+bash update.sh &>>/dev/null
 echo
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Actualizaciones verificadas correctamente"
 echo
