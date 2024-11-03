@@ -23,7 +23,7 @@ hour_string = now.strftime("%I:%M%p")
 
 imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg"""
 
-response = requests.get('https://nekos.best/api/v2/waifu')
+response = requests.get('https://api.waifu.im/search?included_tags=waifu')
 imagen_data = response.json()
 
 imágenes1 = imagen_data.get["url"]
