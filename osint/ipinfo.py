@@ -24,6 +24,8 @@ except Exception as e:
     console.print(f"[bold red]Error inesperado: {e}[/bold red]")
     exit()
 
+print(" ")
+
 table = Table(title="Datos de la IP", title_justify="center", title_style="bold magenta")
 
 table.add_column("Información de red", style="cyan", no_wrap=False)
@@ -74,6 +76,7 @@ table.add_row(" ", " ", "Idioma", str(data1.get("languages", "No disponible")),)
 table.add_row(" ", " ", "Área del país", str(data1.get("country_area", "No disponible")),)
 
 table.add_row(" ", " ", "Población del país", str(data1.get("country_population", "No disponible")),)
+print(" ")
 
 console = Console()
 console.print(table)
