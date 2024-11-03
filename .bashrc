@@ -29,7 +29,6 @@ function cd() {
 # Iniciar tor y cloudflared
 
 clear
-
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando Tor y Cloudflared"
 echo
 pkill tor &
@@ -61,7 +60,8 @@ echo
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Actualizaciones verificadas correctamente"
 sleep 1
 echo
-termux-toast -c green -b black "✔ Operación completada"
+printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Operación completada"
+echo
 
 # Mostrar banner al final
 
