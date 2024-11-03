@@ -48,17 +48,11 @@ printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciad
 
 # Actualizar automáticamente el directorio Stellar con el de github
 
-echo
-printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Vericando actualizaciones..."
-echo
 cd Stellar
 echo
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando actualizaciones..."
 echo
 bash update.sh &>>/dev/null
-echo
-printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Actualizaciones verificadas correctamente"
-echo
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
