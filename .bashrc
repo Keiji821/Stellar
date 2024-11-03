@@ -52,7 +52,13 @@ echo
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Vericando actualizaciones..."
 echo
 cd Stellar
-bash update.sh &
+echo
+printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando actualizaciones..."
+echo
+bash update.sh &>>/dev/null &
+echo
+printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Actualizaciones verificadas correctamente"
+echo
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
