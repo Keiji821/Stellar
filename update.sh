@@ -19,9 +19,6 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Verificar dependencias bash necesarias no instaladas
 
-echo
-printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando paquetes bash no instalados..."
-echo
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
@@ -59,15 +56,9 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  pkg install -y nmap
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
-echo
-printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Paquetes bash verificados correctamente"
-echo
 
 # Verificar paquetes pip no instalados
 
-echo
-printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Verificando paquetes python no instalados..."
-echo
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 sleep 1
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
@@ -97,6 +88,4 @@ printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install rich
 pip install "rich[jupyter]"
-clear
-printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Paquetes python verificados correctamente"
 clear
