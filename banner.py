@@ -14,9 +14,7 @@ system_info = platform.machine() + " - " + platform.processor()
 # Mostrar fecha y hora
 
 now = datetime.datetime.now()
-
 date_string = now.strftime("%Y-%m-%d")
-
 hour_string = now.strftime("%I:%M%p")
 
 # Definir banners
