@@ -16,7 +16,7 @@ Herramienta de hacking para termux, dedicado a termux.
 <details>
   <summary>1. Pasos de instalación</summary>
 
-**Nota:** asegúrate de tener descargado termux:api desde F-Droid para el correcto funcionamiento de la herramienta, abre tu termux y a continuación copia y pega lo siguiente:
+**Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
 - ```pkg install -y git```
 
 - ```git clone https://github.com/Keiji821/Stellar```
