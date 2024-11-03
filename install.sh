@@ -26,15 +26,8 @@ cp ~/Stellar/.bashrc ~/.
 
 # Actualizar paquetes
 
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
- echo
- pkg install -y termux-api
- sleep 5
-
-termux-toast -c green -b black "Iniciando instalación"
-
+printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando instalación"
+echo
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes"
@@ -122,7 +115,6 @@ echo
 pip install rich
 pip install "rich[jupyter]"
 clear
-sleep 5
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
+sleep 5
 bash
-termux-toast -c green -b black "✔ Stellar instalado correctamente"
