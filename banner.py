@@ -1,6 +1,7 @@
 import datetime
 import os
 import platform
+import requests
 import random
 from rich.console import Console
 from rich.markdown import Markdown
@@ -22,7 +23,10 @@ hour_string = now.strftime("%I:%M%p")
 
 imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg"""
 
-imagen_seleccionada = random.choice([imagen1])
+response = requests.get('https://nekos.best/api/v2/waifu')
+imagen_data = response.json()
+
+imagen_seleccionada = random.choice([imagen1, imagen_data[url]])
 
 os.system(f"jp2a --color {imagen_seleccionada}")
 
