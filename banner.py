@@ -25,7 +25,7 @@ os.system("""
 
 cd
 
-jp2a --color Stellar/imágenes/Stellar.png
+jp2a --color https://static.vecteezy.com/system/resources/thumbnails/022/385/025/small_2x/a-cute-surprised-black-haired-anime-girl-under-the-blooming-sakura-ai-generated-photo.jpg
 
 """)
 
