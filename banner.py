@@ -19,7 +19,7 @@ hour_string = now.strftime("%I:%M%p")
 
 # Definir banners
 
-imagen1 = https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg
+imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg"""
 
 os.system("cd", "jp2a --color ", imagen1)
 
