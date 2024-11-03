@@ -24,9 +24,9 @@ hour_string = now.strftime("%I:%M%p")
 imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg"""
 
 response = requests.get('https://api.waifu.im/search?included_tags=waifu')
-imagen_data = response.json()
+data = response.json()
 
-imágenes1 = imagen_data.get["url"]
+imágenes1 = data.get["url"]
 
 imágenes2 = random.choice([imagen1, imágenes1])
 
