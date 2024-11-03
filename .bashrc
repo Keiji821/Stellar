@@ -36,10 +36,10 @@ pkill tor && pkill cloudflared &
 
 export ALL_PROXY=socks5h://localhost:9050
 
-tor &>>/dev/null &
+tor &
 sleep 10
 
-cloudflared --url Stellar &>>/dev/null &
+cloudflared --url Stellar &
 sleep 10
 
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciados correctamente"
@@ -49,7 +49,7 @@ printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciad
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Vericando actualizaciones..."
 
 cd Stellar
-bash update.sh &>>/dev/null &
+bash update.sh &
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
