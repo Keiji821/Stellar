@@ -1,6 +1,7 @@
 import datetime
 import os
 import platform
+import random
 from rich.console import Console
 from rich.markdown import Markdown
 from colorama import init, Fore, Back, Style
@@ -21,7 +22,9 @@ hour_string = now.strftime("%I:%M%p")
 
 imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_671612542-stock-photo-vector-illustration-woman-backpack.jpg"""
 
-os.system("cd", "jp2a --color ", imagen1)
+imagen_seleccionada = random.choice([imagen1])
+
+os.system(f"jp2a --color {imagen_seleccionada}")
 
 print("")
 MARKDOWN = """
