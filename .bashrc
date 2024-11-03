@@ -31,32 +31,36 @@ function cd() {
 clear
 
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando Tor y Cloudflared"
-
+echo
 pkill tor &
+echo
 pkill cloudflared &
 sleep 5
-
+echo
 export ALL_PROXY=socks5h://localhost:9050
-
+echo
 tor &
 sleep 5
-
+echo
 cloudflared --url Stellar &
 sleep 5
-
+echo
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Tor y Cloudflared iniciados correctamente"
 
 # Actualizar automáticamente el directorio Stellar con el de github
 
+echo
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Vericando actualizaciones..."
-
+echo
 cd Stellar
 bash update.sh &
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 cd
+echo
 printf "${amarillo}[${verde}✔${amarillo}] ${blanco2} Actualizaciones verificadas correctamente"
 sleep 1
+echo
 termux-toast -c green -b black "✔ Operación completada"
 
 # Mostrar banner al final
