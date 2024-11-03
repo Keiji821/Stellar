@@ -26,9 +26,7 @@ imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_67
 response = requests.get('https://api.waifu.im/search?included_tags=waifu')
 data = response.json()
 
-imágenes1 = data.get["url"]
-
-imágenes2 = random.choice([imagen1, imágenes1])
+imágenes = random.choice([imagen1, data.get["url"]])
 
 os.system(f"jp2a --color ")
 
