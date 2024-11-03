@@ -26,9 +26,9 @@ imagen1 = """https://st5.depositphotos.com/81867662/67161/i/450/depositphotos_67
 response = requests.get('https://nekos.best/api/v2/waifu')
 imagen_data = response.json()
 
-imagen_seleccionada = random.choice([imagen1, str(imagen_data.get["url"]),])
+imagen_seleccionada = random.choice([imagen1])
 
-os.system(f"jp2a --color {imagen_seleccionada}")
+os.system(f"jp2a --color {imagen_data.get["url"]}")
 
 print("")
 MARKDOWN = """
