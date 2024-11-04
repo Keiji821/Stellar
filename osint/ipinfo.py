@@ -29,16 +29,15 @@ def obtener_datos_ip(ip):
     return datos
 
 def escanear_puertos(opcion, ip_o_rango):
+    comandos = {
+        1: ["nmap", "-v", "-A", ip_o_rango],
+        2: ["nmap", "-v", "-sn", ip_o_rango],
+        3: ["nmap", "-v", "-iR", "10000", "-Pn", "-p", "80"]
+    }
+
     with Progress(SpinnerColumn(), TextColumn("[bold green]Escaneando puertos...[/bold green]")) as progress:
         task = progress.add_task("", start=False)
         progress.start_task(task)
-
-        comandos = {
-            1: ["nmap", "-v", "-A", ip_o_rango],
-            2: ["nmap", "-v", "-sn", ip_o_rango],
-            3: ["nmap", "-v", "-iR", "10000", "-Pn", "-p", "80"]
-        }
-
         try:
             resultado = subprocess.check_output(comandos[opcion], text=True)
             progress.stop()
