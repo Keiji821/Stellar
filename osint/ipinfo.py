@@ -34,7 +34,7 @@ def escanear_puertos(ip):
         progress.start_task(task)
 
         try:
-            resultado = subprocess.check_output(["nmap", "-v", "-s", ip], text=True)
+            resultado = subprocess.check_output(["nmap", "-v", "-sS", ip], text=True)
             progress.stop()
             return resultado
         except subprocess.CalledProcessError as e:
