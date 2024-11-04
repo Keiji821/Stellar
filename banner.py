@@ -40,7 +40,7 @@ blackhole1 = """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠁⠈⠐⠀⠘⠀⠈⠀⠈
 """
 
-banners = random.choice([blackhole1, blackhole2])
+banners = random.choice([blackhole1])
 
 print(Fore.RED + Style.BRIGHT + banners + Style.RESET_ALL)
 
