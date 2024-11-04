@@ -1,8 +1,6 @@
 import requests
-import subprocess
 from rich.console import Console
 from rich.table import Table
-from rich.progress import Progress, SpinnerColumn, TextColumn
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
@@ -28,25 +26,6 @@ def obtener_datos_ip(ip):
 
     return datos
 
-def escanear_puertos(opcion, ip_o_rango):
-    comandos = {
-        1: ["nmap", "-v", "-A", ip_o_rango],
-        2: ["nmap", "-v", "-sn", ip_o_rango],
-        3: ["nmap", "-v", "-iR", "10000", "-Pn", "-p", "80"]
-    }
-
-    with Progress(SpinnerColumn(), TextColumn("[bold green]Escaneando puertos...[/bold green]")) as progress:
-        task = progress.add_task("", start=False)
-        progress.start_task(task)
-        try:
-            resultado = subprocess.check_output(comandos[opcion], text=True)
-            progress.stop()
-            return resultado
-        except subprocess.CalledProcessError as e:
-            progress.stop()
-            console.print(f"[bold red]Error al ejecutar nmap: {e}[/bold red]")
-            return "No disponible"
-
 def agregar_filas(table, datos, section_title, campos):
     table.add_row(f"[bold underline]{section_title}[/bold underline]", "")
     for titulo, key, source in campos:
@@ -61,18 +40,6 @@ def main():
     if not datos:
         console.print("[bold red]No se pudo obtener la información de la IP.[/bold red]")
         return
-
-    console.print("[bold blue]Selecciona el tipo de escaneo Nmap:[/bold blue]")
-    console.print("1: Escaneo detallado (-A)")
-    console.print("2: Escaneo de red (-sn)")
-    console.print("3: Escaneo aleatorio de puertos (-iR)")
-    opcion = int(console.input("[bold green]Opción (1, 2 o 3): [/bold green]"))
-
-    if opcion not in (1, 2, 3):
-        console.print("[bold red]Opción no válida.[/bold red]")
-        return
-
-    ip_o_rango = ip if opcion in (1, 2) else ""
 
     data1, data2 = datos
     table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
@@ -128,17 +95,6 @@ def main():
     agregar_filas(table, datos, "Información de Red", campos_red)
     table.add_row("", "")
     agregar_filas(table, datos, "Información Geográfica", campos_geo)
-
-    resultado_nmap = escanear_puertos(opcion, ip_o_rango)
-
-    if resultado_nmap != "No disponible":
-        table.add_row("[bold underline]Escaneo de Puertos[/bold underline]", "")
-        for line in resultado_nmap.splitlines():
-            if "open" in line or "filtered" in line or "closed" in line:
-                parts = line.split()
-                puerto_info = " ".join(parts[0:2])
-                descripcion = " ".join(parts[2:])
-                table.add_row(puerto_info, descripcion)
 
     console.print(table)
 
