@@ -26,67 +26,59 @@ except Exception as e:
 
 print(" ")
 
-table = Table(title="Datos de la IP", title_justify="center", title_style="bold magenta")
+table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
 
-table.add_column("Información de red", style="cyan", no_wrap=False)
+# Encabezado para columnas
+table.add_column("Información de Red y Geográfica", style="cyan", no_wrap=True)
 table.add_column("Valor", style="magenta")
-table.add_column("Información geográfica", style="cyan")
-table.add_column("Valor", style="magenta")
 
-table.add_row("Red", str(data1.get("network", "No disponible")), "País", str(data1.get("country", "No disponible")),)
+# Información de Red
+table.add_row("[bold underline]Información de Red[/bold underline]", "")
+table.add_row("Red", str(data1.get("network", "No disponible")))
+table.add_row("Tipo de IP", str(data1.get("version", "No disponible")))
+table.add_row("TLD", str(data1.get("country_tld", "No disponible")))
+table.add_row("ASN", str(data1.get("asn", "No disponible")))
+table.add_row("Empresa", str(data1.get("org", "No disponible")))
+table.add_row("RIR", str(data2.get("rir", "No disponible")))
+table.add_row("Es una IP no autorizada", str(data2.get("is_bogon", "No disponible")))
+table.add_row("Es un móvil", str(data2.get("is_mobile", "No disponible")))
+table.add_row("Es un rastreador", str(data2.get("is_crawler", "No disponible")))
+table.add_row("Es un centro de datos", str(data2.get("is_datacenter", "No disponible")))
+table.add_row("Es una red Tor", str(data2.get("is_tor", "No disponible")))
+table.add_row("Es un proxy", str(data2.get("is_proxy", "No disponible")))
+table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")))
+table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")))
+table.add_row("Nivel de fraude", str(data2.get("asn", {}).get("abuser_score", "No disponible")))
+table.add_row("Es una IP activa", str(data2.get("asn", {}).get("active", "No disponible")))
+table.add_row("Dominio", str(data2.get("asn", {}).get("domain", "No disponible")))
+table.add_row("Fecha de creación", str(data2.get("asn", {}).get("created", "No disponible")))
+table.add_row("Correo de abuso", str(data2.get("abuse", {}).get("email", "No disponible")))
 
-table.add_row("Tipo de IP", str(data1.get("version", "No disponible")), "Capital", str(data1.get("country_capital", "No disponible")),)
+# Separador entre secciones
+table.add_row("", "")
 
-table.add_row("TLD", str(data1.get("country_tld", "No disponible")), "Ciudad", str(data1.get("city", "No disponible")),)
+# Información Geográfica
+table.add_row("[bold underline]Información Geográfica[/bold underline]", "")
+table.add_row("País", str(data1.get("country", "No disponible")))
+table.add_row("Capital", str(data1.get("country_capital", "No disponible")))
+table.add_row("Ciudad", str(data1.get("city", "No disponible")))
+table.add_row("Región", str(data1.get("region", "No disponible")))
+table.add_row("Código de región", str(data1.get("region_code", "No disponible")))
+table.add_row("Nombre de país", str(data1.get("country_name", "No disponible")))
+table.add_row("Código de país", str(data1.get("country_code", "No disponible")))
+table.add_row("ISO3", str(data1.get("country_code_iso3", "No disponible")))
+table.add_row("Código de continente", str(data1.get("continent_code", "No disponible")))
+table.add_row("En Europa", str(data1.get("in_eu", "No disponible")))
+table.add_row("Código postal", str(data1.get("postal", "No disponible")))
+table.add_row("Latitud", str(data1.get("latitude", "No disponible")))
+table.add_row("Longitud", str(data1.get("longitude", "No disponible")))
+table.add_row("Zona horaria", str(data1.get("timezone", "No disponible")))
+table.add_row("UTC Offset", str(data1.get("utc_offset", "No disponible")))
+table.add_row("Código de llamada", str(data1.get("country_calling_code", "No disponible")))
+table.add_row("Moneda", str(data1.get("currency", "No disponible")))
+table.add_row("Nombre de moneda", str(data1.get("currency_name", "No disponible")))
+table.add_row("Idioma", str(data1.get("languages", "No disponible")))
+table.add_row("Área del país", str(data1.get("country_area", "No disponible")))
+table.add_row("Población del país", str(data1.get("country_population", "No disponible")))
 
-table.add_row("ASN", str(data1.get("asn", "No disponible")), "Región", str(data1.get("region", "No disponible")),)
-
-table.add_row("Empresa", str(data1.get("org", "No disponible")), "Código de región", str(data1.get("region_code", "No disponible")),)
-
-table.add_row("RIR", str(data2.get("rir", "No disponible")), "Nombre de país", str(data1.get("country_name", "No disponible")),)
-
-table.add_row("Es una IP no autorizada", str(data2.get("is_bogon", "No disponible")), "Código de país", str(data1.get("country_code", "No disponible")),)
-
-table.add_row("Es un móvil", str(data2.get("is_mobile", "No disponible")), "ISO3",
-str(data1.get("country_code_iso3", "No disponible")),)
-
-table.add_row("Es un rastreador", str(data2.get("is_crawler", "No disponible")), "Código de continente", str(data1.get("continent_code", "No disponible")),)
-
-table.add_row("Es un centro de datos", str(data2.get("is_datacenter", "No disponible")), "En Europa", str(data1.get("in_eu", "No disponible")),)
-
-table.add_row("Es una red Tor", str(data2.get("is_tor", "No disponible")), "Código postal", str(data1.get("postal", "No disponible")),)
-
-table.add_row("Es un proxy", str(data2.get("is_proxy", "No disponible")), "Latitud", str(data1.get("latitude", "No disponible")),)
-
-table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")), "Longitud", str(data1.get("longitude", "No disponible")),)
-
-table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")), "Zona horaria", str(data1.get("timezone", "No disponible")),)
-
-table.add_row(" ", " ", "UTC Offset", str(data1.get("utc_offset", "No disponible")),)
-
-table.add_row(" ", " ", "Código de llamada",
-str(data1.get("country_calling_code", "No disponible")),)
-
-table.add_row(" ", " ", "Moneda", str(data1.get("currency", "No disponible")),)
-
-table.add_row(" ", " ", "Nombre de moneda", str(data1.get("currency_name", "No disponible")),)
-
-table.add_row(" ", " ", "Idioma", str(data1.get("languages", "No disponible")),)
-
-table.add_row(" ", " ", "Área del país", str(data1.get("country_area", "No disponible")),)
-
-table.add_row(" ", " ", "Población del país", str(data1.get("country_population", "No disponible")),)
-
-table.add_row("Nivel de fraude: ", str(data2.get("asn")["abuser_score"]),)
-
-table.add_row("Es una ip activa: ", str(data2.get("asn")["active"]),)
-
-table.add_row("Dominio: ", str(data2.get("asn")["domain"]),)
-
-table.add_row("Fecha de creación: ", str(data2.get("asn")["created"]),)
-
-table.add_row("Nivel de fraude: ", str(data2.get("abuse")["email"]),)
-print(" ")
-
-console = Console()
 console.print(table)
