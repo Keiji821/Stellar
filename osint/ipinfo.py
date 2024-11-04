@@ -72,7 +72,7 @@ def main():
         console.print("[bold red]Opción no válida.[/bold red]")
         return
 
-    ip_o_rango = ip if opcion == 1 else console.input("[bold green]Ingrese el rango de IPs o presione Enter para IP aleatoria: [/bold green]")
+    ip_o_rango = ip if opcion in (1, 2) else ""
 
     data1, data2 = datos
     table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
