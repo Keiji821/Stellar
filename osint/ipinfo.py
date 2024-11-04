@@ -1,84 +1,74 @@
 import requests
+import subprocess
 from rich.console import Console
 from rich.table import Table
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 console = Console()
 
-IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]")
+def obtener_datos_ip(ip):
+    session = requests.Session()
+    retry = Retry(total=3, backoff_factor=1, status_forcelist=[502, 503, 504])
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('https://', adapter)
 
-try:
-    response1 = requests.get(f'https://ipapi.co/{IpQuery}/json/')
-    response1.raise_for_status()
-    data1 = response1.json()
+    urls = [f'https://ipapi.co/{ip}/json/', f'https://api.ipapi.is/?ip={ip}']
+    datos = [session.get(url, timeout=5).json() for url in urls]
+    return datos
 
-    response2 = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
-    response2.raise_for_status()
-    data2 = response2.json()
-except requests.exceptions.RequestException as e:
-    console.print(f"[bold red]Error de red: {e}[/bold red]")
-    exit()
-except ValueError as e:
-    console.print(f"[bold red]Error de datos: {e}[/bold red]")
-    exit()
-except Exception as e:
-    console.print(f"[bold red]Error inesperado: {e}[/bold red]")
-    exit()
+def escanear_puertos(ip):
+    resultado = subprocess.run(['nmap', '-p-', ip], capture_output=True, text=True)
+    return resultado.stdout
 
-print(" ")
+def crear_tabla(datos, ip):
+    data1, data2 = datos
+    table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
+    table.add_column("Información de Red y Geográfica", style="cyan", no_wrap=True)
+    table.add_column("Valor", style="magenta")
 
-table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
+    campos_red = [
+        ("Red", "network", 0), ("Tipo de IP", "version", 0), ("TLD", "country_tld", 0), ("ASN", "asn", 0),
+        ("Empresa", "org", 0), ("RIR", "rir", 1), ("Es una IP no autorizada", "is_bogon", 1),
+        ("Es un móvil", "is_mobile", 1), ("Es un rastreador", "is_crawler", 1), ("Es un centro de datos", "is_datacenter", 1),
+        ("Es una red Tor", "is_tor", 1), ("Es un proxy", "is_proxy", 1), ("Es una VPN", "is_vpn", 1),
+        ("Es una IP sospechosa", "is_abuser", 1), ("Nivel de fraude", "abuser_score", 1),
+        ("Es una IP activa", "active", 1), ("Dominio", "domain", 1), ("Fecha de creación", "created", 1),
+        ("Correo de abuso", "email", 1)
+    ]
 
-# Encabezado para columnas
-table.add_column("Información de Red y Geográfica", style="cyan", no_wrap=True)
-table.add_column("Valor", style="magenta")
+    campos_geo = [
+        ("País", "country", 0), ("Capital", "country_capital", 0), ("Ciudad", "city", 0), ("Región", "region", 0),
+        ("Código de región", "region_code", 0), ("Nombre de país", "country_name", 0),
+        ("Código de país", "country_code", 0), ("ISO3", "country_code_iso3", 0), ("Código de continente", "continent_code", 0),
+        ("En Europa", "in_eu", 0), ("Código postal", "postal", 0), ("Latitud", "latitude", 0),
+        ("Longitud", "longitude", 0), ("Zona horaria", "timezone", 0), ("UTC Offset", "utc_offset", 0),
+        ("Código de llamada", "country_calling_code", 0), ("Moneda", "currency", 0),
+        ("Nombre de moneda", "currency_name", 0), ("Idioma", "languages", 0), ("Área del país", "country_area", 0),
+        ("Población del país", "country_population", 0)
+    ]
 
-# Información de Red
-table.add_row("[bold underline]Información de Red[/bold underline]", "")
-table.add_row("Red", str(data1.get("network", "No disponible")))
-table.add_row("Tipo de IP", str(data1.get("version", "No disponible")))
-table.add_row("TLD", str(data1.get("country_tld", "No disponible")))
-table.add_row("ASN", str(data1.get("asn", "No disponible")))
-table.add_row("Empresa", str(data1.get("org", "No disponible")))
-table.add_row("RIR", str(data2.get("rir", "No disponible")))
-table.add_row("Es una IP no autorizada", str(data2.get("is_bogon", "No disponible")))
-table.add_row("Es un móvil", str(data2.get("is_mobile", "No disponible")))
-table.add_row("Es un rastreador", str(data2.get("is_crawler", "No disponible")))
-table.add_row("Es un centro de datos", str(data2.get("is_datacenter", "No disponible")))
-table.add_row("Es una red Tor", str(data2.get("is_tor", "No disponible")))
-table.add_row("Es un proxy", str(data2.get("is_proxy", "No disponible")))
-table.add_row("Es una VPN", str(data2.get("is_vpn", "No disponible")))
-table.add_row("Es una IP sospechosa", str(data2.get("is_abuser", "No disponible")))
-table.add_row("Nivel de fraude", str(data2.get("asn", {}).get("abuser_score", "No disponible")))
-table.add_row("Es una IP activa", str(data2.get("asn", {}).get("active", "No disponible")))
-table.add_row("Dominio", str(data2.get("asn", {}).get("domain", "No disponible")))
-table.add_row("Fecha de creación", str(data2.get("asn", {}).get("created", "No disponible")))
-table.add_row("Correo de abuso", str(data2.get("abuse", {}).get("email", "No disponible")))
+    table.add_row("[bold underline]Información de Red[/bold underline]", "")
+    for titulo, key, source in campos_red:
+        valor = str(datos[source].get(key, "No disponible"))
+        if valor != "No disponible":
+            table.add_row(titulo, valor)
+    table.add_row("", "")
+    table.add_row("[bold underline]Información Geográfica[/bold underline]", "")
+    for titulo, key, source in campos_geo:
+        valor = str(datos[source].get(key, "No disponible"))
+        if valor != "No disponible":
+            table.add_row(titulo, valor)
+    
+    console.print(table)
 
-# Separador entre secciones
-table.add_row("", "")
+    console.print("[bold underline]Escaneo de Puertos[/bold underline]", "")
+    console.print(escanear_puertos(ip))
 
-# Información Geográfica
-table.add_row("[bold underline]Información Geográfica[/bold underline]", "")
-table.add_row("País", str(data1.get("country", "No disponible")))
-table.add_row("Capital", str(data1.get("country_capital", "No disponible")))
-table.add_row("Ciudad", str(data1.get("city", "No disponible")))
-table.add_row("Región", str(data1.get("region", "No disponible")))
-table.add_row("Código de región", str(data1.get("region_code", "No disponible")))
-table.add_row("Nombre de país", str(data1.get("country_name", "No disponible")))
-table.add_row("Código de país", str(data1.get("country_code", "No disponible")))
-table.add_row("ISO3", str(data1.get("country_code_iso3", "No disponible")))
-table.add_row("Código de continente", str(data1.get("continent_code", "No disponible")))
-table.add_row("En Europa", str(data1.get("in_eu", "No disponible")))
-table.add_row("Código postal", str(data1.get("postal", "No disponible")))
-table.add_row("Latitud", str(data1.get("latitude", "No disponible")))
-table.add_row("Longitud", str(data1.get("longitude", "No disponible")))
-table.add_row("Zona horaria", str(data1.get("timezone", "No disponible")))
-table.add_row("UTC Offset", str(data1.get("utc_offset", "No disponible")))
-table.add_row("Código de llamada", str(data1.get("country_calling_code", "No disponible")))
-table.add_row("Moneda", str(data1.get("currency", "No disponible")))
-table.add_row("Nombre de moneda", str(data1.get("currency_name", "No disponible")))
-table.add_row("Idioma", str(data1.get("languages", "No disponible")))
-table.add_row("Área del país", str(data1.get("country_area", "No disponible")))
-table.add_row("Población del país", str(data1.get("country_population", "No disponible")))
+def main():
+    ip = console.input("[bold green]Ingrese la IP: [/bold green]")
+    datos = obtener_datos_ip(ip)
+    crear_tabla(datos, ip)
 
-console.print(table)
+if __name__ == "__main__":
+    main()
