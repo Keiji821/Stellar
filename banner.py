@@ -74,7 +74,7 @@ blackhole2 = """
 
 banners = random.choice([blackhole1, blackhole2])
 
-print(banners)
+print(Fore.RED + Style.BRIGHT + banners + Style.RESET_ALL)
 
 print("")
 MARKDOWN = """
@@ -82,7 +82,7 @@ MARKDOWN = """
 """
 console = Console()
 md = Markdown(MARKDOWN)
-console.print(md)
+console.print(md)console 
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Para ver comandos utilice: menu", Style.RESET_ALL)
 print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Hora actual: " + hour_string + " │ Fecha: " + date_string + Style.RESET_ALL)
 print("")
