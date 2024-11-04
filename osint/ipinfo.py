@@ -77,7 +77,7 @@ table.add_row(" ", " ", "Área del país", str(data1.get("country_area", "No dis
 
 table.add_row(" ", " ", "Población del país", str(data1.get("country_population", "No disponible")),)
 
-Table.add_row("Nivel de fraude: ", atr(data2.get("asn")["abuser_score"]))
+Table.add_row("Nivel de fraude: ", str(data2.get("asn")["abuser_score"]))
 
 Table.add_row("Es una ip activa: ", str(data2.get("asn")["active"]))
 
