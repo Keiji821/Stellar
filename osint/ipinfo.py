@@ -77,15 +77,15 @@ table.add_row(" ", " ", "Área del país", str(data1.get("country_area", "No dis
 
 table.add_row(" ", " ", "Población del país", str(data1.get("country_population", "No disponible")),)
 
-Table.add_row("Nivel de fraude: ", data2.get("asn")[0]["abuser_score"])
+Table.add_row("Nivel de fraude: ", data2.get("asn")["abuser_score"])
 
-Table.add_row("Es una ip activa: ", data2.get("asn")[0]["active"])
+Table.add_row("Es una ip activa: ", data2.get("asn")["active"])
 
-Table.add_row("Dominio: ", data2.get("asn")[0]["domain"])
+Table.add_row("Dominio: ", data2.get("asn")["domain"])
 
-Table.add_row("Fecha de creación: ", data2.get("asn")[0]["created"])
+Table.add_row("Fecha de creación: ", data2.get("asn")["created"])
 
-Table.add_row("Nivel de fraude: ", data2.get("abuse")[0]["email"])
+Table.add_row("Nivel de fraude: ", data2.get("abuse")["email"])
 print(" ")
 
 console = Console()
