@@ -26,13 +26,11 @@ except Exception as e:
 
 print(" ")
 
-table = Table(title="Información de la IP", title_justify="center", title_style="bold magenta")
+table = Table(title="Datos de la IP", title_justify="center", title_style="bold magenta")
 
-# Encabezado para columnas
-table.add_column("Información de Red y Geográfica", style="cyan", no_wrap=True)
+table.add_column("Información", style="cyan", no_wrap=True)
 table.add_column("Valor", style="magenta")
 
-# Información de Red
 table.add_row("[bold underline]Información de Red[/bold underline]", "")
 table.add_row("Red", str(data1.get("network", "No disponible")))
 table.add_row("Tipo de IP", str(data1.get("version", "No disponible")))
@@ -52,12 +50,10 @@ table.add_row("Nivel de fraude", str(data2.get("asn", {}).get("abuser_score", "N
 table.add_row("Es una IP activa", str(data2.get("asn", {}).get("active", "No disponible")))
 table.add_row("Dominio", str(data2.get("asn", {}).get("domain", "No disponible")))
 table.add_row("Fecha de creación", str(data2.get("asn", {}).get("created", "No disponible")))
-table.add_row("Correo de abuso", str(data2.get("abuse", {}).get("email", "No disponible")))
+table.add_row("Correo de la empresa", str(data2.get("abuse", {}).get("email", "No disponible")))
 
-# Separador entre secciones
 table.add_row("", "")
 
-# Información Geográfica
 table.add_row("[bold underline]Información Geográfica[/bold underline]", "")
 table.add_row("País", str(data1.get("country", "No disponible")))
 table.add_row("Capital", str(data1.get("country_capital", "No disponible")))
