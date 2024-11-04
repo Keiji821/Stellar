@@ -29,20 +29,20 @@ function cd() {
 # Iniciar tor y cloudflared 
 
 clear
-pkill tor &
-pkill cloudflared &
+pkill tor &>/dev/null &
+pkill cloudflared &>/dev/null &
 sleep 5
 export ALL_PROXY=socks5h://localhost:9050
-tor &
+tor &>/dev/null &
 sleep 5
-cloudflared --url Stellar &
+cloudflared --url Stellar &>/dev/null &
 sleep 5
 
 # Actualizar automáticamente el directorio Stellar con el de github
 
 cd
 cd Stellar
-bash update.sh &>>/dev/null
+bash update.sh &>/dev/null &
 git pull --force
 cp ~/Stellar/.bash_profile ~/.
 
