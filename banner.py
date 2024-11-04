@@ -65,7 +65,7 @@ print(Fore.RED + Style.BRIGHT + banners + Style.RESET_ALL)
 
 print("")
 MARKDOWN = """
-# Stellar V1.0
+> Stellar V1.0
 """
 console = Console()
 md = Markdown(MARKDOWN)
