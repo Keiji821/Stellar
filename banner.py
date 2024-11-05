@@ -226,4 +226,4 @@ Hecho por: Keiji821
 """
 md = Markdown(MARKDOWN)
 console.print(md)
-console.print(" ")
+print(" ")
