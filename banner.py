@@ -5,9 +5,6 @@ import requests
 import random
 from rich.console import Console
 from rich.markdown import Markdown
-from colorama import init, Fore, Back, Style
-
-init()
 
 os_version = os.sys.platform
 
@@ -47,10 +44,9 @@ print(Fore.RED + Style.BRIGHT + banners + Style.RESET_ALL)
 print("")
 MARKDOWN = """
 > Stellar V1.0
+> Para ver comandos utilice: menu
+> Hora actual: {hour_string} | Fecha actual: {date_string}
 """
 console = Console()
 md = Markdown(MARKDOWN)
 console.print(md)
-print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Para ver comandos utilice: menu", Style.RESET_ALL)
-print(Style.BRIGHT + Fore.YELLOW + "[" + Fore.GREEN + "+" + Fore.YELLOW + "]" + Fore.RED + " Hora actual: " + hour_string + " │ Fecha: " + date_string + Style.RESET_ALL)
-print("")
