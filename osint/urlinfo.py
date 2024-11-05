@@ -47,7 +47,7 @@ def obtener_info_nmap(ip_address):
 
 def analyze_url(url):
     if not re.match(r'^https?://', url):
-        url = 'http://' + url
+        url = 'https://' + url
     
     with Progress(transient=True) as progress:
         task = progress.add_task("[red]Cargando...", total=100)
@@ -89,7 +89,7 @@ def analyze_url(url):
         console.print(table)
 
 def main():
-    url = console.input("[bold green]Ingrese la URL (sin http:// o https:// si no lo tiene): [/bold green]")
+    url = console.input("[bold green]Ingrese la URL: [/bold green]")
     analyze_url(url)
 
 if __name__ == "__main__":
