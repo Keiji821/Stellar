@@ -6,6 +6,8 @@ import random
 from rich.console import Console
 from rich.markdown import Markdown
 
+console = Console()
+
 os_version = os.sys.platform
 
 system_info = platform.machine() + " - " + platform.processor()
@@ -47,6 +49,5 @@ MARKDOWN = """
 > Para ver comandos utilice: menu
 > Hora actual: {hour_string} | Fecha actual: {date_string}
 """
-console = Console()
 md = Markdown(MARKDOWN)
 console.print(md)
