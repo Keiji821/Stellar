@@ -16,7 +16,7 @@ def get_ai_response(user_input):
         response.raise_for_status()
         return response.json()["result"][0]["response"]
     except requests.exceptions.RequestException as e:
-        print("[bold red] Error: " + str(e) + "[/bold red]")
+        console.print("[bold red] Error: " + str(e) + "[/bold red]")
         return None
 
 def print_ai_response(response):
@@ -44,4 +44,4 @@ while True:
             command = response.split("ejecutar ")[1]
             execute_command(command)
     else:
-        print("[bold green]Error[/bold green]")
+        console.print("[bold green]Error[/bold green]")
