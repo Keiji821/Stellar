@@ -7,12 +7,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 
 
- """____  _       _ _
-/ ___|| |_ ___| | | __ _ _ __
-\___ \| __/ _ \ | |/ _` | '__|
- ___) | ||  __/ | | (_| | |
-|____/ \__\___|_|_|\__,_|_|"""
-
+## Stellar
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
 Herramienta de hacking para termux, dedicado a termux.
