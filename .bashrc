@@ -112,7 +112,7 @@ menu() {
 reload() {
   cd
   cd Stellar
-  git pull --force &>/dev/null &
+  git pull --force
   clear
   python banner.py
   cd
