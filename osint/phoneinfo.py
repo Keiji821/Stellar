@@ -3,6 +3,7 @@ from phonenumbers import carrier, geocoder, number_type
 from rich.console import Console
 from rich.table import Table
 
+
 console = Console()
 
 while True:
@@ -27,7 +28,7 @@ while True:
             8: "Busca personas",
             9: "UAN",
             10: "Buzón de voz"
-        }.get(number_type(parse_result), "Desconocido")
+        }.get(phonenumbers.number_type(parse_result), "Desconocido")
 
         table = Table(title="Información del Número de Teléfono", title_justify="center", title_style="bold magenta")
         table.add_column("Información", style="cyan", no_wrap=True)
