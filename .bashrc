@@ -111,7 +111,9 @@ menu() {
 
 reload() {
   cd
-  source .bashrc
+  cd Stellar
+  git pull --force &>/dev/null &
+  python banner.py
   cd
 }
 
