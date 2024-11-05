@@ -42,7 +42,7 @@ Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu termi
 
 | Misc     | Descripción |
 |----------|----------|
-| ia       |          |   
+| ia       | Un pequeño servicio de inteligencia artificial mediante una api.|   
 
 | Osint    | Descripción |
 |----------|-------------|
