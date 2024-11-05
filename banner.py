@@ -3,6 +3,7 @@ import os
 import platform
 import random
 import time
+import sys
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
@@ -47,7 +48,8 @@ with console.status(spinner):
 
 def animate_banner(banner_text, delay=0.05):
     for char in banner_text:
-        console.print(char, end='', flush=True)
+        sys.stdout.write(char)
+        sys.stdout.flush()
         time.sleep(delay)
     console.print()
 
