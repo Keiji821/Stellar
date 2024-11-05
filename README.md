@@ -12,6 +12,8 @@
 
 Herramienta de hacking para termux, dedicado a termux.
 
+[![Termux Stellar](https://raw.githubusercontent.com/Keiji821/Stellar/main/imágenes/Termux-stellar1.jpg)](https://raw.githubusercontent.com/Keiji821/Stellar/main/imágenes/Termux-stellar1.jpg)
+
 <details>
   <summary>1. Pasos de instalación</summary>
 
@@ -76,7 +78,6 @@ La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en s
 <details>
   <summary>3. Guía de uso</summary>
 
-[![Termux Stellar](https://raw.githubusercontent.com/Keiji821/Stellar/main/imágenes/Termux-stellar1.jpg)](https://raw.githubusercontent.com/Keiji821/Stellar/main/imágenes/Termux-stellar1.jpg)
 
 - Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar, cada comando representa un script, una función disponible para usar.
 
