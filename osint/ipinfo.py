@@ -9,24 +9,27 @@ console = Console()
 IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]")
 
 with Progress(SpinnerColumn("dots")) as progress:
-        task = progress.add_task("[red]Cargando...")
-try:
-    response1 = requests.get(f'https://ipapi.co/{IpQuery}/json/')
-    response1.raise_for_status()
-    data1 = response1.json()
+    task = progress.add_task("[red]Cargando...")
+    try:
+        response1 = requests.get(f'https://ipapi.co/{IpQuery}/json/')
+        progress.update(task, advance=20)
+        response1.raise_for_status()
+        data1 = response1.json()
 
-    response2 = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
-    response2.raise_for_status()
-    data2 = response2.json()
-except requests.exceptions.RequestException as e:
-    console.print(f"[bold red]Error de red: {e}[/bold red]")
-    exit()
-except ValueError as e:
-    console.print(f"[bold red]Error de datos: {e}[/bold red]")
-    exit()
-except Exception as e:
-    console.print(f"[bold red]Error inesperado: {e}[/bold red]")
-    exit()
+        response2 = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
+        progress.update(task, advance=30)
+        response2.raise_for_status()
+        data2 = response2.json()
+        progress.update(task, advance=50)
+    except requests.exceptions.RequestException as e:
+        console.print(f"[bold red]Error de red: {e}[/bold red]")
+        exit()
+    except ValueError as e:
+        console.print(f"[bold red]Error de datos: {e}[/bold red]")
+        exit()
+    except Exception as e:
+        console.print(f"[bold red]Error inesperado: {e}[/bold red]")
+        exit()
 
 console.print(" ")
 
