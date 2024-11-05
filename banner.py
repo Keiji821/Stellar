@@ -2,6 +2,7 @@ import datetime
 import os
 import platform
 import random
+import time
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
@@ -44,7 +45,13 @@ spinner = Spinner("dots", text="Iniciando banner... Presiona [Enter] para contin
 with console.status(spinner):
     input("")
 
-console.print("[bold green]" + banners + "[/bold green]")
+def animate_banner(banner_text, delay=0.05):
+    for char in banner_text:
+        console.print(char, end="", flush=True)
+        time.sleep(delay)
+    print()
+
+animate_banner(banners)
 
 print("")
 MARKDOWN = """
