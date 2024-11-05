@@ -45,12 +45,6 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando jp2a"
- echo
- pkg install -y jp2a
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando nmap"
  echo
  pkg install -y nmap
@@ -69,7 +63,7 @@ echo
 pip install bs4
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
-pip install colorama
+pip install pyfiglet
 printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install phonenumbers
