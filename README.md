@@ -38,17 +38,17 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 | Misc     | Osint    | Pentest  |
 |----------|----------|----------|
-| ia       | ipinfo   |          |
-|----------|----------|----------|
-|          | phoneinfo|          |
-|----------|----------|----------|
-|          | metadatainfo |      |
-|----------|----------|----------|
-|          |          |          |
-|----------|----------|----------|
-|          |          |          |
-|----------|----------|----------|
-|          |          |          |
+| ia       | ipinfo   |          
+|----------|----------|
+|          | phoneinfo|
+|----------|----------|
+|          | metadatainfo |
+|----------|----------|
+|          |          |
+|----------|----------|
+|          |          |
+|----------|----------|
+|          |          |
 
 Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
