@@ -10,7 +10,6 @@
 ## Stellar
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
----
 Herramienta de hacking para termux, dedicado a termux.
 
 <details>
@@ -52,19 +51,15 @@ Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu termi
 | metadatainfo| Recupera los metadatos de una imagen, archivo o video.|
 | urlinfo  | Obtiene información relevante de una url o enlace.|
 | emailsearch| Busca correos electrónicos con el nombre y apellido proporcionados.|
-
 | Pentest  |          |
 |----------|----------|
 | En desarrollo|      |  
-
 | Phising  |          |
 |----------|----------|
 | En desarrollo|      | 
-
 | Encryption|         |
 |----------|----------|
 | En desarrollo|      |  
-
 | Chat tor |          |
 |----------|----------|
 | En desarrollo|      |    
