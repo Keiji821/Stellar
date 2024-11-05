@@ -12,6 +12,7 @@
 \___ \| __/ _ \ | |/ _` | '__|
  ___) | ||  __/ | | (_| | |
 |____/ \__\___|_|_|\__,_|_|
+
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
 Herramienta de hacking para termux, dedicado a termux.
