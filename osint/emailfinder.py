@@ -17,7 +17,6 @@ user_agents = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:80.0) Gecko/20100101 Firefox/80.0",
 ]
 
-# Proxy SOCKS5 (reemplaza por tu proxy si es necesario)
 proxies = {
     "http": "socks5h://127.0.0.1:9050",
     "https": "socks5h://127.0.0.1:9050"
@@ -70,7 +69,7 @@ def email_finder():
             console.print(f"[bold red]Error de conexión a {url}:[/bold red] {e}")
 
     table = Table(title="Direcciones de Correo Electrónico Encontradas")
-    table.add_column("Email", style="cyan")
+    table.add_column("Email", style="red")
 
     if emails:
         for email in sorted(emails):
@@ -80,3 +79,4 @@ def email_finder():
         console.print("[bold yellow]No se encontraron correos electrónicos.[/bold yellow]")
 
 email_finder()
+print(" ")
