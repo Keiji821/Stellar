@@ -39,7 +39,6 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 | Osint    | Descripción |
 |----------|----------|
 | ipinfo   |          |          
-           |----------|
 | phoneinfo|          |
 |----------|----------|
 | metadatainfo|       |
