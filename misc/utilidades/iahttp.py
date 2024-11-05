@@ -11,7 +11,7 @@ API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 
 def get_ai_response(user_input):
     with Progress(SpinnerColumn("dots")) as progress:
-        task = progress.add_task("[red]Making request...")
+        task = progress.add_task("[red]Cargando...")
         try:
             url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={API_KEY}&prompt={user_input}"
             response = requests.get(url)
