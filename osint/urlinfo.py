@@ -4,7 +4,7 @@ import subprocess
 import socket
 from rich.console import Console
 from rich.table import Table
-from rich.progress import Progress, BarColumn, TextColumn
+from rich.progress import Progress, BarColumn, SpinnerColumn, TextColumn, TimeElapsedColumn
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import re
@@ -28,20 +28,28 @@ def obtener_datos_web(url):
 
 def obtener_info_nmap(ip_address):
     try:
+        # Ejecución de Nmap y captura de salida
         nmap_output = subprocess.check_output(['nmap', '-v', '-A', ip_address], text=True)
-        open_ports = [line.split()[1] for line in nmap_output.splitlines() if 'Ports:' in line]
-        open_ports = ', '.join(open_ports) if open_ports else "No disponible"
+        
+        # Extracción de información detallada de Nmap
+        open_ports = []
+        os_info = "No disponible"
+        service_versions = "No disponible"
 
-        os_info = ""
         for line in nmap_output.splitlines():
+            # Extracción de puertos abiertos
+            if re.search(r'\bopen\b', line):
+                open_ports.append(line.strip())
+            
+            # Extracción de detalles del sistema operativo
             if "OS details" in line:
                 os_info = line.split(":")[1].strip()
-
-        service_versions = ""
-        for line in nmap_output.splitlines():
+            
+            # Extracción de versiones de servicios
             if "Service Info" in line:
                 service_versions = line.split(":")[1].strip()
 
+        open_ports = '\n'.join(open_ports) if open_ports else "No disponible"
         return open_ports, os_info, service_versions
     except subprocess.CalledProcessError:
         return "Error al ejecutar Nmap", "", ""
@@ -51,12 +59,15 @@ def analyze_url(url):
         url = 'https://' + url
 
     with Progress(
+        SpinnerColumn(spinner_name="dots"),
         TextColumn("[progress.description]{task.description}"),
-        BarColumn(complete_style="green", finished_style="green", pulse_style="red"),
+        BarColumn(complete_style="green", finished_style="green", pulse_style="bright_yellow"),
+        TimeElapsedColumn(),
         transient=True
     ) as progress:
-        task = progress.add_task("[red]Obteniendo datos web...", total=100)
-        for i in range(0, 30):
+        task = progress.add_task("[red]Conectando a la URL...", total=100)
+
+        for _ in range(0, 30):
             progress.update(task, advance=1)
             time.sleep(0.05)
         
@@ -65,7 +76,7 @@ def analyze_url(url):
             return
         
         progress.update(task, description="[yellow]Analizando HTML...", completed=30)
-        for i in range(30, 60):
+        for _ in range(30, 60):
             progress.update(task, advance=1)
             time.sleep(0.05)
 
@@ -81,13 +92,14 @@ def analyze_url(url):
             ip_address = "No disponible"
 
         progress.update(task, description="[blue]Ejecutando Nmap...", completed=60)
-        for i in range(60, 100):
+        for _ in range(60, 100):
             progress.update(task, advance=1)
             time.sleep(0.05)
 
         server_info = response.headers.get('Server', 'No disponible')
         open_ports, os_info, service_versions = obtener_info_nmap(ip_address) if ip_address != "No disponible" else ("No disponible", "", "")
 
+    # Tabla para mostrar la información
     table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
     table.add_column("Información", style="bold green")
     table.add_column("Valor", style="bold green")
