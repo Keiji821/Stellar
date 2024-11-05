@@ -46,11 +46,9 @@ console.print("[bold green]" + banners + "[/bold green]")
 print("")
 MARKDOWN = """
 > Stellar V1.0
-
 > Para ver comandos utilice: menu
-
 > Hecho por: Keiji821
-
 """
 md = Markdown(MARKDOWN)
 console.print(md)
+console.print(" ")
