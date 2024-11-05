@@ -36,16 +36,7 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 ~/Stellar
 
-|Misc
-|----------|------------------------|
-| ia       | Chat con una IA de api |
-|----------|------------------------|
-
-|Osint
-|----------|----------|----------|
-|          |          |          |
-|----------|----------|----------|
-|          |          |          |
+| Misc     | Osint    | Pentest  |
 |----------|----------|----------|
 |          |          |          |
 |----------|----------|----------|
