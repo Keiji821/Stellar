@@ -41,7 +41,7 @@ blackhole1 = """
 
 banners = random.choice([blackhole1])
 
-spinner = Spinner("dots", text="Iniciando banner... Presiona [Enter] para continuar", spinner_style="yellow")
+spinner = Spinner("dots", text="Iniciando banner... Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
 
