@@ -5,6 +5,7 @@ from rich.panel import Panel
 
 console = Console()
 
+print(" ")
 MARKDOWN = """
 # Comandos de Stellar
 """
