@@ -44,4 +44,4 @@ while True:
             command = response.split("ejecutar ")[1]
             execute_command(command)
     else:
-        console.print("[bold green]Error[/bold green]")
+        console.print("[bold red]Error[/bold red]")
