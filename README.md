@@ -40,14 +40,9 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 |----------|----------|
 | ipinfo   |          |          
 | phoneinfo|          |
-|----------|----------|
 | metadatainfo|       |
-|----------|----------|
 | urlinfo  |          |
-|----------|----------|
 | emailsearch|        |
-|----------|----------|
-|          |          |
 
 Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
