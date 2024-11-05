@@ -24,7 +24,7 @@ def obtener_datos_web(url):
 
 def obtener_info_nmap(ip_address):
     try:
-        nmap_output = subprocess.check_output(['nmap', '-p-', '--open', '-T4', '-oG', '-', ip_address], text=True)
+        nmap_output = subprocess.check_output(['nmap', '-v', '-A', ip_address], text=True)
         open_ports = [line.split()[1] for line in nmap_output.splitlines() if 'Ports:' in line]
         return ', '.join(open_ports) if open_ports else "No disponible"
     except subprocess.CalledProcessError:
@@ -49,9 +49,9 @@ def analyze_url(url):
     server_info = response.headers.get('Server', 'No disponible')
     open_ports = obtener_info_nmap(ip_address) if ip_address != "No disponible" else "No disponible"
 
-    table = Table(title="Información del sitio web", title_justify="center", title_style="bold magenta")
-    table.add_column("Información", style="cyan")
-    table.add_column("Valor", style="magenta")
+    table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
+    table.add_column("Información", style="bold green")
+    table.add_column("Valor", style="bold green")
 
     table.add_row("URL", url)
     table.add_row("Título", title)
