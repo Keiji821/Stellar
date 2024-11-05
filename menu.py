@@ -1,5 +1,7 @@
 from rich.console import Console
 from rich.markdown import Markdown
+from rich.table import Table
+from rich.panel import Panel
 
 console = Console()
 
@@ -7,7 +9,7 @@ MARKDOWN = """
 # Comandos de Stellar
 """
 md = Markdown(MARKDOWN)
-console.print(md)
+console.print(md, style="bold magenta")
 
 console.print()
 
@@ -27,10 +29,15 @@ categories = [
 ]
 
 for category in categories:
-    console.print(f"  {category['title']}")
+    table = Table(title=f"[bold blue]{category['title']}[/bold blue]", title_justify="center")
+    table.add_column("Comando", style="cyan", no_wrap=True)
+    table.add_column("Descripción", style="magenta")
+
     for command in category["commands"]:
-        console.print(f"   {command['name']}", ">", command["description"])
+        table.add_row(command["name"], command["description"])
+
+    console.print(table)
 
 console.print()
-console.print("CTRL + Z", " Esto detendrá cualquier comando o proceso existente.")
+console.print(Panel("CTRL + Z : Esto detendrá cualquier comando o proceso existente.", title="[bold red]Atención[/bold red]"), style="bold yellow")
 console.print()
