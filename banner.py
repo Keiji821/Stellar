@@ -51,7 +51,7 @@ os.system("clear")
 
 def animate_banner(banner_text, delay=0.001):
     for char in banner_text:
-        sys.stdout.write(char)
+        console.print(char, end="", style=f"rgb({random.randint(0, 255)}, {random.randint(0, 255)}, {random.randint(0, 255)})")
         sys.stdout.flush()
         time.sleep(delay)
     console.print()
