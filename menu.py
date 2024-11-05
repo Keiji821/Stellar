@@ -24,7 +24,7 @@ categories = [
         {"name": "ipinfo", "description": "Obtiene la información de una ip, ya sea IPV4 o IPV6."},
         {"name": "phoneinfo", "description": "Obtiene la información de un número de teléfono."},
         {"name": "urlinfo", "description": "Obtiene información relevante de una url o enlace."},
-        {"name": "metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."}
+        {"name": "metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."},
         {"name": "emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."}
     ]}
 ]
