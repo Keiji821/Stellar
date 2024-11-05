@@ -30,9 +30,9 @@ while True:
             10: "Buzón de voz"
         }.get(phonenumbers.number_type(parse_result), "Desconocido")
 
-        table = Table(title="Información del Número de Teléfono", title_justify="center", title_style="bold magenta")
-        table.add_column("Información", style="cyan", no_wrap=True)
-        table.add_column("Valor", style="magenta")
+        table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold red")
+        table.add_column("Información", style="green", no_wrap=False)
+        table.add_column("Valor", style="white")
 
         table.add_row("País", country_name)
         table.add_row("Empresa de teléfono", carrier_name)
@@ -43,6 +43,7 @@ while True:
         table.add_row("Tipo de número", number_type_name)
 
         console.print(table)
+        print(" ")
         break
     except phonenumbers.phonenumberutil.NumberParseException:
         console.print("[bold red]Error: El número de teléfono ingresado no es válido. Por favor, inténtalo de nuevo.[/bold red]")
