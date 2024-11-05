@@ -41,6 +41,14 @@ blackhole1 = """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠁⠈⠐⠀⠘⠀⠈⠀⠈
 """
 
+Stellar = """
+ ____  _       _ _
+/ ___|| |_ ___| | | __ _ _ __
+\___ \| __/ _ \ | |/ _` | '__|
+ ___) | ||  __/ | | (_| | |
+|____/ \__\___|_|_|\__,_|_|
+"""
+
 banners = random.choice([blackhole1])
 
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
