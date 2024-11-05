@@ -28,7 +28,7 @@ except Exception as e:
     console.print(f"[bold red]Error inesperado: {e}[/bold red]")
     exit()
 
-print(" ")
+console.print(" ")
 
 table = Table(title="Datos de la IP", title_justify="center", title_style="bold magenta")
 
