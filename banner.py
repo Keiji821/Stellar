@@ -1,5 +1,6 @@
 import datetime
 import os
+from os import system
 import platform
 import random
 import time
@@ -42,11 +43,13 @@ blackhole1 = """
 
 banners = random.choice([blackhole1])
 
-spinner = Spinner("dots", text="Iniciando banner... Presiona [Enter] para continuar", style="yellow")
+spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
 
-def animate_banner(banner_text, delay=0.05):
+os.system("clear")
+
+def animate_banner(banner_text, delay=0.01):
     for char in banner_text:
         sys.stdout.write(char)
         sys.stdout.flush()
