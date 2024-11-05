@@ -16,7 +16,7 @@ def get_ai_response(user_input):
         response.raise_for_status()
         return response.json()["result"][0]["response"]
     except requests.exceptions.RequestException as e:
-        print("[bold red] Error: " + str(e), "[/bold red])
+        print("[bold red] Error: " + str(e) + "[/bold red]")
         return None
 
 def print_ai_response(response):
@@ -29,7 +29,7 @@ def print_ai_response(response):
     md = Markdown(MARKDOWN)
     table.add_row(md)
     console.print(table)
-    print(" ")
+    console.print(" ")
 
 def execute_command(command):
     print(f"Ejecutando comando: {command}")
