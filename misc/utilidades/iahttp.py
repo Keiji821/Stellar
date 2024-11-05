@@ -1,5 +1,5 @@
 import requests
-from rich.progress import Progress
+from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 import textwrap
 from rich.table import Table
@@ -10,14 +10,12 @@ console = Console()
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 
 def get_ai_response(user_input):
-    with Progress() as progress:
-        task = progress.add_task("[red]Making request...", total=100)
+    with Progress(SpinnerColumn("dots")) as progress:
+        task = progress.add_task("[red]Making request...")
         try:
             url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={API_KEY}&prompt={user_input}"
             response = requests.get(url)
-            progress.update(task, advance=50)
             response.raise_for_status()
-            progress.update(task, advance=50)
             return response.json()["result"][0]["response"]
         except requests.exceptions.RequestException as e:
             console.print("[bold red] Error: " + str(e) + "[/bold red]")
@@ -42,4 +40,3 @@ while True:
         print_ai_response(response)
     else:
         console.print("[bold red]Error[/bold red]")
-
