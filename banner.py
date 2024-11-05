@@ -47,10 +47,9 @@ with console.status(spinner):
 
 def animate_banner(banner_text, delay=0.05):
     for char in banner_text:
-        console.print(char, end="")
-        console.flush()  # Flushing the console manually after each character
+        console.print(char, end='', flush=True)
         time.sleep(delay)
-    print()
+    console.print()
 
 animate_banner(banners)
 
