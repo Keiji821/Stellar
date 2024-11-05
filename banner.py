@@ -223,7 +223,7 @@ MARKDOWN = """
 > Stellar V1.0                                        
 Para ver comandos utilice: menu                          
 Hecho por: Keiji821
-
 """
 md = Markdown(MARKDOWN)
 console.print(md)
+print(" ")
