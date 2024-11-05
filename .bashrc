@@ -54,7 +54,7 @@ clear
 python banner.py
 cd
 
-# Comandos y scripts
+# Osint
 
 ipinfo() {
   cd
@@ -83,6 +83,15 @@ metadatainfo() {
   bash metadatainfo.sh
   cd
 }
+
+emailsearch() {
+ cd
+ cd Stellar/osint
+ python emailfinder.py
+ cd
+}
+
+# Pentesting
 
 ddos() {
   cd
