@@ -46,7 +46,7 @@ Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu termi
 
 | Osint    | Descripción |
 |----------|----------|
-| ipinfo   |          |          
+| ipinfo   | Obtiene la información de una ip, ya sea IPV4 o IPV6|          
 | phoneinfo|          |
 | metadatainfo|       |
 | urlinfo  |          |
