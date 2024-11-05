@@ -113,6 +113,7 @@ reload() {
   cd
   cd Stellar
   git pull --force &>/dev/null &
+  clear
   python banner.py
   cd
 }
