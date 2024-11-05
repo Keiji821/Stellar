@@ -50,7 +50,19 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 | Pentest  |          |
 |----------|----------|
-| En desarrollo|      |   
+| En desarrollo|      |  
+
+| Phising  |          |
+|----------|----------|
+| En desarrollo|      | 
+
+| Encryption|         |
+|----------|----------|
+| En desarrollo|      |  
+
+| Chat tor |          |
+|----------|----------|
+| En desarrollo|      |    
 
 Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
