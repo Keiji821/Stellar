@@ -1,11 +1,15 @@
 import requests
+from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
+from rich.markdown import Markdown
 
 console = Console()
 
 IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]")
 
+with Progress(SpinnerColumn("dots")) as progress:
+        task = progress.add_task("[red]Cargando...")
 try:
     response1 = requests.get(f'https://ipapi.co/{IpQuery}/json/')
     response1.raise_for_status()
