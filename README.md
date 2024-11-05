@@ -7,7 +7,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 
 
-## ____  _       _ _
+ ____  _       _ _
 / ___|| |_ ___| | | __ _ _ __
 \___ \| __/ _ \ | |/ _` | '__|
  ___) | ||  __/ | | (_| | |
