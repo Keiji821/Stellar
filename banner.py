@@ -54,7 +54,7 @@ def animate_banner(banner_text, delay=0.01):
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(delay)
-    console.print()
+    console.print("[bold green]")
 
 animate_banner(banners)
 
