@@ -41,13 +41,16 @@ blackhole1 = """
 
 banners = random.choice([blackhole1])
 
-console.print("[bold green]{banners}[/bold green]")
+console.print("[bold green]" + {banners} + "[/bold green]")
 
 print("")
 MARKDOWN = """
 > Stellar V1.0
+
 > Para ver comandos utilice: menu
-> Hora actual: {hour_string} | Fecha actual: {date_string}
+
+> Hecho por: Keiji821
+
 """
 md = Markdown(MARKDOWN)
 console.print(md)
