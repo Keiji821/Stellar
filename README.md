@@ -36,17 +36,20 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 ~/Stellar
 
-- Osint `(5 comandos)`
+|Misc
+|----------|------------------------|
+| ia       | Chat con una IA de api |
+|----------|------------------------|
 
-- Pentesting `(En desarrollo)`  
-
-- Phising `(En desarrollo)`  
-
-- Encryption `(En desarrollo)`  
-
-- Misc `(2 comandos)`  
-
-- Chat Tor `(En desarrollo)`  
+|Osint
+|----------|----------|----------|
+|          |          |          |
+|----------|----------|----------|
+|          |          |          |
+|----------|----------|----------|
+|          |          |          |
+|----------|----------|----------|
+|          |          |          |
 
 Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
