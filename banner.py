@@ -49,7 +49,7 @@ with console.status(spinner):
 
 os.system("clear")
 
-def animate_banner(banner_text, delay=0.0001):
+def animate_banner(banner_text, delay=0.001):
     for char in banner_text:
         sys.stdout.write(char)
         sys.stdout.flush()
