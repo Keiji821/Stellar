@@ -17,16 +17,23 @@ Herramienta de hacking para termux, dedicado a termux.
 
 **Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
 
-                     
-`pkg install -y git`
+<pre>                      
+pkg install -y git
+</pre>
 
-`git clone https://github.com/Keiji821/Stellar`
+<pre> 
+git clone https://github.com/Keiji821/Stellar
+</pre>
 
-`cd Stellar`
+<pre> 
+cd Stellar
+</pre>
 
 **Esto instalará las dependencias necesarias para la Herramienta:**
 
-`bash install.sh`
+<pre> 
+bash install.sh
+</pre>
 
 Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu terminal:
 
