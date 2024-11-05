@@ -31,7 +31,7 @@ Herramienta de hacking para termux, dedicado a termux.
 Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu terminal:
 
 
-```pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh```
+`pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh`
 </details>
 
 <details>
