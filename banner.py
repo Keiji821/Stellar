@@ -39,7 +39,7 @@ blackhole1 = """
 
 banners = random.choice([blackhole1])
 
-print(Fore.RED + Style.BRIGHT + banners + Style.RESET_ALL)
+console.print([bold green], banners, [/bold green])
 
 print("")
 MARKDOWN = """
