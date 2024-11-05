@@ -41,6 +41,6 @@ for category in categories:
     console.print(table)
 
 console.print()
-console.print(Panel("CTRL + Z : Esto detendrá cualquier comando o proceso existente.", title="[bold red]Atención[/bold red]"), style="bold yellow")
+console.print(Panel("CTRL + Z : Esto detendrá cualquier comando o proceso existente.", title="[bold red]Nota[/bold red]"), style="bold yellow")
 print(" ")
 print(" ")
