@@ -29,7 +29,8 @@ while True:
             9: "UAN",
             10: "Buzón de voz"
         }.get(phonenumbers.number_type(parse_result), "Desconocido")
-
+        
+        print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold red")
         table.add_column("Información", style="green", no_wrap=False)
         table.add_column("Valor", style="white")
