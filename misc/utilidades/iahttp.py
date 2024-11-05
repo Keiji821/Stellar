@@ -1,12 +1,11 @@
 import requests
-from colorama import init, Fore, Back, Style
 import textwrap
 import os
 from rich.console import Console
 from rich.table import Table
 from rich.markdown import Markdown
 
-init()
+console.print(" ")
 
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 
@@ -17,7 +16,7 @@ def get_ai_response(user_input):
         response.raise_for_status()
         return response.json()["result"][0]["response"]
     except requests.exceptions.RequestException as e:
-        print(Fore.RED + "Error: " + str(e) + Style.RESET_ALL)
+        print("[bold red] Error: " + str(e), "[/bold red])
         return None
 
 def print_ai_response(response):
@@ -38,7 +37,7 @@ def execute_command(command):
     os.system(command)
 
 while True:
-    user_input = input(Fore.GREEN + Style.BRIGHT + "> ")
+    user_input = input("[bold green]> [/bold green]")
     response = get_ai_response(user_input)
     if response:
         print_ai_response(response)
@@ -46,4 +45,4 @@ while True:
             command = response.split("ejecutar ")[1]
             execute_command(command)
     else:
-        print(Fore.RED + "Error" + Style.RESET_ALL)
+        print("[bold green]Error[/bold green]")
