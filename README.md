@@ -31,7 +31,7 @@ Herramienta de hacking para termux, dedicado a termux.
 
 ~/Stellar
 
-- Osint `(4 comandos)`
+- Osint `(5 comandos)`
 
 - Pentesting `(En desarrollo)`  
 
