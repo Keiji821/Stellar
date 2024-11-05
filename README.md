@@ -45,12 +45,12 @@ Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu termi
 | ia       |          |   
 
 | Osint    | Descripción |
-|----------|-----------------------------------------------------|
+|----------|-------------|
 | ipinfo   | Obtiene la información de una ip, ya sea IPV4 o IPV6|          
-| phoneinfo|          |
-| metadatainfo|       |
-| urlinfo  |          |
-| emailsearch|        |
+| phoneinfo| Obtiene la información de un número de teléfono.|
+| metadatainfo| Recupera los metadatos de una imagen, archivo o video.|
+| urlinfo  | Obtiene información relevante de una url o enlace.|
+| emailsearch| Busca correos electrónicos con el nombre y apellido proporcionados.|
 
 | Pentest  |          |
 |----------|----------|
