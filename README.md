@@ -12,7 +12,7 @@
 
 Herramienta de hacking para termux, dedicado a termux.
 
-![Termux-stellar1](https://raw.githubusercontent.com/Keiji821/Stellar/main/images/Termux-stellar1.jpg)
+![Termux-stellar1](images/Termux-stellar1.jpg)
 
 <details>
   <summary>1. Pasos de instalación</summary>
