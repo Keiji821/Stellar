@@ -10,7 +10,8 @@
 ## Stellar
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
----Herramienta de hacking para termux, dedicado a termux.
+---
+Herramienta de hacking para termux, dedicado a termux.
 
 <details>
   <summary>1. Pasos de instalación</summary>
