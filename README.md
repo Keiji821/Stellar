@@ -13,7 +13,7 @@
 Herramienta de hacking para termux, dedicado a termux.
 
 <details>
-  <details>1. Pasos de instalación</summary>
+  <summary>1. Pasos de instalación</summary>
 
 **Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
 
@@ -33,10 +33,10 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 `pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh`
 
-</summary>
+</details>
 
 <details>
-  <details>2. Características</summary>
+  <summary>2. Características</summary>
 
 ~/Stellar
 
@@ -71,21 +71,21 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
 
-</summary>
+</details>
 
 <details>
-  <details>3. Guía de uso</summary>
+  <summary>3. Guía de uso</summary>
 
 > Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar, cada comando representa un script, una función disponible para usar.
 
-</summary>
+</details>
 
 <details>
-  <details>Registro de cambios</summary>
+  <summary>Registro de cambios</summary>
 
 
 
 #
 Actualización/00/00/2024
 
-<details>
+</details>
