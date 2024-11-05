@@ -36,6 +36,10 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 ~/Stellar
 
+| Misc     | Descripción |
+|----------|----------|
+| ia       |          |   
+
 | Osint    | Descripción |
 |----------|----------|
 | ipinfo   |          |          
@@ -43,6 +47,10 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 | metadatainfo|       |
 | urlinfo  |          |
 | emailsearch|        |
+
+| Pentest  |          |
+|----------|----------|
+| En desarrollo|      |   
 
 Seguridad
 > La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
