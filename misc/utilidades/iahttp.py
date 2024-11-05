@@ -36,7 +36,7 @@ def execute_command(command):
     os.system(command)
 
 while True:
-    user_input = input("[bold green]> [/bold green]")
+    user_input = console.input("[bold green]> [/bold green]")
     response = get_ai_response(user_input)
     if response:
         print_ai_response(response)
