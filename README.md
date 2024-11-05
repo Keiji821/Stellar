@@ -51,15 +51,19 @@ Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu termi
 | metadatainfo| Recupera los metadatos de una imagen, archivo o video.|
 | urlinfo  | Obtiene información relevante de una url o enlace.|
 | emailsearch| Busca correos electrónicos con el nombre y apellido proporcionados.|
+
 | Pentest  |          |
 |----------|----------|
 | En desarrollo|      |  
+
 | Phising  |          |
 |----------|----------|
 | En desarrollo|      | 
+
 | Encryption|         |
 |----------|----------|
 | En desarrollo|      |  
+
 | Chat tor |          |
 |----------|----------|
 | En desarrollo|      |    
@@ -81,7 +85,7 @@ Seguridad
 
 
 
-#
+---
 Actualización/00/00/2024
 
 </details>
