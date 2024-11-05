@@ -76,7 +76,7 @@ La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en s
 <details>
   <summary>3. Guía de uso</summary>
 
-[![Termux-stellar1](Termux-stellar1.jpg)](https://github.com/Keiji821/Stellar/imágenes)
+[![Termux-stellar1](https://github.com/Keiji821/Stellar/imágenes)](Termux-stellar1.jpg)
 
 - Después de ejecutar el archivo install.sh su sesión de termux se reiniciará y la herramienta se va a iniciar, para ver la lista de comandos disponibles ejecute "menu" en la terminal y se desplegará una lista de comandos disponibles para usar, cada comando representa un script, una función disponible para usar.
 
