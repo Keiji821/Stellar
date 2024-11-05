@@ -17,7 +17,7 @@ Herramienta de hacking para termux, dedicado a termux.
 
 **Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
 
-|                    |
+                     
 |--------------------|
 |pkg install -y git  |
 
