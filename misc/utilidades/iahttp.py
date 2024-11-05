@@ -5,7 +5,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.markdown import Markdown
 
-console.print(" ")
+console = Console()
 
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 
@@ -28,7 +28,6 @@ def print_ai_response(response):
     MARKDOWN = wrapped_response
     md = Markdown(MARKDOWN)
     table.add_row(md)
-    console = Console()
     console.print(table)
     print(" ")
 
