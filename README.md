@@ -38,6 +38,14 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 | Misc     | Osint    | Pentest  |
 |----------|----------|----------|
+| ia       | ipinfo   |          |
+|----------|----------|----------|
+|          | phoneinfo|          |
+|----------|----------|----------|
+|          | metadatainfo |      |
+|----------|----------|----------|
+|          |          |          |
+|----------|----------|----------|
 |          |          |          |
 |----------|----------|----------|
 |          |          |          |
