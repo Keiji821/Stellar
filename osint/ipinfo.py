@@ -35,7 +35,7 @@ console.print(" ")
 
 table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
 
-table.add_column("Información", style="green", no_wrap=True)
+table.add_column("Información", style="green", no_wrap=False)
 table.add_column("Valor", style="white")
 
 table.add_row("[bold underline]Información de Red[/bold underline]", "")
