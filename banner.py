@@ -82,7 +82,7 @@ chica1 = """
 ⠸⡆⠀⠀⠇⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠆⠀⠀⠀⠀⠀⠀⠀⠙⠳⣄⡀⢢⡀
 """
 
-banners = random.choice([blackhole1, planet1])
+banners = random.choice([blackhole1, planet1, chica1])
 
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
