@@ -36,17 +36,17 @@ Si quieres instalarlo todo de un solo golpe copia y pega lo siguiente en tu term
 
 ~/Stellar
 
-| Misc     | Osint    | Pentest  |
-|----------|----------|----------|
-| ia       | ipinfo   |          
+| Osint    | Descripción |
 |----------|----------|
-|          | phoneinfo|
+| ipinfo   |          |          
 |----------|----------|
-|          | metadatainfo |
+| phoneinfo|          |
 |----------|----------|
-|          |          |
+| metadatainfo|       |
 |----------|----------|
-|          |          |
+| urlinfo  |          |
+|----------|----------|
+| emailsearch|        |
 |----------|----------|
 |          |          |
 
