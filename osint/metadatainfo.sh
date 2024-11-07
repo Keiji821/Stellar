@@ -27,7 +27,6 @@ cd storage
 echo
 printf "${morado}Directorios ⤵
 "
-echo
 ls
 printf "${morado}"
 echo
@@ -36,7 +35,6 @@ cd "${directorio}"
 echo
 printf "${morado}Carpetas ⤵
 "
-echo
 ls
 printf "${morado}"
 echo
