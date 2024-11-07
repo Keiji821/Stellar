@@ -27,6 +27,7 @@ cd storage
 echo
 printf "${morado}Directorios:
 "
+echo
 ls
 printf "${morado}"
 echo
@@ -34,6 +35,7 @@ read -p 'Directorio: ' directorio
 cd "${directorio}"
 printf "${morado}Carpetas:
 "
+echo
 ls
 printf "${morado}"
 echo
