@@ -25,14 +25,14 @@ printf "${amarillo}"
 cd
 cd storage
 echo
-printf "${morado} Directorios:
+printf "${morado}Directorios:
 "
 ls
 printf "${morado}"
 echo
 read -p 'Directorio: ' directorio
 cd "${directorio}"
-printf "${morado} Carpetas:
+printf "${morado}Carpetas:
 "
 ls
 printf "${morado}"
