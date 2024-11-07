@@ -27,7 +27,10 @@ cd storage
 ls
 read -p 'Directorio: ' directorio
 cd "${directorio}"
+read -p 'Carpeta: ' carpeta
+cd "${carpeta}"
 
 read -p 'Archivo: ' imagen
 
 exiftool "${imagen}"
+cd
