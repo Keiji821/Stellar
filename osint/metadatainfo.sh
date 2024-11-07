@@ -24,7 +24,9 @@ termux-setup-storage -y &>/dev/null &
 printf "${amarillo}"
 cd
 cd storage
+echo "╭────────────────────────────────╮"
 ls
+echo "╰────────────────────────────────╯"
 read -p 'Directorio: ' directorio
 cd "${directorio}"
 ls
