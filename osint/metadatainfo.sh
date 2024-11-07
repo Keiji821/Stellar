@@ -28,6 +28,7 @@ ls
 read -p 'Directorio: ' directorio
 cd "${directorio}"
 read -p 'Carpeta: ' carpeta
+ls
 cd "${carpeta}"
 
 read -p 'Archivo: ' imagen
