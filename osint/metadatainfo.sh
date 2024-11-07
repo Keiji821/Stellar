@@ -55,3 +55,4 @@ read -p 'Archivo: ' imagen
 
 exiftool "${imagen}"
 cd
+echo
