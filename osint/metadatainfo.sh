@@ -42,7 +42,12 @@ printf "${morado}"
 echo
 read -p 'Carpeta: ' carpeta
 cd "${carpeta}"
-
+echo
+printf "${morado}Archivos:
+"
+ls
+printf "${morado}"
+echo
 read -p 'Archivo: ' imagen
 
 exiftool "${imagen}"
