@@ -34,7 +34,8 @@ echo
 read -p 'Directorio: ' directorio
 cd "${directorio}"
 echo
-printf "${azul_agua}Recuerda escribir el nombre de las carpetas sin las comillas."
+printf "${azul_agua}Recuerda escribir el nombre de las carpetas sin las comillas.
+"
 printf "${morado}Carpetas ⤵
 "
 echo
