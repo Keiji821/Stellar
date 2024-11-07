@@ -19,9 +19,10 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Metadatainfo
 
-termux-setup-storage
+termux-setup-storage -y
 
 printf "${amarillo}"
+cd
 cd storage
 ls
 read -p 'Directorio: ' directorio
