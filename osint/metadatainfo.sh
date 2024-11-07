@@ -33,6 +33,7 @@ printf "${morado}"
 echo
 read -p 'Directorio: ' directorio
 cd "${directorio}"
+echo
 printf "${morado}Carpetas:
 "
 echo
