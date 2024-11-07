@@ -24,11 +24,11 @@ termux-setup-storage -y &>/dev/null &
 printf "${amarillo}"
 cd
 cd storage
+la
 read -p 'Directorio: ' directorio
-ls
 cd "${directorio}"
-read -p 'Carpeta: ' carpeta
 ls
+read -p 'Carpeta: ' carpeta
 cd "${carpeta}"
 
 read -p 'Archivo: ' imagen
