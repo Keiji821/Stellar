@@ -224,6 +224,6 @@ md = Markdown(MARKDOWN)
 console.print(md)
 console.print("""[bold green]
 Para ver comandos utilice: menu                          
-Hecho por: Keiji821
-[/bold green]""")
+Hecho por: [/bold green][bold white]Keiji821
+[/bold white]""")
 print(" ")
