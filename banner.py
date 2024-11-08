@@ -218,10 +218,10 @@ animate_banner(banners)
 
 print("")
 MARKDOWN = """
-> Stellar V1.0                                        
+> __Stellar V1.0                                        
 Para ver comandos utilice: menu                          
-Hecho por: Keiji821
+Hecho por: Keiji821__
 """
 md = Markdown(MARKDOWN)
-console.print([bold green] + md + [/bold green])
+console.print(md)
 print(" ")
