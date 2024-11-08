@@ -223,7 +223,7 @@ MARKDOWN = """
 md = Markdown(MARKDOWN)
 console.print(md)
 console.print("""[bold green]
-Para ver comandos utilice: menu                          
-Hecho por: [/bold green][bold white]Keiji821
+Para ver comandos utilice:[/bold green][bold white]menu[/bold white]                        
+[bold green]Hecho por: [/bold green][bold white]Keiji821
 [/bold white]""")
 print(" ")
