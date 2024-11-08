@@ -19,8 +19,8 @@ cyan="$b\033[38;2;23;147;209m"
 
 # Metadatainfo
 
-termux-setup-storage -y
-
+termux-setup-storage -y &>/dev/null &
+sleep 5
 printf "${amarillo}"
 cd
 cd storage
