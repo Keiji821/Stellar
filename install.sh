@@ -21,8 +21,8 @@ cyan="$b\033[38;2;23;147;209m"
 
 clear
 
-cp ~/Stellar/.bash_profile ~/.
-cp ~/Stellar/.bashrc ~/.
+cp ~/Stellar/configuración/.bash_profile ~/.
+cp ~/Stellar/configuración/.bashrc ~/.
 
 # Actualizar paquetes
 
