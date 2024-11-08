@@ -208,7 +208,7 @@ os.system("clear")
 def animate_banner(banner_text, delay=0.001):
     colors = random.choice(["blue", "yellow", "cyan", "white", "red", "green"])
     for char in banner_text:
-        console.print(char, end="", style=f"bright_{colors}")
+        console.print(char, end="", style=f"bold {colors}")
         sys.stdout.flush()
         time.sleep(delay)
     console.print()
@@ -221,7 +221,7 @@ MARKDOWN = """
 """
 md = Markdown(MARKDOWN)
 console.print(md)
-console.print("""[bold green]
+console.print("""[underline][bold green]
 Para ver comandos utilice:[/bold green][bold white] menu[/bold white]                        
 [bold green]Hecho por: [/bold green][bold white]Keiji821
-[/bold white]""")
+[/bold white][/underline]""")
