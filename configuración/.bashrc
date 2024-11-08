@@ -44,12 +44,12 @@ cd
 cd Stellar
 bash update.sh &>/dev/null &
 git pull --force
-cp ~/Stellar/.bash_profile ~/.
+cp ~/Stellar/configuración/.bash_profile ~/.
 
 # Mostrar banner al final
 
 cd
-cd Stellar
+cd Stellar/configuración 
 clear
 python banner.py
 cd
@@ -104,7 +104,7 @@ ddos() {
 
 menu() {
   cd
-  cd Stellar
+  cd Stellar/configuración
   python menu.py
   cd
 }
