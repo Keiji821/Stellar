@@ -53,6 +53,6 @@ printf "${morado}"
 echo
 read -p 'Archivo: ' imagen
 
-exiftool -b "${imagen}"
+exiftool "${imagen}"
 cd
 echo
