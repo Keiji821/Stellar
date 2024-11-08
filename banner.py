@@ -225,4 +225,3 @@ console.print("""[bold green]
 Para ver comandos utilice:[/bold green][bold white] menu[/bold white]                        
 [bold green]Hecho por: [/bold green][bold white]Keiji821
 [/bold white]""")
-print(" ")
