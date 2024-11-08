@@ -111,7 +111,7 @@ menu() {
 
 reload() {
   cd
-  cd Stellar
+  cd Stellar/configuración
   git pull --force
   clear
   python banner.py
