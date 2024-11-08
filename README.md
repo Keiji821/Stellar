@@ -10,7 +10,7 @@
 ## Stellar
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
-Herramienta de hacking para termux, dedicado a termux.
+Herramienta de hacking para termux, dedicado a termux, más que una herramienta de hacking es un repositorio el cual cambia el entorno de tu termux/terminal decorandola y cambiando el aburrido diseño por defecto que tiene termux, se irán agregando más funcionalidades así como scripts poco a poco en la herramienta!, empezado como un proyecto de pasatiempo.
 
 <details>
   <summary>1. Pasos de instalación</summary>
