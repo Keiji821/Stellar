@@ -217,10 +217,11 @@ def animate_banner(banner_text, delay=0.001):
 animate_banner(banners)
 
 print("")
-MARKDOWN = """
-__Stellar V1.0                                        
+MARKDOWN = """[bold green]
+**Stellar V1.0                                        
 Para ver comandos utilice: menu                          
-Hecho por: Keiji821__
+Hecho por: Keiji821**
+[/bold green]
 """
 md = Markdown(MARKDOWN)
 console.print(md)
