@@ -1,1 +1,1 @@
-cp ~/Stellar/.bashrc ~/.
+cp ~/Stellar/configuración/.bashrc ~/.
