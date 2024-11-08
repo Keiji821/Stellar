@@ -223,5 +223,5 @@ Para ver comandos utilice: menu
 Hecho por: Keiji821
 """
 md = Markdown(MARKDOWN)
-console.print(md)
+console.print("[bold green]", md, "[/bold green]")
 print(" ")
