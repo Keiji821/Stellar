@@ -7,7 +7,7 @@ from rich import print
 console = Console()
 
 console.print(" ")
-console.print(Panel("[code]:dvd: Versión V1.0.[/code]", title="[bold red]Comandos de Stellar[/bold red]"), style="bold yellow")
+console.print(Panel(":dvd: Versión V1.0.", title="[code][bold red]Comandos de Stellar[/bold red][/code]"), style="bold yellow")
 console.print(" ")
 
 categories = [
@@ -34,7 +34,7 @@ for category in categories:
     table.add_column("Descripción", style="white")
 
     for command in category["commands"]:
-        table.add_row(command["[code]name[/code]"], command["description"])
+        table.add_row(command["[name"], command["description"])
 
     console.print(table)
 
