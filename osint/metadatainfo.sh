@@ -54,7 +54,7 @@ read -p 'Archivo: ' imagen
 
 echo
 printf "${verde}Datos del archivo"
-printf "${amarillo}"
+printf "${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿"
 exiftool "${imagen}"
 echo
 exiftool -gps:all -a "${imagen}"
