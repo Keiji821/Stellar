@@ -12,8 +12,10 @@ console.print("`Comandos de Stellar`")
 console.print(" ")
 
 categories = [
-    {"title": "PRINCIPALES", "commands": [
-        {"name": "reload", "description": "Reinicia su sesión de termux/bash."}
+    {"title": "SISTEMA", "commands": [
+        {"name": "reload", "description": "Esto recargara el banner de stellar y actualizará la herramienta."}
+        {"name": "clear", "description": "Esto limpiara la pantalla de su terminal."}
+        {"name": "bash", "description": "Esto reiniciara su terminal."}
     ]},
     {"title": "UTILIDADES", "commands": [
         {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante un api gratis."}
