@@ -267,7 +267,7 @@ console.print("""[bold red]
   \|____|\  \   \ \  \ \ \  \_|\ \ \  \____\ \  \____\ \  \ \  \ \  \\  \| 
     ____\_\  \   \ \__\ \ \_______\ \_______\ \_______\ \__\ \__\ \__\\ _\ 
    |\_________\   \|__|  \|_______|\|_______|\|_______|\|__|\|__|\|__|\|__|
-   \|_________|                                                            
+   \|_________|                                                   
 [/bold red]""")
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
