@@ -54,13 +54,9 @@ read -p 'Archivo: ' imagen
 
 echo
 printf "${rojo}                      Datos del archivo"
-printf "
-${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
-"
+printf "${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿"
 exiftool "${imagen}"
-printf "
-${amarillo}────────────────────────────────────────────────────
-"
+printf "${amarillo}──────────────────────────────────────────"
 cd
 echo "
 "
