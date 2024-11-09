@@ -6,11 +6,8 @@ from rich.panel import Panel
 console = Console()
 
 print(" ")
-MARKDOWN = """
-```Comandos de Stellar```
-"""
-md = Markdown(MARKDOWN)
-console.print(md, style="bold yellow")
+
+console.print("```Comandos de Stellar```")
 
 console.print(" ")
 
