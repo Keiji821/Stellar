@@ -12,15 +12,15 @@ console.print(Panel(":gear: Versión V1.0.", title="[bold red]Comandos de Stella
 console.print(" ")
 
 categories = [
-    {"title": "│SISTEMA│", "commands": [
+    {"title": "SISTEMA", "commands": [
         {"name": "reload", "description": "Esto recargara el banner y actualizará stellar."},
         {"name": "clear", "description": "Esto limpiara la pantalla de su terminal."},
         {"name": "bash", "description": "Esto reiniciara su terminal."}
     ]},
-    {"title": "│UTILIDADES│", "commands": [
+    {"title": "UTILIDADES", "commands": [
         {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante un api gratis."}
     ]},
-    {"title": "│OSINT│", "commands": [
+    {"title": "OSINT", "commands": [
         {"name": "ipinfo", "description": "Obtiene la información de una ip, ya sea IPV4 o IPV6."},
         {"name": "phoneinfo", "description": "Obtiene la información de un número de teléfono."},
         {"name": "urlinfo", "description": "Obtiene información relevante de una url o enlace."},
@@ -30,7 +30,7 @@ categories = [
 ]
 
 for category in categories:
-    table = Table(title=f"[bold red]{category['title']}[/bold red]", title_justify="center")
+    table = Table(title=f"[bold red]│{category['title']}│[/bold red]", title_justify="center")
     table.add_column("Comando", style="green", no_wrap=True)
     table.add_column("Descripción", style="white")
 
