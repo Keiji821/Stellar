@@ -53,7 +53,7 @@ echo
 read -p 'Archivo: ' imagen
 
 echo
-printf "${rojo}       Datos del archivo"
+printf "${rojo}                Datos del archivo"
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
