@@ -259,7 +259,7 @@ craneo2 = """
 banners = random.choice([craneo1, blackhole1, craneo2, planet1, chica1, chica2, chica3, chica4, chica5])
 
 os.system("clear")
-console.print("""[code][bold red]
+console.print("""[bold red]
  ________  _________  _______   ___       ___       ________  ________     
 |\   ____\|\___   ___\\  ___ \ |\  \     |\  \     |\   __  \|\   __  \    
 \ \  \___|\|___ \  \_\ \   __/|\ \  \    \ \  \    \ \  \|\  \ \  \|\  \   
@@ -268,7 +268,7 @@ console.print("""[code][bold red]
     ____\_\  \   \ \__\ \ \_______\ \_______\ \_______\ \__\ \__\ \__\\ _\ 
    |\_________\   \|__|  \|_______|\|_______|\|_______|\|__|\|__|\|__|\|__|
    \|_________|                                                            
-[/bold red][/code]""")
+[/bold red]""")
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
