@@ -206,7 +206,7 @@ with console.status(spinner):
 os.system("clear")
 
 def animate_banner(banner_text, delay=0.001):
-    colors = random.choice(["blue", "yellow", "cyan", "white", "red", "green"])
+    colors = random.choice(["blue", "yellow", "cyan", "white", "red", "green", "magenta"])
     for char in banner_text:
         console.print(char, end="", style=f"bold {colors}")
         sys.stdout.flush()
