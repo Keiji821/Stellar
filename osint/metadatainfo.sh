@@ -28,32 +28,32 @@ printf "${green}Directorios ⤵
 "
 echo
 ls
-printf "${green}"
+printf "${verde}"
 echo
 read -p 'Directorio: ' directorio
 cd "${directorio}"
 echo
 printf "${azul_agua}Recuerda escribir el nombre de las carpetas sin las comillas.
 "
-printf "${green}Carpetas ⤵
+printf "${verde}Carpetas ⤵
 "
 echo
 ls
-printf "${green}"
+printf "${verde}"
 echo
 read -p 'Carpeta: ' carpeta
 cd "${carpeta}"
 echo
-printf "${morado}Archivos ⤵
+printf "${verde}Archivos ⤵
 "
 echo
 ls
-printf "${green}"
+printf "${verde}"
 echo
 read -p 'Archivo: ' imagen
 
 echo
-printf "${green}Datos del archivo"
+printf "${verde}Datos del archivo"
 echo
 exiftool "${imagen}"
 echo
