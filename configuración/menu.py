@@ -8,7 +8,7 @@ console = Console()
 
 print(" ")
 
-console.print("```Comandos de Stellar```")
+console.print("[underline]             Comandos de Stellar[/underline]", style="bold yellow")
 
 console.print(" ")
 
