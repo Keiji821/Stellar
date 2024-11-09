@@ -13,7 +13,7 @@ console.print(" ")
 
 categories = [
     {"title": "SISTEMA", "commands": [
-        {"name": "reload", "description": "Esto recargara el banner y actualizará stellar."},
+        {"name": ":dvd: reload", "description": "Esto recargara el banner y actualizará stellar."},
         {"name": "clear", "description": "Esto limpiara la pantalla de su terminal."},
         {"name": "bash", "description": "Esto reiniciara su terminal."}
     ]},
@@ -35,7 +35,7 @@ for category in categories:
     table.add_column("Descripción", style="white")
 
     for command in category["commands"]:
-        table.add_row("command[":dvd: name"], command["description"])
+        table.add_row("command["name"], command["description"])
 
     console.print(table)
 
