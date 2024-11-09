@@ -58,7 +58,7 @@ printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
 exiftool "${imagen}"
-exiftool -gps:all -a "${imagen}"
+exiftool -s3 -gps:all "${imagen}"
 exiftool -b "${imagen}"
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
