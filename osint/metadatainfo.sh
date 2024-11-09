@@ -59,7 +59,7 @@ ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
 exiftool "${imagen}"
 echo
-exiftool -s3 -gps:all "${imagen}"
+exiftool -gps:all -c "%+.6f" "${imagen}"
 exiftool -b "${imagen}"
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
