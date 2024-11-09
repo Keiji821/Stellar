@@ -7,8 +7,8 @@ from rich import print
 console = Console()
 
 console.print(" ")
-markdown = Markdown("/n Hola")
-console.print(f"[code]{markdown}[/code]")
+md = Markdown("[code]Hola[/code]")
+console.print(md)
 console.print(Panel(":dvd: Versión V1.0.", title="[bold red]Comandos de Stellar[/bold red]"), style="bold yellow")
 
 console.print(" ")
