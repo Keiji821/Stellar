@@ -55,10 +55,14 @@ read -p 'Archivo: ' imagen
 echo
 printf "${rojo}                      Datos del archivo"
 printf "
-${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿"
+exiftool -s3 -EXIF:* "${imagen}" | while IFS= read -r line; do
+    campo=$(echo "$line" | cut -d: -f1)
+    valor=$(echo "$line" | cut -d: -f2-)
+    printf "| ${campo} | ${valor} |
 "
-exiftool "${imagen}"
-printf "${amarillo}────────────────────────────────────────────────────────────────────────"
+done
+printf "${amarillo}────────────────────────────────────────────────────────────────────────────────────"
 cd
 echo "
 "
