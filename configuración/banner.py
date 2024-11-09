@@ -221,7 +221,7 @@ MARKDOWN = """
 """
 md = Markdown(MARKDOWN)
 console.print(md)
-console.print("""[underline][bold green]
-Para ver comandos utilice:[/bold green][bold white] menu[/bold white]
-[bold green]Hecho por: [/bold green][bold white]Keiji821
-[/bold white][/underline]""")
+console.print("""[code][bold green]
+Para ver comandos utilice:[/bold green][/code][bold white] menu[/bold white]
+[code][bold green]Hecho por: [/bold green][/code][bold white]Keiji821
+[/bold white]""")
