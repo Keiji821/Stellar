@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.markdown import Markdown
 from rich.table import Table
 from rich.panel import Panel
+from rich import print 
 
 console = Console()
 
