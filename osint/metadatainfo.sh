@@ -55,11 +55,12 @@ read -p 'Archivo: ' imagen
 echo
 printf "${rojo}                      Datos del archivo"
 printf "
-${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿"
+${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+"
 exiftool "${imagen}" | while IFS= read -r line; do
     campo=$(echo "$line" | cut -d: -f1)
     valor=$(echo "$line" | cut -d: -f2-)
-    printf "│ ${campo} │ ${valor} |
+    printf "│ ${campo} │ ${valor}                                 |
 "
 done
 printf "${amarillo}────────────────────────────────────────────────────────────────────────────────────"
