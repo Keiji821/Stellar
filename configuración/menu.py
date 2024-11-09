@@ -13,8 +13,8 @@ console.print(" ")
 
 categories = [
     {"title": "SISTEMA", "commands": [
-        {"name": "reload", "description": "Esto recargara el banner."}
-        {"name": "clear", "description": "Esto limpiara la pantalla de su terminal."}
+        {"name": "reload", "description": "Esto recargara el banner y actualizará stellar."},
+        {"name": "clear", "description": "Esto limpiara la pantalla de su terminal."},
         {"name": "bash", "description": "Esto reiniciara su terminal."}
     ]},
     {"title": "UTILIDADES", "commands": [
