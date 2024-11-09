@@ -53,12 +53,11 @@ echo
 read -p 'Archivo: ' imagen
 
 echo
-printf "${verde}Datos del archivo"
+printf "${rojo}       Datos del archivo"
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
 exiftool "${imagen}"
-echo
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
