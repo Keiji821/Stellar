@@ -7,8 +7,11 @@ from rich import print
 console = Console()
 
 print(" ")
-
-console.print("[underline]             Comandos de Stellar[/underline]", style="bold yellow")
+MARKDOWN = """
+`Comandos de Stellar`
+"""
+md = Markdown(MARKDOWN)
+console.print(md, style="bold yellow")
 
 console.print(" ")
 
