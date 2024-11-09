@@ -7,7 +7,7 @@ from rich import print
 console = Console()
 
 console.print(" ")
-console.print(Panel("Versión V1.0.", title="[bold red]Comandos de Stellar[/bold red]"), style="bold yellow")
+console.print(Panel("Versión V1.0.", title="[bold red]:star:Comandos de Stellar[/bold red]"), style="bold yellow")
 
 console.print(" ")
 
