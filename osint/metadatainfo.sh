@@ -53,14 +53,13 @@ printf "${morado}"
 echo
 read -p 'Archivo: ' imagen
 
-printf "${green}"
-echo "Datos del archivo"
 echo
-exiftool "${imagen}"
+printf "${green}Datos del archivo"
 echo
-exiftool -gps:all -a "${imagen}"
+exiftool "${amarillo}${imagen}"
 echo
-exiftool -b "${imagen}"
+exiftool -gps:all -a "${amarillo}${imagen}"
+exiftool -b "${amarillo}${imagen}"
 cd
 echo "
 "
