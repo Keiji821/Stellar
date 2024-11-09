@@ -24,7 +24,7 @@ sleep 5
 cd
 cd storage
 echo
-printf "${green}Directorios ⤵
+printf "${verde}Directorios ⤵
 "
 echo
 ls
@@ -33,7 +33,7 @@ echo
 read -p 'Directorio: ' directorio
 cd "${directorio}"
 echo
-printf "${azul_agua}Recuerda escribir el nombre de las carpetas sin las comillas.
+printf "${amarillo}Recuerda escribir el nombre de las carpetas sin las comillas.
 "
 printf "${verde}Carpetas ⤵
 "
@@ -54,7 +54,7 @@ read -p 'Archivo: ' imagen
 
 echo
 printf "${verde}Datos del archivo"
-echo
+printf "${amarillo}"
 exiftool "${imagen}"
 echo
 exiftool -gps:all -a "${imagen}"
