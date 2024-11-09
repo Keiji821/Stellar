@@ -253,7 +253,7 @@ craneo2 = """
 ⠀⠀⠀⠀⠀⠀⠀⠙⠛⠻⠿⠿⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 """
 
-banners = random.choice([craneo1, blackhole1, craneo2, planet1, chica1, chica2, chica3, chica4, chica5])
+banners = random.choice([f"[code]{craneo1}[/code]", blackhole1, craneo2, planet1, chica1, chica2, chica3, chica4, chica5])
 
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
