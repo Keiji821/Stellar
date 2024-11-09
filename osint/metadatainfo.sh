@@ -54,5 +54,9 @@ echo
 read -p 'Archivo: ' imagen
 
 exiftool "${imagen}"
+echo
+exiftool -gps:all -a "${imagen}"
+echo
+exiftool -b "${imagen}"
 cd
 echo
