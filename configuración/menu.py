@@ -7,9 +7,7 @@ from rich import print
 console = Console()
 
 print(" ")
-MARKDOWN = """
-## Comandos de Stellar
-"""
+MARKDOWN = """## Comandos de Stellar"""
 md = Markdown(MARKDOWN)
 console.print(md, style="bold yellow")
 
