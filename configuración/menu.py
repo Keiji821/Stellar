@@ -34,10 +34,10 @@ for category in categories:
     table.add_column("Descripción", style="white")
 
     for command in category["commands"]:
-        table.add_row(command["[name"], command["description"])
+        table.add_row(command["name"], command["description"])
 
     console.print(table)
 
-console.print(Panel("CTRL + Z │ Esto detendrá cualquier comando o proceso existente.", title="[bold red]Nota[/bold red]"), style="bold yellow")
+console.print(Panel("CTRL + Z │ Esto detendrá cualquier comando o proceso existente.", title="[code][bold red]Nota[/bold red][/code]"), style="bold yellow")
 console.print(" ")
 console.print(" ")
