@@ -216,12 +216,13 @@ def animate_banner(banner_text, delay=0.001):
 animate_banner(banners)
 
 print("")
-MARKDOWN = """
-> **Stellar V1.0**
-"""
+MARKDOWN = "> **Stellar V1.0**"
 md = Markdown(MARKDOWN)
 console.print(md)
-console.print("""[code][bold green]
-Para ver comandos utilice:[/bold green][/code][bold white] menu[/bold white]
+console.print("""
+[code][bold green]
+Para ver comandos utilice:[/bold green][bold white] menu[/bold white][/code]
+
 [code][bold green]Hecho por: [/bold green][/code][bold white]Keiji821
-[/bold white]""")
+[/bold white][/code]
+""")
