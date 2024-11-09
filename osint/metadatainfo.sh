@@ -21,26 +21,25 @@ cyan="$b\033[38;2;23;147;209m"
 
 termux-setup-storage &>/dev/null &
 sleep 5
-printf "${amarillo}"
 cd
 cd storage
 echo
-printf "${morado}Directorios ⤵
+printf "${green}Directorios ⤵
 "
 echo
 ls
-printf "${morado}"
+printf "${green}"
 echo
 read -p 'Directorio: ' directorio
 cd "${directorio}"
 echo
 printf "${azul_agua}Recuerda escribir el nombre de las carpetas sin las comillas.
 "
-printf "${morado}Carpetas ⤵
+printf "${green}Carpetas ⤵
 "
 echo
 ls
-printf "${morado}"
+printf "${green}"
 echo
 read -p 'Carpeta: ' carpeta
 cd "${carpeta}"
@@ -49,17 +48,17 @@ printf "${morado}Archivos ⤵
 "
 echo
 ls
-printf "${morado}"
+printf "${green}"
 echo
 read -p 'Archivo: ' imagen
 
 echo
 printf "${green}Datos del archivo"
 echo
-exiftool "${amarillo}${imagen}"
+exiftool "${imagen}"
 echo
-exiftool -gps:all -a "${amarillo}${imagen}"
-exiftool -b "${amarillo}${imagen}"
+exiftool -gps:all -a "${imagen}"
+exiftool -b "${imagen}"
 cd
 echo "
 "
