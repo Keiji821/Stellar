@@ -63,7 +63,7 @@ exiftool "${imagen}" | while IFS= read -r line; do
     printf "│ ${campo} │ ${valor}
 "
 done
-printf "${amarillo}╰─────────────────────────────────┴─────────────────────────────────"
+printf "${amarillo}╰──────────────────────────────────┴─────────────────────────────────"
 cd
 echo "
 "
