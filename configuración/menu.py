@@ -7,7 +7,7 @@ from rich import print
 console = Console()
 
 console.print(" ")
-console.print(Panel("CTRL + Z : Esto detendrá cualquier comando o proceso existente.", title="[bold red]Nota[/bold red]"), style="bold yellow")
+console.print(Panel("Versión V1.0.", title="[bold red]Comandos de Stellar[/bold red]"), style="bold yellow")
 
 console.print(" ")
 
