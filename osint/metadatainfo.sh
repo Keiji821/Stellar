@@ -58,10 +58,6 @@ printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
 exiftool "${imagen}"
-echo
-printf "${rojo}                      Información adicional"
-echo
-exiftool -b "${imagen}"
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
