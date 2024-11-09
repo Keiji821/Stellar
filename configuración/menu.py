@@ -10,7 +10,7 @@ MARKDOWN = """
 # Comandos de Stellar
 """
 md = Markdown(MARKDOWN)
-console.print(md, style="bold magenta")
+console.print(md, style="bold red")
 
 console.print()
 
@@ -32,8 +32,8 @@ categories = [
 
 for category in categories:
     table = Table(title=f"[bold blue]{category['title']}[/bold blue]", title_justify="center")
-    table.add_column("Comando", style="cyan", no_wrap=True)
-    table.add_column("Descripción", style="magenta")
+    table.add_column("Comando", style="green", no_wrap=True)
+    table.add_column("Descripción", style="white")
 
     for command in category["commands"]:
         table.add_row(command["name"], command["description"])
