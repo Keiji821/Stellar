@@ -6,10 +6,8 @@ from rich import print
 
 console = Console()
 
-print(" ")
-MARKDOWN = """## Comandos de Stellar"""
-md = Markdown(MARKDOWN)
-console.print(md, style="bold yellow")
+console.print(" ")
+console.print(Panel("CTRL + Z : Esto detendrá cualquier comando o proceso existente.", title="[bold red]Nota[/bold red]"), style="bold yellow")
 
 console.print(" ")
 
@@ -41,7 +39,6 @@ for category in categories:
 
     console.print(table)
 
-console.print()
 console.print(Panel("CTRL + Z : Esto detendrá cualquier comando o proceso existente.", title="[bold red]Nota[/bold red]"), style="bold yellow")
-print(" ")
-print(" ")
+console.print(" ")
+console.print(" ")
