@@ -57,7 +57,7 @@ printf "${rojo}                     Datos del archivo"
 printf "
 ${amarillo}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 "
-exiftool -exif:all "${imagen}"
+exiftool "${imagen}"
 exiftool -gps:all -a "${imagen}"
 exiftool -b "${imagen}"
 printf "
