@@ -297,7 +297,7 @@ banners = random.choice([craneo1, blackhole1, craneo2, planet1, craneo3, chica1,
 os.system("clear")
 
 stellar = """
-[underline][bold red]
+[underline][bold red][/underline]
  ________  _________  _______   ___       ___       ________  ________     
 |\   ____\|\___   ___\\  ___ \ |\  \     |\  \     |\   __  \|\   __  \    
 \ \  \___|\|___ \  \_\ \   __/|\ \  \    \ \  \    \ \  \|\  \ \  \|\  \   
@@ -306,7 +306,7 @@ stellar = """
     ____\_\  \   \ \__\ \ \_______\ \_______\ \_______\ \__\ \__\ \__\\ _\ 
    |\_________\   \|__|  \|_______|\|_______|\|_______|\|__|\|__|\|__|\|__|
    \|_________|                                                   
-[/bold red][/underline]
+[underline][/bold red][/underline]
 """
 
 console.print(stellar)
