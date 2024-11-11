@@ -8,11 +8,16 @@ import socket
 console = Console()
 
 def get_real_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    ip = s.getsockname()[0]
-    s.close()
-    return ip
+    try:
+        response = requests.get('https://api.ipify.org')
+        response.raise_for_status()
+        return response.text.strip()
+    except requests.exceptions.RequestException as e:
+        console.print(f"[bold red]Error de red: {e}[/bold red]")
+        exit()
+    except Exception as e:
+        console.print(f"[bold red]Error inesperado: {e}[/bold red]")
+        exit()
 
 ip = get_real_ip()
 
