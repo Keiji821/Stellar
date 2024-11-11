@@ -133,3 +133,10 @@ traductor() {
  python traductor.py
  cd
 }
+
+myip() {
+ cd
+ cd Stellar/misc/utilidades
+ python myip.py
+ cd
+}
