@@ -6,7 +6,7 @@ from rich.table import Table
 console = Console()
 
 def get_real_ip():
-response = requests.get('https://api.ident.me')
+    response = requests.get('https://api.ident.me')
 return response.text.strip()
 
 ip = get_real_ip()
