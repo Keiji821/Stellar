@@ -5,6 +5,7 @@ import platform
 import random
 import time
 import sys
+import pyfiglet
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
