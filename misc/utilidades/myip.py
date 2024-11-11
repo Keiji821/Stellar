@@ -5,11 +5,33 @@ from rich.table import Table
 
 console = Console()
 
-def get_real_ip():
-    response = requests.get('https://api.ident.me')
-return response.text.strip()
+output = os.popen("""
+IP=$(
+  (command -v dig &> /dev/null &&
+    (dig +short @ident.me ||
+     dig +short @tnedi.me)) ||
+  (command -v nc &> /dev/null &&
+    (nc ident.me 23 < /dev/null ||
+     nc tnedi.me 23 < /dev/null)) ||
+  (command -v curl &> /dev/null &&
+    (curl -sf ident.me ||
+     curl -sf tnedi.me)) ||
+  (command -v wget &> /dev/null &&
+    (wget -qO- ident.me ||
+     wget -qO- tnedi.me)) ||
+  (command -v openssl &> /dev/null &&
+    (openssl s_client -quiet -connect ident.me:992 2> /dev/null ||
+     openssl s_client -quiet -connect tnedi.me:992 2> /dev/null)) ||
+  (command -v ssh &> /dev/null &&
+    (ssh -qo StrictHostKeyChecking=accept-new ident.me ||
+     ssh -qo StrictHostKeyChecking=accept-new tnedi.me)) ||
+  (echo "Could not find public IP through api.ident.me" >&2
+   exit 42)
+)
+echo "Found public IP $IP"
+""").read()
 
-ip = get_real_ip()
+ip = output.strip()
 
 with Progress(SpinnerColumn("dots")) as progress:
     task = progress.add_task("[red]Cargando...")
