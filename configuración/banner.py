@@ -309,7 +309,7 @@ table = Table(title=" ", title_justify="center", title_style="bold red")
 
 table.add_column(" ", style="bold" + colores, no_wrap=False)
 
-table.add_row(colores")
+table.add_row(banners)
 
 console.print("")
 MARKDOWN = "> **Stellar V1.0**"
