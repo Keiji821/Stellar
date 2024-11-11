@@ -7,17 +7,22 @@ import socket
 
 console = Console()
 
-ip = socket.gethostbyname(socket.gethostname())
+def get_real_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))  # Conecta a un servidor público (Google DNS)
+    ip = s.getsockname()[0]
+    s.close()
+    return ip
 
 with Progress(SpinnerColumn("dots")) as progress:
     task = progress.add_task("[red]Cargando...")
     try:
-        response1 = requests.get(f'https://ipapi.co/{ip}/json/')
+        response1 = requests.get(f'https://ipapi.co/', get_real_ip(),'/json/')
         progress.update(task, advance=20)
         response1.raise_for_status()
         data1 = response1.json()
 
-        response2 = requests.get(f'https://api.ipapi.is/?ip={ip}')
+        response2 = requests.get(f'https://api.ipapi.is/?ip=', get_real_ip())
         progress.update(task, advance=30)
         response2.raise_for_status()
         data2 = response2.json()
