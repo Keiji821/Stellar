@@ -12,16 +12,13 @@ from rich.progress import Spinner
 
 console = Console()
 
-def get_current_time():
-    now = datetime.datetime.now()
-    date_string = now.strftime("%Y-%m-%d")
-    hour_string = now.strftime("%I:%M%p")
-    return date_string, hour_string
+now = datetime.datetime.now()
+date_string = now.strftime("%Y-%m-%d")
+hour_string = now.strftime("%I:%M%p")
 
-def get_system_info():
-    os_version = os.sys.platform
-    system_info = platform.machine() + " - " + platform.processor()
-    return os_version, system_info
+os_version = os.sys.platform
+system_info = platform.machine() + " - " + platform.processor()
+   
 
 
 console.print(f"[code][bold green]OS: {os_version}[/bold green] [bold white]menu [/bold white][/code]")
