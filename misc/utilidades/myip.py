@@ -6,16 +6,22 @@ import json
 
 console = Console()
 
-def get_public_ip():
+import requests
+
+def get_real_ip():
     try:
-        response = requests.get('https://api.ipify.org?format=json')
+        # Realiza la consulta sin pasarla por Tor
+        proxies = {
+            "http": None,
+            "https": None
+        }
+        response = requests.get('https://api.ipify.org?format=json', proxies=proxies)
         response.raise_for_status()
         return response.json().get("ip", "No disponible")
     except requests.RequestException as e:
-        console.print(f"[bold red]Error al obtener la IP pública: {e}[/bold red]")
-        exit()
+        return f"Error al obtener la IP real: {e}"
 
-ip = get_public_ip()
+ip = get_real_ip()
 
 with Progress(SpinnerColumn("dots")) as progress:
     task = progress.add_task("[red]Cargando...")
