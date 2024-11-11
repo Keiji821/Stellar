@@ -304,12 +304,12 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-console.print(f"[bold {colores}]{banners}[/bold {colores}]")
+console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
 console.print("")
 MARKDOWN = "> **Stellar V1.0**"
 md = Markdown(MARKDOWN)
-console.print(md, justify="center")  # Centrar el texto
+console.print(md, justify="center")
 
 console.print("""
 [code][bold green]
