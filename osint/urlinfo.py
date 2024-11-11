@@ -28,24 +28,19 @@ def obtener_datos_web(url):
 
 def obtener_info_nmap(ip_address):
     try:
-        # Ejecución de Nmap y captura de salida
         nmap_output = subprocess.check_output(['nmap', '-v', '-A', ip_address], text=True)
         
-        # Extracción de información detallada de Nmap
         open_ports = []
         os_info = "No disponible"
         service_versions = "No disponible"
 
         for line in nmap_output.splitlines():
-            # Extracción de puertos abiertos
             if re.search(r'\bopen\b', line):
                 open_ports.append(line.strip())
             
-            # Extracción de detalles del sistema operativo
             if "OS details" in line:
                 os_info = line.split(":")[1].strip()
             
-            # Extracción de versiones de servicios
             if "Service Info" in line:
                 service_versions = line.split(":")[1].strip()
 
@@ -99,7 +94,6 @@ def analyze_url(url):
         server_info = response.headers.get('Server', 'No disponible')
         open_ports, os_info, service_versions = obtener_info_nmap(ip_address) if ip_address != "No disponible" else ("No disponible", "", "")
 
-    # Tabla para mostrar la información
     table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
     table.add_column("Información", style="bold green")
     table.add_column("Valor", style="bold green")
