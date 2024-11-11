@@ -31,8 +31,6 @@ with Progress(SpinnerColumn("dots")) as progress:
         console.print(f"[bold red]Error inesperado: {e}[/bold red]")
         exit()
 
-console.print(" ")
-
 table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
 
 table.add_column("Información", style="green", no_wrap=False)
