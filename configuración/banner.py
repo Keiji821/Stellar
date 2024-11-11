@@ -316,10 +316,11 @@ animate_banner(banners)
 console.print("")
 MARKDOWN = "> **Stellar V1.0**"
 md = Markdown(MARKDOWN)
-console.print(md)
+console.print(md, justify="center")  # Centrar el texto
+
 console.print("""
 [code][bold green]
 Para ver comandos utilice [/bold green] [bold white]menu [/bold white][/code]
 
 [code][bold green]Hecho por [/bold green] [bold white]Keiji821 [/bold white][/code]
-""")
+""", justify="center")
