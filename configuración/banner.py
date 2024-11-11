@@ -307,7 +307,7 @@ colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
 table = Table(title=" ", title_justify="center", title_style="bold red")
 
-table.add_column(" ", style="bold" + colores, no_wrap=False)
+table.add_column("I", style="bold" + colores, no_wrap=False)
 
 table.add_row(banners)
 
