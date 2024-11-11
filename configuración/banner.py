@@ -302,7 +302,7 @@ with console.status(spinner):
 
 os.system("clear")
 
-colores = random.choice([red, magenta, yellow, blue, cyan])
+colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
 console.print(f"[{colores}]{banners}[/colores]")
 
