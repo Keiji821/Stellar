@@ -296,7 +296,7 @@ craneo3 = """
 
 banners = random.choice([craneo1, blackhole1, craneo2, planet1, craneo3, chica1, chica2, chica3, chica4, chica5])
 
-console.print(pyfiglet.figlet_format("Stellar", font="lean"))
+console.print(pyfiglet.figlet_format("Stellar", font="cosmic"))
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
