@@ -305,9 +305,9 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-table = Table(title=" ", title_justify="center")
+table = Table(title=" ", title_justify="center", title_style="bold red")
 
-table.add_column(" ", no_wrap=False)
+table.add_column(" ", style="green", no_wrap=False)
 
 table.add_row(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
