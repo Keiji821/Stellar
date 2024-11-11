@@ -2,24 +2,20 @@ import requests
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
-from rich.markdown import Markdown
-import socket
+import json
 
 console = Console()
 
-def get_real_ip():
+def get_public_ip():
     try:
-        response = requests.get('https://api.ipify.org')
+        response = requests.get('https://api.ipify.org?format=json')
         response.raise_for_status()
-        return response.text.strip()
-    except requests.exceptions.RequestException as e:
-        console.print(f"[bold red]Error de red: {e}[/bold red]")
-        exit()
-    except Exception as e:
-        console.print(f"[bold red]Error inesperado: {e}[/bold red]")
+        return response.json().get("ip", "No disponible")
+    except requests.RequestException as e:
+        console.print(f"[bold red]Error al obtener la IP pública: {e}[/bold red]")
         exit()
 
-ip = get_real_ip()
+ip = get_public_ip()
 
 with Progress(SpinnerColumn("dots")) as progress:
     task = progress.add_task("[red]Cargando...")
@@ -51,6 +47,7 @@ table = Table(title="Tú IP", title_justify="center", title_style="bold green")
 table.add_column("Información", style="green", no_wrap=False)
 table.add_column("Valor", style="white")
 
+# Información de red
 table.add_row("[bold underline]Información de Red[/bold underline]", "")
 table.add_row("Red", str(data1.get("network", "No disponible")))
 table.add_row("Tipo de IP", str(data1.get("version", "No disponible")))
@@ -72,8 +69,8 @@ table.add_row("Dominio", str(data2.get("asn", {}).get("domain", "No disponible")
 table.add_row("Fecha de creación", str(data2.get("asn", {}).get("created", "No disponible")))
 table.add_row("Correo de la empresa", str(data2.get("abuse", {}).get("email", "No disponible")))
 
+# Información geográfica
 table.add_row("", "")
-
 table.add_row("[bold underline]Información Geográfica[/bold underline]", "")
 table.add_row("País", str(data1.get("country", "No disponible")))
 table.add_row("Capital", str(data1.get("country_capital", "No disponible")))
