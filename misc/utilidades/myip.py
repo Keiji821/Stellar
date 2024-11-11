@@ -11,7 +11,7 @@ def get_real_ip():
         if ni.AF_INET in ni.ifaddresses(interface):
             addr = ni.ifaddresses(interface)[ni.AF_INET][0]['addr']
             return addr
-return "No disponible"
+    return "No disponible"
 
 ip = get_real_ip()
 
