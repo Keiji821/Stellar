@@ -310,7 +310,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
 console.print("")
-MARKDOWN = "> **Stellar V1.0**"
+MARKDOWN = "**Stellar V1.0**"
 md = Markdown(MARKDOWN)
 console.print(md, justify="center")
 
