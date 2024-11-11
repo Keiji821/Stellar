@@ -18,11 +18,6 @@ hour_string = now.strftime("%I:%M%p")
 
 os_version = os.sys.platform
 system_info = platform.machine() + " - " + platform.processor()
-   
-
-
-console.print(f"[code][bold green]OS: {os_version}[/bold green] [bold white]menu [/bold white][/code]")
-console.print(f"[code][bold green]Sistema: {system_info}[/bold green] [bold white]menu [/bold white][/code]")
 
 
 blackhole1 = """
@@ -305,6 +300,9 @@ with console.status(spinner):
 os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
+
+console.print(f"[code][bold green]OS: {os_version}[/bold green] [bold white]menu [/bold white][/code]")
+console.print(f"[code][bold green]Sistema: {system_info}[/bold green] [bold white]menu [/bold white][/code]")
 
 console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
