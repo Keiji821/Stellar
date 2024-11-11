@@ -304,7 +304,7 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-console.print(f"[{colores}]{banners}[/colores]")
+console.print(f"[bold {colores}]{banners}[/bold {colores}]")
 
 console.print("")
 MARKDOWN = "> **Stellar V1.0**"
