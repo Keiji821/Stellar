@@ -3,6 +3,7 @@ from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
 import os
+from os import system
 
 console = Console()
 
@@ -29,7 +30,7 @@ IP=$(
   (echo "Could not find public IP through api.ident.me" >&2
    exit 42)
 )
-echo "Found public IP $IP"
+echo "$IP"
 """).read()
 
 ip = output.strip()
