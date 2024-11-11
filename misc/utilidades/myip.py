@@ -2,16 +2,15 @@ import requests
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
-import netifaces as ni
+import psutil
 
 console = Console()
 
 def get_real_ip():
-    for interface in ni.interfaces():
-        if interface.startswith('wlan') or interface.startswith('eth'):
-            if ni.AF_INET in ni.ifaddresses(interface):
-                addr = ni.ifaddresses(interface)[ni.AF_INET][0]['addr']
-                return addr
+    for conn in psutil.net_connections():
+        if conn.status == psutil.CONN_ESTABLISHED:
+            addr = conn.laddr.ip
+            return addr
     return "No disponible"
 
 ip = get_real_ip()
