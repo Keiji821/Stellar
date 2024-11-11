@@ -7,10 +7,10 @@ import netifaces as ni
 console = Console()
 
 def get_real_ip():
-for interface in ni.interfaces():
-    if ni.AF_INET in ni.ifaddresses(interface):
-        addr = ni.ifaddresses(interface)[ni.AF_INET][0]['addr']
-        return addr
+    for interface in ni.interfaces():
+        if ni.AF_INET in ni.ifaddresses(interface):
+            addr = ni.ifaddresses(interface)[ni.AF_INET][0]['addr']
+            return addr
 return "No disponible"
 
 ip = get_real_ip()
