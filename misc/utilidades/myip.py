@@ -8,6 +8,7 @@ from os import system
 console = Console()
 
 output = os.popen("""
+
 IP=$(
   (command -v dig &> /dev/null &&
     (dig +short @ident.me ||
@@ -30,7 +31,7 @@ IP=$(
   (echo "Could not find public IP through api.ident.me" >&2
    exit 42)
 )
-echo "$IP"
+echo "$IP" 
 """).read()
 
 ip = output.strip()
