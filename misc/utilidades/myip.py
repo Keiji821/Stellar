@@ -18,7 +18,6 @@ with Progress(SpinnerColumn("dots")) as progress:
         data1 = response1.json()
 
         response2 = requests.get(f'https://api.ipapi.is/?ip={ip}')
-)
         progress.update(task, advance=30)
         response2.raise_for_status()
         data2 = response2.json()
