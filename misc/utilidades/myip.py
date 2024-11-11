@@ -31,7 +31,7 @@ IP=$(
   (echo "Could not find public IP through api.ident.me" >&2
    exit 42)
 )
-echo $IP
+echo ${IP##*/}
 """).read()
 
 ip = output.strip()
