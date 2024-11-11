@@ -23,6 +23,11 @@ def get_system_info():
     system_info = platform.machine() + " - " + platform.processor()
     return os_version, system_info
 
+
+console.print(f"[code][bold green]OS: {os_version}[/bold green] [bold white]menu [/bold white][/code]")
+console.print(f"[code][bold green]Sistema: {system_info}[/bold green] [bold white]menu [/bold white][/code]")
+
+
 blackhole1 = """
 ⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⢠⢀⡐⢄⢢⡐⢢⢁⠂⠄⠠⢀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡄⣌⠰⣘⣆⢧⡜⣮⣱⣎⠷⣌⡞⣌⡒⠤⣈⠠
