@@ -4,7 +4,6 @@ from os import system
 import platform
 import random
 import time
-import sys
 import pyfiglet
 from pyfiglet import Figlet
 from rich.console import Console
@@ -303,15 +302,9 @@ with console.status(spinner):
 
 os.system("clear")
 
-def animate_banner(banner_text, delay=0.000):
-    colors = random.choice(["blue", "yellow", "cyan", "white", "red", "green", "magenta"])
-    for char in banner_text:
-        console.print(char, end="", style=f"bold {colors}")
-        sys.stdout.flush()
-        time.sleep(delay)
-    console.print()
+colores = random.choice([red, magenta, yellow, blue, cyan])
 
-animate_banner(banners)
+console.print(f"[{colores}]{banners}[/colores]")
 
 console.print("")
 MARKDOWN = "> **Stellar V1.0**"
