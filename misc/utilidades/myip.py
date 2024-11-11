@@ -2,24 +2,16 @@ import requests
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
-import json
+import netifaces as ni
 
 console = Console()
 
-import requests
-
 def get_real_ip():
-    try:
-        # Realiza la consulta sin pasarla por Tor
-        proxies = {
-            "http": None,
-            "https": None
-        }
-        response = requests.get('https://api.ipify.org?format=json', proxies=proxies)
-        response.raise_for_status()
-        return response.json().get("ip", "No disponible")
-    except requests.RequestException as e:
-        return f"Error al obtener la IP real: {e}"
+for interface in ni.interfaces():
+    if ni.AF_INET in ni.ifaddresses(interface):
+        addr = ni.ifaddresses(interface)[ni.AF_INET][0]['addr']
+        return addr
+return "No disponible"
 
 ip = get_real_ip()
 
