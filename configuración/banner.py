@@ -296,14 +296,14 @@ craneo3 = """
 
 banners = random.choice([craneo1, blackhole1, craneo2, planet1, craneo3, chica1, chica2, chica3, chica4, chica5])
 
-console.print(pyfiglet.figlet_format("Stellar", font="slant"))
+console.print(pyfiglet.figlet_format("Stellar", font="isometric1"))
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
 
 os.system("clear")
 
-def animate_banner(banner_text, delay=0.001):
+def animate_banner(banner_text, delay=0.000):
     colors = random.choice(["blue", "yellow", "cyan", "white", "red", "green", "magenta"])
     for char in banner_text:
         console.print(char, end="", style=f"bold {colors}")
@@ -313,7 +313,7 @@ def animate_banner(banner_text, delay=0.001):
 
 animate_banner(banners)
 
-print("")
+console.print("")
 MARKDOWN = "> **Stellar V1.0**"
 md = Markdown(MARKDOWN)
 console.print(md)
