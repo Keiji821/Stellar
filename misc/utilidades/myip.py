@@ -36,7 +36,7 @@ echo $IP > ip_address.txt
 """)
 
 with open("ip_address.txt", "r") as f:
-ip = f.read().strip()
+    ip = f.read().strip()
 
 with Progress(SpinnerColumn("dots")) as progress:
     task = progress.add_task("[red]Cargando...")
