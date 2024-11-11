@@ -7,7 +7,7 @@ from rich import print
 console = Console()
 
 console.print(" ")
-console.print(Panel(":dvd: Versión V1.0.", title="[code][bold magenta]Comandos de Stellar[/bold magenta][/code]", border_style="bold cyan", style="bold purple"))
+console.print(Panel(":dvd: Versión V1.0.0", title="[code][bold magenta]Comandos de Stellar[/bold magenta][/code]", border_style="bold cyan", style="bold purple"))
 console.print(" ")
 
 categories = [
