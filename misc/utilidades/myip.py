@@ -31,7 +31,7 @@ with Progress(SpinnerColumn("dots")) as progress:
 
 console.print(" ")
 
-table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
+table = Table(title="Tú IP", title_justify="center", title_style="bold green")
 
 table.add_column("Información", style="green", no_wrap=False)
 table.add_column("Valor", style="white")
@@ -83,4 +83,4 @@ table.add_row("Área del país", str(data1.get("country_area", "No disponible"))
 table.add_row("Población del país", str(data1.get("country_population", "No disponible")))
 
 console.print(table)
-print(" ")
+console.print(" ")
