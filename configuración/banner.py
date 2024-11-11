@@ -10,10 +10,6 @@ from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
 
-pyfiglet = Figlet()
-
-Figlet = figlet_format()
-
 console = Console()
 
 def get_current_time():
@@ -299,11 +295,7 @@ craneo3 = """
 
 banners = random.choice([craneo1, blackhole1, craneo2, planet1, craneo3, chica1, chica2, chica3, chica4, chica5])
 
-os.system("clear")
-
-
-stellar = pyfiglet.figlet_format("Stellar", font="slant")
-console.print(f"[bold red]{stellar}[/bold red]")
+console.print(pyfiglet.figlet_format("Stellar", font="slant"))
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
