@@ -10,6 +10,8 @@ from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
 
+pyfiglet = Figlet()
+
 console = Console()
 
 def get_current_time():
