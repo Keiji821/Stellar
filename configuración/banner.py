@@ -305,7 +305,7 @@ console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]
 [bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
-[bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]""", justify="right")
+[bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]""", justify="left")
 
 console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
