@@ -2,16 +2,12 @@ import requests
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
-import psutil
 
 console = Console()
 
 def get_real_ip():
-    for conn in psutil.net_connections():
-        if conn.status == psutil.CONN_ESTABLISHED:
-            addr = conn.laddr.ip
-            return addr
-    return "No disponible"
+response = requests.get('https://api.ident.me')
+return response.text.strip()
 
 ip = get_real_ip()
 
