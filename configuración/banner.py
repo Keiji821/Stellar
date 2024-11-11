@@ -304,7 +304,11 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
+table = Table(title=" ", title_justify="center")
+
+table.add_column(" ", no_wrap=False)
+
+table.add_row(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
 console.print("")
 MARKDOWN = "> **Stellar V1.0**"
