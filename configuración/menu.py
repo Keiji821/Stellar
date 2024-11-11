@@ -18,6 +18,7 @@ categories = [
     ]},
     {"title": "UTILIDADES", "commands": [
         {"name": ":gear: ia", "description": "Un pequeño servicio de inteligencia artificial mediante un API gratis."}
+        {"name": ":gear: myip", "description": "Muestra tu ip real y recupera información de la misma."}
     ]},
     {"title": "OSINT", "commands": [
         {"name": ":gear: ipinfo", "description": "Obtiene la información de una IP, ya sea IPv4 o IPv6."},
