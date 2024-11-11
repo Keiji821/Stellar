@@ -5,6 +5,7 @@ import platform
 import random
 import time
 import sys
+from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
@@ -296,20 +297,9 @@ banners = random.choice([craneo1, blackhole1, craneo2, planet1, craneo3, chica1,
 
 os.system("clear")
 
-stellar = """
-[bold red]
- ________  _________  _______   ___       ___       ________  ________     
-|\   ____\|\___   ___\\  ___ \ |\  \     |\  \     |\   __  \|\   __  \    
-\ \  \___|\|___ \  \_\ \   __/|\ \  \    \ \  \    \ \  \|\  \ \  \|\  \   
- \ \_____  \   \ \  \ \ \  \_|/_\ \  \    \ \  \    \ \   __  \ \   _  _\  
-  \|____|\  \   \ \  \ \ \  \_|\ \ \  \____\ \  \____\ \  \ \  \ \  \\  \| 
-    ____\_\  \   \ \__\ \ \_______\ \_______\ \_______\ \__\ \__\ \__\\ _\ 
-   |\_________\   \|__|  \|_______|\|_______|\|_______|\|__|\|__|\|__|\|__|
-   \|_________|                                                   
-[/bold red]
-"""
 
-console.print(stellar)
+stellar = pyfiglet.figlet_format("Stellar", font="slant")
+console.print(f"[bold red]{stellar}[/bold red]")
 spinner = Spinner("dots", text="Presiona [Enter] para continuar", style="yellow")
 with console.status(spinner):
     input("")
