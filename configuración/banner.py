@@ -12,6 +12,8 @@ from rich.progress import Spinner
 
 pyfiglet = Figlet()
 
+Figlet = figlet_format()
+
 console = Console()
 
 def get_current_time():
