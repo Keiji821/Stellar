@@ -50,6 +50,11 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  pkg install -y nmap
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando dnsutils"
+ echo
+ pkg install -y dnsutils
+ sleep 5
 
 # Verificar paquetes pip no instalados
 
