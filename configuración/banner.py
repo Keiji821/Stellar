@@ -301,8 +301,8 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-console.print(f"[bold green]OS: {os_version}[/bold green] [bold white]menu [/bold white]")
-console.print(f"[bold green]Sistema: {system_info}[/bold green] [bold white]menu [/bold white]")
+console.print(f"[bold green]OS: [/bold green][bold white]{os_version}[/bold white]")
+console.print(f"[bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]")
 
 console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
