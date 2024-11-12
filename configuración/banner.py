@@ -256,14 +256,14 @@ colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 response = requests.get('https://ipapi.co//json/')
 data = response.json()
 
-ip = data.get("network")
+ip = data.get("network", "Stellar no se ha iniciado correctamente.")
 
 console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]
 [bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
-[bold green]Tu IP tor actual: [/bold green][bold white]{ip}[/bold white]""", justify="center")
+[bold green]Red: [/bold green][bold white]{ip}[/bold white]""", justify="center")
 
 console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
