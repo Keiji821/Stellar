@@ -6,10 +6,10 @@ import time
 console = Console()
 
 commands = [
-    "pkill tor &",
-    "pkill cloudflared &",
-    "export ALL_PROXY=socks5h://localhost:9050",
-    "tor &",
+    "cd && pkill tor &",
+    "cd && pkill cloudflared &",
+    "cd && export ALL_PROXY=socks5h://localhost:9050",
+    "cd && tor &",
     "sleep 10",
     "cd && cloudflared --url Stellar &",
     "sleep 10",
