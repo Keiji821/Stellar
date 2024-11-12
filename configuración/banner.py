@@ -256,8 +256,11 @@ colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 response = requests.get('https://ipapi.co//json/')
 data = response.json()
 
-ip = data.get("network")
-if ip is None:
+if data is not None:
+    ip = data.get("network")
+    if ip is None:
+        ip = "Stellar no se ha iniciado correctamente."
+else:
     ip = "Stellar no se ha iniciado correctamente."
 
 console.print(
