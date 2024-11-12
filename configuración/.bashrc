@@ -30,11 +30,9 @@ function cd() {
 
 clear
 cd
-cd Stellar
-cd configuración
+cd Stellar/configuración
 python run.py &
 sleep 5
-cd
 
 # Mostrar banner al final
 
