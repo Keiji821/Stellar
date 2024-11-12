@@ -31,15 +31,14 @@ function cd() {
 clear
 cd
 cd Stellar/configuración
-python run.py &
-sleep 5
+python run.py && sleep 5
 
 # Mostrar banner al final
 
 cd
 cd Stellar/configuración 
 clear
-python banner.py
+python banner.py && sleep 1
 cd
 
 # Osint
