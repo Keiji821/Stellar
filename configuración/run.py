@@ -29,6 +29,6 @@ with Progress(
     task = progress.add_task("[cyan]Ejecución de comandos...", total=len(commands))
 
     for command in commands:
-        progress.update(task, description=f"[cyan]Ejecutando: {command}", advance=1)
+        progress.update(task, description=f"[code][bold yellow]Ejecutando:[/bold yellow][/code] {command}", advance=1)
         os.system(command)
         time.sleep(0.5)
