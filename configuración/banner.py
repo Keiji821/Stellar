@@ -258,7 +258,7 @@ data = response.json()
 
 ip = data.get("network")
 if ip is None:
-ip = "Stellar no se ha iniciado correctamente."
+    ip = "Stellar no se ha iniciado correctamente."
 
 console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
