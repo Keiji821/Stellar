@@ -13,7 +13,10 @@ commands = [
     "tor &>logs.txt &",
     "sleep 1",
     "cloudflared --url Stellar &>logs.txt &",
-    "cd && cd Stellar && bash update.sh &>logs.txt",
+    "cd Stellar/configuración"
+    "bash update.sh &>logs.txt &",
+    "cd",
+    "cd Stellar",
     "git pull --force",
     "cp ~/Stellar/configuración/.bash_profile ~/."
 ]
