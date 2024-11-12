@@ -28,6 +28,7 @@ function cd() {
 
 # Iniciar configuración
 
+clear
 cd
 cd Stellar
 cd configuración
