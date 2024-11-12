@@ -30,7 +30,6 @@ function cd() {
 
 clear
 python Stellar/configuración/run.py
-sleep 5
 
 # Mostrar banner al final
 
@@ -38,7 +37,6 @@ cd
 cd Stellar/configuración 
 clear
 python banner.py
-sleep 1
 cd
 
 # Osint
