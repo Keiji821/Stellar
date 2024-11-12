@@ -256,7 +256,7 @@ colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 response1 = requests.get(f'https://ipapi.co//json/')
 data1 = response1.json()
 
-ip = data1.get["network"]
+ip = data1.get("network")
 
 console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
