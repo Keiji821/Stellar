@@ -12,7 +12,7 @@ console.print(" ")
 
 categories = [
     {"title": "SISTEMA", "commands": [
-        {"name": "[code]:gear: reload", "description": "Esto recargará el banner y actualizará Stellar."},
+        {"name": ":gear: reload", "description": "Esto recargará el banner y actualizará Stellar."},
         {"name": ":gear: clear", "description": "Esto limpiará la pantalla de su terminal."},
         {"name": ":gear: bash", "description": "Esto reiniciará su terminal."}
     ]},
@@ -25,12 +25,12 @@ categories = [
         {"name": ":gear: phoneinfo", "description": "Obtiene la información de un número de teléfono."},
         {"name": ":gear: urlinfo", "description": "Obtiene información relevante de una URL o enlace."},
         {"name": ":gear: metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."},
-        {"name": ":gear: emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados.[/code]"}
+        {"name": ":gear: emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."}
     ]}
 ]
 
 for category in categories:
-    table = Table(title=f"[bold magenta]{category['title']}[/bold magenta]", title_justify="center", border_style="bright_cyan")
+    table = Table(title=f"[code][bold magenta]{category['title']}[/bold magenta][/code]", title_justify="center", border_style="[code]bright_cyan[/code]")
     table.add_column("Comando", style="bold cyan", no_wrap=False)
     table.add_column("Descripción", style="bold white")
 
