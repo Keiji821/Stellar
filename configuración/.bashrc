@@ -32,7 +32,8 @@ clear
 cd
 cd Stellar
 cd configuración
-python run.py
+python run.py &
+sleep 5
 cd
 
 # Mostrar banner al final
