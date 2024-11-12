@@ -1,6 +1,6 @@
 from rich.console import Console
 from rich.table import Table
-from rich.progress import track
+from rich.progress import Progress
 import os
 from os import system
 import time
