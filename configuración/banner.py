@@ -253,7 +253,7 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-response1 = requests.get(f'https://ipapi.co/{IpQuery}/json/')
+response1 = requests.get(f'https://ipapi.co//json/')
 data1 = response1.json()
 
 ip = data1.get["network"]
