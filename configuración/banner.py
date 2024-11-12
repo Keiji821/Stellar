@@ -261,7 +261,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]
 [bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
-[bold green]Tu IP tor actual: [/bold green][bold white][/bold white]""", data.get["network"], justify="center")
+[bold green]Tu IP tor actual: [/bold green][bold white]data.get{"network"}[/bold white]""", justify="center")
 
 console.print(f"[bold {colores}]{banners}[/bold {colores}]", justify="center")
 
