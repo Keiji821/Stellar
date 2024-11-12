@@ -29,7 +29,8 @@ while True:
             response2.raise_for_status()
             data2 = response2.json()
             progress.update(task, advance=50)
-
+            
+            console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
             table.add_column("Información", style="green", no_wrap=False)
             table.add_column("Valor", style="white")
