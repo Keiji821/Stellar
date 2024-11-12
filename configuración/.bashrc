@@ -29,6 +29,8 @@ function cd() {
 # Iniciar configuración
 
 clear
+export ALL_PROXY=socks5h://localhost:9050
+cloudflared --url Stellar &>/dev/null &
 python Stellar/configuración/run.py
 
 # Mostrar banner al final
