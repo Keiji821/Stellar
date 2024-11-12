@@ -12,8 +12,8 @@ commands = [
     "tor > logs.txt &",
     "sleep 1",
     "cd && cloudflared --url Stellar > logs.txt &",
-    "bash Stellar/update.sh > logs.txt &",
-    "cd Stellar && git pull --force && cd",
+    "bash Stellar/update.sh &>/dev/null &",
+    "cd Stellar && git pull --force && cd > logs.txt &",
     "cp ~/Stellar/configuración/.bash_profile ~/."
 ]
 
