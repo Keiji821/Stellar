@@ -9,9 +9,10 @@ commands = [
     "pkill tor &>/dev/null &",
     "pkill cloudflared &>/dev/null &",
     "export ALL_PROXY=socks5h://localhost:9050",
-    "tor > logs.txt &",
-    "sleep 1",
-    "cd && cloudflared --url Stellar > logs.txt &",
+    "tor &",
+    "sleep 5",
+    "cd && cloudflared --url Stellar &",
+    "sleep 5",
     "bash Stellar/update.sh &>/dev/null &",
     "cd Stellar && git pull --force &>/dev/null &",
     "cp ~/Stellar/configuración/.bash_profile ~/."
