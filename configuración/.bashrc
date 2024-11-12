@@ -29,14 +29,16 @@ function cd() {
 # Iniciar configuración
 
 clear
-python run.py && sleep 5
+python run.py
+sleep 5
 
 # Mostrar banner al final
 
 cd
 cd Stellar/configuración 
 clear
-python banner.py && sleep 1
+python banner.py
+sleep 1
 cd
 
 # Osint
