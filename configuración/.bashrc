@@ -30,6 +30,7 @@ function cd() {
 
 clear
 export ALL_PROXY=socks5h://localhost:9050
+pkill cloudflared &
 cloudflared --url Stellar &>/dev/null &
 python Stellar/configuración/run.py
 
