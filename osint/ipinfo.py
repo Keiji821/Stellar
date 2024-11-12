@@ -6,13 +6,13 @@ from rich.markdown import Markdown
 
 console = Console()
 
-IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]")
-
 proxies = {
     "http": None,
     "https": None,
 }
 
+while True:
+IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]")
 with Progress(SpinnerColumn("dots")) as progress:
     task = progress.add_task("[red]Cargando...")
     try:
