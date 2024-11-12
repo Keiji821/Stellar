@@ -63,7 +63,7 @@ with Progress(SpinnerColumn("dots")) as progress:
 
 console.print(" ")
 
-table = Table(title="Tú IP", title_justify="center", title_style="bold green")
+table = Table(title="Tú ip real", title_justify="center", title_style="bold green")
 
 table.add_column("Información", style="green", no_wrap=False)
 table.add_column("Valor", style="white")
