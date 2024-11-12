@@ -80,6 +80,7 @@ with Progress(SpinnerColumn("dots")) as progress:
 
         console.print(table)
         console.print(" ")
+        break
     except requests.exceptions.RequestException as e:
         console.print(f"[bold red]Error de red: {e}[/bold red]")
         exit()
