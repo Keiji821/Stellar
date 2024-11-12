@@ -16,7 +16,7 @@ color_cycle = red_green_cycle()
 
 with Progress(
     TextColumn("[progress.description]{task.description}"),
-    BarColumn(bar_width=None, style="bold bright"),
+    BarColumn(bar_width=None, style="bold"),
     TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
     console=console,
     refresh_per_second=30,
