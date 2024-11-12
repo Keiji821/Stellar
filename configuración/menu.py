@@ -30,7 +30,7 @@ categories = [
 ]
 
 for category in categories:
-    table = Table(title=f"[code][bold magenta]{category['title']}[/bold magenta][/code]", title_justify="center", border_style="[code]bright_cyan[/code]")
+    table = Table(title=f"[bold magenta]{category['title']}[/bold magenta]", title_justify="center", border_style="bright_cyan")
     table.add_column("Comando", style="bold cyan", no_wrap=False)
     table.add_column("Descripción", style="bold white")
 
