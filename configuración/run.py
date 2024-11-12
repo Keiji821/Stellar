@@ -6,14 +6,14 @@ import time
 console = Console()
 
 commands = [
-    "pkill tor > logs.txt",
-    "pkill cloudflared > logs.txt",
+    "pkill tor &>/dev/null &",
+    "pkill cloudflared &>/dev/null &",
     "export ALL_PROXY=socks5h://localhost:9050",
-    "tor > logs.txt &",
+    "tor &>/dev/null &",
     "sleep 1",
-    "cd && cloudflared --url Stellar > logs.txt &",
+    "cd && cloudflared --url Stellar &>/dev/null &",
     "bash Stellar/update.sh &>/dev/null &",
-    "cd Stellar && git pull --force && cd > logs.txt &",
+    "cd Stellar && git pull --force && cd &>/dev/null &",
     "cp ~/Stellar/configuración/.bash_profile ~/."
 ]
 
