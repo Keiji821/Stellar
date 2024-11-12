@@ -13,7 +13,7 @@ commands = [
     "sleep 1",
     "cd && cloudflared --url Stellar &>/dev/null &",
     "bash Stellar/update.sh &>/dev/null &",
-    "cd Stellar && git pull --force && cd &>/dev/null &",
+    "cd Stellar && git pull --force &>/dev/null &",
     "cp ~/Stellar/configuración/.bash_profile ~/."
 ]
 
