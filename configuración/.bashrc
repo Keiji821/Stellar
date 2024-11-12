@@ -26,25 +26,13 @@ function cd() {
   PS1="""${gris}[${rojo}~ ${amarillo}/${pwd_relative}${gris}]${verde} $ ${blanco2}"""
 }
 
-# Iniciar tor y cloudflared 
-
-clear
-pkill tor &>/dev/null &
-pkill cloudflared &>/dev/null &
-sleep 5
-export ALL_PROXY=socks5h://localhost:9050
-tor &>/dev/null &
-sleep 5
-cloudflared --url Stellar &>/dev/null &
-sleep 5
-
-# Actualizar automáticamente el directorio Stellar con el de github
+# Iniciar configuración
 
 cd
 cd Stellar
-bash update.sh &>/dev/null &
-git pull --force
-cp ~/Stellar/configuración/.bash_profile ~/.
+cd configuración
+python run.py
+cd
 
 # Mostrar banner al final
 
