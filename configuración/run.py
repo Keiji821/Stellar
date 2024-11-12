@@ -8,10 +8,7 @@ console = Console()
 commands = [
     "cd && pkill tor &",
     "cd && pkill cloudflared &",
-    "cd && export ALL_PROXY=socks5h://localhost:9050",
     "cd && tor &",
-    "sleep 10",
-    "cd && cloudflared --url Stellar &",
     "sleep 10",
     "bash Stellar/update.sh &>/dev/null &",
     "cd Stellar && git pull --force &>/dev/null &",
