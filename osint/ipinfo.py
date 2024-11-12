@@ -26,15 +26,6 @@ with Progress(SpinnerColumn("dots")) as progress:
         response2.raise_for_status()
         data2 = response2.json()
         progress.update(task, advance=50)
-    except requests.exceptions.RequestException as e:
-        console.print(f"[bold red]Error de red: {e}[/bold red]")
-        exit()
-    except ValueError as e:
-        console.print(f"[bold red]Error de datos: {e}[/bold red]")
-        exit()
-    except Exception as e:
-        console.print(f"[bold red]Error inesperado: {e}[/bold red]")
-        exit()
 
         table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
 
@@ -89,3 +80,12 @@ with Progress(SpinnerColumn("dots")) as progress:
 
         console.print(table)
         console.print(" ")
+    except requests.exceptions.RequestException as e:
+        console.print(f"[bold red]Error de red: {e}[/bold red]")
+        exit()
+    except ValueError as e:
+        console.print(f"[bold red]Error de datos: {e}[/bold red]")
+        exit()
+    except Exception as e:
+        console.print(f"[bold red]Error inesperado: {e}[/bold red]")
+        exit()
