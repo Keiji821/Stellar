@@ -36,13 +36,13 @@ def email_finder():
         f"https://www.reddit.com/search/?q={quote(consulta)}",
         f"https://www.medium.com/search?q={quote(consulta)}",
         f"https://www.quora.com/search?q={quote(consulta)}",
-        f"https://www.bing.com/search?q={quote(consulta)" + ' email')}",
-        f"https://search.yahoo.com/search?p={quote(consulta)" + ' email')}",
-        f"https://duckduckgo.com/?q={quote(consulta)" + ' email')}",
-        f"https://www.ecosia.org/search?q={quote(consulta)" + ' email')}",
-        f"https://www.ask.com/web?q={quote(consulta)" + ' email')}",
-        f"https://www.you.com/search?q={quote(consulta)" + ' email')}",
-        f"https://search.aol.com/aol/search?q={quote(consulta)" + ' email')}",
+        f"https://www.bing.com/search?q={quote(consulta) + ' email')}",
+        f"https://search.yahoo.com/search?p={quote(consulta) + ' email')}",
+        f"https://duckduckgo.com/?q={quote(consulta) + ' email')}",
+        f"https://www.ecosia.org/search?q={quote(consulta) + ' email')}",
+        f"https://www.ask.com/web?q={quote(consulta) + ' email')}",
+        f"https://www.you.com/search?q={quote(consulta) + " email")}",
+        f"https://search.aol.com/aol/search?q={quote(consulta) + ' email')}",
     ]
 
     emails = set()
