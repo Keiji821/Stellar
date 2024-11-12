@@ -26,7 +26,7 @@ with Progress(
     refresh_per_second=10,
 ) as progress:
     
-    task = progress.add_task("[cyan]Ejecución de comandos...", total=len(commands))
+    task = progress.add_task("[bold green]Ejecución de comandos...[/bold green]", total=len(commands))
 
     for command in commands:
         progress.update(task, description=f"[code][bold yellow]Ejecutando:[/bold yellow][/code] {command}", advance=1)
