@@ -35,7 +35,7 @@ for category in categories:
     table.add_column("Descripción", style="bold white")
 
     for command in category["commands"]:
-        table.add_row(f"[bold yellow]{command['name']}[/bold yellow]", f"[italic white]{command['description']}[/italic white]")
+        table.add_row(f"[code][bold yellow]{command['name']}[/bold yellow][/code]", f"[italic white]{command['description']}[/italic white]")
 
     console.print(Panel(table, border_style="bright_magenta", style="bold purple"))
 
