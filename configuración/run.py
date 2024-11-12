@@ -9,6 +9,7 @@ commands = [
     "pkill tor &>logs.txt",
     "pkill cloudflared &>logs.txt",
     "export ALL_PROXY=socks5h://localhost:9050",
+    "cd",
     "tor &>logs.txt &",
     "sleep 1",
     "cloudflared --url Stellar &>logs.txt &",
