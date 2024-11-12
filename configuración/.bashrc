@@ -29,7 +29,7 @@ function cd() {
 # Iniciar configuración
 
 clear
-python run.py
+python Stellar/configuración/run.py
 sleep 5
 
 # Mostrar banner al final
