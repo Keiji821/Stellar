@@ -14,7 +14,7 @@ categories = [
         {"name": "bash", "description": "Esto reiniciará su terminal."}
     ]},
     {"title": "UTILIDADES", "commands": [
-        {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante un API gratis."},
+        {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante una API gratis."},
         {"name": "myip", "description": "Muestra tu ip real y recupera información de la misma."},
     ]},
     {"title": "OSINT", "commands": [
@@ -36,6 +36,7 @@ for i, category in enumerate(categories):
     console.print(" ")
 
 console.print("[code]CTRL + Z │ Esto detendrá cualquier comando o proceso existente.[/code]", justify=("center"))
+
 console.print("[code]CTRL + C │ Esto forzará a cualquier proceso activo a que se detenga, debes pulsar varias veces las dos combinaciones las veces que haga falta hasta que se detenga el proceso.[/code]", justify=("center"))
 console.print(" ")
 console.print(" ")
