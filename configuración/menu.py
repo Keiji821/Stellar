@@ -5,10 +5,6 @@ from rich import print
 
 console = Console()
 
-console.print(" ")
-console.print(Panel(":dvd: Versión V1.0.0", title="[code][bold magenta]Comandos de Stellar[/bold magenta][/code]", border_style="bold cyan", style="bold purple"))
-console.print(" ")
-
 categories = [
     {"title": "SISTEMA", "commands": [
         {"name": ":gear: reload", "description": "Esto recargará el banner y actualizará Stellar."},
@@ -37,6 +33,6 @@ for i, category in enumerate(categories):
         console.print(f"   [bold yellow]{command['name']}[/bold yellow]: [italic white]{command['description']}[/italic white]")
     console.print(" ")
 
-console.print(Panel("CTRL + Z │ Esto detendrá cualquier comando o proceso existente.", title="[code][bold magenta]Nota[/bold magenta][/code]", border_style="bold cyan", style="bold purple"))
+console.print("[code]CTRL + Z │ Esto detendrá cualquier comando o proceso existente.[/code]")
 console.print(" ")
 console.print(" ")
