@@ -30,7 +30,7 @@ for i, category in enumerate(categories):
     color = colors[i % len(colors)]
     console.print(f"[bold {color}]▸ {category['title']}[/bold {color}]")
     for command in category["commands"]:
-        console.print(f"   [bold yellow]{command['name']}[/bold yellow]: [italic white]{command['description']}[/italic white]")
+        console.print(f"   [bold yellow]{command['name']}[/bold yellow]: {command['description']}")
     console.print(" ")
 
 console.print("[code]CTRL + Z │ Esto detendrá cualquier comando o proceso existente.[/code]")
