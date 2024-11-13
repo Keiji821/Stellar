@@ -35,8 +35,8 @@ for i, category in enumerate(categories):
         console.print(f"   [bold yellow]{command['name']}[/bold yellow]: {command['description']}")
     console.print(" ")
 
-console.print("[code]CTRL + Z │ Esto detendrá cualquier comando o proceso existente.[/code]", justify=("center"))
+console.print("[code][bold yellow]CTRL + Z │[/bold yellow] Esto detendrá cualquier comando o proceso existente.[/code]", justify=("center"))
 console.print(" ")
-console.print("[code]CTRL + C │ Esto forzará a cualquier proceso activo a que se detenga, debes pulsar varias veces las dos combinaciones las veces que haga falta hasta que se detenga el proceso.[/code]", justify=("center"))
+console.print("[code][bold yellow]CTRL + C │[/bold yellow] Esto forzará a cualquier proceso activo a que se detenga, debes pulsar varias veces las dos combinaciones las veces que haga falta hasta que se detenga el proceso.[/code]", justify=("center"))
 console.print(" ")
 console.print(" ")
