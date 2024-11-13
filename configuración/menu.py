@@ -35,6 +35,6 @@ for i, category in enumerate(categories):
         console.print(f"   [bold yellow]{command['name']}[/bold yellow]: {command['description']}")
     console.print(" ")
 
-console.print("[code]CTRL + Z │ Esto detendrá cualquier comando o proceso existente.[/code]")
+console.print("[code]CTRL + Z │ Esto detendrá cualquier comando o proceso existente.[/code]", justify=("center"))
 console.print(" ")
 console.print(" ")
