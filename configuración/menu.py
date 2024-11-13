@@ -5,6 +5,8 @@ from rich import print
 
 console = Console()
 
+console.print("[code][bold green]Comandos de Stellar[/bold green][/code]", justify=("center"))
+
 categories = [
     {"title": "SISTEMA", "commands": [
         {"name": ":gear: reload", "description": "Esto recargará el banner y actualizará Stellar."},
