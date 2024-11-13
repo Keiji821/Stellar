@@ -1,8 +1,7 @@
 from rich.console import Console
-from rich.markdown import Markdown
-from rich.table import Table
 from rich.panel import Panel
-from rich import print 
+from rich.text import Text
+from rich import print
 
 console = Console()
 
@@ -29,15 +28,14 @@ categories = [
     ]}
 ]
 
-for category in categories:
-    table = Table(title=f"[bold magenta]{category['title']}[/bold magenta]", title_justify="center", border_style="bright_cyan")
-    table.add_column("Comando", style="bold cyan", no_wrap=False)
-    table.add_column("Descripción", style="bold white")
+colors = ["green", "yellow", "red"]
 
+for i, category in enumerate(categories):
+    color = colors[i % len(colors)]
+    console.print(f"[bold {color}]▸ {category['title']}[/bold {color}]")
     for command in category["commands"]:
-        table.add_row(f"[bold yellow]{command['name']}[/bold yellow]", f"[italic white]{command['description']}[/italic white]")
-
-    console.print(Panel(table, border_style="bright_magenta", style="bold purple"))
+        console.print(f"   [bold yellow]{command['name']}[/bold yellow]: [italic white]{command['description']}[/italic white]")
+    console.print(" ")
 
 console.print(Panel("CTRL + Z │ Esto detendrá cualquier comando o proceso existente.", title="[code][bold magenta]Nota[/bold magenta][/code]", border_style="bold cyan", style="bold purple"))
 console.print(" ")
