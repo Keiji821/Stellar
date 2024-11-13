@@ -9,20 +9,20 @@ console.print("[code][bold green]Comandos de Stellar[/bold green][/code]", justi
 
 categories = [
     {"title": "SISTEMA", "commands": [
-        {"name": ":gear: reload", "description": "Esto recargará el banner y actualizará Stellar."},
-        {"name": ":gear: clear", "description": "Esto limpiará la pantalla de su terminal."},
-        {"name": ":gear: bash", "description": "Esto reiniciará su terminal."}
+        {"name": "reload", "description": "Esto recargará el banner y actualizará Stellar."},
+        {"name": "clear", "description": "Esto limpiará la pantalla de su terminal."},
+        {"name": "bash", "description": "Esto reiniciará su terminal."}
     ]},
     {"title": "UTILIDADES", "commands": [
-        {"name": ":gear: ia", "description": "Un pequeño servicio de inteligencia artificial mediante un API gratis."},
-        {"name": ":gear: myip", "description": "Muestra tu ip real y recupera información de la misma."},
+        {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante un API gratis."},
+        {"name": "myip", "description": "Muestra tu ip real y recupera información de la misma."},
     ]},
     {"title": "OSINT", "commands": [
-        {"name": ":gear: ipinfo", "description": "Obtiene la información de una IP, ya sea IPv4 o IPv6."},
-        {"name": ":gear: phoneinfo", "description": "Obtiene la información de un número de teléfono."},
-        {"name": ":gear: urlinfo", "description": "Obtiene información relevante de una URL o enlace."},
-        {"name": ":gear: metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."},
-        {"name": ":gear: emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."}
+        {"name": "ipinfo", "description": "Obtiene la información de una IP, ya sea IPv4 o IPv6."},
+        {"name": "phoneinfo", "description": "Obtiene la información de un número de teléfono."},
+        {"name": "urlinfo", "description": "Obtiene información relevante de una URL o enlace."},
+        {"name": "metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."},
+        {"name": "emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."}
     ]}
 ]
 
