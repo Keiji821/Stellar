@@ -259,9 +259,9 @@ data = response.json()
 if data is not None:
     ip = data.get("network")
     if ip is None:
-        ip = "Stellar no se ha iniciado correctamente."
+        ip = "La conexión de red es inestable."
 else:
-    ip = "Stellar no se ha iniciado correctamente."
+    ip = "Ha ocurrido un error de red, posible fallo al iniciar Stellar."
 
 console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
