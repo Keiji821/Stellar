@@ -245,7 +245,7 @@ craneo2 = """
 
 banners = random.choice([craneo1, craneo2, chica1, chica2, chica3, chica4, chica5])
 
-f = Figlet(font="cosmic")
+f = Figlet(font="standard")
 text = f.renderText("Stellar")
 
 command = ["lolcat", "--animate", "-8"]
