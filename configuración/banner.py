@@ -262,7 +262,7 @@ def wait_for_input():
     input("Presiona Enter para continuar...")
 
 threading.Thread(target=update_banner).start()
-threading.Thread(target=wait_for_input).start()
+wait_for_input()
 
 os.system("clear")
 
