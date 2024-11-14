@@ -106,14 +106,6 @@ reload() {
   cd
 }
 
-ui() {
-  cd
-  cd Stellar/configuración
-  bash ui.sh
-  cd
-}
-
-
 # Utilidades - herramientas
 
 ia() {
