@@ -247,12 +247,7 @@ banners = random.choice([craneo1, craneo2, chica1, chica2, chica3, chica4, chica
 
 f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
-
-command = ["lolcat", "--animate", "-8"]
-process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-output, _ = process.communicate(text.encode())
-print(output.decode())
-
+console.print(text)
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
 with console.status(spinner):
     input("")
