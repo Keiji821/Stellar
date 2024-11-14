@@ -270,7 +270,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
 [bold green]Tu ip anónima[bold red]/[/bold red]tu ip visible en el internet: [/bold green][bold white]{ip}[/bold white]""", justify="center")
 
-console.print(f"[code][bold {colores}]{banners}[/bold {colores}][/code]", justify="center")
+console.print(f"[code red][bold {colores}]{banners}[/bold {colores}][/code red]", justify="center")
 
 
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
