@@ -251,7 +251,8 @@ text = f.renderText("Stellar")
 command = ["lolcat", "--animate", "-8"]
 process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 output, _ = process.communicate(text.encode())
-console.print("[code]", output.decode(), "[/code]")
+y = output.decode()
+console.print(f"[code]{y}[/code]")
 
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
 with console.status(spinner):
