@@ -19,7 +19,7 @@ Herramienta de hacking para termux, dedicado a termux, más que una herramienta 
 
 **Termux**
 <pre>
-pkg install git -y
+pkg install -y git
 </pre>
 
 <pre>
@@ -40,7 +40,7 @@ pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stella
 
 **Linux** (debian/ubuntu/kali linux)
 <pre>
-apt-get install git -y
+apt-get install -y git
 </pre>
 
 <pre>
