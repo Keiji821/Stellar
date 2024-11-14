@@ -17,8 +17,14 @@ Herramienta de hacking para termux, dedicado a termux, más que una herramienta 
 
 **Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
 
+**Termux**
 <pre>
-pkg install git -y or apt-get install git -y
+pkg install git -y
+</pre>
+
+**Kali Linux**
+<pre>
+apt-get install git -y
 </pre>
 
 <pre>
