@@ -32,7 +32,7 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes"
  echo
- apt-get update -y && apt-get upgrade -y
+ apt-get upgrade -y && apt-get update -y
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
