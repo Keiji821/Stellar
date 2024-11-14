@@ -15,7 +15,7 @@ Herramienta de hacking para termux, dedicado a termux, más que una herramienta 
 <details>
   <summary>1. Pasos de instalación</summary>
 
-**Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
+**Nota:** Abre tu terminal y a continuación copia y pega lo siguiente:
 
 **Termux**
 <pre>
@@ -53,6 +53,10 @@ cd Stellar
 
 <pre>
 bash install.sh
+</pre>
+
+<pre>
+apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
 </pre>
 
 </details>
