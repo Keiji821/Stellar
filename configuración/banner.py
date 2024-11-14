@@ -258,9 +258,11 @@ def update_banner():
         print(output.decode())
         time.sleep(0.1)
 
-threading.Thread(target=update_banner).start()
+def wait_for_input():
+    input("Presiona Enter para continuar...")
 
-input("Presiona Enter para continuar...")
+threading.Thread(target=update_banner).start()
+threading.Thread(target=wait_for_input).start()
 
 os.system("clear")
 
