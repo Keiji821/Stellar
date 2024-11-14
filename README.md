@@ -22,7 +22,23 @@ Herramienta de hacking para termux, dedicado a termux, más que una herramienta 
 pkg install git -y
 </pre>
 
-**Kali Linux**
+<pre>
+git clone https://github.com/Keiji821/Stellar
+</pre>
+
+<pre>
+cd Stellar
+</pre>
+
+<pre>
+bash install.sh
+</pre>
+
+<pre>
+pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
+</pre>
+
+**Linux**
 <pre>
 apt-get install git -y
 </pre>
@@ -35,16 +51,8 @@ git clone https://github.com/Keiji821/Stellar
 cd Stellar
 </pre>
 
-**Esto instalará las dependencias necesarias para la Herramienta:**
-
 <pre>
 bash install.sh
-</pre>
-
-Si quieres instalarlo todo de una sola vez copia y pega lo siguiente en tu terminal:
-
-<pre>
-pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
 </pre>
 
 </details>
