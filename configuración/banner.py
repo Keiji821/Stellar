@@ -10,7 +10,7 @@ from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
-from rich.status import Spinner
+import threading
 
 console = Console()
 
@@ -250,14 +250,17 @@ text = f.renderText("Stellar")
 
 command = ["lolcat", "--animate", "-8"]
 
+def update_banner():
 while True:
-    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    output, _ = process.communicate(text.encode())
-    print(output.decode())
+os.system('clear')
+process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+output, _ = process.communicate(text.encode())
+print(output.decode())
+time.sleep(0.1)
 
-    spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
-    with console.status(spinner):
-        input("")
+threading.Thread(target=update_banner).start()
+
+input("Presiona Enter para continuar...")
 
 os.system("clear")
 
