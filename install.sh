@@ -114,6 +114,10 @@ echo
 pip install rich
 pip install "rich[jupyter]"
 clear
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+pip install lolcat
+echo
+clear
 printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
 sleep 5
 bash
