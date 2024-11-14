@@ -252,11 +252,12 @@ command = ["lolcat", "--animate", "-8"]
 
 def update_banner():
 while True:
-os.system('clear')
-process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-output, _ = process.communicate(text.encode())
-print(output.decode())
-time.sleep(0.1)
+    os.system('clear')
+    process = subprocess.Popen(command, stdin=subprocess.PIPE,
+stdout=subprocess.PIPE)
+    output, _ = process.communicate(text.encode())
+    print(output.decode())
+    time.sleep(0.1)
 
 threading.Thread(target=update_banner).start()
 
