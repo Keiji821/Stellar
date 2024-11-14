@@ -88,7 +88,7 @@ ddos() {
  cd
 }
 
-# Menu y reload
+# Sistema
 
 menu() {
   cd
@@ -105,6 +105,14 @@ reload() {
   python banner.py
   cd
 }
+
+ui() {
+  cd
+  cd Stellar/configuración
+  bash ui.sh
+  cd
+}
+
 
 # Utilidades - herramientas
 
