@@ -5,7 +5,7 @@ import platform
 import random
 import time
 import requests
-import pylolcat
+import lolcat
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
