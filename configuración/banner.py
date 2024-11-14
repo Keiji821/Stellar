@@ -10,6 +10,7 @@ from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
+from rich.status import Spinner
 
 console = Console()
 
@@ -248,13 +249,15 @@ f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
 
 command = ["lolcat", "--animate", "-8"]
-process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-output, _ = process.communicate(text.encode())
-print(output.decode())
 
-spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
-with console.status(spinner):
-    input("")
+while True:
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    output, _ = process.communicate(text.encode())
+    print(output.decode())
+
+    spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
+    with console.status(spinner):
+        input("")
 
 os.system("clear")
 
