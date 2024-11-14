@@ -29,6 +29,7 @@ function cd() {
 # Iniciar configuración
 
 clear
+alias ls='ls | lolcat'
 export ALL_PROXY=socks5h://localhost:9050
 pkill cloudflared &
 cloudflared --url Stellar &>/dev/null &
