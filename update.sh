@@ -87,4 +87,7 @@ printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install rich
 pip install "rich[jupyter]"
+printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+pip install lolcat
+echo
 clear
