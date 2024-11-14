@@ -249,20 +249,13 @@ f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
 
 command = ["lolcat", "--animate", "-8"]
+process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+output, _ = process.communicate(text.encode())
+print(output.decode())
 
-def update_banner():
-    while True:
-        os.system('clear')
-        process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        output, _ = process.communicate(text.encode())
-        print(output.decode())
-        time.sleep(0.1)
-
-def wait_for_input():
-    input("Presiona Enter para continuar...")
-
-threading.Thread(target=update_banner).start()
-wait_for_input()
+spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
+with console.status(spinner):
+    input("")
 
 os.system("clear")
 
