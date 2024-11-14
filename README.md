@@ -18,6 +18,11 @@ Herramienta de hacking para termux, dedicado a termux, más que una herramienta 
 **Nota:** Abre tu terminal y a continuación copia y pega lo siguiente:
 
 **Termux**
+
+<pre>
+pkg upgrade -y && pkg update -y
+</pre>
+
 <pre>
 pkg install -y git
 </pre>
@@ -39,6 +44,10 @@ pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stella
 </pre>
 
 **Linux** (debian/ubuntu/kali linux)
+
+<pre>
+apt-get upgrade -y && apt-get update -y
+
 <pre>
 apt-get install -y git
 </pre>
