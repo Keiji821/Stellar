@@ -246,7 +246,7 @@ craneo2 = """
 banners = random.choice([craneo1, craneo2, chica1, chica2, chica3, chica4, chica5])
 
 lolcat_args = ["--animate", "-8"]
-print(pylolcat.lolcat(pyfiglet.figlet_format("Stellar", font="cosmic"), args=lolcat_args))
+print(lolcat.lolcat(figlet.figlet_format("Stellar", font="cosmic"), args=lolcat_args))
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
 with console.status(spinner):
     input("")
