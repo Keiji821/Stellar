@@ -44,9 +44,11 @@ pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stella
 </pre>
 
 **Linux** (debian/ubuntu/kali linux)
+<pre>
 
 <pre>
 apt-get upgrade -y && apt-get update -y
+</pre>
 
 <pre>
 apt-get install -y git
@@ -66,6 +68,8 @@ bash install.sh
 
 <pre>
 apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
+</pre>
+
 </pre>
 
 </details>
