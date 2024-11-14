@@ -18,7 +18,7 @@ Herramienta de hacking para termux, dedicado a termux, más que una herramienta 
 **Nota:** Abre tu termux y a continuación copia y pega lo siguiente:
 
 <pre>
-pkg install -y git
+pkg install git -y or apt-get install git -y
 </pre>
 
 <pre>
