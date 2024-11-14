@@ -5,12 +5,10 @@ import platform
 import random
 import time
 import requests
-import subprocess
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
-import threading
 
 console = Console()
 
