@@ -5,7 +5,7 @@ import platform
 import random
 import time
 import requests
-from pylolcat import lolcat
+from pylolcat import lolcatify
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
@@ -244,8 +244,12 @@ craneo2 = """
 
 banners = random.choice([craneo1, craneo2, chica1, chica2, chica3, chica4, chica5])
 
+f = Figlet(font="cosmic")
+text = f.renderText("Stellar")
+
 lolcat_args = ["--animate", "-8"]
-print(lolcat.lolcat(figlet.figlet_format("Stellar", font="cosmic"), args=lolcat_args))
+print(lolcatify(text, args=lolcat_args))
+
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
 with console.status(spinner):
     input("")
