@@ -6,6 +6,7 @@ import random
 import time
 import requests
 import pyfiglet
+import pylolcat
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
