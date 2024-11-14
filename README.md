@@ -38,7 +38,7 @@ bash install.sh
 pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
 </pre>
 
-**Linux**
+**Linux (debian/ubuntu/kali linux)**
 <pre>
 apt-get install git -y
 </pre>
