@@ -5,7 +5,6 @@ import platform
 import random
 import time
 import requests
-import figlet
 import pylolcat
 from pyfiglet import Figlet
 from rich.console import Console
