@@ -258,7 +258,7 @@ response = requests.get('https://ipapi.co//json/')
 data = response.json()
 
 if data is not None:
-    ip = str("[bold green]●[/bold green]", data.get("network"))
+    ip = ("[bold green]●[/bold green]", data.get("network"))
     if ip is None:
         ip = "[bold red]El anonimizador no se ha iniciado[/bold red]"
 else:
