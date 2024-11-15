@@ -258,11 +258,14 @@ response = requests.get('https://ipapi.co//json/')
 data = response.json()
 
 if data is not None:
-    ip = "[bold green]●[/bold green]", data.get("network")
+    active = "[bold green]●[/bold green]"
+    ip = data.get("network")
     if ip is None:
-        ip = "[bold red]●[/bold red]El anonimizador no se ha iniciado"
+        ip = "El anonimizador no se ha iniciado"
+        active = "[bold red]●[/bold red]"
 else:
-    ip = "[bold red]●[/bold red]Error de red"
+    active = "[bold red]●[/bold red]"
+    ip = "Error de red"
 
 console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
