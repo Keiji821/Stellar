@@ -76,7 +76,7 @@ chica2 = """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 """
 
-chica3 = """
+chica3 = """[code]
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -95,7 +95,7 @@ chica3 = """
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠉⢹⠋⡀⠴⠧⠬⢿⣿⣿⣿⣿⣿
 ⠟⠛⢛⠯⡛⠻⠿⡿⡏⠻⣿⣿⢿⢧⣀⠀⠀⢠⠁⠀⠀⠈⠩⠭⠭⠽⣿⣿⣿⣿
 ⣀⣀⣀⡀⠻⣦⣀⣈⠈⢢⣻⣿⣆⣁⣀⣝⡆⣘⣀⡀⠀⢀⣀⢀⣤⣠⡛⢉⠛⣿
-"""
+[/code]"""
 
 chica4 = """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡴⣟⣿⢭⡭⠉⣠⣤⣷⡶⢆⡠⢤⣽⠯⣒⢭⣂⠀⠈⠙⢷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -271,7 +271,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
 [bold green]Tu ip anónima[bold red]/[/bold red]tu ip visible en el internet: [/bold green][bold white]{ip}[/bold white]""", justify="center")
 
-console.print(f"[code]{banners}[/code]", justify="center", style=f"bold {colores}")
+console.print(f"{banners}", justify="center", style=f"bold {colores}")
 
 
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
