@@ -84,7 +84,8 @@ apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd St
 
 | Misc     | Descripción |
 |----------|----------|
-| ia       | Un pequeño servicio de inteligencia artificial mediante una api.|   
+| ia       | Un pequeño servicio de inteligencia artificial mediante una api gratuita.|
+| ia       | Muestra tu ip real y muestra información de la ip.|   
 
 | Osint    | Descripción |
 |----------|-------------|
