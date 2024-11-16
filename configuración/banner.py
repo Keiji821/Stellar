@@ -281,7 +281,7 @@ console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
 
 console.print("""
 [code][bold green]
-Para ver comandos utilice [/bold green] [bold white]menu [/bold white][/code]
+Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
 
 [code][bold green]Hecho por [/bold green] [bold white]Keiji821 [/bold white][/code]
 """, justify="center")
