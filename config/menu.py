@@ -11,7 +11,8 @@ categories = [
     {"title": "SISTEMA", "commands": [
         {"name": "reload", "description": "Esto recargará el banner y actualizará Stellar."},
         {"name": "clear", "description": "Esto limpiará la pantalla de su terminal."},
-        {"name": "bash", "description": "Esto reiniciará su terminal."}
+        {"name": "bash", "description": "Esto reiniciará su terminal."},
+        {"name": "ui", "description": "Te permite personalizar el banner y la fuente del banner."}
     ]},
     {"title": "UTILIDADES", "commands": [
         {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante una API gratis."},
@@ -22,7 +23,8 @@ categories = [
         {"name": "phoneinfo", "description": "Obtiene la información de un número de teléfono."},
         {"name": "urlinfo", "description": "Obtiene información relevante de una URL o enlace."},
         {"name": "metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."},
-        {"name": "emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."}
+        {"name": "emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."},
+        {"name": "userfinder", "description": "Verifica si existe el usuario y obtiene información sobre el nombre de usuario proporcionado."}
     ]}
 ]
 
