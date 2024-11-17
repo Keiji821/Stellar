@@ -113,12 +113,16 @@ reload() {
   cd
 }
 
-# Utilidades - herramientas
-
 ui() {
  cd
- 
+ cd Stellar/configuración
+ read -p 'Ingrese el contenido: ' banner
+ echo "${banner}" > banner.txt
+ printf "${verde} Su banner personalizado se ha configurado correctamente!"
+ cd
 }
+
+# Utilidades - herramientas
 
 ia() {
  cd
