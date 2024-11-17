@@ -1,4 +1,6 @@
 import requests
+import os
+from os import system
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
