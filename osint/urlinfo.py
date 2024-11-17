@@ -9,15 +9,19 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import re
 import time
+from urllib.parse import urlparse
 
 console = Console()
 
-def obtener_datos_web(url):
+def crear_sesion():
     session = requests.Session()
-    retries = Retry(total=3, backoff_factor=1, status_forcelist=[502, 503, 504])
+    retries = Retry(total=5, backoff_factor=1, status_forcelist=[502, 503, 504])
     session.mount('https://', HTTPAdapter(max_retries=retries))
     session.mount('http://', HTTPAdapter(max_retries=retries))
+    return session
 
+def obtener_datos_web(url):
+    session = crear_sesion()
     try:
         response = session.get(url, timeout=10)
         response.raise_for_status()
@@ -29,7 +33,7 @@ def obtener_datos_web(url):
 def obtener_info_nmap(ip_address):
     try:
         nmap_output = subprocess.check_output(['nmap', '-v', '-A', ip_address], text=True)
-        
+
         open_ports = []
         os_info = "No disponible"
         service_versions = "No disponible"
@@ -37,10 +41,10 @@ def obtener_info_nmap(ip_address):
         for line in nmap_output.splitlines():
             if re.search(r'\bopen\b', line):
                 open_ports.append(line.strip())
-            
+
             if "OS details" in line:
                 os_info = line.split(":")[1].strip()
-            
+
             if "Service Info" in line:
                 service_versions = line.split(":")[1].strip()
 
@@ -65,11 +69,11 @@ def analyze_url(url):
         for _ in range(0, 30):
             progress.update(task, advance=1)
             time.sleep(0.05)
-        
+
         response = obtener_datos_web(url)
         if not response:
             return
-        
+
         progress.update(task, description="[yellow]Analizando HTML...", completed=30)
         for _ in range(30, 60):
             progress.update(task, advance=1)
@@ -80,7 +84,7 @@ def analyze_url(url):
         meta_description = soup.find('meta', attrs={'name': 'description'})
         meta_keywords = soup.find('meta', attrs={'name': 'keywords'})
 
-        domain = url.split("//")[-1].split('/')[0]
+        domain = urlparse(url).netloc
         try:
             ip_address = socket.gethostbyname(domain)
         except socket.gaierror:
@@ -94,6 +98,7 @@ def analyze_url(url):
         server_info = response.headers.get('Server', 'No disponible')
         open_ports, os_info, service_versions = obtener_info_nmap(ip_address) if ip_address != "No disponible" else ("No disponible", "", "")
 
+    # Crear la tabla de resultados
     table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
     table.add_column("Información", style="bold green")
     table.add_column("Valor", style="bold white")
@@ -109,6 +114,17 @@ def analyze_url(url):
     table.add_row("Servicios y versiones", service_versions if service_versions else "No disponible")
 
     console.print(table)
+
+    console.print("[bold green]Verificando enlaces internos...[/bold green]")
+    links = soup.find_all('a', href=True)
+    internal_links = set()
+    for link in links:
+        href = link['href']
+        if href.startswith('/') or domain in href:
+            internal_links.add(href)
+    console.print(f"[bold cyan]Enlaces internos encontrados:[/bold cyan] {len(internal_links)}")
+    for link in internal_links:
+        console.print(f"- {link}")
 
 def main():
     url = console.input("[bold green]Ingrese la URL: [/bold green]")
