@@ -167,7 +167,7 @@ threepoint	Randall Ransom	1994/04
 ticks	Victor Para
 "
 read -p 'Fuente: ' font
-echo "${font}" > font.txt
+echo "${font}" > banner_font.txt
 echo " "
 printf "${gris}[$verde2✔$gris]${blanco2} Su banner personalizado se ha configurado correctamente!"
 echo " "
