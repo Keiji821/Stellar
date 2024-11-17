@@ -37,6 +37,7 @@ echo $IP > ip_address.txt
 
 with open("ip_address.txt", "r") as f:
     ip = f.read().strip()
+    IpQuery = f.read().strip()
 
 def obtener_info_dispositivo(ip):
     try:
@@ -59,11 +60,6 @@ def obtener_puerto_remoto(ip):
     except socket.error:
         return 'Desconocido'
 
-while True:
-    IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]").strip()
-    if not IpQuery:
-        console.print("[bold red]Error: No se puede dejar la IP vacía. Intente de nuevo.[/bold red]")
-        continue
 
     with Progress(SpinnerColumn("dots")) as progress:
         task = progress.add_task("[red]Cargando...")
