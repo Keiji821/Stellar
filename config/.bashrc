@@ -19,11 +19,14 @@ cyan="\033[38;2;23;147;209m"
 
 # Personalizar input
 
+input="Stellar"
+
 function cd() {
   builtin cd "$@"
   local pwd_relative="${PWD/#$HOME}"
   pwd_relative=${pwd_relative#/}
-  PS1="""${morado}~ ${gris}(${verde}${pwd_relative}${gris}) ${verde}$ ${blanco2}"""
+  PS1="""╭────(${pwd_relative})────
+         ╰──(${input}── ${amarillo}~ ${verde} $ """
 }
 
 # Iniciar configuración
