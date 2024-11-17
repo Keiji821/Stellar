@@ -120,9 +120,11 @@ ui() {
  read -p 'Ingrese el contenido: ' banner
  echo "${banner}" > banner.txt
  echo
- printf "${gris}[$verde2✔$gris]${blanco} Su banner personalizado se ha configurado correctamente!"
+ printf "${gris}[$verde2✔$gris]${blanco2} Su banner personalizado se ha configurado correctamente!"
  echo
- printf "Escriba "reload" para aplicar los cambios."
+ echo
+ printf "${gris}[${verde}+${gris}] ${blanco2}Escriba ${amarillo}"${verde}reload${amarillo}" ${blanco2}para aplicar los cambios."
+ echo
  echo
  cd
 }
