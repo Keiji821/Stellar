@@ -57,36 +57,44 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 
 # Verificar paquetes pip no instalados
 
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+echo
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 sleep 1
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install beautifulsoup4
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install bs4
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install pyfiglet
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install phonenumbers
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install psutil
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install PySocks
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install requests
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install rich
 pip install "rich[jupyter]"
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 pip install lolcat
 echo
 clear
