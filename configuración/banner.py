@@ -56,14 +56,13 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Tu IP tor/cloudflared: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
 
 f = Figlet(font="standard")
-banner = f.renderText(text_banner)
+banner_text = f.renderText(text_banner)
 
-text = Text(banner)
-text.justify = "center"
+terminal_width = os.get_terminal_size().columns
 
-with console.capture() as capture:
-    console.print(text)
-centered_banner = capture.get()
+centered_banner = "\n".join(
+    line.center(terminal_width) for line in banner_text.splitlines()
+)
 
 process = subprocess.Popen(['lolcat', '-f'], stdin=subprocess.PIPE)
 process.communicate(input=centered_banner.encode())
