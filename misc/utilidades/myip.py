@@ -137,7 +137,6 @@ def obtener_puerto_remoto(ip):
 
             console.print(table)
             console.print(" ")
-            break
         except requests.exceptions.RequestException as e:
             console.print(f"[bold red]Error de red: {e}[/bold red]")
         except ValueError as e:
