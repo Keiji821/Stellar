@@ -99,14 +99,14 @@ ddos() {
 
 menu() {
   cd
-  cd Stellar/configuración
+  cd Stellar/config
   python menu.py
   cd
 }
 
 reload() {
   cd
-  cd Stellar/configuración
+  cd Stellar/config
   git pull --force
   clear
   python banner.py
@@ -115,7 +115,7 @@ reload() {
 
 ui() {
  cd
- cd Stellar/configuración
+ cd Stellar/config/themes
  printf "${verde}"
  read -p 'Ingrese el contenido: ' banner
  echo "${banner}" > banner.txt
