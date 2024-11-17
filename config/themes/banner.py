@@ -26,7 +26,7 @@ with open("banner.txt", "r") as f:
 with open("banner_font.txt", "r") as f:
     font = f.read().strip()
 
-f = Figlet(font=f"{font}")
+f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
 console.print(text)
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
@@ -57,7 +57,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
 [bold green]Tu IP tor/cloudflared: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
 
-f = Figlet(font="standard")
+f = Figlet(font=f"{font}")
 banner_text = f.renderText(text_banner)
 
 terminal_width = os.get_terminal_size().columns
