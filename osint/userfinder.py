@@ -6,34 +6,47 @@ from rich.table import Table
 from rich.panel import Panel
 from rich import box
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import time
+import random
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Accept-Encoding": "gzip, deflate, br",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "Cache-Control": "no-cache",
-    "Connection": "keep-alive",
-    "DNT": "1",  
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "Pragma": "no-cache",
-    "TE": "trailers"
-}
-MAX_WORKERS = 8
+HEADERS_LIST = [
+    {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+    },
+    {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36",
+        "Accept-Language": "es-ES,es;q=0.8",
+        "Accept-Encoding": "gzip, deflate, br",
+        "DNT": "1",
+        "Connection": "keep-alive",
+    },
+    {
+        "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0",
+        "Accept-Language": "fr-FR,fr;q=0.5",
+        "Cache-Control": "no-cache",
+        "Upgrade-Insecure-Requests": "1",
+        "TE": "trailers",
+    },
+    {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1",
+        "Accept-Language": "en-GB,en;q=0.9",
+        "DNT": "1",
+    },
+]
+MAX_WORKERS = 12
 console = Console()
 
 def get_soup(url):
+    headers = random.choice(HEADERS_LIST)
     try:
-        response = requests.get(url, headers=HEADERS, timeout=15)
+        response = requests.get(url, headers=headers, timeout=20)
         response.raise_for_status()
         return BeautifulSoup(response.text, 'html.parser')
     except requests.RequestException as e:
-        console.print(f"[bold red]Error fetching {url}[/]: {e}")
+        console.print(f"[bold red]Error al obtener {url}[/]: {e}")
         return None
 
 def search_youtube(name):
@@ -118,7 +131,11 @@ def search_person(name):
         ("StackOverflow", search_stackoverflow),
         ("Reddit", search_reddit),
         ("Wikipedia", search_wikipedia),
-        ("Twitter", search_twitter)
+        ("Twitter", search_twitter),
+        ("Instagram", search_instagram),
+        ("LinkedIn", search_linkedin),
+        ("Facebook", search_facebook),
+        ("TikTok", search_tiktok)
     ]
     results = []
     with Progress(
@@ -136,6 +153,54 @@ def search_person(name):
                 platform_results = future.result()
                 results.extend(platform_results)
                 progress.update(task, advance=1)
+    return results
+
+def search_instagram(name):
+    url = f"https://www.instagram.com/explore/tags/{name}/"
+    soup = get_soup(url)
+    results = []
+    if not soup:
+        return results
+    for result in soup.find_all('a', {'class': 'v1Nh3 kIKUG  _bz0w'}):
+        title = result.find('img')['alt']
+        post_url = f"https://www.instagram.com{result['href']}"
+        results.append({'platform': 'Instagram', 'title': title, 'url': post_url})
+    return results
+
+def search_linkedin(name):
+    url = f"https://www.linkedin.com/search/results/people/?keywords={name}"
+    soup = get_soup(url)
+    results = []
+    if not soup:
+        return results
+    for result in soup.find_all('div', {'class': 'search-result__info'}):
+        title = result.find('span', {'class': 'name'}).text.strip()
+        profile_url = f"https://www.linkedin.com{result.find('a')['href']}"
+        results.append({'platform': 'LinkedIn', 'title': title, 'url': profile_url})
+    return results
+
+def search_facebook(name):
+    url = f"https://www.facebook.com/public/{name}"
+    soup = get_soup(url)
+    results = []
+    if not soup:
+        return results
+    for result in soup.find_all('div', {'class': 'fsl fwb fcb'}):
+        title = result.find('a').text.strip()
+        profile_url = f"https://www.facebook.com{result.find('a')['href']}"
+        results.append({'platform': 'Facebook', 'title': title, 'url': profile_url})
+    return results
+
+def search_tiktok(name):
+    url = f"https://www.tiktok.com/search?q={name}"
+    soup = get_soup(url)
+    results = []
+    if not soup:
+        return results
+    for result in soup.find_all('div', {'class': 'tiktok-1hvpfc4-DivItem'}):
+        title = result.find('a', {'class': 'tiktok-1d7z6g9-AntA'}).text.strip()
+        video_url = f"https://www.tiktok.com{result.find('a')['href']}"
+        results.append({'platform': 'TikTok', 'title': title, 'url': video_url})
     return results
 
 def display_results(results):
@@ -159,9 +224,9 @@ def display_results(results):
     console.print(table)
 
 def main():
-    console.print(Panel("[bold blue]Buscador de Información sobre usuarios.[/bold blue]", border_style="green"))
+    console.print(Panel("[bold blue]Buscador de Información Extremo - Versión Mejorada[/bold blue]", border_style="green"))
     name = input("Ingresa el nombre o término a buscar: ")
-    console.print(f"[bold green]Buscando información para:[/bold green] {name}")
+    console.print(f"[bold green]Buscando información para:[/bold] {name}")
     results = search_person(name)
     display_results(results)
 
