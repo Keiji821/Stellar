@@ -100,8 +100,8 @@ while True:
             table.add_row("Idioma", str(data1.get("languages", "No disponible")))
             table.add_row("Área del país", str(data1.get("country_area", "No disponible")))
             table.add_row("Población del país", str(data1.get("country_population", "No disponible")))
-
-            table.add_row("[bold underline]Información del Dispositivo[/bold underline]", "")
+            table.add_row(" ", " ")
+            table.add_row("[bold underline]Información adicional[/bold underline]", "")
             table.add_row("User Agent", user_agent)
             table.add_row("Dispositivo", device)
             table.add_row("Sistema Operativo", operating_system)
