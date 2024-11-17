@@ -56,7 +56,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
 [bold green]Tu IP tor/cloudflared: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
-
+console.print(" ")
 f = Figlet(font=f"{font}")
 banner_text = f.renderText(text_banner)
 
@@ -68,9 +68,9 @@ centered_banner = "\n".join(
 
 process = subprocess.Popen(['lolcat', '-f', '--animate', '--speed=30'], stdin=subprocess.PIPE)
 process.communicate(input=centered_banner.encode())
-
+console.print(" ")
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
-
+console.print(" ")
 console.print("""
 [code][bold green]
 Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
