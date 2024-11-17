@@ -57,7 +57,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 f = Figlet(font="standard")
 banner = f.renderText(text_banner)
 
-print(subprocess.check_output(["lolcat"], input=banner.encode()))
+console.print(subprocess.check_output(["lolcat"], input=banner.encode()), justif="center")
 
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
 
