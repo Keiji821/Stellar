@@ -26,6 +26,493 @@ printf "${verde} Elija la fuente para su banner"
 echo " "
 printf "${amarillo}
 
+1. 1row
+
+
+2. 3-d
+
+
+3. 3x5
+
+
+4. 5lineoblique
+
+
+5. acrobatic
+
+
+6. alligator
+
+
+7. alligator2
+
+
+8. alphabet
+
+
+9. avatar
+
+
+10. banner
+
+
+11. banner3-D
+
+
+12. banner3
+
+
+13. banner4
+
+
+14. barbwire
+
+
+15. basic
+
+
+16. bell
+
+
+17. big
+
+
+18. bigchief
+
+
+19. binary
+
+
+20. block
+
+
+21. bubble
+
+
+22. bulbhead
+
+
+23. calgphy2
+
+
+24. caligraphy
+
+
+25. catwalk
+
+
+26. chunky
+
+
+27. coinstak
+
+
+28. colossal
+
+
+29. computer
+
+
+30. contessa
+
+
+31. contrast
+
+
+32. cosmic
+
+
+33. cosmike
+
+
+34. crawford
+
+
+35. crazy
+
+
+36. cricket
+
+
+37. cursive
+
+
+38. cyberlarge
+
+
+39. cybermedium
+
+
+40. cybersmall
+
+
+41. diamond
+
+
+42. digital
+
+
+43. doh
+
+
+44. doom
+
+
+45. dotmatrix
+
+
+46. drpepper
+
+
+47. eftichess
+
+
+48. eftifont
+
+
+49. eftipiti
+
+
+50. eftirobot
+
+
+51. eftitalic
+
+
+52. eftiwall
+
+
+53. eftiwater
+
+
+54. epic
+
+
+55. fender
+
+
+56. fourtops
+
+
+57. fraktur
+
+
+58. funface
+
+
+59. funfaces
+
+
+60. fuzzy
+
+
+61. georgi16
+
+
+62. ghost
+
+
+63. ghoulish
+
+
+64. glenyn
+
+
+65. goofy
+
+
+66. gothic
+
+
+67. graffiti
+
+
+68. hex
+
+
+69. hollywood
+
+
+70. invita
+
+
+71. isometric1
+
+
+72. isometric2
+
+
+73. isometric3
+
+
+74. isometric4
+
+
+75. italic
+
+
+76. ivrit
+
+
+77. jazmine
+
+
+78. jerusalem
+
+
+79. katakana
+
+
+80. kban
+
+
+81. lcd
+
+
+82. lean
+
+
+83. letters
+
+
+84. linux
+
+
+85. lockergnome
+
+
+86. madrid
+
+
+87. marquee
+
+
+88. maxfour
+
+
+89. merlin1
+
+
+90. merlin2
+
+
+91. mike
+
+
+92. mini
+
+
+93. mirror
+
+
+94. mnemonic
+
+
+95. morse
+
+
+96. moscow
+
+
+97. nipples
+
+
+98. ntgreek
+
+
+99. o8
+
+
+100. octal
+
+
+101. ogre
+
+
+102. pawp
+
+
+103. pebbles
+
+
+104. pepper
+
+
+105. poison
+
+
+106. puffy
+
+
+107. pyramid
+
+
+108. rectangles
+
+
+109. relief
+
+
+110. relief2
+
+
+111. rev
+
+
+112. roman
+
+
+113. rot13
+
+
+114. rounded
+
+
+115. rowancap
+
+
+116. rozzo
+
+
+117. runic
+
+
+118. runyc
+
+
+119. sblood
+
+
+120. script
+
+
+121. serifcap
+
+
+122. shadow
+
+
+123. shimrod
+
+
+124. short
+
+
+125. slant
+
+
+126. slide
+
+
+127. slscript
+
+
+128. small
+
+
+129. smisome1
+
+
+130. smkeyboard
+
+
+131. smscript
+
+
+132. smshadow
+
+
+133. smslant
+
+
+134. smtengwar
+
+
+135. soft
+
+
+136. speed
+
+
+137. spliff
+
+
+138. stacey
+
+
+139. stampatello
+
+
+140. standard
+
+
+141. starstrips
+
+
+142. starwars
+
+
+143. stellar
+
+
+144. stforek
+
+
+145. stop
+
+
+146. straight
+
+
+147. striped
+
+
+148. sub-zero
+
+
+149. swampland
+
+
+150. swan
+
+
+151. sweet
+
+
+152. threepoint
+
+
+153. ticks
+
+
+154. ticksslant
+
+
+155. tinker-toy
+
+
+156. tombstone
+
+
+157. trek
+
+
+158. tsalagi
+
+
+159. twopoint
+
+
+160. univers
+
+
+161. usaflag
+
+
+162. wavy
+
+
+163. weird
 
 "
 echo " "
