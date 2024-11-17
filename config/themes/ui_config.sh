@@ -520,6 +520,12 @@ printf "${verde}"
 read -p 'Fuente: ' font
 echo "${font}" > banner_font.txt
 echo " "
+printf "${verde} Configure el texto de la input"
+echo " "
+printf "${verde}"
+read -p 'Ingrese el contenido: ' input
+echo "${input}" > input.txt
+echo " "
 printf "${gris}[$verde2✔$gris]${blanco2} Su banner personalizado se ha configurado correctamente!"
 echo " "
 echo " "
