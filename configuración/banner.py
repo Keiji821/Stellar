@@ -5,6 +5,7 @@ import platform
 import random
 import time
 import requests
+import subprocess
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
@@ -56,8 +57,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 f = Figlet(font="standard")
 banner = f.renderText(text_banner)
 
-console.print(f"{banner}", justify="center", style=f"bold {colores}")
-
+console.print(subprocess.check_output(["lolcat"], input=banner.encode()), justify="center")
 
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
 
