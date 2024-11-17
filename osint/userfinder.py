@@ -224,9 +224,9 @@ def display_results(results):
     console.print(table)
 
 def main():
-    console.print(Panel("[bold blue]Buscador de Información Extremo - Versión Mejorada[/bold blue]", border_style="green"))
+    console.print(Panel("[bold blue]Buscador de Información de usuarios.[/bold blue]", border_style="green"))
     name = input("Ingresa el nombre o término a buscar: ")
-    console.print(f"[bold green]Buscando información para:[/bold] {name}")
+    console.print(f"[bold green]Buscando información para:[/bold green] {name}")
     results = search_person(name)
     display_results(results)
 
