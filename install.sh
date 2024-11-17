@@ -78,46 +78,46 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
 # Instalar dependencias python necesarias
 
 echo
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 sleep 1
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install beautifulsoup4
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install bs4
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install pyfiglet
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install phonenumbers
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install psutil
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install PySocks
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install requests
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 echo
 pip install rich
 pip install "rich[jupyter]"
 clear
-printf "$gris[$verde2+$gris]${blanco} Instalando paquetes python...$SECONDS\n"
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 pip install lolcat
 echo
 clear
-printf "$gris[$verde2✔$gris]${blanco} Instalación completada.\n"
+printf "${gris}[${verde}✔${gris}]${blanco} Instalación completada.\n"
 sleep 5
 bash
