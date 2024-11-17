@@ -56,9 +56,9 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Tu IP tor/cloudflared: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
 
 f = Figlet(font="standard")
-banner_text = f.renderText("text_banner")
+banner = f.renderText(text_banner)
 
-text = Text(banner_text)
+text = Text(banner)
 text.justify = "center"
 
 with console.capture() as capture:
