@@ -241,6 +241,9 @@ craneo2 = """
 ⠀⣼⣿⣿⣿⡏⠰⠈⠀⠁⠀⠄⠀⠙⠻⠏⣿⣿⠟⠁⣿⣿⣿⣿⣡⣾⣿⢿⣿⣿⣿⣿⣿⠿⠶⠶⢀⣤⠀⠀⢀⡀⡄⢠⠀⠐⠀⠠⠠⡤⠂⠀⠄⠀⠂⠀⠀⠔⠢⠢⠧⡔⠔⠿⠄
 """
 
+with open("banner.txt", "r") as f:
+    Pbanner = f.read().strip()
+
 banners = random.choice([craneo1, craneo2, chica1, chica2, chica3, chica4, chica5])
 
 f = Figlet(font="cosmic")
