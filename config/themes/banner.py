@@ -66,7 +66,7 @@ centered_banner = "\n".join(
     line.center(terminal_width) for line in banner_text.splitlines()
 )
 
-process = subprocess.Popen(['lolcat', '-f', '--animate', '-8', '--speed=1'], stdin=subprocess.PIPE)
+process = subprocess.Popen(['lolcat', '-f', '--animate', '-8', '--speed=10'], stdin=subprocess.PIPE)
 process.communicate(input=centered_banner.encode())
 
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
