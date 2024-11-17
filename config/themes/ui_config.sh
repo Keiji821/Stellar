@@ -520,7 +520,7 @@ printf "${verde}"
 read -p 'Fuente: ' font
 echo "${font}" > banner_font.txt
 echo " "
-printf "${verde} Configure el texto de la input"
+printf "${verde}Configure el texto de la input"
 echo " "
 printf "${verde}"
 read -p 'Ingrese el contenido: ' input
