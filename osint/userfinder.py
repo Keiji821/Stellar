@@ -161,7 +161,7 @@ def display_results(results):
 def main():
     console.print(Panel("[bold blue]Buscador de Información sobre usuarios.[/bold blue]", border_style="green"))
     name = input("Ingresa el nombre o término a buscar: ")
-    console.print(f"[bold green]Buscando información para:[/bold] {name}")
+    console.print(f"[bold green]Buscando información para:[/bold green] {name}")
     results = search_person(name)
     display_results(results)
 
