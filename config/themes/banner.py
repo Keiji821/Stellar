@@ -69,8 +69,8 @@ centered_banner = "\n".join(
 process = subprocess.Popen(['lolcat', '-f', '--animate', '--speed=30'], stdin=subprocess.PIPE)
 process.communicate(input=centered_banner.encode())
 console.print(" ")
-console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
-console.print(" ")
+console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="center")
+
 console.print("""
 [code][bold green]
 Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
