@@ -10,6 +10,7 @@ from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
+from rich.text import Text
 
 console = Console()
 
@@ -55,10 +56,17 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Tu IP tor/cloudflared: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
 
 f = Figlet(font="standard")
-banner = f.renderText(text_banner)
+banner_text = f.renderText("text_banner")
+
+text = Text(banner_text)
+text.justify = "center"
+
+with console.capture() as capture:
+    console.print(text)
+centered_banner = capture.get()
 
 process = subprocess.Popen(['lolcat', '-f'], stdin=subprocess.PIPE)
-process.communicate(input=banner.encode())
+process.communicate(input=centered_banner.encode())
 
 console.print("[bold red]Stellar V1.0.0[/bold red]", justify="center")
 
