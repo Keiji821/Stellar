@@ -23,8 +23,10 @@ system_info = platform.machine() + " - " + platform.processor()
 
 with open("banner.txt", "r") as f:
     text_banner = f.read().strip()
+with open("banner_font.txt", "r") as f:
+    font = f.read().strip()
 
-f = Figlet(font="cosmic")
+f = Figlet(font=f"{font}")
 text = f.renderText("Stellar")
 console.print(text)
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
