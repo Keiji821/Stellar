@@ -19,7 +19,9 @@ cyan="\033[38;2;23;147;209m"
 
 # Personalizar input
 
-input="Linux"
+cd Stellar/config/themes
+input=$(cat input.txt)
+cd
 
 function cd() {
   builtin cd "$@"
