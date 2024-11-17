@@ -79,6 +79,13 @@ emailsearch() {
  cd
 }
 
+userfinder() {
+ cd
+ cd Stellar/osint
+ python userfinder.py
+ cd
+}
+
 # Pentesting
 
 ddos() {
