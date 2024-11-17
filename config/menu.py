@@ -12,7 +12,7 @@ categories = [
         {"name": "reload", "description": "Esto recargará el banner y actualizará Stellar."},
         {"name": "clear", "description": "Esto limpiará la pantalla de su terminal."},
         {"name": "bash", "description": "Esto reiniciará su terminal."},
-        {"name": "ui", "description": "Te permite personalizar el banner y la fuente del banner."}
+        {"name": "ui", "description": "Te permite personalizar el banner y la fuente del banner asi como el texto de la input."}
     ]},
     {"title": "UTILIDADES", "commands": [
         {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante una API gratis."},
