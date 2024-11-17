@@ -2,8 +2,30 @@ import requests
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
+import socket
 
 console = Console()
+
+def obtener_info_dispositivo(ip):
+    try:
+        response = requests.get(f'https://ipapi.co/{ip}/json/')
+        if response.status_code == 200:
+            data = response.json()
+            user_agent = data.get('user_agent', 'Desconocido')
+            device = data.get('device', 'Desconocido')
+            operating_system = data.get('os', 'Desconocido')
+            return user_agent, device, operating_system
+        return 'Desconocido', 'Desconocido', 'Desconocido'
+    except requests.exceptions.RequestException:
+        return 'Error al obtener', 'Desconocido', 'Desconocido'
+
+def obtener_puerto_remoto(ip):
+    try:
+        sock = socket.create_connection((ip, 80), timeout=5)
+        sock.close()
+        return 80
+    except socket.error:
+        return 'Desconocido'
 
 while True:
     IpQuery = console.input("[bold green]Ingrese la IP: [/bold green]").strip()
@@ -24,7 +46,10 @@ while True:
             response2.raise_for_status()
             data2 = response2.json()
             progress.update(task, advance=50)
-            
+
+            user_agent, device, operating_system = obtener_info_dispositivo(IpQuery)
+            puerto_remoto = obtener_puerto_remoto(IpQuery)
+
             console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
             table.add_column("Información", style="green", no_wrap=False)
@@ -75,6 +100,12 @@ while True:
             table.add_row("Idioma", str(data1.get("languages", "No disponible")))
             table.add_row("Área del país", str(data1.get("country_area", "No disponible")))
             table.add_row("Población del país", str(data1.get("country_population", "No disponible")))
+
+            table.add_row("[bold underline]Información del Dispositivo[/bold underline]", "")
+            table.add_row("User Agent", user_agent)
+            table.add_row("Dispositivo", device)
+            table.add_row("Sistema Operativo", operating_system)
+            table.add_row("Puerto Remoto", str(puerto_remoto))
 
             console.print(table)
             console.print(" ")
