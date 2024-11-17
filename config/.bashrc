@@ -37,7 +37,7 @@ python Stellar/config/run.py
 # Mostrar banner al final
 
 cd
-cd Stellar/config
+cd Stellar/config/themes
 clear
 python banner.py
 cd
