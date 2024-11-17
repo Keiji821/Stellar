@@ -15,7 +15,7 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
     "Cache-Control": "no-cache",
     "Connection": "keep-alive",
-    "DNT": "1",  # Do Not Track Request Header
+    "DNT": "1",  
     "Upgrade-Insecure-Requests": "1",
     "Sec-Fetch-Dest": "document",
     "Sec-Fetch-Mode": "navigate",
