@@ -98,7 +98,6 @@ def analyze_url(url):
         server_info = response.headers.get('Server', 'No disponible')
         open_ports, os_info, service_versions = obtener_info_nmap(ip_address) if ip_address != "No disponible" else ("No disponible", "", "")
 
-    # Crear la tabla de resultados
     table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
     table.add_column("Información", style="bold green")
     table.add_column("Valor", style="bold white")
