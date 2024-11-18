@@ -25,8 +25,8 @@ function cd() {
   builtin cd "$@"
   local pwd_relative="${PWD/#$HOME}"
   pwd_relative=${pwd_relative#/}
-  PS1="${gris}╭────────${azul_agua}(${morado}${pwd_relative}${azul_agua})${gris}
-${gris}╰──${azul_agua}[${verde}${input}${azul_agua}]${gris}── ${amarillo}~${verde} $ ${blanco2}"
+  printf "${gris}╭────────${azul_agua}(${morado}${pwd_relative}${azul_agua})${gris}"
+  PS1="${gris}╰──${azul_agua}[${verde}${input}${azul_agua}]${gris}── ${amarillo}~${verde} $ ${blanco2}"
 }
 
 # Iniciar configuración
