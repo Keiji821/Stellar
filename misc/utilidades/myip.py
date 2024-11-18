@@ -1,15 +1,12 @@
 import requests
 import os
-from os import system
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
-import socket
 
 console = Console()
 
-while True:
-    os.system("""
+os.system("""
 IP=$(
   (command -v dig &> /dev/null &&
     (dig +short @ident.me ||
@@ -34,12 +31,11 @@ IP=$(
 )
 echo $IP > ip_address.txt""")
 
-    with open("ip_address.txt", "r") as f:
-        IpQuery = f.read().strip()
-    if not IpQuery:
-        console.print("[bold red]Error[/bold red]")
-        continue
-
+with open("ip_address.txt", "r") as f:
+    IpQuery = f.read().strip()
+if not IpQuery:
+    console.print("[bold red]Error[/bold red]")
+else:
     with Progress(SpinnerColumn("dots")) as progress:
         task = progress.add_task("[red]Cargando...")
         try:
@@ -53,9 +49,6 @@ echo $IP > ip_address.txt""")
             response2.raise_for_status()
             data2 = response2.json()
             progress.update(task, advance=50)
-
-            user_agent, device, operating_system = obtener_info_dispositivo(IpQuery)
-            puerto_remoto = obtener_puerto_remoto(IpQuery)
 
             console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold red")
@@ -110,7 +103,6 @@ echo $IP > ip_address.txt""")
 
             console.print(table)
             console.print(" ")
-            break
         except requests.exceptions.RequestException as e:
             console.print(f"[bold red]Error de red: {e}[/bold red]")
         except ValueError as e:
