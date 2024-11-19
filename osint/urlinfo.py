@@ -98,6 +98,17 @@ def analyze_url(url):
         server_info = response.headers.get('Server', 'No disponible')
         open_ports, os_info, service_versions = obtener_info_nmap(ip_address) if ip_address != "No disponible" else ("No disponible", "", "")
 
+    console.print("[bold green]Verificando enlaces internos...[/bold green]")
+    links = soup.find_all('a', href=True)
+    internal_links = set()
+    for link in links:
+        href = link['href']
+        if href.startswith('/') or domain in href:
+            internal_links.add(href)
+    console.print(f"[bold cyan]Enlaces internos encontrados:[/bold cyan] {len(internal_links)}")
+    for link in internal_links:
+        console.print(f"- {link}")
+
     table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
     table.add_column("Información", style="bold green")
     table.add_column("Valor", style="bold white")
@@ -111,19 +122,10 @@ def analyze_url(url):
     table.add_row("Puertos abiertos", open_ports)
     table.add_row("Sistema operativo", os_info if os_info else "No disponible")
     table.add_row("Servicios y versiones", service_versions if service_versions else "No disponible")
+    table.add_row(" ", " ")
+    table.add_row(f"- {link}")
 
     console.print(table)
-
-    console.print("[bold green]Verificando enlaces internos...[/bold green]")
-    links = soup.find_all('a', href=True)
-    internal_links = set()
-    for link in links:
-        href = link['href']
-        if href.startswith('/') or domain in href:
-            internal_links.add(href)
-    console.print(f"[bold cyan]Enlaces internos encontrados:[/bold cyan] {len(internal_links)}")
-    for link in internal_links:
-        console.print(f"- {link}")
 
 def main():
     url = console.input("[bold green]Ingrese la URL: [/bold green]")
