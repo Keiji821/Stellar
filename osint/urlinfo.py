@@ -110,7 +110,7 @@ def analyze_url(url):
         console.print(f"- {link}")
 
     table = Table(title="Información del sitio web", title_justify="center", title_style="bold red")
-    table.add_column("Información", style="bold green")
+    table.add_column("Información", style="green", no_wrap=False)
     table.add_column("Valor", style="bold white")
 
     table.add_row("URL", url)
