@@ -51,7 +51,7 @@ else:
             progress.update(task, advance=50)
 
             console.print(" ")
-            table = Table(title="Tú IP real", title_justify="center", title_style="bold red")
+            table = Table(title="Tú IP real", title_justify="center", title_style="bold green")
             table.add_column("Información", style="green", no_wrap=False)
             table.add_column("Valor", style="white")
 
