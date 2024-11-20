@@ -126,21 +126,21 @@ ui() {
 
 ia() {
  cd
- cd Stellar/misc/utilidades
+ cd Stellar/misc/tools
  python iahttp.py
  cd
 }
 
 traductor() {
  cd
- cd Stellar/misc/utilidades
+ cd Stellar/misc/tools
  python traductor.py
  cd
 }
 
 myip() {
  cd
- cd Stellar/misc/utilidades
+ cd Stellar/misc/tools
  python myip.py
  cd
 }
