@@ -44,46 +44,46 @@ clear
 python banner.py
 cd
 
-# Osint
+# Osint - main
 
 ipinfo() {
   cd
-  cd Stellar/osint
+  cd Stellar/osint/main
   python ipinfo.py
   cd
 }
 
 phoneinfo() {
   cd
-  cd Stellar/osint
+  cd Stellar/osint/main
   python phoneinfo.py
   cd
 }
 
 urlinfo() {
   cd
-  cd Stellar/osint
+  cd Stellar/osint/main
   python urlinfo.py
   cd
 }
 
 metadatainfo() {
   cd
-  cd Stellar/osint
+  cd Stellar/osint/main
   bash metadatainfo.sh
   cd
 }
 
 emailsearch() {
  cd
- cd Stellar/osint
+ cd Stellar/osint/main
  python emailfinder.py
  cd
 }
 
 userfinder() {
  cd
- cd Stellar/osint
+ cd Stellar/osint/main
  python userfinder.py
  cd
 }
