@@ -11,7 +11,6 @@ commands = [
     "sleep 10",
     "bash Stellar/update.sh &>/dev/null &",
     "cd Stellar && git pull --force &>/dev/null &",
-    "cp ~/Stellar/config/.bash_profile ~/."
 ]
 
 with Progress(
