@@ -88,7 +88,7 @@ userfinder() {
  cd
 }
 
-# Osing - Discod
+# Osint - Discod
 
 userinfo() {
  cd
