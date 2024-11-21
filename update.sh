@@ -96,8 +96,5 @@ pip install "rich[jupyter]"
 clear
 printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
 pip install lolcat
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-pip install httpx
 echo
 clear
