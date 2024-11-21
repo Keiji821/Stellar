@@ -1,4 +1,4 @@
-import httpx
+import requests
 from bs4 import BeautifulSoup
 
 def lookup_discord_user(user_id):
@@ -9,17 +9,18 @@ def lookup_discord_user(user_id):
         "Accept-Language": "en-US,en;q=0.9",
     }
 
+    proxies = {
+        "http": "socks5h://localhost:9050",
+        "https": "socks5h://localhost:9050"
+    }
+
     try:
-        with httpx.Client(headers=headers, follow_redirects=True) as client:
-            response = client.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
-            return soup
-    except httpx.RequestError as e:
+        response = requests.get(url, headers=headers, proxies=proxies)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "html.parser")
+        return soup
+    except requests.RequestException as e:
         print(f"Error al realizar la solicitud: {e}")
-        return None
-    except httpx.HTTPStatusError as e:
-        print(f"Error de estado HTTP: {e}")
         return None
 
 def print_user_info(soup):
