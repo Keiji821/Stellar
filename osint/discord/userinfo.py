@@ -1,6 +1,7 @@
 import discord
 
-client = discord.Client()
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
 
 token = input("Ingresa un token de un bot: ")
 
