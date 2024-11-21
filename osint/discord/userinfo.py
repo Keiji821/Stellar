@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+from rich.console import Console
+
+console = Console()
 
 def lookup_discord_user(user_id):
     url = f"https://discordlookup.com/user/{user_id}"
@@ -20,7 +23,7 @@ def lookup_discord_user(user_id):
         soup = BeautifulSoup(response.text, "html.parser")
         return soup
     except requests.RequestException as e:
-        print(f"Error al realizar la solicitud: {e}")
+        console.print(f"Error al realizar la solicitud: {e}", style="red")
         return None
 
 def print_user_info(soup):
@@ -31,11 +34,11 @@ def print_user_info(soup):
     user_info['status'] = soup.find('div', {'class': 'status'}).text.strip()
     user_info['joined_at'] = soup.find('div', {'class': 'joined-at'}).text.strip()
 
-    print("Username:", user_info['username'])
-    print("Discriminator:", user_info['discriminator'])
-    print("Avatar:", user_info['avatar'])
-    print("Status:", user_info['status'])
-    print("Joined at:", user_info['joined_at'])
+    console.print("Username:", user_info['username'], style="green")
+    console.print("Discriminator:", user_info['discriminator'], style="green")
+    console.print("Avatar:", user_info['avatar'], style="green")
+    console.print("Status:", user_info['status'], style="green")
+    console.print("Joined at:", user_info['joined_at'], style="green")
 
 user_id = input("Ingrese el ID: ")
 html_data = lookup_discord_user(user_id)
