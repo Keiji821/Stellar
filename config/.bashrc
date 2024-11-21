@@ -88,6 +88,15 @@ userfinder() {
  cd
 }
 
+# Osing - Discod
+
+userinfo() {
+ cd
+ cd Stellar/osint/discord
+ python userinfo.py
+ cd
+}
+
 # Pentesting
 
 ddos() {
