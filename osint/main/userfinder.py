@@ -55,10 +55,10 @@ def check_username(username):
     console.print(table)
 
 if __name__ == "__main__":
-    console.print("[bold cyan]Herramienta OSINT: Búsqueda de Nombre de Usuario[/bold cyan]")
     username = console.input("[bold green]Introduce el nombre de usuario: [/bold green]")
     start_time = time()
     check_username(username)
     end_time = time()
     elapsed_time = end_time - start_time
     console.print(f"[bold yellow]Tiempo total de ejecución:[/bold yellow] {elapsed_time:.2f} segundos")
+    console.print(" ")
