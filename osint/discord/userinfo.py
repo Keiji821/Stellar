@@ -26,12 +26,12 @@ async def on_ready():
         table.add_column("Información", style="green", no_wrap=False)
         table.add_column("Valor", style="white")
 
-        table.add_row("Nombre", user.name)
-        table.add_row("Discriminador", user.discriminator)
-        table.add_row("ID", user.id)
-        table.add_row("Avatar URL", {user.avatar})
+        table.add_row("Nombre", f"{user.name}")
+        table.add_row("Discriminador", f"{user.discriminator}")
+        table.add_row("ID", f"{user.id}")
+        table.add_row("Avatar URL", f"{user.avatar}")
         table.add_row("Bot", f"{'Sí' if user.bot else 'No'}")
-        table.add_row("Cuenta creada el", user.created_at)
+        table.add_row("Cuenta creada el", f"{user.created_at}")
         console.print(table)
         console.print(" ")
     else:
