@@ -27,7 +27,7 @@ async def on_ready():
         table.add_column("Valor", style="white")
 
         table.add_row("Nombre", user.name)
-        table.add_row("Discriminador", {user.discriminator})
+        table.add_row("Discriminador", user.discriminator)
         table.add_row("ID", user.id)
         table.add_row("Avatar URL", {user.avatar})
         table.add_row("Bot", f"{'Sí' if user.bot else 'No'}")
