@@ -1,5 +1,6 @@
 import discord
 from rich.console import Console
+from rich.table import Table
 from discord.ext import commands
 
 console = Console()
@@ -18,13 +19,21 @@ async def on_ready():
     
     user = await bot.fetch_user(USER_ID)
     if user:
-        console.print("[bold red]Información del Usuario:[/bold red]")
-        console.print(f"[bold green]Nombre: {user.name}[/bold green]")
-        console.print(f"[bold green]Discriminador: {user.discriminator}[/bold green]")
-        console.print(f"[bold green]ID: {user.id}[/bold green]")
-        console.print(f"[bold green]Avatar URL: {user.avatar}[/bold green]")
-        console.print(f"Bot: {'Sí' if user.bot else 'No'}")
-        console.print(f"[bold green]Cuenta creada el: {user.created_at}[/bold green]")
+        console.print(" ")
+        table = Table(title="Datos del ID", title_justify="center", title_style="bold red")
+        table.add_column("Información", style="green", no_wrap=False)
+        table.add_column("Valor", style="white")
+
+        table.add_row("[bold red]Información del Usuario:[/bold red]")
+        table.add_row(f"[bold green]Nombre: {user.name}[/bold green]")
+        table.add_row(f"[bold green]Discriminador: {user.discriminator}[/bold green]")
+        table.add_row(f"[bold green]ID: {user.id}[/bold green]")
+        table.add_row(f"[bold green]Avatar URL: {user.avatar}[/bold green]")
+        table.add_row(f"Bot: {'Sí' if user.bot else 'No'}")
+        table.add_row(f"[bold green]Cuenta creada el: {user.created_at}[/bold green]")
+        console.print(table)
+        console.print(" ")
+
     else:
         console.print(f"[bold green]No se pudo encontrar información para el ID: {USER_ID}[/bold green]")
     
