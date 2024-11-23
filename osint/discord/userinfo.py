@@ -2,6 +2,8 @@ import discord
 from rich.console import Console
 from discord.ext import commands
 
+console = Console()
+
 TOKEN = console.input("[bold green]El token de tu bot: [/bold green]")
 USER_ID = console.input("[bold green]ID: [/bold green]")
 
