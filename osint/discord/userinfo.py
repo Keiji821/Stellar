@@ -15,6 +15,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
+    console.print(" ")
     console.print(f"[bold green]Bot conectado como {bot.user}[bold green]")
     
     user = await bot.fetch_user(USER_ID)
@@ -25,12 +26,12 @@ async def on_ready():
         table.add_column("Valor", style="white")
 
         table.add_row("[bold red]Información del Usuario:[/bold red]")
-        table.add_row(f"[bold green]Nombre: {user.name}[/bold green]")
-        table.add_row(f"[bold green]Discriminador: {user.discriminator}[/bold green]")
-        table.add_row(f"[bold green]ID: {user.id}[/bold green]")
-        table.add_row(f"[bold green]Avatar URL: {user.avatar}[/bold green]")
-        table.add_row(f"Bot: {'Sí' if user.bot else 'No'}")
-        table.add_row(f"[bold green]Cuenta creada el: {user.created_at}[/bold green]")
+        table.add_row("Nombre", {user.name})
+        table.add_row("Discriminador", {user.discriminator})
+        table.add_row("ID", {user.id})
+        table.add_row("Avatar URL", {user.avatar})
+        table.add_row("Bot", {'Sí' if user.bot else 'No'})
+        table.add_row("Cuenta creada el", {user.created_at})
         console.print(table)
         console.print(" ")
 
