@@ -25,6 +25,9 @@ categories = [
         {"name": "metadatainfo", "description": "Recupera los metadatos de una imagen, archivo o video."},
         {"name": "emailsearch", "description": "Busca correos electrónicos con el nombre y apellido proporcionados."},
         {"name": "userfinder", "description": "Verifica si existe el usuario y obtiene información sobre el nombre de usuario proporcionado."}
+    ]},
+    {"title": "OSINT/Discord", "commands": [
+        {"name": "userinfo", "description": "Obtiene información sobre el ID ingresado."},
     ]}
 ]
 
