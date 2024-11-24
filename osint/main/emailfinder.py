@@ -53,8 +53,8 @@ def buscar_correos(url, consulta, filtro_dominios=None):
     return emails_encontrados
 
 def email_finder():
-    nombre = input("Ingrese el nombre: ").strip()
-    apellido = input("Ingrese el apellido: ").strip()
+    nombre = console.input("[bold green]Ingrese el nombre: [/bold green]").strip()
+    apellido = console.input("[bold green]Ingrese el apellido: [/bold green]").strip()
     consulta = f"{nombre} {apellido}".strip()
 
     urls = [
