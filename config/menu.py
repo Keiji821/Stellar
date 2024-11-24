@@ -31,7 +31,7 @@ categories = [
     ]}
 ]
 
-colors = ["green", "blue", "red"]
+colors = ["green"]
 
 for i, category in enumerate(categories):
     color = colors[i % len(colors)]
