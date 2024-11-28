@@ -98,3 +98,7 @@ printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS
 pip install lolcat
 echo
 clear
+printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
+pip install discord
+echo
+clear
