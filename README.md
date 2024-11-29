@@ -111,7 +111,7 @@ apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd St
 |----------|----------|
 | En desarrollo|      |    
 
-Seguridad
+**Seguridad**
 La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
 
 </details>
