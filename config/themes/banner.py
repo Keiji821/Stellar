@@ -24,11 +24,7 @@ system_info = platform.machine() + " - " + platform.processor()
 with open("banner.txt", "r") as f:
     text_banner = f.read().strip()
 with open("banner_font.txt", "r") as f:
-    font = None
-    if font is not None:
-        font = f.read().strip()
-        if font is None:
-            font = "standard"
+    font = f.read().strip()
 
 f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
