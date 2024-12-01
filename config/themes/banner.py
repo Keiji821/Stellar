@@ -25,6 +25,8 @@ with open("banner.txt", "r") as f:
     text_banner = f.read().strip()
 with open("banner_font.txt", "r") as f:
     font = f.read().strip()
+    if:
+        font = "standard"
 
 f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
