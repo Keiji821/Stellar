@@ -22,7 +22,7 @@ cyan="\033[38;2;23;147;209m"
 printf "${verde}"
 read -p 'Ingrese el contenido: ' banner
 echo "${banner}" > banner.txt
-printf "${verde} Elija la fuente para su banner"
+printf "${verde}Elija la fuente para su banner"
 echo " "
 printf "${amarillo}
 
