@@ -20,7 +20,6 @@ cyan="\033[38;2;23;147;209m"
 # ui_config.sh
 
 printf "${verde}"
-sleep 10
 read -p "Ingrese el contenido:
 
 " banner
