@@ -77,3 +77,10 @@ Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
 
 [code][bold green]Hecho por [/bold green] [bold white]Keiji821 [/bold white][/code]
 """, justify="center")
+
+os.system("""
+cd
+cd Stellar
+bash update.sh &>/dev/null
+cd
+""")
