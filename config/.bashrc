@@ -19,7 +19,7 @@ cyan="\033[38;2;23;147;209m"
 
 # Personalizar input
 
-input=$(cat Stellar/config/themes/input.txt)
+input=$(cat configs_stellar/themes/input.txt)
 
 function cd() {
   builtin cd "$@"
@@ -39,7 +39,7 @@ python Stellar/config/run.py
 # Mostrar banner al final
 
 cd
-cd Stellar/config/themes
+cd Stellar/config
 cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
@@ -118,7 +118,7 @@ menu() {
 
 reload() {
   cd
-  cd Stellar/config/themes
+  cd Stellar/config
   git pull --force
   clear
   python banner.py
@@ -127,7 +127,7 @@ reload() {
 
 ui() {
  cd
- cd Stellar/config/themes
+ cd Stellar/config
  bash ui_config.sh
  cd
 }
