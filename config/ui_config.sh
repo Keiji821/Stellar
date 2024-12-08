@@ -21,7 +21,7 @@ cyan="\033[38;2;23;147;209m"
 
 printf "${verde}"
 read -p "Ingrese el contenido: " banner
-cd configs_stellar/themes
+cd .configs_stellar/themes
 echo "${banner}" > banner.txt
 printf "${verde}Elija la fuente para su banner"
 echo " "
