@@ -41,7 +41,7 @@ bash install.sh
 </pre>
 
 <pre>
-pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
+pkg upgrade -y && pkg update -y && pkg install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
 </pre>
 
 </pre>
@@ -70,7 +70,7 @@ bash install.sh
 </pre>
 
 <pre>
-apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
+apt-get upgrade -y && apt-get update -y && apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
 </pre>
 
 </pre>
