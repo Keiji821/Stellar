@@ -24,6 +24,18 @@ clear
 cp ~/Stellar/config/.bash_profile ~/.
 cp ~/Stellar/config/.bashrc ~/.
 
+# Configurar archivos necesarios
+
+cd
+mkdir configs_stellar
+cd configs_stellar
+mkdir themes
+cd themes
+echo Stellar > banner.txt
+echo standard > banner_font.txt
+echo Stellar > input.txt
+cd
+
 # Actualizar paquetes
 
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando instalación"
