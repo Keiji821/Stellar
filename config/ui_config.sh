@@ -21,6 +21,7 @@ cyan="\033[38;2;23;147;209m"
 
 printf "${verde}"
 read -p "Ingrese el contenido: " banner
+cd configs_stellar/themes
 echo "${banner}" > banner.txt
 printf "${verde}Elija la fuente para su banner"
 echo " "
@@ -535,3 +536,4 @@ echo " "
 printf "${gris}[${verde}+${gris}] ${blanco2}Escriba ${verde}bash ${blanco2}para aplicar correctamente el texto personalizado de la input."
 echo " "
 echo " "
+cd
