@@ -39,7 +39,7 @@ python Stellar/config/run.py
 # Mostrar banner al final
 
 cd
-cd Stellar/config
+cd configs_stellar/themes
 cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
@@ -118,7 +118,7 @@ menu() {
 
 reload() {
   cd
-  cd Stellar/config
+  cd configs_stellar/themes
   git pull --force
   clear
   python banner.py
