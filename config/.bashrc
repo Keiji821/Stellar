@@ -19,7 +19,7 @@ cyan="\033[38;2;23;147;209m"
 
 # Personalizar input
 
-input=$(cat configs_stellar/themes/input.txt)
+input=$(cat .configs_stellar/themes/input.txt)
 
 function cd() {
   builtin cd "$@"
