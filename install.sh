@@ -27,8 +27,8 @@ cp ~/Stellar/config/.bashrc ~/.
 # Configurar archivos necesarios
 
 cd
-mkdir configs_stellar
-cd configs_stellar
+mkdir .configs_stellar
+cd .configs_stellar
 mkdir themes
 cd themes
 
