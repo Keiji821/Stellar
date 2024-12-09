@@ -1,4 +1,4 @@
-# Definir colores
+# Definir colores 
 
 gris="${b}\033[1;30m"
 blanco="\033[0m"
@@ -32,7 +32,7 @@ cd .configs_stellar
 mkdir themes
 cd themes
 
-cat <<EOF
+cat <<EOF > banner.py
 import datetime
 import os
 from os import system
