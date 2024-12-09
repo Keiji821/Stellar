@@ -19,7 +19,7 @@ cyan="\033[38;2;23;147;209m"
 
 # ui_config.sh
 
-printf "${verde}"
+printf "${verde}Ingrese el texto personalizado para su banner de inicio."
 read -p "Ingrese el contenido: " banner
 cd .configs_stellar/themes
 echo "${banner}" > banner.txt
