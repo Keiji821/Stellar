@@ -229,3 +229,5 @@ sleep 5
 cd Stellar/config
 bash ui_config.sh
 bash
+reload
+bash
