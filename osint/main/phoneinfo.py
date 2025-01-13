@@ -1,7 +1,6 @@
 import phonenumbers
 from phonenumbers import carrier, geocoder, number_type
 from rich.console import Console
-from rich.markdown import Markdown
 from rich.table import Table
 from rich.progress import Progress, SpinnerColumn
 
@@ -33,8 +32,8 @@ while True:
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold red")
-        table.add_column("Información", style="code", no_wrap=False)
-        table.add_column("Valor", style="code")
+        table.add_column("[green]Información", style="code", no_wrap=False)
+        table.add_column("[white]Valor", style="code")
 
         table.add_row("País/dirección", country_name)
         table.add_row("Empresa de teléfono", carrier_name)
