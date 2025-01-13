@@ -117,7 +117,7 @@ cyan="\033[38;2;23;147;209m"
 
 printf "${verde}Ingrese el texto personalizado para su banner de inicio.\n"
 read -p "Ingrese el contenido: " banner
-echo "${banner}" > banner.txt
+echo $banner > banner.txt
 printf "${verde}Elija la fuente para su banner"
 echo " "
 printf "${amarillo}
