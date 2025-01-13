@@ -32,7 +32,7 @@ while True:
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold red")
-        table.add_column("Información", style="code", no_wrap=False)
+        table.add_column("Información", style="code green", no_wrap=False)
         table.add_column("Valor", style="white")
 
         table.add_row("País", country_name)
