@@ -116,7 +116,7 @@ Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
 os.system("""
 cd
 cd Stellar/config
-git pull --force
+git pull --force &>/dev/null &
 cd
 """)
 EOF
