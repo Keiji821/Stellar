@@ -1,6 +1,7 @@
 import phonenumbers
 from phonenumbers import carrier, geocoder, number_type
 from rich.console import Console
+from rich.markdown import Markdown
 from rich.table import Table
 from rich.progress import Progress, SpinnerColumn
 
