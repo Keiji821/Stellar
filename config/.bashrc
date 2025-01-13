@@ -119,7 +119,6 @@ menu() {
 reload() {
   cd
   cd .configs_stellar/themes
-  git pull --force
   clear
   python banner.py
   cd
