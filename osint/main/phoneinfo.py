@@ -32,7 +32,7 @@ while True:
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold red")
-        table.add_column("Información", style="green", no_wrap=False)
+        table.add_column("Información", style="code", no_wrap=False)
         table.add_column("Valor", style="white")
 
         table.add_row("País", country_name)
@@ -43,7 +43,7 @@ while True:
         table.add_row("Extensión", extension)
         table.add_row("Tipo de número", number_type_name)
 
-        console.print(f"[code]{table}")
+        console.print(table)
         print(" ")
         break
     except phonenumbers.phonenumberutil.NumberParseException:
