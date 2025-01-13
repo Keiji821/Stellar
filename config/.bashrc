@@ -126,7 +126,6 @@ reload() {
 
 ui() {
  cd
- cd .configs_stellar/themes
  bash ui_config.sh
  cd
 }
