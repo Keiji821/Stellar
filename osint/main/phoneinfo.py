@@ -31,9 +31,9 @@ while True:
         }.get(phonenumbers.number_type(parse_result), "Desconocido")
         
         print(" ")
-        table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold red")
+        table = Table(title="[code]Información del número de teléfono", title_justify="center", title_style="bold red")
         table.add_column("[green]Información", style="code", no_wrap=False)
-        table.add_column("[white]Valor", style="code")
+        table.add_column("[green]Valor", style="code")
 
         table.add_row("País/dirección", country_name)
         table.add_row("Empresa de teléfono", carrier_name)
