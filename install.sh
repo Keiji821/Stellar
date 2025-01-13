@@ -115,8 +115,8 @@ Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
 
 os.system("""
 cd
-cd Stellar
-bash update.sh &>/dev/null
+cd Stellar/config
+git pull --force
 cd
 """)
 EOF
