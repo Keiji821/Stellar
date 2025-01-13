@@ -92,3 +92,5 @@ git pull --force &>/dev/null &
 cd
 """)
 EOF
+
+cd
