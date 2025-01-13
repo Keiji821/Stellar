@@ -766,9 +766,5 @@ pip install discord
 echo
 clear
 printf "${gris}[${verde}✔${gris}]${blanco} Instalación completada.\n"
-sleep 5
-cd Stellar/config
-bash ui_config.sh
 bash
 reload
-bash
