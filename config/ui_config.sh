@@ -21,7 +21,7 @@ cyan="\033[38;2;23;147;209m"
 
 printf "${verde}Ingrese el texto personalizado para su banner de inicio.\n"
 read -p "Ingrese el contenido: " banner
-echo "${banner}" > banner.txt
+echo "${banner}" > .configs_stellar/themes/banner.txt
 printf "${verde}Elija la fuente para su banner"
 echo " "
 printf "${amarillo}
@@ -518,13 +518,13 @@ printf "${amarillo}
 echo " "
 printf "${verde}"
 read -p 'Fuente: ' font
-echo "${font}" > banner_font.txt
+echo "${font}" > .configs_stellar/themes/banner_font.txt
 echo " "
 printf "${verde}Configure el texto de la input"
 echo " "
 printf "${verde}"
 read -p 'Ingrese el contenido: ' input
-echo "${input}" > input.txt
+echo "${input}" > .configs_stellar/themes/input.txt
 echo " "
 printf "${gris}[$verde2✔$gris]${blanco2} Su banner personalizado se ha configurado correctamente!"
 echo " "
