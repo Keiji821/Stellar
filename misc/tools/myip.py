@@ -52,8 +52,8 @@ else:
 
             console.print(" ")
             table = Table(title="Tú IP real", title_justify="center", title_style="bold green")
-            table.add_column("Información", style="green", no_wrap=False)
-            table.add_column("Valor", style="white")
+            table.add_column("Información", style="code", no_wrap=False)
+            table.add_column("Valor", style="code")
 
             table.add_row("[bold underline]Información de Red[/bold underline]", "")
             table.add_row("Red", str(data1.get("network", "No disponible")))
