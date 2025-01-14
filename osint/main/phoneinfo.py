@@ -45,6 +45,7 @@ while True:
         table.add_row(" ")
         table.add_row("País/dirección 1", country_name)
         table.add_row("Dirección 2", str(data1.get("location")))
+        table.add_row("Región:" str(data2.get("regionName")))
         table.add_row(" ", " ")
         table.add_row(" ")
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
