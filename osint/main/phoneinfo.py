@@ -55,6 +55,7 @@ while True:
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
         table.add_row("Empresa de teléfono 2", str(carrier_name))
         table.add_row("Número de teléfono válido", is_valid)
+        table.add_row("El número es válido en la región", str(data2.get("numberValidForRegion")))
         table.add_row("Tipo de número", number_type_name)
         table.add_row(" ", " ")
         table.add_row("[underline]Información adicional")
