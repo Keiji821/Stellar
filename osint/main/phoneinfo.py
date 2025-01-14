@@ -3,12 +3,15 @@ from phonenumbers import carrier, geocoder, number_type
 from rich.console import Console
 from rich.table import Table
 from rich.progress import Progress, SpinnerColumn
+import requests
 
 console = Console()
 
 while True:
     phone_number = console.input("[bold green]Ingrese un número de celular: [/bold green]")
     try:
+        response = requests.get(f"https://api.numlookupapi.com/v1/validate/{phone_number}?apikey=num_live_z5WCcECRDEQ1YL9H5smWU8fhwH3NoOjf9oj3QVEp")
+        data1 = response.json()
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
         carrier_name = carrier.name_for_number(parse_result, "es")
