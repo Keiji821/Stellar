@@ -40,7 +40,7 @@ while True:
 
         table.add_row("País/dirección", country_name)
         table.add_row("Dirección 2:", str(data1.get("location")))
-        if data1.get("carrier") and carrier_name:
+        if data1.get("carrier") and not carrier_name:
             table.add_row("Empresa de teléfono", str(data1.get("carrier")), carrier_name)
         table.add_row("Número de teléfono válido", is_valid)
         table.add_row("Código de país", str(country_code))
