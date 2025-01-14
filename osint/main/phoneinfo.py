@@ -38,9 +38,10 @@ while True:
         table.add_column("[green]Información", style="code", no_wrap=False)
         table.add_column("[green]Valor", style="code")
 
-        table.add_row("País/dirección", country_name)
+        table.add_row("País/dirección 1", country_name)
         table.add_row("Dirección 2:", str(data1.get("location")))
-        table.add_row("Empresa de teléfono", str(data1.get("carrier")), carrier_name)
+        table.add_row("Empresa de teléfono 1", str(data1.get("carrier", "No disponible")))
+        table.add_row("Empresa de teléfono 2", str("carrier_name", "No disponible")
         table.add_row("Número de teléfono válido", is_valid)
         table.add_row("Código de país", str(country_code))
         table.add_row("Número nacional", str(national_number))
