@@ -10,8 +10,12 @@ console = Console()
 while True:
     phone_number = console.input("[bold green]Ingrese un número de celular: [/bold green]")
     try:
-        response = requests.get(f"https://api.numlookupapi.com/v1/validate/{phone_number}?apikey=num_live_z5WCcECRDEQ1YL9H5smWU8fhwH3NoOjf9oj3QVEp")
-        data1 = response.json()
+        response1 = requests.get(f"https://api.numlookupapi.com/v1/validate/{phone_number}?apikey=num_live_z5WCcECRDEQ1YL9H5smWU8fhwH3NoOjf9oj3QVEp")
+        data1 = response1.json()
+        response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
+        data2 = response2.json()
+        
+        
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
         carrier_name = carrier.name_for_number(parse_result, "es")
@@ -38,10 +42,15 @@ while True:
         table.add_column("[green]Información", style="code", no_wrap=False)
         table.add_column("[green]Valor", style="code")
 
+        table.add_row(" ")
         table.add_row("País/dirección 1", country_name)
         table.add_row("Dirección 2", str(data1.get("location")))
+        table.add_row(" ", " ")
+        table.add_row(" ")
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
         table.add_row("Empresa de teléfono 2", str(carrier_name))
+        table.add_row(" ", " ")
+        table.add_row("")
         table.add_row("Número de teléfono válido", is_valid)
         table.add_row("Código de país", str(country_code))
         table.add_row("Número nacional", str(national_number))
