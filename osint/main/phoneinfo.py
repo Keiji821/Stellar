@@ -38,7 +38,7 @@ while True:
         table.add_column("[green]Información", style="code", no_wrap=False)
         table.add_column("[green]Valor", style="code")
 
-        table.add_row("País/dirección 1", country_name)
+        table.add_row("País/dirección 1 :ve:", country_name)
         table.add_row("Dirección 2", str(data1.get("location")))
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
         table.add_row("Empresa de teléfono 2", str(carrier_name))
