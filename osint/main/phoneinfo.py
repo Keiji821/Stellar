@@ -16,24 +16,29 @@ while True:
         data2 = response2.json()
 
         location = data1.get("location")
-        if location is not None:
-            localización = location
-            if location is None:
-                localización = "No disponible"
+        if location is None:
+            location = "No disponible"
 
         regionName = data2.get("regionName")
         if regionName is None:
             regionName = "No disponible"
 
         city = data2.get("city")
+        if city is None:
+            city = "No disponible"
 
         zip = data2.get("zip")
+        if zip is None:
+            zip = "No disponible"
 
         lon = data2.get("lon")
+        if lon is None:
+            lon = "No disponible"
 
         lat = data2.get("lat")
-        
-        
+        if lat is None:
+            lat = "No disponible"
+               
         
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
@@ -64,12 +69,12 @@ while True:
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección 1", country_name)
-        table.add_row("Dirección 2", localización)
+        table.add_row("Dirección 2", location)
         table.add_row("Región", regionName)
-        table.add_row("Ciudad", ) 
-        table.add_row("Código postal", )
-        table.add_row("Longitud", )
-        table.add_row("Latitud", )
+        table.add_row("Ciudad", city) 
+        table.add_row("Código postal", zip)
+        table.add_row("Longitud", lon)
+        table.add_row("Latitud", lat)
 
 
         table.add_row(" ", " ")
