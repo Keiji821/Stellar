@@ -68,7 +68,7 @@ while True:
         numberValidForRegion = data2.get("numberValidForRegion")
         if numberValidForRegion is None:
             numberValidForRegion = "No disponible"
-        numberValidForRegion = "Sí" if (bool(numberValidForRegion) and numberValidForRegion!= "") else "No"
+        estadoTelefono = "Sí" if (bool(numberValidForRegion) and numberValidForRegion!= "") else "No"
     
         
         print(" ")
@@ -89,7 +89,7 @@ while True:
         table.add_row("Empresa de teléfono 1", carrier)
         table.add_row("Empresa de teléfono 2", carrier_name)
         table.add_row("Número de teléfono válido", is_valid)
-        table.add_row("El número es válido en la región", str(numberValidForRegion))
+        table.add_row("El número es válido en la región", str(estadoTelefono))
         table.add_row("Tipo de número", number_type_name)
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información adicional[/bold green]")
