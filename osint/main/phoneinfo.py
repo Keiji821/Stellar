@@ -66,9 +66,10 @@ while True:
             carrier = "No disponible"
 
         numberValidForRegion = data2.get("numberValidForRegion")
-        if numberValidForRegion is None:
-            numberValidForRegion = "No disponible"
-        numberValidForRegion = "Sí" if numberValidForRegion else "No"
+        if numberValidForRegion is not None:
+            numberValidForRegion = "Sí"
+            if numberValidForRegion is None:
+                numberValidForRegion = "No disponible"
     
         
         print(" ")
