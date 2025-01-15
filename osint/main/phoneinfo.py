@@ -45,11 +45,21 @@ while True:
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección 1", country_name)
         table.add_row("Dirección 2", str(data1.get("location")))
-        table.add_row("Región", str(data2.get("regionName")))
-        table.add_row("Ciudad", str(data2.get("city")))
+        regionName = data2.get("regionName")
+        if regionName is not None:
+            table.add_row("Región", regionName)
+            if regionName is None:
+                table.add_row("Región", "No disponible")
+        city = data2.get("city")
+        if city is not None:
+            table.add_row("Ciudad", city)
+            if city is None:
+                table.add_row("Ciudad", "No disponible") 
         table.add_row("Código postal", str(data2.get("zip")))
         table.add_row("Longitud", str(data2.get("lon")))
         table.add_row("Latitud", str(data2.get("lat")))
+
+
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información técnica[/bold green]")
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
