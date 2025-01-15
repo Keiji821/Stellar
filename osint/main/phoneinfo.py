@@ -70,8 +70,8 @@ while True:
             numberValidForRegion = "No disponible"
         if bool(numberValidForRegion):
             numberValidForRegion = "Sí"
-        else:
-            numberValidForRegion = "No"
+            else:
+                numberValidForRegion = "No"
     
         
         print(" ")
