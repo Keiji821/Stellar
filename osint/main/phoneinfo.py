@@ -68,9 +68,9 @@ while True:
         numberValidForRegion = data2.get("numberValidForRegion")
         if numberValidForRegion is None:
             numberValidForRegion = "No disponible"
-        if numberValidForRegion == "True":
+        if bool(numberValidForRegion):
             numberValidForRegion = "Sí"
-        if numberValidForRegion == "False":
+        else numberValidForRegion:
             numberValidForRegion = "No"
     
         
