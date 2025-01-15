@@ -57,7 +57,7 @@ while True:
         table.add_row("Número de teléfono válido", is_valid)
         if data2.get("numberValidForRegion") == "False":
             table.add_row("El número es válido en la región", "No")
-        else data2.get("numberValidForRegion") == "True":
+        if data2.get("numberValidForRegion") == "True":
             table.add_row("El número es válido en la región", "Sí")
         table.add_row("Tipo de número", number_type_name)
         table.add_row(" ", " ")
