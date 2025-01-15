@@ -13,8 +13,30 @@ while True:
         response1 = requests.get(f"https://api.numlookupapi.com/v1/validate/{phone_number}?apikey=num_live_z5WCcECRDEQ1YL9H5smWU8fhwH3NoOjf9oj3QVEp")
         data1 = response1.json()
         response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
-        data2 = response2.json()
-
+        data2 = response2.json()           
+        
+        parse_result = phonenumbers.parse(phone_number, None)
+        country_name = geocoder.description_for_number(parse_result, "es")
+        carrier_name = carrier.name_for_number(parse_result, "es")
+        is_valid = "Sí" if phonenumbers.is_valid_number(parse_result) else "No"
+        country_code = parse_result.country_code
+        national_number = parse_result.national_number
+        extension = parse_result.extension if parse_result.extension else "No disponible"
+        number_type_name = {
+            0: "Desconocido",
+            1: "Línea fija",
+            2: "Móvil",
+            3: "Número gratuito",
+            4: "Tarifa premium",
+            5: "Costo compartido",
+            6: "VoIP",
+            7: "Número personal",
+            8: "Busca personas",
+            9: "UAN",
+            10: "Buzón de voz"
+        }.get(phonenumbers.number_type(parse_result), "Desconocido")
+        
+        
         location = data1.get("location")
         if location is None:
             location = "No disponible"
@@ -38,29 +60,15 @@ while True:
         lat = data2.get("lat")
         if lat is None:
             lat = "No disponible"
-               
-        
-        parse_result = phonenumbers.parse(phone_number, None)
-        country_name = geocoder.description_for_number(parse_result, "es")
-        carrier_name = carrier.name_for_number(parse_result, "es")
-        is_valid = "Sí" if phonenumbers.is_valid_number(parse_result) else "No"
-        country_code = parse_result.country_code
-        national_number = parse_result.national_number
-        extension = parse_result.extension if parse_result.extension else "No disponible"
-        number_type_name = {
-            0: "Desconocido",
-            1: "Línea fija",
-            2: "Móvil",
-            3: "Número gratuito",
-            4: "Tarifa premium",
-            5: "Costo compartido",
-            6: "VoIP",
-            7: "Número personal",
-            8: "Busca personas",
-            9: "UAN",
-            10: "Buzón de voz"
-        }.get(phonenumbers.number_type(parse_result), "Desconocido")
 
+        carrier = data1.get("carrier")
+        if carrier is None:
+            carrier = "No disponible"
+
+        numberValidForRegion = data2.get("numberValidForRegion")
+        if numberValidForRegion is None:
+            numberValidForRegion = "No disponible"
+    
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold green")
@@ -75,14 +83,12 @@ while True:
         table.add_row("Código postal", zip)
         table.add_row("Longitud", lon)
         table.add_row("Latitud", lat)
-
-
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información técnica[/bold green]")
-        table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
-        table.add_row("Empresa de teléfono 2", str(carrier_name))
+        table.add_row("Empresa de teléfono 1", carrier)
+        table.add_row("Empresa de teléfono 2", carrier_name)
         table.add_row("Número de teléfono válido", is_valid)
-        table.add_row("El número es válido en la región", str(data2.get("numberValidForRegion")))
+        table.add_row("El número es válido en la región", numberValidForRegion)
         table.add_row("Tipo de número", number_type_name)
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información adicional[/bold green]")
