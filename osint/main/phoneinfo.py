@@ -55,7 +55,8 @@ while True:
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
         table.add_row("Empresa de teléfono 2", str(carrier_name))
         table.add_row("Número de teléfono válido", is_valid)
-        if data2.get("numberValidForRegion") == "True":
+        numberValidForRegion = data2.get("numberValidForRegion")
+        if numberValidForRegion == "True":
             table.add_row("El número es válido en la región", "Sí")
         else:
             table.add_row("El número es válido en la región", "No")
@@ -67,7 +68,7 @@ while True:
         table.add_row("Extensión", extension)
 
         console.print(table)
-        print(data2.get("numberValidForRegion"))
+        print(" ")
         break
     except phonenumbers.phonenumberutil.NumberParseException:
         console.print("[bold red]Error: El número de teléfono ingresado no es válido. Por favor, inténtalo de nuevo.[/bold red]")
