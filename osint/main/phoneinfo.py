@@ -14,12 +14,21 @@ while True:
         data1 = response1.json()
         response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
         data2 = response2.json()
- 
+
         location = data1.get("location")
+        if location is not None:
+            localización = location
+            if location is None:
+                localización = "No disponible"
+
         regionName = data2.get("regionName")
+
         city = data2.get("city")
+
         zip = data2.get("zip")
+
         lon = data2.get("lon")
+
         lat = data2.get("lat")
         
         
@@ -53,7 +62,7 @@ while True:
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección 1", country_name)
-        table.add_row("Dirección 2", )
+        table.add_row("Dirección 2", localización)
         table.add_row("Región", )
         table.add_row("Ciudad", ) 
         table.add_row("Código postal", )
