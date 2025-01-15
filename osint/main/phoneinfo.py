@@ -23,9 +23,9 @@ while True:
 
         regionName = data2.get("regionName")
         if regionName is not None:
-            nombre_de_la_región = regionName
+            región = regionName
             if regionName is None:
-                nombre_de_la_región = "No disponible"
+                región = "No disponible"
 
         city = data2.get("city")
 
@@ -67,7 +67,7 @@ while True:
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección 1", country_name)
         table.add_row("Dirección 2", localización)
-        table.add_row("Región", nombre_de_la_región)
+        table.add_row("Región", región)
         table.add_row("Ciudad", ) 
         table.add_row("Código postal", )
         table.add_row("Longitud", )
