@@ -22,6 +22,10 @@ while True:
                 localización = "No disponible"
 
         regionName = data2.get("regionName")
+        if regionName is not None:
+            nombre_de_la_región = regionName
+            if regionName is None:
+                nombre_de_la_región = "No disponible"
 
         city = data2.get("city")
 
