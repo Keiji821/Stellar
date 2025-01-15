@@ -67,7 +67,7 @@ while True:
         table.add_row("Extensión", extension)
 
         console.print(table)
-        print(" ")
+        print(data2.get("numberValidForRegion"))
         break
     except phonenumbers.phonenumberutil.NumberParseException:
         console.print("[bold red]Error: El número de teléfono ingresado no es válido. Por favor, inténtalo de nuevo.[/bold red]")
