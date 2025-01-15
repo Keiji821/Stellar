@@ -14,6 +14,14 @@ while True:
         data1 = response1.json()
         response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
         data2 = response2.json()
+ 
+        location = data1.get("location")
+        regionName = data2.get("regionName")
+        city = data2.get("city")
+        zip = data2.get("zip")
+        lon = data2.get("lon")
+        lat = data2.get("lat")
+        
         
         
         parse_result = phonenumbers.parse(phone_number, None)
@@ -36,6 +44,7 @@ while True:
             9: "UAN",
             10: "Buzón de voz"
         }.get(phonenumbers.number_type(parse_result), "Desconocido")
+
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold green")
@@ -44,20 +53,12 @@ while True:
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección 1", country_name)
-        table.add_row("Dirección 2", str(data1.get("location")))
-        regionName = data2.get("regionName")
-        if regionName is not None:
-            table.add_row("Región", regionName)
-            if regionName is None:
-                table.add_row("Región", "No disponible")
-        city = data2.get("city")
-        if city is not None:
-            table.add_row("Ciudad", city)
-            if city is None:
-                table.add_row("Ciudad", "No disponible") 
-        table.add_row("Código postal", str(data2.get("zip")))
-        table.add_row("Longitud", str(data2.get("lon")))
-        table.add_row("Latitud", str(data2.get("lat")))
+        table.add_row("Dirección 2", )
+        table.add_row("Región", )
+        table.add_row("Ciudad", ) 
+        table.add_row("Código postal", )
+        table.add_row("Longitud", )
+        table.add_row("Latitud", )
 
 
         table.add_row(" ", " ")
