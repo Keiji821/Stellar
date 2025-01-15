@@ -10,7 +10,7 @@ console = Console()
 while True:
     phone_number = console.input("[bold green]Ingrese un número de celular: [/bold green]")
     try:
-        response1 = requests.get(f"https://api.numlookupapi.com/v1/validate/{phone_number}?apikey=num_live_z5WCcECRDEQ1YL9H5smWU8fhwH3NoOjf9oj3QVEp")
+        response1 = requests.get(f"")
         data1 = response1.json()
         response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
         data2 = response2.json()           
