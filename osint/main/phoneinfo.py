@@ -55,10 +55,10 @@ while True:
         table.add_row("Empresa de teléfono 1", str(data1.get("carrier")))
         table.add_row("Empresa de teléfono 2", str(carrier_name))
         table.add_row("Número de teléfono válido", is_valid)
-        if data2.get("numberValidForRegion") == "False":
-            table.add_row("El número es válido en la región", "No")
         if data2.get("numberValidForRegion") == "True":
             table.add_row("El número es válido en la región", "Sí")
+        else:
+            table.add_row("El número es válido en la región", "No")
         table.add_row("Tipo de número", number_type_name)
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información adicional[/bold green]")
