@@ -70,7 +70,7 @@ while True:
             numberValidForRegion = "No disponible"
         if bool(numberValidForRegion):
             numberValidForRegion = "Sí"
-        else numberValidForRegion
+        else:
             numberValidForRegion = "No"
     
         
