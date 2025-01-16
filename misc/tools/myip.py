@@ -52,10 +52,10 @@ else:
 
             console.print(" ")
             table = Table(title="Tú IP real", title_justify="center", title_style="bold green")
-            table.add_column("Información", style="code", no_wrap=False)
-            table.add_column("Valor", style="code")
+            table.add_column("[bold green]Información", style="code", no_wrap=False)
+            table.add_column("[bold green]Valor", style="code")
 
-            table.add_row("[bold underline]Información de Red[/bold underline]", "")
+            table.add_row("[bold underline][code][bold green]Información de Red[/bold underline]", "")
             table.add_row("Red", str(data1.get("network", "No disponible")))
             table.add_row("Tipo de IP", str(data1.get("version", "No disponible")))
             table.add_row("TLD", str(data1.get("country_tld", "No disponible")))
@@ -78,7 +78,7 @@ else:
 
             table.add_row("", "")
 
-            table.add_row("[bold underline]Información Geográfica[/bold underline]", "")
+            table.add_row("[bold underline][code][bold green]Información Geográfica[/bold underline]", "")
             table.add_row("País", str(data1.get("country", "No disponible")))
             table.add_row("Capital", str(data1.get("country_capital", "No disponible")))
             table.add_row("Ciudad", str(data1.get("city", "No disponible")))
