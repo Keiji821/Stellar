@@ -78,14 +78,33 @@ while True:
             isDisposible = "No disponible"
         
         country = data1.get("country")
-        
+        paises = {
+'AR': '🇦🇷',
+'BO': '🇧🇴',
+'BR': '🇧🇷',
+'CL': '🇨🇱',
+'CO': '🇨🇴',
+'CR': '🇨🇷',
+'CU': '🇨🇺',
+'DO': '🇩🇴',
+'ES': '🇪🇸',
+'GT': '🇬🇹',
+'HN': '🇭🇳',
+'MX': '🇲🇽',
+'PA': '🇵🇦',
+'PE': '🇵🇪',
+'PY': '🇵🇾',
+'SV': '🇸🇻',
+}
+        pais_emoji = paises.get(country)
+
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold green")
         table.add_column("[green]Información", style="code", no_wrap=False)
         table.add_column("[green]Valor", style="code")
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
-        table.add_row("País/dirección", country_name)
+        table.add_row("País/dirección", country_name + pais_emoji)
         table.add_row("Continente", continent)
         table.add_row("Región", regionName)
         table.add_row("Ciudad", city) 
