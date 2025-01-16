@@ -64,6 +64,7 @@ while True:
             numberValidForRegion = "No disponible"
 
         continent = data1.get("continent")
+        isDisposible = data1.get("isDisposible")
     
         
         print(" ")
@@ -82,6 +83,7 @@ while True:
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información técnica[/bold green]")
         table.add_row("Empresa de teléfono", carrier_name)
+        table.add_row("Es desechable", isDisposible)
         table.add_row("Número de teléfono válido", is_valid)
         table.add_row("El número es válido en la región", str(numberValidForRegion))
         table.add_row("Tipo de número", number_type_name)
