@@ -65,7 +65,10 @@ while True:
 
         continent = data1.get("continent")
         isDisposible = str(data1.get("isDisposible"))
-    
+        if isDisposible == "True":
+            isDisposible = "Sí"
+        if isDisposible == "False":
+            isDisposible = "No"  
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold green")
