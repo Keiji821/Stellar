@@ -16,7 +16,7 @@ while True:
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
         carrier_name = carrier.name_for_number(parse_result, "es")
-        if carrier_name is None:
+        if carrier_name == "":
             carrier_name = "No disponible"
 
         is_valid = "Sí" if phonenumbers.is_valid_number(parse_result) else "No"
