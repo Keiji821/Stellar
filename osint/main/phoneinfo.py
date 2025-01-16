@@ -10,8 +10,6 @@ console = Console()
 while True:
     phone_number = console.input("[bold green]Ingrese un número de celular: [/bold green]")
     try:
-        response1 = requests.get(f"")
-        data1 = response1.json()
         response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
         data2 = response2.json()           
         
@@ -61,10 +59,6 @@ while True:
         if lat is None:
             lat = "No disponible"
 
-        carrier = data1.get("carrier")
-        if carrier is None:
-            carrier = "No disponible"
-
         numberValidForRegion = data2.get("numberValidForRegion")
         if numberValidForRegion is not None:
             numberValidForRegion = "Sí"
@@ -87,8 +81,7 @@ while True:
         table.add_row("Latitud", str(lat))
         table.add_row(" ", " ")
         table.add_row("[underline][bold green]Información técnica[/bold green]")
-        table.add_row("Empresa de teléfono 1", carrier)
-        table.add_row("Empresa de teléfono 2", carrier_name)
+        table.add_row("Empresa de teléfono", carrier_name)
         table.add_row("Número de teléfono válido", is_valid)
         table.add_row("El número es válido en la región", str(numberValidForRegion))
         table.add_row("Tipo de número", number_type_name)
