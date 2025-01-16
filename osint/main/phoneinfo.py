@@ -22,7 +22,7 @@ while True:
         if carrier_name == "":
             carrier_name = "No disponible"
 
-        is_valid = "Sí" if phonenumbers.is_valid_number(parse_result) else "No"
+        is_valid = "Sí" if phonenumbers.is_valid_number(parse_result) else "No es válido"
         country_code = parse_result.country_code
         national_number = parse_result.national_number
         extension = parse_result.extension if parse_result.extension else "No disponible"
@@ -64,7 +64,7 @@ while True:
         if numberValidForRegion is not None:
             numberValidForRegion = "Sí"
         if numberValidForRegion is None:
-            numberValidForRegion = "No disponible"
+            numberValidForRegion = "No es válido"
 
         continent = data1.get("continent")
         if continent == "":
@@ -74,7 +74,7 @@ while True:
             isDisposible = "Sí"
         if isDisposible == "False":
             isDisposible = "No"
-        if isDisposible is None:
+        if isDisposible == "None":
             isDisposible = "No disponible"
         
         print(" ")
