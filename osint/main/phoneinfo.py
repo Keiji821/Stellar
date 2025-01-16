@@ -64,7 +64,7 @@ while True:
             numberValidForRegion = "No disponible"
 
         continent = data1.get("continent")
-        isDisposible = data1.get("isDisposible")
+        isDisposible = str(data1.get("isDisposible"))
     
         
         print(" ")
