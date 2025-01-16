@@ -101,7 +101,7 @@ while True:
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold green")
         table.add_column("[green]Información", style="code", no_wrap=False)
-        table.add_column("[green]Valor", style="code")
+        table.add_column("[green]Valor", style="bold white")
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección", country_name + pais_emoji)
