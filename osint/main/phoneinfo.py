@@ -16,6 +16,9 @@ while True:
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
         carrier_name = carrier.name_for_number(parse_result, "es")
+        if carrier_name is None:
+            carrier_name = "No disponible"
+
         is_valid = "Sí" if phonenumbers.is_valid_number(parse_result) else "No"
         country_code = parse_result.country_code
         national_number = parse_result.national_number
@@ -34,8 +37,6 @@ while True:
             10: "Buzón de voz"
         }.get(phonenumbers.number_type(parse_result), "Desconocido")
         
-        
-
         regionName = data1.get("regionName")
         if regionName is None:
             regionName = "No disponible"
