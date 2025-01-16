@@ -10,9 +10,9 @@ console = Console()
 while True:
     phone_number = console.input("[bold green]Ingrese un número de celular: [/bold green]")
     try:
-        response2 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
-        data2 = response2.json()           
-        
+        response1 = requests.get(f"http://phone-number-api.com/json/?number={phone_number}")
+        data1 = response1.json()  
+         
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
         carrier_name = carrier.name_for_number(parse_result, "es")
@@ -35,31 +35,28 @@ while True:
         }.get(phonenumbers.number_type(parse_result), "Desconocido")
         
         
-        location = data1.get("location")
-        if location is None:
-            location = "No disponible"
 
-        regionName = data2.get("regionName")
+        regionName = data1.get("regionName")
         if regionName is None:
             regionName = "No disponible"
 
-        city = data2.get("city")
+        city = data1.get("city")
         if city is None:
             city = "No disponible"
 
-        zip = data2.get("zip")
+        zip = data1.get("zip")
         if zip is None:
             zip = "No disponible"
 
-        lon = data2.get("lon")
+        lon = data1.get("lon")
         if lon is None:
             lon = "No disponible"
 
-        lat = data2.get("lat")
+        lat = data1.get("lat")
         if lat is None:
             lat = "No disponible"
 
-        numberValidForRegion = data2.get("numberValidForRegion")
+        numberValidForRegion = data1.get("numberValidForRegion")
         if numberValidForRegion is not None:
             numberValidForRegion = "Sí"
         if numberValidForRegion is None:
@@ -73,7 +70,6 @@ while True:
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección 1", country_name)
-        table.add_row("Dirección 2", location)
         table.add_row("Región", regionName)
         table.add_row("Ciudad", city) 
         table.add_row("Código postal", zip)
