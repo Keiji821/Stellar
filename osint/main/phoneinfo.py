@@ -62,6 +62,8 @@ while True:
             numberValidForRegion = "Sí"
         if numberValidForRegion is None:
             numberValidForRegion = "No disponible"
+
+        continent = data1.get("continent")
     
         
         print(" ")
@@ -71,6 +73,7 @@ while True:
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
         table.add_row("País/dirección", country_name)
+        table.add_row("Continente", continent)
         table.add_row("Región", regionName)
         table.add_row("Ciudad", city) 
         table.add_row("Código postal", zip)
