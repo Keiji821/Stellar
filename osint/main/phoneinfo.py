@@ -15,6 +15,9 @@ while True:
          
         parse_result = phonenumbers.parse(phone_number, None)
         country_name = geocoder.description_for_number(parse_result, "es")
+        if country_name == "":
+            country_name = "No disponible"
+
         carrier_name = carrier.name_for_number(parse_result, "es")
         if carrier_name == "":
             carrier_name = "No disponible"
@@ -64,11 +67,15 @@ while True:
             numberValidForRegion = "No disponible"
 
         continent = data1.get("continent")
+        if continent == "":
+            continent = "No disponible"
         isDisposible = str(data1.get("isDisposible"))
         if isDisposible == "True":
             isDisposible = "Sí"
         if isDisposible == "False":
-            isDisposible = "No"  
+            isDisposible = "No"
+        if isDisposible is None:
+            isDisposible = "No disponible"
         
         print(" ")
         table = Table(title="Información del número de teléfono", title_justify="center", title_style="bold green")
