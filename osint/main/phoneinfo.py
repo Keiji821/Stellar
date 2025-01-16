@@ -85,7 +85,7 @@ while True:
         table.add_column("[green]Valor", style="code")
 
         table.add_row("[underline][bold green]Información geográfica[/bold green]")
-        table.add_row("País/dirección", country_name + f":{country}:")
+        table.add_row("País/dirección", country_name)
         table.add_row("Continente", continent)
         table.add_row("Región", regionName)
         table.add_row("Ciudad", city) 
