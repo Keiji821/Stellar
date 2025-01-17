@@ -16,7 +16,7 @@ while True:
         try:
             session = requests.session()
             session.proxies = {}
-            session.proxies ['http = 'socks5h://localhost:9150'
+            session.proxies ['http'] = 'socks5h://localhost:9150'
             session.proxies ['https'] = 'socks5h://localhost:9150'
             
             response1 = session.get(f'https://ipapi.co/{IpQuery}/json/')
