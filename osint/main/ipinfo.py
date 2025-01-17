@@ -14,12 +14,17 @@ while True:
     with Progress(SpinnerColumn("dots")) as progress:
         task = progress.add_task("[red]Cargando...")
         try:
-            response1 = requests.get(f'https://ipapi.co/{IpQuery}/json/')
+            session = requests.session()
+            session.proxies = {}
+            session.proxies ['http = 'socks5h://localhost:9150'
+            session.proxies ['https'] = 'socks5h://localhost:9150'
+            
+            response1 = session.get(f'https://ipapi.co/{IpQuery}/json/')
             progress.update(task, advance=20)
             response1.raise_for_status()
             data1 = response1.json()
 
-            response2 = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
+            response2 = session.get(f'https://api.ipapi.is/?ip={IpQuery}')
             progress.update(task, advance=30)
             response2.raise_for_status()
             data2 = response2.json()
