@@ -31,9 +31,9 @@ function cd() {
 # Iniciar configuración
 
 clear
-export ALL_PROXY=socks5h://localhost:9050
+export ALL_PROXY=https://localhost:9050
 pkill cloudflared &
-cloudflared tunnel --socks5-proxy socks5://127.0.0.1:9050 &>/dev/null &
+cloudflared tunnel --proxy https://127.0.0.1:9050 &>/dev/null &
 python Stellar/config/run.py
 
 # Mostrar banner al final
