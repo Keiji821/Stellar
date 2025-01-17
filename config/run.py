@@ -7,7 +7,7 @@ console = Console()
 
 commands = [
     "cd && pkill tor &",
-    "cd && tor",
+    "cd && tor &",
     "sleep 10",
     "bash Stellar/update.sh &>/dev/null &",
     "cd Stellar && git pull --force &>/dev/null &",
