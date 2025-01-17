@@ -72,7 +72,11 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-response = requests.get('https://ipapi.co//json/')
+session = requests.session()
+session.proxies = {}
+session.proxies ['http'] = 'socks5h://localhost:9050'
+session.proxies ['https'] = 'socks5h://localhost:9050'
+response = session.get('https://ipapi.co//json/')
 data = response.json()
 
 if data is not None:
