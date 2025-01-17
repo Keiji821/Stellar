@@ -34,7 +34,7 @@ clear
 export ALL_PROXY=socks5h://localhost:9050
 export cloudflared=https://localhost:9050
 pkill cloudflared &
-cloudflared tunnel --proxy $cloudflared &>/dev/null &
+cloudflared tunnel --proxy $cloudflared &
 python Stellar/config/run.py
 
 # Mostrar banner al final
