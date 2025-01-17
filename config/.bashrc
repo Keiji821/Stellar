@@ -33,7 +33,7 @@ function cd() {
 clear
 export ALL_PROXY=socks5h://localhost:9050
 export cloudflared=https://localhost:9050
-pkill cloudflared &
+pkill cloudflared &>/dev/null &
 cloudflared tunnel --proxy $cloudflared &
 python Stellar/config/run.py
 
