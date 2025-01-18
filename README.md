@@ -112,7 +112,7 @@ apt-get upgrade -y && apt-get update -y && apt-get install -y git && git clone h
 | En desarrollo|      |    
 
 **Seguridad**
-La herramienta anonimiza toda acción usando cloudflared (cloudflare) y tor en su termux.
+La herramienta anonimiza toda acción usando tor en su termux.
 
 </details>
 
