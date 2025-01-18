@@ -31,7 +31,6 @@ function cd() {
 # Iniciar configuración
 
 clear
-export ALL_PROXY=socks5h://localhost:9050
 pkill tor &
 tor &>/dev/null &
 python Stellar/config/run.py
