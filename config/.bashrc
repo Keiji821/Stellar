@@ -33,7 +33,7 @@ function cd() {
 clear
 export ALL_PROXY=socks5h://localhost:9050
 pkill cloudflared &
-cloudflared --url https://localhost:8081 &>/dev/null &
+cloudflared tunnel --url https://localhost:8081 &>/dev/null &
 python Stellar/config/run.py
 
 # Mostrar banner al final
