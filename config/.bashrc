@@ -31,8 +31,7 @@ function cd() {
 # Iniciar configuración
 
 clear
-pkill tor &
-tor &>/dev/null &
+export ALL_PROXY=socks5h://localhost:9050
 python Stellar/config/run.py
 
 # Mostrar banner al final
