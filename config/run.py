@@ -6,8 +6,6 @@ import time
 console = Console()
 
 commands = [
-    "cd && pkill tor &",
-    "cd && tor &>/dev/null &",
     "sleep 10",
     "bash Stellar/update.sh &>/dev/null &",
     "cd Stellar && git pull --force &>/dev/null &",
