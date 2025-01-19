@@ -20,25 +20,25 @@ while True:
             data = response.json()
             progress.update(task, advance=50)
 
-            ip = data.get("ip")
+            ip = str(data.get("ip"))
             
-            rir = data.get("rir")
+            rir = str(data.get("rir"))
 
-            is_bogon = data.get("is_bogon")
+            is_bogon = str(data.get("is_bogon"))
 
-            is_mobile = data.get("is_mobile")
+            is_mobile = str(data.get("is_mobile"))
 
-            is_crawler = data.get("is_crawler")
+            is_crawler = str(data.get("is_crawler"))
 
-            is_datacenter = data.get("is_datacenter")
+            is_datacenter = str(data.get("is_datacenter"))
 
-            is_tor = data.get("is_tor")
+            is_tor = str(data.get("is_tor"))
 
-            is_proxy = data.get("is_proxy")
+            is_proxy = str(data.get("is_proxy"))
 
-            is_vpn = data.get("is_vpn")
+            is_vpn = str(data.get("is_vpn"))
 
-            is_abuser = data.get("is_abuser")
+            is_abuser = str(data.get("is_abuser"))
 
             company_name = str(data.get("company", {}).get("name"))
 
