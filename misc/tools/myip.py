@@ -3,6 +3,7 @@ import os
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
+import threading
 
 console = Console()
 
@@ -43,6 +44,8 @@ else:
             progress.update(task, advance=20)
             response1.raise_for_status()
             data1 = response1.json()
+
+            threading.sleep(5)
 
             response2 = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
             progress.update(task, advance=30)
