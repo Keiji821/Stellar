@@ -22,6 +22,24 @@ while True:
 
             ip = data.get("ip")
             
+            rir = data.get("rir")
+
+            is_bogon = data.get("is_bogon")
+
+            is_mobile = data.get("is_mobile")
+
+            is_crawler = data.get("is_crawler")
+
+            is_datacenter = data.get("is_datacenter")
+
+            is_tor = data.get("is_tor")
+
+            is_proxy = data.get("is_proxy")
+
+            is_vpn = data.get("is_vpn")
+
+            is_abuser = data.get("is_abuser")
+            
 
             console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold green")
