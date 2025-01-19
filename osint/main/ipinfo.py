@@ -39,6 +39,19 @@ while True:
             is_vpn = data.get("is_vpn")
 
             is_abuser = data.get("is_abuser")
+
+            company_name = data.get("company")[0]("name")
+
+            abuser_score = data.get("company")[0]("abuser_score")
+
+            domain = data.get("company")[0]("domain")
+
+            type = data.get("company")[0]("type")
+
+            network = data.get("company")[0]("network")
+
+            
+
             
 
             console.print(" ")
