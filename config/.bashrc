@@ -658,6 +658,13 @@ echo " "
 cd
 }
 
+onTor () {
+ cd
+ printf "${verde} Iniciando Tor"
+ printf "${verde}"
+ tor
+}
+
 # Utilidades - herramientas
 
 ia() {
