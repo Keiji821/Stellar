@@ -90,11 +90,11 @@ while True:
 
             city = data.get("location", {}).get("city")
 
-            latitude = data.get("location", {}).get("latitude")
+            latitude = str(data.get("location", {}).get("latitude"))
 
-            longitude = data.get("location", {}).get("longitude")
+            longitude = str(data.get("location", {}).get("longitude"))
 
-            zip = data.get("location", {}).get("zip")
+            zip = str(data.get("location", {}).get("zip"))
 
             timezone = data.get("location", {}).get("timezone")
  
