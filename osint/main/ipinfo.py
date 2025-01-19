@@ -128,7 +128,6 @@ while True:
             table.add_row("Longitud", longitude)
             table.add_row("Zona horaria", timezone)
             table.add_row("Código de llamada", calling_code)
-)
 
             console.print(table)
             console.print(" ")
