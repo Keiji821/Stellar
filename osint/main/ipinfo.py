@@ -50,6 +50,38 @@ while True:
 
             network = data.get("company")[0]("network")
 
+            abuse_name = data.get("abuse")[0]("name")
+
+            address = data.get("abuse")[0]("address")
+
+            phone = data.get("abuse")[0]("phone")
+
+            asn = data.get("asn")[0]("asn")
+
+            abuser_score = data.get("asn")[0]("abuser_score")
+
+            route = data.get("asn")[0]("route")
+
+            descr = data.get("asn")[0]("descr")
+
+            active = data.get("asn")[0]("active")
+
+            org = data.get("asn")[0]("org")
+
+            asn_domain = data.get("asn")[0]("domain")
+
+            abuse = data.get("asn")[0]("abuse")
+
+            asn_type = data.get("asn")[0]("type")
+
+            created = data.get("asn")[0]("created")
+
+            updated = data.get("asn")[0]("updated")
+
+            asn_rir = data.get("asn")[0]("rir")
+
+            
+
             
 
             
