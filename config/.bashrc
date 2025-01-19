@@ -31,7 +31,6 @@ function cd() {
 # Iniciar configuración
 
 clear
-export ALL_PROXY=socks5://localhost:9050
 python Stellar/config/run.py
 
 # Mostrar banner al final
