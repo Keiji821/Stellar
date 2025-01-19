@@ -20,13 +20,16 @@ while True:
             data = response.json()
             progress.update(task, advance=50)
 
+            ip = data.get("ip")
+            
+
             console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold green")
             table.add_column("[bold green]Información", style="code", no_wrap=False)
             table.add_column("[bold green]Valor", style="code")
 
             table.add_row("[bold underline][code][bold green]Información de Red[/bold underline]", "")
-            table.add_row("Red", )
+            table.add_row("Red", ip)
             table.add_row("Tipo de IP", )
             table.add_row("TLD", )
             table.add_row("ASN", )
