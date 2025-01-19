@@ -50,12 +50,9 @@ data = response.json()
 if data is not None:
     active = "[bold green]●[/bold green]"
     ip = data.get("network")
-    if ip is None:
-        ip = "El anonimizador no se ha iniciado"
-        active = "[bold red]●[/bold red]"
-else:
+if ip is None:
+    ip = "El anonimizador no se ha iniciado"
     active = "[bold red]●[/bold red]"
-    ip = "Error de red"
 
 console.print(
 f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
