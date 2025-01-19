@@ -80,13 +80,24 @@ while True:
 
             asn_rir = data.get("asn")[0]("rir")
 
-            
+            calling_code = data.get("location")[0]("calling_code")
 
-            
+            continent = data.get("location")[0]("continent")
 
-            
+            country = data.get("location")[0]("country")
 
-            
+            state = data.get("location")[0]("state")
+
+            city = data.get("location")[0]("city")
+
+            latitude = data.get("location")[0]("latitude")
+
+            longitude = data.get("location")[0]("longitude")
+
+            zip = data.get("location")[0]("zip")
+
+            timezone = data.get("location")[0]("timezone")
+ 
 
             console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold green")
