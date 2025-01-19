@@ -8,7 +8,6 @@ console = Console()
 commands = [
     "sleep 10",
     "pkill tor &",
-    "tor &>/dev/null &",
     "bash Stellar/update.sh &>/dev/null &",
     "cd Stellar && git pull --force &>/dev/null &",
 ]
