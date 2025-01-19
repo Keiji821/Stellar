@@ -72,7 +72,7 @@ os.system("clear")
 
 colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
-response = requests.get('https://ipapi.co//json/')
+response = requests.get('https://api.ipapi.is/?ip=')
 data = response.json()
 
 if data is not None:
