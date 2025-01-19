@@ -77,7 +77,7 @@ data = response.json()
 
 if data is not None:
     active = "[bold green]●[/bold green]"
-    ip = data.get("network")
+    ip = data.get("ip")
 if ip is None:
     ip = "El anonimizador no se ha iniciado"
     active = "[bold red]●[/bold red]"
