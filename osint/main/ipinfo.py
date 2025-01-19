@@ -40,55 +40,55 @@ while True:
 
             is_abuser = data.get("is_abuser")
 
-            company_name = data.get("company", {}).get("name")
+            company_name = str(data.get("company", {}).get("name"))
 
-            abuser_score = data.get("company", {}).get("abuser_score")
+            abuser_score = str(data.get("company", {}).get("abuser_score"))
 
-            domain = data.get("company", {}).get("domain")
+            domain = str(data.get("company", {}).get("domain"))
 
-            type = data.get("company", {}).get("type")
+            type = str(data.get("company", {}).get("type"))
 
-            network = data.get("company", {}).get("network")
+            network = str(data.get("company", {}).get("network"))
 
-            abuse_name = data.get("abuse", {}).get("name")
+            abuse_name = str(data.get("abuse", {}).get("name"))
 
-            address = data.get("abuse", {}).get("address")
+            address = str(data.get("abuse", {}).get("address"))
 
-            phone = data.get("abuse", {}).get("phone")
+            phone = str(data.get("abuse", {}).get("phone"))
 
-            asn = data.get("asn", {}).get("asn")
+            asn = str(data.get("asn", {}).get("asn"))
 
-            abuser_score = data.get("asn", {}).get("abuser_score")
+            abuser_score = str(data.get("asn", {}).get("abuser_score"))
 
-            route = data.get("asn", {}).get("route")
+            route = str(data.get("asn", {}).get("route"))
 
-            descr = data.get("asn", {}).get("descr")
+            descr = str(data.get("asn", {}).get("descr"))
 
-            active = data.get("asn", {}).get("active")
+            active = str(data.get("asn", {}).get("active"))
 
-            org = data.get("asn", {}).get("org")
+            org = str(data.get("asn", {}).get("org"))
 
-            asn_domain = data.get("asn", {}).get("domain")
+            asn_domain = str(data.get("asn", {}).get("domain"))
 
-            abuse = data.get("asn", {}).get("abuse")
+            abuse = str(data.get("asn", {}).get("abuse"))
 
-            asn_type = data.get("asn", {}).get("type")
+            asn_type = str(data.get("asn", {}).get("type"))
 
-            created = data.get("asn", {}).get("created")
+            created = str(data.get("asn", {}).get("created"))
 
-            updated = data.get("asn", {}).get("updated")
+            updated = str(data.get("asn", {}).get("updated"))
 
-            asn_rir = data.get("asn", {}).get("rir")
+            asn_rir = str(data.get("asn", {}).get("rir"))
 
-            calling_code = data.get("location", {}).get("calling_code")
+            calling_code = str(data.get("location", {}).get("calling_code"))
 
-            continent = data.get("location", {}).get("continent")
+            continent = str(data.get("location", {}).get("continent"))
 
-            country = data.get("location", {}).get("country")
+            country = str(data.get("location", {}).get("country"))
 
-            state = data.get("location", {}).get("state")
+            state = str(data.get("location", {}).get("state"))
 
-            city = data.get("location", {}).get("city")
+            city = str(data.get("location", {}).get("city"))
 
             latitude = str(data.get("location", {}).get("latitude"))
 
@@ -96,7 +96,7 @@ while True:
 
             zip = str(data.get("location", {}).get("zip"))
 
-            timezone = data.get("location", {}).get("timezone")
+            timezone = str(data.get("location", {}).get("timezone"))
  
 
             console.print(" ")
