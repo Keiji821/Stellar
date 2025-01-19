@@ -86,6 +86,8 @@ while True:
 
             
 
+            
+
             console.print(" ")
             table = Table(title="Datos de la IP", title_justify="center", title_style="bold green")
             table.add_column("[bold green]Información", style="code", no_wrap=False)
