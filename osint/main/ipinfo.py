@@ -27,7 +27,7 @@ while True:
 
             table.add_row("[bold underline][code][bold green]Información de Red[/bold underline]", "")
             table.add_row("Red", str(data.get("network", "No disponible")))
-            table.add_row("Tipo de IP", str(data1.get("version", "No disponible")))
+            table.add_row("Tipo de IP", str(data.get("version", "No disponible")))
             table.add_row("TLD", str(data.get("country_tld", "No disponible")))
             table.add_row("ASN", str(data.get("asn", "No disponible")))
             table.add_row("Empresa", str(data.get("org", "No disponible")))
