@@ -110,10 +110,6 @@ apt-get upgrade -y && apt-get update -y && apt-get install -y git && git clone h
 | Chat tor |          |
 |----------|----------|
 | En desarrollo|      |    
-
-**Seguridad**
-La herramienta anonimiza toda acción usando tor en su termux.
-
 </details>
 
 <details>
