@@ -1,4 +1,4 @@
-import rich.console 
+from rich.console import Console
 import time
 import os
 from os import system
