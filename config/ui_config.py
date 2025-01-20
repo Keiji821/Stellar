@@ -11,6 +11,8 @@ banner = input()
 
 console.print("[code][bold green]Establecer fuente para el banner de texto, deje en blanco si no coloco un banner de texto.", justify="center")
 banner_font = input()
+if banner_font == "":
+    banner_font = "standard"
 
 console.print("[code][bold green]Establezca el texto personalizado de la input", justify="center")
 input_text = input()
