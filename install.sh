@@ -90,7 +90,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
 console.print(" ")
 
-if any(char.isalpha() for char in variable):
+if any(char.isalpha() for char in text_banner):
     f = Figlet(font=f"{font}")
     banner_text = f.renderText(text_banner)
 
