@@ -42,14 +42,34 @@ while True:
                 is_crawler = "No"
 
             is_datacenter = str(data.get("is_datacenter"))
+            if is_datacenter == "True":
+                is_datacenter = "Sí"
+            if is_datacenter == "False":
+                is_datacenter = "No"
 
             is_tor = str(data.get("is_tor"))
+            if is_tor == "True":
+                is_tor = "Sí"
+            if is_tor == "False":
+                is_tor = "No"  
 
             is_proxy = str(data.get("is_proxy"))
+            if is_proxy == "True":
+                is_proxy = "Sí"
+            if is_proxy == "False":
+                is_proxy = "No"
 
             is_vpn = str(data.get("is_vpn"))
+            if is_vpn == "True":
+                is_vpn = "Sí"
+            if is_vpn == "False":
+                is_vpn = "No"
 
             is_abuser = str(data.get("is_abuser"))
+            if is_abuser == "True":
+                is_abuser = "Sí"
+            if is_abuser == "False":
+                is_abuser = "No"
 
             company_name = str(data.get("company", {}).get("name"))
 
