@@ -11,13 +11,13 @@ try:
     if banner == "":
         banner = "Stellar"
     time.sleep(5)
-    
+    console.print("")
     console.print("[code][bold yellow]Establecer fuente para el banner de texto, deje en blanco si no coloco un banner de texto.", justify="center")
     banner_font = input()
     if banner_font == "":
         banner_font = "standard"
     time.sleep(5)
-        
+    console.print("")   
     console.print("[code][bold yellow]Establezca el texto personalizado de la input", justify="center")
     input_text = input()
     if input_text == "":
