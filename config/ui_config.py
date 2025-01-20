@@ -23,8 +23,12 @@ try:
     if input_text == "":
         input_text = "Stellar"
     time.sleep(5)
-    
-    os.system(f"""
+
+    console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
+except Exception as e:
+    print(f"[code][bold red]Error: {e}")
+time.sleep(2)
+os.system(f"""
 cd
 cd .configs_stellar
 cd themes
@@ -33,10 +37,3 @@ echo {banner_font} > banner_font.txt
 echo {input_text} > input.txt
 cd
 """)
-
-    time.sleep(5)
-
-    console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
-except Exception as e:
-    print(f"[code][bold red]Error: {e}")
-time.sleep(2)
