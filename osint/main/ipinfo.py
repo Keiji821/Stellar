@@ -36,6 +36,10 @@ while True:
                 is_mobile = "No"
 
             is_crawler = str(data.get("is_crawler"))
+            if is_crawler == "True":
+                is_crawler = "Sí"
+            if is_crawler == "False":
+                is_crawler = "No"
 
             is_datacenter = str(data.get("is_datacenter"))
 
