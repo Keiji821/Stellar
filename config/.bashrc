@@ -124,9 +124,9 @@ reload() {
 
 ui() {
  cd
+ cd Stellar/config
  python ui_config.py
  cd
-
 }
 
 # Utilidades - herramientas
