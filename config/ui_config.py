@@ -15,7 +15,7 @@ try:
     console.print("[bold yellow]Establecer fuente para el banner de texto.")
     banner_font = console.input("[bold green]> ")
     if banner_font == "":
-        banner_font = "Stellar"
+        banner_font = "standard"
     console.print("")   
     console.print("[bold yellow]Establezca el texto personalizado de la input")
     input_text = console.input("[bold green]> ")
