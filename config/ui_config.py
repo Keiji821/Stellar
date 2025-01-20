@@ -7,7 +7,7 @@ console = Console()
 
 try:
     console.print("[code][bold yellow]Establecer banner", justify="center")
-    banner = console.input(""" """)
+    banner = console.input()
     if banner == "":
         banner = "Stellar"
     time.sleep(5)
