@@ -25,6 +25,10 @@ while True:
             rir = str(data.get("rir"))
 
             is_bogon = str(data.get("is_bogon"))
+            if is_bogon == "True":
+                is_bogon = "Sí"
+            if is_bogon == "False":
+                is_bogon = "No"
 
             is_mobile = str(data.get("is_mobile"))
 
