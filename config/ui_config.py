@@ -6,19 +6,19 @@ from os import system
 console = Console()
 
 try:
-    console.print("[code][bold yellow]Establecer banner", justify="center")
+    console.print("[code][bold yellow]Establecer banner")
     banner = console.input()
     if banner == "":
         banner = "Stellar"
     time.sleep(5)
     console.print("")
-    console.print("[code][bold yellow]Establecer fuente para el banner de texto, deje en blanco si no coloco un banner de texto.", justify="center")
+    console.print("[code][bold yellow]Establecer fuente para el banner de texto, deje en blanco si no coloco un banner de texto.")
     banner_font = console.input()
     if banner_font == "":
         banner_font = "standard"
     time.sleep(5)
     console.print("")   
-    console.print("[code][bold yellow]Establezca el texto personalizado de la input", justify="center")
+    console.print("[code][bold yellow]Establezca el texto personalizado de la input")
     input_text = console.input()
     if input_text == "":
         input_text = "Stellar"
