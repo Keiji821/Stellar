@@ -21,8 +21,9 @@ try:
     input_text = console.input("[bold green]> ")
     if input_text == "":
         input_text = "Stellar"
-
+    console.print()
     console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
+    console.print()
 except Exception as e:
     print(f"[code][bold red]Error: {e}")
 time.sleep(2)
