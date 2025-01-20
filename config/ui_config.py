@@ -6,6 +6,7 @@ from os import system
 console = Console()
 
 try:
+    console.print()
     console.print("[code][bold yellow]Establecer banner")
     banner = console.input()
     if banner == "":
