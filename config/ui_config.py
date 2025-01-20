@@ -8,7 +8,7 @@ console = Console()
 try:
     console.print()
     console.print("[bold yellow]Establecer banner")
-    banner = console.input()
+    banner = console.input("[bold green]> ")
     if banner == "":
         banner = "Stellar"
     console.print("")
