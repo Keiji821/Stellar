@@ -21,7 +21,6 @@ while True:
             progress.update(task, advance=50)
 
             ip = str(data.get("ip"))
-            
             rir = str(data.get("rir"))
 
             is_bogon = str(data.get("is_bogon"))
@@ -31,6 +30,10 @@ while True:
                 is_bogon = "No"
 
             is_mobile = str(data.get("is_mobile"))
+            if is_mobile == "True":
+                is_mobile = "Sí"
+            if is_mobile == "False":
+                is_mobile = "No"
 
             is_crawler = str(data.get("is_crawler"))
 
