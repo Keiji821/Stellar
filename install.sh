@@ -89,8 +89,10 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
 [bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
 console.print(" ")
-f = Figlet(font=f"{font}")
-banner_text = f.renderText(text_banner)
+
+if any(char.isalpha() for char in variable):
+    f = Figlet(font=f"{font}")
+    banner_text = f.renderText(text_banner)
 
 terminal_width = os.get_terminal_size().columns
 
