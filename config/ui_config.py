@@ -8,7 +8,7 @@ console = Console()
 try:
     console.print()
     
-    main = console.input("[bold green]Elija el tipo de banner a agregar,[/bold green] [bold yellow][code]Ascii Art/Texto:[/code] ")
+    main = console.input("[bold green]Elija el tipo de banner a agregar,[/bold green] [bold yellow][code]Ascii Art/Texto:[/code][/bold yellow] ")
 
     if main == "Ascii Art":
         os.system("cd && nano .configs_stellar/themes/banner.txt")
