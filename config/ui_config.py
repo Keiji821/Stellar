@@ -7,21 +7,32 @@ console = Console()
 
 try:
     console.print()
+    
+    main = console.input("[bold green]Elija el tipo de banner a agregar,[/bold green] [bold yellow][code]Ascii Art/Texto: ")
+
+
+
     console.print("[bold yellow]Establecer banner")
     banner = console.input("[bold green]> ")
     if banner == "":
         banner = "Stellar"
     console.print("")
+
+
     console.print("[bold yellow]Establecer fuente para el banner de texto.")
     banner_font = console.input("[bold green]> ")
     if banner_font == "":
         banner_font = "standard"
-    console.print("")   
+    console.print("")
+
+
     console.print("[bold yellow]Establezca el texto personalizado de la input")
     input_text = console.input("[bold green]> ")
     if input_text == "":
         input_text = "Stellar"
     console.print()
+
+
     console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
     console.print()
 except Exception as e:
