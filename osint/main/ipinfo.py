@@ -115,9 +115,10 @@ while True:
 
             continent = str(data.get("location", {}).get("continent"))
             continent_tr = {
-'SA': 'Sudamérica',
-'EU': 'Europa',
-}           continent_es = continent_tr.get(continent)
+            'SA': 'Sudamérica',
+            'EU': 'Europa',
+}
+            continent_es = continent_tr.get(continent)
 
             country = str(data.get("location", {}).get("country"))
 
