@@ -96,6 +96,10 @@ while True:
             descr = str(data.get("asn", {}).get("descr"))
 
             active = str(data.get("asn", {}).get("active"))
+            if active == "True":
+                active = "Sí"
+            if active == "False":
+                active = "No"
 
             org = str(data.get("asn", {}).get("org"))
 
