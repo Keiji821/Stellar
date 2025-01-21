@@ -8,11 +8,10 @@ console = Console()
 try:
     console.print()
     
-    main = console.input("[bold green]Elija el tipo de banner a agregar,[/bold green] [bold yellow][code]Ascii Art/Texto: ")
+    main = console.input("[bold green]Elija el tipo de banner a agregar,[/bold green] [bold yellow][code]Ascii Art/Texto:[/code] ")
 
     if main == "Ascii Art":
-        os.system("nano .configs_stellar/themes/banner.txt")
-
+        os.system("cd && nano .configs_stellar/themes/banner.txt")
 
     if main == "Texto":
         console.print("[bold yellow]Establecer banner")
@@ -28,13 +27,11 @@ try:
             banner_font = "standard"
         console.print("")
 
-
     console.print("[bold yellow]Establezca el texto personalizado de la input")
     input_text = console.input("[bold green]> ")
     if input_text == "":
         input_text = "Stellar"
     console.print()
-
 
     console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
     console.print()
