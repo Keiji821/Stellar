@@ -94,14 +94,19 @@ if any(char.isalpha() for char in text_banner):
     f = Figlet(font=f"{font}")
     banner_text = f.renderText(text_banner)
 
-terminal_width = os.get_terminal_size().columns
-
-centered_banner = "\n".join(
-    line.center(terminal_width) for line in banner_text.splitlines()
+if any(char.isalpha() for char in text_banner):
+    terminal_width = os.get_terminal_size().columns
+    centered_banner = "\n".join(
+        line.center(terminal_width) for line in banner_text.splitlines()
 )
 
+if any(char.isalpha() for char in text_banner):
+    process = subprocess.Popen(['lolcat'], stdin=subprocess.PIPE)
+    process.communicate(input=centered_banner.encode())
+
 process = subprocess.Popen(['lolcat'], stdin=subprocess.PIPE)
-process.communicate(input=centered_banner.encode())
+process.communicate(input=text_banner.encode())
+
 console.print(" ")
 console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="center")
 
