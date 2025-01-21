@@ -114,6 +114,10 @@ while True:
             calling_code = str(data.get("location", {}).get("calling_code"))
 
             continent = str(data.get("location", {}).get("continent"))
+            continent_tr = {
+'SA': 'Sudamérica',
+'EU': 'Europa',
+}           continent_es = continent_tr.get(continent)
 
             country = str(data.get("location", {}).get("country"))
 
@@ -174,7 +178,7 @@ while True:
             table.add_row("Rir del asn", asn_rir)
             table.add_row("", "")
             table.add_row("[bold underline][code][bold green]Información Geográfica[/bold underline]", "")
-            table.add_row("Continente", continent)
+            table.add_row("Continente", continent_es)
             table.add_row("País", country)
             table.add_row("Estado", state)
             table.add_row("Ciudad", city)
