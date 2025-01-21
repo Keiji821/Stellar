@@ -174,7 +174,7 @@ while True:
             table.add_row("Router", route)
             table.add_row("Descripción", descr)
             table.add_row("Activo", active)
-            table.add_row("Página", org)
+            table.add_row("Organización", org)
             table.add_row("Dominio del asn", asn_domain)
             table.add_row("Abuser", abuse)
             table.add_row("Tipo de asn", asn_type)
