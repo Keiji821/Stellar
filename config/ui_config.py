@@ -18,7 +18,7 @@ try:
         banner = console.input("[bold green]> ")
         if banner == "":
             banner = "Stellar"
-        os.system("""
+        os.system(f"""
 cd 
 cd .configs_stellar/themes
 echo {banner} > banner.txt
@@ -30,7 +30,7 @@ cd""")
         banner_font = console.input("[bold green]> ")
         if banner_font == "":
             banner_font = "standard"
-        os.system("""
+        os.system(f"""
 cd 
 cd .configs_stellar/themes
 echo {banner_font} > banner_font.txt
@@ -41,7 +41,7 @@ cd""")
     input_text = console.input("[bold green]> ")
     if input_text == "":
         input_text = "By Keiji for you ❤️"
-    os.system("""
+    os.system(f"""
 cd 
 cd .configs_stellar/themes
 echo {input_text} > input.txt
