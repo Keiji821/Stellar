@@ -1,52 +1,43 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-import time
 import random
+import concurrent.futures
 from rich.console import Console
 from rich.table import Table
-from rich.progress import track
+from rich.progress import Progress
 from urllib.parse import quote
-import concurrent.futures
 
 console = Console()
 
-user_agents = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Firefox/81.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:80.0) Gecko/20100101 Firefox/80.0",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS;EN-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36 Edge/12.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 Edge/17.17134",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0"
 ]
 
-proxies = {
-    "http": "socks5h://127.0.0.1:9050",
-    "https": "socks5h://127.0.0.1:9050"
-}
+EMAIL_PATTERN = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
 
-def buscar_correos(url, consulta, filtro_dominios=None):
-    headers = {"User-Agent": random.choice(user_agents)}
+def obtener_headers():
+    return {"User-Agent": random.choice(USER_AGENTS), "Accept-Language": "es-ES,es;q=0.9"}
+
+def buscar_correos(url, filtro_dominios=None):
     emails_encontrados = set()
-    pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
-
+    
     try:
-        response = requests.get(url, timeout=10, headers=headers, proxies=proxies)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.content, 'html.parser')
-        text = soup.get_text()
-        found_emails = re.findall(pattern, text)
+        respuesta = requests.get(url, timeout=7, headers=obtener_headers())
+        respuesta.raise_for_status()
+        sopa = BeautifulSoup(respuesta.content, 'html.parser')
+        texto = sopa.get_text()
+        correos = re.findall(EMAIL_PATTERN, texto)
         
         if filtro_dominios:
-            found_emails = [email for email in found_emails if any(dom in email for dom in filtro_dominios)]
+            correos = [email for email in correos if any(dom in email for dom in filtro_dominios)]
         
-        emails_encontrados.update(found_emails)
+        emails_encontrados.update(correos)
 
-    except requests.exceptions.HTTPError as e:
-        console.print(f"[bold red]Error al acceder a {url}:[/bold red] {e}")
+    except requests.HTTPError as e:
+        console.print(f"[bold red]Error en {url}:[/bold red] {e}")
     except requests.RequestException as e:
         console.print(f"[bold red]Error de conexión a {url}:[/bold red] {e}")
 
@@ -88,7 +79,7 @@ def email_finder():
     console.print(f"\n[bold green]Buscando correos electrónicos para:[/bold green] {consulta}\n")
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        resultados = list(executor.map(lambda url: buscar_correos(url, consulta, filtro_dominios), urls))
+        resultados = list(executor.map(lambda url: buscar_correos(url, filtro_dominios), urls))
 
     for resultado in resultados:
         emails.update(resultado)
