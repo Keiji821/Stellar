@@ -78,7 +78,7 @@ def buscar_usuario(plataforma: str, username: str) -> Tuple[bool, str, str, str]
     """Verifica la existencia de un usuario en una plataforma específica"""
     config = PLATAFORMAS[plataforma]
     url = config["url"].format(quote(username))
-    
+
     try:
         respuesta = requests.get(
             url,
@@ -86,20 +86,20 @@ def buscar_usuario(plataforma: str, username: str) -> Tuple[bool, str, str, str]
             timeout=10,
             allow_redirects=False
         )
-        
+
         existencia = (
             respuesta.status_code != config["status_code"] and
             config["indicador"] not in respuesta.text and
             not any(config["indicador"] in redireccion.text for redireccion in respuesta.history)
         )
-        
+
         if existencia:
             titulo, descripcion = extraer_info(respuesta)
             return True, url, titulo, descripcion
-            
+
     except RequestException as e:
         pass
-        
+
     return False, url, "No disponible", "Sin información"
 
 def crear_tabla() -> Table:
@@ -115,7 +115,7 @@ def crear_tabla() -> Table:
 def procesar_resultados(futuros: dict, progreso: Progress, tarea: int) -> Table:
     """Procesa los resultados de las solicitudes concurrentes"""
     tabla = crear_tabla()
-    
+
     for futuro in as_completed(futuros):
         plataforma = futuros[futuro]
         try:
@@ -132,20 +132,20 @@ def procesar_resultados(futuros: dict, progreso: Progress, tarea: int) -> Table:
             tabla.add_row(plataforma, "[red]Error[/red]", "", "Error", str(e))
         finally:
             progreso.advance(tarea)
-    
+
     return tabla
 
 def verificar_usuario(username: str) -> None:
     """Coordina la verificación del usuario en todas las plataformas"""
     with Progress() as progreso:
         tarea = progreso.add_task("Buscando en redes sociales...", total=len(PLATAFORMAS))
-        
+
         with ThreadPoolExecutor(max_workers=8) as executor:
             futuros = {executor.submit(buscar_usuario, plataforma, username): plataforma 
                       for plataforma in PLATAFORMAS}
-            
+
             tabla = procesar_resultados(futuros, progreso, tarea)
-    
+
     console.print(tabla)
 
 if __name__ == "__main__":
