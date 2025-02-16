@@ -3,15 +3,11 @@ import aiohttp
 import httpx
 import random
 import logging
-import uvloop
 import aiocache
 from selectolax.parser import HTMLParser
 from rich.console import Console
 from rich.table import Table
-from rich.progress import Progress
 from urllib.parse import quote
-from io import BytesIO
-from PIL import Image
 
 console = Console()
 
@@ -68,22 +64,9 @@ async def extraer_info(html):
         titulo = tree.css_first("title").text(strip=True) if tree.css_first("title") else "No disponible"
         desc_meta = tree.css_first('meta[name="description"]')
         descripcion = desc_meta.attrs["content"].strip() if desc_meta else "Sin descripción"
-        img_meta = tree.css_first('meta[property="og:image"]')
-        img_url = img_meta.attrs["content"] if img_meta else None
-        return titulo, descripcion, img_url
+        return titulo, descripcion
     except Exception:
-        return "No disponible", "Sin descripción", None
-
-
-async def descargar_imagen(url):
-    """Descarga y muestra una imagen de perfil"""
-    async with httpx.AsyncClient() as client:
-        try:
-            response = await client.get(url, timeout=5)
-            img = Image.open(BytesIO(response.content))
-            img.show()
-        except Exception as e:
-            logging.warning(f"Error al descargar imagen {url}: {e}")
+        return "No disponible", "Sin descripción"
 
 
 async def buscar_usuario(session, plataforma, username):
@@ -94,14 +77,14 @@ async def buscar_usuario(session, plataforma, username):
 
     html, status = await fetch(session, url)
     if not html:
-        return plataforma, False, url, "No disponible", "Sin información", None
+        return plataforma, False, url, "No disponible", "Sin información"
 
     encontrado = status != config["status_code"] and config["indicador"] not in html
     if encontrado:
-        titulo, descripcion, img_url = await extraer_info(html)
-        return plataforma, True, url, titulo, descripcion, img_url
+        titulo, descripcion = await extraer_info(html)
+        return plataforma, True, url, titulo, descripcion
 
-    return plataforma, False, url, "No disponible", "Sin información", None
+    return plataforma, False, url, "No disponible", "Sin información"
 
 
 async def verificar_usuario(username):
@@ -122,17 +105,13 @@ def mostrar_resultados(username, resultados):
     tabla.add_column("Nombre", justify="left", max_width=20)
     tabla.add_column("Descripción", justify="left", max_width=40)
 
-    for plataforma, encontrado, url, nombre, descripcion, img_url in resultados:
+    for plataforma, encontrado, url, nombre, descripcion in resultados:
         estado = "[green]✔ Encontrado[/green]" if encontrado else "[red]❌ No encontrado[/red]"
         tabla.add_row(plataforma, estado, f"[link={url}]{url}[/link]", nombre[:20], descripcion[:40])
-
-        if encontrado and img_url:
-            asyncio.create_task(descargar_imagen(img_url))
 
     console.print(tabla)
 
 
 if __name__ == "__main__":
     username = console.input("[bold green]Introduce el nombre de usuario: [/bold green]").strip()
-    uvloop.install()
     asyncio.run(verificar_usuario(username))
