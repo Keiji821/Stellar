@@ -1,48 +1,56 @@
 import requests
-from time import time
+from time import time, sleep
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from rich.console import Console
-from rich.table import Table
-from rich.progress import Progress
 from bs4 import BeautifulSoup
 import random
 from typing import Dict, Tuple, List
 from requests.exceptions import RequestException
 from urllib.parse import quote
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.style import Style
+import json
 
 console = Console()
 
 PLATAFORMAS: Dict[str, Dict[str, str]] = {
-    "Twitter": {
-        "url": "https://twitter.com/{}",
-        "indicador": "This account doesn’t exist",
-        "status_code": 404
-    },
-    "Instagram": {
-        "url": "https://instagram.com/{}",
-        "indicador": "La página no está disponible",
-        "status_code": 200
-    },
-    "Facebook": {
-        "url": "https://www.facebook.com/{}",
-        "indicador": "Página no encontrada",
-        "status_code": 200
-    },
-    "Pinterest": {
-        "url": "https://pinterest.com/{}",
-        "indicador": "Lo sentimos, esta página no está disponible",
-        "status_code": 404
-    },
-    "YouTube": {
-        "url": "https://www.youtube.com/@{}",
-        "indicador": "Este canal no está disponible",
-        "status_code": 200
-    },
-    "TikTok": {
-        "url": "https://www.tiktok.com/@{}",
-        "indicador": "Couldn't find this account",
-        "status_code": 200
-    }
+    "Twitter": {"url": "https://twitter.com/{}", "indicador": "This account doesn’t exist", "status_code": 404},
+    "Instagram": {"url": "https://instagram.com/{}", "indicador": "La página no está disponible", "status_code": 200},
+    "Facebook": {"url": "https://www.facebook.com/{}", "indicador": "Página no encontrada", "status_code": 200},
+    "Pinterest": {"url": "https://pinterest.com/{}", "indicador": "Lo sentimos, esta página no está disponible", "status_code": 404},
+    "YouTube": {"url": "https://www.youtube.com/@{}", "indicador": "Este canal no está disponible", "status_code": 200},
+    "TikTok": {"url": "https://www.tiktok.com/@{}", "indicador": "Couldn't find this account", "status_code": 200},
+    "Reddit": {"url": "https://www.reddit.com/user/{}", "indicador": "Sorry, nobody on Reddit goes by that name", "status_code": 404},
+    "GitHub": {"url": "https://github.com/{}", "indicador": "Not Found", "status_code": 404},
+    "LinkedIn": {"url": "https://www.linkedin.com/in/{}", "indicador": "This profile is not available", "status_code": 404},
+    "Twitch": {"url": "https://www.twitch.tv/{}", "indicador": "This channel is unavailable", "status_code": 404},
+    "Snapchat": {"url": "https://www.snapchat.com/add/{}", "indicador": "Sorry, we couldn't find that user", "status_code": 404},
+    "Spotify": {"url": "https://open.spotify.com/user/{}", "indicador": "Page not found", "status_code": 404},
+    "Steam": {"url": "https://steamcommunity.com/id/{}", "indicador": "The specified profile could not be found", "status_code": 404},
+    "Tumblr": {"url": "https://{}.tumblr.com", "indicador": "There's nothing here", "status_code": 404},
+    "Flickr": {"url": "https://www.flickr.com/people/{}", "indicador": "Page Not Found", "status_code": 404},
+    "Vimeo": {"url": "https://vimeo.com/{}", "indicador": "Sorry, we couldn’t find that page", "status_code": 404},
+    "SoundCloud": {"url": "https://soundcloud.com/{}", "indicador": "Oops! We can’t find that page", "status_code": 404},
+    "Medium": {"url": "https://medium.com/@{}", "indicador": "Page not found", "status_code": 404},
+    "DeviantArt": {"url": "https://{}.deviantart.com", "indicador": "Page Not Found", "status_code": 404},
+    "Quora": {"url": "https://www.quora.com/profile/{}", "indicador": "Oops! The page you were looking for doesn’t exist", "status_code": 404},
+    "Wikipedia": {"url": "https://en.wikipedia.org/wiki/User:{}", "indicador": "User does not exist", "status_code": 404},
+    "Patreon": {"url": "https://www.patreon.com/{}", "indicador": "This page is not available", "status_code": 404},
+    "Dribbble": {"url": "https://dribbble.com/{}", "indicador": "Page not found", "status_code": 404},
+    "Behance": {"url": "https://www.behance.net/{}", "indicador": "Page Not Found", "status_code": 404},
+    "Goodreads": {"url": "https://www.goodreads.com/{}", "indicador": "Page not found", "status_code": 404},
+    "Bandcamp": {"url": "https://bandcamp.com/{}", "indicador": "Page not found", "status_code": 404},
+    "CodePen": {"url": "https://codepen.io/{}", "indicador": "Page not found", "status_code": 404},
+    "HackerRank": {"url": "https://www.hackerrank.com/{}", "indicador": "Page not found", "status_code": 404},
+    "LeetCode": {"url": "https://leetcode.com/{}", "indicador": "Page not found", "status_code": 404},
+    "Kaggle": {"url": "https://www.kaggle.com/{}", "indicador": "Page not found", "status_code": 404},
+    "StackOverflow": {"url": "https://stackoverflow.com/users/{}", "indicador": "Page not found", "status_code": 404},
+    "Keybase": {"url": "https://keybase.io/{}", "indicador": "Page not found", "status_code": 404},
+    "Bitbucket": {"url": "https://bitbucket.org/{}", "indicador": "Page not found", "status_code": 404},
+    "GitLab": {"url": "https://gitlab.com/{}", "indicador": "Page not found", "status_code": 404},
+    "ReverbNation": {"url": "https://www.reverbnation.com/{}", "indicador": "Page not found", "status_code": 404},
 }
 
 USER_AGENTS: List[str] = [
@@ -51,8 +59,7 @@ USER_AGENTS: List[str] = [
     "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0"
 ]
 
-def obtener_headers() -> Dict[str, str]:
-    """Genera headers aleatorios para las solicitudes HTTP"""
+def obtener_headers():
     return {
         "User-Agent": random.choice(USER_AGENTS),
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -63,90 +70,105 @@ def obtener_headers() -> Dict[str, str]:
         "DNT": "1" if random.random() > 0.5 else "0"
     }
 
-def extraer_info(respuesta: requests.Response) -> Tuple[str, str]:
-    """Extrae metadatos de la página web"""
+def extraer_info(respuesta):
     try:
         sopa = BeautifulSoup(respuesta.text, "html.parser")
         titulo = sopa.title.string.strip() if sopa.title else "No disponible"
         meta_desc = sopa.find("meta", {"name": "description"})
         descripcion = meta_desc["content"].strip() if meta_desc and meta_desc.get("content") else "Sin descripción"
         return titulo, descripcion
-    except Exception as e:
+    except Exception:
         return "No disponible", "Sin descripción"
 
-def buscar_usuario(plataforma: str, username: str) -> Tuple[bool, str, str, str]:
-    """Verifica la existencia de un usuario en una plataforma específica"""
+def buscar_usuario(plataforma, username):
     config = PLATAFORMAS[plataforma]
     url = config["url"].format(quote(username))
-
     try:
-        respuesta = requests.get(
-            url,
-            headers=obtener_headers(),
-            timeout=10,
-            allow_redirects=False
-        )
-
+        respuesta = requests.get(url, headers=obtener_headers(), timeout=10, allow_redirects=False)
         existencia = (
             respuesta.status_code != config["status_code"] and
             config["indicador"] not in respuesta.text and
             not any(config["indicador"] in redireccion.text for redireccion in respuesta.history)
         )
-
         if existencia:
             titulo, descripcion = extraer_info(respuesta)
             return True, url, titulo, descripcion
-
-    except RequestException as e:
+    except RequestException:
         pass
-
     return False, url, "No disponible", "Sin información"
 
-def crear_tabla() -> Table:
-    """Crea la estructura de la tabla para resultados"""
-    tabla = Table(title="Resultados de Búsqueda", show_header=True, header_style="bold blue")
-    tabla.add_column("Plataforma", justify="left")
-    tabla.add_column("Estado", justify="center")
-    tabla.add_column("URL", justify="left", max_width=30)
-    tabla.add_column("Nombre", justify="left", max_width=20)
-    tabla.add_column("Descripción", justify="left", max_width=40)
-    return tabla
+def mostrar_resultado(plataforma, encontrado, url, nombre, descripcion):
+    estado = Text("Encontrado", style="bold green") if encontrado else Text("No encontrado", style="bold red")
+    panel = Panel(
+        Text.assemble(
+            (f"Plataforma: {plataforma}\n", "bold cyan"),
+            (f"Estado: ", "bold"), estado, "\n",
+            (f"URL: {url}\n", "blue"),
+            (f"Nombre: {nombre}\n", "green"),
+            (f"Descripción: {descripcion}", "yellow")
+        ),
+        border_style="bold magenta" if encontrado else "bold red",
+        title=f"Resultado en {plataforma}",
+        title_align="left"
+    )
+    console.print(panel)
 
-def procesar_resultados(futuros: dict, progreso: Progress, tarea: int) -> Table:
-    """Procesa los resultados de las solicitudes concurrentes"""
-    tabla = crear_tabla()
+def guardar_resultados(username, resultados):
+    with open(f"resultados_{username}.json", "w", encoding="utf-8") as archivo:
+        json.dump(resultados, archivo, ensure_ascii=False, indent=4)
+    console.print(f"[bold green]Resultados guardados en 'resultados_{username}.json'[/bold green]")
 
-    for futuro in as_completed(futuros):
-        plataforma = futuros[futuro]
-        try:
-            encontrado, url, nombre, bio = futuro.result()
-            estado = "[green]Encontrado[/green]" if encontrado else "[red]No encontrado[/red]"
-            tabla.add_row(
-                plataforma,
-                estado,
-                f"[link={url}]{url}[/link]",
-                nombre[:20] + "..." if len(nombre) > 20 else nombre,
-                bio[:40] + "..." if len(bio) > 40 else bio
-            )
-        except Exception as e:
-            tabla.add_row(plataforma, "[red]Error[/red]", "", "Error", str(e))
-        finally:
-            progreso.advance(tarea)
+def mostrar_resumen(encontrados, no_encontrados):
+    resumen = Panel(
+        Text.assemble(
+            (f"Resumen de búsqueda:\n", "bold cyan"),
+            (f"Plataformas encontradas: {encontrados}\n", "bold green"),
+            (f"Plataformas no encontradas: {no_encontrados}", "bold red")
+        ),
+        border_style="bold blue",
+        title="Resumen",
+        title_align="left"
+    )
+    console.print(resumen)
 
-    return tabla
+def verificar_usuario(username):
+    resultados = []
+    encontrados = 0
+    no_encontrados = 0
 
-def verificar_usuario(username: str) -> None:
-    """Coordina la verificación del usuario en todas las plataformas"""
-    with Progress() as progreso:
-        tarea = progreso.add_task("Buscando en redes sociales...", total=len(PLATAFORMAS))
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        transient=True
+    ) as progress:
+        task = progress.add_task("[cyan]Buscando en plataformas...", total=len(PLATAFORMAS))
 
         with ThreadPoolExecutor(max_workers=8) as executor:
-            futuros = {executor.submit(buscar_usuario, plataforma, username): plataforma 
-                      for plataforma in PLATAFORMAS}
+            futuros = {executor.submit(buscar_usuario, plataforma, username): plataforma for plataforma in PLATAFORMAS}
+            for futuro in as_completed(futuros):
+                plataforma = futuros[futuro]
+                try:
+                    encontrado, url, nombre, bio = futuro.result()
+                    resultados.append({
+                        "plataforma": plataforma,
+                        "encontrado": encontrado,
+                        "url": url,
+                        "nombre": nombre,
+                        "descripcion": bio
+                    })
+                    mostrar_resultado(plataforma, encontrado, url, nombre, bio)
+                    if encontrado:
+                        encontrados += 1
+                    else:
+                        no_encontrados += 1
+                except Exception as e:
+                    console.print(f"[!] Error en {plataforma}: {str(e)}", style="bold red")
+                finally:
+                    progress.update(task, advance=1)
 
-            tabla = procesar_resultados(futuros, progreso, tarea)
-
-    console.print(tabla)
+    if resultados:
+        guardar_resultados(username, resultados)
+        mostrar_resumen(encontrados, no_encontrados)
 
 if __name__ == "__main__":
     usuario = console.input("[bold green]Introduce el nombre de usuario: [/bold green]")
