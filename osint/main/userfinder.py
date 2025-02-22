@@ -1,5 +1,5 @@
 import requests
-from time import time, sleep
+from time import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from bs4 import BeautifulSoup
 import random
@@ -98,16 +98,16 @@ def buscar_usuario(plataforma, username):
     return False, url, "No disponible", "Sin información"
 
 def mostrar_resultado(plataforma, encontrado, url, nombre, descripcion):
-    estado = Text("Encontrado", style="bold green") if encontrado else Text("No encontrado", style="bold red")
+    estado = Text("Encontrado", style="bold green") if encontrado else Text("No encontrado", style="bold white")
     panel = Panel(
         Text.assemble(
-            (f"Plataforma: {plataforma}\n", "bold cyan"),
-            (f"Estado: ", "bold"), estado, "\n",
-            (f"URL: {url}\n", "blue"),
-            (f"Nombre: {nombre}\n", "green"),
-            (f"Descripción: {descripcion}", "yellow")
+            (f"Plataforma: {plataforma}\n", "bold white"),
+            (f"Estado: ", "bold white"), estado, "\n",
+            (f"URL: {url}\n", "bold white"),
+            (f"Nombre: {nombre}\n", "bold white"),
+            (f"Descripción: {descripcion}", "bold white")
         ),
-        border_style="bold magenta" if encontrado else "bold red",
+        border_style="bold green" if encontrado else "bold white",
         title=f"Resultado en {plataforma}",
         title_align="left"
     )
@@ -121,11 +121,11 @@ def guardar_resultados(username, resultados):
 def mostrar_resumen(encontrados, no_encontrados):
     resumen = Panel(
         Text.assemble(
-            (f"Resumen de búsqueda:\n", "bold cyan"),
+            (f"Resumen de búsqueda:\n", "bold white"),
             (f"Plataformas encontradas: {encontrados}\n", "bold green"),
-            (f"Plataformas no encontradas: {no_encontrados}", "bold red")
+            (f"Plataformas no encontradas: {no_encontrados}", "bold white")
         ),
-        border_style="bold blue",
+        border_style="bold green",
         title="Resumen",
         title_align="left"
     )
@@ -141,7 +141,7 @@ def verificar_usuario(username):
         TextColumn("[progress.description]{task.description}"),
         transient=True
     ) as progress:
-        task = progress.add_task("[cyan]Buscando en plataformas...", total=len(PLATAFORMAS))
+        task = progress.add_task("[bold white]Buscando en plataformas...", total=len(PLATAFORMAS))
 
         with ThreadPoolExecutor(max_workers=8) as executor:
             futuros = {executor.submit(buscar_usuario, plataforma, username): plataforma for plataforma in PLATAFORMAS}
@@ -162,7 +162,7 @@ def verificar_usuario(username):
                     else:
                         no_encontrados += 1
                 except Exception as e:
-                    console.print(f"[!] Error en {plataforma}: {str(e)}", style="bold red")
+                    console.print(f"[!] Error en {plataforma}: {str(e)}", style="bold white")
                 finally:
                     progress.update(task, advance=1)
 
@@ -174,4 +174,4 @@ if __name__ == "__main__":
     usuario = console.input("[bold green]Introduce el nombre de usuario: [/bold green]")
     inicio = time()
     verificar_usuario(usuario.strip())
-    console.print(f"[bold yellow]Tiempo total: {time() - inicio:.2f}s[/bold yellow]")
+    console.print(f"[bold green]Tiempo total: {time() - inicio:.2f}s[/bold green]")
