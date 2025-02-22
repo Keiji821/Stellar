@@ -9,9 +9,7 @@ from urllib.parse import quote
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
-from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.style import Style
-import json
 
 console = Console()
 
@@ -113,11 +111,6 @@ def mostrar_resultado(plataforma, encontrado, url, nombre, descripcion):
     )
     console.print(panel)
 
-def guardar_resultados(username, resultados):
-    with open(f"resultados_{username}.json", "w", encoding="utf-8") as archivo:
-        json.dump(resultados, archivo, ensure_ascii=False, indent=4)
-    console.print(f"[bold green]Resultados guardados en 'resultados_{username}.json'[/bold green]")
-
 def mostrar_resumen(encontrados, no_encontrados):
     resumen = Panel(
         Text.assemble(
@@ -136,39 +129,28 @@ def verificar_usuario(username):
     encontrados = 0
     no_encontrados = 0
 
-    with Progress(
-        SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
-        transient=True
-    ) as progress:
-        task = progress.add_task("[bold white]Buscando en plataformas...", total=len(PLATAFORMAS))
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futuros = {executor.submit(buscar_usuario, plataforma, username): plataforma for plataforma in PLATAFORMAS}
+        for futuro in as_completed(futuros):
+            plataforma = futuros[futuro]
+            try:
+                encontrado, url, nombre, bio = futuro.result()
+                resultados.append({
+                    "plataforma": plataforma,
+                    "encontrado": encontrado,
+                    "url": url,
+                    "nombre": nombre,
+                    "descripcion": bio
+                })
+                mostrar_resultado(plataforma, encontrado, url, nombre, bio)
+                if encontrado:
+                    encontrados += 1
+                else:
+                    no_encontrados += 1
+            except Exception as e:
+                console.print(f"[!] Error en {plataforma}: {str(e)}", style="bold white")
 
-        with ThreadPoolExecutor(max_workers=8) as executor:
-            futuros = {executor.submit(buscar_usuario, plataforma, username): plataforma for plataforma in PLATAFORMAS}
-            for futuro in as_completed(futuros):
-                plataforma = futuros[futuro]
-                try:
-                    encontrado, url, nombre, bio = futuro.result()
-                    resultados.append({
-                        "plataforma": plataforma,
-                        "encontrado": encontrado,
-                        "url": url,
-                        "nombre": nombre,
-                        "descripcion": bio
-                    })
-                    mostrar_resultado(plataforma, encontrado, url, nombre, bio)
-                    if encontrado:
-                        encontrados += 1
-                    else:
-                        no_encontrados += 1
-                except Exception as e:
-                    console.print(f"[!] Error en {plataforma}: {str(e)}", style="bold white")
-                finally:
-                    progress.update(task, advance=1)
-
-    if resultados:
-        guardar_resultados(username, resultados)
-        mostrar_resumen(encontrados, no_encontrados)
+    mostrar_resumen(encontrados, no_encontrados)
 
 if __name__ == "__main__":
     usuario = console.input("[bold green]Introduce el nombre de usuario: [/bold green]")
