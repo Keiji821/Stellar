@@ -204,5 +204,5 @@ class UserSearch:
 
 if __name__ == "__main__":
     user_input = Console().input("[bold green]Introduce el nombre de usuario o real: [/bold green]")
-    console.print()
+    Console().print()
     UserSearch(user_input).run()
