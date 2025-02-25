@@ -104,7 +104,8 @@ if any(char.isalpha() for char in text_banner):
     process = subprocess.Popen(['lolcat'], stdin=subprocess.PIPE)
     process.communicate(input=centered_banner.encode())
 
-console.print(f"[code]{text_banner}[/code]", justify="center")
+if not any(char.isalpha() for char in text_banner):
+    console.print(f"[code]{text_banner}[/code]", justify="center")
 
 console.print(" ")
 console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="center")
