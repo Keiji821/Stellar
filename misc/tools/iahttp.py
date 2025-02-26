@@ -29,8 +29,8 @@ def print_ai_response(response):
 
     MARKDOWN = wrapped_response
     md = Markdown(MARKDOWN)
-    table.add_row(md)
-    console.print(f"[code]table")
+    response = table.add_row(md)
+    console.print(f"[code]response")
     console.print(" ")
 
 while True:
