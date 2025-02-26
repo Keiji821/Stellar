@@ -31,7 +31,7 @@ def print_ai_response(response):
     md = Markdown(MARKDOWN)
     table.add_row(md)
     console.print(table)
-    console.print(f"[code]{md}")
+    console.print(" ")
 
 while True:
     user_input = console.input("[bold green]> [/bold green]")
