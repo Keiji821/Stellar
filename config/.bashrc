@@ -138,7 +138,7 @@ ia() {
  cd
 }
 
-ia image() {
+ia-image() {
  cd
  cd Stellar/misc/tools
  python ia_image.py
