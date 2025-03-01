@@ -13,7 +13,7 @@ import os
 console = Console()
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 HISTORIAL_ARCHIVO = 'historial_chat.json'
-MAX_CONTEXT_MESSAGES = 100
+MAX_CONTEXT_MESSAGES = 50
 conversation_history = []
 
 def cargar_historial():
