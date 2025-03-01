@@ -80,8 +80,9 @@ def get_ai_response(user_input):
     return None
 
 def display_response(response):
+    console.print("")
     table = Table(title="Respuesta de LlaMa IA", title_justify="center", title_style="bold magenta")
-    table.add_column("Respuesta", style="white")
+    table.add_column("Respuesta", style="code")
     table.add_row(Markdown(response))
     console.print(table)
     console.print("\n")
