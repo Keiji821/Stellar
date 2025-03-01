@@ -25,10 +25,11 @@ def translate(text, target_language):
         console.print(f"[bold blue]Response content:[/bold blue] {response.text}")
 
         if response.status_code == 200:
-            return response.json().get("translatedText")
-        else:
-            console.print(f"[bold red]Error:[/bold red] {response.status_code}")
-            return None
+            data = response.json()
+            if data.get("status") == "true" and data.get("result"):
+                return data["result"][0].get("output")
+        console.print(f"[bold red]Error:[/bold red] No se pudo obtener la traducción.")
+        return None
     except requests.exceptions.RequestException as e:
         console.print(f"[bold red]Error en la solicitud:[/bold red] {e}")
         return None
