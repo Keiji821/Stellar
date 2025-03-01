@@ -176,7 +176,7 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando nmap"
+ printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
  echo
  apt-get install -y termux-api
  sleep 5
