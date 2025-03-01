@@ -60,4 +60,4 @@ if __name__ == "__main__":
         display_translation(text_to_translate, translated_text)
     else:
         console.print("[bold red]No se pudo obtener la traducción.[/bold red]")
-console.pring("")
+console.print("")
