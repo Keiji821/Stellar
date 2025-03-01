@@ -1,3 +1,4 @@
+
 import requests
 from rich.console import Console
 from rich.table import Table
@@ -24,7 +25,8 @@ def display_translation(original, translated):
     console.print(table)
 
 if __name__ == "__main__":
-    text_to_translate = "Hello World! This is the output in French"
-    translated_text = translate(text_to_translate, "fr")
+    text_to_translate = input("Introduce el texto a traducir: ")
+    target_language = input("Introduce el idioma al que deseas traducir (ej. 'fr' para francés): ")
+    translated_text = translate(text_to_translate, target_language)
     if translated_text:
         display_translation(text_to_translate, translated_text)
