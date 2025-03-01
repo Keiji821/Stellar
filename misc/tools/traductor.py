@@ -17,13 +17,8 @@ def translate(text, target_language):
     url = f"https://api.kastg.xyz/api/tool/translate?input={encoded_text}&to={target_language}&from=auto"
     headers = {"Authorization": f"Bearer {API_KEY}"}
 
-    console.print(f"[bold blue]Sending request to:[/bold blue] {url}")
-
     try:
         response = requests.get(url, headers=headers)
-        console.print(f"[bold blue]Response status code:[/bold blue] {response.status_code}")
-        console.print(f"[bold blue]Response content:[/bold blue] {response.text}")
-
         if response.status_code == 200:
             data = response.json()
             if data.get("status") == "true" and data.get("result"):
@@ -39,13 +34,17 @@ def display_translation(original, translated):
         Text(original, style="bold white"),
         title="[bold magenta]Texto Original[/bold magenta]",
         border_style="blue",
-        padding=(1, 2))
+        width=50,
+        padding=(1, 2),
+        expand=False)
     
     translated_panel = Panel(
         Text(translated, style="bold green"),
         title="[bold magenta]Texto Traducido[/bold magenta]",
         border_style="green",
-        padding=(1, 2))
+        width=50,
+        padding=(1, 2),
+        expand=False)
     
     console.print(original_panel)
     console.print(translated_panel)
