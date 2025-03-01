@@ -50,8 +50,9 @@ def display_translation(original, translated):
     console.print(translated_panel)
 
 if __name__ == "__main__":
-    text_to_translate = input("Introduce el texto a traducir: ")
-    target_language = input("Introduce el idioma al que deseas traducir (ej. 'fr' para francés): ")
+    text_to_translate = console.input("[bold green]Introduce el texto a traducir: [/bold green]")
+    target_language = console.input("[bold green]Introduce el idioma al que deseas traducir (ej. 'en' para inglés: [/bold green]")
+    console.print("")
     
     translated_text = translate(text_to_translate, target_language)
     
@@ -59,3 +60,4 @@ if __name__ == "__main__":
         display_translation(text_to_translate, translated_text)
     else:
         console.print("[bold red]No se pudo obtener la traducción.[/bold red]")
+console.pring("")
