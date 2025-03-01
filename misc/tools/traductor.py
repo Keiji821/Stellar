@@ -1,4 +1,3 @@
-
 import requests
 from rich.console import Console
 from rich.table import Table
@@ -10,7 +9,10 @@ API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 def translate(text, target_language):
     url = f"https://api.kastg.xyz/api/tool/translate?input={text}&to={target_language}&from=auto"
     headers = {"Authorization": f"Bearer {API_KEY}"}
+    console.print(f"Sending request to: {url}")  # Debug: URL being requested
     response = requests.get(url, headers=headers)
+    console.print(f"Response status code: {response.status_code}")  # Debug: Response status code
+    console.print(f"Response content: {response.content}")  # Debug: Response content
     if response.status_code == 200:
         return response.json().get("translatedText")
     else:
@@ -30,3 +32,5 @@ if __name__ == "__main__":
     translated_text = translate(text_to_translate, target_language)
     if translated_text:
         display_translation(text_to_translate, translated_text)
+    else:
+        console.print("No se pudo obtener la traducción.")
