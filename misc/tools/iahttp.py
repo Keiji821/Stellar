@@ -85,7 +85,7 @@ def display_response(response):
     console.print("\n")
 
 def main():
-    console.print(Panel("[bold blue]Chat LlaMa IA[/bold blue]\n[dim]Tu asistente virtual de inteligencia artificial[/dim]", title="Bienvenido", title_align="center"))
+    console.print(Panel("[bold green]Chat LlaMa IA[/bold blue]\n[bold white]Tu asistente virtual de inteligencia artificial[/bold white]", title="Bienvenido", title_align="center"))
 
     while True:
         user_input = Prompt.ask("[bold green]Tú >[/bold green] ", default="")
