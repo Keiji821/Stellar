@@ -138,6 +138,13 @@ ia() {
  cd
 }
 
+ia image() {
+ cd
+ cd Stellar/misc/tools
+ python ia_image.py
+ cd
+}
+
 traductor() {
  cd
  cd Stellar/misc/tools
