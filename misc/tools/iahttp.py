@@ -13,7 +13,7 @@ from rich.table import Table
 console = Console()
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 HISTORIAL_ARCHIVO = 'historial_chat.json'
-MAX_CONTEXT_MESSAGES = 15
+MAX_CONTEXT_MESSAGES = 10
 TIMEOUT = 10
 
 def cargar_historial():
