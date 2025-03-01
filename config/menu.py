@@ -15,7 +15,8 @@ categories = [
         {"name": "ui", "description": "Te permite personalizar el banner y la fuente del banner asi como el texto de la input."}
     ]},
     {"title": "UTILIDADES", "commands": [
-        {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante una API gratis."},
+        {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante una API gratuita."},
+        {"name": "traductor", "description": "Un pequeño servicio de traducción mediante una API gratuita."},
         {"name": "myip", "description": "Muestra tu ip real y recupera información de la misma."},
     ]},
     {"title": "OSINT", "commands": [
