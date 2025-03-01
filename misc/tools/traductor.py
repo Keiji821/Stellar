@@ -4,7 +4,7 @@ from rich.table import Table
 
 console = Console()
 
-API_KEY = ""
+API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 
 def translate(text, target_language):
     url = f"https://api.kastg.xyz/api/tool/translate?input={text}&to={target_language}&from=auto"
