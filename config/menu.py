@@ -16,6 +16,7 @@ categories = [
     ]},
     {"title": "UTILIDADES", "commands": [
         {"name": "ia", "description": "Un pequeño servicio de inteligencia artificial mediante una API gratuita."},
+        {"name": "ia image", "description": "Un pequeño servicio de inteligencia artificial para generar imágenes mediante una API gratuita."},
         {"name": "traductor", "description": "Un pequeño servicio de traducción mediante una API gratuita."},
         {"name": "myip", "description": "Muestra tu ip real y recupera información de la misma."},
     ]},
