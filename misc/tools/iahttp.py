@@ -1,7 +1,6 @@
 import os
 import json
 import requests
-import textwrap
 import urllib.parse
 from rich.console import Console
 from rich.panel import Panel
@@ -20,8 +19,8 @@ def cargar_historial():
         try:
             with open(HISTORIAL_ARCHIVO, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except (json.JSONDecodeError, IOError):
-            console.print("[bold red]Error al cargar el historial. Se iniciará uno nuevo.[/bold red]")
+        except (json.JSONDecodeError, IOError) as e:
+            console.print(f"[bold red]Error al cargar el historial: {e}. Se iniciará uno nuevo.[/bold red]")
     return []
 
 def guardar_en_historial(historial):
@@ -31,9 +30,7 @@ def guardar_en_historial(historial):
     except IOError as e:
         console.print(f"[bold red]Error al guardar el historial: {e}[/bold red]")
 
-conversation_history = cargar_historial()
-
-def get_ai_response(user_input):
+def get_ai_response(user_input, historial):
     if not API_KEY:
         console.print("[bold red]Error: Clave de API no configurada.[/bold red]")
         return None
@@ -42,7 +39,7 @@ def get_ai_response(user_input):
         console.print("[bold red]Error: Entrada vacía.[/bold red]")
         return None
 
-    context = conversation_history[-MAX_CONTEXT_MESSAGES:]
+    context = historial[-MAX_CONTEXT_MESSAGES:]
     prompt_lines = [f"{entry['role']}: {entry['message']}" for entry in context]
     prompt_lines.append(f"Usuario: {user_input}")
     prompt = "\n".join(prompt_lines)
@@ -85,6 +82,7 @@ def display_response(response):
 
 def main():
     console.print(Panel("[bold green]Chat LlaMa IA[/bold green]", title="[code][bold yellow]Bienvenido", title_align="center"))
+    historial = cargar_historial()
 
     while True:
         user_input = Prompt.ask("[bold green]Tú >[/bold green] ", default="")
@@ -93,11 +91,11 @@ def main():
             console.print("[bold yellow]¡Hasta luego![/bold yellow]")
             break
 
-        ai_response = get_ai_response(user_input)
+        ai_response = get_ai_response(user_input, historial)
         if ai_response:
-            conversation_history.append({"role": "Usuario", "message": user_input})
-            conversation_history.append({"role": "IA", "message": ai_response})
-            guardar_en_historial(conversation_history)
+            historial.append({"role": "Usuario", "message": user_input})
+            historial.append({"role": "IA", "message": ai_response})
+            guardar_en_historial(historial)
             display_response(ai_response)
         else:
             console.print("[bold red]No se pudo obtener una respuesta de la IA.[/bold red]")
