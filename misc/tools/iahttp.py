@@ -12,7 +12,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 console = Console()
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 HISTORIAL_ARCHIVO = 'historial_chat.json'
-MAX_CONTEXT_MESSAGES = 5  # Reduce el número de mensajes de contexto
+MAX_CONTEXT_MESSAGES = 5
 TIMEOUT = 10
 
 def cargar_historial():
