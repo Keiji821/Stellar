@@ -48,13 +48,16 @@ def get_ai_response(user_input):
     prompt_lines.append(f"Usuario: {user_input}")
     prompt = "\n".join(prompt_lines)
 
-    encoded_prompt = urllib.parse.quote(prompt)
-    url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={API_KEY}&prompt={encoded_prompt}"
+    url = "https://api.kastg.xyz/api/ai/fast-llamaV3-large"
+    payload = {
+        "key": API_KEY,
+        "prompt": prompt
+    }
 
     try:
         with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True, console=console) as progress:
             progress.add_task(description="Obteniendo respuesta de la IA...", total=None)
-            response = requests.get(url, timeout=TIMEOUT)
+            response = requests.post(url, json=payload, timeout=TIMEOUT)
             response.raise_for_status()
 
             data = response.json()
