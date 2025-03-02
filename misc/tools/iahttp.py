@@ -8,12 +8,11 @@ from rich.panel import Panel
 from rich.markdown import Markdown
 from rich.prompt import Prompt
 from rich.progress import Progress, SpinnerColumn, TextColumn
-from rich.table import Table
 
 console = Console()
 API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 HISTORIAL_ARCHIVO = 'historial_chat.json'
-MAX_CONTEXT_MESSAGES = 10
+MAX_CONTEXT_MESSAGES = 5  # Reduce el número de mensajes de contexto
 TIMEOUT = 10
 
 def cargar_historial():
@@ -48,16 +47,13 @@ def get_ai_response(user_input):
     prompt_lines.append(f"Usuario: {user_input}")
     prompt = "\n".join(prompt_lines)
 
-    url = "https://api.kastg.xyz/api/ai/fast-llamaV3-large"
-    payload = {
-        "key": API_KEY,
-        "prompt": prompt
-    }
+    encoded_prompt = urllib.parse.quote(prompt[:2000])  # Limitar la longitud del prompt
+    url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={API_KEY}&prompt={encoded_prompt}"
 
     try:
         with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True, console=console) as progress:
             progress.add_task(description="Obteniendo respuesta de la IA...", total=None)
-            response = requests.post(url, json=payload, timeout=TIMEOUT)
+            response = requests.get(url, timeout=TIMEOUT)
             response.raise_for_status()
 
             data = response.json()
