@@ -6,16 +6,14 @@ from urllib.parse import quote
 
 console = Console()
 
-API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
-
-def translate(text, target_language):
+def translate(text, target_language, api_key):
     if not text or not target_language:
         console.print("[bold red]Error:[/bold red] El texto y el idioma objetivo no pueden estar vacíos.")
         return None
 
     encoded_text = quote(text)
     url = f"https://api.kastg.xyz/api/tool/translate?input={encoded_text}&to={target_language}&from=auto"
-    headers = {"Authorization": f"Bearer {API_KEY}"}
+    headers = {"Authorization": f"Bearer {api_key}"}
 
     try:
         response = requests.get(url, headers=headers)
@@ -50,14 +48,15 @@ def display_translation(original, translated):
     console.print(translated_panel)
 
 if __name__ == "__main__":
+    api_key = console.input("[bold green]Introduce tu clave API de kastg: [/bold green]")
     text_to_translate = console.input("[bold green]Introduce el texto a traducir: [/bold green]")
-    target_language = console.input("[bold green]Introduce el idioma al que deseas traducir (ej. 'en' para inglés: [/bold green]")
+    target_language = console.input("[bold green]Introduce el idioma al que deseas traducir (ej. 'en' para inglés): [/bold green]")
     console.print("")
     
-    translated_text = translate(text_to_translate, target_language)
+    translated_text = translate(text_to_translate, target_language, api_key)
     
     if translated_text:
         display_translation(text_to_translate, translated_text)
     else:
         console.print("[bold red]No se pudo obtener la traducción.[/bold red]")
-console.print("")
+    console.print("")
