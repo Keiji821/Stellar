@@ -32,7 +32,9 @@ python Stellar/config/run.py
 
 cp ~/Stellar/config/.bash_profile ~/.
 clear
-python ~/.configs_stellar/themes/banner.py
+cd .configs_stellar/themes
+python banner.py
+cd
 
 run_script() {
     local path="$1"
