@@ -9,7 +9,6 @@ from rich.prompt import Prompt
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
 console = Console()
-API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
 HISTORIAL_ARCHIVO = 'historial_chat.json'
 MAX_CONTEXT_MESSAGES = 5
 TIMEOUT = 10
@@ -44,8 +43,8 @@ def guardar_en_historial(historial):
     except IOError as e:
         console.print(ERROR_MESSAGES["history_save"].format(error=e))
 
-def get_ai_response(user_input, historial):
-    if not API_KEY:
+def get_ai_response(user_input, historial, api_key):
+    if not api_key:
         console.print(ERROR_MESSAGES["api_key"])
         return None
 
@@ -59,7 +58,7 @@ def get_ai_response(user_input, historial):
     prompt = "\n".join(prompt_lines)
 
     encoded_prompt = urllib.parse.quote(prompt[:2000])  # Limitar la longitud del prompt
-    url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={API_KEY}&prompt={encoded_prompt}"
+    url = f"https://api.kastg.xyz/api/ai/fast-llamaV3-large?key={api_key}&prompt={encoded_prompt}"
 
     try:
         with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), transient=True, console=console) as progress:
@@ -95,7 +94,8 @@ def display_response(response):
     console.print("\n")
 
 def main():
-    console.print(Panel("[bold green]Chat LlaMa IA[/bold green]", title="[code][bold yellow]Bienvenido", title_align="center"))
+    console.print(Panel("[bold green]Chat LlaMa IA[/bold green]", title="[code][bold yellow]Bienvenido[/bold yellow]", title_align="center"))
+    api_key = Prompt.ask("[bold green]Ingrese su clave API de kastg[/bold green]")
     historial = cargar_historial()
 
     while True:
@@ -105,7 +105,7 @@ def main():
             console.print("[bold yellow]¡Hasta luego![/bold yellow]")
             break
 
-        ai_response = get_ai_response(user_input, historial)
+        ai_response = get_ai_response(user_input, historial, api_key)
         if ai_response:
             historial.append({"role": "Usuario", "message": user_input})
             historial.append({"role": "IA", "message": ai_response})
