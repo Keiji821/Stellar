@@ -15,14 +15,14 @@ console.print("""
 • Blue Pencil >> blue-pencil
 """)
 console.print("")
-Modelo = console.input("[bold green]Ingrese el modelo a usar: [/bold green]")
+modelo = console.input("[bold green]Ingrese el modelo a usar: [/bold green]")
+api_key = console.input("[bold green]Ingrese su clave API de kastg: [/bold green]")
 
-API_KEY = "Kastg_fKlIk2c1LRc8969in2g9_free"
-API_URL = f"https://api.kastg.xyz/api/ai/{Modelo}"
+api_url = f"https://api.kastg.xyz/api/ai/{modelo}"
 
 def get_image_url(prompt):
     try:
-        response = requests.get(f"{API_URL}?prompt={prompt}&n_p=(anime, modern, colorful, vibrant, stylized, digital, computer-generated, CGI, Japanese, animation)&style=anime&art_style=digital&ratio=square&key={API_KEY}")
+        response = requests.get(f"{api_url}?prompt={prompt}&n_p=(anime, modern, colorful, vibrant, stylized, digital, computer-generated, CGI, Japanese, animation)&style=anime&art_style=digital&ra[...]", headers={"Authorization": f"Bearer {api_key}"})
         response.raise_for_status()
         data = response.json()
         if data.get("status") == "true" and data.get("result"):
@@ -30,13 +30,13 @@ def get_image_url(prompt):
         else:
             return "No disponible"
     except requests.RequestException as e:
-        console.print(f"[bold red]Error al realizar la solicitud: [bold red]{e}")
+        console.print(f"[bold red]Error al realizar la solicitud: {e}[/bold red]")
         return None
 
-prompt = console.input("[bold green]> [bold green]")
+prompt = console.input("[bold green]> [/bold green]")
 image_url = get_image_url(prompt)
 if image_url:
     console.print("")
-    console.print(f"[bold red]URL de la imagen: [bold red]{image_url}")
+    console.print(f"[bold red]URL de la imagen: {image_url}[/bold red]")
     console.print("")
     os.system(f"termux-open {image_url}")
