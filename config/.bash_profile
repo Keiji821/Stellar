@@ -82,19 +82,8 @@ if not any(char.isalpha() for char in text_banner):
 console.print(" ")
 console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="center")
 
-console.print("""
-[code][bold green]
-Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
-
-[code][bold green]Hecho por [/bold green] [bold white]Keiji821 [/bold white][/code]
-""", justify="center")
-
-os.system("""
-cd
-cd Stellar/config
-git pull --force &>/dev/null &
-cd
-""")
+console.print("[code][bold green]
+Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]", justify="left")
 EOF
 
 cd
