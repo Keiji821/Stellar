@@ -55,7 +55,7 @@ if ip is None:
     active = "[bold red]●[/bold red]"
 
 
-console.print(f"[code]{color}{text_banner}[/code]", justify="center")
+console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
 EOF
 
 cd
