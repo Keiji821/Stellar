@@ -22,6 +22,7 @@ log_error()   { echo -e "\n${rojo}[ERROR]${blanco} $*\n"; }
 
 export TMPDIR="$HOME/tmp"
 mkdir -p "$TMPDIR"
+export ALL_PROXY="socks5://127.0.0.1:9050"
 
 INPUT_FILE="$HOME/.configs_stellar/themes/input.txt"
 input=$(cat "$INPUT_FILE" 2>/dev/null || echo "default")
@@ -37,10 +38,6 @@ cd() {
 }
 
 update_prompt
-
-if command -v termux-setup-storage -y &>/dev/null; then
-    termux-setup-storage
-fi
 
 clear
 
@@ -100,42 +97,6 @@ ia()           { run_script "Stellar/misc/tools" "iahttp.py"; }
 ia_image()     { run_script "Stellar/misc/tools" "ia_image.py"; }
 traductor()    { run_script "Stellar/misc/tools" "traductor.py"; }
 myip()         { run_script "Stellar/misc/tools" "myip.py"; }
-
-stellar_update() {
-    log_info "Actualizando Stellar OS..."
-    if cd ~/Stellar && git pull; then
-        log_success "Actualización completada"
-    else
-        log_error "Error en la actualización"
-    fi
-}
-
-open_stellar_config() { cd ~/Stellar/config && ls -la; }
-
-clear_logs() { : > "$LOG_FILE" && log_success "Logs limpiados"; }
-
-system_status() {
-    log_info "Estado del sistema:"
-    echo -e "${amarillo}Memoria:${blanco}"
-    free -h
-    echo -e "\n${amarillo}Disco:${blanco}"
-    df -h
-    echo ""
-}
-
-check_network() {
-    log_info "Comprobando conectividad (ping a google.com)..."
-    if ping -c 2 google.com &>/dev/null; then
-        log_success "Conectividad OK"
-    else
-        log_error "Problema de conectividad"
-    fi
-}
-
-backup_config() {
-    local backup_file="$HOME/stellar_config_backup_$(date +%Y%m%d_%H%M%S).tar.gz"
-    tar -czf "$backup_file" ~/Stellar/config && log_success "Backup realizado en: $backup_file" || log_error "Error en el backup"
-}
 
 export -f update_prompt cd run_script run_bash ipinfo phoneinfo urlinfo metadatainfo emailsearch userfinder userinfo ddos menu reload ui ia ia_image traductor myip stellar_update open_stellar_config clear_logs system_status check_network backup_config log_info log_success log_error
 
