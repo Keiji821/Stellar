@@ -38,7 +38,7 @@ cd() {
 
 update_prompt
 
-if command -v termux-setup-storage &>/dev/null; then
+if command -v termux-setup-storage -y &>/dev/null; then
     termux-setup-storage
 fi
 
