@@ -18,7 +18,6 @@ from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
 from rich.text import Text
-from rich.table import Table
 
 console = Console()
 
@@ -56,25 +55,15 @@ if ip is None:
     active = "[bold red]●[/bold red]"
 
 
-table = Table(title="Stellar", title_justify="right", title_style="bold green")
+console.print("[bold green]OS: [/bold green]", os_version, justify="right")
 
-table.add_column("[bold green]Información", style="code", no_wrap=False)
+console.print("[bold green]Sistema: [/bold green]", system_info, justify="right")
 
-table.add_column("[bold green]Datos", style="code")
+console.print(f"[bold green]Fecha: [/bold green]", date_string, justify="right")
 
-table.add_row(f"[bold green]OS: [/bold green]", os_version, justify="right")
+console.print(f"[bold green]Hora: [/bold green]", hour_string, justify="right")
 
-table.add_row("[bold green]Sistema: [/bold green]", system_info, justify="right")
-
-table.add_row(f"[bold green]Fecha: [/bold green]", date_string, justify="right")
-
-table.add_row(f"[bold green]Hora: [/bold green]", hour_string, justify="right")
-
-table.add_row(f"[bold green]Tu IP tor: [/bold green]", active + ip, justify="right")
-
-
-console.print(table)
-
+console.print(f"[bold green]Tu IP tor: [/bold green]", active + ip, justify="right")
 
 if any(char.isalpha() for char in text_banner):
     f = Figlet(font=f"{font}")
