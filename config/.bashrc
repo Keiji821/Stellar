@@ -22,7 +22,6 @@ log_error()   { echo -e "\n${rojo}[ERROR]${blanco} $*\n"; }
 
 export TMPDIR="$HOME/tmp"
 mkdir -p "$TMPDIR"
-export ALL_PROXY="socks5://127.0.0.1:9050"
 
 INPUT_FILE="$HOME/.configs_stellar/themes/input.txt"
 input=$(cat "$INPUT_FILE" 2>/dev/null || echo "default")
@@ -53,7 +52,6 @@ run_bg() {
 }
 
 run_bg "python Stellar/config/run.py"
-sleep 10
 
 [ -f "$HOME/Stellar/config/.bash_profile" ] && cp "$HOME/Stellar/config/.bash_profile" "$HOME/."
 
