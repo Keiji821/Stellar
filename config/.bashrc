@@ -1,5 +1,3 @@
-Definir colores
-
 gris="\033[1;30m"
 blanco="\033[0m"
 blanco2="\033[1;37m"
@@ -153,4 +151,7 @@ python myip.py
 cd
 }
 
-
+command_not_found_handle() {
+    echo -e "${rojo}Comando no encontrado: $1${blanco}"
+    return 127
+}
