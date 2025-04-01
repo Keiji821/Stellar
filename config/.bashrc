@@ -98,6 +98,6 @@ ia_image()     { run_script "Stellar/misc/tools" "ia_image.py"; }
 traductor()    { run_script "Stellar/misc/tools" "traductor.py"; }
 myip()         { run_script "Stellar/misc/tools" "myip.py"; }
 
-export -f update_prompt cd run_script run_bash ipinfo phoneinfo urlinfo metadatainfo emailsearch userfinder userinfo ddos menu reload ui ia ia_image traductor myip stellar_update open_stellar_config clear_logs system_status check_network backup_config log_info log_success log_error
+export -f update_prompt cd run_script run_bash ipinfo phoneinfo urlinfo metadatainfo emailsearch userfinder userinfo ddos menu reload ui ia ia_image traductor myip log_info log_success log_error
 
 log_success "Stellar OS cargado. Usa los comandos disponibles para gestionar el sistema."
