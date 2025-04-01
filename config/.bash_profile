@@ -59,7 +59,7 @@ f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
 [bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]
 [bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
 [bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
-[bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
+[bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]""", justify="right")
 console.print(" ")
 
 if any(char.isalpha() for char in text_banner):
@@ -77,10 +77,10 @@ if any(char.isalpha() for char in text_banner):
     process.communicate(input=centered_banner.encode())
 
 if not any(char.isalpha() for char in text_banner):
-    console.print(f"[code]{text_banner}[/code]", justify="center")
+    console.print(f"[code]{text_banner}[/code]", justify="right")
 
 console.print(" ")
-console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="center")
+console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="right")
 
 console.print("[code][bold green]Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]", justify="right")
 EOF
