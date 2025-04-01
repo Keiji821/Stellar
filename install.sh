@@ -126,7 +126,7 @@ cd
 EOF
 
 echo Stellar > banner.txt
-echo standard > banner_font.txt
+echo bold green > banner_color.txt
 echo Stellar > input.txt
 cd
 
