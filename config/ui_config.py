@@ -10,7 +10,7 @@ try:
     
     main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner[/bold green]: ")
 
-    if main == "Ascii Art":
+    if main == "":
         os.system("cd && nano .configs_stellar/themes/banner.txt")
         color_menu = console.input("[bold green]Pulse Enter para ver colores disponibles: [bold green]")
         console.print("""[bold green]
