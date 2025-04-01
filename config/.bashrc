@@ -53,6 +53,7 @@ run_bg() {
 }
 
 run_bg "python Stellar/config/run.py"
+sleep 10
 
 [ -f "$HOME/Stellar/config/.bash_profile" ] && cp "$HOME/Stellar/config/.bash_profile" "$HOME/."
 
