@@ -12,41 +12,29 @@ try:
 
     if main == "Ascii Art":
         os.system("cd && nano .configs_stellar/themes/banner.txt")
+        color_menu = console.input("[bold green]Pulse Enter para ver colores disponibles: [bold green]")
+        console.print("""[bold green]
+> bold green = verde brilloso
+> bold red = rojo brilloso
+> bold cyan = cyan brilloso
+> bold magenta = magenta brilloso
+> bold yellow = anaranjado brilloso
+[bold green]""")        
 
-    if main == "Texto":
-        console.print("[bold yellow]Establecer banner")
-        banner = console.input("[bold green]> ")
-        if banner == "":
-            banner = "Stellar"
+        color =console.input("[bold green]Elija un color para su banner: [bold green]")
         os.system(f"""
 cd 
 cd .configs_stellar/themes
-echo {banner} > banner.txt
+echo {color} > banner_color.txt
 cd""")
-        console.print("")
 
-    if main == "Texto":
-        console.print("[bold yellow]Establecer fuente para el banner de texto.")
-        banner_font = console.input("[bold green]> ")
-        if banner_font == "":
-            banner_font = "standard"
+        input_text = console.print("[bold green]Ingrese un texto para la input: [bold green]")
         os.system(f"""
 cd 
 cd .configs_stellar/themes
-echo {banner_font} > banner_font.txt
+echo {input_txt} > input.txt
 cd""")
-        console.print("")
-
-    console.print("[bold yellow]Establezca el texto personalizado de la input")
-    input_text = console.input("[bold green]> ")
-    if input_text == "":
-        input_text = "By Keiji for you ❤️"
-    os.system(f"""
-cd 
-cd .configs_stellar/themes
-echo {input_text} > input.txt
-cd""")
-    console.print()
+    
 
     console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
     console.print()
