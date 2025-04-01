@@ -59,7 +59,7 @@ console.print("[bold green]Sistema[/bold green]", system_info, justify="left")
 console.print("Hora", hour_string, justify="left")
 console.print("Fecha", date_string, justify="left")
 console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
-console.print(f"[code][]Tu IP Tor[][/code][code]{active} {ip}[/code]", justify="center")
+console.print(f"[code][bold yellow]Tu IP Tor[/bold yellow][/code][code]{active} {ip}[/code]", justify="center")
 
 
 console.print("")
