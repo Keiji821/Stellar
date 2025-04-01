@@ -18,6 +18,7 @@ from rich.console import Console
 from rich.markdown import Markdown
 from rich.progress import Spinner
 from rich.text import Text
+from rich.table import Table
 
 console = Console()
 
@@ -54,13 +55,15 @@ if ip is None:
     ip = "El anonimizador no se ha iniciado"
     active = "[bold red]●[/bold red]"
 
-console.print(
-f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
-[bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]
-[bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
-[bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
-[bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]""", justify="right")
-console.print(" ")
+table.add_row(f"[bold green]OS: [/bold green][bold white]{os_version}[/bold white]")
+
+f"[bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]"
+
+f"[bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]"
+
+f"[bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]"
+
+f"[bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]"
 
 if any(char.isalpha() for char in text_banner):
     f = Figlet(font=f"{font}")
