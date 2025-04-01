@@ -62,15 +62,15 @@ table.add_column("[bold green]Información", style="code", no_wrap=False)
 
 table.add_column("[bold green]Datos", style="code")
 
-table.add_row(f"[bold green]OS: [/bold green]", os_version)
+table.add_row(f"[bold green]OS: [/bold green]", os_version, justify="right")
 
-table.add_row("[bold green]Sistema: [/bold green]", system_info)
+table.add_row("[bold green]Sistema: [/bold green]", system_info, justify="right")
 
-table.add_row(f"[bold green]Fecha: [/bold green]", date_string)
+table.add_row(f"[bold green]Fecha: [/bold green]", date_string, justify="right")
 
-table.add_row(f"[bold green]Hora: [/bold green]", hour_string)
+table.add_row(f"[bold green]Hora: [/bold green]", hour_string, justify="right")
 
-table.add_row(f"[bold green]Tu IP tor: [/bold green]", active + ip)
+table.add_row(f"[bold green]Tu IP tor: [/bold green]", active + ip, justify="right")
 
 
 console.print(table)
