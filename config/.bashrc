@@ -30,7 +30,7 @@ python Stellar/config/run.py
 
 cd
 cd .configs_stellar/themes
-cp ~/Stellar/config/.bash_profile ~/. &>/dev/null &
+cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
 cd
