@@ -86,3 +86,13 @@ console.print("[code][bold green]Para ver comandos escriba [/bold green] [bold w
 EOF
 
 cd
+
+preexec() {
+    printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1"
+    echo
+  
+}
+
+if [ -n "$BASH_VERSION" ]; then
+    trap 'preexec "$BASH_COMMAND"' DEBUG
+fi
