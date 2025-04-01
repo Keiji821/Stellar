@@ -159,7 +159,8 @@ command_not_found_handle() {
 }
 
 preexec() {
-    printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1"
+    printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1
+"
 }
 
 if [ -n "$BASH_VERSION" ]; then
