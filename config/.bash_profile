@@ -56,6 +56,9 @@ if ip is None:
 
 
 console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
+
+console.print("")
+console.print("")
 EOF
 
 cd
