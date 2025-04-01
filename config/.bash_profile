@@ -66,7 +66,6 @@ console.print("")
 console.print("")
 EOF
 
-os.system("cd && cd Stellar && git pull --force &>/dev/null &")
 cd
 
 preexec() {
