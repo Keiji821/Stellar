@@ -97,7 +97,7 @@ python ddos.py
 cd
 }
 
-# Sistema
+# System
 
 menu() {
 cd
@@ -121,7 +121,7 @@ python ui_config.py
 cd
 }
 
-# Utilidades - herramientas
+# Misc
 
 ia() {
 cd
@@ -151,7 +151,9 @@ python myip.py
 cd
 }
 
+# Config
+
 command_not_found_handle() {
-    echo -e "${rojo}Comando no encontrado: $1${blanco}"
+    echo -e "${rojo}Comando no encontrado:${rojo} ${blanco}$1${blanco}"
     return 127
 }
