@@ -30,7 +30,7 @@ cd""")
         os.system(f"""
 cd 
 cd .configs_stellar/themes
-echo {input_txt} > input.txt
+echo {input_text} > input.txt
 cd""")
     
 
