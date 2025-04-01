@@ -157,13 +157,3 @@ command_not_found_handle() {
     echo -e "${gris}[INFO] ${rojo}Comando no encontrado:${rojo} ${blanco}$1${blanco}"
     return 127
 }
-
-preexec() {
-    printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1"
-    echo
-  
-}
-
-if [ -n "$BASH_VERSION" ]; then
-    trap 'preexec "$BASH_COMMAND"' DEBUG
-fi
