@@ -158,11 +158,5 @@ command_not_found_handle() {
     return 127
 }
 
-preexec() {
-    printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1
-"
-}
-
-if [ -n "$BASH_VERSION" ]; then
-    trap 'preexec "$BASH_COMMAND"' DEBUG
-fi
+trap 'printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1
+"' DEBUG
