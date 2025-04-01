@@ -76,8 +76,6 @@ if not any(char.isalpha() for char in text_banner):
 
 console.print(" ")
 console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="right")
-
-console.print("[code][bold green]Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]", justify="right")
 EOF
 
 cd
