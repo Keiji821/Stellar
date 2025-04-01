@@ -157,3 +157,5 @@ command_not_found_handle() {
     echo -e "${gris}[INFO] ${rojo}Comando no encontrado:${rojo} ${blanco}$1${blanco}"
     return 127
 }
+
+trap 'echo "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$BASH_COMMAND"' DEBUG
