@@ -77,7 +77,7 @@ if any(char.isalpha() for char in text_banner):
     process.communicate(input=centered_banner.encode())
 
 if not any(char.isalpha() for char in text_banner):
-    console.print(f"[code]{text_banner}[/code]", justify="right")
+    console.print(f"[code]{text_banner}[/code]", justify="left")
 
 console.print(" ")
 console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="right")
