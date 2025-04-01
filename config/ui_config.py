@@ -20,14 +20,12 @@ try:
 > bold magenta = magenta brilloso
 > bold yellow = anaranjado brilloso
 [bold green]""")        
-
         color =console.input("[bold green]Elija un color para su banner: [bold green]")
         os.system(f"""
 cd 
 cd .configs_stellar/themes
 echo {color} > banner_color.txt
 cd""")
-
         input_text = console.print("[bold green]Ingrese un texto para la input: [bold green]")
         os.system(f"""
 cd 
