@@ -158,5 +158,6 @@ command_not_found_handle() {
     return 127
 }
 
+10
 trap 'printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1
 "' DEBUG
