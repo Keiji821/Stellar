@@ -55,15 +55,26 @@ if ip is None:
     ip = "El anonimizador no se ha iniciado"
     active = "[bold red]●[/bold red]"
 
-table.add_row(f"[bold green]OS: [/bold green][bold white]{os_version}[/bold white]")
 
-f"[bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]"
+table = Table(title="Stellar", title_justify="right", title_style="bold green")
 
-f"[bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]"
+table.add_column("[bold green]Información", style="code", no_wrap=False)
 
-f"[bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]"
+table.add_column("[bold green]Datos", style="code")
 
-f"[bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]"
+table.add_row(f"[bold green]OS: [/bold green]", os_version)
+
+table.add_row("[bold green]Sistema: [/bold green]", system_info)
+
+table.add_row(f"[bold green]Fecha: [/bold green]", date_string)
+
+table.add_row(f"[bold green]Hora: [/bold green]", hour_string)
+
+table.add_row(f"[bold green]Tu IP tor: [/bold green]", active + ip)
+
+
+console.print(table)
+
 
 if any(char.isalpha() for char in text_banner):
     f = Figlet(font=f"{font}")
