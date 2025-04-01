@@ -8,11 +8,11 @@ console = Console()
 try:
     console.print()
     
-    main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner[/bold green]: ")
+    main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner: [/bold green]")
 
     if main == "":
         os.system("cd && nano .configs_stellar/themes/banner.txt")
-        color_menu = console.input("[bold green]Pulse Enter para ver colores disponibles: [bold green]")
+        color_menu = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para ver colores disponibles: [bold green]")
         console.print("""[bold green]
 > bold green = verde brilloso
 > bold red = rojo brilloso
@@ -20,20 +20,20 @@ try:
 > bold magenta = magenta brilloso
 > bold yellow = anaranjado brilloso
 [bold green]""")        
-        color =console.input("[bold green]Elija un color para su banner: [bold green]")
+        color = console.input("[bold green]Elija un color para su banner: [bold green]")
         os.system(f"""
 cd 
 cd .configs_stellar/themes
 echo {color} > banner_color.txt
 cd""")
-        input_text = console.print("[bold green]Ingrese un texto para la input: [bold green]")
+        input_text = console.input("[bold green]Ingrese un texto para la input: [bold green]")
         os.system(f"""
 cd 
 cd .configs_stellar/themes
 echo {input_text} > input.txt
 cd""")
     
-
+    console.print("")
     console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
     console.print()
 
