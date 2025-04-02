@@ -1,5 +1,3 @@
-# Definir colores 
-
 gris="${b}\033[1;30m"
 blanco="\033[0m"
 blanco2="$b\033[1;37m"
@@ -17,14 +15,10 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
-# Configurar .bashrc a home
-
 clear
 
 cp ~/Stellar/config/.bash_profile ~/.
 cp ~/Stellar/config/.bashrc ~/.
-
-# Configurar archivos necesarios
 
 cd
 mkdir .configs_stellar
@@ -58,8 +52,8 @@ system_info = platform.machine() + " - " + platform.processor()
 
 with open("banner.txt", "r") as f:
     text_banner = f.read().strip()
-with open("banner_font.txt", "r") as f:
-    font = f.read().strip()
+with open("banner_color.txt", "r") as f:
+    color = f.read().strip()
 
 f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
@@ -82,55 +76,24 @@ if ip is None:
     ip = "El anonimizador no se ha iniciado"
     active = "[bold red]●[/bold red]"
 
-console.print(
-f"""[bold green]OS: [/bold green][bold white]{os_version}[/bold white]
-[bold green]Sistema: [/bold green][bold white]{system_info}[/bold white]
-[bold green]Fecha: [/bold green][bold white]{date_string}[/bold white]
-[bold green]Hora: [/bold green][bold white]{hour_string}[/bold white]
-[bold green]Tu IP tor: [/bold green][bold white]{active} {ip}[/bold white]""", justify="center")
-console.print(" ")
+console.print("[bold green]OS[/bold green]", os_version, justify="center")
+console.print("[bold green]Sistema[/bold green]", system_info, justify="center")
+console.print("[bold green]Hora[/bold green]", hour_string, justify="center")
+console.print("[bold green]Fecha[/bold green]", date_string, justify="center")
+console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
+console.print("")
+console.print(f"[code][bold yellow]Tu IP Tor[/bold yellow][/code][code]{active} {ip}[/code]", justify="center")
 
-if any(char.isalpha() for char in text_banner):
-    f = Figlet(font=f"{font}")
-    banner_text = f.renderText(text_banner)
 
-if any(char.isalpha() for char in text_banner):
-    terminal_width = os.get_terminal_size().columns
-    centered_banner = "\n".join(
-        line.center(terminal_width) for line in banner_text.splitlines()
-)
-
-if any(char.isalpha() for char in text_banner):
-    process = subprocess.Popen(['lolcat'], stdin=subprocess.PIPE)
-    process.communicate(input=centered_banner.encode())
-
-if not any(char.isalpha() for char in text_banner):
-    console.print(f"[code]{text_banner}[/code]", justify="center")
-
-console.print(" ")
-console.print("[underline][bold red]Stellar V1.0.0[/bold red][/underline]", justify="center")
-
-console.print("""
-[code][bold green]
-Para ver comandos escriba [/bold green] [bold white]menu [/bold white][/code]
-
-[code][bold green]Hecho por [/bold green] [bold white]Keiji821 [/bold white][/code]
-""", justify="center")
-
-os.system("""
-cd
-cd Stellar/config
-git pull --force &>/dev/null &
-cd
-""")
+console.print("")
+console.print("")
+console.print("")
 EOF
 
 echo Stellar > banner.txt
 echo bold green > banner_color.txt
 echo Stellar > input.txt
 cd
-
-# Actualizar paquetes
 
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando instalación"
 echo
@@ -141,8 +104,6 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  apt-get upgrade -y && apt-get update -y
  sleep 5
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
-
-# Instalar dependencias bash necesarias
 
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
@@ -186,8 +147,6 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  apt-get install -y dnsutils
  sleep 5
-
-# Instalar dependencias python necesarias
 
 echo
 printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
