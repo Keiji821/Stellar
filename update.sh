@@ -1,5 +1,3 @@
-# Definir colores
-
 gris="${b}\033[1;30m"
 blanco="\033[0m"
 blanco2="$b\033[1;37m"
@@ -17,7 +15,6 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
-# Verificar dependencias bash necesarias no instaladas
 printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
@@ -60,8 +57,6 @@ printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
  echo
  apt-get install -y dnsutils
  sleep 5
-
-# Verificar paquetes pip no instalados
 
 echo
 printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
