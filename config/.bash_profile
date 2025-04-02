@@ -56,8 +56,8 @@ if ip is None:
 
 console.print("[bold green]OS[/bold green]", os_version, justify="center")
 console.print("[bold green]Sistema[/bold green]", system_info, justify="center")
-console.print("Hora", hour_string, justify="center")
-console.print("Fecha", date_string, justify="center")
+console.print("[bold green]Hora[/bold green]", hour_string, justify="center")
+console.print("[bold green]Fecha[/bold green]", date_string, justify="center")
 console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
 console.print("")
 console.print(f"[code][bold yellow]Tu IP Tor[/bold yellow][/code][code]{active} {ip}[/code]", justify="center")
