@@ -34,6 +34,8 @@ cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
 cd
+printf "${gris}[INFO] ${verde}Stellar se iniciado correctamente, escriba (menu) para ver los comandos disponibles."
+echo
 
 # Osint - main
 
