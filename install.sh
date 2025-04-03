@@ -88,6 +88,10 @@ console.print(f"[code][bold yellow]Tu IP Tor[/bold yellow][/code][code]{active} 
 console.print("")
 console.print("")
 console.print("")
+os.system("""
+cd Stellar
+git pull --force &>/dev/null &
+cd""")
 EOF
 
 echo Stellar > banner.txt
