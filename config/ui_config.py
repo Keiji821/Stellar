@@ -12,6 +12,7 @@ try:
 
     if main == "":
         os.system("cd && nano .configs_stellar/themes/banner.txt")
+        os.system("cd && rm -rf .configs_stellar/themes/banner.txt")
 
         color_menu = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para ver colores disponibles: [bold green]")
 
@@ -20,7 +21,9 @@ try:
 > bold red = rojo brilloso
 > bold cyan = cyan brilloso
 > bold magenta = magenta brilloso
-> bold yellow = anaranjado brilloso
+> bold yellow = amarillo brilloso
+> bold white = Blanco brilloso
+> bold blue = Azul brilloso
 [bold green]""")
 
         color = console.input("[bold green]Elija un color para su banner: [bold green]")
