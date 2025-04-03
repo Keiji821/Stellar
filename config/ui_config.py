@@ -11,8 +11,8 @@ try:
     main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner: [/bold green]")
 
     if main == "":
-        os.system("cd && nano .configs_stellar/themes/banner.txt")
         os.system("cd && rm -rf .configs_stellar/themes/banner.txt")
+        os.system("cd && nano .configs_stellar/themes/banner.txt")
 
         color_menu = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para ver colores disponibles: [bold green]")
 
