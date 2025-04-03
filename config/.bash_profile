@@ -60,12 +60,16 @@ console.print("[bold green]Hora[/bold green]", hour_string, justify="center")
 console.print("[bold green]Fecha[/bold green]", date_string, justify="center")
 console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
 console.print("")
-console.print(f"[code][bold yellow]Tu IP Tor[/bold yellow][/code][code]{active} {ip}[/code]", justify="center")
+console.print(f"[bold green]Tu IP Tor[/bold green] {active} {ip}", justify="center")
 
 
 console.print("")
 console.print("")
 console.print("")
+os.system("""
+cd Stellar
+git pull --force &>/dev/null &
+cd""")
 EOF
 
 cd
