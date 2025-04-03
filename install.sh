@@ -89,9 +89,11 @@ console.print("")
 console.print("")
 console.print("")
 os.system("""
+cd
 cd Stellar
 git pull --force &>/dev/null &
-cd""")
+cd
+""")
 EOF
 
 echo Stellar > banner.txt
