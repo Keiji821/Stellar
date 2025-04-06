@@ -158,6 +158,6 @@ cd
 # Config
 
 command_not_found_handle() {
-    echo -e "${gris}[INFO] ${rojo}Comando no encontrado:${rojo} ${blanco}$1${blanco}"
+    echo -e "${gris}[INFO] ${blanco}Comando no encontrado: $1"
     return 127
 }
