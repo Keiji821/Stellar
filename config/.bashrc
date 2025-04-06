@@ -17,6 +17,8 @@ cyan="\033[38;2;23;147;209m"
 
 clear
 
+echo -ne '\033]0;~ Stellar\007'
+
 function pwlogin_loop() {
     local max_intentos=3
     local intentos=0
