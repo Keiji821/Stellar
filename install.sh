@@ -18,14 +18,36 @@ cyan="$b\033[38;2;23;147;209m"
 clear
 
 set_password() {
-    while true; do
-        printf "${gris}[INFO] ${blanco}Configure su nombre de usuario para su Termux.\n"
-        cd 
-        cd .configs_stellar/themes
-        echo $user > user.txt
-        cd
+    printf "${azul}[INFO] ${blanco}Configuración de usuario para Termux${reset}\n"
+    
+    user_file="$HOME/.configs_stellar/themes/user.txt"
+    current_user=""
+    
+    if [[ -f "$user_file" ]]; then
+        current_user=$(cat "$user_file")
+        printf "${amarillo}[INFO] ${blanco}Usuario actual: ${verde}$current_user${reset}\n"
+        printf "${amarillo}[INFO] ${blanco}¿Desea cambiarlo? [s/N]: "
+        read cambiar_user
+        if [[ "$cambiar_user" != "s" && "$cambiar_user" != "S" ]]; then
+            user="$current_user"
+        fi
+    fi
 
-        printf "${gris}[INFO] ${blanco}Configure una contraseña para su Termux.\n"
+    if [[ -z "$user" ]]; then
+        while true; do
+            printf "${gris}[INFO] ${blanco}Ingrese su nombre de usuario: "
+            read user
+            if [[ -z "$user" ]]; then
+                printf "${rojo}[ERROR] ${blanco}El nombre de usuario no puede estar vacío${reset}\n"
+            else
+                mkdir -p "$HOME/.configs_stellar/themes"
+                echo "$user" > "$user_file"
+                break
+            fi
+        done
+    fi
+
+    while true; do
         printf "${gris}[INFO] ${blanco}Ingrese su nueva contraseña: "
         read -s password
         printf "\n${gris}[INFO] ${blanco}Repita la contraseña: "
