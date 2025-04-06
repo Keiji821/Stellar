@@ -79,17 +79,17 @@ if ip is None:
 
 
 info_text = Text()
-info_text.append(f"{os.getlogin()}@termux\n", style="bold bold white")
-info_text.append(f"OS: Termux {platform.machine()}\n", style="bold cyan")
-info_text.append(f"Kernel: {platform.release()}\n", style="bold cyan")
-info_text.append(f"Uptime: {get_uptime()}\n", style="bold cyan")
-info_text.append(f"Packages: {get_packages()}\n", style="bold cyan")
-info_text.append(f"Shell: {os.path.basename(os.getenv('SHELL', 'bash'))}\n", style="bold cyan")
-info_text.append(f"Terminal: {os.getenv('TERM', 'unknown')}\n", style="bold cyan")
-info_text.append(f"CPU: {platform.processor()}\n", style="bold cyan")
-info_text.append(f"Memory: {get_memory()}\n", style="bold cyan")
-info_text.append(f"Storage: {get_disk()}\n", style="bold cyan")
-info_text.append(f"Tu ip TOR: {ip}", style="bold cyan")
+info_text.append(f"{os.getlogin()}@termux\n")
+info_text.append(f"[bold green]OS[/bold green]: Termux {platform.machine()}\n")
+info_text.append(f"[bold green]Kernel[/bold green]: {platform.release()}\n")
+info_text.append(f"Uptime: {get_uptime()}\n")
+info_text.append(f"[bold green]Packages[/bold green]: {get_packages()}\n")
+info_text.append(f"[bold green]Shell[/bold green]: {os.path.basename(os.getenv('SHELL', 'bash'))}\n")
+info_text.append(f"[bold green]Terminal[/bold green]: {os.getenv('TERM', 'unknown')}\n")
+info_text.append(f"[bold green]CPU[/bold green]: {platform.processor()}\n")
+info_text.append(f"[bold green]Memoria[/bold green]: {get_memory()}\n")
+info_text.append(f"[bold green]Almacenamiento[/bold green]: {get_disk()}\n")
+info_text.append(f"[bold green]Tu IP TOR[/bold green]: {ip}")
 
 console.print(Columns([f"[code]{text_banner}[/code]", Panel(info_text)], equal=False, expand=True))
 
