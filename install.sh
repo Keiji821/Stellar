@@ -141,7 +141,11 @@ def get_system_info():
     except:
         ip = 'No disponible'
 
+        with open("user.txt", "r") as f:
+            user = f.read().strip().lower()
+
     return {
+        "Usuario": user,
         "Fecha": now.strftime("%Y-%m-%d"),
         "Hora": now.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
