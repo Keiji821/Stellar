@@ -47,9 +47,9 @@ cp ~/Stellar/config/.bash_profile ~/.
 cp ~/Stellar/config/.bashrc ~/.
 
 cd
-mkdir .configs_stellar
+mkdir .configs_stellar &>/dev/null
 cd .configs_stellar
-mkdir themes
+mkdir themes &>/dev/null
 cd themes
 
 cat <<EOF > banner.py
