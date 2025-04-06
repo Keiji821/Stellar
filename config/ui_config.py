@@ -33,6 +33,13 @@ cd .configs_stellar/themes
 echo {color} > banner_color.txt
 cd""")
 
+        input_background = console.input("[bold green]Desea que el banner tenga fondo? No/Sí: [bold green]")
+        os.system(f"""
+cd 
+cd .configs_stellar/themes
+echo {input_background} > banner_background.txt
+cd""") 
+
         input_text = console.input("[bold green]Ingrese un texto para la input: [bold green]")
         os.system(f"""
 cd 
