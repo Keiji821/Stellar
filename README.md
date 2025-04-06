@@ -46,34 +46,7 @@ pkg upgrade -y && pkg update -y && pkg install -y git && git clone https://githu
 
 </pre>
 
-**Linux** (debian/ubuntu/kali linux)
-<pre>
-
-<pre>
-apt-get upgrade -y && apt-get update -y
-</pre>
-
-<pre>
-apt-get install -y git
-</pre>
-
-<pre>
-git clone https://github.com/Keiji821/Stellar
-</pre>
-
-<pre>
-cd Stellar
-</pre>
-
-<pre>
-bash install.sh
-</pre>
-
-<pre>
-apt-get upgrade -y && apt-get update -y && apt-get install -y git && git clone https://github.com/Keiji821/Stellar && cd Stellar && bash install.sh
-</pre>
-
-</pre>
+**Linux** (debian/ubuntu/kali linux) | En desarrollo<pre>
 
 </details>
 
