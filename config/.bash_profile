@@ -79,7 +79,8 @@ if ip is None:
 
 
 info_text = Text()
-info_text.append(f"{os.getlogin()}@termux\n")
+info_text.append(f"[bold green]Fecha[/bold green]: {date_string}")
+info_text.append(f"[bold green]Hora[/bold green]: {hour_string}")
 info_text.append(f"[bold green]OS[/bold green]: Termux {platform.machine()}\n")
 info_text.append(f"[bold green]Kernel[/bold green]: {platform.release()}\n")
 info_text.append(f"Uptime: {get_uptime()}\n")
