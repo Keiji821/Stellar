@@ -159,8 +159,10 @@ cd
 """)
 EOF
 
+
 echo Stellar > banner.txt
 echo bold green > banner_color.txt
+echo No > banner_background.txt
 echo Stellar > input.txt
 cd
 
