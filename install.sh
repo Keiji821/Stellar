@@ -57,10 +57,8 @@ import datetime
 import os
 from os import system
 import platform
-import random
 import time
 import requests
-import subprocess
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
@@ -90,8 +88,6 @@ with console.status(spinner):
 
 os.system("clear")
 
-colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
-
 response = requests.get('https://api.ipapi.is/?ip=')
 data = response.json()
 
@@ -108,7 +104,7 @@ console.print("[bold green]Hora[/bold green]", hour_string, justify="center")
 console.print("[bold green]Fecha[/bold green]", date_string, justify="center")
 console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
 console.print("")
-console.print(f"[code][bold yellow]Tu IP Tor[/bold yellow][/code][code]{active} {ip}[/code]", justify="center")
+console.print(f"[bold green]Tu IP Tor[/bold green] {active} {ip}", justify="center")
 
 
 console.print("")
