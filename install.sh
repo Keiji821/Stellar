@@ -148,16 +148,16 @@ info_text.append(f"Memoria: {get_memory()}\n", style="bold cyan")
 info_text.append(f"Almacenamiento: {get_disk()}\n", style="bold cyan")
 info_text.append(f"Tu IP TOR: {ip}", style="bold cyan")
 
-banner = Text(text_banner, style=f"{color}")
+color_banner = Text(banner, style=f"{color}")
 
 if background =="No":
-    console.print(Columns([f"{banner}", Panel(info_text)], equal=False, expand=True))
+    console.print(Columns([f"{color_banner}", Panel(info_text)], equal=False, expand=True))
 
 if background =="Si":
-    console.print(Columns([f"[code]{banner}[/code]", Panel(info_text)], equal=False, expand=True))
+    console.print(Columns([f"[code]{color_banner}[/code]", Panel(info_text)], equal=False, expand=True))
 
 if background =="Sí":
-    console.print(Columns([f"[code]{banner}[/code]", Panel(info_text)], equal=False, expand=True))
+    console.print(Columns([f"[code]{color_banner}[/code]", Panel(info_text)], equal=False, expand=True))
 
 
 console.print("")
