@@ -161,3 +161,31 @@ command_not_found_handle() {
     echo -e "${gris}[INFO] ${blanco}Comando no encontrado: $1"
     return 127
 }
+
+pwlogin_with_retry() {
+    while [[ $intentos -lt $max_intentos ]]; do
+        printf "${gris}[INFO] ${blanco}Autenticación requerida\n"
+        printf "${gris}[INFO] ${blanco}Ingrese su contraseña: "
+        read -s password
+        printf "\n"
+
+        if [[ -z "$password" ]]; then
+            intentos=$((intentos+1))
+            printf "${amarillo}[WARNING] ${blanco}Contraseña no puede estar vacía (Intento $intentos/$max_intentos)\n\n"
+            continue
+        fi
+
+        if echo "$password" | pwlogin; then
+            printf "${verde}[SUCCESS] ${blanco}Autenticación exitosa\n"
+            return 0
+        else
+            intentos=$((intentos+1))
+            printf "${rojo}[ERROR] ${blanco}Contraseña incorrecta (Intento $intentos/$max_intentos)\n\n"
+        fi
+    done
+
+    printf "${rojo}[ERROR] ${blanco}Demasiados intentos fallidos. Sistema bloqueado temporalmente.\n"
+    return 1
+}
+
+pwlogin_with_retry
