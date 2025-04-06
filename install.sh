@@ -167,9 +167,6 @@ def main():
 
     console.print(Columns([left_panel, right_panel], equal=False, expand=True))
     os.system("cd ~/Stellar && git pull --force &>/dev/null &")
-    console.print("")
-    console.print("")
-    console.print("")
 
 if __name__ == "__main__":
     main()
