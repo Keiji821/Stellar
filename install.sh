@@ -26,17 +26,17 @@ set_password() {
     printf "\n"
 
     if [[ "$password" != "$password_confirm" ]]; then
-        printf "${amarillo}[WARNING] ${rojo}Las contraseñas no coinciden${blanco}\n"
+        printf "${amarillo}[WARNING] ${blanco}Las contraseñas no coinciden\n"
         return 1
     fi
 
     (echo "$password"; echo "$password") | passwd >/dev/null 2>&1
 
     if [[ $? -eq 0 ]]; then
-        printf "${gris}[INFO] ${verde}Contraseña configurada correctamente${blanco}\n"
+        printf "${gris}[INFO] ${blanco}Contraseña configurada correctamente\n"
         return 0
     else
-        printf "${rojo}[ERROR] ${rojo}Error al configurar la contraseña${blanco}\n"
+        printf "${rojo}[ERROR] ${blanco}Error al configurar la contraseña\n"
         return 1
     fi
 }
