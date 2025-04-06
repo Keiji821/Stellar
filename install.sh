@@ -19,6 +19,12 @@ clear
 
 set_password() {
     while true; do
+        printf "${gris}[INFO] ${blanco}Configure su nombre de usuario para su Termux.\n"
+        cd 
+        cd .configs_stellar/themes
+        echo $user > user.txt
+        cd
+
         printf "${gris}[INFO] ${blanco}Configure una contraseña para su Termux.\n"
         printf "${gris}[INFO] ${blanco}Ingrese su nueva contraseña: "
         read -s password
@@ -196,7 +202,6 @@ EOF
 echo bold green > banner_color.txt
 echo No > banner_background.txt
 echo bright_white > banner_background_color.txt
-echo Stellar > input.txt
 cd
 
 printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando instalación"
