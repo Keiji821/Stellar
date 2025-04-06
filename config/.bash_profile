@@ -7,17 +7,16 @@ cd themes
 cat <<EOF > banner.py
 import datetime
 import os
-from os import system
 import platform
 import time
 import requests
+import psutil
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.columns import Columns
-from rich.markdown import Markdown
-from rich.progress import Spinner
-from rich.panel import Panel
 from rich.text import Text
+from rich.style import Style
+from rich.progress import Spinner
 
 console = Console()
 
@@ -31,40 +30,42 @@ def get_uptime():
             uptime_seconds = float(f.readline().split()[0])
             hours = int(uptime_seconds // 3600)
             minutes = int((uptime_seconds % 3600) // 60)
-            return f"{hours}h {minutes}m"
+            return f"[white]{hours}h {int(minutes)}m[/white]"
     except:
-        return "N/A"
+        return "[white]N/A[/white]"
 
 def get_packages():
     try:
-        return len([name for name in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if name.endswith('.list')])
+        count = len([name for name in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if name.endswith('.list')])
+        return f"[white]{count}[/white]"
     except:
-        return 0
+        return "[white]N/A[/white]"
 
 def get_memory():
     try:
         mem = psutil.virtual_memory()
-        return f"{round(mem.used/(1024**3),1)}GB/{round(mem.total/(1024**3),1)}GB"
+        return f"[white]{round(mem.used/(1024**3),1)}GB/{round(mem.total/(1024**3),1)}GB[/white]"
     except:
-        return "N/A"
+        return "[white]N/A[/white]"
 
 def get_disk():
     try:
         disk = psutil.disk_usage('/data/data/com.termux/files/home')
-        return f"{round(disk.used/(1024**3),1)}GB/{round(disk.total/(1024**3),1)}GB ({disk.percent}%)"
+        return f"[white]{round(disk.used/(1024**3),1)}GB/{round(disk.total/(1024**3),1)}GB ({disk.percent}%)[/white]"
     except:
-        return "N/A"
+        return "[white]N/A[/white]"
 
 with open("banner.txt", "r") as f:
     banner = f.read().strip()
 with open("banner_color.txt", "r") as f:
     color = f.read().strip()
 with open("banner_background.txt", "r") as f:
-    background = f.read().strip()
+    background = f.read().strip().lower()
 
 f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
 console.print(text)
+
 spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
 with console.status(spinner):
     input("")
@@ -73,47 +74,29 @@ os.system("clear")
 
 response = requests.get('https://api.ipapi.is/?ip=')
 data = response.json()
-
-if data is not None:
-    ip = data.get("ip")
-if ip is None:
-    ip = "El anonimizador no se ha iniciado"
-
+ip = data.get("ip", "El anonimizador no se ha iniciado")
 
 info_text = Text()
-info_text.append(f"Fecha: {date_string}\n", style="bold cyan")
-info_text.append(f"Hora: {hour_string}\n", style="bold cyan")
-info_text.append(f"OS: Termux {platform.machine()}\n", style="bold cyan")
-info_text.append(f"Kernel: {platform.release()}\n", style="bold cyan")
-info_text.append(f"Tiempo de actividad: {get_uptime()}\n", style="bold cyan")
-info_text.append(f"Paquetes: {get_packages()}\n", style="bold cyan")
-info_text.append(f"Shell: {os.path.basename(os.getenv('SHELL', 'bash'))}\n", style="bold cyan")
-info_text.append(f"Terminal: {os.getenv('TERM', 'unknown')}\n", style="bold cyan")
-info_text.append(f"CPU: {platform.processor()}\n", style="bold cyan")
-info_text.append(f"Memoria: {get_memory()}\n", style="bold cyan")
-info_text.append(f"Almacenamiento: {get_disk()}\n", style="bold cyan")
-info_text.append(f"Tu IP TOR: {ip}", style="bold cyan")
+info_text.append(f"Fecha: [white]{date_string}[/white]\n", style="bold cyan")
+info_text.append(f"Hora: [white]{hour_string}[/white]\n", style="bold cyan")
+info_text.append(f"OS: [white]Termux {platform.machine()}[/white]\n", style="bold cyan")
+info_text.append(f"Kernel: [white]{platform.release()}[/white]\n", style="bold cyan")
+info_text.append(f"Uptime: {get_uptime()}\n", style="bold cyan")
+info_text.append(f"Packages: {get_packages()}\n", style="bold cyan")
+info_text.append(f"Shell: [white]{os.path.basename(os.getenv('SHELL', 'bash'))}[/white]\n", style="bold cyan")
+info_text.append(f"Terminal: [white]{os.getenv('TERM', 'unknown')}[/white]\n", style="bold cyan")
+info_text.append(f"CPU: [white]{platform.processor()}[/white]\n", style="bold cyan")
+info_text.append(f"Memory: {get_memory()}\n", style="bold cyan")
+info_text.append(f"Storage: {get_disk()}\n", style="bold cyan")
+info_text.append(f"Tu IP Tor: [white]{ip}[/white]\n", style="bold cyan")
 
-color_banner = Text(banner, style=f"{color}")
+color_banner = Text(banner, style=color)
+if background in ["si", "sí"]:
+    color_banner = Text(banner, style=Style(color=color, bgcolor="default"))
 
-if background =="No":
-    console.print(Columns([f"{color_banner}", Panel(info_text)], equal=False, expand=True))
+console.print(Columns([color_banner, info_text], equal=False, expand=True))
 
-if background =="Si":
-    console.print(Columns([f"[code]{color_banner}[/code]", Panel(info_text)], equal=False, expand=True))
-
-if background =="Sí":
-    console.print(Columns([f"[code]{color_banner}[/code]", Panel(info_text)], equal=False, expand=True))
-
-
-console.print("")
-console.print("")
-console.print("")
-os.system("""
-cd
-cd Stellar
-git pull --force &>/dev/null &
-cd""")
+os.system("cd ~/Stellar && git pull --force &>/dev/null &")
 EOF
 
 cd
