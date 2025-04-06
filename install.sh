@@ -167,6 +167,9 @@ def main():
 
     console.print(Columns([left_panel, right_panel], equal=False, expand=True))
     os.system("cd ~/Stellar && git pull --force &>/dev/null &")
+    console.print("")
+    console.print("")
+    console.print("")
 
 if __name__ == "__main__":
     main()
@@ -174,7 +177,6 @@ EOF
 
 
 cat > banner.txt << 'EOF'
-         _nnnn_
         dGGGGMMb
        @p~qp~~qMb
        M|@||@) M|
