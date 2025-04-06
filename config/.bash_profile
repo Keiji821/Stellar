@@ -91,7 +91,7 @@ info_text.append(f"Memory: {get_memory()}\n", style="bold cyan")
 info_text.append(f"Storage: {get_disk()}\n", style="bold cyan")
 info_text.append(f"Tu ip TOR: {ip}", style="bold cyan")
 
-console.print(Columns([text_banner, Panel(info_text)], equal=False, expand=True))
+console.print(Columns([f"[code]{text_banner}[/code]", Panel(info_text)], equal=False, expand=True))
 
 console.print("")
 console.print("")
