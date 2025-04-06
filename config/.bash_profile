@@ -13,6 +13,7 @@ import time
 import requests
 from pyfiglet import Figlet
 from rich.console import Console
+from rich.columns import Columns
 from rich.markdown import Markdown
 from rich.progress import Spinner
 from rich.text import Text
