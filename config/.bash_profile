@@ -81,6 +81,8 @@ def display_banner():
         color = f.read().strip().replace("bold ", "")
     with open("banner_background.txt", "r") as f:
         background = f.read().strip().lower()
+    with open("banner_background_color.txt", "r") as f:
+        background_color = f.read().strip().lower()
 
     f = Figlet(font="cosmic")
     console.print(f.renderText("Stellar"))
@@ -98,7 +100,7 @@ def main():
 
     banner_style = Style(color=color, bold=True) if color else Style(bold=True)
     if background in ["si", "sí", "yes"]:
-        banner_style += Style(bgcolor="default")
+        banner_style += Style(bgcolor=background_color)
 
     left_panel = Text(banner, style=banner_style)
     right_panel = Text("\n", style="bold")
