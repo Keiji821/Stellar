@@ -102,6 +102,9 @@ from rich.columns import Columns
 
 console = Console()
 
+with open("user.txt", "r") as f:
+    user = f.read().strip().lower()
+
 def get_system_info():
     now = datetime.datetime.now()
 
@@ -140,9 +143,6 @@ def get_system_info():
         ip = response.json().get('ip', 'No disponible')
     except:
         ip = 'No disponible'
-
-        with open("user.txt", "r") as f:
-            user = f.read().strip().lower()
 
     return {
         "Usuario": user,
