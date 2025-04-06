@@ -18,7 +18,7 @@ cyan="$b\033[38;2;23;147;209m"
 clear
 
 set_password() {
-    printf "${gris}[INFO] ${blanco} Configure su contraseña de termux."
+    printf "${gris}[INFO] ${blanco} Configure una contraseña para su termux."
     printf "${gris}[INFO] ${blanco}Ingrese su nueva contraseña: "
     read -s password
     printf "\n${gris}[INFO] ${blanco}Repita la contraseña: "
