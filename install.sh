@@ -18,27 +18,33 @@ cyan="$b\033[38;2;23;147;209m"
 clear
 
 set_password() {
-    printf "${gris}[INFO] ${blanco}Configure una contraseña para su termux."
-    printf "\n${gris}[INFO] ${blanco}Ingrese su nueva contraseña: "
-    read -s password
-    printf "\n${gris}[INFO] ${blanco}Repita la contraseña: "
-    read -s password_confirm
-    printf "\n"
+    while true; do
+        printf "${gris}[INFO] ${blanco}Configure una contraseña para su Termux.\n"
+        printf "${gris}[INFO] ${blanco}Ingrese su nueva contraseña: "
+        read -s password
+        printf "\n${gris}[INFO] ${blanco}Repita la contraseña: "
+        read -s password_confirm
+        printf "\n"
 
-    if [[ "$password" != "$password_confirm" ]]; then
-        printf "${amarillo}[WARNING] ${blanco}Las contraseñas no coinciden\n"
-        return 1
-    fi
+        if [[ -z "$password" ]]; then
+            printf "${amarillo}[WARNING] ${blanco}La contraseña no puede estar vacía\n\n"
+            continue
+        fi
 
-    (echo "$password"; echo "$password") | passwd >/dev/null 2>&1
+        if [[ "$password" != "$password_confirm" ]]; then
+            printf "${amarillo}[WARNING] ${blanco}Las contraseñas no coinciden\n\n"
+            continue
+        fi
 
-    if [[ $? -eq 0 ]]; then
-        printf "${gris}[INFO] ${blanco}Contraseña configurada correctamente\n"
-        return 0
-    else
-        printf "${rojo}[ERROR] ${blanco}Error al configurar la contraseña\n"
-        return 1
-    fi
+        (echo "$password"; echo "$password") | passwd >/dev/null 2>&1
+
+        if [[ $? -eq 0 ]]; then
+            printf "${verde}[SUCCESS] ${blanco}Contraseña configurada correctamente\n"
+            break
+        else
+            printf "${rojo}[ERROR] ${blanco}Error al configurar la contraseña\n\n"
+        fi
+    done
 }
 
 set_password
