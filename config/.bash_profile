@@ -23,8 +23,35 @@ now = datetime.datetime.now()
 date_string = now.strftime("%Y-%m-%d")
 hour_string = now.strftime("%I:%M%p")
 
-os_version = os.sys.platform
-system_info = platform.machine() + " - " + platform.processor()
+def get_uptime():
+    try:
+        with open('/proc/uptime', 'r') as f:
+            uptime_seconds = float(f.readline().split()[0])
+            hours = int(uptime_seconds // 3600)
+            minutes = int((uptime_seconds % 3600) // 60)
+            return f"{hours}h {minutes}m"
+    except:
+        return "N/A"
+
+def get_packages():
+    try:
+        return len([name for name in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if name.endswith('.list')])
+    except:
+        return 0
+
+def get_memory():
+    try:
+        mem = psutil.virtual_memory()
+        return f"{round(mem.used/(1024**3),1)}GB/{round(mem.total/(1024**3),1)}GB"
+    except:
+        return "N/A"
+
+def get_disk():
+    try:
+        disk = psutil.disk_usage('/data/data/com.termux/files/home')
+        return f"{round(disk.used/(1024**3),1)}GB/{round(disk.total/(1024**3),1)}GB ({disk.percent}%)"
+    except:
+        return "N/A"
 
 with open("banner.txt", "r") as f:
     text_banner = f.read().strip()
@@ -44,20 +71,25 @@ response = requests.get('https://api.ipapi.is/?ip=')
 data = response.json()
 
 if data is not None:
-    active = "[bold green]●[/bold green]"
     ip = data.get("ip")
 if ip is None:
     ip = "El anonimizador no se ha iniciado"
-    active = "[bold red]●[/bold red]"
 
-console.print("[bold green]OS[/bold green]", os_version, justify="center")
-console.print("[bold green]Sistema[/bold green]", system_info, justify="center")
-console.print("[bold green]Hora[/bold green]", hour_string, justify="center")
-console.print("[bold green]Fecha[/bold green]", date_string, justify="center")
-console.print(f"[code][{color}]{text_banner}[/code]", justify="center")
-console.print("")
-console.print(f"[bold green]Tu IP Tor[/bold green] {active} {ip}", justify="center")
 
+info_text = Text()
+info_text.append(f"{os.getlogin()}@termux\n", style="bold bold white")
+info_text.append(f"OS: Termux {platform.machine()}\n", style="bold cyan")
+info_text.append(f"Kernel: {platform.release()}\n", style="bold cyan")
+info_text.append(f"Uptime: {get_uptime()}\n", style="bold cyan")
+info_text.append(f"Packages: {get_packages()}\n", style="bold cyan")
+info_text.append(f"Shell: {os.path.basename(os.getenv('SHELL', 'bash'))}\n", style="bold cyan")
+info_text.append(f"Terminal: {os.getenv('TERM', 'unknown')}\n", style="bold cyan")
+info_text.append(f"CPU: {platform.processor()}\n", style="bold cyan")
+info_text.append(f"Memory: {get_memory()}\n", style="bold cyan")
+info_text.append(f"Storage: {get_disk()}\n", style="bold cyan")
+info_text.append(f"Tu ip TOR: {ip}", style="bold cyan")
+
+console.print(Columns([text_banner, Panel(info_text)], equal=False, expand=True))
 
 console.print("")
 console.print("")
@@ -72,7 +104,7 @@ EOF
 
 cd
 
-preexec() {
+apreexec() {
     printf "${gris}[INFO] ${blanco}Ejecutando comando: $1"
     echo
 
