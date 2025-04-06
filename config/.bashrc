@@ -20,14 +20,6 @@ clear
 echo -ne '\033]0;~ Stellar\007'
 
 function pwlogin_loop() {
-    rojo='\033[1;31m'
-    verde='\033[1;32m'
-    amarillo='\033[1;33m'
-    azul='\033[1;34m'
-    blanco='\033[1;37m'
-    gris='\033[0;37m'
-    reset='\033[0m'
-
     local max_intentos=3
     local intentos=0
     local user=""
