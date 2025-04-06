@@ -110,9 +110,11 @@ def get_disk():
         return "N/A"
 
 with open("banner.txt", "r") as f:
-    text_banner = f.read().strip()
+    banner = f.read().strip()
 with open("banner_color.txt", "r") as f:
     color = f.read().strip()
+with open("banner_background.txt", "r") as f:
+    background = f.read().strip()
 
 f = Figlet(font="cosmic")
 text = f.renderText("Stellar")
@@ -146,7 +148,17 @@ info_text.append(f"Memoria: {get_memory()}\n", style="bold cyan")
 info_text.append(f"Almacenamiento: {get_disk()}\n", style="bold cyan")
 info_text.append(f"Tu IP TOR: {ip}", style="bold cyan")
 
-console.print(Columns([f"[code]{color}{text_banner}[/code]", Panel(info_text)], equal=False, expand=True))
+banner = Text(text_banner, style=f"{color}")
+
+if background =="No":
+    console.print(Columns([f"{banner}", Panel(info_text)], equal=False, expand=True))
+
+if background =="Si":
+    console.print(Columns([f"[code]{banner}[/code]", Panel(info_text)], equal=False, expand=True))
+
+if background =="Sí":
+    console.print(Columns([f"[code]{banner}[/code]", Panel(info_text)], equal=False, expand=True))
+
 
 console.print("")
 console.print("")
