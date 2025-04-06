@@ -17,6 +17,31 @@ cyan="$b\033[38;2;23;147;209m"
 
 clear
 
+set_password() {
+    printf "${amarillo}Ingrese su nueva contraseña: ${blanco}"
+    read -s password
+    printf "\n${amarillo}Repita la contraseña: ${blanco}"
+    read -s password_confirm
+    printf "\n"
+
+    if [[ "$password" != "$password_confirm" ]]; then
+        printf "${rojo}Las contraseñas no coinciden${blanco}\n"
+        return 1
+    fi
+
+    (echo "$password"; echo "$password") | passwd >/dev/null 2>&1
+
+    if [[ $? -eq 0 ]]; then
+        printf "${verde}Contraseña configurada correctamente${blanco}\n"
+        return 0
+    else
+        printf "${rojo}Error al configurar la contraseña${blanco}\n"
+        return 1
+    fi
+}
+
+set_password
+
 cp ~/Stellar/config/.bash_profile ~/.
 cp ~/Stellar/config/.bashrc ~/.
 
