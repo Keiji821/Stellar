@@ -195,6 +195,7 @@ EOF
 
 echo bold green > banner_color.txt
 echo No > banner_background.txt
+echo bright_white > banner_background_color.txt
 echo Stellar > input.txt
 cd
 
