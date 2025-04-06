@@ -15,6 +15,49 @@ amarillo="\033[1;33m"
 amarillo2="\033[33m"
 cyan="\033[38;2;23;147;209m"
 
+clear
+
+function pwlogin_loop() {
+    local max_intentos=3
+    local intentos=0
+
+    if ! command -v pwlogin &>/dev/null; then
+        echo -e "${rojo}[ERROR]${blanco} Comando 'pwlogin' no encontrado"
+        return 1
+    fi
+
+    if [[ ! -f "$HOME/.termux_authinfo" ]]; then
+        echo -e "${rojo}[ERROR]${blanco} No hay contraseña configurada"
+        return 1
+    fi
+
+    while [[ $intentos -lt $max_intentos ]]; do
+        echo -e "${gris}[INFO]${blanco} Autenticación requerida"
+        echo -n -e "${gris}[INFO]${blanco} Ingrese su contraseña: "
+        read -s password
+        echo
+
+        if [[ -z "$password" ]]; then
+            intentos=$((intentos+1))
+            echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)\n"
+            continue
+        fi
+
+        if echo "$password" | pwlogin 2>/dev/null; then
+            echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa"
+            return 0
+        else
+            intentos=$((intentos+1))
+            echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)\n"
+        fi
+    done
+
+    echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos"
+    return 1
+}
+
+pwlogin_loop
+
 input=$(cat .configs_stellar/themes/input.txt)
 
 function cd() {
@@ -161,31 +204,3 @@ command_not_found_handle() {
     echo -e "${gris}[INFO] ${blanco}Comando no encontrado: $1"
     return 127
 }
-
-pwlogin_with_retry() {
-    while [[ $intentos -lt $max_intentos ]]; do
-        printf "${gris}[INFO] ${blanco}Autenticación requerida\n"
-        printf "${gris}[INFO] ${blanco}Ingrese su contraseña: "
-        read -s password
-        printf "\n"
-
-        if [[ -z "$password" ]]; then
-            intentos=$((intentos+1))
-            printf "${amarillo}[WARNING] ${blanco}Contraseña no puede estar vacía (Intento $intentos/$max_intentos)\n\n"
-            continue
-        fi
-
-        if echo "$password" | pwlogin; then
-            printf "${verde}[SUCCESS] ${blanco}Autenticación exitosa\n"
-            return 0
-        else
-            intentos=$((intentos+1))
-            printf "${rojo}[ERROR] ${blanco}Contraseña incorrecta (Intento $intentos/$max_intentos)\n\n"
-        fi
-    done
-
-    printf "${rojo}[ERROR] ${blanco}Demasiados intentos fallidos. Sistema bloqueado temporalmente.\n"
-    return 1
-}
-
-pwlogin_with_retry
