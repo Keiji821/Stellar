@@ -107,7 +107,7 @@ EOF
 
 cd
 
-apreexec() {
+preexec() {
     printf "${gris}[INFO] ${blanco}Ejecutando comando: $1"
     echo
 
