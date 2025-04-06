@@ -92,7 +92,7 @@ info_text.append(f"Memoria: {get_memory()}\n", style="bold cyan")
 info_text.append(f"Almacenamiento: {get_disk()}\n", style="bold cyan")
 info_text.append(f"Tu IP TOR: {ip}", style="bold cyan")
 
-console.print(Columns([f"[code]{text_banner}[/code]", Panel(info_text)], equal=False, expand=True))
+console.print(Columns([f"[code]{color}{text_banner}[/code]", Panel(info_text)], equal=False, expand=True))
 
 console.print("")
 console.print("")
