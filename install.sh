@@ -150,7 +150,7 @@ if background in ["si", "sí"]:
 
 console.print(Columns([color_banner, info_text], equal=False, expand=True))
 
-os.system("cd ~/Stellar && git pull --force &>/dev/null &")""")
+os.system("cd ~/Stellar && git pull --force &>/dev/null &")
 EOF
 
 
