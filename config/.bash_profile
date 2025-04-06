@@ -9,10 +9,8 @@ import datetime
 import os
 from os import system
 import platform
-import random
 import time
 import requests
-import subprocess
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.markdown import Markdown
@@ -41,8 +39,6 @@ with console.status(spinner):
     input("")
 
 os.system("clear")
-
-colores = random.choice(["red", "magenta", "yellow", "blue", "cyan"])
 
 response = requests.get('https://api.ipapi.is/?ip=')
 data = response.json()
