@@ -75,7 +75,7 @@ function pwlogin_loop() {
 
 pwlogin_loop
 
-input=$(cat .configs_stellar/themes/input.txt)
+input=$(cat .configs_stellar/themes/user.txt)
 
 function cd() {
 builtin cd "$@"
