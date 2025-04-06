@@ -77,7 +77,7 @@ EOF
 cd
 
 preexec() {
-    printf "${gris}[INFO] ${verde}Ejecutando comando: ${blanco}$1"
+    printf "${gris}[INFO] ${blanco}Ejecutando comando: $1"
     echo
 
 }
