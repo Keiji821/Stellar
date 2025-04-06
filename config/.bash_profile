@@ -79,8 +79,8 @@ if ip is None:
 
 
 info_text = Text()
-info_text.append(f"Fecha: {date_string}", style="bold cyan")
-info_text.append(f"Hora: {hour_string}", style="bold cyan")
+info_text.append(f"Fecha: {date_string}\n", style="bold cyan")
+info_text.append(f"Hora: {hour_string}\n", style="bold cyan")
 info_text.append(f"OS: Termux {platform.machine()}\n", style="bold cyan")
 info_text.append(f"Kernel: {platform.release()}\n", style="bold cyan")
 info_text.append(f"Tiempo de actividad: {get_uptime()}\n", style="bold cyan")
