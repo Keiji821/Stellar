@@ -49,7 +49,7 @@ pkg upgrade -y && pkg update -y && pkg install -y git && git clone https://githu
 
 **Linux** (debian/ubuntu/kali linux)
 <pre>
-En desarrollo 
+En desarrollo...
 </pre>
 
 </details>
