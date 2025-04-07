@@ -2,14 +2,14 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
-from rich.box import DOUBLE
+from rich.box import ROUNDED
 from rich.style import Style
 
 console = Console()
 
 console.print(
     Panel.fit(
-        Text("TERMINAL COMMANDER", justify="center", style="bold steel_blue1"),
+        Text("Comandos de Stellar", justify="center", style="bold #4682B4"),
         border_style="dim white",
         padding=(1, 4),
         style="on black",
@@ -18,84 +18,83 @@ console.print(
 )
 
 command_data = {
-    "SYSTEM": {
-        "color": "steel_blue1",
+    "SISTEMA": {
+        "color": "#4682B4",
         "commands": {
-            "reload": "Reload Stellar configuration",
-            "clear": "Clear terminal screen",
-            "bash": "Restart terminal session",
-            "ui": "Customize interface themes"
+            "reload": "Recargar configuración de Stellar",
+            "clear": "Limpiar pantalla de terminal",
+            "bash": "Reiniciar sesión de terminal", 
+            "ui": "Personalizar interfaz y temas"
         }
     },
-    "UTILITIES": {
-        "color": "dark_sea_green4",
+    "UTILIDADES": {
+        "color": "#5F9EA0",
         "commands": {
-            "ia": "AI assistant service",
-            "ia-image": "AI image generation",
-            "traductor": "Multi-language translator",
-            "myip": "IP address analyzer"
+            "ia": "Asistente de inteligencia artificial",
+            "ia-image": "Generador de imágenes con IA",
+            "traductor": "Traductor multidioma",
+            "myip": "Analizador de dirección IP"
         }
     },
     "OSINT": {
-        "color": "light_goldenrod3",
+        "color": "#DAA520",
         "commands": {
-            "ipinfo": "Advanced IP analysis",
-            "phoneinfo": "Phone number lookup",
-            "urlinfo": "URL/Domain scanner",
-            "metadatainfo": "Metadata extraction",
-            "emailsearch": "Email search tool",
-            "userfinder": "Username tracker"
+            "ipinfo": "Analizador avanzado de IP",
+            "phoneinfo": "Buscador de información telefónica",
+            "urlinfo": "Escáner de URLs y dominios",
+            "metadatainfo": "Extractor de metadatos",
+            "emailsearch": "Buscador de correos electrónicos",
+            "userfinder": "Rastreador de nombres de usuario"
         }
     },
     "DISCORD": {
-        "color": "medium_purple4",
+        "color": "#9370DB",
         "commands": {
-            "userinfo": "Discord user lookup"
+            "userinfo": "Obtención de datos de usuario"
         }
     }
 }
 
 for category, data in command_data.items():
     table = Table(
-        show_header=False,
-        box=DOUBLE,
+        title=f"[bold {data['color']}]{category}[/]",
         border_style=data["color"],
+        box=ROUNDED,
+        header_style=f"bold {data['color']}",
         padding=(0, 2),
         expand=True
     )
-    table.add_column(width=20)
-    table.add_column(width=50)
-    
-    table.add_row(
-        f"[bold {data['color']}]{category}[/]",
-        ""
-    )
+    table.add_column("Comando", style="bold bright_white", width=18)
+    table.add_column("Descripción", style="bright_black")
     
     for cmd, desc in data["commands"].items():
         table.add_row(
-            f"[bold bright_white]{cmd}[/]",
-            f"[bright_black]{desc}[/]"
+            f"[bold #FFD700]{cmd}[/]",
+            f"[bright_white]{desc}[/]"
         )
     
     console.print(table)
     console.print()
 
 hotkeys_table = Table(
-    box=DOUBLE,
+    title="[bold #4682B4]ATAJOS DE TECLADO[/]",
+    box=ROUNDED,
     border_style="bright_white",
-    show_header=False,
     padding=(0, 2),
-    width=50
+    width=60
 )
-hotkeys_table.add_column(width=15)
-hotkeys_table.add_column(width=35)
-hotkeys_table.add_row("[bold bright_white]CTRL+Z[/]", "[bright_black]Safe process termination[/]")
-hotkeys_table.add_row("[bold bright_white]CTRL+C[/]", "[bright_black]Force process termination[/]")
+hotkeys_table.add_column("Combinación", style="bold bright_white", width=15)
+hotkeys_table.add_column("Acción", style="bright_black")
+hotkeys_table.add_row("[bold #FFD700]CTRL + Z[/]", "Detención segura de procesos")
+hotkeys_table.add_row("[bold #FFD700]CTRL + C[/]", "Terminación forzada de procesos")
+
+console.print(hotkeys_table)
+console.print()
 
 console.print(
     Panel.fit(
-        hotkeys_table,
-        title="KEYBINDS",
+        Text("Presione [bold #FFD700]TAB[/] para autocompletar • [bold #4682B4]↑↓[/] para navegar", 
+            justify="center"),
         border_style="dim white",
         style="on black"
     )
