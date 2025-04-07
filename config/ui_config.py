@@ -41,7 +41,7 @@ echo {input_background} > banner_background.txt
 cd""") 
 
         with open("banner_background.txt", "r") as f:
-        background = f.read().strip().lower()
+            background = f.read().strip().lower()
 
         if background =="Sí":
             input_background_color_list = console.print("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para ver colores disponibles para el fondo de su banner: [bold green]")
