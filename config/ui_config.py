@@ -85,7 +85,7 @@ def main():
         show_title()
         console.print(Panel.fit(
             "[bold green]Configuración completada con éxito!\n\n"
-            "Escriba [yellow]bash[/yellow] para aplicar los cambios",
+            "Escriba [yellow]reload[/yellow] para aplicar los cambios",
             style="bold green"
         ))
         
