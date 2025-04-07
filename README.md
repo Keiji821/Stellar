@@ -11,12 +11,19 @@
 **Stellar** es una herramienta de hacking para Termux diseñada para personalizar y mejorar la apariencia de tu terminal. Cambia el entorno predeterminado con un diseño más atractivo y funcional.
 
 ## Tabla de Contenidos
-1. [Pasos de Instalación](#pasos-de-instalación)
-2. [Características](#características)
-3. [Guía de Uso](#guía-de-uso)
-4. [Registro de Cambios](#registro-de-cambios)
-5. [Contribuciones](#contribuciones)
-6. [Licencia](#licencia)
+1. [Descripción](#descripción)
+2. [Pasos de Instalación](#pasos-de-instalación)
+3. [Características](#características)
+4. [Guía de Uso](#guía-de-uso)
+5. [Registro de Cambios](#registro-de-cambios)
+6. [Contribuciones](#contribuciones)
+7. [Licencia](#licencia)
+8. [Autores](#autores)
+9. [Enlaces](#enlaces)
+
+## Descripción
+
+**Stellar** es una herramienta poderosa para personalizar Termux, ofreciendo múltiples funcionalidades orientadas a hacking, pentesting, osint, y más. Stellar busca mejorar la experiencia del usuario proporcionando un entorno más atractivo y funcional.
 
 ## Pasos de Instalación
 
@@ -83,6 +90,8 @@ La herramienta anonimiza todas las acciones usando Tor en la terminal.
 
 Después de ejecutar el archivo `install.sh`, tu sesión de Termux se reiniciará y la herramienta se iniciará automáticamente. Para ver la lista de comandos disponibles, ejecuta `menu` en la terminal.
 
+![Ejemplo de Uso](https://github.com/Keiji821/Stellar/blob/master/images/example.gif)
+
 ## Registro de Cambios
 
 ### Actualización 00/00/2024
@@ -100,3 +109,14 @@ Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los si
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+## Autores
+
+- **Keiji821** - *Desarrollador principal* - [Keiji821](https://github.com/Keiji821)
+
+## Enlaces
+
+- [Proyecto en GitHub](https://github.com/Keiji821/Stellar)
+- [Documentación Oficial](https://github.com/Keiji821/Stellar/wiki)
+- [Reportar un problema](https://github.com/Keiji821/Stellar/issues)
+- [Discusión de la Comunidad](https://github.com/Keiji821/Stellar/discussions)
