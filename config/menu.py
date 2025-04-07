@@ -7,7 +7,8 @@ console = Console(style="grey78 on grey23")
 def print_fullwidth(text, style=""):
     console.print(text.ljust(console.width), style=style)
 
-menu_data = {    "SISTEMA":         
+menu_data = {    
+    "SISTEMA":  [        
         ("reload", "Recarga el banner"),
         ("clear", "Limpia la pantalla"),
         ("bash", "Reinicia la sesión"),
