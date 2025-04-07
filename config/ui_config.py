@@ -1,71 +1,93 @@
 from rich.console import Console
-import time
+from rich.panel import Panel
+from rich.text import Text
 import os
-from os import system
+import sys
 
 console = Console()
 
-try:
-    os.system("cd && cd .configs_stellar/themes")
+def clear_screen():
+    os.system('clear' if os.name == 'posix' else 'cls')
+
+def show_title():
+    clear_screen()
+    console.print(Panel.fit(" Configurador de Banner Stellar ", style="bold blue"))
     console.print()
+
+def get_banner():
+    show_title()
+    console.print("[bold green]Pulse [bold yellow]Enter[/bold yellow] para editar su banner[/bold green]")
+    input()
     
-    main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner: [/bold green]")
-
-    if main == "":
-        os.system("cd && rm -rf .configs_stellar/themes/banner.txt")
-        os.system("cd && nano .configs_stellar/themes/banner.txt")
-
-        color_menu = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para ver colores disponibles: [bold green]")
-
-        console.print("""[bold green]
-> bold green = verde brilloso
-> bold red = rojo brilloso
-> bold cyan = cyan brilloso
-> bold magenta = magenta brilloso
-> bold yellow = amarillo brilloso
-> bold white = Blanco brilloso
-> bold blue = Azul brilloso
-[bold green]""")
-
-        color = console.input("[bold green]Elija un color para su banner: [bold green]")
-        os.system(f"echo {color} > banner_color.txt")
-
-        input_background = console.input("[bold green]Desea que el banner tenga fondo? No/Sí: [bold green]")
-        os.system(f"echo {input_background} > banner_background.txt") 
-
-        with open("banner_background.txt", "r") as f:
-            background = f.read().strip().lower()
-
-        if background =="Sí":
-            input_background_color_list = console.print("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para ver colores disponibles para el fondo de su banner: [bold green]")
-            console.print("""
-[bold underline]Colores estándar:[/bold underline]
-[black]black[/] [red]red[/] [green]green[/] [yellow]yellow[/] [blue]blue[/] [magenta]magenta[/] [cyan]cyan[/] [white]white[/]
-
-[bold underline]Colores brillantes:[/bold underline]
-[bright_black]bright_black[/] [bright_red]bright_red[/] [bright_green]bright_green[/] [bright_yellow]bright_yellow[/]
-[bright_blue]bright_blue[/] [bright_magenta]bright_magenta[/] [bright_cyan]bright_cyan[/] [bright_white]bright_white[/]
-
-[bold underline]Grises (greys):[/bold underline]
-[grey0]grey0[/] [grey11]grey11[/] [grey30]grey30[/] [grey50]grey50[/] [grey70]grey70[/] [grey90]grey90[/] [grey93]grey93[/] [grey100]grey100[/]
-
-[bold underline]Colores extendidos:[/bold underline]
-[dark_red]dark_red[/] [firebrick]firebrick[/] [indian_red]indian_red[/] [light_salmon]light_salmon[/]
-[dark_green]dark_green[/] [chartreuse]chartreuse[/] [sea_green]sea_green[/] [pale_green]pale_green[/]
-[dark_blue]dark_blue[/] [navy_blue]navy_blue[/] [blue3]blue3[/] [royal_blue]royal_blue[/]
-[sky_blue]sky_blue[/] [deep_sky_blue1]deep_sky_blue1[/] [dodger_blue2]dodger_blue2[/] [steel_blue]steel_blue[/]
-[dark_cyan]dark_cyan[/] [turquoise]turquoise[/] [medium_turquoise]medium_turquoise[/] [aquamarine1]aquamarine1[/]
-[purple]purple[/] [medium_purple]medium_purple[/] [dark_magenta]dark_magenta[/] [orchid]orchid[/]
-[orange1]orange1[/] [gold1]gold1[/] [khaki1]khaki1[/] [light_goldenrod1]light_goldenrod1[/]
-[slate_gray1]slate_gray1[/] [dark_slate_gray]dark_slate_gray[/]
-""")
-        background_color_set = console.input("[bold green]Seleccione un color: [bold green]")
-        os.system(f"echo {background_color_set} > banner_background_color.txt") 
+    banner_path = os.path.expanduser("~/.configs_stellar/themes/banner.txt")
+    os.system(f"nano {banner_path} || touch {banner_path} && nano {banner_path}")
     
-    console.print("")
-    console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
-    console.print()
-    os.system("cd")
+    if not os.path.exists(banner_path):
+        console.print("[bold red]Error: No se pudo crear el archivo banner.txt[/bold red]")
+        sys.exit(1)
 
-except Exception as e:
-    print(f"[code][bold red]Error: {e}")
+def show_color_options():
+    colors = {
+        "Estándar": ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"],
+        "Brillantes": ["bright_black", "bright_red", "bright_green", "bright_yellow", 
+                      "bright_blue", "bright_magenta", "bright_cyan", "bright_white"],
+        "Grises": ["grey0", "grey11", "grey30", "grey50", "grey70", "grey90", "grey93", "grey100"]
+    }
+    
+    for category, color_list in colors.items():
+        text = Text(f"\n{category}:\n", style="bold underline")
+        for color in color_list:
+            text.append(f"{color} ", style=color)
+        console.print(text)
+
+def set_banner_color():
+    show_title()
+    console.print("[bold green]Colores disponibles para el banner:[/bold green]")
+    show_color_options()
+    
+    color = console.input("\n[bold green]Elija un color para su banner (ej: blue): [/bold green]")
+    color_path = os.path.expanduser("~/.configs_stellar/themes/banner_color.txt")
+    with open(color_path, 'w') as f:
+        f.write(color)
+
+def set_background():
+    show_title()
+    background = console.input("[bold green]¿Desea que el banner tenga fondo? (s/n): [/bold green]").lower()
+    
+    bg_path = os.path.expanduser("~/.configs_stellar/themes/banner_background.txt")
+    with open(bg_path, 'w') as f:
+        f.write("si" if background in ['s', 'si', 'sí'] else "no")
+    
+    if background in ['s', 'si', 'sí']:
+        show_title()
+        console.print("[bold green]Colores disponibles para el fondo:[/bold green]")
+        show_color_options()
+        
+        bg_color = console.input("\n[bold green]Seleccione un color para el fondo: [/bold green]")
+        bg_color_path = os.path.expanduser("~/.configs_stellar/themes/banner_background_color.txt")
+        with open(bg_color_path, 'w') as f:
+            f.write(bg_color)
+
+def main():
+    try:
+        themes_dir = os.path.expanduser("~/.configs_stellar/themes")
+        os.makedirs(themes_dir, exist_ok=True)
+        os.chdir(themes_dir)
+        
+        get_banner()
+        set_banner_color()
+        set_background()
+        
+        show_title()
+        console.print(Panel.fit(
+            "[bold green]Configuración completada con éxito!\n\n"
+            "Escriba [yellow]bash[/yellow] para aplicar los cambios",
+            style="bold green"
+        ))
+        
+    except Exception as e:
+        console.print(f"[bold red]Error: {str(e)}[/bold red]")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
