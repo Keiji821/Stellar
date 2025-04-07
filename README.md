@@ -5,12 +5,12 @@
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 
-# Stellar
+# 🌟 Stellar 🌟
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
 **Stellar** es una herramienta de hacking para Termux diseñada para personalizar y mejorar la apariencia de tu terminal. Cambia el entorno predeterminado con un diseño más atractivo y funcional.
 
-## Tabla de Contenidos
+## 🗂️ Tabla de Contenidos
 1. [Descripción](#descripción)
 2. [Pasos de Instalación](#pasos-de-instalación)
 3. [Características](#características)
@@ -19,13 +19,12 @@
 6. [Contribuciones](#contribuciones)
 7. [Licencia](#licencia)
 8. [Autores](#autores)
-9. [Enlaces](#enlaces)
 
-## Descripción
+## 📖 Descripción
 
 **Stellar** es una herramienta poderosa para personalizar Termux, ofreciendo múltiples funcionalidades orientadas a hacking, pentesting, osint, y más. Stellar busca mejorar la experiencia del usuario proporcionando un entorno más atractivo y funcional.
 
-## Pasos de Instalación
+## 🛠️ Pasos de Instalación
 
 **Nota:** Abre tu terminal y copia y pega los siguientes comandos:
 
@@ -46,7 +45,7 @@ pkg upgrade -y && pkg update -y && pkg install -y git && git clone https://githu
 ### Linux (Debian/Ubuntu/Kali Linux)
 En desarrollo...
 
-## Características
+## ✨ Características
 
 ### Misc
 | Comando   | Descripción |
@@ -86,18 +85,16 @@ En desarrollo...
 **Seguridad:**
 La herramienta anonimiza todas las acciones usando Tor en la terminal.
 
-## Guía de Uso
+## 📝 Guía de Uso
 
 Después de ejecutar el archivo `install.sh`, tu sesión de Termux se reiniciará y la herramienta se iniciará automáticamente. Para ver la lista de comandos disponibles, ejecuta `menu` en la terminal.
 
-![Ejemplo de Uso](https://github.com/Keiji821/Stellar/blob/master/images/example.gif)
-
-## Registro de Cambios
+## 📅 Registro de Cambios
 
 ### Actualización 00/00/2024
 - Descripción de los cambios realizados.
 
-## Contribuciones
+## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los siguientes pasos:
 1. Realiza un fork del repositorio.
@@ -106,17 +103,10 @@ Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los si
 4. Envía tus cambios a la rama (`git push origin feature/nueva-funcionalidad`).
 5. Crea un nuevo Pull Request.
 
-## Licencia
+## 📜 Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-## Autores
+## 👥 Autores
 
 - **Keiji821** - *Desarrollador principal* - [Keiji821](https://github.com/Keiji821)
-
-## Enlaces
-
-- [Proyecto en GitHub](https://github.com/Keiji821/Stellar)
-- [Documentación Oficial](https://github.com/Keiji821/Stellar/wiki)
-- [Reportar un problema](https://github.com/Keiji821/Stellar/issues)
-- [Discusión de la Comunidad](https://github.com/Keiji821/Stellar/discussions)
