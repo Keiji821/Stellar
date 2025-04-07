@@ -1,89 +1,107 @@
 from rich.console import Console
 from rich.panel import Panel
-from rich.text import Text
 from rich.table import Table
-from rich import box
-from rich.style import Style
+from rich.text import Text
+from rich.box import ROUNDED
 
 console = Console()
 
 console.print(
     Panel.fit(
-        Text("Comandos de Stellar", justify="center", style="bold green"),
-        border_style="bright_blue",
+        Text("STELLAR COMMAND CENTER", justify="center", style="bold #FF6B6B"),
+        border_style="#4ECDC4",
         padding=(1, 4),
-        title="✨",
-        subtitle="by Stellar Team"
+        style="on #292F36",
+        subtitle="v3.1.0"
     )
 )
 
-categories = [
-    {
-        "title": "SISTEMA", 
-        "commands": [
-            {"name": "reload", "description": "Recarga el banner y actualiza Stellar"},
-            {"name": "clear", "description": "Limpia la pantalla de la terminal"},
-            {"name": "bash", "description": "Reinicia la terminal"},
-            {"name": "ui", "description": "Personaliza banner, fuente y texto de input"}
-        ],
-        "color": "bright_cyan"
+command_data = {
+    "🛠️ SISTEMA": {
+        "color": "#4ECDC4",
+        "commands": {
+            "reload": "Recarga la configuración de Stellar",
+            "clear": "Limpia la terminal completamente",
+            "bash": "Reinicia la sesión terminal",
+            "ui": "Personaliza interfaz y temas"
+        }
     },
-    {
-        "title": "UTILIDADES", 
-        "commands": [
-            {"name": "ia", "description": "Servicio de IA mediante API gratuita"},
-            {"name": "ia-image", "description": "Genera imágenes con IA"},
-            {"name": "traductor", "description": "Servicio de traducción"},
-            {"name": "myip", "description": "Muestra tu IP e información relacionada"}
-        ],
-        "color": "bright_magenta"
+    "🔍 UTILIDADES": {
+        "color": "#FFD166",
+        "commands": {
+            "ia": "Asistente de IA con API gratuita",
+            "ia-image": "Generador de imágenes con IA",
+            "traductor": "Traductor multidioma en tiempo real",
+            "myip": "Analizador de dirección IP"
+        }
     },
-    {
-        "title": "OSINT", 
-        "commands": [
-            {"name": "ipinfo", "description": "Obtiene información de una IP"},
-            {"name": "phoneinfo", "description": "Consulta información de teléfonos"},
-            {"name": "urlinfo", "description": "Analiza URLs y enlaces"},
-            {"name": "metadatainfo", "description": "Extrae metadatos de archivos"},
-            {"name": "emailsearch", "description": "Busca correos electrónicos"},
-            {"name": "userfinder", "description": "Verifica nombres de usuario"}
-        ],
-        "color": "bright_yellow"
+    "🕵️‍♂️ OSINT": {
+        "color": "#06D6A0",
+        "commands": {
+            "ipinfo": "Analizador avanzado de IP",
+            "phoneinfo": "Buscador de información telefónica",
+            "urlinfo": "Escáner de URLs y dominios",
+            "metadatainfo": "Extractor de metadatos",
+            "emailsearch": "Buscador de correos electrónicos",
+            "userfinder": "Rastreador de nombres de usuario"
+        }
     },
-    {
-        "title": "OSINT/Discord", 
-        "commands": [
-            {"name": "userinfo", "description": "Obtiene información de IDs de Discord"}
-        ],
-        "color": "bright_red"
+    "🤖 DISCORD": {
+        "color": "#EF476F",
+        "commands": {
+            "userinfo": "Obtención de datos de usuario"
+        }
     }
-]
+}
 
-for category in categories:
+for category, data in command_data.items():
     table = Table(
-        title=f"[b {category['color']}]{category['title']}[/]",
-        border_style=category['color'],
-        box=box.ROUNDED,
-        header_style=f"b {category['color']}",
-        title_justify="left"
+        title=f"[bold {data['color']}]{category}[/]",
+        border_style=data["color"],
+        box=ROUNDED,
+        header_style=f"bold {data['color']}",
+        title_justify="left",
+        expand=True
     )
-    table.add_column("Comando", style="bold yellow", width=15)
-    table.add_column("Descripción", style="bright_white")
+    table.add_column("Comando", style="bold #F8F9FA", min_width=15)
+    table.add_column("Descripción", style="#ADB5BD")
     
-    for cmd in category['commands']:
-        table.add_row(cmd['name'], cmd['description'])
+    for cmd, desc in data["commands"].items():
+        table.add_row(
+            f"[bold #FFD166]{cmd}[/]",
+            f"[#F8F9FA]{desc}[/]"
+        )
     
-    console.print(table)
+    console.print(table, justify="center")
     console.print()
 
-hotkeys_table = Table(
-    title="[b]Atajos de teclado[/]",
-    border_style="bright_green",
-    box=box.DOUBLE_EDGE
+hotkeys_panel = Panel.fit(
+    Text("ATAJOS CLAVE", justify="center", style="bold #4ECDC4"),
+    border_style="#FF6B6B",
+    padding=(1, 4),
+    style="on #292F36"
 )
-hotkeys_table.add_column("Combinación", style="bold yellow")
-hotkeys_table.add_column("Acción", style="bright_white")
-hotkeys_table.add_row("CTRL + Z", "Detiene cualquier comando o proceso")
-hotkeys_table.add_row("CTRL + C", "Fuerza la detención de procesos activos")
+console.print(hotkeys_panel)
 
-console.print(hotkeys_table)
+hotkeys_table = Table(
+    box=ROUNDED,
+    border_style="#4ECDC4",
+    show_header=False,
+    padding=(0, 2)
+)
+hotkeys_table.add_column("Key", style="bold #FFD166", justify="right")
+hotkeys_table.add_column("Action", style="#F8F9FA", justify="left")
+hotkeys_table.add_row("[bold]CTRL + Z[/]", "Detención segura de procesos")
+hotkeys_table.add_row("[bold]CTRL + C[/]", "Terminación forzada de procesos")
+
+console.print(hotkeys_table, justify="center")
+console.print()
+
+console.print(
+    Panel.fit(
+        Text("Presiona [bold #FFD166]TAB[/] para autocompletar • [bold #4ECDC4]↑↓[/] para navegar", 
+            justify="center"),
+        border_style="#4ECDC4",
+        style="#F8F9FA"
+    )
+)
