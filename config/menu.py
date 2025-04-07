@@ -1,34 +1,22 @@
 from rich.console import Console
-from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
-from rich.box import ROUNDED
 from rich.style import Style
 
-console = Console()
-
-console.print(
-    Panel.fit(
-        Text("Comandos de Stellar", justify="center", style="bold #4682B4"),
-        border_style="dim white",
-        padding=(1, 4),
-        style="on black",
-        subtitle="v3.1.0"
-    )
-)
+console = Console(style="grey15 on grey23")
 
 command_data = {
     "SISTEMA": {
-        "color": "#4682B4",
+        "color": "dodger_blue2",
         "commands": {
             "reload": "Recargar configuración de Stellar",
             "clear": "Limpiar pantalla de terminal",
-            "bash": "Reiniciar sesión de terminal", 
+            "bash": "Reiniciar sesión de terminal",
             "ui": "Personalizar interfaz y temas"
         }
     },
     "UTILIDADES": {
-        "color": "#5F9EA0",
+        "color": "sea_green3",
         "commands": {
             "ia": "Asistente de inteligencia artificial",
             "ia-image": "Generador de imágenes con IA",
@@ -37,7 +25,7 @@ command_data = {
         }
     },
     "OSINT": {
-        "color": "#DAA520",
+        "color": "dark_orange3",
         "commands": {
             "ipinfo": "Analizador avanzado de IP",
             "phoneinfo": "Buscador de información telefónica",
@@ -48,54 +36,30 @@ command_data = {
         }
     },
     "DISCORD": {
-        "color": "#9370DB",
+        "color": "medium_purple3",
         "commands": {
             "userinfo": "Obtención de datos de usuario"
         }
     }
 }
 
+console.print("\n")
+console.print(" CENTRO DE COMANDOS STELLAR ".center(80), style="bold grey93 on grey23")
+console.print(" v3.1.0 ".center(80), style="grey70 on grey23")
+console.print("\n")
+
 for category, data in command_data.items():
-    table = Table(
-        title=f"[bold {data['color']}]{category}[/]",
-        border_style=data["color"],
-        box=ROUNDED,
-        header_style=f"bold {data['color']}",
-        padding=(0, 2),
-        expand=True
-    )
-    table.add_column("Comando", style="bold bright_white", width=18)
-    table.add_column("Descripción", style="bright_black")
+    console.print(f" {category} ", style=f"bold {data['color']} on grey23")
     
     for cmd, desc in data["commands"].items():
-        table.add_row(
-            f"[bold #FFD700]{cmd}[/]",
-            f"[bright_white]{desc}[/]"
-        )
+        console.print(f"  [bold grey93]{cmd.ljust(12)}[/] [grey78]{desc}[/]")
     
-    console.print(table)
-    console.print()
+    console.print("\n")
 
-hotkeys_table = Table(
-    title="[bold #4682B4]ATAJOS DE TECLADO[/]",
-    box=ROUNDED,
-    border_style="bright_white",
-    padding=(0, 2),
-    width=60
-)
-hotkeys_table.add_column("Combinación", style="bold bright_white", width=15)
-hotkeys_table.add_column("Acción", style="bright_black")
-hotkeys_table.add_row("[bold #FFD700]CTRL + Z[/]", "Detención segura de procesos")
-hotkeys_table.add_row("[bold #FFD700]CTRL + C[/]", "Terminación forzada de procesos")
-
-console.print(hotkeys_table)
-console.print()
-
-console.print(
-    Panel.fit(
-        Text("Presione [bold #FFD700]TAB[/] para autocompletar • [bold #4682B4]↑↓[/] para navegar", 
-            justify="center"),
-        border_style="dim white",
-        style="on black"
-    )
-)
+console.print(" ATAJOS DE TECLADO ".center(80), style="bold grey93 on grey23")
+console.print("\n")
+console.print(f"  [bold grey93]{"CTRL + Z".ljust(12)}[/] [grey78]{"Detención segura de procesos"}[/]")
+console.print(f"  [bold grey93]{"CTRL + C".ljust(12)}[/] [grey78]{"Terminación forzada de procesos"}[/]")
+console.print("\n")
+console.print(" Presione [bold grey93]TAB[/] para autocompletar • [bold grey93]↑↓[/] para navegar ".center(80), style="grey78 on grey23")
+console.print("\n")
