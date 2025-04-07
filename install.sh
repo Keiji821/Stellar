@@ -143,21 +143,21 @@ def get_system_info():
         ip = response.json().get('ip', 'No disponible')
     except:
         ip = 'No disponible'
-
+        
     return {
         "Usuario": user,
         "Fecha": now.strftime("%Y-%m-%d"),
         "Hora": now.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
-        "Uptime": get_uptime(),
-        "Packages": get_packages(),
+        "Tiempo de actividad": get_uptime(),
+        "Paquetes": get_packages(),
         "Shell": os.path.basename(os.getenv('SHELL', 'bash')),
         "Terminal": os.getenv('TERM', 'unknown'),
         "CPU": platform.processor() or "N/A",
-        "Memory": get_memory(),
-        "Storage": get_disk(),
-        "IP Tor": ip
+        "Memoria": get_memory(),
+        "Almacenamiento": get_disk(),
+        "Tu IP Tor": ip
     }
 
 def display_banner():
@@ -167,6 +167,8 @@ def display_banner():
         color = f.read().strip().replace("bold ", "")
     with open("banner_background.txt", "r") as f:
         background = f.read().strip().lower()
+    with open("banner_background_color.txt", "r") as f:
+        background_color = f.read().strip().lower()
 
     f = Figlet(font="cosmic")
     console.print(f.renderText("Stellar"))
@@ -176,15 +178,15 @@ def display_banner():
         input("")
 
     os.system("clear")
-    return banner, color, background
+    return banner, color, background, background_color  # Ahora retornamos los 4 valores
 
 def main():
-    banner, color, background, background_color = display_banner()
+    banner, color, background, background_color = display_banner()  # Ahora coinciden
     info = get_system_info()
 
     banner_style = Style(color=color, bold=True) if color else Style(bold=True)
     if background in ["si", "sí", "yes"]:
-        banner_style += Style(bgcolor="default")
+        banner_style += Style(bgcolor=background_color)
 
     left_panel = Text(banner, style=banner_style)
     right_panel = Text("\n", style="bold")
