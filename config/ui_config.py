@@ -6,6 +6,7 @@ from os import system
 console = Console()
 
 try:
+    os.system("cd .configs_stellar/themes")
     console.print()
     
     main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner: [/bold green]")
@@ -27,18 +28,10 @@ try:
 [bold green]""")
 
         color = console.input("[bold green]Elija un color para su banner: [bold green]")
-        os.system(f"""
-cd 
-cd .configs_stellar/themes
-echo {color} > banner_color.txt
-cd""")
+        os.system(f"echo {color} > banner_color.txt")
 
         input_background = console.input("[bold green]Desea que el banner tenga fondo? No/Sí: [bold green]")
-        os.system(f"""
-cd 
-cd .configs_stellar/themes
-echo {input_background} > banner_background.txt
-cd""") 
+        os.system(f"echo {input_background} > banner_background.txt") 
 
         with open("banner_background.txt", "r") as f:
             background = f.read().strip().lower()
@@ -67,15 +60,12 @@ cd""")
 [slate_gray1]slate_gray1[/] [dark_slate_gray]dark_slate_gray[/]
 """)
         background_color_set = console.input("[bold green]Seleccione un color: [bold green]")
-        os.system(f"""
-cd 
-cd .configs_stellar/themes
-echo {background_color_set} > banner_background_color.txt
-cd""") 
+        os.system(f"echo {background_color_set} > banner_background_color.txt") 
     
     console.print("")
     console.print("[code][bold green]Configuración realizada con éxito, escriba bash para que los cambios surtan efecto", justify="center")
     console.print()
+    os.system("cd")
 
 except Exception as e:
     print(f"[code][bold red]Error: {e}")
