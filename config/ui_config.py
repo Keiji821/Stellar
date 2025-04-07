@@ -11,14 +11,13 @@ def clear_screen():
 
 def show_title():
     clear_screen()
-    console.print(Panel.fit(" Configurador de Banner Stellar ", style="bold blue"))
+    console.print(Panel.fit(" Configurador de UI", style="bold blue"))
     console.print()
 
 def get_banner():
     show_title()
     banner_path = os.path.expanduser("~/.configs_stellar/themes/banner.txt")
     
-    # Borrar el banner actual si existe
     if os.path.exists(banner_path):
         os.remove(banner_path)
         console.print("[yellow]Se ha borrado el banner anterior.[/yellow]\n")
@@ -26,7 +25,6 @@ def get_banner():
     console.print("[bold green]Pulse [bold yellow]Enter[/bold yellow] para crear su nuevo banner[/bold green]")
     input()
     
-    # Crear archivo y abrir editor
     os.system(f"touch {banner_path} && nano {banner_path}")
     
     # Verificar si se creó el banner
