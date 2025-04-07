@@ -24,6 +24,8 @@
 
 **Stellar** es una herramienta poderosa para personalizar Termux, ofreciendo múltiples funcionalidades orientadas a hacking, pentesting, osint, y más. Stellar busca mejorar la experiencia del usuario proporcionando un entorno más atractivo y funcional.
 
+[![Imágen](https://cdn.discordapp.com/attachments/1202078440371789884/1358688080516616302/1744006751277.jpg?ex=67f4c061&is=67f36ee1&hm=35eda6adc50ca3c6e392ef406f316b9de8eff05d3d4f19ad573c37ed39e1588d&)
+
 ## 🛠️ Pasos de Instalación
 
 **Nota:** Abre tu terminal y copia y pega los siguientes comandos:
