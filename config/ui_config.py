@@ -11,19 +11,27 @@ def clear_screen():
 
 def show_title():
     clear_screen()
-    console.print(Panel.fit(" Configurador de la UI", style="bold blue"))
+    console.print(Panel.fit(" Configurador de Banner Stellar ", style="bold blue"))
     console.print()
 
 def get_banner():
     show_title()
-    console.print("[bold green]Pulse [bold yellow]Enter[/bold yellow] para editar su banner[/bold green]")
+    banner_path = os.path.expanduser("~/.configs_stellar/themes/banner.txt")
+    
+    # Borrar el banner actual si existe
+    if os.path.exists(banner_path):
+        os.remove(banner_path)
+        console.print("[yellow]Se ha borrado el banner anterior.[/yellow]\n")
+    
+    console.print("[bold green]Pulse [bold yellow]Enter[/bold yellow] para crear su nuevo banner[/bold green]")
     input()
     
-    banner_path = os.path.expanduser("~/.configs_stellar/themes/banner.txt")
-    os.system(f"nano {banner_path} || touch {banner_path} && nano {banner_path}")
+    # Crear archivo y abrir editor
+    os.system(f"touch {banner_path} && nano {banner_path}")
     
-    if not os.path.exists(banner_path):
-        console.print("[bold red]Error: No se pudo crear el archivo banner.txt[/bold red]")
+    # Verificar si se creó el banner
+    if not os.path.exists(banner_path) or os.path.getsize(banner_path) == 0:
+        console.print("[bold red]Error: No se creó el banner o está vacío[/bold red]")
         sys.exit(1)
 
 def show_color_options():
@@ -74,7 +82,7 @@ def main():
         os.makedirs(themes_dir, exist_ok=True)
         os.chdir(themes_dir)
         
-        get_banner()
+        get_banner()  # Esta función ahora borra automáticamente el banner anterior
         set_banner_color()
         set_background()
         
