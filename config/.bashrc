@@ -16,6 +16,7 @@ amarillo2="\033[33m"
 cyan="\033[38;2;23;147;209m"
 
 clear
+cd
 
 echo -ne '\033]0;~ Stellar\007'
 
