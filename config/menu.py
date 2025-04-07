@@ -1,45 +1,77 @@
 from rich.console import Console
 from rich.style import Style
+from rich.rule import Rule
 
 console = Console(style="grey78 on grey23")
 
-commandos = {
+def print_fullwidth(text, style=""):
+    console.print(text.ljust(console.width), style=style)
+
+menu_data = {
     "SISTEMA": [
-        ("reload", "Recargar configuración"),
-        ("clear", "Limpiar terminal"),
-        ("bash", "Reiniciar terminal"),
-        ("ui", "Personalizar interfaz")
+        ("reload", "Recargar configuración completa"),
+        ("clear", "Limpiar pantalla terminal"),
+        ("bash", "Reiniciar sesión terminal"),
+        ("ui", "Personalizar temas e interfaz")
     ],
     "UTILIDADES": [
-        ("ia", "Asistente de IA"),
-        ("ia-image", "Generar imágenes IA"),
-        ("traductor", "Traducción instantánea"),
-        ("myip", "Información de IP")
+        ("ia", "Asistente IA con API integrada"),
+        ("ia-image", "Generación de imágenes con IA"),
+        ("traductor", "Traducción en tiempo real"),
+        ("myip", "Analizador avanzado de IP")
     ],
-    "OSINT": [
-        ("ipinfo", "Analizar direcciones IP"),
-        ("phoneinfo", "Buscar teléfonos"),
-        ("urlinfo", "Analizar enlaces"),
-        ("metadatainfo", "Extraer metadatos"),
-        ("emailsearch", "Buscar correos"),
-        ("userfinder", "Rastrear usuarios")
+    "HERRAMIENTAS OSINT": [
+        ("ipinfo", "Análisis detallado de IP"),
+        ("phoneinfo", "Búsqueda de información telefónica"),
+        ("urlinfo", "Escaneo de URLs y dominios"),
+        ("metadatainfo", "Extracción de metadatos"),
+        ("emailsearch", "Búsqueda de correos electrónicos"),
+        ("userfinder", "Rastreo de nombres de usuario")
     ],
     "DISCORD": [
-        ("userinfo", "Consultar usuario")
+        ("userinfo", "Consulta detallada de usuarios")
     ]
 }
 
-console.print("\nCENTRO DE COMANDOS STELLAR", style="bold", justify="center")
-console.print("v3.1.0\n", style="dim", justify="center")
+console.print("\n")
+console.print(Rule(style="grey23"))
+console.print(" Comandos de Stellar ".center(console.width), style="bold grey93 on grey23")
+console.print(" v3.2.0 ".center(console.width), style="grey70 on grey23")
+console.print(Rule(style="grey23"))
+console.print("\n")
 
-for categoria, items in commandos.items():
-    console.print(categoria, style="bold grey93")
-    for cmd, desc in items:
-        console.print(f"  {cmd:<12} {desc}", style="grey78")
-    console.print()
+for categoria, comandos in menu_data.items():
+    console.print(f" {categoria} ", style="bold grey93 on grey23")
+    console.print(Rule(style="grey23"))
+    
+    for cmd, desc in comandos:
+        console.print(
+            f"[grey78]{' ' * 2}[/]"
+            f"[bold grey93]{cmd.ljust(18)}[/]"
+            f"[grey78]{desc}[/]"
+            f"[grey78]{' ' * (console.width - len(cmd) - len(desc) - 4)}[/]"
+        )
+    
+    console.print("\n")
 
-console.print("ATAJOS:", style="bold grey93")
-console.print("  CTRL+Z  Detener proceso", style="grey78")
-console.print("  CTRL+C  Forzar terminación\n", style="grey78")
-
-console.print("Navegación: TAB ↹ ↑ ↓", style="dim", justify="center")
+console.print(Rule(style="grey23"))
+console.print(" Atajos del sistema ".center(console.width), style="bold grey93 on grey23")
+console.print(Rule(style="grey23"))
+console.print(
+    f"[grey78]{' ' * 2}[/][bold grey93]CTRL+Z[/][grey78]{' ' * 10}[/]"
+    f"[grey78]Detención segura de procesos[/]"
+    f"[grey78]{' ' * (console.width - 37)}[/]"
+)
+console.print(
+    f"[grey78]{' ' * 2}[/][bold grey93]CTRL+C[/][grey78]{' ' * 10}[/]"
+    f"[grey78]Terminación forzada de procesos[/]"
+    f"[grey78]{' ' * (console.width - 39)}[/]"
+)
+console.print("\n")
+console.print(Rule(style="grey23"))
+console.print(
+    " Navegación: [bold grey93]TAB[/] Autocompletado • [bold grey93]↑↓[/] Movimiento ".center(console.width),
+    style="grey70 on grey23"
+)
+console.print(Rule(style="grey23"))
+console.print("\n")
