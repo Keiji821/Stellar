@@ -96,10 +96,10 @@ def display_banner():
         input("")
 
     os.system("clear")
-    return banner, color, background, background_color  # Ahora retornamos los 4 valores
+    return banner, color, background, background_color
 
 def main():
-    banner, color, background, background_color = display_banner()  # Ahora coinciden
+    banner, color, background, background_color = display_banner()
     info = get_system_info()
 
     banner_style = Style(color=color, bold=True) if color else Style(bold=True)
