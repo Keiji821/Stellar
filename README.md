@@ -10,6 +10,8 @@
 
 **Stellar** es un OS para termux que cambia significativamente el aburrido diseño por defecto que trae termux.
 
+![Imágen](https://cdn.discordapp.com/attachments/1202078440371789884/1358688080797630504/1744006767108.jpg?ex=67f4c061&is=67f36ee1&hm=5e7cc40ea9678bd09b368f7f029f8d500277c291c0e6ad4c8acd78543e647e55&)
+
 ## 🗂️ Tabla de Contenidos
 1. [Descripción](#descripción)
 2. [Pasos de Instalación](#pasos-de-instalación)
@@ -25,8 +27,6 @@
 **Stellar** es una herramienta poderosa para personalizar Termux, ofreciendo múltiples funcionalidades orientadas a hacking, pentesting, osint, y más. Stellar busca mejorar la experiencia del usuario proporcionando un entorno más atractivo y funcional.
 
 ![Imágen](https://cdn.discordapp.com/attachments/1202078440371789884/1358688080516616302/1744006751277.jpg?ex=67f4c061&is=67f36ee1&hm=35eda6adc50ca3c6e392ef406f316b9de8eff05d3d4f19ad573c37ed39e1588d&)
-
-![Imágen](https://cdn.discordapp.com/attachments/1202078440371789884/1358688080797630504/1744006767108.jpg?ex=67f4c061&is=67f36ee1&hm=5e7cc40ea9678bd09b368f7f029f8d500277c291c0e6ad4c8acd78543e647e55&)
 
 ## 🛠️ Pasos de Instalación
 
