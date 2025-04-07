@@ -36,7 +36,7 @@ menu_data = {
 console.print("\n")
 console.print(Rule(style="grey23"))
 console.print(" Comandos de Stellar ".center(console.width), style="bold grey93 on grey23")
-console.print(" v3.2.0 ".center(console.width), style="grey70 on grey23")
+console.print(" Hecho por Keiji821 ".center(console.width), style="grey70 on grey23")
 console.print(Rule(style="grey23"))
 console.print("\n")
 
