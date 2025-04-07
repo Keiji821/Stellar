@@ -179,7 +179,7 @@ def display_banner():
     return banner, color, background
 
 def main():
-    banner, color, background = display_banner()
+    banner, color, background, background_color = display_banner()
     info = get_system_info()
 
     banner_style = Style(color=color, bold=True) if color else Style(bold=True)
