@@ -44,8 +44,9 @@ function pwlogin_loop() {
         echo -e "${gris}[INFO]${blanco} Usuario actual: ${verde}$user${reset}"
         termux-toast -g top "Usuario: $user"
     else
-        user_response=$(termux-dialog text -t "Login" -i "Ingrese usuario")
-        user=$(echo "$user_response" | grep -oP '(?<="text": ")[^"]*')
+        user_response=$(termux-dialog text -t "Login" -i "Ingrese usuario" 2>/dev/null)
+        [[ -z "$user_response" ]] && { echo -e "${rojo}[ERROR]${blanco} Diálogo cancelado${reset}"; return 1; }
+        user=$(grep -oP '(?<="text": ")[^"]*' <<< "$user_response")
         
         if [[ -z "$user" ]]; then
             echo -e "${rojo}[ERROR]${blanco} No se ingresó usuario${reset}"
@@ -59,23 +60,24 @@ function pwlogin_loop() {
         termux-toast -b green -c black "Usuario guardado"
     fi
 
-    while [[ $intentos -lt $max_intentos ]]; do
-        pass_response=$(termux-dialog text -t "Login" -i "Contraseña para $user" -p)
-        password=$(echo "$pass_response" | grep -oP '(?<="text": ")[^"]*')
+    while (( intentos < max_intentos )); do
+        pass_response=$(termux-dialog text -t "Login" -i "Contraseña para $user" -p 2>/dev/null)
+        [[ -z "$pass_response" ]] && { echo -e "${amarillo}[WARNING]${blanco} Diálogo cancelado${reset}"; ((intentos++)); continue; }
+        password=$(grep -oP '(?<="text": ")[^"]*' <<< "$pass_response")
 
         if [[ -z "$password" ]]; then
-            intentos=$((intentos+1))
+            ((intentos++))
             echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)${reset}"
             termux-toast -b yellow -c black "Intento $intentos: Sin contraseña"
             continue
         fi
 
-        if echo "$password" | pwlogin 2>/dev/null; then
+        if echo "$password" | pwlogin &>/dev/null; then
             echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa${reset}"
             termux-toast -b green -c white "✓ Acceso concedido"
             return 0
         else
-            intentos=$((intentos+1))
+            ((intentos++))
             echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)${reset}"
             termux-toast -b red -c white "X Intento $intentos fallido"
         fi
@@ -83,8 +85,7 @@ function pwlogin_loop() {
 
     echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos. Cerrando sesión...${reset}"
     termux-toast -b red -c white "! BLOQUEADO !"
-    
-    pkill -9 -u $(id -u) termux
+    pkill -9 -u $(id -u) termux &>/dev/null
     exit 1
 }
 
