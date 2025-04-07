@@ -7,29 +7,28 @@ console = Console(style="grey78 on grey23")
 def print_fullwidth(text, style=""):
     console.print(text.ljust(console.width), style=style)
 
-menu_data = {
-    "SISTEMA": [
-        ("reload", "Recargar configuración completa"),
-        ("clear", "Limpiar pantalla terminal"),
-        ("bash", "Reiniciar sesión terminal"),
+menu_data = {    "SISTEMA":         
+        ("reload", "Recarga el banner"),
+        ("clear", "Limpia la pantalla"),
+        ("bash", "Reinicia la sesión"),
         ("ui", "Personalizar temas e interfaz")
     ],
     "UTILIDADES": [
         ("ia", "Asistente IA con API integrada"),
         ("ia-image", "Generación de imágenes con IA"),
         ("traductor", "Traducción en tiempo real"),
-        ("myip", "Analizador avanzado de IP")
+        ("myip", "Muestra tu IP y información completa")
     ],
     "HERRAMIENTAS OSINT": [
         ("ipinfo", "Análisis detallado de IP"),
-        ("phoneinfo", "Búsqueda de información telefónica"),
+        ("phoneinfo", "Obtiene información de números de teléfonos"),
         ("urlinfo", "Escaneo de URLs y dominios"),
         ("metadatainfo", "Extracción de metadatos"),
         ("emailsearch", "Búsqueda de correos electrónicos"),
-        ("userfinder", "Rastreo de nombres de usuario")
+        ("userfinder", "Busqueda de nombres de usuario")
     ],
     "DISCORD": [
-        ("userinfo", "Consulta detallada de usuarios")
+        ("userinfo", "Obtiene información sobre un ID")
     ]
 }
 
