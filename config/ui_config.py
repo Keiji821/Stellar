@@ -11,7 +11,7 @@ def clear_screen():
 
 def show_title():
     clear_screen()
-    console.print(Panel.fit(" Configurador de Banner Stellar ", style="bold blue"))
+    console.print(Panel.fit(" Configurador de la UI", style="bold blue"))
     console.print()
 
 def get_banner():
