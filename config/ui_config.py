@@ -6,7 +6,7 @@ from os import system
 console = Console()
 
 try:
-    os.system("cd .configs_stellar/themes")
+    os.system("cd && cd .configs_stellar/themes")
     console.print()
     
     main = console.input("[bold green]Pulse [code][bold yellow]Enter[/bold yellow][/code] para agregar su banner: [/bold green]")
