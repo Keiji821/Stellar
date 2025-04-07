@@ -5,10 +5,10 @@
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub watchers](https://img.shields.io/github/watchers/Keiji821/Stellar.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/Keiji821/Stellar/watchers/)
 
-# 🌟 Stellar 🌟
+# Stellar
 [![Versión](https://img.shields.io/badge/Versión-1.0.0-blue.svg)](https://github.com/Keiji821/Stellar/releases)
 
-**Stellar** es una herramienta de hacking para Termux diseñada para personalizar y mejorar la apariencia de tu terminal. Cambia el entorno predeterminado con un diseño más atractivo y funcional.
+**Stellar** es un OS para termux que cambia significativamente el aburrido diseño por defecto que trae termux.
 
 ## 🗂️ Tabla de Contenidos
 1. [Descripción](#descripción)
