@@ -11,7 +11,7 @@ def clear_screen():
 
 def show_title():
     clear_screen()
-    console.print(Panel.fit(" Configurador de UI", style="bold blue"))
+    console.print(Panel.fit(" Configurador de Banner Stellar ", style="bold blue"))
     console.print()
 
 def get_banner():
@@ -20,14 +20,12 @@ def get_banner():
     
     if os.path.exists(banner_path):
         os.remove(banner_path)
-        console.print("[yellow]Se ha borrado el banner anterior.[/yellow]\n")
     
     console.print("[bold green]Pulse [bold yellow]Enter[/bold yellow] para crear su nuevo banner[/bold green]")
     input()
     
     os.system(f"touch {banner_path} && nano {banner_path}")
     
-    # Verificar si se creó el banner
     if not os.path.exists(banner_path) or os.path.getsize(banner_path) == 0:
         console.print("[bold red]Error: No se creó el banner o está vacío[/bold red]")
         sys.exit(1)
@@ -80,7 +78,7 @@ def main():
         os.makedirs(themes_dir, exist_ok=True)
         os.chdir(themes_dir)
         
-        get_banner()  # Esta función ahora borra automáticamente el banner anterior
+        get_banner()
         set_banner_color()
         set_background()
         
