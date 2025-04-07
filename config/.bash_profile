@@ -87,7 +87,6 @@ def display_banner():
         background = f.read().strip().lower()
     with open("banner_background_color.txt", "r") as f:
         background_color = f.read().strip().lower()
-    
 
     f = Figlet(font="cosmic")
     console.print(f.renderText("Stellar"))
@@ -97,10 +96,10 @@ def display_banner():
         input("")
 
     os.system("clear")
-    return banner, color, background
+    return banner, color, background, background_color  # Ahora retornamos los 4 valores
 
 def main():
-    banner, color, background, background_color = display_banner()
+    banner, color, background, background_color = display_banner()  # Ahora coinciden
     info = get_system_info()
 
     banner_style = Style(color=color, bold=True) if color else Style(bold=True)
