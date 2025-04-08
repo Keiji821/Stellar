@@ -235,104 +235,61 @@ echo No > banner_background.txt
 echo bright_white > banner_background_color.txt
 cd
 
-printf "${amarillo}[${verde}+${amarillo}] ${blanco2} Iniciando instalación"
-echo
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Actualizando paquetes"
- echo
- apt-get upgrade -y && apt-get update -y
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
+printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando instalación\n"
+printf "${verde}————————————————————————————————————————${reset}\n"
 
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando python"
- echo
- apt-get install -y python 
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando tor"
- echo
- apt-get install -y tor
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando cloudflared"
- echo
- apt-get install -y cloudflared 
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando exiftool"
- echo
- apt-get install -y exiftool
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando nmap"
- echo
- apt-get install -y nmap
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando termux-api"
- echo
- apt-get install -y termux-api
- sleep 5
-printf "${verde}＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿${blanco}"
- echo
- printf "${gris}[${verde}+${gris}] ${blanco} Instalando dnsutils"
- echo
- apt-get install -y dnsutils
- sleep 5
+printf "${gris}[${verde}+${gris}]${blanco} Actualizando paquetes\n"
+apt-get update -y && apt-get upgrade -y
+printf "${verde}————————————————————————————————————————${reset}\n"
 
-echo
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-sleep 1
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install beautifulsoup4
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install bs4
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install pyfiglet
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install phonenumbers
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install psutil
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install PySocks
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install requests
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-echo
-pip install rich
-pip install "rich[jupyter]"
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-pip install lolcat
-echo
-clear
-printf "${gris}[${verde}+${gris}]${blanco} Instalando paquetes python...$SECONDS\n"
-pip install discord
-echo
-clear
-printf "${gris}[${verde}✔${gris}]${blanco} Instalación completada.\n"
+pkg_install() {
+    printf "${gris}[${verde}+${gris}]${blanco} Instalando $1\n"
+    if apt-get install -y $1 >/dev/null 2>&1; then
+        sleep 1
+    else
+        printf "${gris}[${rojo}x${gris}]${blanco} Falló $1\n"
+    fi
+}
+
+pkg_install python
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install tor
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install cloudflared
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install exiftool
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install nmap
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install termux-api
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install termux-auth
+printf "${verde}————————————————————————————————————————${reset}\n"
+pkg_install dnsutils
+printf "${verde}————————————————————————————————————————${reset}\n"
+
+pip_install() {
+    printf "${gris}[${verde}+${gris}]${blanco} Instalando $1 (Python)\n"
+    if pip install $1 >/dev/null 2>&1; then
+        sleep 0.5
+    else
+        printf "${gris}[${rojo}x${gris}]${blanco} Falló $1\n"
+    fi
+}
+
+pip_install beautifulsoup4
+pip_install bs4
+pip_install pyfiglet
+pip_install phonenumbers
+pip_install psutil
+pip_install PySocks
+pip_install requests
+pip_install rich
+pip_install "rich[jupyter]"
+pip_install lolcat
+pip_install discord
+
+printf "${verde}————————————————————————————————————————${reset}\n"
+printf "${gris}[${verde}✔${gris}]${blanco} Instalación completada\n
+cd
 bash
-reload
