@@ -24,68 +24,70 @@ function pwlogin_loop() {
     local max_intentos=3
     local intentos=0
     local user=""
+    local timeout=10
 
     if ! command -v pwlogin &>/dev/null; then
-        echo -e "${rojo}[ERROR]${blanco} Comando 'pwlogin' no encontrado${reset}"
-        termux-toast -b red -c white "ERROR: Falta 'pwlogin'"
+        echo -e "${rojo}[ERROR]${reset} Comando 'pwlogin' no encontrado"
         return 1
     fi
 
     if [[ ! -f "$HOME/.termux_authinfo" ]]; then
-        echo -e "${rojo}[ERROR]${blanco} No hay contraseña configurada${reset}"
-        termux-toast -b red -c white "ERROR: Sin contraseña"
+        echo -e "${rojo}[ERROR]${reset} No hay contraseña configurada"
         return 1
     fi
 
-    echo -e "${azul}[INFO]${blanco} Autenticación requerida${reset}"
-    termux-toast -b blue -c white "Login requerido"
+    echo -e "${azul}[INFO]${reset} Autenticación requerida"
 
     if [[ -f "$HOME/.configs_stellar/themes/user.txt" ]]; then
-        user=$(cat "$HOME/.configs_stellar/themes/user.txt")
-        echo -e "${gris}[INFO]${blanco} Usuario actual: ${verde}$user${reset}"
-        termux-toast -g top "Usuario: $user"
+        user=$(timeout $timeout cat "$HOME/.configs_stellar/themes/user.txt" 2>/dev/null)
+        if [[ -n "$user" ]]; then
+            echo -e "${gris}[INFO]${reset} Usuario: ${verde}$user${reset}"
+        else
+            user="usuario_predeterminado"
+        fi
     else
-        user_response=$(termux-dialog text -t "Login" -i "Ingrese usuario" 2>/dev/null)
-        [[ -z "$user_response" ]] && { echo -e "${rojo}[ERROR]${blanco} Diálogo cancelado${reset}"; return 1; }
-        user=$(grep -oP '(?<="text": ")[^"]*' <<< "$user_response")
-        
-        if [[ -z "$user" ]]; then
-            echo -e "${rojo}[ERROR]${blanco} No se ingresó usuario${reset}"
-            termux-toast -b red -c white "ERROR: Sin usuario"
+        user_response=$(timeout $timeout termux-dialog text -t "Login" -i "Ingrese usuario" 2>/dev/null)
+        if [[ -z "$user_response" ]]; then
+            echo -e "${amarillo}[WARNING]${reset} Tiempo agotado"
             return 1
         fi
         
+        user=$(grep -oP '(?<="text": ")[^"]*' <<< "$user_response")
+        if [[ -z "$user" ]]; then
+            echo -e "${rojo}[ERROR]${reset} Usuario no válido"
+            return 1
+        fi
+
         mkdir -p "$HOME/.configs_stellar/themes"
         echo "$user" > "$HOME/.configs_stellar/themes/user.txt"
-        echo -e "${gris}[INFO]${blanco} Usuario registrado: ${verde}$user${reset}"
-        termux-toast -b green -c black "Usuario guardado"
+        echo -e "${gris}[INFO]${reset} Usuario registrado: ${verde}$user${reset}"
     fi
 
     while (( intentos < max_intentos )); do
-        pass_response=$(termux-dialog text -t "Login" -i "Contraseña para $user" -p 2>/dev/null)
-        [[ -z "$pass_response" ]] && { echo -e "${amarillo}[WARNING]${blanco} Diálogo cancelado${reset}"; ((intentos++)); continue; }
-        password=$(grep -oP '(?<="text": ")[^"]*' <<< "$pass_response")
-
-        if [[ -z "$password" ]]; then
+        pass_response=$(timeout $timeout termux-dialog text -t "Login" -i "Contraseña para $user" -p 2>/dev/null)
+        if [[ -z "$pass_response" ]]; then
             ((intentos++))
-            echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)${reset}"
-            termux-toast -b yellow -c black "Intento $intentos: Sin contraseña"
+            echo -e "${amarillo}[WARNING]${reset} Tiempo agotado (Intento $intentos/$max_intentos)"
             continue
         fi
 
-        if echo "$password" | pwlogin &>/dev/null; then
-            echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa${reset}"
-            termux-toast -b green -c white "✓ Acceso concedido"
+        password=$(grep -oP '(?<="text": ")[^"]*' <<< "$pass_response")
+        if [[ -z "$password" ]]; then
+            ((intentos++))
+            echo -e "${amarillo}[WARNING]${reset} Contraseña vacía (Intento $intentos/$max_intentos)"
+            continue
+        fi
+
+        if echo "$password" | timeout $timeout pwlogin 2>/dev/null; then
+            echo -e "${verde}[SUCCESS]${reset} Acceso concedido"
             return 0
         else
             ((intentos++))
-            echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)${reset}"
-            termux-toast -b red -c white "X Intento $intentos fallido"
+            echo -e "${rojo}[ERROR]${reset} Credenciales inválidas (Intento $intentos/$max_intentos)"
         fi
     done
 
-    echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos. Cerrando sesión...${reset}"
-    termux-toast -b red -c white "! BLOQUEADO !"
+    echo -e "${rojo}[ERROR]${reset} Demasiados intentos"
     pkill -9 -u $(id -u) termux &>/dev/null
     exit 1
 }
