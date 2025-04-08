@@ -95,7 +95,6 @@ cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
 cd
-termux-toast -b green -c white "Bienvenido $input"
 printf "${gris}[INFO] ${blanco}Stellar se ha iniciado correctamente.
 "
 printf "${gris}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.
