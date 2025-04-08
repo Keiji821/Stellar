@@ -24,71 +24,53 @@ function pwlogin_loop() {
     local max_intentos=3
     local intentos=0
     local user=""
-    local timeout=10
+    local shell_pid=$$
 
     if ! command -v pwlogin &>/dev/null; then
-        echo -e "${rojo}[ERROR]${reset} Comando 'pwlogin' no encontrado"
+        echo -e "${rojo}[ERROR]${blanco} Comando 'pwlogin' no encontrado${reset}"
         return 1
     fi
 
     if [[ ! -f "$HOME/.termux_authinfo" ]]; then
-        echo -e "${rojo}[ERROR]${reset} No hay contraseña configurada"
+        echo -e "${rojo}[ERROR]${blanco} No hay contraseña configurada${reset}"
         return 1
     fi
 
-    echo -e "${azul}[INFO]${reset} Autenticación requerida"
+    echo -e "${azul}[INFO]${blanco} Autenticación requerida${reset}"
 
     if [[ -f "$HOME/.configs_stellar/themes/user.txt" ]]; then
-        user=$(timeout $timeout cat "$HOME/.configs_stellar/themes/user.txt" 2>/dev/null)
-        if [[ -n "$user" ]]; then
-            echo -e "${gris}[INFO]${reset} Usuario: ${verde}$user${reset}"
-        else
-            user="usuario_predeterminado"
-        fi
+        user=$(cat "$HOME/.configs_stellar/themes/user.txt")
+        echo -e "${gris}[INFO]${blanco} Usuario actual: ${verde}$user${reset}"
     else
-        user_response=$(timeout $timeout termux-dialog text -t "Login" -i "Ingrese usuario" 2>/dev/null)
-        if [[ -z "$user_response" ]]; then
-            echo -e "${amarillo}[WARNING]${reset} Tiempo agotado"
-            return 1
-        fi
-        
-        user=$(grep -oP '(?<="text": ")[^"]*' <<< "$user_response")
-        if [[ -z "$user" ]]; then
-            echo -e "${rojo}[ERROR]${reset} Usuario no válido"
-            return 1
-        fi
-
+        echo -n -e "${gris}[INFO]${blanco} Ingrese su nombre de usuario: "
+        read user
         mkdir -p "$HOME/.configs_stellar/themes"
         echo "$user" > "$HOME/.configs_stellar/themes/user.txt"
-        echo -e "${gris}[INFO]${reset} Usuario registrado: ${verde}$user${reset}"
     fi
 
-    while (( intentos < max_intentos )); do
-        pass_response=$(timeout $timeout termux-dialog text -t "Login" -i "Contraseña para $user" -p 2>/dev/null)
-        if [[ -z "$pass_response" ]]; then
-            ((intentos++))
-            echo -e "${amarillo}[WARNING]${reset} Tiempo agotado (Intento $intentos/$max_intentos)"
-            continue
-        fi
+    while [[ $intentos -lt $max_intentos ]]; do
+        echo -n -e "${gris}[INFO]${blanco} Ingrese su contraseña: "
+        read -s password
+        echo
 
-        password=$(grep -oP '(?<="text": ")[^"]*' <<< "$pass_response")
         if [[ -z "$password" ]]; then
-            ((intentos++))
-            echo -e "${amarillo}[WARNING]${reset} Contraseña vacía (Intento $intentos/$max_intentos)"
+            intentos=$((intentos+1))
+            echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)${reset}\n"
             continue
         fi
 
-        if echo "$password" | timeout $timeout pwlogin 2>/dev/null; then
-            echo -e "${verde}[SUCCESS]${reset} Acceso concedido"
+        if echo "$password" | pwlogin 2>/dev/null; then
+            echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa${reset}"
             return 0
         else
-            ((intentos++))
-            echo -e "${rojo}[ERROR]${reset} Credenciales inválidas (Intento $intentos/$max_intentos)"
+            intentos=$((intentos+1))
+            echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)${reset}\n"
         fi
     done
 
-    echo -e "${rojo}[ERROR]${reset} Demasiados intentos"
-    pkill -9 -u $(id -u) termux &>/dev/null
+    echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos. Cerrando sesión...${reset}"
+    sleep 2
+    kill -9 $shell_pid 2>/dev/null
     exit 1
 }
 
