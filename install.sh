@@ -290,6 +290,6 @@ pip_install lolcat
 pip_install discord
 
 printf "${verde}————————————————————————————————————————${reset}\n"
-printf "${gris}[${verde}✔${gris}]${blanco} Instalación" completada\n
+printf "${gris}[${verde}✔${gris}]${blanco} Instalación completada\n"
 cd
 bash
