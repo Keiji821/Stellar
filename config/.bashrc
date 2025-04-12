@@ -86,8 +86,11 @@ PS1="${azul_agua}(${morado}${pwd_relative}${azul_agua}) ${azul_agua}${verde}${in
 }
 
 clear
-export ALL_PROXY=socks5h://localhost:9050
-python Stellar/config/run.py
+export ALL_PROXY=socks5h://localhost:9052
+pkill tor
+tor &>/dev/null &
+bash Stellar/update.sh &>/dev/null &",
+cd Stellar && git pull --force &>/dev/null &
 
 cd
 cd .configs_stellar/themes
