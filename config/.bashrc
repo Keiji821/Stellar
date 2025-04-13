@@ -1,3 +1,5 @@
+#!/bin/bash
+
 gris="\033[1;30m"
 blanco="\033[0m"
 blanco2="\033[1;37m"
@@ -27,20 +29,20 @@ function pwlogin_loop() {
     local shell_pid=$$
 
     if ! command -v pwlogin &>/dev/null; then
-        echo -e "${rojo}[ERROR]${blanco} Comando 'pwlogin' no encontrado${reset}"
+        echo -e "${rojo}[ERROR]${blanco} Comando 'pwlogin' no encontrado"
         return 1
     fi
 
     if [[ ! -f "$HOME/.termux_authinfo" ]]; then
-        echo -e "${rojo}[ERROR]${blanco} No hay contraseña configurada${reset}"
+        echo -e "${rojo}[ERROR]${blanco} No hay contraseña configurada"
         return 1
     fi
 
-    echo -e "${azul}[INFO]${blanco} Autenticación requerida${reset}"
+    echo -e "${azul}[INFO]${blanco} Autenticación requerida"
 
     if [[ -f "$HOME/.configs_stellar/themes/user.txt" ]]; then
         user=$(cat "$HOME/.configs_stellar/themes/user.txt")
-        echo -e "${gris}[INFO]${blanco} Usuario actual: ${verde}$user${reset}"
+        echo -e "${gris}[INFO]${blanco} Usuario actual: ${verde}$user"
     else
         echo -n -e "${gris}[INFO]${blanco} Ingrese su nombre de usuario: "
         read user
@@ -55,20 +57,20 @@ function pwlogin_loop() {
 
         if [[ -z "$password" ]]; then
             intentos=$((intentos+1))
-            echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)${reset}\n"
+            echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)\n"
             continue
         fi
 
         if echo "$password" | pwlogin 2>/dev/null; then
-            echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa${reset}"
+            echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa"
             return 0
         else
             intentos=$((intentos+1))
-            echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)${reset}\n"
+            echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)\n"
         fi
     done
 
-    echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos. Cerrando sesión...${reset}"
+    echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos. Cerrando sesión..."
     sleep 2
     kill -9 $shell_pid 2>/dev/null
     exit 1
@@ -79,17 +81,17 @@ pwlogin_loop
 input=$(cat .configs_stellar/themes/user.txt)
 
 function cd() {
-builtin cd "$@"
-local pwd_relative="${PWD/#$HOME}"
-pwd_relative=${pwd_relative#/}
-PS1="${azul_agua}(${morado}${pwd_relative}${azul_agua}) ${azul_agua}${verde}${input}${azul_agua} ${amarillo}~${verde} $ ${blanco2}"
+    builtin cd "$@"
+    local pwd_relative="${PWD/#$HOME}"
+    pwd_relative=${pwd_relative#/}
+    PS1="${azul_agua}(${morado}${pwd_relative}${azul_agua}) ${azul_agua}${verde}${input}${azul_agua} ${amarillo}~${verde} $ ${blanco2}"
 }
 
 clear
 export ALL_PROXY=socks5h://localhost:9052
 pkill tor
 tor &>/dev/null &
-bash Stellar/update.sh &>/dev/null &",
+bash Stellar/update.sh &>/dev/null &
 cd Stellar && git pull --force &>/dev/null &
 
 cd
@@ -98,128 +100,99 @@ cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
 cd
-printf "${gris}[INFO] ${blanco}Stellar se ha iniciado correctamente.
-"
-printf "${gris}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.
-"
-
-# Osint - main
+printf "${gris}[INFO] ${blanco}Stellar se ha iniciado correctamente.\n"
+printf "${gris}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.\n"
 
 ipinfo() {
-cd
-cd Stellar/osint/main
-python ipinfo.py
-cd
+    cd ~/Stellar/osint/main
+    python ipinfo.py
+    cd
 }
 
 phoneinfo() {
-cd
-cd Stellar/osint/main
-python phoneinfo.py
-cd
+    cd ~/Stellar/osint/main
+    python phoneinfo.py
+    cd
 }
 
 urlinfo() {
-cd
-cd Stellar/osint/main
-python urlinfo.py
-cd
+    cd ~/Stellar/osint/main
+    python urlinfo.py
+    cd
 }
 
 metadatainfo() {
-cd
-cd Stellar/osint/main
-bash metadatainfo.sh
-cd
+    cd ~/Stellar/osint/main
+    bash metadatainfo.sh
+    cd
 }
 
 emailsearch() {
-cd
-cd Stellar/osint/main
-python emailfinder.py
-cd
+    cd ~/Stellar/osint/main
+    python emailfinder.py
+    cd
 }
 
 userfinder() {
-cd
-cd Stellar/osint/main
-python userfinder.py
-cd
+    cd ~/Stellar/osint/main
+    python userfinder.py
+    cd
 }
-
-# Osint - Discod
 
 userinfo() {
-cd
-cd Stellar/osint/discord
-python userinfo.py
-cd
+    cd ~/Stellar/osint/discord
+    python userinfo.py
+    cd
 }
-
-# Pentesting
 
 ddos() {
-cd
-cd Stellar/pentesting
-python ddos.py
-cd
+    cd ~/Stellar/pentesting
+    python ddos.py
+    cd
 }
 
-# System
-
 menu() {
-cd
-cd Stellar/config
-python menu.py
-cd
+    cd ~/Stellar/config
+    python menu.py
+    cd
 }
 
 reload() {
-cd
-cd .configs_stellar/themes
-clear
-python banner.py
-cd
+    cd ~/.configs_stellar/themes
+    clear
+    python banner.py
+    cd
 }
 
 ui() {
-cd
-cd Stellar/config
-python ui_config.py
-cd
+    cd ~/Stellar/config
+    python ui_config.py
+    cd
 }
 
-# Misc
-
 ia() {
-cd
-cd Stellar/misc/tools
-python iahttp.py
-cd
+    cd ~/Stellar/misc/tools
+    python iahttp.py
+    cd
 }
 
 ia-image() {
-cd
-cd Stellar/misc/tools
-python ia_image.py
-cd
+    cd ~/Stellar/misc/tools
+    python ia_image.py
+    cd
 }
 
 traductor() {
-cd
-cd Stellar/misc/tools
-python traductor.py
-cd
+    cd ~/Stellar/misc/tools
+    python traductor.py
+    cd
 }
 
 myip() {
-cd
-cd Stellar/misc/tools
-python myip.py
-cd
+    cd ~/Stellar/misc/tools
+    python myip.py
+    cd
 }
-
-# Config
 
 command_not_found_handle() {
     echo -e "${gris}[INFO] ${blanco}Comando no encontrado: $1"
