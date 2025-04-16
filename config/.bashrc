@@ -20,16 +20,41 @@ cyan="\033[38;2;23;147;209m"
 clear
 cd
 
-echo -ne '\033]0;~ Stellar\007'
-
-input=$(cat .configs_stellar/themes/user.txt)
+input=$(grep -v '^[[:space:]]*$' "$HOME/.configs_stellar/themes/user.txt" 2>/dev/null || {
+    mkdir -p "$HOME/.configs_stellar/themes"
+    echo -ne "\033[1;32mUsuario: \033[0m"
+    read -r input
+    echo "$input" > "$HOME/.configs_stellar/themes/user.txt"
+    echo "$input"
+})
 
 function cd() {
-    builtin cd "$@"
-    local pwd_relative="${PWD/#$HOME}"
-    pwd_relative=${pwd_relative#/}
-    PS1="${azul_agua}(${morado}${pwd_relative}${azul_agua}) ${azul_agua}${verde}${input}${azul_agua} ${amarillo}~${verde} $ ${blanco2}"
+    builtin cd "$@" || return 1
+    local current_dir="${PWD/#$HOME/\~}"
+    
+    declare -A colors=(
+        ["user"]="\033[1;32m"
+        ["host"]="\033[1;31m"
+        ["path"]="\033[1;36m"
+        ["symbol"]="\033[1;35m"
+        ["git"]="\033[1;33m"
+        ["reset"]="\033[0m"
+    )
+
+    local git_branch=$(git branch --show-current 2>/dev/null)
+    local git_info=""
+    
+    if [ -n "$git_branch" ]; then
+        git_info=" ${colors[symbol]}[${colors[git]}⎇ $git_branch${colors[symbol]}]"
+    fi
+
+    PS1="${colors[user]}${input}${colors[reset]}@${colors[host]}termux${colors[reset]}:${colors[path]}${current_dir}${git_info}${colors[reset]}"
+    PS1+="\n${colors[symbol]}└─╼${colors[reset]} "
+    
+    echo -ne "\033]0;${input}@termux: ${current_dir}\007"
 }
+
+cd "$HOME"
 
 clear
 export ALL_PROXY=socks5h://localhost:9052
