@@ -22,62 +22,6 @@ cd
 
 echo -ne '\033]0;~ Stellar\007'
 
-function pwlogin_loop() {
-    local max_intentos=3
-    local intentos=0
-    local user=""
-    local shell_pid=$$
-
-    if ! command -v pwlogin &>/dev/null; then
-        echo -e "${rojo}[ERROR]${blanco} Comando 'pwlogin' no encontrado"
-        return 1
-    fi
-
-    if [[ ! -f "$HOME/.termux_authinfo" ]]; then
-        echo -e "${rojo}[ERROR]${blanco} No hay contraseña configurada"
-        return 1
-    fi
-
-    echo -e "${azul}[INFO]${blanco} Autenticación requerida"
-
-    if [[ -f "$HOME/.configs_stellar/themes/user.txt" ]]; then
-        user=$(cat "$HOME/.configs_stellar/themes/user.txt")
-        echo -e "${gris}[INFO]${blanco} Usuario actual: ${verde}$user"
-    else
-        echo -n -e "${gris}[INFO]${blanco} Ingrese su nombre de usuario: "
-        read user
-        mkdir -p "$HOME/.configs_stellar/themes"
-        echo "$user" > "$HOME/.configs_stellar/themes/user.txt"
-    fi
-
-    while [[ $intentos -lt $max_intentos ]]; do
-        echo -n -e "${gris}[INFO]${blanco} Ingrese su contraseña: "
-        read -s password
-        echo
-
-        if [[ -z "$password" ]]; then
-            intentos=$((intentos+1))
-            echo -e "${amarillo}[WARNING]${blanco} Contraseña vacía (Intento $intentos/$max_intentos)\n"
-            continue
-        fi
-
-        if echo "$password" | pwlogin 2>/dev/null; then
-            echo -e "${verde}[SUCCESS]${blanco} Autenticación exitosa"
-            return 0
-        else
-            intentos=$((intentos+1))
-            echo -e "${rojo}[ERROR]${blanco} Contraseña incorrecta (Intento $intentos/$max_intentos)\n"
-        fi
-    done
-
-    echo -e "${rojo}[ERROR]${blanco} Demasiados intentos fallidos. Cerrando sesión..."
-    sleep 2
-    kill -9 $shell_pid 2>/dev/null
-    exit 1
-}
-
-pwlogin_loop
-
 input=$(cat .configs_stellar/themes/user.txt)
 
 function cd() {
