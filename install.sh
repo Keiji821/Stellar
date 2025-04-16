@@ -176,60 +176,24 @@ echo bright_white > banner_background_color.txt
 cd
 
 printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando instalación\n"
-printf "${verde}————————————————————————————————————————${reset}\n"
 
-printf "${gris}[${verde}+${gris}]${blanco} Actualizando paquetes\n"
 apt-get update -y && apt-get upgrade -y
-printf "${verde}————————————————————————————————————————${reset}\n"
+pkg install python
+pkg install tor
+pkg install cloudflared
+pkg install exiftool
+pkg install nmap
+pkg install termux-api
+pkg install dnsutils
 
-pkg_install() {
-    printf "${gris}[${verde}+${gris}]${blanco} Instalando $1\n"
-    if apt-get install -y $1 >/dev/null 2>&1; then
-        sleep 1
-    else
-        printf "${gris}[${rojo}x${gris}]${blanco} Falló $1\n"
-    fi
-}
-
-pkg_install python
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install tor
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install cloudflared
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install exiftool
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install nmap
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install termux-api
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install termux-auth
-printf "${verde}————————————————————————————————————————${reset}\n"
-pkg_install dnsutils
-printf "${verde}————————————————————————————————————————${reset}\n"
-
-pip_install() {
-    printf "${gris}[${verde}+${gris}]${blanco} Instalando $1 (Python)\n"
-    if pip install $1 >/dev/null 2>&1; then
-        sleep 0.5
-    else
-        printf "${gris}[${rojo}x${gris}]${blanco} Falló $1\n"
-    fi
-}
-
-pip_install beautifulsoup4
-pip_install bs4
-pip_install pyfiglet
-pip_install phonenumbers
-pip_install psutil
-pip_install PySocks
-pip_install requests
-pip_install rich
-pip_install "rich[jupyter]"
-pip_install lolcat
-pip_install discord
-
-printf "${verde}————————————————————————————————————————${reset}\n"
-printf "${gris}[${verde}✔${gris}]${blanco} Instalación completada\n"
-cd
-bash
+pip install beautifulsoup4
+pip install bs4
+pip install pyfiglet
+pip install phonenumbers
+pip install psutil
+pip install PySocks
+pip install requests
+pip install rich
+pip install "rich[jupyter]"
+pip install lolcat
+pip install discord
