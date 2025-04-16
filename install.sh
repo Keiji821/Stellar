@@ -17,66 +17,6 @@ cyan="$b\033[38;2;23;147;209m"
 
 clear
 
-set_password() {
-    printf "${azul}[INFO] ${blanco}Configuración de usuario para Termux${reset}\n"
-    
-    user_file="$HOME/.configs_stellar/themes/user.txt"
-    current_user=""
-    
-    if [[ -f "$user_file" ]]; then
-        current_user=$(cat "$user_file")
-        printf "${amarillo}[INFO] ${blanco}Usuario actual: ${verde}$current_user${reset}\n"
-        printf "${amarillo}[INFO] ${blanco}¿Desea cambiarlo? [s/N]: "
-        read cambiar_user
-        if [[ "$cambiar_user" != "s" && "$cambiar_user" != "S" ]]; then
-            user="$current_user"
-        fi
-    fi
-
-    if [[ -z "$user" ]]; then
-        while true; do
-            printf "${gris}[INFO] ${blanco}Ingrese su nombre de usuario: "
-            read user
-            if [[ -z "$user" ]]; then
-                printf "${rojo}[ERROR] ${blanco}El nombre de usuario no puede estar vacío${reset}\n"
-            else
-                mkdir -p "$HOME/.configs_stellar/themes"
-                echo "$user" > "$user_file"
-                break
-            fi
-        done
-    fi
-
-    while true; do
-        printf "${gris}[INFO] ${blanco}Ingrese su nueva contraseña: "
-        read -s password
-        printf "\n${gris}[INFO] ${blanco}Repita la contraseña: "
-        read -s password_confirm
-        printf "\n"
-
-        if [[ -z "$password" ]]; then
-            printf "${amarillo}[WARNING] ${blanco}La contraseña no puede estar vacía\n\n"
-            continue
-        fi
-
-        if [[ "$password" != "$password_confirm" ]]; then
-            printf "${amarillo}[WARNING] ${blanco}Las contraseñas no coinciden\n\n"
-            continue
-        fi
-
-        (echo "$password"; echo "$password") | passwd >/dev/null 2>&1
-
-        if [[ $? -eq 0 ]]; then
-            printf "${verde}[SUCCESS] ${blanco}Contraseña configurada correctamente\n"
-            break
-        else
-            printf "${rojo}[ERROR] ${blanco}Error al configurar la contraseña\n\n"
-        fi
-    done
-}
-
-set_password
-
 cp ~/Stellar/config/.bash_profile ~/.
 cp ~/Stellar/config/.bashrc ~/.
 
