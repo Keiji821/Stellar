@@ -1,71 +1,67 @@
 from rich.console import Console
-from rich.style import Style
-from rich.rule import Rule
 from rich.panel import Panel
-from rich.text import Text
-from rich.box import ROUNDED
+from rich.table import Table
+from rich.style import Style
 
 console = Console()
 
-def print_fullwidth(text, style=""):
-    console.print(text.ljust(console.width), style=style)
-
-menu_data = {    
-    "🌌 SISTEMA": [        
-        ("reload", "Recarga el banner estelar"),
-        ("clear", "Limpia el cosmos terminal"),
-        ("bash", "Reinicia la constelación"),
-        ("ui", "Personaliza tu universo visual")
+menu_data = {
+    "SISTEMA": [
+        ("reload", "Recargar configuración"),
+        ("clear", "Limpiar terminal"),
+        ("update", "Actualizar Stellar OS"),
+        ("config", "Configuración avanzada")
     ],
-    "✨ UTILIDADES": [
-        ("ia", "Asistente cósmico con IA"),
-        ("ia-image", "Genera nebulosas digitales"),
-        ("traductor", "Traduce lenguajes estelares"),
-        ("myip", "Localiza tu posición galáctica")
+    "HERRAMIENTAS": [
+        ("net-scan", "Escaneo de red"),
+        ("osint", "Investigación digital"),
+        ("crypt", "Herramientas criptográficas"),
+        ("forensic", "Análisis forense")
     ],
-    "🔍 HERRAMIENTAS OSINT": [
-        ("ipinfo", "Analiza constelaciones IP"),
-        ("phoneinfo", "Rastrea comunicaciones interestelares"),
-        ("urlinfo", "Explora galaxias web"),
-        ("metadatainfo", "Descubre secretos de archivos cósmicos"),
-        ("emailsearch", "Busca mensajes en el vacío digital"),
-        ("userfinder", "Rastrea entidades en la red")
-    ],
-    "💬 DISCORD": [
-        ("userinfo", "Decodifica identidades discordianas")
+    "UTILIDADES": [
+        ("vpn", "Gestión de conexiones VPN"),
+        ("proxy", "Configuración de proxy"),
+        ("tor", "Control de servicio Tor"),
+        ("logs", "Visualización de registros")
     ]
 }
 
-console.print("\n")
-console.print(Panel.fit(
-    Text(" STELLAR OS ", justify="center", style="bold #FF66B2"),
-    subtitle="by Keiji821",
-    style="#23DCEF",
-    border_style="#FF66B2",
-    box=ROUNDED,
-    padding=(1, 2)
-)
-
-console.print(Rule(style="#FF66B2"))
-console.print("\n")
-
-for categoria, comandos in menu_data.items():
-    console.print(f" {categoria} ", style="bold #23DCEF on #1A1A2E")
-    console.print(Rule(style="#FF66B2"))
-
-    for cmd, desc in comandos:
-        console.print(
-            f"[#FF66B2]{' ' * 2}[/]"
-            f"[bold #23DCEF]{cmd.ljust(18)}[/]"
-            f"[#C9CBFF]{desc}[/]"
+def display_menu():
+    console.print(
+        Panel.fit(
+            "[bold cyan]STELLAR OS[/] [bright_black](v1.0.0)[/]",
+            subtitle="[bright_black]by Keiji821[/]",
+            border_style="cyan",
+            style="bold"
         )
-    console.print("\n")
+    )
+    
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="bold cyan", justify="left")
+    table.add_column(style="bright_white", justify="left")
+    
+    for category, commands in menu_data.items():
+        table.add_row(
+            Panel.fit(
+                f"[bold]{category}[/]",
+                border_style="dim cyan",
+                style="bold"
+            )
+        )
+        for cmd, desc in commands:
+            table.add_row(
+                f"[bold green]• {cmd}[/]",
+                f"[bright_white]{desc}[/]"
+            )
+        table.add_row("")
+    
+    console.print(table)
+    
+    console.print(
+        Panel.fit(
+            "[bright_black]TAB: Autocompletado  ↑/↓: Navegación  CTRL+C: Salir[/]",
+            border_style="dim cyan"
+        )
+    )
 
-console.print(Rule(style="#FF66B2"))
-console.print(Panel.fit(
-    " Navegación: [bold #23DCEF]TAB[/] Autocompletado • [bold #23DCEF]↑↓[/] Movimiento ",
-    style="#C9CBFF",
-    border_style="#FF66B2",
-    box=ROUNDED
-))
-console.print("\n")
+display_menu()
