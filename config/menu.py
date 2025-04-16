@@ -7,22 +7,31 @@ console = Console()
 
 menu_data = {
     "SISTEMA": [
-        ("reload", "Recargar configuración"),
-        ("clear", "Limpiar terminal"),
-        ("update", "Actualizar Stellar OS"),
-        ("config", "Configuración avanzada")
-    ],
-    "HERRAMIENTAS": [
-        ("net-scan", "Escaneo de red"),
-        ("osint", "Investigación digital"),
-        ("crypt", "Herramientas criptográficas"),
-        ("forensic", "Análisis forense")
+        ("reload", "Recarga el banner"),
+        ("clear", "Limpia la pantalla"),
+        ("bash", "Reinicia la sesión"),
+        ("ui", "Personalizar temas e interfaz")
     ],
     "UTILIDADES": [
-        ("vpn", "Gestión de conexiones VPN"),
-        ("proxy", "Configuración de proxy"),
-        ("tor", "Control de servicio Tor"),
-        ("logs", "Visualización de registros")
+        ("ia", "Asistente IA con API integrada"),
+        ("ia-image", "Generación de imágenes con IA"),
+        ("traductor", "Traducción en tiempo real"),
+        ("myip", "Muestra tu IP y información completa")
+    ],
+    "HERRAMIENTAS OSINT": [
+        ("ipinfo", "Análisis detallado de IP"),
+        ("phoneinfo", "Obtiene información de números de teléfonos"),
+        ("urlinfo", "Escaneo de URLs y dominios"),
+        ("metadatainfo", "Extracción de metadatos"),
+        ("emailsearch", "Búsqueda de correos electrónicos"),
+        ("userfinder", "Busqueda de nombres de usuario")
+    ],
+    "DISCORD": [
+        ("userinfo", "Obtiene información sobre un ID")
+    ],
+    "ATAJOS": [
+        ("CTRL+Z", "Detención segura de procesos"),
+        ("CTRL+C", "Terminación forzada de procesos")
     ]
 }
 
@@ -37,7 +46,7 @@ def display_menu():
     )
     
     table = Table.grid(padding=(0, 2))
-    table.add_column(style="bold cyan", justify="left")
+    table.add_column(style="bold cyan", justify="left", width=18)
     table.add_column(style="bright_white", justify="left")
     
     for category, commands in menu_data.items():
@@ -59,7 +68,7 @@ def display_menu():
     
     console.print(
         Panel.fit(
-            "[bright_black]TAB: Autocompletado  ↑/↓: Navegación  CTRL+C: Salir[/]",
+            "[bright_black]TAB: Autocompletado  ↑/↓: Navegación  ENTER: Ejecutar[/]",
             border_style="dim cyan"
         )
     )
