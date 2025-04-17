@@ -15,3 +15,4 @@ amarillo="$b\033[1;33m"
 amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
+cd Stellar && git pull --force &>/dev/null &
