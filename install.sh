@@ -177,23 +177,40 @@ cd
 
 printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando instalación\n"
 
-apt-get update -y && apt-get upgrade -y
-pkg install python
-pkg install tor
-pkg install cloudflared
-pkg install exiftool
-pkg install nmap
-pkg install termux-api
-pkg install dnsutils
+apt-get update -y && apt-get upgrade -y &>/dev/null &
 
-pip install beautifulsoup4
-pip install bs4
-pip install pyfiglet
-pip install phonenumbers
-pip install psutil
-pip install PySocks
-pip install requests
-pip install rich
-pip install "rich[jupyter]"
-pip install lolcat
-pip install discord
+pkg install python &>/dev/null &
+
+pkg install tor &>/dev/null &
+
+pkg install cloudflared &>/dev/null &
+
+pkg install exiftool &>/dev/null &
+
+pkg install nmap &>/dev/null &
+
+pkg install termux-api &>/dev/null &
+
+pkg install dnsutils &>/dev/null &
+
+pip install beautifulsoup4 &>/dev/null &
+
+pip install bs4 &>/dev/null &
+
+pip install pyfiglet &>/dev/null &
+
+pip install phonenumbers &>/dev/null &
+
+pip install psutil &>/dev/null &
+
+pip install PySocks &>/dev/null &
+
+pip install requests &>/dev/null &
+
+pip install rich &>/dev/null &
+
+pip install "rich[jupyter]" &>/dev/null &
+
+pip install lolcat &>/dev/null &
+
+pip install discord &>/dev/null &
