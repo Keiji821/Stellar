@@ -15,7 +15,7 @@ amarillo="$b[1;33m"
 amarillo2="$b[33m"
 cyan="$b[38;2;23;147;209m"
 
-read -p "${rojo}¿Desea borrar Stellar completamente?${blanco} " respuesta
+read -p "${rojo}¿Desea borrar Stellar completamente? S/N${blanco} " respuesta
 
 if [ "$respuesta" = "s" ] || [ "$respuesta" = "S" ] || [ "$respuesta" = "sí" ] || [ "$respuesta" = "Si" ]; then
 rm -rf Stellar && rm -rf .bashrc && rm -rf .bash_profile
