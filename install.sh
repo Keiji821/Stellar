@@ -179,19 +179,19 @@ printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando instalación\n"
 
 apt-get update -y && apt-get upgrade -y &>/dev/null &
 
-pkg install python &>/dev/null &
+apt install python &>/dev/null &
 
-pkg install tor &>/dev/null &
+apt install tor &>/dev/null &
 
-pkg install cloudflared &>/dev/null &
+apt install cloudflared &>/dev/null &
 
-pkg install exiftool &>/dev/null &
+apt install exiftool &>/dev/null &
 
-pkg install nmap &>/dev/null &
+apt install nmap &>/dev/null &
 
-pkg install termux-api &>/dev/null &
+apt install termux-api &>/dev/null &
 
-pkg install dnsutils &>/dev/null &
+apt install dnsutils &>/dev/null &
 
 pip install beautifulsoup4 &>/dev/null &
 
