@@ -32,6 +32,7 @@ printf "Cerrando sesión....." | lolcat -a -d 30
 
 clear
 
+printf "Espero hayas disfrutado de mi herramienta! Atte: Keiji821" | lolcat -a -d 100
 printf "¡Adiós! :)" | lolcat -a -d 20
 
 login
