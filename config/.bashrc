@@ -60,7 +60,6 @@ clear
 export ALL_PROXY=socks5h://localhost:9052
 pkill tor
 tor &>/dev/null &
-cd Stellar && git pull --force &>/dev/null &
 
 cd
 cd .configs_stellar/themes
