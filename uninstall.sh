@@ -30,4 +30,8 @@ printf "${verde}Configuraciones de Stellar borradas con éxito${blanco}"
 
 printf "Cerrando sesión....." | lolcat -a -d 30
 
+clear
+
 printf "¡Adiós! :)" | lolcat -a -d 20
+
+login
