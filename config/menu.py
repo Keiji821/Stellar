@@ -12,7 +12,7 @@ menu_data = {
         ("bash", "Reinicia la sesión"),
         ("ui", "Personalizar temas e interfaz")
         ("uninstall", "Desinstala todo el sistema"),
-        ("update", "Actualiza y busca actualizaciones en el repositorio de github."),
+        ("update", "Actualiza y busca actualizaciones en el repositorio de github.")
     ],
     "UTILIDADES": [
         ("ia", "Asistente IA con API integrada"),
