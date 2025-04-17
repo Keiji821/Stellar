@@ -71,6 +71,36 @@ cd
 printf "${gris}[INFO] ${blanco}Stellar se ha iniciado correctamente.\n"
 printf "${gris}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.\n"
 
+# Sistema
+
+menu() {
+    cd ~/Stellar/config
+    python menu.py
+    cd
+}
+
+reload() {
+    cd ~/.configs_stellar/themes
+    clear
+    python banner.py
+    cd
+}
+
+ui() {
+    cd ~/Stellar/config
+    python ui_config.py
+    cd
+}
+
+uninstall() {
+    cd ~/Stellar
+    bash uninstall.sh
+    cd
+}
+
+
+# Osint
+
 ipinfo() {
     cd ~/Stellar/osint/main
     python ipinfo.py
@@ -113,30 +143,15 @@ userinfo() {
     cd
 }
 
+# Pentest
+
 ddos() {
     cd ~/Stellar/pentesting
     python ddos.py
     cd
 }
 
-menu() {
-    cd ~/Stellar/config
-    python menu.py
-    cd
-}
-
-reload() {
-    cd ~/.configs_stellar/themes
-    clear
-    python banner.py
-    cd
-}
-
-ui() {
-    cd ~/Stellar/config
-    python ui_config.py
-    cd
-}
+# Misc
 
 ia() {
     cd ~/Stellar/misc/tools
