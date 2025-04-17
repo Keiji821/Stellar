@@ -98,6 +98,12 @@ uninstall() {
     cd
 }
 
+update() {
+    cd ~/Stellar
+    bash update.sh
+    cd
+}
+
 
 # Osint
 
