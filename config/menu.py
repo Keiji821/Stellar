@@ -10,7 +10,7 @@ menu_data = {
         ("reload", "Recarga el banner"),
         ("clear", "Limpia la pantalla"),
         ("bash", "Reinicia la sesión"),
-        ("ui", "Personalizar temas e interfaz")
+        ("ui", "Personalizar temas e interfaz"),
         ("uninstall", "Desinstala todo el sistema"),
         ("update", "Actualiza y busca actualizaciones en el repositorio de github.")
     ],
