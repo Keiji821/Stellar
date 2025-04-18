@@ -12,8 +12,9 @@ from rich.columns import Columns
 
 console = Console()
 
-os.system("cd && cd Stellar/config/system")
-with open(user.txt", "r") as f:
+
+os.chdir(os.path.expanduser("~/Stellar/config/system"))
+with open("user.txt", "r") as f:
     user = f.read().strip().lower()
 
 def get_system_info():
