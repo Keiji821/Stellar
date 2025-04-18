@@ -29,7 +29,8 @@ menu_data = {
         ("userfinder", "Busqueda de nombres de usuario")
     ],
     "DISCORD": [
-        ("userinfo", "Obtiene información sobre un ID")
+        ("userinfo", "Obtiene información sobre un ID"),
+        ("serverinfo", "Obtiene información sobre un servidor"),
     ],
     "ATAJOS": [
         ("CTRL+Z", "Detención segura de procesos"),
