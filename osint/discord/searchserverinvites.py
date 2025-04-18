@@ -34,7 +34,10 @@ def buscar_en_sitio(nombre_sitio, url, selector_servidores, selector_nombre, sel
     resultados = []
     try:
         res = requests.get(url, headers=headers, timeout=10)
-        soup = servidores:
+        soup = BeautifulSoup(res.text, "html.parser")
+        servidores = soup.select(selector_servidores)
+
+        for servidor in servidores:
             nombre = servidor.select_one(selector_nombre)
             enlace = servidor.select_one(selector_enlace)
             if nombre and enlace:
@@ -47,7 +50,12 @@ def buscar_en_sitio(nombre_sitio, url, selector_servidores, selector_nombre, sel
             if len(resultados) >= max_resultados:
                 break
     except Exception as e:
-        console.print(]", box=box.ROUNDED))
+        console.print(Panel(f"[red]Error en {nombre_sitio}:[/] {e}", box=box.ROUNDED))
+    return resultados
+
+def mostrar_tabla(titulo, datos):
+    if not datos:
+        console.print(Panel(f"[red]No se encontraron resultados en {titulo}[/]", box=box.ROUNDED))
         return
 
     tabla = Table(title=titulo, box=box.ROUNDED, title_style="bold magenta")
