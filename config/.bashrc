@@ -77,7 +77,7 @@ menu() {
 }
 
 reload() {
-    cd ~/.configs_stellar/themes
+    cd ~/Stellar/config/themes
     clear
     python banner.py
     cd
