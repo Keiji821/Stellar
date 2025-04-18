@@ -10,8 +10,7 @@ console = Console()
 class DiscordUserFetcher:
     def __init__(self):
         intents = discord.Intents.default()
-        intents.members = True  # Necesario para obtener miembros del servidor
-        intents.presences = True  # Para ver el estado del usuario
+        intents.members = True
         self.bot = discord.Client(intents=intents)
 
     def formatear_fecha(self, fecha):
@@ -47,9 +46,9 @@ class DiscordUserFetcher:
         ))
 
     async def run(self):
-        user_id = console.input("ID de usuario: ").strip()
-        guild_id = console.input("ID del servidor (opcional): ").strip()
-        token = console.input("Token del bot: ").strip()
+        user_id = console.input("[bold green]ID del usuario: [/]").strip()
+        guild_id = console.input("[bold green]ID del servidor (opcional): [/]").strip()
+        token = console.input("[bold green]Token del bot: [/]").strip()
 
         if not user_id.isdigit():
             console.print("[red]El ID debe ser numérico.[/]")
@@ -57,33 +56,33 @@ class DiscordUserFetcher:
 
         try:
             await self.bot.login(token)
-            await self.bot.connect()  # Necesario para inicializar fetches
+
+            user = await self.bot.http.fetch_user(int(user_id))
+            member = None
+
+            if guild_id.isdigit():
+                try:
+                    member_data = await self.bot.http.get_member(guild_id=int(guild_id), user_id=int(user_id))
+                    guild = await self.bot.fetch_guild(int(guild_id))
+                    roles = await guild.fetch_roles()
+                    member_roles = [role for role in roles if role.id in member_data.get("roles", [])]
+
+                    member = discord.Member(data=member_data, guild=guild, state=self.bot._connection)
+                    member._roles = [r.id for r in member_roles]
+
+                except discord.HTTPException:
+                    console.print("[yellow]No se pudo obtener información extendida del servidor.[/]")
+
+            self.mostrar_info(user, member)
 
         except discord.LoginFailure:
             console.print("[red]Token inválido.[/]")
-            return
-
-        async def fetch():
-            try:
-                user = await self.bot.fetch_user(int(user_id))
-                member = None
-
-                if guild_id.isdigit():
-                    guild = self.bot.get_guild(int(guild_id)) or await self.bot.fetch_guild(int(guild_id))
-                    member = guild.get_member(int(user_id)) or await guild.fetch_member(int(user_id))
-
-                self.mostrar_info(user, member)
-
-            except discord.NotFound:
-                console.print("[red]Usuario o servidor no encontrado.[/]")
-            except discord.Forbidden:
-                console.print("[red]Permisos insuficientes para acceder al servidor o miembro.[/]")
-            except discord.HTTPException as e:
-                console.print(f"[red]Error HTTP: {e}[/]")
-            finally:
-                await self.bot.close()
-
-        await fetch()
+        except discord.NotFound:
+            console.print("[red]Usuario no encontrado.[/]")
+        except Exception as e:
+            console.print(f"[red]Error inesperado: {e}[/]")
+        finally:
+            await self.bot.close()
 
 if __name__ == "__main__":
     fetcher = DiscordUserFetcher()
