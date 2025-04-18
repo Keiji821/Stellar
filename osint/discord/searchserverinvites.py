@@ -197,6 +197,12 @@ def buscar_discordhome(query, max_resultados=10):
         res = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
         servidores = soup.select("div.server")
+    except requests.RequestException as e:
+        print(f"[!] Error al buscar en DiscordHome: {e}")
+        return resultados
+    except Exception as e:
+        print(f"[!] Error inesperado: {e}")
+        return resultados
 
 
 def mostrar_tabla(titulo, datos):
