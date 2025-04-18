@@ -155,6 +155,18 @@ serverinfo() {
     cd
 }
 
+searchserverinvites() {
+    cd ~/Stellar/osint/discord
+    python searchserverinvites.py
+    cd
+}
+
+inviteinfo() {
+    cd ~/Stellar/osint/discord
+    python inviteinfo.py
+    cd
+}
+
 # Pentest
 
 ddos() {
