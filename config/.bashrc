@@ -20,10 +20,10 @@ cyan="\033[38;2;23;147;209m"
 clear
 cd
 
-input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/system/user.txt" 2>/dev/null || {
+input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
-    echo "$input" > "$HOME/Stellar/system/user.txt"
+    echo "$input" > "$HOME/Stellar/config/system/user.txt"
     echo "$input"
 })
 
