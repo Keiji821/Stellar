@@ -1,110 +1,105 @@
 import discord
 import requests
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
-from datetime import datetime
+from rich.table import Table
+from rich.text import Text
+import asyncio
 
 console = Console()
 
-class DiscordServerInfo:
+class ServerAnalyzer:
     def __init__(self):
         self.bot = None
+        self.status_colors = {
+            'online': 'green',
+            'idle': 'yellow',
+            'dnd': 'red',
+            'offline': 'dim'
+        }
 
-    async def obtener_info(self, id_servidor, token=None):
-        info_widget = self.obtener_widget(id_servidor)
+    async def get_data(self, server_id, token=None):
+        widget = self.get_widget_data(server_id)
         
         if token:
             try:
                 self.bot = discord.Client(intents=discord.Intents.default())
                 await self.bot.login(token)
-                servidor = await self.bot.fetch_guild(int(id_servidor))
-                
+                guild = await self.bot.fetch_guild(int(server_id))
                 return {
-                    "nombre": servidor.name,
-                    "miembros": servidor.member_count,
-                    "canales": len(servidor.channels),
-                    "widget": info_widget
+                    'name': guild.name,
+                    'total_members': guild.member_count,
+                    'boosts': guild.premium_subscription_count,
+                    'widget': widget
                 }
             except:
-                return {"widget": info_widget}
+                return {'widget': widget}
         
-        return {"widget": info_widget}
+        return {'widget': widget}
 
-    def obtener_widget(self, id_servidor):
+    def get_widget_data(self, server_id):
         try:
-            respuesta = requests.get(f"https://discord.com/api/guilds/{id_servidor}/widget.json", timeout=10)
-            if respuesta.status_code == 200:
-                datos = respuesta.json()
+            response = requests.get(f"https://discord.com/api/guilds/{server_id}/widget.json", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
                 return {
-                    "nombre": datos.get("name"),
-                    "miembros_online": datos.get("members", []),
-                    "canales_voz": [canal["name"] for canal in datos.get("channels", [])],
-                    "invitacion": datos.get("instant_invite")
+                    'online_members': data.get('members', []),
+                    'voice_channels': [ch['name'] for ch in data.get('channels', [])],
+                    'invite': data.get('instant_invite')
                 }
-            return {"error": "Widget desactivado"}
+            return {'error': True}
         except:
-            return {"error": "Error de conexión"}
+            return {'error': True}
 
-    def mostrar_miembros(self, miembros):
-        console.print(f"\n[bold cyan]Miembros en línea ({len(miembros)}):[/]\n")
-        for miembro in miembros:
-            nombre = f"{miembro.get('username', '?')}#{miembro.get('discriminator', '0000')}"
-            estado = miembro.get('status', 'desconocido')
-            
-            color_estado = {
-                "online": "green",
-                "idle": "yellow",
-                "dnd": "red",
-                "offline": "dim"
-            }.get(estado, "magenta")
-            
-            console.print(f"[white]{nombre.ljust(30)}[/] [bold {color_estado}]◉ {estado.capitalize()}[/]")
-
-    def mostrar_info(self, datos):
-        if "error" in datos.get("widget", {}):
-            console.print("[bold red]✘ Widget desactivado[/]")
-            return
-
-        tabla = Table(show_header=False, box=None)
-        tabla.add_column(style="bold green", width=20)
-        tabla.add_column(style="blue")
-
-        nombre = datos.get("nombre") or datos["widget"].get("nombre")
-        tabla.add_row("Servidor", nombre)
-
-        if "miembros" in datos:
-            tabla.add_row("Miembros totales", str(datos["miembros"]))
+    def build_display(self, data):
+        members_table = Table.grid(padding=(0, 2))
+        members_table.add_column(style='bold', width=30)
+        members_table.add_column(width=10)
         
-        tabla.add_row("En línea", str(len(datos["widget"].get("miembros_online", []))))
+        online_members = data['widget'].get('online_members', [])
+        for member in online_members[:75]:
+            username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
+            status = member.get('status', 'offline')
+            members_table.add_row(
+                username,
+                Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
+            )
 
-        if "canales" in datos:
-            tabla.add_row("Canales totales", str(datos["canales"]))
+        info_table = Table(show_header=False)
+        info_table.add_column(style='bold green')
+        info_table.add_column(style='cyan')
         
-        if datos["widget"].get("canales_voz"):
-            tabla.add_row("Canales de voz", ", ".join(datos["widget"]["canales_voz"]))
+        server_name = data.get('name', 'Unknown')
+        info_table.add_row('SERVIDOR', server_name)
+        
+        if 'total_members' in data:
+            info_table.add_row('MIEMBROS', f"{len(online_members)}/{data['total_members']}")
+        else:
+            info_table.add_row('EN LÍNEA', str(len(online_members)))
+        
+        if 'boosts' in data:
+            info_table.add_row('BOOSTS', str(data['boosts']))
+        
+        if data['widget'].get('voice_channels'):
+            info_table.add_row('CANALES', ', '.join(data['widget']['voice_channels']))
 
-        console.print(Panel.fit(
-            tabla,
-            title="[bold green]Información del Servidor[/]",
-            border_style="green",
-            padding=(1, 4)
-        ))
+        if data['widget'].get('invite'):
+            info_table.add_row('INVITACIÓN', data['widget']['invite'])
 
-        if datos["widget"].get("miembros_online"):
-            self.mostrar_miembros(datos["widget"]["miembros_online"])
+        return Panel(
+            Panel(info_table) + "\n" + Panel(members_table),
+            title="[bold green]INFORMACIÓN DEL SERVIDOR[/]",
+            border_style="green"
+        )
 
-    async def ejecutar(self):
-        id_servidor = console.input("[bold green]ID del servidor: [/]")
+    async def run(self):
+        server_id = console.input("[bold green]ID del servidor: [/]")
         token = console.input("[bold green]Token del bot (opcional): [/]")
         
-        datos = await self.obtener_info(id_servidor, token if token else None)
-        self.mostrar_info(datos)
+        data = await self.get_data(server_id, token if token else None)
+        console.print(self.build_display(data))
         
         if self.bot:
             await self.bot.close()
 
-if __name__ == "__main__":
-    import asyncio
-    info = DiscordServerInfo()
-    asyncio.run(info.ejecutar())
+asyncio.run(ServerAnalyzer().run())
