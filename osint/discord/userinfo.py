@@ -33,7 +33,7 @@ class DiscordUserLookup:
                 return {"error": f"Error {response.status_code}"}
             return response.json()
         except requests.exceptions.RequestException:
-            return {"error": "Error de conexión"}
+            return {"error": "No se pudo conectar con el servicio de búsqueda"}
 
     async def obtener_info_discord_py(self, user_id, token):
         try:
@@ -75,18 +75,18 @@ class DiscordUserLookup:
         ))
 
     async def run(self):
-        user_id = console.input("[bold green]» Ingrese el ID de usuario: [/]")
+        user_id = console.input("[bold green]ID de usuario: [/]")
 
         if not user_id.isdigit():
-            console.print("[red]✘ El ID debe ser un número[/]")
+            console.print("[red]El ID debe ser numérico.[/]")
             return
 
-        token = console.input("[bold green]» Token de bot (opcional): [/]")
+        token = console.input("[bold green]Token del bot (opcional): [/]")
 
-        with console.status("[bold blue]Buscando información...[/]", spinner="dots"):
+        with console.status("[blue]Buscando información...[/]", spinner="dots"):
             datos = self.obtener_info_api(user_id)
             if 'error' in datos:
-                console.print(f"[red]✘ {datos['error']}[/]")
+                console.print(f"[red]{datos['error']}[/]")
                 return
 
             datos_extra = None
@@ -99,6 +99,5 @@ class DiscordUserLookup:
         self.mostrar_info(datos, datos_extra)
 
 if __name__ == "__main__":
-    console.print("\n[bold cyan]Discord User ID Lookup[/]\n")
     lookup = DiscordUserLookup()
     asyncio.run(lookup.run())
