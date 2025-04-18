@@ -12,8 +12,11 @@ from rich.columns import Columns
 
 console = Console()
 
-with open("system/user.txt", "r") as f:
-    user = f.read().strip().lower()
+try:
+    with open("system/user.txt", "r", encoding="utf-8") as f:
+        user = f.read().strip().lower()
+except:
+    user = None
 
 def get_system_info():
     now = datetime.datetime.now()
