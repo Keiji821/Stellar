@@ -23,27 +23,26 @@ def obtener_headers():
 
 def buscar_correos(url, filtro_dominios=None):
     emails_encontrados = set()
-    session = requests.Session()
-    
     try:
+        session = requests.Session()
         respuesta = session.get(url, timeout=7, headers=obtener_headers())
         respuesta.raise_for_status()
         sopa = BeautifulSoup(respuesta.content, 'html.parser')
         texto = sopa.get_text()
         correos = re.findall(EMAIL_PATTERN, texto)
-        
+
         if filtro_dominios:
             correos = [email for email in correos if any(dom in email for dom in filtro_dominios)]
-        
+
         emails_encontrados.update(correos)
-        
+
     except requests.HTTPError as e:
         console.print(f"[bold red]Error HTTP en {url}:[/bold red] {e}")
     except requests.RequestException as e:
         console.print(f"[bold red]Error de conexión a {url}:[/bold red] {e}")
     except Exception as e:
         console.print(f"[bold red]Error inesperado en {url}:[/bold red] {e}")
-    
+
     return emails_encontrados
 
 def email_finder():
@@ -51,11 +50,11 @@ def email_finder():
         nombre = console.input("[bold green]Ingrese el nombre: [/bold green]").strip()
         apellido = console.input("[bold green]Ingrese el apellido: [/bold green]").strip()
         consulta = f"{nombre} {apellido}".strip()
-        
+
         if not nombre or not apellido:
             console.print("[bold red]Nombre o apellido no pueden estar vacíos.[/bold red]")
             return
-        
+
         urls = [
             f"https://www.linkedin.com/search/results/content/?keywords={quote(consulta)}",
             f"https://twitter.com/search?q={quote(consulta)}",
@@ -77,31 +76,38 @@ def email_finder():
             f"https://www.researchgate.net/search?q={quote(consulta)}",
             f"https://www.facebook.com/search/top?q={quote(consulta)}"
         ]
-        
+
         emails = set()
-        
         filtro_dominios = console.input("Ingrese dominios de correo que desea filtrar (separados por coma, o deje vacío para todos): ").strip()
         if filtro_dominios:
             filtro_dominios = filtro_dominios.split(",")
-        
+
         console.print(f"\n[bold green]Buscando correos electrónicos para:[/bold green] {consulta}\n")
-        
+
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-            resultados = list(executor.map(lambda url: buscar_correos(url, filtro_dominios), urls))
-        
+            with Progress() as progress:
+                task = progress.add_task("[cyan]Buscando correos...", total=len(urls))
+
+                def actualizar_avance(url):
+                    result = buscar_correos(url, filtro_dominios)
+                    progress.update(task, advance=1)
+                    return result
+
+                resultados = list(executor.map(actualizar_avance, urls))
+
         for resultado in resultados:
             emails.update(resultado)
-        
+
         table = Table(title="Direcciones de Correo Electrónico Encontradas")
         table.add_column("Email", style="red")
-        
+
         if emails:
             for email in sorted(emails):
                 table.add_row(email)
             console.print(table)
         else:
             console.print("[bold yellow]No se encontraron correos electrónicos.[/bold yellow]")
-    
+
     except Exception as e:
         console.print(f"[bold red]Error inesperado:[/bold red] {e}")
 
