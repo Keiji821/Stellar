@@ -6,7 +6,7 @@ from typing import Dict, Any, Optional, List
 console = Console()
 ERROR_STYLE = "bold red"
 SUCCESS_STYLE = "bold green"
-INFO_STYLE = "bold blue"
+INFO_STYLE = "bold green"
 
 def get_server_id() -> str:
     return console.input(f"[{INFO_STYLE}]Ingrese el ID del servidor: [/]")
