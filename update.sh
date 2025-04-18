@@ -18,7 +18,7 @@ amarillo2="$b\033[33m"
 cyan="$b\033[38;2;23;147;209m"
 
 update_repo() {
-    printf "${azul}Actualizando repositorio...${blanco}\n"
+    printf "Actualizando repositorio...${blanco}\n"
     if ! git pull --force; then
         printf "${rojo}¡Error al actualizar el repositorio!${blanco}\n"
         exit 1
@@ -29,7 +29,7 @@ update_repo() {
 show_lolcat_message() {
     local message="$1"
     local delay="${2:-20}"
-    printf "${cyan}${message}${blanco}\n" | lolcat -a -d "$delay"
+    printf "${message}\n" | lolcat -a -d "$delay"
 }
 
 show_lolcat_message "Actualizando..."
