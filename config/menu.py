@@ -47,11 +47,11 @@ def display_menu():
             style="bold"
         )
     )
-    
+
     table = Table.grid(padding=(0, 2))
     table.add_column(style="bold cyan", justify="left", width=18)
     table.add_column(style="bright_white", justify="left")
-    
+
     for category, commands in menu_data.items():
         table.add_row(
             Panel.fit(
@@ -66,9 +66,9 @@ def display_menu():
                 f"[bright_white]{desc}[/]"
             )
         table.add_row("")
-    
+
     console.print(table)
-    
+
     console.print(
         Panel.fit(
             "[bright_black]TAB: Autocompletado  ↑/↓: Navegación  ENTER: Ejecutar[/]",
