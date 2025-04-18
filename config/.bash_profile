@@ -88,13 +88,6 @@ def display_banner():
     with open("banner_background_color.txt", "r") as f:
         background_color = f.read().strip().lower()
 
-    f = Figlet(font="cosmic")
-    console.print(f.renderText("Stellar"))
-
-    spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
-    with console.status(spinner):
-        input("")
-
     os.system("clear")
     return banner, color, background, background_color
 
