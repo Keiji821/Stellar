@@ -24,6 +24,7 @@ cd
 mkdir .configs_stellar &>/dev/null
 cd .configs_stellar
 mkdir themes &>/dev/null
+mkdir system &>/dev/null
 cd themes
 
 cat <<EOF > banner.py
@@ -164,6 +165,18 @@ EOF
 echo bold green > banner_color.txt
 echo No > banner_background.txt
 echo bright_white > banner_background_color.txt
+
+
+
+user_config () {
+read -p "Configure su nombre de usuario: " usuario
+
+echo $usuario > user.txt
+}
+
+user_config()
+
+
 cd
 
 printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando instalación\n"
