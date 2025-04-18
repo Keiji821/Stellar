@@ -9,38 +9,40 @@ SUCCESS_STYLE = "bold green"
 INFO_STYLE = "bold blue"
 
 def get_server_id() -> str:
-    return console.input(f"[{SUCCESS_STYLE}]Ingrese el ID del servidor:[/{SUCCESS_STYLE}] ")
+    return console.input(f"[{INFO_STYLE}]Ingrese el ID del servidor: [/]")
 
 def fetch_widget_data(server_id: str) -> Optional[Dict[str, Any]]:
     widget_url = f"https://discord.com/api/guilds/{server_id}/widget.json"
-    
+
     try:
         response = requests.get(widget_url, timeout=15)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
-        console.print(f"[{ERROR_STYLE}]Error al conectar con Discord: {e}[/{ERROR_STYLE}]")
+        console.print(f"[{ERROR_STYLE}]Error al conectar con Discord: {e}[/]")
         return None
     except json.JSONDecodeError:
-        console.print(f"[{ERROR_STYLE}]Error al decodificar la respuesta JSON[/{ERROR_STYLE}]")
+        console.print(f"[{ERROR_STYLE}]Error al decodificar la respuesta JSON[/]")
         return None
 
 def display_members(members: List[Dict[str, Any]], limit: int = 150) -> None:
     for member in members[:limit]:
         username = member.get('username', 'Desconocido')
         discriminator = member.get('discriminator', '0000')
-        console.print(f"[{SUCCESS_STYLE}]{username}#{discriminator}[/{SUCCESS_STYLE}]")
+        status = member.get('status', 'desconocido')
+        console.print(f"[{SUCCESS_STYLE}]{username}#{discriminator}[/] - Estado: [{INFO_STYLE}]{status}[/]")
 
 def get_guild_info(server_id: str) -> Dict[str, Any]:
     widget_url = f"https://discord.com/api/guilds/{server_id}/widget.json"
-    
+
     try:
         response = requests.get(widget_url, timeout=10)
+        response.raise_for_status()
         data = response.json()
-    except requests.exceptions.RequestException:
-        return {"Error": "No se pudo conectar al widget"}
+    except requests.exceptions.RequestException as e:
+        return {"Error": f"No se pudo conectar al widget: {str(e)}"}
     except json.JSONDecodeError:
-        return {"Error": "Widget desactivado por el servidor"}
+        return {"Error": "Widget desactivado por el servidor o respuesta inválida"}
 
     if response.status_code == 200:
         return {
@@ -55,20 +57,33 @@ def get_guild_info(server_id: str) -> Dict[str, Any]:
     else:
         return {"Error": f"Código HTTP {response.status_code}"}
 
+def display_guild_info(info: Dict[str, Any]) -> None:
+    console.print(f"\n[{INFO_STYLE}]Información del servidor:[/]")
+    if "Error" in info:
+        console.print(f"[{ERROR_STYLE}]{info['Error']}[/]")
+    else:
+        for key, value in info.items():
+            if isinstance(value, list):
+                console.print(f"[{SUCCESS_STYLE}]{key}:[/]")
+                for item in value:
+                    console.print(f"  - {item}")
+            else:
+                console.print(f"[{SUCCESS_STYLE}]{key}:[/] {value}")
+
 def main() -> None:
     server_id = get_server_id()
     
     widget_data = fetch_widget_data(server_id)
-    
+
     if widget_data:
         if 'members' in widget_data:
-            console.print(f"\n[{INFO_STYLE}]Miembros en línea ({len(widget_data['members'])}):[/{INFO_STYLE}]\n")
+            console.print(f"\n[{INFO_STYLE}]Miembros en línea ({len(widget_data['members'])}):[/]\n")
             display_members(widget_data['members'])
         else:
-            console.print(f"[{ERROR_STYLE}]Widget desactivado o acceso denegado[/{ERROR_STYLE}]")
-     console.print(f"\n[{INFO_STYLE}]Información del servidor:[/{INFO_STYLE}]")
+            console.print(f"[{ERROR_STYLE}]Widget desactivado o acceso denegado[/]")
+    
     guild_info = get_guild_info(server_id)
-    console.print(json.dumps(guild_info, indent=4, ensure_ascii=False))
+    display_guild_info(guild_info)
 
 if __name__ == "__main__":
     main()
