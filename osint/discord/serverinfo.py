@@ -32,8 +32,12 @@ class ServerAnalyzer:
                     'boosts': guild.premium_subscription_count,
                     'widget': widget
                 }
-            except:
+            except Exception as e:
+                console.print(f"[red]Error con el bot: {e}[/]")
                 return {'widget': widget}
+            finally:
+                if self.bot:
+                    await self.bot.close()
         
         return {'widget': widget}
 
@@ -43,53 +47,64 @@ class ServerAnalyzer:
             if response.status_code == 200:
                 data = response.json()
                 return {
+                    'name': data.get('name'),
                     'online_members': data.get('members', []),
                     'voice_channels': [ch['name'] for ch in data.get('channels', [])],
                     'invite': data.get('instant_invite')
                 }
-            return {'error': True}
-        except:
-            return {'error': True}
+            return {'error': 'Widget desactivado'}
+        except Exception as e:
+            return {'error': f'Error de conexión: {e}'}
 
     def build_display(self, data):
-        members_table = Table.grid(padding=(0, 2))
-        members_table.add_column(style='bold', width=30)
-        members_table.add_column(width=10)
+        content = []
         
-        online_members = data['widget'].get('online_members', [])
-        for member in online_members[:75]:
-            username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
-            status = member.get('status', 'offline')
-            members_table.add_row(
-                username,
-                Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
-            )
-
-        info_table = Table(show_header=False)
-        info_table.add_column(style='bold green')
-        info_table.add_column(style='cyan')
+        info_table = Table(show_header=False, box=None, padding=(0, 1))
+        info_table.add_column(style="bold green", width=20)
+        info_table.add_column(style="cyan")
         
-        server_name = data.get('name', 'Unknown')
-        info_table.add_row('SERVIDOR', server_name)
+        server_name = data.get('name') or data['widget'].get('name', 'Desconocido')
+        info_table.add_row("Servidor", server_name)
         
         if 'total_members' in data:
-            info_table.add_row('MIEMBROS', f"{len(online_members)}/{data['total_members']}")
+            online_count = len(data['widget'].get('online_members', []))
+            info_table.add_row("Miembros", f"{online_count}/{data['total_members']}")
         else:
-            info_table.add_row('EN LÍNEA', str(len(online_members)))
+            info_table.add_row("En línea", str(len(data['widget'].get('online_members', []))))
         
         if 'boosts' in data:
-            info_table.add_row('BOOSTS', str(data['boosts']))
+            info_table.add_row("Boosts", str(data['boosts']))
         
         if data['widget'].get('voice_channels'):
-            info_table.add_row('CANALES', ', '.join(data['widget']['voice_channels']))
-
+            info_table.add_row("Canales de voz", "\n".join(data['widget']['voice_channels']))
+        
         if data['widget'].get('invite'):
-            info_table.add_row('INVITACIÓN', data['widget']['invite'])
-
+            info_table.add_row("Invitación", data['widget']['invite'])
+        
+        content.append(info_table)
+        
+        if data['widget'].get('online_members'):
+            content.append(Text("\nMiembros conectados:", style="bold"))
+            
+            members_table = Table.grid(padding=(0, 2))
+            members_table.add_column(style="bold", width=30)
+            members_table.add_column(width=10)
+            
+            for member in data['widget']['online_members'][:50]:  # Mostrar máximo 50 miembros
+                username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
+                status = member.get('status', 'offline')
+                members_table.add_row(
+                    username,
+                    Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
+                )
+            
+            content.append(members_table)
+        
         return Panel(
-            Panel(info_table, border_style="blue") + "\n" + Panel(members_table, border_style="blue"),
+            *content,
             title="[bold green]INFORMACIÓN DEL SERVIDOR[/]",
-            border_style="green"
+            border_style="green",
+            padding=(1, 2)
         )
 
     async def run(self):
@@ -97,9 +112,13 @@ class ServerAnalyzer:
         token = console.input("[bold green]Token del bot (opcional): [/]")
         
         data = await self.get_data(server_id, token if token else None)
-        console.print(self.build_display(data))
         
-        if self.bot:
-            await self.bot.close()
+        if 'error' in data['widget']:
+            console.print(f"[red]Error: {data['widget']['error']}[/]")
+            return
+        
+        console.print(self.build_display(data))
 
-asyncio.run(ServerAnalyzer().run())
+if __name__ == "__main__":
+    analyzer = ServerAnalyzer()
+    asyncio.run(analyzer.run())
