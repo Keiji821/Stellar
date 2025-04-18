@@ -11,7 +11,6 @@ import platform
 import time
 import requests
 import psutil
-from pyfiglet import Figlet
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
