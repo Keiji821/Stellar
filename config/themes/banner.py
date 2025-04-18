@@ -12,7 +12,7 @@ from rich.columns import Columns
 
 console = Console()
 
-with open("user.txt", "r") as f:
+with open("system/user.txt", "r") as f:
     user = f.read().strip().lower()
 
 def get_system_info():
