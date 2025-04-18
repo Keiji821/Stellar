@@ -31,6 +31,8 @@ menu_data = {
     "DISCORD": [
         ("userinfo", "Obtiene información sobre un ID"),
         ("serverinfo", "Obtiene información sobre un servidor"),
+        ("searchserverinvite", "Obtiene enlaces de invitación por palabras claves de fuentes públicas"),
+        ("inviteinfo", "Obtiene información sobre un enlace de invitación"),
     ],
     "ATAJOS": [
         ("CTRL+Z", "Detención segura de procesos"),
