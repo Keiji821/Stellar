@@ -1,71 +1,43 @@
 import discord
-import requests
 from rich.console import Console
-from rich.panel import Panel
 from rich.table import Table
-from datetime import datetime
+from rich.panel import Panel
 import asyncio
+from datetime import datetime
 
 console = Console()
 
-class DiscordUserLookup:
+class DiscordUserFetcher:
     def __init__(self):
-        self.bot = None
+        intents = discord.Intents.default()
+        intents.members = True  # Necesario para obtener miembros del servidor
+        intents.presences = True  # Para ver el estado del usuario
+        self.bot = discord.Client(intents=intents)
 
-    def formatear_fecha(self, fecha_str):
-        try:
-            fecha = datetime.fromisoformat(fecha_str.replace('Z', '+00:00'))
+    def formatear_fecha(self, fecha):
+        if isinstance(fecha, datetime):
             return fecha.strftime("%d/%m/%Y a las %H:%M:%S")
-        except:
-            return fecha_str
+        return "N/A"
 
-    def mostrar_insignias(self, insignias):
-        if not insignias:
-            return "Ninguna"
-        return ", ".join(insignia.replace("_", " ").title() for insignia in insignias)
-
-    def obtener_info_api(self, user_id):
-        try:
-            response = requests.get(f"https://discordlookup.mesalytic.moe/v1/user/{user_id}", timeout=10)
-            if response.status_code == 404:
-                return {"error": "Usuario no encontrado"}
-            elif response.status_code != 200:
-                return {"error": f"Error {response.status_code}"}
-            return response.json()
-        except requests.exceptions.RequestException:
-            return {"error": "No se pudo conectar con el servicio de búsqueda"}
-
-    async def obtener_info_discord_py(self, user_id, token):
-        try:
-            self.bot = discord.Client(intents=discord.Intents.default())
-            await self.bot.login(token)
-            user = await self.bot.fetch_user(int(user_id))
-            return user
-        except Exception as e:
-            return {"error": f"Error con el bot: {e}"}
-        finally:
-            if self.bot:
-                await self.bot.close()
-
-    def mostrar_info(self, datos, datos_extra=None):
+    def mostrar_info(self, user: discord.User, member: discord.Member = None):
         tabla = Table(show_header=False, box=None)
         tabla.add_column(style="bold green", width=20)
         tabla.add_column(style="blue")
 
-        tabla.add_row("Usuario", datos.get("username", "Desconocido"))
-        tabla.add_row("Nombre global", datos.get("global_name", "N/A"))
-        tabla.add_row("ID", datos.get("id", "N/A"))
-        tabla.add_row("Creación", self.formatear_fecha(datos.get("created_at", "N/A")))
+        tabla.add_row("Usuario", f"{user.name}#{user.discriminator}")
+        tabla.add_row("ID", str(user.id))
+        tabla.add_row("Bot", "Sí" if user.bot else "No")
+        tabla.add_row("Creado el", self.formatear_fecha(user.created_at))
+        tabla.add_row("Avatar", user.avatar.url if user.avatar else "Sin avatar")
 
-        avatar = datos.get("avatar", {})
-        tabla.add_row("Avatar", avatar.get("link", "N/A"))
-        tabla.add_row("Animado", "Sí" if avatar.get("is_animated", False) else "No")
-        tabla.add_row("Insignias", self.mostrar_insignias(datos.get("badges")))
+        if member:
+            tabla.add_row("Apodo", member.nick or "Ninguno")
+            tabla.add_row("Estado", str(member.status).title())
+            tabla.add_row("Unido el", self.formatear_fecha(member.joined_at))
 
-        if datos_extra and isinstance(datos_extra, discord.User):
-            tabla.add_row("Bot", "Sí" if datos_extra.bot else "No")
-            tabla.add_row("Tag", datos_extra.discriminator)
-            tabla.add_row("Nombre completo", f"{datos_extra.name}#{datos_extra.discriminator}")
+            roles = [role.name for role in member.roles if role.name != "@everyone"]
+            roles_str = ", ".join(roles) if roles else "Ninguno"
+            tabla.add_row("Roles", roles_str)
 
         console.print(Panel.fit(
             tabla,
@@ -75,29 +47,44 @@ class DiscordUserLookup:
         ))
 
     async def run(self):
-        user_id = console.input("[bold green]ID de usuario: [/]")
+        user_id = console.input("ID de usuario: ").strip()
+        guild_id = console.input("ID del servidor (opcional): ").strip()
+        token = console.input("Token del bot: ").strip()
 
         if not user_id.isdigit():
             console.print("[red]El ID debe ser numérico.[/]")
             return
 
-        token = console.input("[bold green]Token del bot (opcional): [/]")
+        try:
+            await self.bot.login(token)
+            await self.bot.connect()  # Necesario para inicializar fetches
 
-        with console.status("[blue]Buscando información...[/]", spinner="dots"):
-            datos = self.obtener_info_api(user_id)
-            if 'error' in datos:
-                console.print(f"[red]{datos['error']}[/]")
-                return
+        except discord.LoginFailure:
+            console.print("[red]Token inválido.[/]")
+            return
 
-            datos_extra = None
-            if token.strip():
-                datos_extra = await self.obtener_info_discord_py(user_id, token.strip())
-                if isinstance(datos_extra, dict) and 'error' in datos_extra:
-                    console.print(f"[red]{datos_extra['error']}[/]")
-                    datos_extra = None
+        async def fetch():
+            try:
+                user = await self.bot.fetch_user(int(user_id))
+                member = None
 
-        self.mostrar_info(datos, datos_extra)
+                if guild_id.isdigit():
+                    guild = self.bot.get_guild(int(guild_id)) or await self.bot.fetch_guild(int(guild_id))
+                    member = guild.get_member(int(user_id)) or await guild.fetch_member(int(user_id))
+
+                self.mostrar_info(user, member)
+
+            except discord.NotFound:
+                console.print("[red]Usuario o servidor no encontrado.[/]")
+            except discord.Forbidden:
+                console.print("[red]Permisos insuficientes para acceder al servidor o miembro.[/]")
+            except discord.HTTPException as e:
+                console.print(f"[red]Error HTTP: {e}[/]")
+            finally:
+                await self.bot.close()
+
+        await fetch()
 
 if __name__ == "__main__":
-    lookup = DiscordUserLookup()
-    asyncio.run(lookup.run())
+    fetcher = DiscordUserFetcher()
+    asyncio.run(fetcher.run())
