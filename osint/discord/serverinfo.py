@@ -7,93 +7,104 @@ from datetime import datetime
 
 console = Console()
 
-class DiscordServerAnalyzer:
+class DiscordServerInfo:
     def __init__(self):
         self.bot = None
 
-    async def get_detailed_info(self, guild_id, token=None):
-        widget_data = self.get_widget_data(guild_id)
+    async def obtener_info(self, id_servidor, token=None):
+        info_widget = self.obtener_widget(id_servidor)
         
         if token:
             try:
                 self.bot = discord.Client(intents=discord.Intents.default())
                 await self.bot.login(token)
+                servidor = await self.bot.fetch_guild(int(id_servidor))
                 
-                guild = await self.bot.fetch_guild(int(guild_id))
                 return {
-                    "name": guild.name,
-                    "total_members": guild.member_count,
-                    "channels": len(guild.channels),
-                    "roles": len(guild.roles),
-                    "emojis": len(guild.emojis),
-                    "boosts": guild.premium_subscription_count,
-                    "widget": widget_data
+                    "nombre": servidor.name,
+                    "miembros": servidor.member_count,
+                    "canales": len(servidor.channels),
+                    "widget": info_widget
                 }
-            except Exception as e:
-                return {"widget": widget_data, "error": str(e)}
+            except:
+                return {"widget": info_widget}
         
-        return {"widget": widget_data}
+        return {"widget": info_widget}
 
-    def get_widget_data(self, guild_id):
+    def obtener_widget(self, id_servidor):
         try:
-            response = requests.get(
-                f"https://discord.com/api/guilds/{guild_id}/widget.json",
-                timeout=10
-            )
-            if response.status_code == 200:
-                data = response.json()
+            respuesta = requests.get(f"https://discord.com/api/guilds/{id_servidor}/widget.json", timeout=10)
+            if respuesta.status_code == 200:
+                datos = respuesta.json()
                 return {
-                    "online_members": len(data.get("members", [])),
-                    "voice_channels": [ch["name"] for ch in data.get("channels", [])],
-                    "invite_url": data.get("instant_invite")
+                    "nombre": datos.get("name"),
+                    "miembros_online": datos.get("members", []),
+                    "canales_voz": [canal["name"] for canal in datos.get("channels", [])],
+                    "invitacion": datos.get("instant_invite")
                 }
-            return {"error": "Widget disabled"}
+            return {"error": "Widget desactivado"}
         except:
-            return {"error": "Connection error"}
+            return {"error": "Error de conexión"}
 
-    def display_results(self, data):
-        table = Table(show_header=False, box=None)
-        table.add_column(style="bold yellow", width=25)
-        table.add_column(style="cyan")
+    def mostrar_miembros(self, miembros):
+        console.print(f"\n[bold cyan]Miembros en línea ({len(miembros)}):[/]\n")
+        for miembro in miembros:
+            nombre = f"{miembro.get('username', '?')}#{miembro.get('discriminator', '0000')}"
+            estado = miembro.get('status', 'desconocido')
+            
+            color_estado = {
+                "online": "green",
+                "idle": "yellow",
+                "dnd": "red",
+                "offline": "dim"
+            }.get(estado, "magenta")
+            
+            console.print(f"[white]{nombre.ljust(30)}[/] [bold {color_estado}]◉ {estado.capitalize()}[/]")
 
-        server_name = data.get("name") or "Unknown Server"
-        table.add_row("Server Name", server_name)
+    def mostrar_info(self, datos):
+        if "error" in datos.get("widget", {}):
+            console.print("[bold red]✘ Widget desactivado[/]")
+            return
 
-        if "total_members" in data:
-            table.add_row("Total Members", str(data["total_members"]))
+        tabla = Table(show_header=False, box=None)
+        tabla.add_column(style="bold green", width=20)
+        tabla.add_column(style="blue")
+
+        nombre = datos.get("nombre") or datos["widget"].get("nombre")
+        tabla.add_row("Servidor", nombre)
+
+        if "miembros" in datos:
+            tabla.add_row("Miembros totales", str(datos["miembros"]))
         
-        table.add_row("Online Now", str(data["widget"].get("online_members", 0)))
+        tabla.add_row("En línea", str(len(datos["widget"].get("miembros_online", []))))
 
-        if "channels" in data:
-            table.add_row("Total Channels", str(data["channels"]))
+        if "canales" in datos:
+            tabla.add_row("Canales totales", str(datos["canales"]))
         
-        if data["widget"].get("voice_channels"):
-            table.add_row("Voice Channels", ", ".join(data["widget"]["voice_channels"]))
-
-        if "boosts" in data:
-            table.add_row("Server Boosts", str(data["boosts"]))
-        
-        if "error" in data:
-            console.print(f"[bold red]Error: {data['error']}[/]")
+        if datos["widget"].get("canales_voz"):
+            tabla.add_row("Canales de voz", ", ".join(datos["widget"]["canales_voz"]))
 
         console.print(Panel.fit(
-            table,
-            title="[bold green]SERVER ANALYSIS[/]",
+            tabla,
+            title="[bold green]Información del Servidor[/]",
             border_style="green",
             padding=(1, 4)
         ))
 
-    async def run(self):
-        guild_id = console.input("[bold magenta]Enter Server ID: [/]")
-        token = console.input("[bold blue]Enter Bot Token (optional): [/]", password=True)
+        if datos["widget"].get("miembros_online"):
+            self.mostrar_miembros(datos["widget"]["miembros_online"])
+
+    async def ejecutar(self):
+        id_servidor = console.input("[bold green]ID del servidor: [/]")
+        token = console.input("[bold green]Token del bot (opcional): [/]")
         
-        data = await self.get_detailed_info(guild_id, token if token else None)
-        self.display_results(data)
+        datos = await self.obtener_info(id_servidor, token if token else None)
+        self.mostrar_info(datos)
         
-        if token and self.bot:
+        if self.bot:
             await self.bot.close()
 
 if __name__ == "__main__":
-    analyzer = DiscordServerAnalyzer()
     import asyncio
-    asyncio.run(analyzer.run())
+    info = DiscordServerInfo()
+    asyncio.run(info.ejecutar())
