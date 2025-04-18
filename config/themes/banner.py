@@ -13,7 +13,7 @@ from rich.columns import Columns
 console = Console()
 
 os.system("cd && cd Stellar/config/system")
-with open("user.txt", "r", encoding="utf-8") as f:
+with open(user.txt", "r") as f:
     user = f.read().strip().lower()
 
 def get_system_info():
