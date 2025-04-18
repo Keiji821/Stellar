@@ -57,9 +57,7 @@ class ServerAnalyzer:
             return {'error': f'Error de conexión: {e}'}
 
     def build_display(self, data):
-        content = []
-        
-        info_table = Table(show_header=False, box=None, padding=(0, 1))
+        info_table = Table(show_header=False, box=None)
         info_table.add_column(style="bold green", width=20)
         info_table.add_column(style="cyan")
         
@@ -76,35 +74,25 @@ class ServerAnalyzer:
             info_table.add_row("Boosts", str(data['boosts']))
         
         if data['widget'].get('voice_channels'):
-            info_table.add_row("Canales de voz", "\n".join(data['widget']['voice_channels']))
+            info_table.add_row("Canales de voz", ", ".join(data['widget']['voice_channels']))
         
         if data['widget'].get('invite'):
             info_table.add_row("Invitación", data['widget']['invite'])
         
-        content.append(info_table)
-        
+        members_content = ""
         if data['widget'].get('online_members'):
-            content.append(Text("\nMiembros conectados:", style="bold"))
-            
-            members_table = Table.grid(padding=(0, 2))
-            members_table.add_column(style="bold", width=30)
-            members_table.add_column(width=10)
-            
-            for member in data['widget']['online_members'][:50]:  # Mostrar máximo 50 miembros
+            members_content = "\n[bold]Miembros conectados:[/]\n\n"
+            for member in data['widget']['online_members'][:50]:
                 username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
                 status = member.get('status', 'offline')
-                members_table.add_row(
-                    username,
-                    Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
-                )
-            
-            content.append(members_table)
+                members_content += f"{username.ljust(30)} [bold {self.status_colors.get(status, 'magenta')}]◉ {status.upper()}[/]\n"
+        
+        full_content = f"{info_table}\n{members_content}"
         
         return Panel(
-            *content,
-            title="[bold green]INFORMACIÓN DEL SERVIDOR[/]",
-            border_style="green",
-            padding=(1, 2)
+            full_content,
+            title="[bold green]Información del servidor[/]",
+            border_style="green"
         )
 
     async def run(self):
