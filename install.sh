@@ -169,13 +169,13 @@ echo bright_white > banner_background_color.txt
 
 
 user_config () {
+cd
+cd .configs_stellar/system
 read -p "Configure su nombre de usuario: " usuario
-
 echo $usuario > user.txt
 }
 
-user_config()
-
+user_config
 
 cd
 
