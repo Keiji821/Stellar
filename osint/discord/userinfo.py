@@ -75,9 +75,14 @@ class DiscordUserFetcher:
             return "Ninguna"
         return ", ".join(insignias)
 
+    async def get_server_info(self, server_id):
+        guild = await self.bot.fetch_guild(server_id)
+        return guild
+
     async def run(self):
         user_id = console.input("[bold green]ID del usuario: [/]").strip()
         token = console.input("[bold green]Token del bot: [/]").strip()
+        server_id_input = console.input("[bold green]ID del servidor (opcional): [/]").strip()
 
         if not user_id.isdigit():
             console.print("[red]El ID debe ser numérico.[/]")
@@ -87,7 +92,12 @@ class DiscordUserFetcher:
             await self.bot.login(token)
 
             user = await self.bot.fetch_user(int(user_id))
-            self.mostrar_info(user)
+            member = None
+            if server_id_input.isdigit():
+                server_id = int(server_id_input)
+                guild = await self.get_server_info(server_id)
+                member = guild.get_member(int(user_id))
+            self.mostrar_info(user, member)
 
         except discord.LoginFailure:
             console.print("[red]Token inválido.[/]")
