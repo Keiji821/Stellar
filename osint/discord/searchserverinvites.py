@@ -237,14 +237,10 @@ def main():
     enlaces = []
     enlaces.extend(buscar_discordservers(query, max_resultados))
     enlaces.extend(buscar_discordme(query, max_resultados))
-
-enlaces.extend(buscar_discord_st(query, max_resultados))
-
-enlaces.extend(buscar_discordhub(query, max_resultados))
-
-enlaces.extend(buscar_discordlist_gg(query, max_resultados))
-
-enlaces.extend(buscar_discordhome(query, max_resultados))
+    enlaces.extend(buscar_discord_st(query, max_resultados))
+    enlaces.extend(buscar_discordhub(query, max_resultados))
+    enlaces.extend(buscar_discordlist_gg(query, max_resultados))
+    enlaces.extend(buscar_discordhome(query, max_resultados))
 
     if enlaces:
         mostrar_links_crudos([url for _, url in enlaces])
