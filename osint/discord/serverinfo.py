@@ -1,6 +1,6 @@
 import discord
 import requests
-from rich.console import Console
+from rich.console import Console, Group
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
@@ -20,7 +20,7 @@ class ServerAnalyzer:
 
     async def get_data(self, server_id, token=None):
         widget = self.get_widget_data(server_id)
-        
+
         if token:
             try:
                 self.bot = discord.Client(intents=discord.Intents.default())
@@ -38,7 +38,7 @@ class ServerAnalyzer:
             finally:
                 if self.bot:
                     await self.bot.close()
-        
+
         return {'widget': widget}
 
     def get_widget_data(self, server_id):
@@ -60,42 +60,42 @@ class ServerAnalyzer:
         info_table = Table.grid(expand=True)
         info_table.add_column(style="bold green", width=20)
         info_table.add_column(style="cyan")
-        
+
         server_name = data.get('name') or data['widget'].get('name', 'Desconocido')
         info_table.add_row("Servidor", server_name)
-        
+
         if 'total_members' in data:
             online_count = len(data['widget'].get('online_members', []))
             info_table.add_row("Miembros", f"{online_count}/{data['total_members']}")
         else:
             info_table.add_row("En línea", str(len(data['widget'].get('online_members', []))))
-        
+
         if 'boosts' in data:
             info_table.add_row("Boosts", str(data['boosts']))
-        
+
         if data['widget'].get('voice_channels'):
             info_table.add_row("Canales de voz", ", ".join(data['widget']['voice_channels']))
-        
+
         if data['widget'].get('invite'):
             info_table.add_row("Invitación", data['widget']['invite'])
-        
+
         members_table = Table.grid(padding=(0, 1))
         members_table.add_column(style="bold", width=30)
         members_table.add_column(width=10)
-        
+
         if data['widget'].get('online_members'):
             for member in data['widget']['online_members'][:50]:  # Mostrar máximo 50 miembros
                 username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
                 status = member.get('status', 'offline')
                 members_table.add_row(username, Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta')))
-        
-        content = [
+
+        content = Group(
             Panel(info_table, title="Información General", border_style="blue"),
             Panel(members_table, title="Miembros Conectados", border_style="blue")
-        ]
-        
+        )
+
         return Panel(
-            *content,
+            content,
             title="[bold green]Información del servidor[/]",
             border_style="green",
             padding=(1, 2)
@@ -104,13 +104,13 @@ class ServerAnalyzer:
     async def run(self):
         server_id = console.input("[bold green]ID del servidor: [/]")
         token = console.input("[bold green]Token del bot (opcional): [/]")
-        
+
         data = await self.get_data(server_id, token if token else None)
-        
+
         if 'error' in data['widget']:
             console.print(f"[red]Error: {data['widget']['error']}[/]")
             return
-        
+
         console.print(self.build_display(data))
 
 if __name__ == "__main__":
