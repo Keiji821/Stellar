@@ -116,3 +116,4 @@ class ServerAnalyzer:
 if __name__ == "__main__":
     analyzer = ServerAnalyzer()
     asyncio.run(analyzer.run())
+    console.print("")
