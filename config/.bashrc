@@ -62,7 +62,7 @@ pkill tor
 tor &>/dev/null &
 
 cd
-cd themes
+cd Stellar/config/themes
 cp ~/Stellar/config/.bash_profile ~/.
 clear
 python banner.py
