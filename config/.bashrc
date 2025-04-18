@@ -155,7 +155,7 @@ serverinfo() {
     cd
 }
 
-searchserverinvites() {
+searchinvites() {
     cd ~/Stellar/osint/discord
     python searchserverinvites.py
     cd
