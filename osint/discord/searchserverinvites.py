@@ -28,7 +28,6 @@ def requiere_captcha(url):
         headers = {"User-Agent": "Mozilla/5.0"}
         res = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
-        # Buscar elementos típicos de CAPTCHA
         if soup.find("iframe", {"src": re.compile(r"recaptcha|hcaptcha")}):
             return True
         return False
@@ -232,13 +231,20 @@ def mostrar_links_crudos(enlaces):
 
 
 def main():
-    console.print(Panel("[bold magenta]Buscador de servidores de Discord[/]", box=box.ROUNDED))
     query = entrada_richeada("Introduce el nombre del servidor o tema de interés")
     max_resultados = 10
 
     enlaces = []
     enlaces.extend(buscar_discordservers(query, max_resultados))
     enlaces.extend(buscar_discordme(query, max_resultados))
+
+enlaces.extend(buscar_discord_st(query, max_resultados))
+
+enlaces.extend(buscar_discordhub(query, max_resultados))
+
+enlaces.extend(buscar_discordlist_gg(query, max_resultados))
+
+enlaces.extend(buscar_discordhome(query, max_resultados))
 
     if enlaces:
         mostrar_links_crudos([url for _, url in enlaces])
