@@ -20,11 +20,10 @@ cyan="\033[38;2;23;147;209m"
 clear
 cd
 
-input=$(grep -v '^[[:space:]]*$' "$HOME/.configs_stellar/themes/user.txt" 2>/dev/null || {
-    mkdir -p "$HOME/.configs_stellar/themes"
+input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
-    echo "$input" > "$HOME/.configs_stellar/themes/user.txt"
+    echo "$input" > "$HOME/Stellar/system/user.txt"
     echo "$input"
 })
 
@@ -61,9 +60,8 @@ export ALL_PROXY=socks5h://localhost:9052
 pkill tor
 tor &>/dev/null &
 
-cd
-cd Stellar/config/themes
 cp ~/Stellar/config/.bash_profile ~/.
+cd Stellar/config/themes
 clear
 python banner.py
 cd
