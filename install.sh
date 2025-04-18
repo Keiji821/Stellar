@@ -166,13 +166,42 @@ echo bold green > banner_color.txt
 echo No > banner_background.txt
 echo bright_white > banner_background_color.txt
 
+user_config() {
+    if [ ! -d ~/.configs_stellar/system ]; then
+        echo -e "${rojo}Error: Directorio .configs_stellar/system no encontrado${blanco}"
+        return 1
+    fi
 
+    while true; do
+        clear
+        echo -e "${amarillo}CONFIGURACION DE USUARIO${blanco}"
+        echo -e "${amarillo}-----------------------${blanco}"
+        
+        read -p "Nombre de usuario (4-15 caracteres): " usuario
+        
+        if [[ -z "$usuario" ]]; then
+            echo -e "${rojo}El campo no puede estar vacio${blanco}"
+            sleep 1
+            continue
+        fi
+        
+        if [[ "${#usuario}" -lt 4 || "${#usuario}" -gt 15 ]]; then
+            echo -e "${rojo}Debe tener entre 4 y 15 caracteres${blanco}"
+            sleep 1
+            continue
+        fi
+        
+        if [[ ! "$usuario" =~ ^[a-zA-Z0-9_]+$ ]]; then
+            echo -e "${rojo}Solo se permiten letras, numeros y _${blanco}"
+            sleep 1
+            continue
+        fi
 
-user_config () {
-cd
-cd .configs_stellar/system
-read -p "Configure su nombre de usuario: " usuario
-echo $usuario > user.txt
+        echo "$usuario" > ~/.configs_stellar/system/user.txt
+        echo -e "${verde}Usuario configurado correctamente!${blanco}"
+        sleep 2
+        break
+    done
 }
 
 user_config
