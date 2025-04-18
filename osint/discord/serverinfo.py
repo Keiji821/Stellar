@@ -1,126 +1,99 @@
+import discord
 import requests
-import json
 from rich.console import Console
-from typing import Dict, Any, Optional, List
+from rich.table import Table
+from rich.panel import Panel
 from datetime import datetime
 
-console = Console(highlight=False)
-ERROR_STYLE = "bold red"
-SUCCESS_STYLE = "bold green"
-INFO_STYLE = "bold blue"
-INPUT_STYLE = "bold green"
-HEADER_STYLE = "bold cyan"
-MEMBER_STYLE = "bold"
-STATUS_STYLE = {
-    "online": "green",
-    "idle": "yellow",
-    "dnd": "red",
-    "offline": "dim",
-    "invisible": "dim",
-    "desconocido": "magenta"
-}
+console = Console()
 
-def get_server_id() -> str:
-    return console.input(f"[{INPUT_STYLE}]»[/] [{INPUT_STYLE}]Ingrese el ID del servidor: [/]")
+class DiscordServerAnalyzer:
+    def __init__(self):
+        self.bot = None
 
-def fetch_widget_data(server_id: str) -> Optional[Dict[str, Any]]:
-    widget_url = f"https://discord.com/api/guilds/{server_id}/widget.json"
-    
-    try:
-        with console.status(f"[{INFO_STYLE}]Conectando con Discord...[/]", spinner="dots"):
-            response = requests.get(widget_url, timeout=15)
-            response.raise_for_status()
-            return response.json()
-    except requests.exceptions.RequestException as e:
-        console.print(f"\n[{ERROR_STYLE}]✘ Error al conectar con Discord:[/] {e}")
-        return None
-    except json.JSONDecodeError:
-        console.print(f"\n[{ERROR_STYLE}]✘ Error al leer los datos[/]")
-        return None
-
-def format_member_name(member: Dict[str, Any]) -> str:
-    username = member.get('username', 'Desconocido')
-    discriminator = member.get('discriminator', '0000')
-    return f"{username}#{discriminator}"
-
-def get_member_status(member: Dict[str, Any]) -> str:
-    return member.get('status', 'desconocido').lower()
-
-def display_members(members: List[Dict[str, Any]], limit: int = 150) -> None:
-    console.print(f"[{HEADER_STYLE}]┌{'─' * 50}[/]")
-    console.print(f"[{HEADER_STYLE}]│[/] [{HEADER_STYLE}]Miembros conectados ({len(members)}):[/]")
-    console.print(f"[{HEADER_STYLE}]└{'─' * 50}[/]\n")
-    
-    for member in members[:limit]:
-        name = format_member_name(member)
-        status = get_member_status(member)
-        status_color = STATUS_STYLE.get(status, "magenta")
+    async def get_detailed_info(self, guild_id, token=None):
+        widget_data = self.get_widget_data(guild_id)
         
-        console.print(
-            f"[{MEMBER_STYLE}]{name.ljust(35)}[/] "
-            f"[{status_color}]◉ {status.capitalize()}[/]"
-        )
-
-def get_guild_info(server_id: str) -> Dict[str, Any]:
-    widget_url = f"https://discord.com/api/guilds/{server_id}/widget.json"
-    
-    try:
-        response = requests.get(widget_url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-    except requests.exceptions.RequestException:
-        return {"Error": "No se pudo conectar al servidor"}
-    except json.JSONDecodeError:
-        return {"Error": "Widget desactivado o datos incorrectos"}
-
-    if response.status_code != 200:
-        return {"Error": f"Error al obtener datos (Código {response.status_code})"}
-
-    return {
-        "Nombre del servidor": data.get("name", "Desconocido"),
-        "Miembros en línea": len(data.get("members", [])),
-        "Canales de voz": [ch["name"] for ch in data.get("channels", [])],
-        "Invitación": data.get("instant_invite", "No disponible"),
-        "Actualizado": datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    }
-
-def display_guild_info(info: Dict[str, Any]) -> None:
-    console.print(f"\n[{HEADER_STYLE}]┌{'─' * 50}[/]")
-    console.print(f"[{HEADER_STYLE}]│[/] [{HEADER_STYLE}]Información del servidor[/]")
-    console.print(f"[{HEADER_STYLE}]└{'─' * 50}[/]")
-    
-    if "Error" in info:
-        console.print(f"\n[{ERROR_STYLE}]✘ {info['Error']}[/]")
-        return
-    
-    max_key_length = max(len(key) for key in info.keys())
-    
-    for key, value in info.items():
-        key_display = f"{key}:".ljust(max_key_length + 2)
+        if token:
+            try:
+                self.bot = discord.Client(intents=discord.Intents.default())
+                await self.bot.login(token)
+                
+                guild = await self.bot.fetch_guild(int(guild_id))
+                return {
+                    "name": guild.name,
+                    "total_members": guild.member_count,
+                    "channels": len(guild.channels),
+                    "roles": len(guild.roles),
+                    "emojis": len(guild.emojis),
+                    "boosts": guild.premium_subscription_count,
+                    "widget": widget_data
+                }
+            except Exception as e:
+                return {"widget": widget_data, "error": str(e)}
         
-        if isinstance(value, list):
-            console.print(f"\n[{SUCCESS_STYLE}]{key_display}[/]")
-            for item in value:
-                console.print(f"  [{INFO_STYLE}]•[/] {item}")
-        else:
-            console.print(f"[{SUCCESS_STYLE}]{key_display}[/] [{INFO_STYLE}]{value}[/]")
+        return {"widget": widget_data}
 
-def main() -> None:
-    console.print(f"\n[{HEADER_STYLE}] Información de Servidores Discord [/]\n")
-    
-    server_id = get_server_id()
-    widget_data = fetch_widget_data(server_id)
+    def get_widget_data(self, guild_id):
+        try:
+            response = requests.get(
+                f"https://discord.com/api/guilds/{guild_id}/widget.json",
+                timeout=10
+            )
+            if response.status_code == 200:
+                data = response.json()
+                return {
+                    "online_members": len(data.get("members", [])),
+                    "voice_channels": [ch["name"] for ch in data.get("channels", [])],
+                    "invite_url": data.get("instant_invite")
+                }
+            return {"error": "Widget disabled"}
+        except:
+            return {"error": "Connection error"}
 
-    if widget_data and 'members' in widget_data:
-        display_members(widget_data['members'])
-    
-    guild_info = get_guild_info(server_id)
-    display_guild_info(guild_info)
+    def display_results(self, data):
+        table = Table(show_header=False, box=None)
+        table.add_column(style="bold yellow", width=25)
+        table.add_column(style="cyan")
+
+        server_name = data.get("name") or "Unknown Server"
+        table.add_row("Server Name", server_name)
+
+        if "total_members" in data:
+            table.add_row("Total Members", str(data["total_members"]))
+        
+        table.add_row("Online Now", str(data["widget"].get("online_members", 0)))
+
+        if "channels" in data:
+            table.add_row("Total Channels", str(data["channels"]))
+        
+        if data["widget"].get("voice_channels"):
+            table.add_row("Voice Channels", ", ".join(data["widget"]["voice_channels"]))
+
+        if "boosts" in data:
+            table.add_row("Server Boosts", str(data["boosts"]))
+        
+        if "error" in data:
+            console.print(f"[bold red]Error: {data['error']}[/]")
+
+        console.print(Panel.fit(
+            table,
+            title="[bold green]SERVER ANALYSIS[/]",
+            border_style="green",
+            padding=(1, 4)
+        ))
+
+    async def run(self):
+        guild_id = console.input("[bold magenta]Enter Server ID: [/]")
+        token = console.input("[bold blue]Enter Bot Token (optional): [/]", password=True)
+        
+        data = await self.get_detailed_info(guild_id, token if token else None)
+        self.display_results(data)
+        
+        if token and self.bot:
+            await self.bot.close()
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        console.print(f"\n[{ERROR_STYLE}]✘ Operación cancelada[/]")
-    except Exception as e:
-        console.print(f"\n[{ERROR_STYLE}]✘ Error: {e}[/]")
+    analyzer = DiscordServerAnalyzer()
+    import asyncio
+    asyncio.run(analyzer.run())
