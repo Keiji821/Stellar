@@ -12,7 +12,7 @@ from rich.columns import Columns
 
 console = Console()
 
-os.system("cd && cd Stellar/config/System")
+os.system("cd && cd Stellar/config/system")
 with open("user.txt", "r", encoding="utf-8") as f:
     user = f.read().strip().lower()
 
