@@ -87,9 +87,7 @@ class ServerAnalyzer:
             for member in data['widget']['online_members'][:50]:  # Mostrar máximo 50 miembros
                 username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
                 status = member.get('status', 'offline')
-                members_table.add_row(
-                    username,
-                    Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
+                members_table.add_row(username, Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
         
         content = [
             Panel(info_table, title="Información General", border_style="blue"),
