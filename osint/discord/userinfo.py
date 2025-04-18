@@ -29,9 +29,22 @@ class DiscordUserFetcher:
         tabla.add_row("Creado el", self.formatear_fecha(user.created_at))
         tabla.add_row("Avatar", user.avatar.url if user.avatar else "Sin avatar")
 
+        badges = self.mostrar_insignias(user.public_flags)
+        tabla.add_row("Insignias", badges)
+        
+        activity = user.activity
+        if activity:
+            activity_name = activity.name
+            activity_type = activity.type.name
+            tabla.add_row(f"Actividad ({activity_type})", activity_name)
+        else:
+            tabla.add_row("Actividad", "Ninguna")
+
+        status = str(user.status).title()
+        tabla.add_row("Estado de presencia", status)
+
         if member:
             tabla.add_row("Apodo", member.nick or "Ninguno")
-            tabla.add_row("Estado", str(member.status).title())
             tabla.add_row("Unido el", self.formatear_fecha(member.joined_at))
 
             roles = [role.name for role in member.roles if role.name != "@everyone"]
@@ -45,9 +58,25 @@ class DiscordUserFetcher:
             padding=(1, 4)
         ))
 
+    def mostrar_insignias(self, flags):
+        insignias = []
+        if flags.early_supporter:
+            insignias.append("Soporte temprano")
+        if flags.partner:
+            insignias.append("Partner")
+        if flags.hypesquad:
+            insignias.append("HypeSquad")
+        if flags.bug_hunter:
+            insignias.append("Cazador de bugs")
+        if flags.verified_bot_developer:
+            insignias.append("Desarrollador de Bot Verificado")
+        
+        if not insignias:
+            return "Ninguna"
+        return ", ".join(insignias)
+
     async def run(self):
         user_id = console.input("[bold green]ID del usuario: [/]").strip()
-        guild_id = console.input("[bold green]ID del servidor (opcional): [/]").strip()
         token = console.input("[bold green]Token del bot: [/]").strip()
 
         if not user_id.isdigit():
@@ -58,16 +87,7 @@ class DiscordUserFetcher:
             await self.bot.login(token)
 
             user = await self.bot.fetch_user(int(user_id))
-            member = None
-
-            if guild_id.isdigit():
-                try:
-                    guild = await self.bot.fetch_guild(int(guild_id))
-                    member = await guild.fetch_member(int(user_id))
-                except discord.HTTPException:
-                    console.print("[yellow]No se pudo obtener información extendida del servidor.[/]")
-
-            self.mostrar_info(user, member)
+            self.mostrar_info(user)
 
         except discord.LoginFailure:
             console.print("[red]Token inválido.[/]")
