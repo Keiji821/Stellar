@@ -87,7 +87,7 @@ class ServerAnalyzer:
             info_table.add_row('INVITACIÓN', data['widget']['invite'])
 
         return Panel(
-            Panel(info_table) + "\n" + Panel(members_table),
+            Panel(info_table, border_style="blue") + "\n" + Panel(members_table, border_style="blue"),
             title="[bold green]INFORMACIÓN DEL SERVIDOR[/]",
             border_style="green"
         )
