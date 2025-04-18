@@ -31,11 +31,10 @@ class DiscordUserFetcher:
 
         badges = self.mostrar_insignias(user.public_flags)
         tabla.add_row("Insignias", badges)
-        
-        activity = user.activity
-        if activity:
-            activity_name = activity.name
-            activity_type = activity.type.name
+
+        if hasattr(user, 'activity') and user.activity:
+            activity_name = user.activity.name
+            activity_type = user.activity.type.name
             tabla.add_row(f"Actividad ({activity_type})", activity_name)
         else:
             tabla.add_row("Actividad", "Ninguna")
