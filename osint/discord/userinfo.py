@@ -39,16 +39,17 @@ class DiscordUserFetcher:
         else:
             tabla.add_row("Actividad", "Ninguna")
 
-        status = str(user.status).title()
-        tabla.add_row("Estado de presencia", status)
-
         if member:
+            status = str(member.status).title()  # Acceder al estado del miembro si es un objeto Member
+            tabla.add_row("Estado de presencia", status)
             tabla.add_row("Apodo", member.nick or "Ninguno")
             tabla.add_row("Unido el", self.formatear_fecha(member.joined_at))
 
             roles = [role.name for role in member.roles if role.name != "@everyone"]
             roles_str = ", ".join(roles) if roles else "Ninguno"
             tabla.add_row("Roles", roles_str)
+        else:
+            tabla.add_row("Estado de presencia", "Desconocido (No en servidor)")
 
         console.print(Panel.fit(
             tabla,
