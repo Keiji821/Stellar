@@ -111,7 +111,6 @@ def main():
         right_panel.append(f" {value}\n")
 
     console.print(Columns([left_panel, right_panel], equal=False, expand=True))
-    os.system("cd ~/Stellar && git pull --force &>/dev/null &")
     console.print("")
     console.print("")
 
