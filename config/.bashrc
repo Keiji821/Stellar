@@ -142,9 +142,18 @@ userfinder() {
     cd
 }
 
+
+# Discord - Osint
+
 userinfo() {
     cd ~/Stellar/osint/discord
     python userinfo.py
+    cd
+}
+
+serverinfo() {
+    cd ~/Stellar/osint/discord
+    python serverinfo.py
     cd
 }
 
