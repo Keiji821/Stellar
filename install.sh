@@ -33,7 +33,6 @@ import platform
 import time
 import requests
 import psutil
-from pyfiglet import Figlet
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
@@ -110,13 +109,6 @@ def display_banner():
     with open("banner_background_color.txt", "r") as f:
         background_color = f.read().strip().lower()
 
-    f = Figlet(font="cosmic")
-    console.print(f.renderText("Stellar"))
-
-    spinner = Spinner("dots", text="Presiona [code][Enter][/code] para continuar", style="yellow")
-    with console.status(spinner):
-        input("")
-
     os.system("clear")
     return banner, color, background, background_color
 
@@ -140,7 +132,6 @@ def main():
         right_panel.append(f" {value}\n")
 
     console.print(Columns([left_panel, right_panel], equal=False, expand=True))
-    os.system("cd ~/Stellar && git pull --force &>/dev/null &")
     console.print("")
     console.print("")
 
