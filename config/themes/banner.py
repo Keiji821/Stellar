@@ -16,6 +16,7 @@ console = Console()
 os.chdir(os.path.expanduser("~/Stellar/config/system"))
 with open("user.txt", "r") as f:
     user = f.read().strip().lower()
+os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 
 def get_system_info():
     now = datetime.datetime.now()
