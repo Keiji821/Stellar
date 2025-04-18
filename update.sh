@@ -17,4 +17,4 @@ cyan="$b\033[38;2;23;147;209m"
 
 printf "Actualizando..." | lolcat -a -d 20
 git pull --force
-printf "¡Listo!" | lolcat -a -d 20
+printf "¡Listo! :)" | lolcat -a -d 20
