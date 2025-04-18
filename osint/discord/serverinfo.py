@@ -57,7 +57,7 @@ class ServerAnalyzer:
             return {'error': f'Error de conexión: {e}'}
 
     def build_display(self, data):
-        info_table = Table(show_header=False, box=None)
+        info_table = Table.grid(expand=True)
         info_table.add_column(style="bold green", width=20)
         info_table.add_column(style="cyan")
         
@@ -79,20 +79,28 @@ class ServerAnalyzer:
         if data['widget'].get('invite'):
             info_table.add_row("Invitación", data['widget']['invite'])
         
-        members_content = ""
+        members_table = Table.grid(padding=(0, 1))
+        members_table.add_column(style="bold", width=30)
+        members_table.add_column(width=10)
+        
         if data['widget'].get('online_members'):
-            members_content = "\n[bold]Miembros conectados:[/]\n\n"
-            for member in data['widget']['online_members'][:50]:
+            for member in data['widget']['online_members'][:50]:  # Mostrar máximo 50 miembros
                 username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
                 status = member.get('status', 'offline')
-                members_content += f"{username.ljust(30)} [bold {self.status_colors.get(status, 'magenta')}]◉ {status.upper()}[/]\n"
+                members_table.add_row(
+                    username,
+                    Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta'))
         
-        full_content = f"{info_table}\n{members_content}"
+        content = [
+            Panel(info_table, title="Información General", border_style="blue"),
+            Panel(members_table, title="Miembros Conectados", border_style="blue")
+        ]
         
         return Panel(
-            full_content,
+            *content,
             title="[bold green]Información del servidor[/]",
-            border_style="green"
+            border_style="green",
+            padding=(1, 2)
         )
 
     async def run(self):
