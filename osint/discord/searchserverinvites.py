@@ -86,6 +86,118 @@ def buscar_discordme(query, max_resultados=10):
         console.print(Panel(f"[red]Error en Discord.me:[/] {e}", box=box.ROUNDED))
         return []
 
+def buscar_findadiscord(query, max_resultados=10):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    resultados = []
+    try:
+        url = f"https://findadiscord.com/search/?term={query}"
+        res = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
+        tarjetas = soup.select("div.card")  # Ajusta este selector según la estructura real
+
+        for tarjeta in tarjetas:
+            nombre = tarjeta.select_one("h5.card-title")
+            enlace = tarjeta.select_one("a")
+            if nombre and enlace:
+                nombre_txt = nombre.text.strip()
+                href = enlace.get("href")
+                full_url = f"https://findadiscord.com{href}"
+                if verificar_enlace(full_url) and not requiere_captcha(full_url):
+                    resultados.append((nombre_txt, full_url))
+            if len(resultados) >= max_resultados:
+                break
+        return resultados
+    except Exception as e:
+        console.print(Panel(f"[red]Error en FindADiscord:[/] {e}", box=box.ROUNDED))
+        return []
+
+def buscar_discord_st(query, max_resultados=10):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    resultados = []
+    try:
+        url = f"https://discord.st/servers/search?q={query}"
+        res = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
+        servidores = soup.select("div.server")  # Ajusta este selector según la estructura real
+
+        for servidor in servidores:
+            nombre = servidor.select_one("h3")
+            enlace = servidor.select_one("a")
+            if nombre and enlace:
+                nombre_texto = nombre.text.strip()
+                href = enlace.get("href")
+                if href:
+                    url_servidor = f"https://discord.st{href}"
+                    if verificar_enlace(url_servidor) and not requiere_captcha(url_servidor):
+                        resultados.append((nombre_texto, url_servidor))
+            if len(resultados) >= max_resultados:
+                break
+        return resultados
+    except Exception as e:
+        console.print(Panel(f"[red]Error en Discord.st:[/] {e}", box=box.ROUNDED))
+        return []
+
+def buscar_discordhub(query, max_resultados=10):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    resultados = []
+    try:
+        url = f"https://discordhub.com/servers/search?q={query}"
+        res = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
+        servidores = soup.select("div.server")  # Ajusta este selector según la estructura real
+
+        for servidor in servidores:
+            nombre = servidor.select_one("h3")
+            enlace = servidor.select_one("a")
+            if nombre and enlace:
+                nombre_texto = nombre.text.strip()
+                href = enlace.get("href")
+                if href:
+                    url_servidor = f"https://discordhub.com{href}"
+                    if verificar_enlace(url_servidor) and not requiere_captcha(url_servidor):
+                        resultados.append((nombre_texto, url_servidor))
+            if len(resultados) >= max_resultados:
+                break
+        return resultados
+    except Exception as e:
+        console.print(Panel(f"[red]Error en DiscordHub.com:[/] {e}", box=box.ROUNDED))
+        return []
+
+def buscar_discordlist_gg(query, max_resultados=10):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    resultados = []
+    try:
+        url = f"https://discordlist.gg/search?q={query}"
+        res = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
+        servidores = soup.select("div.server-card")  # Ajusta este selector según la estructura real
+
+        for servidor in servidores:
+            nombre = servidor.select_one("h3")
+            enlace = servidor.select_one("a")
+            if nombre and enlace:
+                nombre_texto = nombre.text.strip()
+                href = enlace.get("href")
+                if href:
+                    url_servidor = f"https://discordlist.gg{href}"
+                    if verificar_enlace(url_servidor) and not requiere_captcha(url_servidor):
+                        resultados.append((nombre_texto, url_servidor))
+            if len(resultados) >= max_resultados:
+                break
+        return resultados
+    except Exception as e:
+        console.print(Panel(f"[red]Error en DiscordList.gg:[/] {e}", box=box.ROUNDED))
+        return []
+
+def buscar_discordhome(query, max_resultados=10):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    resultados = []
+    try:
+        url = f"https://discordhome.com/servers/search?q={query}"
+        res = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
+        servidores = soup.select("div.server")
+
 
 def mostrar_tabla(titulo, datos):
     if not datos:
