@@ -20,7 +20,7 @@ menu_data = {
         ("traductor", "Traducción en tiempo real"),
         ("myip", "Muestra tu IP y información completa")
     ],
-    "HERRAMIENTAS OSINT": [
+    "OSINT": [
         ("ipinfo", "Análisis detallado de IP"),
         ("phoneinfo", "Obtiene información de números de teléfonos"),
         ("urlinfo", "Escaneo de URLs y dominios"),
@@ -28,10 +28,10 @@ menu_data = {
         ("emailsearch", "Búsqueda de correos electrónicos"),
         ("userfinder", "Busqueda de nombres de usuario")
     ],
-    "DISCORD": [
+    "OSINT - DISCORD": [
         ("userinfo", "Obtiene información sobre un ID"),
         ("serverinfo", "Obtiene información sobre un servidor"),
-        ("searchserverinvites", "Obtiene enlaces de invitación por palabras claves de fuentes públicas"),
+        ("searchinvites", "Obtiene enlaces de invitación por palabras claves de fuentes públicas"),
         ("inviteinfo", "Obtiene información sobre un enlace de invitación"),
     ],
     "ATAJOS": [
