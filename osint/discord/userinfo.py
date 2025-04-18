@@ -57,19 +57,13 @@ class DiscordUserFetcher:
         try:
             await self.bot.login(token)
 
-            user = await self.bot.http.fetch_user(int(user_id))
+            user = await self.bot.fetch_user(int(user_id))
             member = None
 
             if guild_id.isdigit():
                 try:
-                    member_data = await self.bot.http.get_member(guild_id=int(guild_id), user_id=int(user_id))
                     guild = await self.bot.fetch_guild(int(guild_id))
-                    roles = await guild.fetch_roles()
-                    member_roles = [role for role in roles if role.id in member_data.get("roles", [])]
-
-                    member = discord.Member(data=member_data, guild=guild, state=self.bot._connection)
-                    member._roles = [r.id for r in member_roles]
-
+                    member = await guild.fetch_member(int(user_id))
                 except discord.HTTPException:
                     console.print("[yellow]No se pudo obtener información extendida del servidor.[/]")
 
