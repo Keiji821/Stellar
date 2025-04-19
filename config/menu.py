@@ -18,7 +18,7 @@ menu_data = {
         ("ia", "Asistente IA con API integrada"),
         ("ia-image", "Generación de imágenes con IA"),
         ("traductor", "Traducción en tiempo real"),
-        ("myip", "Muestra tu IP y información completa")
+        ("myip", "Muestra tu IP real y información completa")
     ],
     "OSINT": [
         ("ipinfo", "Análisis detallado de IP"),
