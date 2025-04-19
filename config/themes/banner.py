@@ -13,105 +13,80 @@ from rich.table import Table
 from rich.progress import Progress, BarColumn, TextColumn
 
 console = Console()
+themes_dir = os.path.expanduser("~/Stellar/config/themes")
+system_dir = os.path.expanduser("~/Stellar/config/system")
 
-def display_banner():
-    os.chdir(os.path.expanduser("~/Stellar/config/system"))
-    with open("banner.txt", "r") as f:
-        banner = f.read().strip()
-    with open("banner_color.txt", "r") as f:
-        color = f.read().strip().replace("bold ", "")
-    with open("banner_background.txt", "r") as f:
-        bg = f.read().strip().lower()
-    with open("banner_background_color.txt", "r") as f:
-        bg_color = f.read().strip().lower()
-    os.system("clear")
-    style = Style(color=color, bold=True)
-    if bg in ["si", "sí", "yes"]:
-        style += Style(bgcolor=bg_color)
-    return Text(banner, style=style)
-
-def get_system_info():
-    now = datetime.datetime.now()
-    def get_uptime():
-        try:
-            up = time.time() - psutil.boot_time()
-            h, r = divmod(up, 3600)
-            m = int(r // 60)
-            return f"{int(h)}h {m}m"
-        except:
-            return "N/A"
-    def get_memory():
-        m = psutil.virtual_memory()
-        return f"{round(m.used / (1024 ** 3), 1)}GB/{round(m.total / (1024 ** 3), 1)}GB", m.percent
-    def get_disk():
-        d = psutil.disk_usage(os.path.expanduser("~"))
-        return f"{round(d.used / (1024 ** 3), 1)}GB/{round(d.total / (1024 ** 3), 1)}GB ({d.percent}%)", d.percent
-    def get_cpu():
-        out = os.popen("top -n 1 | grep 'CPU:'").read().split()
-        return next((p for p in out if p.endswith("%")), "N/A")
+def leer_archivo(ruta_archivo):
     try:
-        ip = requests.get('https://api.ipify.org', timeout=2).text
+        with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
+            return archivo.read().strip()
+    except FileNotFoundError:
+        return None
+
+banner = leer_archivo(os.path.join(themes_dir, "banner.txt")) or ""
+banner_color = leer_archivo(os.path.join(themes_dir, "banner_color.txt")) or "cyan"
+banner_background = leer_archivo(os.path.join(themes_dir, "banner_background.txt")) or "no"
+banner_background_color = leer_archivo(os.path.join(themes_dir, "banner_background_color.txt")) or "black"
+usuario = leer_archivo(os.path.join(system_dir, "user.txt")) or "Usuario"
+
+style = Style(color=banner_color, bold=True)
+if banner_background.lower() in ["si", "sí", "yes"]:
+    style += Style(bgcolor=banner_background_color)
+text_banner = Text(banner, style=style)
+
+def obtener_informacion_sistema():
+    ahora = datetime.datetime.now()
+    tiempo_actividad = time.time() - psutil.boot_time()
+    memoria = psutil.virtual_memory()
+    disco = psutil.disk_usage(os.path.expanduser("~"))
+    try:
+        ip = requests.get("https://api.ipify.org", timeout=2).text
     except:
         ip = "No disponible"
-
-    mem_str, mem_pct = get_memory()
-    disk_str, disk_pct = get_disk()
     return {
-        "Usuario": user,
-        "Fecha": now.strftime("%Y-%m-%d"),
-        "Hora": now.strftime("%I:%M%p"),
+        "Usuario": usuario,
+        "Fecha": ahora.strftime("%Y-%m-%d"),
+        "Hora": ahora.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
-        "Tiempo de actividad": get_uptime(),
-        "Paquetes": str(len([f for f in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if f.endswith('.list')])),
+        "Tiempo de actividad": f"{int(tiempo_actividad//3600)}h {int((tiempo_actividad%3600)//60)}m",
+        "Paquetes": str(len([f for f in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if f.endswith(".list")])),
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
-        "CPU": get_cpu(),
-        "Memoria": mem_str,
-        "Memoria %": mem_pct,
-        "Almacenamiento": disk_str,
-        "Almacenamiento %": disk_pct,
-        "Tu IP": ip
+        "CPU": platform.processor() or "N/A",
+        "Memoria": f"{round(memoria.used/2**30,1)}GB/{round(memoria.total/2**30,1)}GB",
+        "Memoria %": memoria.percent,
+        "Almacenamiento": f"{round(disco.used/2**30,1)}GB/{round(disco.total/2**30,1)}GB ({disco.percent}%)",
+        "Almacenamiento %": disco.percent,
+        "IP": ip
     }
 
-def make_panel(info):
-    table = Table.grid(padding=(0, 1))
-    table.add_column(justify="right", style="bright_magenta", no_wrap=True)
-    table.add_column(style="bright_cyan")
-    for key in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU", "Memoria", "Almacenamiento", "Tu IP"]:
-        table.add_row(f"{key}:", info[key])
+def crear_panel_informacion(info):
+    tabla = Table.grid(padding=(0,1))
+    tabla.add_column(justify="right", style="bright_magenta", no_wrap=True)
+    tabla.add_column(style="bright_cyan")
+    for clave in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU", "Memoria", "Almacenamiento", "IP"]:
+        tabla.add_row(f"{clave}:", info[clave])
+    panel = Panel.fit(tabla, title="Información del Sistema", border_style="bright_white", padding=(1,2))
+    return panel
 
-    progress = Progress(
+def mostrar_barras_progreso(info):
+    with Progress(
         TextColumn("Memoria:"),
         BarColumn(bar_width=None, complete_style="bright_red"),
-        TextColumn(f"{info['Memoria %']}%"),
-        TextColumn("   "),
+        TextColumn(f"{info['Memoria %']}%", style="bright_red"),
+        TextColumn(" "),
         TextColumn("Almacenamiento:"),
         BarColumn(bar_width=None, complete_style="bright_green"),
-        TextColumn(f"{info['Almacenamiento %']}%"),
+        TextColumn(f"{info['Almacenamiento %']}%", style="bright_green"),
         expand=True,
         console=console
-    )
-    progress.add_task("", total=100, completed=info["Memoria %"])
-    progress.add_task("", total=100, completed=info["Almacenamiento %"])
-
-    panel = Panel.fit(
-        table,
-        title="Información del Sistema",
-        border_style="bright_white",
-        padding=(1, 2),
-    )
-    return panel, progress
-
-def main():
-    global user
-    os.chdir(os.path.expanduser("~/Stellar/config/system"))
-    user = open("user.txt").read().strip().lower()
-    banner = display_banner()
-    info = get_system_info()
-    panel, progress = make_panel(info)
-    console.print(Columns([banner, panel], expand=True))
-    console.print(progress)
+    ) as progreso:
+        progreso.add_task("", total=100, completed=info["Memoria %"])
+        progreso.add_task("", total=100, completed=info["Almacenamiento %"])
 
 if __name__ == "__main__":
-    main()
+    informacion = obtener_informacion_sistema()
+    panel_informacion = crear_panel_informacion(informacion)
+    console.print(Columns([text_banner, panel_informacion], expand=True))
+    mostrar_barras_progreso(informacion)
