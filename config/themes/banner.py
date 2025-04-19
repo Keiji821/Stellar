@@ -1,3 +1,4 @@
+
 import datetime
 import os
 import platform
@@ -8,7 +9,9 @@ from rich.console import Console
 from rich.text import Text
 from rich.style import Style
 from rich.columns import Columns
-from rich.progress import Progress
+from rich.panel import Panel
+from rich.progress import Progress, BarColumn, TextColumn, ProgressColumn
+from rich.table import Table
 
 console = Console()
 
@@ -103,16 +106,19 @@ def display_banner():
     os.system("clear")
     return banner, color, background, background_color
 
-def color_bar(percent):
-    color = "bright_green"
-    if percent >= 70:
-        color = "bright_red"
-    elif percent >= 40:
-        color = "bright_yellow"
-    filled = int(percent // 4)
-    empty = 25 - filled
-    bar = "[" + "=" * filled + " " * empty + f"] {percent:.1f}%"
-    return f"[{color}]{bar}[/{color}]"
+class ColorBarColumn(ProgressColumn):
+    def render(self, task):
+        percent = task.percentage
+        if percent is None:
+            return Text("N/A")
+        if percent >= 70:
+            color = "bright_red"
+        elif percent >= 40:
+            color = "bright_yellow"
+        else:
+            color = "bright_green"
+        bar = BarColumn(bar_width=25, complete_style=color)
+        return bar.render(task)
 
 def main():
     banner, color, background, background_color = display_banner()
@@ -123,47 +129,43 @@ def main():
         banner_style += Style(bgcolor=background_color)
 
     left_panel = Text(banner, style=banner_style)
-    right_panel = Text("\n")
-    label_style = Style(color="bright_magenta", bold=True)
-    value_style = Style(color="bright_cyan", bold=True)
-    title_style = Style(color="bright_magenta", bold=True)
 
-    def section(title):
-        right_panel.append(f"[ {title} ]\n", style=title_style)
+    table = Table.grid(padding=(0, 1))
+    table.add_column(justify="right", style="bright_magenta", no_wrap=True)
+    table.add_column(style="bright_cyan", no_wrap=False)
 
-    label_padding = max(len(k) for k in info if not k.endswith('%')) + 1
+    table.add_row("Usuario:", info["Usuario"])
+    table.add_row("Fecha:", info["Fecha"])
+    table.add_row("Hora:", info["Hora"])
+    table.add_row("OS:", info["OS"])
+    table.add_row("Kernel:", info["Kernel"])
+    table.add_row("Tiempo de actividad:", info["Tiempo de actividad"])
+    table.add_row("Paquetes:", info["Paquetes"])
+    table.add_row("Shell:", info["Shell"])
+    table.add_row("Terminal:", info["Terminal"])
+    table.add_row("CPU:", info["CPU"])
+    table.add_row("Memoria:", info["Memoria"])
+    table.add_row("Almacenamiento:", info["Almacenamiento"])
+    table.add_row("Tu IP Tor:", info["Tu IP Tor"])
 
-    section("Usuario")
-    for key in ["Usuario", "Fecha", "Hora"]:
-        label = f"{key.ljust(label_padding)}:"
-        right_panel.append(label, style=label_style)
-        right_panel.append(f" {info[key]}\n", style=value_style)
+    progress = Progress(
+        TextColumn("Memoria:"),
+        BarColumn(bar_width=25, complete_style="bright_green"),
+        TextColumn(f"{info['Memoria %']}%"),
+        TextColumn("  "),
+        TextColumn("Almacenamiento:"),
+        BarColumn(bar_width=25, complete_style="bright_blue"),
+        TextColumn(f"{info['Almacenamiento %']}%"),
+        expand=False,
+    )
 
-    section("Sistema")
-    for key in ["OS", "Kernel", "Tiempo de actividad", "Paquetes"]:
-        label = f"{key.ljust(label_padding)}:"
-        right_panel.append(label, style=label_style)
-        right_panel.append(f" {info[key]}\n", style=value_style)
+    progress.add_task("", total=100, completed=info["Memoria %"])
+    progress.add_task("", total=100, completed=info["Almacenamiento %"])
 
-    section("Entorno")
-    for key in ["Shell", "Terminal", "CPU"]:
-        label = f"{key.ljust(label_padding)}:"
-        right_panel.append(label, style=label_style)
-        right_panel.append(f" {info[key]}\n", style=value_style)
-
-    section("Recursos")
-    for key in ["Memoria", "Almacenamiento", "Tu IP Tor"]:
-        label = f"{key.ljust(label_padding)}:"
-        right_panel.append(label, style=label_style)
-        right_panel.append(f" {info[key]}\n", style=value_style)
-
-    section("Uso de Recursos")
-    right_panel.append(f"Memoria       : {color_bar(info['Memoria %'])}\n")
-    right_panel.append(f"Almacenamiento: {color_bar(info['Almacenamiento %'])}\n")
+    right_panel = Panel.fit(table, border_style="bright_white", title="Información del Sistema", title_align="left")
 
     console.print(Columns([left_panel, right_panel], equal=False, expand=True))
-    console.print("")
-    console.print("")
+    console.print(progress)
 
 if __name__ == "__main__":
     main()
