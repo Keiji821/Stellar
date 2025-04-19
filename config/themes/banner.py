@@ -1,4 +1,3 @@
-
 import datetime
 import os
 import platform
@@ -6,19 +5,16 @@ import time
 import requests
 import psutil
 from rich.console import Console
-from rich.text import Text
-from rich.style import Style
-from rich.columns import Columns
-from rich.panel import Panel
-from rich.progress import Progress, BarColumn, TextColumn, ProgressColumn
 from rich.table import Table
+from rich.panel import Panel
+from rich.columns import Columns
+from rich.progress import Progress, BarColumn, TextColumn
 
 console = Console()
 
 os.chdir(os.path.expanduser("~/Stellar/config/system"))
 with open("user.txt", "r") as f:
     user = f.read().strip().lower()
-os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 
 def get_system_info():
     now = datetime.datetime.now()
@@ -42,30 +38,22 @@ def get_system_info():
     def get_memory():
         try:
             mem = psutil.virtual_memory()
-            used_gb = round(mem.used / (1024 ** 3), 1)
-            total_gb = round(mem.total / (1024 ** 3), 1)
-            percent = round(mem.percent, 1)
-            return f"{used_gb}GB/{total_gb}GB", percent
+            used = mem.used / (1024**3)
+            total = mem.total / (1024**3)
+            percent = mem.percent
+            return f"{round(used, 1)}GB/{round(total, 1)}GB", percent
         except:
             return "N/A", 0
 
     def get_disk():
         try:
             disk = psutil.disk_usage('/data/data/com.termux/files/home')
-            used_gb = round(disk.used / (1024 ** 3), 1)
-            total_gb = round(disk.total / (1024 ** 3), 1)
-            percent = round(disk.percent, 1)
-            return f"{used_gb}GB/{total_gb}GB ({percent}%)", percent
+            used = disk.used / (1024**3)
+            total = disk.total / (1024**3)
+            percent = disk.percent
+            return f"{round(used,1)}GB/{round(total,1)}GB ({percent}%)", percent
         except:
             return "N/A", 0
-
-    def get_cpu():
-        try:
-            output = os.popen("top -n 1 | grep 'CPU:'").read()
-            percent = next((part for part in output.split() if '%' in part), None)
-            return percent if percent else "N/A"
-        except:
-            return "N/A"
 
     try:
         response = requests.get('https://api.ipapi.is/?ip=', timeout=3)
@@ -86,7 +74,7 @@ def get_system_info():
         "Paquetes": get_packages(),
         "Shell": os.path.basename(os.getenv('SHELL', 'bash')),
         "Terminal": os.getenv('TERM', 'unknown'),
-        "CPU": get_cpu(),
+        "CPU": platform.processor() or "N/A",
         "Memoria": mem_str,
         "Memoria %": mem_percent,
         "Almacenamiento": disk_str,
@@ -94,77 +82,35 @@ def get_system_info():
         "Tu IP Tor": ip
     }
 
-def display_banner():
-    with open("banner.txt", "r") as f:
-        banner = f.read().strip()
-    with open("banner_color.txt", "r") as f:
-        color = f.read().strip().replace("bold ", "")
-    with open("banner_background.txt", "r") as f:
-        background = f.read().strip().lower()
-    with open("banner_background_color.txt", "r") as f:
-        background_color = f.read().strip().lower()
-    os.system("clear")
-    return banner, color, background, background_color
-
-class ColorBarColumn(ProgressColumn):
-    def render(self, task):
-        percent = task.percentage
-        if percent is None:
-            return Text("N/A")
-        if percent >= 70:
-            color = "bright_red"
-        elif percent >= 40:
-            color = "bright_yellow"
-        else:
-            color = "bright_green"
-        bar = BarColumn(bar_width=25, complete_style=color)
-        return bar.render(task)
-
 def main():
-    banner, color, background, background_color = display_banner()
     info = get_system_info()
-
-    banner_style = Style(color=color, bold=True) if color else Style(bold=True)
-    if background in ["si", "sí", "yes"]:
-        banner_style += Style(bgcolor=background_color)
-
-    left_panel = Text(banner, style=banner_style)
 
     table = Table.grid(padding=(0, 1))
     table.add_column(justify="right", style="bright_magenta", no_wrap=True)
     table.add_column(style="bright_cyan", no_wrap=False)
 
-    table.add_row("Usuario:", info["Usuario"])
-    table.add_row("Fecha:", info["Fecha"])
-    table.add_row("Hora:", info["Hora"])
-    table.add_row("OS:", info["OS"])
-    table.add_row("Kernel:", info["Kernel"])
-    table.add_row("Tiempo de actividad:", info["Tiempo de actividad"])
-    table.add_row("Paquetes:", info["Paquetes"])
-    table.add_row("Shell:", info["Shell"])
-    table.add_row("Terminal:", info["Terminal"])
-    table.add_row("CPU:", info["CPU"])
-    table.add_row("Memoria:", info["Memoria"])
-    table.add_row("Almacenamiento:", info["Almacenamiento"])
-    table.add_row("Tu IP Tor:", info["Tu IP Tor"])
+    for key in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes",
+                "Shell", "Terminal", "CPU", "Memoria", "Almacenamiento", "Tu IP Tor"]:
+        table.add_row(f"{key}:", info[key])
 
     progress = Progress(
         TextColumn("Memoria:"),
-        BarColumn(bar_width=25, complete_style="bright_green"),
+        BarColumn(bar_width=None, complete_style="bright_red"),
         TextColumn(f"{info['Memoria %']}%"),
         TextColumn("  "),
         TextColumn("Almacenamiento:"),
-        BarColumn(bar_width=25, complete_style="bright_blue"),
+        BarColumn(bar_width=None, complete_style="bright_green"),
         TextColumn(f"{info['Almacenamiento %']}%"),
-        expand=False,
+        expand=True,
+        console=console
     )
 
     progress.add_task("", total=100, completed=info["Memoria %"])
     progress.add_task("", total=100, completed=info["Almacenamiento %"])
 
-    right_panel = Panel.fit(table, border_style="bright_white", title="Información del Sistema", title_align="left")
+    panel = Panel.fit(table, border_style="bright_white", title="Información del Sistema", title_align="left")
 
-    console.print(Columns([left_panel, right_panel], equal=False, expand=True))
+    console.print(Columns([panel], expand=True))
     console.print(progress)
 
 if __name__ == "__main__":
