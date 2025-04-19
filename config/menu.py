@@ -46,15 +46,15 @@ menu_data = {
 def display_menu():
     console.print(
         Panel.fit(
-            "[bold yellow]STELLAR OS[/] [bright_black](v1.0.0)[/]",
+            "[bright_cyan]STELLAR OS[/] [bright_black](v1.0.0)[/]",
             subtitle="[bright_black]by Keiji821[/]",
-            border_style="bold blue",
+            border_style="bright_cyan",
             style="bold"
         )
     )
 
     table = Table.grid(padding=(0, 2))
-    table.add_column(style="bold blue", justify="left", width=18)
+    table.add_column(style="bold cyan", justify="left", width=18)
     table.add_column(style="bright_white", justify="left")
 
     for category, commands in menu_data.items():
