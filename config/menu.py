@@ -50,7 +50,6 @@ def display_menu():
             subtitle="[bright_black]by Keiji821[/]",
             border_style="bright_cyan",
             style="bold",
-            justify="center"
         )
     )
 
