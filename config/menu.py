@@ -34,6 +34,9 @@ menu_data = {
         ("searchinvites", "Obtiene enlaces de invitación por palabras claves de fuentes públicas"),
         ("inviteinfo", "Obtiene información sobre un enlace de invitación"),
     ],
+    "PENTESTING": [
+        ("ddos", "Realiza un ataque dedos hacia una url")
+    ],
     "ATAJOS": [
         ("CTRL+Z", "Detención segura de procesos"),
         ("CTRL+C", "Terminación forzada de procesos")
