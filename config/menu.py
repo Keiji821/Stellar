@@ -62,7 +62,8 @@ def display_menu():
             Panel.fit(
                 f"[bold]{category}[/]",
                 border_style="dim cyan",
-                style="bold"
+                style="bold",
+                justify="center"
             )
         )
         for cmd, desc in commands:
