@@ -46,15 +46,15 @@ menu_data = {
 def display_menu():
     console.print(
         Panel.fit(
-            "[bold cyan]STELLAR OS[/] [bright_black](v1.0.0)[/]",
+            "[bold green]STELLAR OS[/] [bright_black](v1.0.0)[/]",
             subtitle="[bright_black]by Keiji821[/]",
-            border_style="cyan",
+            border_style="bold green",
             style="bold"
         )
     )
 
     table = Table.grid(padding=(0, 2))
-    table.add_column(style="bold cyan", justify="left", width=18)
+    table.add_column(style="bold green", justify="left", width=18)
     table.add_column(style="bright_white", justify="left")
 
     for category, commands in menu_data.items():
@@ -77,7 +77,7 @@ def display_menu():
     console.print(
         Panel.fit(
             "[bright_black]TAB: Autocompletado  ↑/↓: Navegación  ENTER: Ejecutar[/]",
-            border_style="dim cyan"
+            border_style="dim yellow"
         )
     )
 
