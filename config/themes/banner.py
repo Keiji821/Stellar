@@ -8,6 +8,7 @@ from rich.console import Console
 from rich.text import Text
 from rich.style import Style
 from rich.columns import Columns
+from rich.progress import Progress
 
 console = Console()
 
@@ -38,22 +39,30 @@ def get_system_info():
     def get_memory():
         try:
             mem = psutil.virtual_memory()
-            used = mem.used
-            total = mem.total
-            percent = mem.percent
-            return f"{round(used/(1024**3),1)}GB/{round(total/(1024**3),1)}GB", used, total, percent
+            used_gb = round(mem.used / (1024 ** 3), 1)
+            total_gb = round(mem.total / (1024 ** 3), 1)
+            percent = round(mem.percent, 1)
+            return f"{used_gb}GB/{total_gb}GB", percent
         except:
-            return "N/A", 0, 0, 0
+            return "N/A", 0
 
     def get_disk():
         try:
             disk = psutil.disk_usage('/data/data/com.termux/files/home')
-            used = disk.used
-            total = disk.total
-            percent = disk.percent
-            return f"{round(used/(1024**3),1)}GB/{round(total/(1024**3),1)}GB ({disk.percent}%)", used, total, percent
+            used_gb = round(disk.used / (1024 ** 3), 1)
+            total_gb = round(disk.total / (1024 ** 3), 1)
+            percent = round(disk.percent, 1)
+            return f"{used_gb}GB/{total_gb}GB ({percent}%)", percent
         except:
-            return "N/A", 0, 0, 0
+            return "N/A", 0
+
+    def get_cpu():
+        try:
+            output = os.popen("top -n 1 | grep 'CPU:'").read()
+            percent = next((part for part in output.split() if '%' in part), None)
+            return percent if percent else "N/A"
+        except:
+            return "N/A"
 
     try:
         response = requests.get('https://api.ipapi.is/?ip=', timeout=3)
@@ -61,8 +70,8 @@ def get_system_info():
     except:
         ip = 'No disponible'
 
-    mem_str, mem_used, mem_total, mem_percent = get_memory()
-    disk_str, disk_used, disk_total, disk_percent = get_disk()
+    mem_str, mem_percent = get_memory()
+    disk_str, disk_percent = get_disk()
 
     return {
         "Usuario": user,
@@ -74,12 +83,12 @@ def get_system_info():
         "Paquetes": get_packages(),
         "Shell": os.path.basename(os.getenv('SHELL', 'bash')),
         "Terminal": os.getenv('TERM', 'unknown'),
-        "CPU": platform.processor() or "N/A",
+        "CPU": get_cpu(),
         "Memoria": mem_str,
+        "Memoria %": mem_percent,
         "Almacenamiento": disk_str,
-        "Tu IP Tor": ip,
-        "mem_percent": mem_percent,
-        "disk_percent": disk_percent
+        "Almacenamiento %": disk_percent,
+        "Tu IP Tor": ip
     }
 
 def display_banner():
@@ -91,24 +100,19 @@ def display_banner():
         background = f.read().strip().lower()
     with open("banner_background_color.txt", "r") as f:
         background_color = f.read().strip().lower()
-
     os.system("clear")
     return banner, color, background, background_color
 
-def create_colored_bar(percent):
-    bar_length = 20
-    filled_length = int(bar_length * percent // 100)
-    empty_length = bar_length - filled_length
-    bar = '█' * filled_length + '░' * empty_length
-
-    if percent < 50:
-        color = "green"
-    elif percent < 80:
-        color = "yellow"
-    else:
-        color = "red"
-
-    return f"[{color}]{bar}[/] {percent}%"
+def color_bar(percent):
+    color = "bright_green"
+    if percent >= 70:
+        color = "bright_red"
+    elif percent >= 40:
+        color = "bright_yellow"
+    filled = int(percent // 4)
+    empty = 25 - filled
+    bar = "[" + "=" * filled + " " * empty + f"] {percent:.1f}%"
+    return f"[{color}]{bar}[/{color}]"
 
 def main():
     banner, color, background, background_color = display_banner()
@@ -119,37 +123,43 @@ def main():
         banner_style += Style(bgcolor=background_color)
 
     left_panel = Text(banner, style=banner_style)
-    right_panel = Text()
-    blue = Style(color="blue", bold=True)
-    white = Style(color="white", bold=True)
-    magenta = Style(color="magenta", bold=True)
-    label_padding = max(len(k) for k in info if not k.endswith('_percent')) + 2
+    right_panel = Text("\n")
+    label_style = Style(color="bright_magenta", bold=True)
+    value_style = Style(color="bright_cyan", bold=True)
+    title_style = Style(color="bright_magenta", bold=True)
 
-    section_titles = {
-        "Usuario": "[ Usuario ]",
-        "OS": "[ Sistema ]",
-        "Shell": "[ Entorno ]",
-        "Memoria": "[ Recursos ]"
-    }
+    def section(title):
+        right_panel.append(f"[ {title} ]\n", style=title_style)
 
-    shown_sections = set()
+    label_padding = max(len(k) for k in info if not k.endswith('%')) + 1
 
-    for key, value in info.items():
-        if key in ['mem_percent', 'disk_percent']:
-            continue
-
-        section = section_titles.get(key, None)
-        if section and section not in shown_sections:
-            right_panel.append(f"\n{section}\n", style=magenta)
-            shown_sections.add(section)
-
+    section("Usuario")
+    for key in ["Usuario", "Fecha", "Hora"]:
         label = f"{key.ljust(label_padding)}:"
-        right_panel.append(label, style=blue)
-        right_panel.append(f" {value}\n", style=white)
+        right_panel.append(label, style=label_style)
+        right_panel.append(f" {info[key]}\n", style=value_style)
 
-    right_panel.append(f"\n[ Uso de Recursos ]\n", style=magenta)
-    right_panel.append(f"{'Memoria'.ljust(label_padding)}: {create_colored_bar(info['mem_percent'])}\n")
-    right_panel.append(f"{'Almacenamiento'.ljust(label_padding)}: {create_colored_bar(info['disk_percent'])}\n")
+    section("Sistema")
+    for key in ["OS", "Kernel", "Tiempo de actividad", "Paquetes"]:
+        label = f"{key.ljust(label_padding)}:"
+        right_panel.append(label, style=label_style)
+        right_panel.append(f" {info[key]}\n", style=value_style)
+
+    section("Entorno")
+    for key in ["Shell", "Terminal", "CPU"]:
+        label = f"{key.ljust(label_padding)}:"
+        right_panel.append(label, style=label_style)
+        right_panel.append(f" {info[key]}\n", style=value_style)
+
+    section("Recursos")
+    for key in ["Memoria", "Almacenamiento", "Tu IP Tor"]:
+        label = f"{key.ljust(label_padding)}:"
+        right_panel.append(label, style=label_style)
+        right_panel.append(f" {info[key]}\n", style=value_style)
+
+    section("Uso de Recursos")
+    right_panel.append(f"Memoria       : {color_bar(info['Memoria %'])}\n")
+    right_panel.append(f"Almacenamiento: {color_bar(info['Almacenamiento %'])}\n")
 
     console.print(Columns([left_panel, right_panel], equal=False, expand=True))
     console.print("")
