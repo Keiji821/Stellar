@@ -49,7 +49,8 @@ def display_menu():
             "[bright_cyan]STELLAR OS[/] [bright_black](v1.0.0)[/]",
             subtitle="[bright_black]by Keiji821[/]",
             border_style="bright_cyan",
-            style="bold"
+            style="bold",
+            justify="center"
         )
     )
 
@@ -62,8 +63,7 @@ def display_menu():
             Panel.fit(
                 f"[bold]{category}[/]",
                 border_style="dim cyan",
-                style="bold",
-                justify="center"
+                style="bold"
             )
         )
         for cmd, desc in commands:
