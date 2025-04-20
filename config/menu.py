@@ -19,7 +19,13 @@ themes = {
         "secondary": "bright_blue",
         "highlight": "bright_cyan",
         "bg": "black"
-    }
+    },
+    "dark": {
+        "primary": "bright_white",
+        "secondary": "dark_blue",
+        "highlight": "bright_red",
+        "bg": "black"
+    },
 }
 
 menu_data = {
@@ -29,8 +35,7 @@ menu_data = {
         ("bash", "Reinicia la sesión de terminal"),
         ("ui", "Personalizar tema e interfaz gráfica"),
         ("uninstall", "Desinstalar todo el sistema"),
-        ("update", "Actualizar desde repositorio GitHub"),
-        ("ddos", "Ataque DDOS controlado")
+        ("update", "Actualizar desde repositorio GitHub")
     ],
     "UTILIDADES": [
         ("ia", "Asistente de IA con GPT-4"),
@@ -51,10 +56,13 @@ menu_data = {
         ("serverinfo", "Analiza servidores de Discord"),
         ("searchinvites", "Busca invitaciones públicas"),
         ("inviteinfo", "Analiza enlaces de invitación")
+    ],
+    "PENTESTING": [
+        ("ddos", "Ataque DDOS controlado")
     ]
 }
 
-theme_cycle = cycle(["makoto"])
+theme_cycle = cycle(["makoto", "dark"])
 current_theme = next(theme_cycle)
 
 def create_table(theme):
