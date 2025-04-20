@@ -1,19 +1,20 @@
-import sys
-import termios
-import tty
-import select
-import time
-import random
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 from rich.live import Live
 from rich.layout import Layout
+from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from rich.align import Align
 from rich.style import Style
 from rich.box import ROUNDED, DOUBLE
 from itertools import cycle
+import time
+import random
+import sys
+import termios
+import tty
+import select
 
 class StellarOS:
     def __init__(self):
