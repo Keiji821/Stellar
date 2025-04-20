@@ -19,43 +19,65 @@ import random
 class StellarOS:
     def __init__(self):
         self.console = Console()
+        # Define themes with clear contrast
         self.themes = {
-            "neon":{"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_yellow","bg":"#0a0a1a"},
-            "cyber":{"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},
-            "matrix":{"primary":"bright_white","secondary":"bright_green","highlight":"bright_cyan","bg":"black"},
-            "shinkai":{"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
-            "solar":{"primary":"black","secondary":"bright_yellow","highlight":"bright_red","bg":"#fff8e1"},
-            "sunset":{"primary":"black","secondary":"dark_red","highlight":"white","bg":"#ffeb3b"},
-            "frost":{"primary":"black","secondary":"blue","highlight":"white","bg":"#e0f7fa"},
-            "pastel":{"primary":"black","secondary":"magenta","highlight":"cyan","bg":"#f5e6e8"},
-            "clean":{"primary":"black","secondary":"grey50","highlight":"dark_blue","bg":"#ffffff"},
-            "midnight":{"primary":"bright_blue","secondary":"bright_cyan","highlight":"bright_magenta","bg":"#001f3f"},
-            "forest":{"primary":"white","secondary":"green","highlight":"bright_green","bg":"#013220"},
-            "aurora":{"primary":"bright_green","secondary":"bright_magenta","highlight":"cyan","bg":"#2b1f3b"},
-            "dawn":{"primary":"bright_red","secondary":"yellow","highlight":"white","bg":"#0f1b1b"},
-            "twilight":{"primary":"bright_cyan","secondary":"blue","highlight":"green","bg":"#1b2a3e"},
-            "lava":{"primary":"bright_red","secondary":"yellow","highlight":"white","bg":"#2f0200"},
-            "monokai":{"primary":"bright_yellow","secondary":"bright_magenta","highlight":"bright_green","bg":"#2d2a2e"},
-            "dracula":{"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_white","bg":"#282a36"},
-            "ocean":{"primary":"bright_blue","secondary":"cyan","highlight":"white","bg":"#001f3f"},
-            "vaporwave":{"primary":"bright_magenta","secondary":"bright_blue","highlight":"bright_cyan","bg":"#2b0030"},
-            "ember":{"primary":"bright_red","secondary":"bright_yellow","highlight":"bright_white","bg":"#3f0a0a"},
-            "glacier":{"primary":"bright_cyan","secondary":"white","highlight":"white","bg":"#0a1e2a"},
-            "daylight":{"primary":"black","secondary":"grey70","highlight":"dark_blue","bg":"#f0f0f0"},
-            "sage":{"primary":"white","secondary":"dark_green","highlight":"green","bg":"#dff0d8"},
-            "retro":{"primary":"white","secondary":"bright_yellow","highlight":"bright_red","bg":"#333300"},
-            "lunar":{"primary":"bright_white","secondary":"bright_blue","highlight":"bright_magenta","bg":"#102030"},
-            "gold":{"primary":"black","secondary":"gold3","highlight":"white","bg":"#ffda44"},
-            "storm":{"primary":"bright_white","secondary":"cyan","highlight":"blue","bg":"#0c1e3b"},
-            "ink":{"primary":"white","secondary":"grey70","highlight":"grey30","bg":"#e6e6e6"}
+            "neon":      {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_yellow","bg":"#0a0a1a"},
+            "cyber":     {"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},
+            "matrix":    {"primary":"bright_white","secondary":"bright_green","highlight":"bright_cyan","bg":"black"},
+            "shinkai":   {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
+            "solar":     {"primary":"black","secondary":"bright_yellow","highlight":"bright_red","bg":"#fff8e1"},
+            "sunset":    {"primary":"black","secondary":"dark_red","highlight":"white","bg":"#ffeb3b"},
+            "frost":     {"primary":"black","secondary":"blue","highlight":"white","bg":"#e0f7fa"},
+            "pastel":    {"primary":"black","secondary":"magenta","highlight":"cyan","bg":"#f5e6e8"},
+            "clean":     {"primary":"black","secondary":"grey50","highlight":"dark_blue","bg":"#ffffff"},
+            "midnight":  {"primary":"bright_blue","secondary":"bright_cyan","highlight":"bright_magenta","bg":"#001f3f"},
+            "forest":    {"primary":"white","secondary":"green","highlight":"bright_green","bg":"#013220"},
+            "aurora":    {"primary":"bright_green","secondary":"bright_magenta","highlight":"cyan","bg":"#2b1f3b"},
+            "dawn":      {"primary":"bright_red","secondary":"yellow","highlight":"white","bg":"#0f1b1b"},
+            "twilight":  {"primary":"bright_cyan","secondary":"blue","highlight":"green","bg":"#1b2a3e"},
+            "lava":      {"primary":"bright_red","secondary":"yellow","highlight":"white","bg":"#2f0200"},
+            "monokai":   {"primary":"bright_yellow","secondary":"bright_magenta","highlight":"bright_green","bg":"#2d2a2e"},
+            "dracula":   {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_white","bg":"#282a36"},
+            "ocean":     {"primary":"bright_blue","secondary":"cyan","highlight":"white","bg":"#001f3f"},
+            "vaporwave": {"primary":"bright_pink","secondary":"bright_blue","highlight":"bright_magenta","bg":"#2b0030"},
+            "ember":     {"primary":"bright_red","secondary":"bright_yellow","highlight":"bright_white","bg":"#3f0a0a"},
+            "glacier":   {"primary":"bright_cyan","secondary":"white","highlight":"white","bg":"#0a1e2a"},
+            "daylight":  {"primary":"black","secondary":"grey70","highlight":"dark_blue","bg":"#f0f0f0"},
+            "sage":      {"primary":"white","secondary":"dark_green","highlight":"green","bg":"#dff0d8"},
+            "retro":     {"primary":"white","secondary":"bright_yellow","highlight":"bright_red","bg":"#333300"},
+            "lunar":     {"primary":"bright_white","secondary":"bright_blue","highlight":"bright_magenta","bg":"#102030"},
         }
+        # Menu data
         self.menu_data = {
-            "MAIN": [("intro","Stellar OS es un sistema operativo para Termux de fácil uso e instalación. Este menú presenta comandos preconfigurados listos para usar, enfocados en mejorar la apariencia de Termux y ofrecer utilidades opcionales para diferentes áreas.")],
-            "SISTEMA": [("reload","Recarga el banner"),("clear","Limpia la terminal"),("bash","Reinicia terminal"),("ui","Personalizar interfaz"),("uninstall","Desinstalar sistema"),("update","Actualizar desde GitHub")],
-            "UTILIDADES": [("ia","Asistente IA GPT-4"),("ia-image","Generador de imágenes"),("traductor","Traductor multidioma"),("myip","Muestra tu IP pública")],
-            "OSINT": [("ipinfo","Info de direcciones IP"),("phoneinfo","Búsqueda de teléfonos"),("urlinfo","Analiza URLs"),("metadatainfo","Extrae metadatos"),("emailsearch","Busca emails"),("userfinder","Rastrea usuarios")],
-            "OSINT-DISCORD": [("userinfo","Info de usuarios Discord"),("serverinfo","Info de servidores"),("searchinvites","Busca invitaciones"),("inviteinfo","Analiza enlaces")],
-            "PENTESTING": [("ddos","Ataque DDOS controlado")]
+            "MAIN": [("intro",
+                "Stellar OS es un sistema operativo para Termux de fácil uso e instalación. "
+                "Este menú presenta comandos preconfigurados listos para usar, enfocados en mejorar la apariencia de Termux "
+                "y ofrecer utilidades opcionales para diferentes áreas." )],
+            "SISTEMA": [
+                ("reload","Recarga el banner"),
+                ("clear","Limpia la terminal"),
+                ("bash","Reinicia terminal"),
+                ("ui","Personalizar interfaz"),
+                ("uninstall","Desinstalar sistema"),
+                ("update","Actualizar desde GitHub")],
+            "UTILIDADES": [
+                ("ia","Asistente IA GPT-4"),
+                ("ia-image","Generador de imágenes"),
+                ("traductor","Traductor multidioma"),
+                ("myip","Muestra tu IP pública")],
+            "OSINT": [
+                ("ipinfo","Info de direcciones IP"),
+                ("phoneinfo","Búsqueda de teléfonos"),
+                ("urlinfo","Analiza URLs"),
+                ("metadatainfo","Extrae metadatos"),
+                ("emailsearch","Busca emails"),
+                ("userfinder","Rastrea usuarios")],
+            "OSINT-DISCORD": [
+                ("userinfo","Info de usuarios Discord"),
+                ("serverinfo","Info de servidores"),
+                ("searchinvites","Busca invitaciones"),
+                ("inviteinfo","Analiza enlaces")],
+            "PENTESTING": [("ddos","Ataque DDOS controlado")],
         }
         self.categories = list(self.menu_data.keys())
         self.cat_index = 0
@@ -80,10 +102,9 @@ class StellarOS:
         theme = self.themes[self.current_theme]
         text = Text.assemble(
             (" STELLAR OS ", f"bold {theme['secondary']} blink"),
-            (f" [{self.version}]\n", f"bold {theme['highlight']}"),
-            ("Creadores:\n", f"bold {theme['primary']}"),
+            (f" [{self.version}]\n", "bold grey50"),
             ("Keiji821 (Programador)\n", f"bold {theme['highlight']}"),
-            ("Galera (Diseñadora)", f"bold {theme['secondary']}")
+            ("Galera (Diseñadora)\n", f"bold {theme['secondary']}")
         )
         return Panel(
             Align.center(text),
@@ -98,17 +119,21 @@ class StellarOS:
         cat = self.categories[self.cat_index]
         if cat == 'MAIN':
             intro = self.menu_data['MAIN'][0][1]
+            # Intro panel
             intro_panel = Panel(
                 Align.left(intro), title='INTRODUCCIÓN', title_align='center',
-                border_style=theme['highlight'], box=ROUNDED, style=Style(bgcolor=theme['bg']), padding=(1,2)
+                border_style=theme['secondary'], box=ROUNDED, style=Style(bgcolor=theme['bg']), padding=(1,2)
             )
-            anim_cats = '\n'.join([f"[underline bold {random.choice(self.worm_colors)}]{c}[/]" for c in self.categories if c != "MAIN"])
+            # Categories panel
+            cats = '\n'.join([f"[underline]{c}[/]" for c in self.categories if c!='MAIN'])
             cat_panel = Panel(
-                Align.center(anim_cats), title="Categorías", title_align="center",
+                Align.center(Text.assemble((cats,"bold {theme['highlight']}"))),
+                title='Categorías', title_align='center',
                 border_style=self.worm_colors[(self.worm_pos+2)%len(self.worm_colors)],
                 box=ROUNDED, style=Style(bgcolor=theme['bg']), padding=(1,2)
             )
             return Layout(name='main').split_column(Layout(intro_panel), Layout(cat_panel))
+        # Other categories
         table = Table.grid(padding=(0,2))
         table.add_column(style=f"bold {theme['highlight']}", width=20)
         table.add_column(style=theme['primary'])
@@ -124,12 +149,12 @@ class StellarOS:
         )
 
     def tips_panel(self):
-        theme = self.themes[self.current_theme]
+        theme=self.themes[self.current_theme]
         tips = Text()
         tips.append("Tips Rápidos:\n", style="bold underline")
         tips.append(" w/s   ", style="dim"); tips.append("Subir/Bajar Categorías\n")
-        tips.append(" t     ", style="dim"); tips.append("Cambiar tema\n")
-        tips.append(" q     ", style="dim"); tips.append("Salir")
+        tips.append(" t     Cambiar tema\n")
+        tips.append(" q     Salir")
         return Panel(
             tips, box=ROUNDED,
             border_style=self.worm_colors[(self.worm_pos+6)%len(self.worm_colors)],
@@ -137,42 +162,39 @@ class StellarOS:
         )
 
     def loading_animation(self):
-        theme = self.themes[self.current_theme]
+        theme=self.themes[self.current_theme]
         for style in cycle([theme['highlight'],theme['secondary'],theme['primary']]):
-            prog = Progress(
-                SpinnerColumn(style=f"bold {style}"),
-                BarColumn(style=f"bold {style}"),
-                TextColumn("{task.percentage:>3.0f}%", style=f"bold {style}"),
-                console=self.console, transient=True
-            )
-            task = prog.add_task("INICIANDO...", total=100)
+            prog=Progress(
+                SpinnerColumn(style=f"bold {style}"),BarColumn(style=f"bold {style}"),
+                TextColumn("{task.percentage:>3.0f}%",style=f"bold {style}"),
+                console=self.console,transient=True)
+            task=prog.add_task("INICIANDO...",total=100)
             with prog:
                 for _ in range(100):
-                    time.sleep(0.01)
-                    prog.update(task, advance=1)
+                    time.sleep(0.01); prog.update(task,advance=1)
             break
 
     def render(self):
-        self.worm_pos = (self.worm_pos + 1) % len(self.worm_colors)
-        layout = Layout()
+        self.worm_pos=(self.worm_pos+1)%len(self.worm_colors)
+        layout=Layout()
         layout.split_column(
-            Layout(self.animated_banner(), size=7),
-            Layout(self.create_table(), ratio=2),
-            Layout(self.tips_panel(), size=4)
+            Layout(self.animated_banner(),size=7),
+            Layout(self.create_table(),ratio=2),
+            Layout(self.tips_panel(),size=4)
         )
         return layout
 
     def main(self):
         self.loading_animation()
-        with Live(auto_refresh=False, screen=True, console=self.console) as live:
+        with Live(auto_refresh=False,screen=True,console=self.console) as live:
             while True:
-                live.update(self.render(), refresh=True)
-                key = self.get_key()
-                if key == 'q': break
-                if key == 't': self.current_theme = next(self.theme_cycle)
-                if key == 'w': self.cat_index = (self.cat_index - 1) % len(self.categories)
-                if key == 's': self.cat_index = (self.cat_index + 1) % len(self.categories)
+                live.update(self.render(),refresh=True)
+                key=self.get_key()
+                if key=='q':break
+                if key=='t':self.current_theme=next(self.theme_cycle)
+                if key=='w':self.cat_index=(self.cat_index-1)%len(self.categories)
+                if key=='s':self.cat_index=(self.cat_index+1)%len(self.categories)
         self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
 
-if __name__ == "__main__":
+if __name__=="__main__":
     StellarOS().main()
