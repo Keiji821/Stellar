@@ -55,7 +55,7 @@ def obtener_info():
     except:
         ip = "No disponible"
     return {
-        "Usuario ": usuario,
+        "Usuario": usuario,
         "Fecha": now.strftime("%Y-%m-%d"),
         "Hora": now.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
