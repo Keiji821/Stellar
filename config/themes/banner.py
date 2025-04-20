@@ -81,7 +81,9 @@ def crear_panel_informacion(info):
     tabla.add_column(style="bright_cyan")
     for clave in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU", "Memoria", "Almacenamiento", "IP"]:
         tabla.add_row(f"{clave}:", info[clave])
-    return Panel.fit(tabla, title="Información del Sistema", border_style="bright_white", padding=(1, 2))
+
+    panel = Panel.fit(tabla, title="Información del Sistema", border_style="bright_white", padding=(1, 2))
+    return panel
 
 def mostrar_barras_progreso(info):
     with Progress(
@@ -101,7 +103,13 @@ def mostrar_barras_progreso(info):
 def mostrar_informacion():
     informacion = obtener_informacion_sistema()
     panel_informacion = crear_panel_informacion(informacion)
-    console.print(Columns([text_banner, panel_informacion], expand=True))
+    panel_informacion_con_barras = Panel(
+        Columns([panel_informacion, Text("  ")], expand=True),
+        title="Sistema Detalles",
+        border_style="bright_yellow",
+        padding=(1, 2)
+    )
+    console.print(Columns([text_banner, panel_informacion_con_barras], expand=True))
     mostrar_barras_progreso(informacion)
 
 if __name__ == "__main__":
