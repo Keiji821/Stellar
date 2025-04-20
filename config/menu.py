@@ -11,10 +11,11 @@ from rich.style import Style
 from itertools import cycle
 import time
 import random
+import os
 
 class StellarOS:
     def __init__(self):
-        self.console = Console(style=Style(bgcolor="black"))
+        self.console = Console()
         self.themes = {
             "neon": {
                 "primary": "bright_magenta",
@@ -33,6 +34,18 @@ class StellarOS:
                 "secondary": "green",
                 "highlight": "bright_white",
                 "bg": "black"
+            },
+            "shinkai": {
+                "primary": "bright_cyan",
+                "secondary": "bright_blue",
+                "highlight": "bright_magenta",
+                "bg": "#101830"
+            },
+            "solar": {
+                "primary": "yellow",
+                "secondary": "bright_red",
+                "highlight": "bright_white",
+                "bg": "#1f1f1f"
             }
         }
 
@@ -59,7 +72,7 @@ class StellarOS:
                 ("emailsearch", "Búsqueda de correos electrónicos"),
                 ("userfinder", "Rastreo de nombres de usuario")
             ],
-            "DISCORD": [
+            "OSINT-DISCORD": [
                 ("userinfo", "Obten información de usuarios"),
                 ("serverinfo", "Analiza servidores de Discord"),
                 ("searchinvites", "Busca invitaciones públicas"),
@@ -73,13 +86,8 @@ class StellarOS:
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
-        self.running_colors = cycle([
-            "bright_red", "bright_magenta", "bright_cyan", 
-            "bright_green", "bright_blue", "bright_yellow"
-        ])
-        self.step = 0
 
-    def create_table(self):
+def create_table(self):
         table = Table.grid(padding=(0, 2))
         table.add_column(style=f"bold {self.themes[self.current_theme]['highlight']}", width=24)
         table.add_column(style=self.themes[self.current_theme]['primary'])
@@ -100,34 +108,39 @@ class StellarOS:
         return table
 
     def animated_banner(self):
-        banner = Text.assemble(
-            (f" STELLAR OS ", f"bold {self.themes[self.current_theme]['secondary']} blink"),
+        text = Text.assemble(
+            (f" STELLAR OS ", f"bold {self.themes[self.current_theme]['secondary']}"),
             (f" [{self.version}]", "bold grey50")
         )
-        credits = Text.assemble(
-            ("Desarrollado por ", "bold grey37"),
-            ("Keiji821", f"bold {self.themes[self.current_theme]['highlight']}"),
-            (" (Programador)   ", "bold grey37"),
-            ("Galera", f"bold {self.themes[self.current_theme]['secondary']}"),
-            (" (Diseñadora)", "bold grey37")
+        author_block = Text.assemble(
+            ("\n" + "─" * 38 + "\n", "dim"),
+            ("Keiji821 (Programador)\n", "bold white"),
+            ("Galera (Diseñadora)", "bold white")
         )
-
         return Panel(
-            Align.center(Text.assemble(banner, "\n", credits)), 
-            border_style=next(self.running_colors), 
+            Align.center(text.append(author_block)), 
+            border_style=self.themes[self.current_theme]['secondary'], 
             padding=(1, 4), 
             box=DOUBLE,
             style=Style(bgcolor=self.themes[self.current_theme]['bg'])
         )
 
-    def loading_animation(self):
-        spinner_styles = [
+    def tips_panel(self):
+        tips = "[bold]Tips Rápidos:[/bold]  [dim]CTRL+C[/dim] Detener | [dim]CTRL+Z[/dim] Suspender | [dim]q[/dim] Salir | [dim]t[/dim] Cambiar tema"
+        return Panel(
+            tips,
+            border_style=self.themes[self.current_theme]['secondary'],
+            style=Style(bgcolor=self.themes[self.current_theme]['bg']),
+            box=ROUNDED
+        )
+
+def loading_animation(self):
+        styles = [
             f"bold {self.themes[self.current_theme]['highlight']}",
             f"bold {self.themes[self.current_theme]['secondary']}",
             f"bold {self.themes[self.current_theme]['primary']}"
         ]
-
-        for style in cycle(spinner_styles):
+        for style in cycle(styles):
             progress = Progress(
                 SpinnerColumn(style=style),
                 BarColumn(bar_width=None, style=style),
@@ -135,9 +148,7 @@ class StellarOS:
                 console=self.console,
                 transient=True,
             )
-
             task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
-
             with progress:
                 for _ in range(100):
                     time.sleep(0.01)
@@ -151,34 +162,45 @@ class StellarOS:
             Layout(
                 Panel(
                     self.create_table(), 
-                    border_style=next(self.running_colors),
+                    border_style=self.themes[self.current_theme]['secondary'], 
                     box=ROUNDED, 
                     padding=(1, 0),
                     style=Style(bgcolor=self.themes[self.current_theme]['bg'])
                 ), 
                 ratio=2
             ),
-            Layout(
-                Panel(
-                    Align.center(
-                        f"[blink bold {self.themes[self.current_theme]['highlight']}]Presiona 'q' para salir | 't' para cambiar tema\n[dim]Tips: CTRL + C para detener | CTRL + Z para suspender[/]"
-                    ), 
-                    border_style=next(self.running_colors),
-                    style=Style(bgcolor=self.themes[self.current_theme]['bg'])
-                ), 
-                size=4
-            ),
+            Layout(self.tips_panel(), size=3)
         )
         return layout
 
-    def main(self):
+    def running_light_effect(self, layout):
+        positions = [(i, side) for side in ["top", "right", "bottom", "left"] for i in range(20)]
+        colors = ["red", "magenta", "yellow", "green", "cyan", "blue"]
+        while True:
+            color = random.choice(colors)
+            layout.border_style = color
+            yield layout
+            time.sleep(0.02)
+
+def main(self):
         self.loading_animation()
-        with Live(auto_refresh=True, screen=True, console=self.console) as live:
+
+        with Live(screen=True, redirect_stderr=False) as live:
             while True:
                 try:
-                    live.update(self.render_screen(), refresh=True)
-                    time.sleep(0.15)
-                    self.step += 1
+                    layout = self.render_screen()
+                    border_effect = self.running_light_effect(layout)
+
+                    for _ in range(1000):
+                        live.update(next(border_effect), refresh=True)
+
+                        if self.console.input("[bold cyan](t = tema | q = salir)> ").strip().lower() == "t":
+                            self.current_theme = next(self.theme_cycle)
+                            break
+                        elif self.console.input().strip().lower() == "q":
+                            self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
+                            return
+
                 except KeyboardInterrupt:
                     self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
                     return
