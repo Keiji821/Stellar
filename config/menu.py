@@ -1,3 +1,7 @@
+import sys
+import termios
+import tty
+import select
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -72,7 +76,6 @@ class StellarOS:
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
-        self.running_lights = []
 
     def create_table(self):
         table = Table.grid(padding=(0, 2))
@@ -110,21 +113,20 @@ class StellarOS:
     def loading_animation(self):
         colors = ["rgb(0,255,255)", "rgb(0,200,255)", "rgb(0,150,255)", "rgb(0,100,255)", "rgb(50,0,255)", "rgb(100,0,255)"]
         styles = cycle(colors)
+        style = next(styles)
 
-        for _ in range(1):
-            style = next(styles)
-            progress = Progress(
-                SpinnerColumn(style=style),
-                BarColumn(bar_width=None, style=style),
-                TextColumn("[progress.percentage]{task.percentage:>3.0f}%", style=style),
-                console=self.console,
-                transient=True,
-            )
-            task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
-            with progress:
-                for _ in range(100):
-                    time.sleep(0.02)
-                    progress.update(task, advance=1)
+        progress = Progress(
+            SpinnerColumn(style=style),
+            BarColumn(bar_width=None, style=style),
+            TextColumn("[progress.percentage]{task.percentage:>3.0f}%", style=style),
+            console=self.console,
+            transient=True,
+        )
+        task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
+        with progress:
+            for _ in range(100):
+                time.sleep(0.02)
+                progress.update(task, advance=1)
 
     def render_screen(self):
         layout = Layout()
@@ -151,26 +153,32 @@ class StellarOS:
         )
         return layout
 
-    def running_light_effect(self, panel):
-        yield panel  # Placeholder visual, efecto futuro animado si quieres agregar más
+    def get_key_non_blocking(self):
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setcbreak(fd)
+            rlist, _, _ = select.select([fd], [], [], 0.1)
+            if rlist:
+                return sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return None
 
     def main(self):
         self.loading_animation()
-
         with Live(auto_refresh=False, screen=True) as live:
             while True:
                 try:
-                    current_screen = self.render_screen()
-                    for animated_panel in self.running_light_effect(current_screen):
-                        live.update(animated_panel)
-                        live.refresh()
-                        key = self.console.input(timeout=0.1)
-                        if key == 'q':
-                            self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
-                            return
-                        elif key == 't':
-                            self.current_theme = next(self.theme_cycle)
-                            break
+                    layout = self.render_screen()
+                    live.update(layout)
+                    live.refresh()
+                    key = self.get_key_non_blocking()
+                    if key == "q":
+                        self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
+                        return
+                    elif key == "t":
+                        self.current_theme = next(self.theme_cycle)
                 except KeyboardInterrupt:
                     self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
                     return
