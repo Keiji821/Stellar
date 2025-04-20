@@ -13,28 +13,28 @@ from rich.table import Table
 from rich.progress import Progress, BarColumn, TextColumn
 
 console = Console()
+
 themes_dir = os.path.expanduser("~/Stellar/config/themes")
 system_dir = os.path.expanduser("~/Stellar/config/system")
 
-def leer_archivo(ruta_archivo):
+def leer_archivo(ruta_archivo, valor_por_defecto=""):
     try:
         with open(ruta_archivo, 'r', encoding='utf-8') as archivo:
             return archivo.read().strip()
     except FileNotFoundError:
-        return None
+        return valor_por_defecto
 
 def procesar_estilo(cadena_estilo):
     partes = cadena_estilo.lower().split()
     es_bold = 'bold' in partes
-    colores = [parte for parte in partes if parte != 'bold']
-    color = colores[0] if colores else None
+    color = next((parte for parte in partes if parte != 'bold'), None)
     return Style(color=color, bold=es_bold)
 
-banner = leer_archivo(os.path.join(themes_dir, "banner.txt")) or ""
-cadena_estilo = leer_archivo(os.path.join(themes_dir, "banner_color.txt")) or "cyan"
-banner_background = leer_archivo(os.path.join(themes_dir, "banner_background.txt")) or "no"
-banner_background_color = leer_archivo(os.path.join(themes_dir, "banner_background_color.txt")) or "black"
-usuario = leer_archivo(os.path.join(system_dir, "user.txt")) or "Usuario"
+banner = leer_archivo(os.path.join(themes_dir, "banner.txt"))
+cadena_estilo = leer_archivo(os.path.join(themes_dir, "banner_color.txt"), "cyan")
+banner_background = leer_archivo(os.path.join(themes_dir, "banner_background.txt"), "no")
+banner_background_color = leer_archivo(os.path.join(themes_dir, "banner_background_color.txt"), "black")
+usuario = leer_archivo(os.path.join(system_dir, "user.txt"), "Usuario")
 
 style = procesar_estilo(cadena_estilo)
 if banner_background.lower() in ["si", "sí", "yes"]:
@@ -48,34 +48,34 @@ def obtener_informacion_sistema():
     disco = psutil.disk_usage(os.path.expanduser("~"))
     try:
         ip = requests.get("https://api.ipify.org", timeout=2).text
-    except:
+    except requests.RequestException:
         ip = "No disponible"
+    
     return {
         "Usuario": usuario,
         "Fecha": ahora.strftime("%Y-%m-%d"),
         "Hora": ahora.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
-        "Tiempo de actividad": f"{int(tiempo_actividad//3600)}h {int((tiempo_actividad%3600)//60)}m",
+        "Tiempo de actividad": f"{int(tiempo_actividad // 3600)}h {int((tiempo_actividad % 3600) // 60)}m",
         "Paquetes": str(len([f for f in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if f.endswith(".list")])),
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
         "CPU": platform.processor() or "N/A",
-        "Memoria": f"{round(memoria.used/2**30,1)}GB/{round(memoria.total/2**30,1)}GB",
+        "Memoria": f"{round(memoria.used / 2**30, 1)}GB/{round(memoria.total / 2**30, 1)}GB",
         "Memoria %": memoria.percent,
-        "Almacenamiento": f"{round(disco.used/2**30,1)}GB/{round(disco.total/2**30,1)}GB ({disco.percent}%)",
+        "Almacenamiento": f"{round(disco.used / 2**30, 1)}GB/{round(disco.total / 2**30, 1)}GB ({disco.percent}%)",
         "Almacenamiento %": disco.percent,
         "IP": ip
     }
 
 def crear_panel_informacion(info):
-    tabla = Table.grid(padding=(0,1))
+    tabla = Table.grid(padding=(0, 1))
     tabla.add_column(justify="right", style="bright_magenta", no_wrap=True)
     tabla.add_column(style="bright_cyan")
     for clave in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU", "Memoria", "Almacenamiento", "IP"]:
         tabla.add_row(f"{clave}:", info[clave])
-    panel = Panel.fit(tabla, title="Información del Sistema", border_style="bright_white", padding=(1,2))
-    return panel
+    return Panel.fit(tabla, title="Información del Sistema", border_style="bright_white", padding=(1, 2))
 
 def mostrar_barras_progreso(info):
     with Progress(
