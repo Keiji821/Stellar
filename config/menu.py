@@ -1,9 +1,3 @@
-import sys
-import termios
-import tty
-import select
-import time
-import random
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -15,6 +9,12 @@ from rich.style import Style
 from rich.box import ROUNDED, DOUBLE
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from itertools import cycle
+import sys
+import termios
+import tty
+import select
+import time
+import random
 
 class StellarOS:
     def __init__(self):
@@ -25,16 +25,17 @@ class StellarOS:
             "matrix":  {"primary":"bright_green","secondary":"green","highlight":"bright_white","bg":"black"},
             "shinkai": {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
             "solar":   {"primary":"yellow","secondary":"bright_red","highlight":"bright_white","bg":"#1f1f1f"},
-            "frost":   {"primary":"white","secondary":"bright_cyan","highlight":"bright_blue","bg":"#e0f7fa"},
-            "sunset":  {"primary":"bright_yellow","secondary":"bright_red","highlight":"white","bg":"#fff3e0"},
+            "frost":   {"primary":"black","secondary":"bright_blue","highlight":"bright_magenta","bg":"#e0f7fa"},
+            "sunset":  {"primary":"black","secondary":"bright_red","highlight":"bright_white","bg":"#fff3e0"},
+            "pastel":  {"primary":"dim_gray","secondary":"light_pink","highlight":"light_sky_blue1","bg":"#f5e6e8"},
+            "clean":   {"primary":"black","secondary":"grey50","highlight":"dark_blue","bg":"#ffffff"}
         }
         self.menu_data = {
             "MAIN": [
-                ("Bienvenido", 
-                 "Stellar OS, es un sistema operativo para Termux de fácil uso y de fácil instalación. "
-                 "Este menú muestra una recolección de comandos ya hechos y listos para ser usados. "
-                 "Stellar se centra en mejorar la aburrida apariencia de Termux pero también, de manera "
-                 "opcional, entrega una selección de comandos útiles para usar en diferentes áreas.")
+                ("intro", 
+                 "Stellar OS es un sistema operativo para Termux de fácil uso e instalación. "
+                 "Este menú presenta comandos preconfigurados listos para usar, enfocados en mejorar la apariencia de Termux "
+                 "y ofrecer utilidades opcionales para diferentes áreas.")
             ],
             "SISTEMA": [
                 ("reload",    "Recarga el banner"),
@@ -70,11 +71,9 @@ class StellarOS:
         }
         self.categories = list(self.menu_data.keys())
         self.cat_index = 0
-
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
-
         self.worm_colors = ["red","magenta","yellow","green","cyan","blue"]
         self.worm_pos = 0
 
@@ -113,35 +112,46 @@ class StellarOS:
     def create_table(self):
         theme = self.themes[self.current_theme]
         cat = self.categories[self.cat_index]
+        if cat == "MAIN":
+            # Panel de introducción, texto left, título centrado
+            desc = self.menu_data["MAIN"][0][1]
+            return Panel(
+                Align.left(desc),
+                title="MAIN",
+                title_align="center",
+                border_style=theme['secondary'],
+                box=ROUNDED,
+                padding=(1,2),
+                style=Style(bgcolor=theme['bg'])
+            )
+        # Resto de categorías como antes
         table = Table.grid(padding=(0,2))
         table.add_column(style=f"bold {theme['highlight']}", width=20)
-        table.add_column(style=theme["primary"])
-
+        table.add_column(style=theme['primary'])
         table.add_row(
-            Panel.fit(f"[bold]{cat}[/]",
-                      border_style=theme["secondary"],
-                      box=ROUNDED),
-            ""
+            Panel.fit(f"[bold]{cat}[/]", border_style=theme['secondary'], box=ROUNDED), ""
         )
         for cmd, desc in self.menu_data[cat]:
             table.add_row(f"[{theme['highlight']}]› {cmd}", f"[{theme['primary']}] {desc}")
-
         return Panel(
             table,
             border_style=self.worm_colors[(self.worm_pos+2) % len(self.worm_colors)],
             box=ROUNDED,
             padding=(1,1),
-            style=Style(bgcolor=theme["bg"])
+            style=Style(bgcolor=theme['bg'])
         )
 
     def tips_panel(self):
         theme = self.themes[self.current_theme]
-        tips = "[bold]Tips Rápidos:[/bold]  [dim]w/s[/dim] ↑/↓ Categorías  |  [dim]t[/dim] Cambiar tema  |  [dim]q[/dim] Salir"
+        tips = (
+            "[bold]Tips Rápidos:[/bold]  [dim]w/s[/dim] ↑/↓ Categorías  | "
+            "[dim]t[/dim] Cambiar tema  |  [dim]q[/dim] Salir"
+        )
         return Panel(
             tips,
             border_style=self.worm_colors[(self.worm_pos+4) % len(self.worm_colors)],
             box=ROUNDED,
-            style=Style(bgcolor=theme["bg"])
+            style=Style(bgcolor=theme['bg'])
         )
 
     def loading_animation(self):
