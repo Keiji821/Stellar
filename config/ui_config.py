@@ -16,7 +16,7 @@ def show_title():
 
 def get_banner():
     show_title()
-    banner_path = os.path.expanduser("~/.configs_stellar/themes/banner.txt")
+    banner_path = os.path.expanduser("~/.Stellar/config/themes/banner.txt")
 
     if os.path.exists(banner_path):
         os.remove(banner_path)
@@ -50,7 +50,7 @@ def set_banner_color():
     show_color_options()
 
     color = console.input("\n[bold green]Elija un color para su banner (ej: blue): [/bold green]")
-    color_path = os.path.expanduser("~/.configs_stellar/themes/banner_color.txt")
+    color_path = os.path.expanduser("~/Stellar/config/themes/banner_color.txt")
     with open(color_path, 'w') as f:
         f.write(color)
 
@@ -58,7 +58,7 @@ def set_background():
     show_title()
     background = console.input("[bold green]¿Desea que el banner tenga fondo? (s/n): [/bold green]").lower()
 
-    bg_path = os.path.expanduser("~/.configs_stellar/themes/banner_background.txt")
+    bg_path = os.path.expanduser("~/Stellar/config/themes/banner_background.txt")
     with open(bg_path, 'w') as f:
         f.write("si" if background in ['s', 'si', 'sí'] else "no")
 
@@ -68,13 +68,13 @@ def set_background():
         show_color_options()
 
         bg_color = console.input("\n[bold green]Seleccione un color para el fondo: [/bold green]")
-        bg_color_path = os.path.expanduser("~/.configs_stellar/themes/banner_background_color.txt")
+        bg_color_path = os.path.expanduser("~/Stellar/config/themes/banner_background_color.txt")
         with open(bg_color_path, 'w') as f:
             f.write(bg_color)
 
 def main():
     try:
-        themes_dir = os.path.expanduser("~/.configs_stellar/themes")
+        themes_dir = os.path.expanduser("~/Stellar/config/themes")
         os.makedirs(themes_dir, exist_ok=True)
         os.chdir(themes_dir)
 
