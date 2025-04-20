@@ -144,25 +144,25 @@ userfinder() {
 # Discord - Osint
 
 userinfo() {
-    cd ~/Stellar/osint/discord
+    cd ~/Stellar/commands/osint/discord
     python userinfo.py
     cd
 }
 
 serverinfo() {
-    cd ~/Stellar/osint/discord
+    cd ~/Stellar/commands/osint/discord
     python serverinfo.py
     cd
 }
 
 searchinvites() {
-    cd ~/Stellar/osint/discord
+    cd ~/Stellar/commands/osint/discord
     python searchserverinvites.py
     cd
 }
 
 inviteinfo() {
-    cd ~/Stellar/osint/discord
+    cd ~/Stellar/commands/osint/discord
     python inviteinfo.py
     cd
 }
@@ -170,7 +170,7 @@ inviteinfo() {
 # Pentest
 
 ddos() {
-    cd ~/Stellar/pentesting
+    cd ~/Stellar/commands/pentesting/main
     python ddos.py
     cd
 }
@@ -178,25 +178,25 @@ ddos() {
 # Misc
 
 ia() {
-    cd ~/Stellar/misc/tools
+    cd ~/Stellar/commands/misc/tools
     python iahttp.py
     cd
 }
 
 ia-image() {
-    cd ~/Stellar/misc/tools
+    cd ~/Stellar/commands/misc/tools
     python ia_image.py
     cd
 }
 
 traductor() {
-    cd ~/Stellar/misc/tools
+    cd ~/Stellar/commands/misc/tools
     python traductor.py
     cd
 }
 
 myip() {
-    cd ~/Stellar/misc/tools
+    cd ~/Stellar/commands/misc/tools
     python myip.py
     cd
 }
