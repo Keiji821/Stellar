@@ -7,6 +7,7 @@ from rich.layout import Layout
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from rich.prompt import Prompt
 from rich.box import HEAVY, ROUNDED
+from rich.align import Align  # IMPORTAR Align
 from itertools import cycle
 import time
 import os
