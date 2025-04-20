@@ -87,7 +87,7 @@ class StellarOS:
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
 
-def create_table(self):
+    def create_table(self):
         table = Table.grid(padding=(0, 2))
         table.add_column(style=f"bold {self.themes[self.current_theme]['highlight']}", width=24)
         table.add_column(style=self.themes[self.current_theme]['primary'])
@@ -134,7 +134,7 @@ def create_table(self):
             box=ROUNDED
         )
 
-def loading_animation(self):
+    def loading_animation(self):
         styles = [
             f"bold {self.themes[self.current_theme]['highlight']}",
             f"bold {self.themes[self.current_theme]['secondary']}",
@@ -182,7 +182,7 @@ def loading_animation(self):
             yield layout
             time.sleep(0.02)
 
-def main(self):
+    def main(self):
         self.loading_animation()
 
         with Live(screen=True, redirect_stderr=False) as live:
