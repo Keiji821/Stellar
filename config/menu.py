@@ -5,12 +5,11 @@ from rich.text import Text
 from rich.live import Live
 from rich.layout import Layout
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
-from rich.box import HEAVY, ROUNDED, DOUBLE
+from rich.box import ROUNDED, DOUBLE
 from rich.align import Align
 from rich.style import Style
 from itertools import cycle
 import time
-import random
 
 class StellarOS:
     def __init__(self):
@@ -35,7 +34,7 @@ class StellarOS:
                 "bg": "black"
             }
         }
-        
+
         self.menu_data = {
             "SISTEMA": [
                 ("reload", "Recarga el banner del sistema"),
@@ -69,7 +68,7 @@ class StellarOS:
                 ("ddos", "Ataque DDOS controlado")
             ]
         }
-        
+
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
@@ -79,7 +78,7 @@ class StellarOS:
         table = Table.grid(padding=(0, 2))
         table.add_column(style=f"bold {self.themes[self.current_theme]['highlight']}", width=24)
         table.add_column(style=self.themes[self.current_theme]['primary'])
-        
+
         for category, items in self.menu_data.items():
             table.add_row(
                 Panel.fit(f"[bold]{category}[/]", 
@@ -109,28 +108,23 @@ class StellarOS:
         )
 
     def loading_animation(self):
-        spinner_styles = [
-            f"bold {self.themes[self.current_theme]['highlight']}",
-            f"bold {self.themes[self.current_theme]['secondary']}",
-            f"bold {self.themes[self.current_theme]['primary']}"
-        ]
-        
-        for style in cycle(spinner_styles):
+        colors = ["rgb(0,255,255)", "rgb(0,200,255)", "rgb(0,150,255)", "rgb(0,100,255)", "rgb(50,0,255)", "rgb(100,0,255)"]
+        styles = cycle(colors)
+
+        for _ in range(1):
+            style = next(styles)
             progress = Progress(
                 SpinnerColumn(style=style),
-                BarColumn(bar_width=None, style=style, pulse=True),
+                BarColumn(bar_width=None, style=style),
                 TextColumn("[progress.percentage]{task.percentage:>3.0f}%", style=style),
                 console=self.console,
                 transient=True,
             )
-            
             task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
-            
             with progress:
                 for _ in range(100):
                     time.sleep(0.02)
                     progress.update(task, advance=1)
-                break
 
     def render_screen(self):
         layout = Layout()
@@ -158,42 +152,18 @@ class StellarOS:
         return layout
 
     def running_light_effect(self, panel):
-        positions = [
-            (0, "top"), (1, "top"), (2, "top"), (3, "top"),
-            (0, "right"), (1, "right"), (2, "right"), (3, "right"),
-            (0, "bottom"), (1, "bottom"), (2, "bottom"), (3, "bottom"),
-            (0, "left"), (1, "left"), (2, "left"), (3, "left")
-        ]
-        
-        for pos, side in positions:
-            self.running_lights.append((pos, side))
-            if len(self.running_lights) > 3:
-                self.running_lights.pop(0)
-            
-            border_styles = {}
-            for i, (p, s) in enumerate(self.running_lights):
-                intensity = 1.0 - (i * 0.3)
-                color = self.themes[self.current_theme]['highlight']
-                border_styles[f"{s}_{p}"] = f"rgb(255,{int(255*intensity)},{int(255*intensity)})"
-            
-            panel.border_style = self.themes[self.current_theme]['secondary']
-            for key, style in border_styles.items():
-                setattr(panel, key, style)
-            
-            yield panel
+        yield panel  # Placeholder visual, efecto futuro animado si quieres agregar más
 
     def main(self):
         self.loading_animation()
-        
+
         with Live(auto_refresh=False, screen=True) as live:
             while True:
                 try:
                     current_screen = self.render_screen()
-                    
                     for animated_panel in self.running_light_effect(current_screen):
                         live.update(animated_panel)
                         live.refresh()
-                        
                         key = self.console.input(timeout=0.1)
                         if key == 'q':
                             self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
@@ -201,11 +171,9 @@ class StellarOS:
                         elif key == 't':
                             self.current_theme = next(self.theme_cycle)
                             break
-                    
                 except KeyboardInterrupt:
                     self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
                     return
 
 if __name__ == "__main__":
-    stellar_os = StellarOS()
-    stellar_os.main()
+    StellarOS().main()
