@@ -1,4 +1,4 @@
-from rich.console import Console, Group
+from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
@@ -6,7 +6,6 @@ from rich.live import Live
 from rich.layout import Layout
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from rich.prompt import Prompt
-from rich.align import Align
 from rich.box import HEAVY, ROUNDED
 from itertools import cycle
 import time
@@ -17,31 +16,51 @@ console = Console()
 themes = {
     "claro": {
         "primary": "bright_white",
-        "secondary": "sky_blue1",
+        "secondary": "bright_blue",
         "highlight": "bright_cyan",
-        "bg": "grey93"
+        "bg": "white"
     },
     "oscuro": {
         "primary": "white",
-        "secondary": "dark_violet",
+        "secondary": "bright_magenta",
         "highlight": "magenta",
-        "bg": "grey11"
+        "bg": "black"
     }
 }
 
 menu_data = {
+    "SISTEMA": [
+        ("reload", "Recarga el banner del sistema"),
+        ("clear", "Limpia la terminal completamente"),
+        ("bash", "Reinicia la sesión de terminal"),
+        ("ui", "Personalizar tema e interfaz gráfica"),
+        ("uninstall", "Desinstalar todo el sistema"),
+        ("update", "Actualizar desde repositorio GitHub")
+    ],
     "UTILIDADES": [
         ("ia", "Asistente de IA con GPT-4"),
-        ("traductor", "Traductor en tiempo real"),
+        ("ia-image", "Generador de imágenes con DALL-E"),
+        ("traductor", "Traductor en tiempo real multidioma"),
+        ("myip", "Muestra tu IP pública y geolocalización")
     ],
     "OSINT": [
-        ("ipinfo", "Información IP"),
-        ("emailsearch", "Buscar correos"),
+        ("ipinfo", "Información detallada de direcciones IP"),
+        ("phoneinfo", "Búsqueda de números telefónicos"),
+        ("urlinfo", "Analizador de URLs y dominios"),
+        ("metadatainfo", "Extracción avanzada de metadatos"),
+        ("emailsearch", "Búsqueda de correos electrónicos"),
+        ("userfinder", "Rastreo de nombres de usuario")
     ],
-    "SISTEMA": [
-        ("clear", "Limpiar pantalla"),
-        ("theme", "Cambiar tema"),
-        ("exit", "Salir del sistema"),
+    "DISCORD": [
+        ("userinfo", "Obten información de usuarios"),
+        ("serverinfo", "Analiza servidores de Discord"),
+        ("searchinvites", "Busca invitaciones públicas"),
+        ("inviteinfo", "Analiza enlaces de invitación")
+    ],
+    "PENTESTING": [
+        ("ddos", "Ataque DDOS controlado"),
+        ("portscan", "Escaneo avanzado de puertos"),
+        ("vulnscan", "Detector de vulnerabilidades")
     ]
 }
 
