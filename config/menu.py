@@ -28,7 +28,7 @@ class StellarOS:
             {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_white","bg":"#282a36"}
         ])
         self.current_theme = next(self.theme_cycle)
-        self.worm_colors = ["red","yellow","green","cyan","blue","magenta"]
+        self.worm_colors = ["bright_red","bright_yellow","bright_green","bright_cyan","bright_blue","bright_magenta"]
         self.worm_index = 0
         self.menu_data = {
             "MAIN": [("intro","Bienvenido a Stellar OS, sistema visual de Termux.")],
@@ -40,7 +40,8 @@ class StellarOS:
         }
         self.layout = Layout()
         self.last_update = time.time()
-        self.worm_speed = 0.5
+        self.worm_speed = 1.0
+        self.current_color = self.worm_colors[self.worm_index]
 
     def get_key(self, timeout=0.005):
         fd = sys.stdin.fileno()
@@ -59,16 +60,16 @@ class StellarOS:
         text = Text(justify="center")
         text.append("STELLAR OS\n", style=f"bold {t['secondary']}")
         text.append(f"{self.version}\n", style=f"bold {t['highlight']}")
-        text.append("CREADORES: ")
+        text.append("CREADORES: ", style=f"bold {t['primary']}")
         text.append("Keiji821 (Programador)", style=f"bold {t['highlight']}")
-        text.append(" | ")
+        text.append(" | ", style=f"bold {t['primary']}")
         text.append("Galera (Diseñadora)", style=f"bold {t['highlight']}")
         return Panel(
             Align.center(text),
             box=DOUBLE,
-            border_style=self.worm_colors[self.worm_index],
+            border_style=self.current_color,
             style=Style(bgcolor=t['bg']),
-            padding=(0,1)
+            padding=(0,0)
         )
 
     def create_menu(self):
@@ -83,40 +84,39 @@ class StellarOS:
         return Panel(
             table,
             box=ROUNDED,
-            border_style=self.worm_colors[(self.worm_index+2) % len(self.worm_colors)],
+            border_style=self.current_color,
             style=Style(bgcolor=t['bg']),
-            padding=(0,1)
+            padding=(0,0)
         )
 
     def create_tips(self):
         t = self.current_theme
-        tips = Text(justify="center")
-        tips.append("[W]Arriba  ")
-        tips.append("[S]Abajo  ")
-        tips.append("[T]Tema  ")
-        tips.append("[Q]Salir", style=f"bold {t['secondary']}")
+        tips = Table.grid(padding=0)
+        tips.add_column(justify="center")
+        tips.add_row("[W]Arriba   [S]Abajo   [T]Tema   [Q]Salir", style=f"bold {t['secondary']}")
         return Panel(
             Align.center(tips),
             box=ROUNDED,
-            border_style=self.worm_colors[(self.worm_index+4) % len(self.worm_colors)],
+            border_style=self.current_color,
             style=Style(bgcolor=t['bg']),
-            padding=(0,1)
+            padding=(0,0)
         )
 
     def render(self):
         if time.time() - self.last_update > self.worm_speed:
             self.worm_index = (self.worm_index + 1) % len(self.worm_colors)
+            self.current_color = self.worm_colors[self.worm_index]
             self.last_update = time.time()
         
         self.layout.split_column(
             Layout(self.create_banner(), ratio=2),
-            Layout(self.create_menu(), ratio=6),
-            Layout(self.create_tips(), ratio=1)
+            Layout(self.create_menu(), ratio=5),
+            Layout(self.create_tips(), ratio=0.5)
         )
         return self.layout
 
     def main(self):
-        with Live(self.render(), refresh_per_second=30, screen=True, console=self.console, transient=False) as live:
+        with Live(self.render(), refresh_per_second=20, screen=True, console=self.console, transient=False) as live:
             while True:
                 live.update(self.render())
                 key = self.get_key()
