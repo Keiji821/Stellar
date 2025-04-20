@@ -9,6 +9,7 @@ from rich.style import Style
 from rich.box import ROUNDED, DOUBLE
 from itertools import cycle
 import termios, tty, sys, select
+import time
 
 class StellarOS:
     def __init__(self):
@@ -20,11 +21,11 @@ class StellarOS:
         ]
         self.cat_index = 0
         self.theme_cycle = cycle([
-            {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_yellow","bg":"#0a0a1a"},  # neon
-            {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},  # shinkai
-            {"primary":"bright_white","secondary":"bright_green","highlight":"bright_cyan","bg":"black"},  # matrix
-            {"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},  # cyber
-            {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_white","bg":"#282a36"}   # dracula
+            {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_yellow","bg":"#0a0a1a"},
+            {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
+            {"primary":"bright_white","secondary":"bright_green","highlight":"bright_cyan","bg":"black"},
+            {"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},
+            {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_white","bg":"#282a36"}
         ])
         self.current_theme = next(self.theme_cycle)
         self.worm_colors = ["red","yellow","green","cyan","blue","magenta"]
@@ -37,6 +38,9 @@ class StellarOS:
             "OSINT-DISCORD": [("userinfo","Info Discord"),("serverinfo","Info Servidores"),("searchinvites","Busca Invitaciones"),("inviteinfo","Analiza enlaces")],
             "PENTESTING": [("ddos","Ataque DDOS controlado")]
         }
+        self.layout = Layout()
+        self.last_update = time.time()
+        self.worm_speed = 0.5
 
     def get_key(self, timeout=0.005):
         fd = sys.stdin.fileno()
@@ -53,14 +57,12 @@ class StellarOS:
     def create_banner(self):
         t = self.current_theme
         text = Text(justify="center")
-        text.append("STELLAR OS\n", style=f"bold {t['secondary']} blink")
+        text.append("STELLAR OS\n", style=f"bold {t['secondary']}")
         text.append(f"{self.version}\n", style=f"bold {t['highlight']}")
-        # Creadores
         text.append("CREADORES: ")
         text.append("Keiji821 (Programador)", style=f"bold {t['highlight']}")
         text.append(" | ")
         text.append("Galera (Diseñadora)", style=f"bold {t['highlight']}")
-        self.worm_index = (self.worm_index + 1) % len(self.worm_colors)
         return Panel(
             Align.center(text),
             box=DOUBLE,
@@ -102,24 +104,29 @@ class StellarOS:
         )
 
     def render(self):
-        layout = Layout()
-        layout.split_column(
+        if time.time() - self.last_update > self.worm_speed:
+            self.worm_index = (self.worm_index + 1) % len(self.worm_colors)
+            self.last_update = time.time()
+        
+        self.layout.split_column(
             Layout(self.create_banner(), ratio=2),
             Layout(self.create_menu(), ratio=6),
             Layout(self.create_tips(), ratio=1)
         )
-        return layout
+        return self.layout
 
     def main(self):
-        # Ultra fluidez sin sleep adicional
-        with Live(self.render(), refresh_per_second=120, screen=True, console=self.console) as live:
+        with Live(self.render(), refresh_per_second=30, screen=True, console=self.console, transient=False) as live:
             while True:
                 live.update(self.render())
                 key = self.get_key()
                 if key == 'q': break
-                if key == 't': self.current_theme = next(self.theme_cycle)
-                if key == 'w': self.cat_index = max(0, self.cat_index-1)
-                if key == 's': self.cat_index = min(len(self.categories)-1, self.cat_index+1)
+                if key == 't': 
+                    self.current_theme = next(self.theme_cycle)
+                if key == 'w': 
+                    self.cat_index = max(0, self.cat_index-1)
+                if key == 's': 
+                    self.cat_index = min(len(self.categories)-1, self.cat_index+1)
         self.console.print("[bold cyan]SALIENDO...")
 
 if __name__ == "__main__":
