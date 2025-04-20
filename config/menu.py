@@ -57,26 +57,16 @@ class StellarOS:
 
     def create_banner(self):
         t = self.current_theme
-        banner_table = Table.grid(padding=0, expand=True)
-        banner_table.add_column(justify="center")
-        
-        # Título principal con efecto especial
-        title = Text("STELLAR OS", style=f"bold {t['secondary']} blink")
-        version = Text(self.version, style=f"bold {t['highlight']}")
-        
-        # Sección de creadores compacta
-        creators = Table.grid(padding=0)
-        creators.add_column(justify="center")
-        creators.add_row(Text("CREADORES", style=f"bold {t['primary']} underline"))
-        creators.add_row(Text("Keiji821 (Programador)", style=f"bold {t['highlight']}"))
-        creators.add_row(Text("Galera (Diseñadora)", style=f"bold {t['highlight']}"))
-        
-        banner_table.add_row(title)
-        banner_table.add_row(version)
-        banner_table.add_row(creators)
-        
+        banner_content = Text.assemble(
+            ("STELLAR OS\n", f"bold {t['secondary']}"),
+            (f"{self.version}\n\n", f"bold {t['highlight']}"),
+            ("CREADORES\n", f"bold {t['primary']}"),
+            ("Keiji821 (Programador)\n", f"bold {t['highlight']}"),
+            ("Galera (Diseñadora)", f"bold {t['highlight']}"),
+            justify="center"
+        )
         return Panel(
-            banner_table,
+            Align.center(banner_content),
             box=DOUBLE,
             border_style=self.current_color,
             style=Style(bgcolor=t['bg']),
@@ -86,14 +76,20 @@ class StellarOS:
     def create_menu(self):
         t = self.current_theme
         cat = self.categories[self.cat_index]
-        table = Table.grid(padding=(0,1))
-        table.add_column(style=f"bold {t['highlight']}", width=20)
-        table.add_column(style=t['primary'])
-        table.add_row(Panel.fit(f"[bold]{cat}[/]", box=ROUNDED, border_style=t['secondary']), "")
-        for cmd, desc in self.menu_data[cat]:
-            table.add_row(f"[{t['highlight']}]› {cmd}", f"[{t['primary']}] {desc}")
+        
+        if cat == "MAIN":
+            content = Align.center(Text(self.menu_data[cat][0][1], justify="center", style=t['primary']))
+        else:
+            table = Table.grid(padding=(0,1))
+            table.add_column(style=f"bold {t['highlight']}", width=20)
+            table.add_column(style=t['primary'])
+            table.add_row(Panel.fit(f"[bold]{cat}[/]", box=ROUNDED, border_style=t['secondary']), "")
+            for cmd, desc in self.menu_data[cat]:
+                table.add_row(f"[{t['highlight']}]› {cmd}", f"[{t['primary']}] {desc}")
+            content = table
+        
         return Panel(
-            table,
+            content,
             box=ROUNDED,
             border_style=self.current_color,
             style=Style(bgcolor=t['bg']),
@@ -102,13 +98,12 @@ class StellarOS:
 
     def create_tips(self):
         t = self.current_theme
-        tips = Table.grid(padding=0)
-        tips.add_column(justify="center")
-        tips.add_row(
-            Text("[W] Arriba  ", style=t['secondary']) +
-            Text("[S] Abajo  ", style=t['secondary']) +
-            Text("[T] Tema  ", style=t['secondary']) +
-            Text("[Q] Salir", style=f"bold {t['highlight']}")
+        tips = Text.assemble(
+            ("[W] Arriba   ", t['secondary']),
+            ("[S] Abajo   ", t['secondary']),
+            ("[T] Tema   ", t['secondary']),
+            ("[Q] Salir", f"bold {t['highlight']}"),
+            justify="center"
         )
         return Panel(
             Align.center(tips),
@@ -126,7 +121,7 @@ class StellarOS:
         
         self.layout.split_column(
             Layout(self.create_banner(), ratio=3),
-            Layout(self.create_menu(), ratio=6),
+            Layout(self.create_menu(), ratio=5),
             Layout(self.create_tips(), ratio=1)
         )
         return self.layout
