@@ -119,3 +119,4 @@ if __name__ == "__main__":
     console.print(Columns([text_banner, panel], expand=False))
     console.print("")
     console.print("")
+    console.print("")
