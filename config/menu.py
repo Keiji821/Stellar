@@ -5,7 +5,6 @@ from rich.text import Text
 from rich.live import Live
 from rich.layout import Layout
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
-from rich.prompt import Prompt
 from rich.box import HEAVY, ROUNDED
 from rich.align import Align
 from itertools import cycle
@@ -30,7 +29,8 @@ menu_data = {
         ("bash", "Reinicia la sesión de terminal"),
         ("ui", "Personalizar tema e interfaz gráfica"),
         ("uninstall", "Desinstalar todo el sistema"),
-        ("update", "Actualizar desde repositorio GitHub")
+        ("update", "Actualizar desde repositorio GitHub"),
+        ("ddos", "Ataque DDOS controlado")
     ],
     "UTILIDADES": [
         ("ia", "Asistente de IA con GPT-4"),
@@ -110,6 +110,9 @@ def run_command(command):
     elif command == "exit":
         console.print("[bold red]Saliendo del sistema...")
         raise KeyboardInterrupt()
+    elif command == "ddos":
+        console.print("[bold red]Realizando ataque DDOS controlado...[/]")
+        time.sleep(1)
     else:
         console.print(f"[bold green]Ejecutando:[/] {command}")
         time.sleep(1)
@@ -127,7 +130,7 @@ def main():
         while True:
             try:
                 live.update(render_screen(current_theme))
-                command = Prompt.ask("[bold cyan]› Ingresar comando[/]")
+                command = input(f"[bold cyan]› Ingresar comando[/]")
                 run_command(command)
                 for panel in add_border_animation(render_screen(current_theme)):
                     live.update(panel)
