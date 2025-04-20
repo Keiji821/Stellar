@@ -11,22 +11,11 @@ from rich.align import Align
 from itertools import cycle
 import time
 import os
+import random
 
 console = Console()
 
 themes = {
-    "claro": {
-        "primary": "bright_white",
-        "secondary": "bright_blue",
-        "highlight": "bright_cyan",
-        "bg": "white"
-    },
-    "oscuro": {
-        "primary": "white",
-        "secondary": "bright_magenta",
-        "highlight": "cyan",
-        "bg": "black"
-    },
     "makoto": {
         "primary": "bright_green",
         "secondary": "bright_blue",
@@ -71,7 +60,7 @@ menu_data = {
     ]
 }
 
-theme_cycle = cycle(["oscuro", "claro", "makoto"])
+theme_cycle = cycle(["makoto"])
 current_theme = next(theme_cycle)
 
 def create_table(theme):
@@ -113,8 +102,8 @@ def render_screen(theme):
     layout = Layout()
     layout.split_column(
         Layout(animated_banner(theme), size=5),
-        Layout(Panel(create_table(theme), border_style=themes[theme]['secondary'], box=ROUNDED), ratio=2),
-        Layout(Panel("[dim]Escribe un comando o CTRL+C para salir[/]", border_style="yellow"), size=3),
+        Layout(Panel(create_table(theme), border_style=themes[theme]['secondary'], box=ROUNDED, padding=(1, 0)), ratio=2),
+        Layout(Panel("[dim]Escribe un comando o CTRL+C para salir[/]", border_style=themes[theme]['secondary']), size=3),
     )
     return layout
 
@@ -131,6 +120,13 @@ def run_command(command):
         console.print(f"[bold green]Ejecutando:[/] {command}")
         time.sleep(1)
 
+def add_border_animation(panel):
+    border_styles = ["bright_blue", "bright_green", "cyan"]
+    for style in border_styles:
+        panel.border_style = style
+        time.sleep(0.3)
+        yield panel
+
 def main():
     loading_animation(current_theme)
     with Live(render_screen(current_theme), refresh_per_second=10, screen=True) as live:
@@ -139,8 +135,10 @@ def main():
                 live.update(render_screen(current_theme))
                 command = Prompt.ask("[bold cyan]› Ingresar comando[/]")
                 run_command(command)
+                for panel in add_border_animation(render_screen(current_theme)):
+                    live.update(panel)
             except KeyboardInterrupt:
-                console.print("\n[bold magenta]Hasta pronto...")
+                console.print("\n[bold cyan]Hasta pronto...")
                 break
 
 if __name__ == "__main__":
