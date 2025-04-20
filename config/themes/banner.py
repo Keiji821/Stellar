@@ -7,9 +7,7 @@ import psutil
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
-from rich.columns import Columns
 from rich.panel import Panel
-from rich.table import Table
 from rich.progress import Progress, BarColumn, TextColumn
 
 console = Console()
@@ -76,14 +74,27 @@ def obtener_informacion_sistema():
     }
 
 def crear_panel_informacion(info):
-    tabla = Table.grid(padding=(0, 1))
-    tabla.add_column(justify="right", style="bright_magenta", no_wrap=True)
-    tabla.add_column(style="bright_cyan")
-    for clave in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU", "Memoria", "Almacenamiento", "IP"]:
-        tabla.add_row(f"{clave}:", info[clave])
-
-    panel = Panel.fit(tabla, title="Información del Sistema", border_style="bright_white", padding=(1, 2))
-    return panel
+    tabla = Panel.fit(
+        f"""
+        Usuario: {info['Usuario']}
+        Fecha: {info['Fecha']}
+        Hora: {info['Hora']}
+        OS: {info['OS']}
+        Kernel: {info['Kernel']}
+        Tiempo de actividad: {info['Tiempo de actividad']}
+        Paquetes: {info['Paquetes']}
+        Shell: {info['Shell']}
+        Terminal: {info['Terminal']}
+        CPU: {info['CPU']}
+        Memoria: {info['Memoria']}
+        Almacenamiento: {info['Almacenamiento']}
+        IP: {info['IP']}
+        """,
+        title="Información del Sistema",
+        border_style="bright_white",
+        padding=(1, 2)
+    )
+    return tabla
 
 def mostrar_barras_progreso(info):
     with Progress(
@@ -103,13 +114,7 @@ def mostrar_barras_progreso(info):
 def mostrar_informacion():
     informacion = obtener_informacion_sistema()
     panel_informacion = crear_panel_informacion(informacion)
-    panel_informacion_con_barras = Panel(
-        Columns([panel_informacion, Text("  ")], expand=True),
-        title="Sistema Detalles",
-        border_style="bright_yellow",
-        padding=(1, 2)
-    )
-    console.print(Columns([text_banner, panel_informacion_con_barras], expand=True))
+    console.print(Columns([text_banner, panel_informacion], expand=True))
     mostrar_barras_progreso(informacion)
 
 if __name__ == "__main__":
