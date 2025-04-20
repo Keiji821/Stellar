@@ -8,7 +8,7 @@ import shutil
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
-from rich.columns import Columns
+from rich.layout import Layout
 from rich.panel import Panel
 from rich.table import Table
 
@@ -88,7 +88,8 @@ def crear_panel(info):
         "Shell": "🐚", "Terminal": "🖥️", "CPU": "🧠", "Memoria": "🧮",
         "Almacenamiento": "💾", "IP": "🌐"
     }
-    for key in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad","Paquetes","Shell","Terminal","CPU"]:
+    for key in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad",
+                "Paquetes","Shell","Terminal","CPU"]:
         t.add_row(f"{emojis[key]} {key}:", info[key])
     mem_bar = render_bar(info["Memoria %"], bar_w)
     disk_bar = render_bar(info["Almacenamiento %"], bar_w)
@@ -100,4 +101,11 @@ def crear_panel(info):
 if __name__ == "__main__":
     info = obtener_info()
     panel = crear_panel(info)
-    console.print(Columns([text_banner, panel], expand=True))
+    layout = Layout()
+    layout.split_row(
+        Layout(name="left", ratio=1),
+        Layout(name="right", ratio=2)
+    )
+    layout["left"].update(text_banner)
+    layout["right"].update(panel)
+    console.print(layout)
