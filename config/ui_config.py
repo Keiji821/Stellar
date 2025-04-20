@@ -16,7 +16,7 @@ def show_title():
 
 def get_banner():
     show_title()
-    banner_path = os.path.expanduser("~/.Stellar/config/themes/banner.txt")
+    banner_path = os.path.expanduser("~/Stellar/config/themes/banner.txt")
 
     if os.path.exists(banner_path):
         os.remove(banner_path)
