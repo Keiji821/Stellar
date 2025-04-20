@@ -74,7 +74,7 @@ class StellarOS:
         self.cat_index = 0
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
-        self.version = "v2.4.1"
+        self.version = "v2.4.2"
         self.worm_colors = ["red", "magenta", "yellow", "green", "cyan", "blue"]
         self.worm_pos = 0
 
@@ -95,9 +95,9 @@ class StellarOS:
         text = Text(justify="center")
         text.append("\nSTELLAR OS", style=f"bold {theme['secondary']} blink")
         text.append(f" [{self.version}]", style=f"bold {theme['highlight']}")
-        text.append("\n\nCreadores:\n\n", style=f"bold {theme['primary']}")
-        text.append("Keiji821 (Programador)\n", style=f"bold {theme['highlight']}")
-        text.append("Galera (Diseñadora)\n\n", style=f"bold {theme['highlight']}")
+        text.append("\n\nCreadores:\n", style=f"bold {theme['primary']} underline")
+        text.append("\nKeiji821 (Programador)\n", style=f"bold {theme['highlight']}")
+        text.append("Galera (Diseñadora)\n", style=f"bold {theme['highlight']}")
         return Panel(
             Align.center(text, vertical="middle"),
             border_style=self.worm_colors[self.worm_pos % len(self.worm_colors)],
@@ -145,10 +145,10 @@ class StellarOS:
     def tips_panel(self):
         theme = self.themes[self.current_theme]
         tips = Text(style=theme['primary'])
-        tips.append("NAVEGACIÓN:\n", style=f"bold {theme['highlight']} underline")
-        tips.append(" w/s   Cambiar categoría\n", style=f"bold {theme['secondary']}")
-        tips.append(" t     Rotar temas\n", style=f"bold {theme['secondary']}")
-        tips.append(" q     Salir del sistema", style=f"bold {theme['secondary']}")
+        tips.append("NAVEGACIÓN RÁPIDA\n", style=f"bold {theme['highlight']} underline")
+        tips.append(" w/s - Cambiar categoría\n", style=f"bold {theme['secondary']}")
+        tips.append(" t   - Rotar temas visuales\n", style=f"bold {theme['secondary']}")
+        tips.append(" q   - Salir del sistema", style=f"bold {theme['secondary']}")
         return Panel(
             tips,
             box=ROUNDED,
