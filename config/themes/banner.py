@@ -8,9 +8,9 @@ import shutil
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
-from rich.layout import Layout
 from rich.panel import Panel
 from rich.table import Table
+from rich.columns import Columns
 
 console = Console()
 
@@ -79,7 +79,7 @@ def render_bar(pct, width, fill="█", empty="░"):
 def crear_panel(info):
     cols = shutil.get_terminal_size().columns
     bar_w = max(min(cols - 35, 40), 10)
-    t = Table.grid(expand=True)
+    t = Table.grid(expand=False)
     t.add_column(style="#e5e186", justify="right", no_wrap=True)
     t.add_column(style="#a6c8d8")
     emojis = {
@@ -96,16 +96,9 @@ def crear_panel(info):
     t.add_row(f"{emojis['Memoria']} Memoria:", f"[#e57d7d]{mem_bar}[/#e57d7d] {info['Memoria %']}%")
     t.add_row(f"{emojis['Almacenamiento']} Almacen.:", f"[#8579ce]{disk_bar}[/#8579ce] {info['Almacenamiento %']}%")
     t.add_row(f"{emojis['IP']} IP:", info["IP"])
-    return Panel(t, title="Información del Sistema", border_style="#fd9bca", padding=(1,2), expand=True)
+    return Panel(t, title="Información del Sistema", border_style="#fd9bca", padding=(1,2))
 
 if __name__ == "__main__":
     info = obtener_info()
     panel = crear_panel(info)
-    layout = Layout()
-    layout.split_row(
-        Layout(name="left", ratio=1),
-        Layout(name="right", ratio=2)
-    )
-    layout["left"].update(text_banner)
-    layout["right"].update(panel)
-    console.print(layout)
+    console.print(Columns([text_banner, panel], expand=True, equal=True, align="center"))
