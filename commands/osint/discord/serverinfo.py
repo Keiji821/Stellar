@@ -17,20 +17,26 @@ class ServerAnalyzer:
             'dnd': 'red',
             'offline': 'dim'
         }
+        self.intents = discord.Intents.default()
+        self.intents.members = True
+        self.intents.presences = True
 
     async def get_data(self, server_id, token=None):
         widget = self.get_widget_data(server_id)
 
         if token:
             try:
-                self.bot = discord.Client(intents=discord.Intents.default())
+                self.bot = discord.Client(intents=self.intents)
                 await self.bot.login(token)
                 guild = await self.bot.fetch_guild(int(server_id))
+                await guild.chunk()
+                online_count = sum(1 for m in guild.members if m.status != discord.Status.offline)
                 return {
                     'name': guild.name,
                     'total_members': guild.member_count,
                     'boosts': guild.premium_subscription_count,
-                    'widget': widget
+                    'widget': widget,
+                    'online_count': online_count
                 }
             except Exception as e:
                 console.print(f"[red]Error con el bot: {e}[/]")
@@ -65,7 +71,7 @@ class ServerAnalyzer:
         info_table.add_row("Servidor", server_name)
 
         if 'total_members' in data:
-            online_count = len(data['widget'].get('online_members', []))
+            online_count = data.get('online_count', len(data['widget'].get('online_members', [])))
             info_table.add_row("Miembros", f"{online_count}/{data['total_members']}")
         else:
             info_table.add_row("En línea", str(len(data['widget'].get('online_members', []))))
@@ -84,7 +90,7 @@ class ServerAnalyzer:
         members_table.add_column(width=10)
 
         if data['widget'].get('online_members'):
-            for member in data['widget']['online_members'][:50]:  # Mostrar máximo 50 miembros
+            for member in data['widget']['online_members'][:50]:
                 username = f"{member.get('username', '?')}#{member.get('discriminator', '0000')}"
                 status = member.get('status', 'offline')
                 members_table.add_row(username, Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta')))
