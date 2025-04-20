@@ -23,13 +23,20 @@ def leer_archivo(ruta_archivo):
     except FileNotFoundError:
         return None
 
+def procesar_estilo(cadena_estilo):
+    partes = cadena_estilo.lower().split()
+    es_bold = 'bold' in partes
+    colores = [parte for parte in partes if parte != 'bold']
+    color = colores[0] if colores else None
+    return Style(color=color, bold=es_bold)
+
 banner = leer_archivo(os.path.join(themes_dir, "banner.txt")) or ""
-banner_color = leer_archivo(os.path.join(themes_dir, "banner_color.txt")) or "cyan"
+cadena_estilo = leer_archivo(os.path.join(themes_dir, "banner_color.txt")) or "cyan"
 banner_background = leer_archivo(os.path.join(themes_dir, "banner_background.txt")) or "no"
 banner_background_color = leer_archivo(os.path.join(themes_dir, "banner_background_color.txt")) or "black"
 usuario = leer_archivo(os.path.join(system_dir, "user.txt")) or "Usuario"
 
-style = Style(color=banner_color, bold=True)
+style = procesar_estilo(cadena_estilo)
 if banner_background.lower() in ["si", "sí", "yes"]:
     style += Style(bgcolor=banner_background_color)
 text_banner = Text(banner, style=style)
