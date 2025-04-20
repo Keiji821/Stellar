@@ -5,6 +5,7 @@ import time
 import requests
 import psutil
 import shutil
+import random
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
@@ -16,6 +17,15 @@ console = Console()
 
 themes_dir = os.path.expanduser("~/Stellar/config/themes")
 system_dir = os.path.expanduser("~/Stellar/config/system")
+
+color_palettes = [
+    {'key': '#F2C1D7', 'value': '#B39AB6', 'mem': '#FFB85C', 'disk': '#00FF7F', 'border': '#FF69B4'},
+    {'key': '#89CFF0', 'value': '#77DD77', 'mem': '#FF6961', 'disk': '#AEC6CF', 'border': '#B39EB5'},
+    {'key': '#CF9FFF', 'value': '#FFB347', 'mem': '#B19CD9', 'disk': '#FF6961', 'border': '#779ECB'},
+    {'key': '#98FB98', 'value': '#FFD700', 'mem': '#87CEEB', 'disk': '#FFB6C1', 'border': '#FFA07A'}
+]
+
+palette = random.choice(color_palettes)
 
 def leer_archivo(ruta, defecto=""):
     try:
@@ -57,38 +67,48 @@ def obtener_info():
     return {
         "Usuario": usuario,
         "Fecha": now.strftime("%Y-%m-%d"),
-        "Hora": now.strftime("%I:%M%p"),
+        "Hora": now.strftime("%I:%M %p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
         "TiempoActividad": ta_str,
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
-        "Memoria": f"{vm.percent}% ({vm.used//(1024**2)}MB/{vm.total//(1024**2)}MB)",
-        "Almacenamiento": f"{du.percent}% ({du.used//(1024**3)}GB/{du.total//(1024**3)}GB)",
+        "MemoriaPorcentaje": vm.percent,
+        "MemoriaTotal": f"{vm.total//(1024**2)}MB",
+        "MemoriaUsada": f"{vm.used//(1024**2)}MB",
+        "DiscoPorcentaje": du.percent,
+        "DiscoTotal": f"{du.total//(1024**3)}GB",
+        "DiscoUsado": f"{du.used//(1024**3)}GB",
         "IP": ip
     }
 
 def render_bar(pct, width=20):
     filled = int(pct * width / 100)
-    return f"█{'░'*(width-filled)} {pct}%"
+    return f"█{'░'*(width-filled)}"
 
 def crear_panel(info, panel_width):
     t = Table.grid(expand=False)
-    t.add_column(style="#F2C1D7", justify="right")
-    t.add_column(style="#B39AB6")
+    t.add_column(style=palette['key'], justify="right", min_width=18)
+    t.add_column(style=palette['value'], min_width=28)
     
     for key in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "TiempoActividad", "Shell", "Terminal"]:
-        t.add_row(f"{key}:", info[key])
+        t.add_row(f"{key}: ", info[key])
     
-    t.add_row("Memoria:", f"[#FFB85C]{render_bar(float(info['Memoria'].split('%')[0]))}[/]")
-    t.add_row("Almacenamiento:", f"[#00FF7F]{render_bar(float(info['Almacenamiento'].split('%')[0]))}[/]")
-    t.add_row("IP:", info["IP"])
+    memoria_bar = f"[{palette['mem']}]{render_bar(info['MemoriaPorcentaje'])}[/] {info['MemoriaPorcentaje']}%"
+    memoria_detalle = f"{info['MemoriaUsada']} / {info['MemoriaTotal']}"
+    t.add_row("Memoria: ", f"{memoria_bar}\n{memoria_detalle}")
+    
+    disco_bar = f"[{palette['disk']}]{render_bar(info['DiscoPorcentaje'])}[/] {info['DiscoPorcentaje']}%"
+    disco_detalle = f"{info['DiscoUsado']} / {info['DiscoTotal']}"
+    t.add_row("Almacenamiento: ", f"{disco_bar}\n{disco_detalle}")
+    
+    t.add_row("IP: ", info["IP"])
 
     return Panel(
         t,
-        title="Stellar System Info",
-        border_style="#FF69B4",
-        padding=(1,2),
+        title="[bold] Sistema Stellar [/]",
+        border_style=palette['border'],
+        padding=(1, 2),
         width=panel_width
     )
 
