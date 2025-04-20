@@ -11,6 +11,8 @@ import itertools
 
 console = Console(record=True)
 
+color_palette = ["#6e7f80", "#304451", "#708090", "#5d7261", "#536878"]
+
 menu_data = {
     "SISTEMA": [
         ("reload", "Recarga el banner del sistema"),
@@ -47,66 +49,72 @@ menu_data = {
 
 class TerminalAnimator:
     def __init__(self):
-        self.colors = ["bright_cyan", "cyan", "blue", "bright_blue"]
+        self.colors = itertools.cycle(color_palette)
         self.spinner = itertools.cycle(["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"])
-        self.border_cycle = itertools.cycle(self.colors)
 
     def get_spinner(self):
         return next(self.spinner)
 
-    def get_border_color(self):
-        return next(self.border_cycle)
+    def get_color(self):
+        return next(self.colors)
 
 def generate_frame(animator):
-    border_color = animator.get_border_color()
+    color = animator.get_color()
     spinner = animator.get_spinner()
 
-    banner = Panel(
-        Text.from_markup(
-            f"[bold {border_color}]╭───────────────────────────────────────╮\n"
-            f"│    [blink]STELLAR OS[/blink] [bright_black](v2.1.0)[/bright_black]    │\n"
-            f"╰───────────────────────────────────────╯"
-        ),
-        subtitle=f"[bright_black]{spinner} by Keiji821[/]",
-        border_style=border_color,
-        box=ROUNDED,
-        padding=(0, 2)
+    banner_text = Text.from_markup(
+        f"[bold {color}]╭──────────────────────────────────────────╮\n"
+        f"│            [blink]STELLAR OS[/blink] [#999999](v2.1.0)            │\n"
+        f"╰──────────────────────────────────────────╯"
     )
 
-    main_table = Table.grid(padding=(0, 3), expand=True)
-    main_table.add_column(justify="left", style=f"bold {border_color}", width=24)
-    main_table.add_column(justify="left", style="bright_white")
+    banner_panel = Panel(
+        banner_text,
+        border_style=color,
+        box=ROUNDED,
+        subtitle=f"[#888888]{spinner} by Keiji821[/#888888]",
+        width=60,
+        padding=(0, 1),
+    )
+
+    table = Table.grid(padding=(0, 2), expand=True)
+    table.add_column(style=f"bold {color}", width=24)
+    table.add_column(style="white")
 
     for category, commands in menu_data.items():
-        main_table.add_row(
+        table.add_row(
             Panel.fit(
                 f"[bold]{category}[/]",
-                border_style=border_color,
-                style=Style(bold=True, blink=(category == "SISTEMA"))
+                border_style=color,
+                style=Style(bold=True, blink=(category == "SISTEMA")),
+                box=ROUNDED,
             ),
             ""
         )
         for cmd, desc in commands:
-            main_table.add_row(f"[green]› {cmd}[/]", desc)
-        main_table.add_row("", "")  # Espaciado entre categorías
+            table.add_row(
+                f"[bold green]› {cmd}[/]",
+                f"[white]{desc}[/]"
+            )
+        table.add_row("", "")
 
-    content = Panel(
-        main_table,
-        border_style=border_color,
+    content = Panel.fit(
+        table,
+        border_style=color,
         padding=(1, 4),
         box=DOUBLE
     )
 
     main_panel = Panel(
         content,
-        title=f"[bold {border_color}] STELLAR TERMINAL v2 [/]",
+        title=f"[bold {color}] STELLAR TERMINAL v2 [/]",
         subtitle="[bright_black]Presiona CTRL+C para salir[/]",
-        border_style=border_color,
+        border_style=color,
         box=ROUNDED,
         width=92
     )
 
-    help_panel = Panel.fit(
+    footer_panel = Panel.fit(
         "[bright_black]TAB:Autocompletar  ↑/↓:Navegar  ENTER:Ejecutar  CTRL+C:Salir[/]",
         border_style="yellow",
         style=Style(bold=True, blink=True)
@@ -114,9 +122,9 @@ def generate_frame(animator):
 
     layout = Layout()
     layout.split_column(
-        Layout(banner, name="header", size=7),
+        Layout(banner_panel, name="header", size=7),
         Layout(main_panel, name="main"),
-        Layout(help_panel, name="footer", size=3)
+        Layout(footer_panel, name="footer", size=3)
     )
 
     return layout
