@@ -117,3 +117,5 @@ if __name__ == "__main__":
     info_width = cols - banner_width - 2
     panel = crear_panel(info, info_width)
     console.print(Columns([text_banner, panel], expand=False))
+    console.print("")
+    console.print("")
