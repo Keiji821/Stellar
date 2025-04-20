@@ -4,13 +4,13 @@ import datetime
 import time
 import requests
 import psutil
-from rich.console import Console, Group
+import shutil
+from rich.console import Console
 from rich.text import Text
 from rich.style import Style
 from rich.columns import Columns
 from rich.panel import Panel
 from rich.table import Table
-from rich.progress import Progress, BarColumn, TextColumn
 
 console = Console()
 
@@ -37,33 +37,33 @@ bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", "black")
 usuario = leer_archivo(f"{system_dir}/user.txt", "Usuario")
 
 style = procesar_estilo(col)
-if bg.lower() in ("si","sí","yes"):
+if bg.lower() in ("si", "sí", "yes"):
     style += Style(bgcolor=bgcol)
 text_banner = Text(banner, style=style)
 
 def obtener_info():
-    ahora = datetime.datetime.now()
+    now = datetime.datetime.now()
     try:
         ta = time.time() - psutil.boot_time()
         ta_str = f"{int(ta//3600)}h {int((ta%3600)//60)}m"
-    except Exception:
+    except:
         ta_str = "No disponible"
     vm = psutil.virtual_memory()
     du = psutil.disk_usage(os.path.expanduser("~"))
     try:
         ip = requests.get("https://api.ipify.org", timeout=2).text
-    except Exception:
+    except:
         ip = "No disponible"
     return {
         "Usuario": usuario,
-        "Fecha": ahora.strftime("%Y-%m-%d"),
-        "Hora": ahora.strftime("%I:%M%p"),
+        "Fecha": now.strftime("%Y-%m-%d"),
+        "Hora": now.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
         "Tiempo de actividad": ta_str,
         "Paquetes": str(len([f for f in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if f.endswith('.list')])),
-        "Shell": os.path.basename(os.getenv("SHELL","bash")),
-        "Terminal": os.getenv("TERM","unknown"),
+        "Shell": os.path.basename(os.getenv("SHELL", "bash")),
+        "Terminal": os.getenv("TERM", "unknown"),
         "CPU": platform.processor() or "N/A",
         "Memoria": f"{round(vm.used/2**30,1)}GB/{round(vm.total/2**30,1)}GB",
         "Memoria %": vm.percent,
@@ -72,37 +72,28 @@ def obtener_info():
         "IP": ip
     }
 
-def crear_tabla(info):
-    t = Table.grid(padding=(0,1))
-    t.add_column(justify="right", style="bright_magenta", no_wrap=True)
-    t.add_column(style="bright_cyan")
-    for k in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad","Paquetes","Shell","Terminal","CPU","Memoria","Almacenamiento","IP"]:
-        t.add_row(f"{k}:", info[k])
-    return t
+def render_bar(pct, width):
+    llenado = int(pct * width / 100)
+    vacio = width - llenado
+    return "[" + "█" * llenado + " " * vacio + "]"
 
-def mostrar():
-    info = obtener_info()
-    tabla = crear_tabla(info)
-    prog = Progress(
-        TextColumn("Memoria:", style="bold"),
-        BarColumn(bar_width=None, complete_style="bright_red"),
-        TextColumn(f"{info['Memoria %']}%", style="bright_red"),
-        TextColumn("  "),
-        TextColumn("Almac:", style="bold"),
-        BarColumn(bar_width=None, complete_style="bright_green"),
-        TextColumn(f"{info['Almacenamiento %']}%", style="bright_green"),
-        expand=True,
-        console=console
-    )
-    prog.add_task("", total=100, completed=info["Memoria %"])
-    prog.add_task("", total=100, completed=info["Almacenamiento %"])
-    panel = Panel(
-        Group(tabla, prog),
-        title="Información del Sistema",
-        border_style="bright_white",
-        padding=(1,2)
-    )
-    console.print(Columns([text_banner, panel], expand=True))
+def crear_panel(info):
+    cols = shutil.get_terminal_size().columns
+    bar_width = max(min(cols - 40, 40), 10)
+    t = Table.grid(padding=(0, 1))
+    t.add_column(justify="right", style="bright_magenta", no_wrap=True)
+    t.add_column(style="bright_cyan", no_wrap=False)
+    claves = ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU"]
+    for k in claves:
+        t.add_row(f"{k}:", info[k])
+    barra_mem = render_bar(info["Memoria %"], bar_width)
+    barra_disk = render_bar(info["Almacenamiento %"], bar_width)
+    t.add_row("Memoria:", f"{barra_mem} {info['Memoria']}")
+    t.add_row("Almacenamiento:", f"{barra_disk} {info['Almacenamiento']}")
+    t.add_row("IP:", info["IP"])
+    return Panel(t, title="Información del Sistema", border_style="bright_white", padding=(1, 2), expand=True)
 
 if __name__ == "__main__":
-    mostrar()
+    info = obtener_info()
+    panel = crear_panel(info)
+    console.print(Columns([text_banner, panel], expand=True))
