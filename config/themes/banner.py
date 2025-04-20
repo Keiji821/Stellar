@@ -31,9 +31,9 @@ def procesar_estilo(cadena):
     return Style(color=color, bold=bold)
 
 banner = leer_archivo(f"{themes_dir}/banner.txt")
-col = leer_archivo(f"{themes_dir}/banner_color.txt", "cyan")
+col = leer_archivo(f"{themes_dir}/banner_color.txt", "#91ee98")
 bg = leer_archivo(f"{themes_dir}/banner_background.txt", "no")
-bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", "black")
+bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", "#a6c8d8")
 usuario = leer_archivo(f"{system_dir}/user.txt", "Usuario")
 
 style = procesar_estilo(col)
@@ -65,33 +65,37 @@ def obtener_info():
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
         "CPU": platform.processor() or "N/A",
-        "Memoria": f"{round(vm.used/2**30,1)}GB/{round(vm.total/2**30,1)}GB",
         "Memoria %": vm.percent,
-        "Almacenamiento": f"{round(du.used/2**30,1)}GB/{round(du.total/2**30,1)}GB ({du.percent}%)",
+        "Memoria": f"{round(vm.used/2**30,1)}GB/{round(vm.total/2**30,1)}GB",
         "Almacenamiento %": du.percent,
+        "Almacenamiento": f"{round(du.used/2**30,1)}GB/{round(du.total/2**30,1)}GB ({du.percent}%)",
         "IP": ip
     }
 
-def render_bar(pct, width):
-    llenado = int(pct * width / 100)
-    vacio = width - llenado
-    return "[" + "█" * llenado + " " * vacio + "]"
+def render_bar(pct, width, fill="█", empty="░"):
+    filled = int(pct * width / 100)
+    return fill * filled + empty * (width - filled)
 
 def crear_panel(info):
     cols = shutil.get_terminal_size().columns
-    bar_width = max(min(cols - 40, 40), 10)
-    t = Table.grid(padding=(0, 1))
-    t.add_column(justify="right", style="bright_magenta", no_wrap=True)
-    t.add_column(style="bright_cyan", no_wrap=False)
-    claves = ["Usuario", "Fecha", "Hora", "OS", "Kernel", "Tiempo de actividad", "Paquetes", "Shell", "Terminal", "CPU"]
-    for k in claves:
-        t.add_row(f"{k}:", info[k])
-    barra_mem = render_bar(info["Memoria %"], bar_width)
-    barra_disk = render_bar(info["Almacenamiento %"], bar_width)
-    t.add_row("Memoria:", f"{barra_mem} {info['Memoria']}")
-    t.add_row("Almacenamiento:", f"{barra_disk} {info['Almacenamiento']}")
-    t.add_row("IP:", info["IP"])
-    return Panel(t, title="Información del Sistema", border_style="bright_white", padding=(1, 2), expand=True)
+    bar_w = max(min(cols - 35, 40), 10)
+    t = Table.grid(expand=True)
+    t.add_column(style="#e5e186", justify="right", no_wrap=True)
+    t.add_column(style="#a6c8d8")
+    emojis = {
+        "Usuario": "👤", "Fecha": "📅", "Hora": "⏰", "OS": "💻",
+        "Kernel": "🧩", "Tiempo de actividad": "⏳", "Paquetes": "📦",
+        "Shell": "🐚", "Terminal": "🖥️", "CPU": "🧠", "Memoria": "🧮",
+        "Almacenamiento": "💾", "IP": "🌐"
+    }
+    for key in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad","Paquetes","Shell","Terminal","CPU"]:
+        t.add_row(f"{emojis[key]} {key}:", info[key])
+    mem_bar = render_bar(info["Memoria %"], bar_w)
+    disk_bar = render_bar(info["Almacenamiento %"], bar_w)
+    t.add_row(f"{emojis['Memoria']} Memoria:", f"[#e57d7d]{mem_bar}[/#e57d7d] {info['Memoria %']}%")
+    t.add_row(f"{emojis['Almacenamiento']} Almacen.:", f"[#8579ce]{disk_bar}[/#8579ce] {info['Almacenamiento %']}%")
+    t.add_row(f"{emojis['IP']} IP:", info["IP"])
+    return Panel(t, title="Información del Sistema", border_style="#fd9bca", padding=(1,2), expand=True)
 
 if __name__ == "__main__":
     info = obtener_info()
