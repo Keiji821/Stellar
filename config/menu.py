@@ -11,7 +11,6 @@ from rich.align import Align
 from itertools import cycle
 import time
 import os
-import random
 
 console = Console()
 
@@ -52,11 +51,6 @@ menu_data = {
         ("serverinfo", "Analiza servidores de Discord"),
         ("searchinvites", "Busca invitaciones públicas"),
         ("inviteinfo", "Analiza enlaces de invitación")
-    ],
-    "PENTESTING": [
-        ("ddos", "Ataque DDOS controlado"),
-        ("portscan", "Escaneo avanzado de puertos"),
-        ("vulnscan", "Detector de vulnerabilidades")
     ]
 }
 
@@ -103,7 +97,7 @@ def render_screen(theme):
     layout.split_column(
         Layout(animated_banner(theme), size=5),
         Layout(Panel(create_table(theme), border_style=themes[theme]['secondary'], box=ROUNDED, padding=(1, 0)), ratio=2),
-        Layout(Panel("[dim]Escribe un comando o CTRL+C para salir[/]", border_style=themes[theme]['secondary']), size=3),
+        Layout(Panel("[dim]Escribe un comando o CTRL+C para salir (CTRL+Z para suspender)[/]", border_style=themes[theme]['secondary']), size=3),
     )
     return layout
 
