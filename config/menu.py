@@ -6,7 +6,6 @@ from rich.style import Style
 from rich.box import ROUNDED, DOUBLE
 from rich.live import Live
 from rich.layout import Layout
-from rich.animation import Animation
 import time
 import itertools
 
@@ -42,9 +41,7 @@ menu_data = {
         ("inviteinfo", "Analiza enlaces de invitación")
     ],
     "PENTESTING": [
-        ("ddos", "Ataque DDOS controlado"),
-        ("portscan", "Escaneo avanzado de puertos"),
-        ("vulnscan", "Detector de vulnerabilidades")
+        ("ddos", "Ataque DDOS controlado")
     ]
 }
 
@@ -53,52 +50,53 @@ class TerminalAnimator:
         self.colors = ["bright_cyan", "cyan", "blue", "bright_blue"]
         self.spinner = itertools.cycle(["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"])
         self.border_cycle = itertools.cycle(self.colors)
-    
+
     def get_spinner(self):
         return next(self.spinner)
-    
+
     def get_border_color(self):
         return next(self.border_cycle)
 
 def generate_frame(animator):
     border_color = animator.get_border_color()
     spinner = animator.get_spinner()
-    
+
     banner = Panel(
-        Text.from_markup(f"[bold {border_color}]╭───────────────────────────────────────╮\n"
-                       f"│    [blink]STELLAR OS[/blink] [bright_black](v2.1.0)[/bright_black]    │\n"
-                       f"╰───────────────────────────────────────╯"),
-        subtitle=f"[bright_black]{spinner} by Keiji821 [/bright_black]",
+        Text.from_markup(
+            f"[bold {border_color}]╭───────────────────────────────────────╮\n"
+            f"│    [blink]STELLAR OS[/blink] [bright_black](v2.1.0)[/bright_black]    │\n"
+            f"╰───────────────────────────────────────╯"
+        ),
+        subtitle=f"[bright_black]{spinner} by Keiji821[/]",
         border_style=border_color,
-        box=ROUNDED
+        box=ROUNDED,
+        padding=(0, 2)
     )
-    
+
     main_table = Table.grid(padding=(0, 3), expand=True)
-    main_table.add_column(style=f"bold {border_color}", width=24)
-    main_table.add_column(style="bright_white")
-    
+    main_table.add_column(justify="left", style=f"bold {border_color}", width=24)
+    main_table.add_column(justify="left", style="bright_white")
+
     for category, commands in menu_data.items():
         main_table.add_row(
             Panel.fit(
                 f"[bold]{category}[/]",
                 border_style=border_color,
-                style=Style(bold=True, blink=(category=="SISTEMA"))
-            , "")
-        
+                style=Style(bold=True, blink=(category == "SISTEMA"))
+            ),
+            ""
+        )
         for cmd, desc in commands:
-            main_table.add_row(
-                f"[bold green]› {cmd}[/]",
-                f"[bright_white]{desc}[/]"
-            )
-        main_table.add_row("", "")
-    
-    content = Panel.fit(
+            main_table.add_row(f"[green]› {cmd}[/]", desc)
+        main_table.add_row("", "")  # Espaciado entre categorías
+
+    content = Panel(
         main_table,
         border_style=border_color,
         padding=(1, 4),
         box=DOUBLE
     )
-    
+
     main_panel = Panel(
         content,
         title=f"[bold {border_color}] STELLAR TERMINAL v2 [/]",
@@ -107,29 +105,28 @@ def generate_frame(animator):
         box=ROUNDED,
         width=92
     )
-    
+
     help_panel = Panel.fit(
         "[bright_black]TAB:Autocompletar  ↑/↓:Navegar  ENTER:Ejecutar  CTRL+C:Salir[/]",
         border_style="yellow",
         style=Style(bold=True, blink=True)
     )
-    
+
     layout = Layout()
     layout.split_column(
         Layout(banner, name="header", size=7),
         Layout(main_panel, name="main"),
         Layout(help_panel, name="footer", size=3)
     )
-    
+
     return layout
 
 def exit_animation():
-    frames = [
+    for frame in [
         "[bold red]Cerrando Stellar OS...[/]",
         "[bold yellow]Finalizando procesos...[/]",
         "[bold green]Sistema detenido correctamente[/]"
-    ]
-    for frame in frames:
+    ]:
         console.print(frame)
         time.sleep(0.8)
 
