@@ -11,7 +11,6 @@ from rich.columns import Columns
 from rich.panel import Panel
 from rich.table import Table
 from rich.progress import Progress, BarColumn, TextColumn
-from rich.live import Live
 
 console = Console()
 
