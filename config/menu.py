@@ -137,6 +137,7 @@ class StellarOS:
                 box=ROUNDED,
                 style=Style(bgcolor=theme['bg']),
                 padding=(1, 2)
+)
             
             layout = Layout()
             layout.split_column(Layout(intro_panel), Layout(cats_panel))
