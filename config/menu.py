@@ -19,7 +19,6 @@ class StellarOS:
             "cyber": {"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},
             "matrix": {"primary":"bright_white","secondary":"bright_green","highlight":"bright_cyan","bg":"black"},
             "shinkai": {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
-            # ... otros temas ...
         }
         self.menu_data = {
             "MAIN": [("intro", "Stellar OS es un sistema operativo para Termux de fácil uso e instalación. Este menú presenta comandos preconfigurados listos para usar, enfocados en mejorar la apariencia de Termux y ofrecer utilidades opcionales para diferentes áreas.")],
@@ -82,29 +81,15 @@ class StellarOS:
         if cat == 'MAIN':
             intro = self.menu_data['MAIN'][0][1]
             intro_panel = Panel(
-                Align.center(intro),
+                Align.center(intro, vertical="middle"),
                 title='INTRODUCCIÓN',
                 border_style=theme['highlight'],
                 box=ROUNDED,
                 style=Style(bgcolor=theme['bg']),
-                padding=(1, 2)
+                padding=(2, 4)
             )
-            cats_text = Text(justify="center")
-            for name in self.categories:
-                if name != 'MAIN':
-                    color = self.worm_colors[(self.worm_pos + self.categories.index(name)) % len(self.worm_colors)]
-                    cats_text.append(f"{name}\n", style=f"bold {color} underline")
-            cats_panel = Panel(
-                Align.center(cats_text),
-                title='CATEGORÍAS',
-                border_style=theme['secondary'],
-                box=ROUNDED,
-                style=Style(bgcolor=theme['bg']),
-                padding=(1, 2)
-            )
-            layout = Layout()
-            layout.split_column(Layout(intro_panel), Layout(cats_panel))
-            return layout
+            return intro_panel
+
         table = Table.grid(padding=(0, 2))
         table.add_column(style=f"bold {theme['highlight']}", width=22)
         table.add_column(style=theme['primary'])
