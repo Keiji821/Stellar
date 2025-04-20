@@ -60,19 +60,16 @@ class StellarOS:
         banner_table = Table.grid(padding=0, expand=True)
         banner_table.add_column(justify="center")
         
-        # Titulo principal
-        title = Text("STELLAR OS", style=f"bold {t['secondary']}", justify="center")
-        version = Text(self.version, style=f"bold {t['highlight']}", justify="center")
+        # Título principal con efecto especial
+        title = Text("STELLAR OS", style=f"bold {t['secondary']} blink")
+        version = Text(self.version, style=f"bold {t['highlight']}")
         
-        # Línea de creadores compacta
+        # Sección de creadores compacta
         creators = Table.grid(padding=0)
         creators.add_column(justify="center")
-        creators.add_row(
-            Text("CREADORES: ", style=f"bold {t['primary']}") 
-            + Text("Keiji821 (Programador)", style=f"bold {t['highlight']}") 
-            + Text(" | ", style=f"bold {t['primary']}") 
-            + Text("Galera (Diseñadora)", style=f"bold {t['highlight']}")
-        )
+        creators.add_row(Text("CREADORES", style=f"bold {t['primary']} underline"))
+        creators.add_row(Text("Keiji821 (Programador)", style=f"bold {t['highlight']}"))
+        creators.add_row(Text("Galera (Diseñadora)", style=f"bold {t['highlight']}"))
         
         banner_table.add_row(title)
         banner_table.add_row(version)
@@ -107,9 +104,14 @@ class StellarOS:
         t = self.current_theme
         tips = Table.grid(padding=0)
         tips.add_column(justify="center")
-        tips.add_row("[W]Arriba   [S]Abajo   [T]Tema   [Q]Salir", style=f"bold {t['secondary']}")
+        tips.add_row(
+            Text("[W] Arriba  ", style=t['secondary']) +
+            Text("[S] Abajo  ", style=t['secondary']) +
+            Text("[T] Tema  ", style=t['secondary']) +
+            Text("[Q] Salir", style=f"bold {t['highlight']}")
+        )
         return Panel(
-            tips,
+            Align.center(tips),
             box=ROUNDED,
             border_style=self.current_color,
             style=Style(bgcolor=t['bg']),
@@ -123,8 +125,8 @@ class StellarOS:
             self.last_update = time.time()
         
         self.layout.split_column(
-            Layout(self.create_banner(), ratio=4),
-            Layout(self.create_menu(), ratio=10),
+            Layout(self.create_banner(), ratio=3),
+            Layout(self.create_menu(), ratio=6),
             Layout(self.create_tips(), ratio=1)
         )
         return self.layout
