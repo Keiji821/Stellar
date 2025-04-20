@@ -7,7 +7,7 @@ from rich.layout import Layout
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from rich.prompt import Prompt
 from rich.box import HEAVY, ROUNDED
-from rich.align import Align  # IMPORTAR Align
+from rich.align import Align
 from itertools import cycle
 import time
 import os
@@ -24,7 +24,13 @@ themes = {
     "oscuro": {
         "primary": "white",
         "secondary": "bright_magenta",
-        "highlight": "magenta",
+        "highlight": "cyan",
+        "bg": "black"
+    },
+    "makoto": {
+        "primary": "bright_green",
+        "secondary": "bright_blue",
+        "highlight": "bright_cyan",
         "bg": "black"
     }
 }
@@ -65,7 +71,7 @@ menu_data = {
     ]
 }
 
-theme_cycle = cycle(["oscuro", "claro"])
+theme_cycle = cycle(["oscuro", "claro", "makoto"])
 current_theme = next(theme_cycle)
 
 def create_table(theme):
