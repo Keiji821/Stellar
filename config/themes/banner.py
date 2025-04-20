@@ -5,7 +5,6 @@ import time
 import requests
 import psutil
 import shutil
-import subprocess
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
@@ -44,110 +43,52 @@ text_banner = Text(banner, style=style)
 
 def obtener_info():
     now = datetime.datetime.now()
-    
     try:
-        boot_time = psutil.boot_time()
-        uptime = datetime.datetime.fromtimestamp(boot_time)
-        ta_str = str(datetime.datetime.now() - uptime).split('.')[0]
-    except Exception:
+        ta = time.time() - psutil.boot_time()
+        ta_str = f"{int(ta//3600)}h {int((ta%3600)//60)}m"
+    except:
         ta_str = "No disponible"
-
-    cpu_info = {
-        'marca': platform.processor() or "N/A",
-        'nucleos': "N/A",
-        'hilos': "N/A",
-        'uso': "N/A"
-    }
-    
-    try:
-        cpu_info.update({
-            'nucleos': psutil.cpu_count(logical=False),
-            'hilos': psutil.cpu_count(logical=True),
-            'uso': f"{psutil.cpu_percent(interval=0.1)}%"
-        })
-    except Exception:
-        pass
-
     vm = psutil.virtual_memory()
     du = psutil.disk_usage(os.path.expanduser("~"))
-
-    ip_info = {'ipv4': "No disponible", 'ipv6': "No disponible"}
     try:
-        ip_info['ipv4'] = requests.get("https://api.ipify.org", timeout=2).text
-        ip_info['ipv6'] = requests.get("https://api64.ipify.org", timeout=2).text
-    except Exception:
-        pass
-
-    try:
-        bateria = psutil.sensors_battery()
-        battery_info = f"{bateria.percent}% ({'⚡' if bateria.power_plugged else '🔋'})" if bateria else "N/A"
-    except Exception:
-        battery_info = "N/A"
-
+        ip = requests.get("https://api.ipify.org", timeout=2).text
+    except:
+        ip = "No disponible"
     return {
         "Usuario": usuario,
-        "Fecha": now.strftime("%d/%m/%Y"),
-        "Hora": now.strftime("%H:%M:%S"),
+        "Fecha": now.strftime("%Y-%m-%d"),
+        "Hora": now.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
-        "Tiempo actividad": ta_str,
+        "TiempoActividad": ta_str,
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
-        "CPU": f"{cpu_info['marca']} ({cpu_info['nucleos']}C/{cpu_info['hilos']}T)",
-        "Uso CPU": cpu_info['uso'],
-        "Memoria": f"{vm.percent}% [{vm.used//(1024**2)}MB/{vm.total//(1024**2)}MB]",
-        "Almacenamiento": f"{du.percent}% [{du.used//(1024**3)}GB/{du.total//(1024**3)}GB]",
-        "IP": f"IPv4: {ip_info['ipv4']}\nIPv6: {ip_info['ipv6']}",
-        "Batería": battery_info
+        "Memoria": f"{vm.percent}% ({vm.used//(1024**2)}MB/{vm.total//(1024**2)}MB)",
+        "Almacenamiento": f"{du.percent}% ({du.used//(1024**3)}GB/{du.total//(1024**3)}GB)",
+        "IP": ip
     }
 
-def render_bar(pct, width, fill="█", empty="░"):
-    try:
-        filled = int(pct * width / 100)
-        return fill * filled + empty * (width - filled)
-    except Exception:
-        return ""
+def render_bar(pct, width=20):
+    filled = int(pct * width / 100)
+    return f"█{'░'*(width-filled)} {pct}%"
 
 def crear_panel(info, panel_width):
     t = Table.grid(expand=False)
-    t.add_column(style="#F2C1D7", justify="right", no_wrap=True)
+    t.add_column(style="#F2C1D7", justify="right")
     t.add_column(style="#B39AB6")
     
-    emojis = {
-        "Usuario": "👤", "Fecha": "📅", "Hora": "⏰", 
-        "OS": "💻", "Kernel": "🧩", "Tiempo actividad": "⏳",
-        "Shell": "🐚", "Terminal": "🖥️", "CPU": "🧠",
-        "Uso CPU": "📈", "Memoria": "💾", 
-        "Almacenamiento": "💽", "IP": "🌐", "Batería": "🔋"
-    }
-
-    for key in ["Usuario", "Fecha", "Hora", "OS", "Kernel",
-                "Tiempo actividad", "Shell", "Terminal", 
-                "CPU", "Uso CPU"]:
-        t.add_row(f"{emojis.get(key, ' ')} {key}:", info[key])
+    for key in ["Usuario", "Fecha", "Hora", "OS", "Kernel", "TiempoActividad", "Shell", "Terminal"]:
+        t.add_row(f"{key}:", info[key])
     
-    metricas = [
-        ("Memoria", info["Memoria"].split()[0], "#FFB85C"),
-        ("Almacenamiento", info["Almacenamiento"].split()[0], "#00FF7F")
-    ]
-    
-    for nombre, valor, color in metricas:
-        bar_w = max(min(panel_width - 20, 40), 10)
-        try:
-            bar = render_bar(float(valor.strip('%')), bar_w)
-            t.add_row(f"{emojis[nombre]} {nombre}:", f"[{color}]{bar}[/{color}] {valor}")
-        except Exception:
-            t.add_row(f"{emojis[nombre]} {nombre}:", valor)
-
-    t.add_row(f"{emojis['IP']} IP:", info["IP"])
-    t.add_row(f"{emojis['Batería']} Batería:", info["Batería"])
+    t.add_row("Memoria:", f"[#FFB85C]{render_bar(float(info['Memoria'].split('%')[0]))}[/]")
+    t.add_row("Almacenamiento:", f"[#00FF7F]{render_bar(float(info['Almacenamiento'].split('%')[0]))}[/]")
+    t.add_row("IP:", info["IP"])
 
     return Panel(
         t,
-        title="📊 Sistema Info",
+        title="Stellar System Info",
         border_style="#FF69B4",
         padding=(1,2),
-        expand=False,
         width=panel_width
     )
 
@@ -157,5 +98,5 @@ if __name__ == "__main__":
     banner_width = max(len(line) for line in banner.splitlines())
     info_width = cols - banner_width - 4
     panel = crear_panel(info, info_width)
-    console.print(Columns([text_banner, panel], expand=False, equal=False))
+    console.print(Columns([text_banner, panel], expand=False))
     console.print("\n")
