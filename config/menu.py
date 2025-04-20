@@ -8,7 +8,7 @@ from rich.align import Align
 from rich.style import Style
 from rich.box import ROUNDED, DOUBLE
 from itertools import cycle
-import termios, tty, sys, select, time
+import termios, tty, sys, select
 
 class StellarOS:
     def __init__(self):
@@ -56,15 +56,17 @@ class StellarOS:
         text.append("STELLAR OS\n", style=f"bold {t['secondary']} blink")
         text.append(f"{self.version}\n", style=f"bold {t['highlight']}")
         # Creadores
-        text.append("\nCREADORES\n", style=f"bold {t['primary']} underline")
-        text.append("Keiji821 (Programador)\n", style=f"bold {t['highlight']}")
-        text.append("Galera (Diseñadora)\n", style=f"bold {t['highlight']}")
+        text.append("CREADORES: ")
+        text.append("Keiji821 (Programador)", style=f"bold {t['highlight']}")
+        text.append(" | ")
+        text.append("Galera (Diseñadora)", style=f"bold {t['highlight']}")
+        self.worm_index = (self.worm_index + 1) % len(self.worm_colors)
         return Panel(
-            Align.center(text, vertical="middle"),
+            Align.center(text),
             box=DOUBLE,
-            border_style=self.worm_colors[self.worm_index % len(self.worm_colors)],
+            border_style=self.worm_colors[self.worm_index],
             style=Style(bgcolor=t['bg']),
-            padding=(1,2)
+            padding=(0,1)
         )
 
     def create_menu(self):
@@ -81,36 +83,37 @@ class StellarOS:
             box=ROUNDED,
             border_style=self.worm_colors[(self.worm_index+2) % len(self.worm_colors)],
             style=Style(bgcolor=t['bg']),
-            padding=(1,2)
+            padding=(0,1)
         )
 
     def create_tips(self):
         t = self.current_theme
         tips = Text(justify="center")
-        tips.append("NAVEGACIÓN RÁPIDA\n", style=f"bold {t['highlight']} underline")
-        tips.append("[W] Arriba   [S] Abajo   [T] Tema   [Q] Salir", style=f"bold {t['secondary']}")
+        tips.append("[W]Arriba  ")
+        tips.append("[S]Abajo  ")
+        tips.append("[T]Tema  ")
+        tips.append("[Q]Salir", style=f"bold {t['secondary']}")
         return Panel(
             Align.center(tips),
             box=ROUNDED,
             border_style=self.worm_colors[(self.worm_index+4) % len(self.worm_colors)],
             style=Style(bgcolor=t['bg']),
-            padding=(1,2)
+            padding=(0,1)
         )
 
     def render(self):
-        self.worm_index += 1
         layout = Layout()
         layout.split_column(
-            Layout(self.create_banner(), ratio=3),
-            Layout(self.create_menu(), ratio=5),
-            Layout(self.create_tips(), ratio=2)
+            Layout(self.create_banner(), ratio=2),
+            Layout(self.create_menu(), ratio=6),
+            Layout(self.create_tips(), ratio=1)
         )
         return layout
 
     def main(self):
+        # Ultra fluidez sin sleep adicional
         with Live(self.render(), refresh_per_second=120, screen=True, console=self.console) as live:
             while True:
-                time.sleep(0.008)
                 live.update(self.render())
                 key = self.get_key()
                 if key == 'q': break
