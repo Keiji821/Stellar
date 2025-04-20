@@ -105,37 +105,37 @@ update() {
 # Osint
 
 ipinfo() {
-    cd ~/Stellar/osint/main
+    cd ~/Stellar/commands/osint/main
     python ipinfo.py
     cd
 }
 
 phoneinfo() {
-    cd ~/Stellar/osint/main
+    cd ~/Stellar/commands/osint/main
     python phoneinfo.py
     cd
 }
 
 urlinfo() {
-    cd ~/Stellar/osint/main
+    cd ~/Stellar/commands/osint/main
     python urlinfo.py
     cd
 }
 
 metadatainfo() {
-    cd ~/Stellar/osint/main
+    cd ~/Stellar/commands/osint/main
     bash metadatainfo.sh
     cd
 }
 
 emailsearch() {
-    cd ~/Stellar/osint/main
+    cd ~/Stellar/commands/osint/main
     python emailfinder.py
     cd
 }
 
 userfinder() {
-    cd ~/Stellar/osint/main
+    cd ~/Stellar/commands/osint/main
     python userfinder.py
     cd
 }
