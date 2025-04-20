@@ -96,7 +96,6 @@ class StellarOS:
         text.append("\n\nSTELLAR OS", style=f"bold {theme['secondary']} blink")
         text.append(f" [{self.version}]\n", style=f"bold {theme['highlight']}")
         
-        # Sección de creadores mejorada
         creators = Text("\nCreadores:\n\n", style=f"bold {theme['primary']} underline", justify="center")
         creators.append("Keiji821 (Programador Principal)\n", style=f"bold {theme['highlight']}")
         creators.append("Galera (Diseñadora de Interfaces)\n\n", style=f"bold {theme['highlight']}")
