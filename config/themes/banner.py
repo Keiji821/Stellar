@@ -31,9 +31,9 @@ def procesar_estilo(cadena):
     return Style(color=color, bold=bold)
 
 banner = leer_archivo(f"{themes_dir}/banner.txt")
-col = leer_archivo(f"{themes_dir}/banner_color.txt", "#00FF00")
+col = leer_archivo(f"{themes_dir}/banner_color.txt", "#6E97B7")
 bg = leer_archivo(f"{themes_dir}/banner_background.txt", "no")
-bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", "#00BFFF")
+bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", "#4D8FAC")
 usuario = leer_archivo(f"{system_dir}/user.txt", "Usuario")
 
 style = procesar_estilo(col)
@@ -78,23 +78,37 @@ def render_bar(pct, width, fill="█", empty="░"):
 
 def crear_panel(info, panel_width):
     t = Table.grid(expand=False)
-    t.add_column(style="#FFFF00", justify="right", no_wrap=True)
-    t.add_column(style="#1E90FF")
+    t.add_column(style="#F2C1D7", justify="right", no_wrap=True)
+    t.add_column(style="#B39AB6")
     emojis = {
         "Usuario": "👤", "Fecha": "📅", "Hora": "⏰", "OS": "💻",
         "Kernel": "🧩", "Tiempo de actividad": "⏳", "Paquetes": "📦",
         "Shell": "🐚", "Terminal": "🖥️", "CPU": "🧠", "Memoria": "🧮",
         "Almacenamiento": "💾", "IP": "🌐"
     }
-    for key in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad","Paquetes","Shell","Terminal","CPU"]:
+    for key in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad",
+                "Paquetes","Shell","Terminal","CPU"]:
         t.add_row(f"{emojis[key]} {key}:", info[key])
     bar_w = max(min(panel_width - 20, 40), 10)
     mem_bar = render_bar(info["Memoria %"], bar_w)
     disk_bar = render_bar(info["Almacenamiento %"], bar_w)
-    t.add_row(f"{emojis['Memoria']} Memoria:", f"[#FF1493]{mem_bar}[/#FF1493] {info['Memoria %']}%")
-    t.add_row(f"{emojis['Almacenamiento']} Almacen.:", f"[#8000FF]{disk_bar}[/#8000FF] {info['Almacenamiento %']}%")
+    t.add_row(
+        f"{emojis['Memoria']} Memoria:",
+        f"[#FFB85C]{mem_bar}[/#FFB85C] {info['Memoria %']}%"
+    )
+    t.add_row(
+        f"{emojis['Almacenamiento']} Almacen.:",
+        f"[#00FF7F]{disk_bar}[/#00FF7F] {info['Almacenamiento %']}%"
+    )
     t.add_row(f"{emojis['IP']} IP:", info["IP"])
-    return Panel(t, title="Información del Sistema", border_style="#FFD700", padding=(1,2), expand=False, width=panel_width)
+    return Panel(
+        t,
+        title="Información del Sistema",
+        border_style="#FF69B4",
+        padding=(1,2),
+        expand=False,
+        width=panel_width
+    )
 
 if __name__ == "__main__":
     info = obtener_info()
