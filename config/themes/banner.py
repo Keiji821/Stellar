@@ -76,9 +76,7 @@ def render_bar(pct, width, fill="█", empty="░"):
     filled = int(pct * width / 100)
     return fill * filled + empty * (width - filled)
 
-def crear_panel(info):
-    cols = shutil.get_terminal_size().columns
-    bar_w = max(min(cols - 35, 40), 10)
+def crear_panel(info, panel_width):
     t = Table.grid(expand=False)
     t.add_column(style="#e5e186", justify="right", no_wrap=True)
     t.add_column(style="#a6c8d8")
@@ -91,14 +89,18 @@ def crear_panel(info):
     for key in ["Usuario","Fecha","Hora","OS","Kernel","Tiempo de actividad",
                 "Paquetes","Shell","Terminal","CPU"]:
         t.add_row(f"{emojis[key]} {key}:", info[key])
+    bar_w = max(min(panel_width - 20, 40), 10)
     mem_bar = render_bar(info["Memoria %"], bar_w)
     disk_bar = render_bar(info["Almacenamiento %"], bar_w)
     t.add_row(f"{emojis['Memoria']} Memoria:", f"[#e57d7d]{mem_bar}[/#e57d7d] {info['Memoria %']}%")
     t.add_row(f"{emojis['Almacenamiento']} Almacen.:", f"[#8579ce]{disk_bar}[/#8579ce] {info['Almacenamiento %']}%")
     t.add_row(f"{emojis['IP']} IP:", info["IP"])
-    return Panel(t, title="Información del Sistema", border_style="#fd9bca", padding=(1,2))
+    return Panel(t, title="Información del Sistema", border_style="#fd9bca", padding=(1,2), expand=False, width=panel_width)
 
 if __name__ == "__main__":
     info = obtener_info()
-    panel = crear_panel(info)
-    console.print(Columns([text_banner, panel], expand=True, equal=True, align="center"))
+    cols = shutil.get_terminal_size().columns
+    banner_width = max(len(line) for line in banner.splitlines())
+    info_width = cols - banner_width - 2
+    panel = crear_panel(info, info_width)
+    console.print(Columns([text_banner, panel], expand=False))
