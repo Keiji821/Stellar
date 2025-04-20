@@ -1,20 +1,20 @@
+import sys
+import termios
+import tty
+import select
+import time
+import random
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 from rich.live import Live
 from rich.layout import Layout
-from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from rich.align import Align
 from rich.style import Style
 from rich.box import ROUNDED, DOUBLE
+from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
 from itertools import cycle
-import time
-import random
-import sys
-import termios
-import tty
-import select
 
 class StellarOS:
     def __init__(self):
@@ -25,21 +25,30 @@ class StellarOS:
             "matrix":  {"primary":"bright_green","secondary":"green","highlight":"bright_white","bg":"black"},
             "shinkai": {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
             "solar":   {"primary":"yellow","secondary":"bright_red","highlight":"bright_white","bg":"#1f1f1f"},
+            "frost":   {"primary":"white","secondary":"bright_cyan","highlight":"bright_blue","bg":"#e0f7fa"},
+            "sunset":  {"primary":"bright_yellow","secondary":"bright_red","highlight":"white","bg":"#fff3e0"},
         }
         self.menu_data = {
+            "MAIN": [
+                ("Bienvenido", 
+                 "Stellar OS, es un sistema operativo para Termux de fácil uso y de fácil instalación. "
+                 "Este menú muestra una recolección de comandos ya hechos y listos para ser usados. "
+                 "Stellar se centra en mejorar la aburrida apariencia de Termux pero también, de manera "
+                 "opcional, entrega una selección de comandos útiles para usar en diferentes áreas.")
+            ],
             "SISTEMA": [
-                ("reload", "Recarga el banner"),
-                ("clear",  "Limpia la terminal"),
-                ("bash",   "Reinicia terminal"),
-                ("ui",     "Personalizar interfaz"),
-                ("uninstall","Desinstalar sistema"),
-                ("update", "Actualizar desde GitHub")
+                ("reload",    "Recarga el banner"),
+                ("clear",     "Limpia la terminal"),
+                ("bash",      "Reinicia terminal"),
+                ("ui",        "Personalizar interfaz"),
+                ("uninstall", "Desinstalar sistema"),
+                ("update",    "Actualizar desde GitHub")
             ],
             "UTILIDADES": [
-                ("ia",       "Asistente IA GPT-4"),
-                ("ia-image", "Generador de imágenes"),
-                ("traductor","Traductor multidioma"),
-                ("myip",     "Muestra tu IP pública")
+                ("ia",        "Asistente IA GPT-4"),
+                ("ia-image",  "Generador de imágenes"),
+                ("traductor", "Traductor multidioma"),
+                ("myip",      "Muestra tu IP pública")
             ],
             "OSINT": [
                 ("ipinfo",      "Info de direcciones IP"),
@@ -61,11 +70,11 @@ class StellarOS:
         }
         self.categories = list(self.menu_data.keys())
         self.cat_index = 0
+
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
 
-        # Para el “gusano” de colores
         self.worm_colors = ["red","magenta","yellow","green","cyan","blue"]
         self.worm_pos = 0
 
@@ -84,13 +93,13 @@ class StellarOS:
     def animated_banner(self):
         theme = self.themes[self.current_theme]
         header = Text.assemble(
-            (" STELLAR OS ", f"bold {theme['secondary']}"),
+            (" STELLAR OS ",  f"bold {theme['secondary']}"),
             (f" [{self.version}]\n", "bold grey50")
         )
         sep = Text("─" * 38 + "\n", style="dim")
         authors = Text.assemble(
             ("Keiji821 (Programador)\n", f"bold {theme['highlight']}"),
-            ("Galera (Diseñadora)",      f"bold {theme['secondary']}")
+            ("Galera (Diseñadora)",       f"bold {theme['secondary']}")
         )
         panel = Panel(
             Align.center(Text.assemble(header, sep, authors)),
@@ -107,16 +116,16 @@ class StellarOS:
         table = Table.grid(padding=(0,2))
         table.add_column(style=f"bold {theme['highlight']}", width=20)
         table.add_column(style=theme["primary"])
-        # Título de categoría
+
         table.add_row(
             Panel.fit(f"[bold]{cat}[/]",
                       border_style=theme["secondary"],
                       box=ROUNDED),
             ""
         )
-        # Comandos
         for cmd, desc in self.menu_data[cat]:
             table.add_row(f"[{theme['highlight']}]› {cmd}", f"[{theme['primary']}] {desc}")
+
         return Panel(
             table,
             border_style=self.worm_colors[(self.worm_pos+2) % len(self.worm_colors)],
@@ -157,7 +166,6 @@ class StellarOS:
             break
 
     def render(self):
-        # Avanza gusano
         self.worm_pos = (self.worm_pos + 1) % len(self.worm_colors)
         layout = Layout()
         layout.split_column(
