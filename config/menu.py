@@ -18,9 +18,8 @@ import random
 
 class StellarOS:
     def __init__(self):
-        # Inicialización
         self.console = Console()
-        # Definición de temas con contraste ajustado
+        # Define themes with clear contrast
         self.themes = {
             "neon":      {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_yellow","bg":"#0a0a1a"},
             "cyber":     {"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},
@@ -44,55 +43,47 @@ class StellarOS:
             "ember":     {"primary":"bright_red","secondary":"bright_yellow","highlight":"bright_white","bg":"#3f0a0a"},
             "glacier":   {"primary":"bright_cyan","secondary":"white","highlight":"white","bg":"#0a1e2a"},
             "daylight":  {"primary":"black","secondary":"grey70","highlight":"dark_blue","bg":"#f0f0f0"},
+            "sage":      {"primary":"white","secondary":"dark_green","highlight":"green","bg":"#dff0d8"},
+            "retro":     {"primary":"white","secondary":"bright_yellow","highlight":"bright_red","bg":"#333300"},
+            "lunar":     {"primary":"bright_white","secondary":"bright_blue","highlight":"bright_magenta","bg":"#102030"},
         }
-        # Menú de comandos
+        # Menu data
         self.menu_data = {
-            "MAIN": [
-                ("intro",(
-                    "Stellar OS es un sistema operativo para Termux de fácil uso e instalación. "
-                    "Este menú presenta comandos preconfigurados listos para usar, enfocados en mejorar la apariencia de Termux "
-                    "y ofrecer utilidades opcionales para diferentes áreas."))
-            ],
+            "MAIN": [("intro",
+                "Stellar OS es un sistema operativo para Termux de fácil uso e instalación. "
+                "Este menú presenta comandos preconfigurados listos para usar, enfocados en mejorar la apariencia de Termux "
+                "y ofrecer utilidades opcionales para diferentes áreas." )],
             "SISTEMA": [
                 ("reload","Recarga el banner"),
                 ("clear","Limpia la terminal"),
                 ("bash","Reinicia terminal"),
                 ("ui","Personalizar interfaz"),
                 ("uninstall","Desinstalar sistema"),
-                ("update","Actualizar desde GitHub")
-            ],
+                ("update","Actualizar desde GitHub")],
             "UTILIDADES": [
                 ("ia","Asistente IA GPT-4"),
                 ("ia-image","Generador de imágenes"),
                 ("traductor","Traductor multidioma"),
-                ("myip","Muestra tu IP pública")
-            ],
+                ("myip","Muestra tu IP pública")],
             "OSINT": [
                 ("ipinfo","Info de direcciones IP"),
                 ("phoneinfo","Búsqueda de teléfonos"),
                 ("urlinfo","Analiza URLs"),
                 ("metadatainfo","Extrae metadatos"),
                 ("emailsearch","Busca emails"),
-                ("userfinder","Rastrea usuarios")
-            ],
+                ("userfinder","Rastrea usuarios")],
             "OSINT-DISCORD": [
                 ("userinfo","Info de usuarios Discord"),
                 ("serverinfo","Info de servidores"),
                 ("searchinvites","Busca invitaciones"),
-                ("inviteinfo","Analiza enlaces")
-            ],
-            "PENTESTING": [
-                ("ddos","Ataque DDOS controlado")
-            ],
+                ("inviteinfo","Analiza enlaces")],
+            "PENTESTING": [("ddos","Ataque DDOS controlado")],
         }
-        # Variables de estado
         self.categories = list(self.menu_data.keys())
         self.cat_index = 0
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
-        # Gusano de colores
-        self.worm_colors = list(self.themes.values())[0].keys()  # dummy
         self.worm_colors = ["red","magenta","yellow","green","cyan","blue"]
         self.worm_pos = 0
 
@@ -109,19 +100,16 @@ class StellarOS:
 
     def animated_banner(self):
         theme = self.themes[self.current_theme]
-        header = Text.assemble(
+        text = Text.assemble(
             (" STELLAR OS ", f"bold {theme['secondary']} blink"),
-            (f" [{self.version}]\n", "bold grey50")
-        )
-        sep = Text("─"*38 + "\n", style="dim")
-        authors = Text.assemble(
+            (f" [{self.version}]\n", "bold grey50"),
             ("Keiji821 (Programador)\n", f"bold {theme['highlight']}"),
             ("Galera (Diseñadora)\n", f"bold {theme['secondary']}")
         )
         return Panel(
-            Align.center(Text.assemble(header, sep, authors)),
+            Align.center(text),
+            border_style=self.worm_colors[self.worm_pos%len(self.worm_colors)],
             box=DOUBLE,
-            border_style=self.worm_colors[self.worm_pos % len(self.worm_colors)],
             style=Style(bgcolor=theme['bg']),
             padding=(1,2)
         )
@@ -129,58 +117,61 @@ class StellarOS:
     def create_table(self):
         theme = self.themes[self.current_theme]
         cat = self.categories[self.cat_index]
-        if cat == "MAIN":
+        if cat == 'MAIN':
             intro = self.menu_data['MAIN'][0][1]
-            # Animar categorías
-            lines = []
-            for i,name in enumerate(self.categories):
-                if name=='MAIN': continue
-                color = self.worm_colors[(self.worm_pos+i)%len(self.worm_colors)]
-                lines.append(f"[{color} blink][underline]{name}[/underline][/]")
-            content = Text(intro + "\n\n", style=theme['primary'])
-            for line in lines: content.append(Text.from_markup(line+"\n"))
-            return Panel(
-                Align.left(content), title="MAIN", title_align="center",
-                border_style=self.worm_colors[self.worm_pos%len(self.worm_colors)],
+            # Intro panel
+            intro_panel = Panel(
+                Align.left(intro), title='INTRODUCCIÓN', title_align='center',
+                border_style=theme['secondary'], box=ROUNDED, style=Style(bgcolor=theme['bg']), padding=(1,2)
+            )
+            # Categories panel
+            cats = '\n'.join([f"[underline]{c}[/]" for c in self.categories if c!='MAIN'])
+            cat_panel = Panel(
+                Align.center(Text.assemble((cats,"bold {theme['highlight']}"))),
+                title='Categorías', title_align='center',
+                border_style=self.worm_colors[(self.worm_pos+2)%len(self.worm_colors)],
                 box=ROUNDED, style=Style(bgcolor=theme['bg']), padding=(1,2)
             )
-        # Panel de comandos
+            return Layout(name='main').split_column(Layout(intro_panel), Layout(cat_panel))
+        # Other categories
         table = Table.grid(padding=(0,2))
         table.add_column(style=f"bold {theme['highlight']}", width=20)
         table.add_column(style=theme['primary'])
-        table.add_row(Panel.fit(f"[bold]{cat}[/]", border_style=theme['secondary'], box=ROUNDED),"")
+        table.add_row(
+            Panel.fit(f"[bold]{cat}[/]", border_style=theme['secondary'], box=ROUNDED), ""
+        )
         for cmd,desc in self.menu_data[cat]:
             table.add_row(f"[{theme['highlight']}]› {cmd}", f"[{theme['primary']}] {desc}")
         return Panel(
-            table,
-            box=ROUNDED,
-            border_style=self.worm_colors[(self.worm_pos+2)%len(self.worm_colors)],
+            table, box=ROUNDED,
+            border_style=self.worm_colors[(self.worm_pos+4)%len(self.worm_colors)],
             style=Style(bgcolor=theme['bg']), padding=(1,1)
         )
 
     def tips_panel(self):
         theme=self.themes[self.current_theme]
-        tips="[bold]Tips:[/bold] [dim]w/s[/dim]↑↓Categorías|[dim]t[/dim]Tema|[dim]q[/dim]Salir"
+        tips = Text()
+        tips.append("Tips Rápidos:\n", style="bold underline")
+        tips.append(" w/s   ", style="dim"); tips.append("Subir/Bajar Categorías\n")
+        tips.append(" t     Cambiar tema\n")
+        tips.append(" q     Salir")
         return Panel(
-            tips,
-            box=ROUNDED,
-            border_style=self.worm_colors[(self.worm_pos+4)%len(self.worm_colors)],
-            style=Style(bgcolor=theme['bg'])
+            tips, box=ROUNDED,
+            border_style=self.worm_colors[(self.worm_pos+6)%len(self.worm_colors)],
+            style=Style(bgcolor=theme['bg']), padding=(1,1)
         )
-  
+
     def loading_animation(self):
         theme=self.themes[self.current_theme]
         for style in cycle([theme['highlight'],theme['secondary'],theme['primary']]):
             prog=Progress(
-                SpinnerColumn(style=f"bold {style}"),
-                BarColumn(bar_width=None,style=f"bold {style}"),
+                SpinnerColumn(style=f"bold {style}"),BarColumn(style=f"bold {style}"),
                 TextColumn("{task.percentage:>3.0f}%",style=f"bold {style}"),
                 console=self.console,transient=True)
             task=prog.add_task("INICIANDO...",total=100)
             with prog:
                 for _ in range(100):
-                    time.sleep(0.01);
-                    prog.update(task,advance=1)
+                    time.sleep(0.01); prog.update(task,advance=1)
             break
 
     def render(self):
@@ -189,7 +180,7 @@ class StellarOS:
         layout.split_column(
             Layout(self.animated_banner(),size=7),
             Layout(self.create_table(),ratio=2),
-            Layout(self.tips_panel(),size=3)
+            Layout(self.tips_panel(),size=4)
         )
         return layout
 
@@ -203,7 +194,7 @@ class StellarOS:
                 if key=='t':self.current_theme=next(self.theme_cycle)
                 if key=='w':self.cat_index=(self.cat_index-1)%len(self.categories)
                 if key=='s':self.cat_index=(self.cat_index+1)%len(self.categories)
-        self.console.print("\n[bold cyan]SALIENDO...")
+        self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
 
 if __name__=="__main__":
     StellarOS().main()
