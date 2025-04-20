@@ -25,9 +25,6 @@ else
 printf "${rojo}Operación cancelada${blanco}"
 fi
 
-rm -rf .configs_stellar
-printf "${verde}Configuraciones de Stellar borradas con éxito${blanco}"
-
 printf "Cerrando sesión....." | lolcat -a -d 30
 
 clear
