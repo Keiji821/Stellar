@@ -96,11 +96,12 @@ class StellarOS:
         text.append("\n\nSTELLAR OS", style=f"bold {theme['secondary']} blink")
         text.append(f" [{self.version}]\n", style=f"bold {theme['highlight']}")
         
-        creators = Text("\nCreadores:\n\n", style=f"bold {theme['primary']} underline", justify="center")
+        # Sección de creadores
+        creators = Text("\nCREADORES\n\n", style=f"bold {theme['primary']} underline", justify="center")
         creators.append("Keiji821 (Programador Principal)\n", style=f"bold {theme['highlight']}")
         creators.append("Galera (Diseñadora de Interfaces)\n\n", style=f"bold {theme['highlight']}")
-        
         text.append(creators)
+        
         return Panel(
             Align.center(text, vertical="middle"),
             border_style=self.worm_colors[self.worm_pos % len(self.worm_colors)],
@@ -115,24 +116,32 @@ class StellarOS:
         if cat == 'MAIN':
             intro = self.menu_data['MAIN'][0][1]
             intro_panel = Panel(
-                Align.left(intro, vertical="top"),
-                title='INTRODUCCIÓN', title_align='center',
-                border_style=theme['highlight'], box=ROUNDED,
-                style=Style(bgcolor=theme['bg']), padding=(2, 3))
-            cats_text = Text()
-            for i, name in enumerate(self.categories):
-                if name == 'MAIN':
-                    continue
-                color = self.worm_colors[(self.worm_pos + i) % len(self.worm_colors)]
+                Align.center(intro),
+                title='INTRODUCCIÓN', 
+                border_style=theme['highlight'], 
+                box=ROUNDED,
+                style=Style(bgcolor=theme['bg']),
+                padding=(1, 2)
+            )
+            
+            cats_text = Text("\n", justify="center")
+            for name in self.categories:
+                if name == 'MAIN': continue
+                color = self.worm_colors[(self.worm_pos + self.categories.index(name)) % len(self.worm_colors)]
                 cats_text.append(f"{name}\n", style=f"bold {color} underline")
-            cat_panel = Panel(
-                Align.left(cats_text, vertical="top"),
-                title='Categorías', title_align='center',
-                border_style=self.worm_colors[(self.worm_pos + 2) % len(self.worm_colors)],
-                box=ROUNDED, style=Style(bgcolor=theme['bg']), padding=(1, 3))
+            
+            cats_panel = Panel(
+                Align.center(cats_text),
+                title='CATEGORÍAS',
+                border_style=theme['secondary'],
+                box=ROUNDED,
+                style=Style(bgcolor=theme['bg']),
+                padding=(1, 2)
+            
             layout = Layout()
-            layout.split_column(Layout(intro_panel, ratio=2), Layout(cat_panel))
+            layout.split_column(Layout(intro_panel), Layout(cats_panel))
             return layout
+            
         table = Table.grid(padding=(0, 2))
         table.add_column(style=f"bold {theme['highlight']}", width=22)
         table.add_column(style=theme['primary'])
@@ -143,22 +152,22 @@ class StellarOS:
             table,
             box=ROUNDED,
             border_style=self.worm_colors[(self.worm_pos + 4) % len(self.worm_colors)],
-            style=Style(bgcolor=theme['bg']), padding=(1, 2))
+            style=Style(bgcolor=theme['bg']), 
+            padding=(1, 2))
 
     def tips_panel(self):
         theme = self.themes[self.current_theme]
-        tips = Text(style=theme['primary'])
+        tips = Text(justify="center")
         tips.append("\nNAVEGACIÓN RÁPIDA\n\n", style=f"bold {theme['highlight']} underline")
-        tips.append(" [W] Subir categoría\n", style=f"bold {theme['secondary']}")
-        tips.append(" [S] Bajar categoría\n", style=f"bold {theme['secondary']}")
-        tips.append(" [T] Cambiar tema visual\n", style=f"bold {theme['secondary']}")
-        tips.append(" [Q] Salir del sistema\n", style=f"bold {theme['secondary']}")
+        tips.append("[W] Subir categoría   [S] Bajar categoría\n", style=f"bold {theme['secondary']}")
+        tips.append("[T] Cambiar tema      [Q] Salir del sistema\n\n", style=f"bold {theme['secondary']}")
+        
         return Panel(
             Align.center(tips, vertical="middle"),
             box=ROUNDED,
             border_style=self.worm_colors[(self.worm_pos + 6) % len(self.worm_colors)],
             style=Style(bgcolor=theme['bg']),
-            padding=(2, 4)
+            padding=(1, 2)
         )
 
     def loading_animation(self):
@@ -182,9 +191,9 @@ class StellarOS:
         self.worm_pos = (self.worm_pos + 1) % len(self.worm_colors)
         layout = Layout()
         layout.split_column(
-            Layout(self.animated_banner(), size=12),
+            Layout(self.animated_banner(), size=10),
             Layout(self.create_table(), ratio=2),
-            Layout(self.tips_panel(), size=8)
+            Layout(self.tips_panel(), size=6)
         )
         return layout
 
