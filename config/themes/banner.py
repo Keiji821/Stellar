@@ -11,6 +11,7 @@ from rich.columns import Columns
 from rich.panel import Panel
 from rich.table import Table
 from rich.progress import Progress, BarColumn, TextColumn
+from rich.live import Live
 
 console = Console()
 
@@ -43,7 +44,13 @@ text_banner = Text(banner, style=style)
 
 def obtener_informacion_sistema():
     ahora = datetime.datetime.now()
-    tiempo_actividad = time.time() - psutil.boot_time()
+    
+    try:
+        tiempo_actividad = time.time() - psutil.boot_time()
+        tiempo_actividad_str = f"{int(tiempo_actividad // 3600)}h {int((tiempo_actividad % 3600) // 60)}m"
+    except (PermissionError, psutil.Error) as e:
+        tiempo_actividad_str = "No disponible"
+    
     memoria = psutil.virtual_memory()
     disco = psutil.disk_usage(os.path.expanduser("~"))
     try:
@@ -57,7 +64,7 @@ def obtener_informacion_sistema():
         "Hora": ahora.strftime("%I:%M%p"),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
-        "Tiempo de actividad": f"{int(tiempo_actividad // 3600)}h {int((tiempo_actividad % 3600) // 60)}m",
+        "Tiempo de actividad": tiempo_actividad_str,
         "Paquetes": str(len([f for f in os.listdir('/data/data/com.termux/files/usr/var/lib/dpkg/info') if f.endswith(".list")])),
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
@@ -92,8 +99,11 @@ def mostrar_barras_progreso(info):
         progreso.add_task("", total=100, completed=info["Memoria %"])
         progreso.add_task("", total=100, completed=info["Almacenamiento %"])
 
-if __name__ == "__main__":
+def mostrar_informacion():
     informacion = obtener_informacion_sistema()
     panel_informacion = crear_panel_informacion(informacion)
     console.print(Columns([text_banner, panel_informacion], expand=True))
     mostrar_barras_progreso(informacion)
+
+if __name__ == "__main__":
+    mostrar_informacion()
