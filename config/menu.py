@@ -194,10 +194,11 @@ class StellarOS:
                     for _ in range(1000):
                         live.update(next(border_effect), refresh=True)
 
-                        if self.console.input("[bold cyan](t = tema | q = salir)> ").strip().lower() == "t":
-                            self.current_theme = next(self.theme_cycle)
+                        user_input = self.console.input("[bold cyan](t = tema | q = salir)> ").strip().lower()
+                        if user_input == "t":
+                            self.current_theme = next(self.theme_cycle)  # Cambia el tema
                             break
-                        elif self.console.input().strip().lower() == "q":
+                        elif user_input == "q":
                             self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
                             return
 
