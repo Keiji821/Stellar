@@ -1,210 +1,186 @@
+import sys
+import termios
+import tty
+import select
+import time
+import random
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 from rich.live import Live
 from rich.layout import Layout
-from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
-from rich.box import ROUNDED, DOUBLE
 from rich.align import Align
 from rich.style import Style
+from rich.box import ROUNDED, DOUBLE
 from itertools import cycle
-import time
-import random
-import os
 
 class StellarOS:
     def __init__(self):
         self.console = Console()
         self.themes = {
-            "neon": {
-                "primary": "bright_magenta",
-                "secondary": "bright_cyan",
-                "highlight": "bright_yellow",
-                "bg": "#0a0a1a"
-            },
-            "cyber": {
-                "primary": "bright_green",
-                "secondary": "bright_blue",
-                "highlight": "bright_red",
-                "bg": "#0a1a0a"
-            },
-            "matrix": {
-                "primary": "bright_green",
-                "secondary": "green",
-                "highlight": "bright_white",
-                "bg": "black"
-            },
-            "shinkai": {
-                "primary": "bright_cyan",
-                "secondary": "bright_blue",
-                "highlight": "bright_magenta",
-                "bg": "#101830"
-            },
-            "solar": {
-                "primary": "yellow",
-                "secondary": "bright_red",
-                "highlight": "bright_white",
-                "bg": "#1f1f1f"
-            }
+            "neon":    {"primary":"bright_magenta","secondary":"bright_cyan","highlight":"bright_yellow","bg":"#0a0a1a"},
+            "cyber":   {"primary":"bright_green","secondary":"bright_blue","highlight":"bright_red","bg":"#0a1a0a"},
+            "matrix":  {"primary":"bright_green","secondary":"green","highlight":"bright_white","bg":"black"},
+            "shinkai": {"primary":"bright_cyan","secondary":"bright_blue","highlight":"bright_magenta","bg":"#101830"},
+            "solar":   {"primary":"yellow","secondary":"bright_red","highlight":"bright_white","bg":"#1f1f1f"},
         }
-
         self.menu_data = {
             "SISTEMA": [
-                ("reload", "Recarga el banner del sistema"),
-                ("clear", "Limpia la terminal completamente"),
-                ("bash", "Reinicia la sesión de terminal"),
-                ("ui", "Personalizar tema e interfaz gráfica"),
-                ("uninstall", "Desinstalar todo el sistema"),
-                ("update", "Actualizar desde repositorio GitHub")
+                ("reload", "Recarga el banner"),
+                ("clear",  "Limpia la terminal"),
+                ("bash",   "Reinicia terminal"),
+                ("ui",     "Personalizar interfaz"),
+                ("uninstall","Desinstalar sistema"),
+                ("update", "Actualizar desde GitHub")
             ],
             "UTILIDADES": [
-                ("ia", "Asistente de IA con GPT-4"),
-                ("ia-image", "Generador de imágenes con DALL-E"),
-                ("traductor", "Traductor en tiempo real multidioma"),
-                ("myip", "Muestra tu IP pública y geolocalización")
+                ("ia",       "Asistente IA GPT-4"),
+                ("ia-image", "Generador de imágenes"),
+                ("traductor","Traductor multidioma"),
+                ("myip",     "Muestra tu IP pública")
             ],
             "OSINT": [
-                ("ipinfo", "Información detallada de direcciones IP"),
-                ("phoneinfo", "Búsqueda de números telefónicos"),
-                ("urlinfo", "Analizador de URLs y dominios"),
-                ("metadatainfo", "Extracción avanzada de metadatos"),
-                ("emailsearch", "Búsqueda de correos electrónicos"),
-                ("userfinder", "Rastreo de nombres de usuario")
+                ("ipinfo",      "Info de direcciones IP"),
+                ("phoneinfo",   "Búsqueda de teléfonos"),
+                ("urlinfo",     "Analiza URLs"),
+                ("metadatainfo","Extrae metadatos"),
+                ("emailsearch", "Busca emails"),
+                ("userfinder",  "Rastrea usuarios")
             ],
             "OSINT-DISCORD": [
-                ("userinfo", "Obten información de usuarios"),
-                ("serverinfo", "Analiza servidores de Discord"),
-                ("searchinvites", "Busca invitaciones públicas"),
-                ("inviteinfo", "Analiza enlaces de invitación")
+                ("userinfo",    "Info de usuarios Discord"),
+                ("serverinfo",  "Info de servidores"),
+                ("searchinvites","Busca invitaciones"),
+                ("inviteinfo",  "Analiza enlaces")
             ],
             "PENTESTING": [
                 ("ddos", "Ataque DDOS controlado")
-            ]
+            ],
         }
-
+        self.categories = list(self.menu_data.keys())
+        self.cat_index = 0
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
 
-    def create_table(self):
-        table = Table.grid(padding=(0, 2))
-        table.add_column(style=f"bold {self.themes[self.current_theme]['highlight']}", width=24)
-        table.add_column(style=self.themes[self.current_theme]['primary'])
+        # Para el “gusano” de colores
+        self.worm_colors = ["red","magenta","yellow","green","cyan","blue"]
+        self.worm_pos = 0
 
-        for category, items in self.menu_data.items():
-            table.add_row(
-                Panel.fit(f"[bold]{category}[/]", 
-                         border_style=self.themes[self.current_theme]['secondary'], 
-                         box=ROUNDED),
-                ""
-            )
-            for cmd, desc in items:
-                table.add_row(
-                    f"[{self.themes[self.current_theme]['highlight']}]› {cmd}", 
-                    f"[{self.themes[self.current_theme]['primary']}]{desc}"
-                )
-            table.add_row("", "")
-        return table
+    def get_key(self, timeout=0.1):
+        fd = sys.stdin.fileno()
+        old = termios.tcgetattr(fd)
+        try:
+            tty.setcbreak(fd)
+            r, _, _ = select.select([fd], [], [], timeout)
+            if r:
+                return sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old)
+        return None
 
     def animated_banner(self):
-        text = Text.assemble(
-            (f" STELLAR OS ", f"bold {self.themes[self.current_theme]['secondary']}"),
-            (f" [{self.version}]", "bold grey50")
+        theme = self.themes[self.current_theme]
+        header = Text.assemble(
+            (" STELLAR OS ", f"bold {theme['secondary']}"),
+            (f" [{self.version}]\n", "bold grey50")
         )
-        author_block = Text.assemble(
-            ("\n" + "─" * 38 + "\n", "dim"),
-            ("Keiji821 (Programador)\n", "bold white"),
-            ("Galera (Diseñadora)", "bold white")
+        sep = Text("─" * 38 + "\n", style="dim")
+        authors = Text.assemble(
+            ("Keiji821 (Programador)\n", f"bold {theme['highlight']}"),
+            ("Galera (Diseñadora)",      f"bold {theme['secondary']}")
         )
-        return Panel(
-            Align.center(text.append(author_block)), 
-            border_style=self.themes[self.current_theme]['secondary'], 
-            padding=(1, 4), 
+        panel = Panel(
+            Align.center(Text.assemble(header, sep, authors)),
+            border_style=self.worm_colors[self.worm_pos % len(self.worm_colors)],
             box=DOUBLE,
-            style=Style(bgcolor=self.themes[self.current_theme]['bg'])
+            padding=(1,2),
+            style=Style(bgcolor=theme["bg"])
+        )
+        return panel
+
+    def create_table(self):
+        theme = self.themes[self.current_theme]
+        cat = self.categories[self.cat_index]
+        table = Table.grid(padding=(0,2))
+        table.add_column(style=f"bold {theme['highlight']}", width=20)
+        table.add_column(style=theme["primary"])
+        # Título de categoría
+        table.add_row(
+            Panel.fit(f"[bold]{cat}[/]",
+                      border_style=theme["secondary"],
+                      box=ROUNDED),
+            ""
+        )
+        # Comandos
+        for cmd, desc in self.menu_data[cat]:
+            table.add_row(f"[{theme['highlight']}]› {cmd}", f"[{theme['primary']}] {desc}")
+        return Panel(
+            table,
+            border_style=self.worm_colors[(self.worm_pos+2) % len(self.worm_colors)],
+            box=ROUNDED,
+            padding=(1,1),
+            style=Style(bgcolor=theme["bg"])
         )
 
     def tips_panel(self):
-        tips = "[bold]Tips Rápidos:[/bold]  [dim]CTRL+C[/dim] Detener | [dim]CTRL+Z[/dim] Suspender | [dim]q[/dim] Salir | [dim]t[/dim] Cambiar tema"
+        theme = self.themes[self.current_theme]
+        tips = "[bold]Tips Rápidos:[/bold]  [dim]w/s[/dim] ↑/↓ Categorías  |  [dim]t[/dim] Cambiar tema  |  [dim]q[/dim] Salir"
         return Panel(
             tips,
-            border_style=self.themes[self.current_theme]['secondary'],
-            style=Style(bgcolor=self.themes[self.current_theme]['bg']),
-            box=ROUNDED
+            border_style=self.worm_colors[(self.worm_pos+4) % len(self.worm_colors)],
+            box=ROUNDED,
+            style=Style(bgcolor=theme["bg"])
         )
 
     def loading_animation(self):
+        theme = self.themes[self.current_theme]
         styles = [
-            f"bold {self.themes[self.current_theme]['highlight']}",
-            f"bold {self.themes[self.current_theme]['secondary']}",
-            f"bold {self.themes[self.current_theme]['primary']}"
+            f"bold {theme['highlight']}",
+            f"bold {theme['secondary']}",
+            f"bold {theme['primary']}"
         ]
         for style in cycle(styles):
-            progress = Progress(
+            prog = Progress(
                 SpinnerColumn(style=style),
                 BarColumn(bar_width=None, style=style),
                 TextColumn("[progress.percentage]{task.percentage:>3.0f}%", style=style),
-                console=self.console,
-                transient=True,
+                console=self.console, transient=True
             )
-            task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
-            with progress:
+            task = prog.add_task("INICIANDO...", total=100)
+            with prog:
                 for _ in range(100):
                     time.sleep(0.01)
-                    progress.update(task, advance=1)
-                break
+                    prog.update(task, advance=1)
+            break
 
-    def render_screen(self):
+    def render(self):
+        # Avanza gusano
+        self.worm_pos = (self.worm_pos + 1) % len(self.worm_colors)
         layout = Layout()
         layout.split_column(
             Layout(self.animated_banner(), size=7),
-            Layout(
-                Panel(
-                    self.create_table(), 
-                    border_style=self.themes[self.current_theme]['secondary'], 
-                    box=ROUNDED, 
-                    padding=(1, 0),
-                    style=Style(bgcolor=self.themes[self.current_theme]['bg'])
-                ), 
-                ratio=2
-            ),
+            Layout(self.create_table(), ratio=2),
             Layout(self.tips_panel(), size=3)
         )
         return layout
 
-    def running_light_effect(self, layout):
-        positions = [(i, side) for side in ["top", "right", "bottom", "left"] for i in range(20)]
-        colors = ["red", "magenta", "yellow", "green", "cyan", "blue"]
-        while True:
-            color = random.choice(colors)
-            layout.border_style = color
-            yield layout
-            time.sleep(0.02)
-
     def main(self):
         self.loading_animation()
-
-        with Live(screen=True, redirect_stderr=False) as live:
+        with Live(screen=True, auto_refresh=False, console=self.console) as live:
             while True:
-                try:
-                    layout = self.render_screen()
-                    border_effect = self.running_light_effect(layout)
-
-                    for _ in range(1000):
-                        live.update(next(border_effect), refresh=True)
-
-                        user_input = self.console.input("[bold cyan](t = tema | q = salir)> ").strip().lower()
-                        if user_input == "t":
-                            self.current_theme = next(self.theme_cycle)  # Cambia el tema
-                            break
-                        elif user_input == "q":
-                            self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
-                            return
-
-                except KeyboardInterrupt:
-                    self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
-                    return
+                live.update(self.render(), refresh=True)
+                key = self.get_key()
+                if key == "q":
+                    break
+                if key == "t":
+                    self.current_theme = next(self.theme_cycle)
+                if key == "w":
+                    self.cat_index = (self.cat_index - 1) % len(self.categories)
+                if key == "s":
+                    self.cat_index = (self.cat_index + 1) % len(self.categories)
+        self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
 
 if __name__ == "__main__":
     StellarOS().main()
