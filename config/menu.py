@@ -108,10 +108,11 @@ class StellarOS:
             self.current_color = self.worm_colors[self.worm_index]
             self.last_update = time.time()
         
+
         self.layout.split_column(
-            Layout(self.create_banner(), ratio=2),
-            Layout(self.create_menu(), ratio=5),
-            Layout(self.create_tips(), ratio=0.5)
+            Layout(self.create_banner(), ratio=4),    # 2 -> 4
+            Layout(self.create_menu(), ratio=10),     # 5 -> 10
+            Layout(self.create_tips(), ratio=1)       # 0.5 -> 1
         )
         return self.layout
 
