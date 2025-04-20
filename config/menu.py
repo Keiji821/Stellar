@@ -1,7 +1,3 @@
-import sys
-import termios
-import tty
-import select
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -14,6 +10,7 @@ from rich.align import Align
 from rich.style import Style
 from itertools import cycle
 import time
+import random
 
 class StellarOS:
     def __init__(self):
@@ -76,6 +73,11 @@ class StellarOS:
         self.theme_cycle = cycle(self.themes.keys())
         self.current_theme = next(self.theme_cycle)
         self.version = "v2.3.0"
+        self.running_colors = cycle([
+            "bright_red", "bright_magenta", "bright_cyan", 
+            "bright_green", "bright_blue", "bright_yellow"
+        ])
+        self.step = 0
 
     def create_table(self):
         table = Table.grid(padding=(0, 2))
@@ -98,44 +100,58 @@ class StellarOS:
         return table
 
     def animated_banner(self):
-        text = Text.assemble(
+        banner = Text.assemble(
             (f" STELLAR OS ", f"bold {self.themes[self.current_theme]['secondary']} blink"),
             (f" [{self.version}]", "bold grey50")
         )
+        credits = Text.assemble(
+            ("Desarrollado por ", "bold grey37"),
+            ("Keiji821", f"bold {self.themes[self.current_theme]['highlight']}"),
+            (" (Programador)   ", "bold grey37"),
+            ("Galera", f"bold {self.themes[self.current_theme]['secondary']}"),
+            (" (Diseñadora)", "bold grey37")
+        )
+
         return Panel(
-            Align.center(text), 
-            border_style=self.themes[self.current_theme]['secondary'], 
+            Align.center(Text.assemble(banner, "\n", credits)), 
+            border_style=next(self.running_colors), 
             padding=(1, 4), 
             box=DOUBLE,
             style=Style(bgcolor=self.themes[self.current_theme]['bg'])
         )
 
     def loading_animation(self):
-        colors = ["rgb(0,255,255)", "rgb(0,200,255)", "rgb(0,150,255)", "rgb(0,100,255)", "rgb(50,0,255)", "rgb(100,0,255)"]
-        styles = cycle(colors)
-        style = next(styles)
+        spinner_styles = [
+            f"bold {self.themes[self.current_theme]['highlight']}",
+            f"bold {self.themes[self.current_theme]['secondary']}",
+            f"bold {self.themes[self.current_theme]['primary']}"
+        ]
 
-        progress = Progress(
-            SpinnerColumn(style=style),
-            BarColumn(bar_width=None, style=style),
-            TextColumn("[progress.percentage]{task.percentage:>3.0f}%", style=style),
-            console=self.console,
-            transient=True,
-        )
-        task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
-        with progress:
-            for _ in range(100):
-                time.sleep(0.02)
-                progress.update(task, advance=1)
+        for style in cycle(spinner_styles):
+            progress = Progress(
+                SpinnerColumn(style=style),
+                BarColumn(bar_width=None, style=style),
+                TextColumn("[progress.percentage]{task.percentage:>3.0f}%", style=style),
+                console=self.console,
+                transient=True,
+            )
+
+            task = progress.add_task(f"[{style}]INICIANDO INTERFAZ...", total=100)
+
+            with progress:
+                for _ in range(100):
+                    time.sleep(0.01)
+                    progress.update(task, advance=1)
+                break
 
     def render_screen(self):
         layout = Layout()
         layout.split_column(
-            Layout(self.animated_banner(), size=5),
+            Layout(self.animated_banner(), size=7),
             Layout(
                 Panel(
                     self.create_table(), 
-                    border_style=self.themes[self.current_theme]['secondary'], 
+                    border_style=next(self.running_colors),
                     box=ROUNDED, 
                     padding=(1, 0),
                     style=Style(bgcolor=self.themes[self.current_theme]['bg'])
@@ -144,41 +160,25 @@ class StellarOS:
             ),
             Layout(
                 Panel(
-                    f"[blink bold {self.themes[self.current_theme]['highlight']}]Presiona 'q' para salir | 't' para cambiar tema[/]", 
-                    border_style=self.themes[self.current_theme]['secondary'],
+                    Align.center(
+                        f"[blink bold {self.themes[self.current_theme]['highlight']}]Presiona 'q' para salir | 't' para cambiar tema\n[dim]Tips: CTRL + C para detener | CTRL + Z para suspender[/]"
+                    ), 
+                    border_style=next(self.running_colors),
                     style=Style(bgcolor=self.themes[self.current_theme]['bg'])
                 ), 
-                size=3
+                size=4
             ),
         )
         return layout
 
-    def get_key_non_blocking(self):
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setcbreak(fd)
-            rlist, _, _ = select.select([fd], [], [], 0.1)
-            if rlist:
-                return sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return None
-
     def main(self):
         self.loading_animation()
-        with Live(auto_refresh=False, screen=True) as live:
+        with Live(auto_refresh=True, screen=True, console=self.console) as live:
             while True:
                 try:
-                    layout = self.render_screen()
-                    live.update(layout)
-                    live.refresh()
-                    key = self.get_key_non_blocking()
-                    if key == "q":
-                        self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
-                        return
-                    elif key == "t":
-                        self.current_theme = next(self.theme_cycle)
+                    live.update(self.render_screen(), refresh=True)
+                    time.sleep(0.15)
+                    self.step += 1
                 except KeyboardInterrupt:
                     self.console.print("\n[bold cyan]SALIENDO DEL SISTEMA...")
                     return
