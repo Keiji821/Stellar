@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-cd config/themes
-BANNER=$(cat "banner.txt")
-BANNER_COLOR=$(cat "banner_color.txt")
-BANNER_BACKGROUND=$(cat "banner_background.txt")
-BANNER_BACKGROUND_COLOR=$(cat "banner_background_color.txt")
-cd
-cd Stellar
+mv banner.txt .
+mv banner_color.txt .
+mv banner_background.txt .
+mv banner_background_color.txt .
 git stash
 
 update_repo() {
@@ -30,7 +27,7 @@ else
     exit 1
 fi
 
-cd 
+cd
 mv banner.txt ~/Stellar/config/themes/
 mv banner_color.txt ~/Stellar/config/themes/
 mv banner_background.txt ~/Stellar/config/themes/
