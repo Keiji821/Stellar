@@ -36,4 +36,3 @@ echo $BANNER_BACKGROUND > banner_background.txt
 echo $BANNER_BACKGROUND_COLOR > banner_background_color.txt
 printf "¡Todo en orden!" | lolcat -a -d 20
 echo
-
