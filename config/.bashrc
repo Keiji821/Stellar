@@ -56,9 +56,12 @@ function cd() {
 cd "$HOME"
 
 clear
-export ALL_PROXY=socks5h://localhost:9052
-pkill tor
-tor &>/dev/null &
+
+pkill tor 2>/dev/null
+tor --RunAsDaemon 1 2>/dev/null & disown
+sleep 3
+TOR_PORT=$(ss -tulpn | grep 'tor' | awk '{print $5}' | cut -d':' -f2 | head -n1)
+export ALL_PROXY="socks5h://localhost:${TOR_PORT:-9052}" 2>/dev/null
 
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
