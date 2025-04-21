@@ -112,7 +112,7 @@ def crear_panel(info, panel_width):
     t.add_column(style=estilo_rgb(paleta['valor']), min_width=30)
     
     for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Tiempo transcurrido", "Shell", "Terminal"]:
-        t.add_row(f"{key}:", info[key])
+        t.add_row(f"{key}:", info[key], justify="left")
     
     memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
     t.add_row("Memoria:", memoria_bar)
