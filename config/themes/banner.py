@@ -13,7 +13,7 @@ from rich.style import Style
 from rich.panel import Panel
 from rich.table import Table
 from rich.columns import Columns
-from rich.box import Box
+from rich import box
 
 console = Console()
 
@@ -22,7 +22,7 @@ system_dir = os.path.expanduser("~/Stellar/config/system")
 
 def generar_paleta():
     def color_rgb():
-        return (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255))
+        return (random.randint(100, 255), (random.randint(100, 255)), (random.randint(100, 255))
     return {
         'titulo': color_rgb(),
         'clave': color_rgb(),
@@ -130,7 +130,7 @@ def crear_panel(info, panel_width):
         border_style=estilo_rgb(paleta['borde']),
         padding=(1, 2),
         width=panel_width,
-        box=Box.ROUNDED
+        box=box.SQUARE
     )
 
 if __name__ == "__main__":
