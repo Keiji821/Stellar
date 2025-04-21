@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 cd
+cd Stellar/config/system
+mv user.txt $HOME
+cd
 cd Stellar/config/themes
 mv banner.txt $HOME
 mv banner_color.txt $HOME
@@ -32,6 +35,7 @@ else
 fi
 
 cd
+mv user.txt ~/Stellar/config/system
 mv banner.txt ~/Stellar/config/themes/
 mv banner_color.txt ~/Stellar/config/themes/
 mv banner_background.txt ~/Stellar/config/themes/
