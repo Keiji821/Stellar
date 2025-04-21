@@ -57,11 +57,15 @@ cd "$HOME"
 
 clear
 
-pkill tor 2>/dev/null
-tor --RunAsDaemon 1 2>/dev/null & disown
-sleep 3
-TOR_PORT=$(ss -tulpn | grep 'tor' | awk '{print $5}' | cut -d':' -f2 | head -n1)
-export ALL_PROXY="socks5h://localhost:${TOR_PORT:-9052}" 2>/dev/null
+pkill -f "tor --SocksPort" 2>/dev/null  
+
+for port in {9050..9099}; do  
+  if ! netstat -tuln 2>/dev/null | grep -q ":$port "; then  
+    tor --SocksPort $port --RunAsDaemon 1 2>/dev/null & disown  
+    export ALL_PROXY="socks5h://localhost:$port" 2>/dev/null  
+    break  
+  fi  
+done  
 
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
