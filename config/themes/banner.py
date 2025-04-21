@@ -88,7 +88,7 @@ def obtener_info():
         "Fecha": now.strftime("%Y-%m-%d"),
         "Hora": now.strftime("%I:%M %p"),
         "Celular": obtener_modelo_celular(),
-        "OS": f"Termux {platform.machine()}",
+        "OS": f"{platform.machine()}",
         "Kernel": platform.release(),
         "Tiempo transcurrido": ta_str,
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
