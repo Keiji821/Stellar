@@ -7,6 +7,7 @@ BANNER_BACKGROUND=(cat "banner_background.txt")
 BANNER_BACKGROUND_COLOR=(cat "banner_background_color.txt")
 cd
 cd Stellar
+git stash
 
 update_repo() {
     if ! git pull --force; then
