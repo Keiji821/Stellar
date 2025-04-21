@@ -36,10 +36,10 @@ echo $BANNER_COLOR > banner_color.txt
 echo $BANNER_BACKGROUND > banner_background.txt
 echo $BANNER_BACKGROUND_COLOR > banner_background_color.txt
 
-mv banner.txt /Stellar/config/themes/
-mv banner_color.txt /Stellar/config/themes/
-mv banner_background.txt /Stellar/config/themes/
-mv banner_background_color.txt /Stellar/config/themes/
+mv banner.txt ~/Stellar/config/themes/
+mv banner_color.txt ~/Stellar/config/themes/
+mv banner_background.txt ~/Stellar/config/themes/
+mv banner_background_color.txt ~/Stellar/config/themes/
 
 
 printf "¡Todo en orden!" | lolcat -a -d 20
