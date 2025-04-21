@@ -29,26 +29,34 @@ class ServerAnalyzer:
                 self.bot = discord.Client(intents=self.intents)
                 await self.bot.login(token)
                 guild = await self.bot.fetch_guild(int(server_id))
-                await guild.chunk()
-                
-                # Recopilar datos de miembros
+
+                total_members = None
+                boosts = None
+                online_count = None
                 members = []
-                for member in guild.members[:50]:  # Limitar para rendimiento
-                    members.append({
-                        'username': member.name,
-                        'discriminator': member.discriminator,
-                        'status': str(member.status)
-                    })
-                
-                online_count = sum(1 for m in guild.members if m.status != discord.Status.offline)
-                
+
+                try:
+                    await guild.chunk()
+                    total_members = guild.member_count
+                    boosts = guild.premium_subscription_count
+                    online_count = sum(1 for m in guild.members if m.status != discord.Status.offline)
+
+                    for member in guild.members[:50]:
+                        members.append({
+                            'username': member.name,
+                            'discriminator': member.discriminator,
+                            'status': str(member.status)
+                        })
+                except Exception:
+                    pass
+
                 return {
                     'name': guild.name,
-                    'total_members': guild.member_count,
-                    'boosts': guild.premium_subscription_count,
-                    'widget': widget,
+                    'total_members': total_members,
+                    'boosts': boosts,
                     'online_count': online_count,
-                    'members': members
+                    'members': members,
+                    'widget': widget
                 }
             except Exception as e:
                 console.print(f"[red]Error con el bot: {e}[/]")
@@ -82,29 +90,26 @@ class ServerAnalyzer:
         server_name = data.get('name') or data['widget'].get('name', 'Desconocido')
         info_table.add_row("Servidor", server_name)
 
-        # Manejar estadísticas de miembros
-        if 'total_members' in data:
+        if data.get('total_members') is not None:
             online_count = data.get('online_count', 0)
-            info_table.add_row("Miembros", f"{online_count}/{data['total_members']")
+            info_table.add_row("Miembros", f"{online_count}/{data['total_members']}")
         elif data['widget'].get('online_members') is not None:
             info_table.add_row("En línea", str(len(data['widget']['online_members'])))
 
-        if 'boosts' in data:
+        if data.get('boosts') is not None:
             info_table.add_row("Boosts", str(data['boosts']))
 
-        # Canales de voz e invitación del widget
         if data['widget'].get('voice_channels'):
             info_table.add_row("Canales de voz", ", ".join(data['widget']['voice_channels']))
         if data['widget'].get('invite'):
             info_table.add_row("Invitación", data['widget']['invite'])
 
-        # Tabla de miembros
         members_table = Table.grid(padding=(0, 1))
         members_table.add_column(style="bold", width=30)
         members_table.add_column(width=10)
 
-        if 'members' in data:  # Datos del bot
-            for member in data['members'][:50]:
+        if data.get('members'):
+            for member in data['members']:
                 username = f"{member['username']}#{member['discriminator']}"
                 status = member['status']
                 members_table.add_row(username, Text(f"◉ {status.upper()}", style=self.status_colors.get(status, 'magenta')))
@@ -132,12 +137,12 @@ class ServerAnalyzer:
 
         data = await self.get_data(server_id, token if token else None)
 
-        # Manejar errores solo si no hay datos del bot
         if data['widget'].get('error') and not data.get('name'):
             console.print(f"[red]Error: {data['widget']['error']}[/]")
             return
 
         console.print(self.build_display(data))
+
 
 if __name__ == "__main__":
     analyzer = ServerAnalyzer()
