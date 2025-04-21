@@ -126,7 +126,7 @@ def crear_panel(info, panel_width):
 
     return Panel(
         t,
-        title=Text("ＳＴＥＬＬＡＲ", style=estilo_rgb(paleta['titulo'])),
+        title=Text(" ❤️ ", style=estilo_rgb(paleta['titulo'])),
         border_style=estilo_rgb(paleta['borde']),
         padding=(1, 2),
         width=panel_width,
