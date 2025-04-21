@@ -1,8 +1,8 @@
 import discord
+import asyncio
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
-import asyncio
 from datetime import datetime
 
 console = Console()
@@ -14,70 +14,48 @@ class DiscordUserFetcher:
         self.bot = discord.Client(intents=intents)
 
     def formatear_fecha(self, fecha):
-        if isinstance(fecha, datetime):
-            return fecha.strftime("%d/%m/%Y a las %H:%M:%S")
-        return "N/A"
+        return fecha.strftime("%d/%m/%Y a las %H:%M:%S") if isinstance(fecha, datetime) else "N/A"
+
+    def mostrar_insignias(self, flags):
+        insignias = {
+            "staff": "Discord Staff",
+            "partner": "Partner",
+            "hypesquad": "HypeSquad",
+            "bug_hunter": "Bug Hunter",
+            "bug_hunter_level_2": "Bug Hunter Nivel 2",
+            "verified_bot_developer": "Dev Bot Verificado",
+            "early_supporter": "Soporte Temprano",
+            "hypesquad_bravery": "Bravery",
+            "hypesquad_brilliance": "Brilliance",
+            "hypesquad_balance": "Balance",
+            "active_developer": "Desarrollador Activo"
+        }
+        lista = [nombre for clave, nombre in insignias.items() if getattr(flags, clave, False)]
+        return ", ".join(lista) if lista else "Ninguna"
 
     def mostrar_info(self, user: discord.User, member: discord.Member = None):
-        tabla = Table(show_header=False, box=None)
-        tabla.add_column(style="bold green", width=20)
-        tabla.add_column(style="blue")
+        tabla = Table(show_header=False, box=None, padding=(0, 1))
+        tabla.add_column(style="bold green", width=22)
+        tabla.add_column(style="cyan")
 
         tabla.add_row("Usuario", f"{user.name}#{user.discriminator}")
         tabla.add_row("ID", str(user.id))
         tabla.add_row("Bot", "Sí" if user.bot else "No")
         tabla.add_row("Creado el", self.formatear_fecha(user.created_at))
         tabla.add_row("Avatar", user.avatar.url if user.avatar else "Sin avatar")
-
-        badges = self.mostrar_insignias(user.public_flags)
-        tabla.add_row("Insignias", badges)
-
-        if hasattr(user, 'activity') and user.activity:
-            activity_name = user.activity.name
-            activity_type = user.activity.type.name
-            tabla.add_row(f"Actividad ({activity_type})", activity_name)
-        else:
-            tabla.add_row("Actividad", "Ninguna")
+        tabla.add_row("Insignias", self.mostrar_insignias(user.public_flags))
 
         if member:
-            status = str(member.status).title()  # Acceder al estado del miembro si es un objeto Member
-            tabla.add_row("Estado de presencia", status)
+            tabla.add_row("Estado", str(member.status).title())
             tabla.add_row("Apodo", member.nick or "Ninguno")
             tabla.add_row("Unido el", self.formatear_fecha(member.joined_at))
-
-            roles = [role.name for role in member.roles if role.name != "@everyone"]
-            roles_str = ", ".join(roles) if roles else "Ninguno"
-            tabla.add_row("Roles", roles_str)
+            roles = [r.name for r in member.roles if r.name != "@everyone"]
+            tabla.add_row("Roles", ", ".join(roles) if roles else "Ninguno")
         else:
-            tabla.add_row("Estado de presencia", "Desconocido (No en servidor)")
+            tabla.add_row("Estado", "Desconocido (no está en el servidor)")
 
-        console.print(Panel.fit(
-            tabla,
-            title="[bold cyan]Información del Usuario[/]",
-            border_style="cyan",
-            padding=(1, 4)
-        ))
-
-    def mostrar_insignias(self, flags):
-        insignias = []
-        if flags.early_supporter:
-            insignias.append("Soporte temprano")
-        if flags.partner:
-            insignias.append("Partner")
-        if flags.hypesquad:
-            insignias.append("HypeSquad")
-        if flags.bug_hunter:
-            insignias.append("Cazador de bugs")
-        if flags.verified_bot_developer:
-            insignias.append("Desarrollador de Bot Verificado")
-        
-        if not insignias:
-            return "Ninguna"
-        return ", ".join(insignias)
-
-    async def get_server_info(self, server_id):
-        guild = await self.bot.fetch_guild(server_id)
-        return guild
+        panel = Panel(tabla, title="[bold cyan]Información del Usuario[/]", border_style="bright_cyan", padding=(1, 4))
+        console.print(panel)
 
     async def run(self):
         user_id = console.input("[bold green]ID del usuario: [/]").strip()
@@ -90,13 +68,18 @@ class DiscordUserFetcher:
 
         try:
             await self.bot.login(token)
-
             user = await self.bot.fetch_user(int(user_id))
             member = None
+
             if server_id_input.isdigit():
-                server_id = int(server_id_input)
-                guild = await self.get_server_info(server_id)
-                member = guild.get_member(int(user_id))
+                try:
+                    guild = await self.bot.fetch_guild(int(server_id_input))
+                    member = await guild.fetch_member(int(user_id))
+                except discord.Forbidden:
+                    console.print("[yellow]No se tienen permisos para acceder al servidor.[/]")
+                except discord.NotFound:
+                    console.print("[yellow]El usuario no está en ese servidor.[/]")
+
             self.mostrar_info(user, member)
 
         except discord.LoginFailure:
@@ -106,7 +89,8 @@ class DiscordUserFetcher:
         except Exception as e:
             console.print(f"[red]Error inesperado: {e}[/]")
         finally:
-            await self.bot.close()
+            if self.bot.is_closed() is False:
+                await self.bot.close()
 
 if __name__ == "__main__":
     fetcher = DiscordUserFetcher()
