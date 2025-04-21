@@ -57,7 +57,12 @@ cd "$HOME"
 
 clear
 
- 
+pkill -f "tor --SocksPort" 2>/dev/null
+PORT=9052
+tor --SocksPort $PORT --RunAsDaemon 1 2>/dev/null & disown && \
+export ALL_PROXY="socks5h://localhost:$PORT" 2>/dev/null && \
+git config --global http.proxy "socks5://127.0.0.1:$PORT" 2>/dev/null && \
+git config --global https.proxy "socks5://127.0.0.1:$PORT" 2>/dev/null
 
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
