@@ -2,10 +2,10 @@
 
 cd
 cd Stellar/config/themes
-mv banner.txt .
-mv banner_color.txt .
-mv banner_background.txt .
-mv banner_background_color.txt .
+mv banner.txt $HOME
+mv banner_color.txt $HOME
+mv banner_background.txt $HOME
+mv banner_background_color.txt $HOME
 git stash
 cd
 cd Stellar
