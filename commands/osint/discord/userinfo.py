@@ -1,4 +1,3 @@
-
 import discord
 from discord.ext import commands
 from rich.console import Console
@@ -12,113 +11,141 @@ console = Console()
 
 class DiscordUserAnalyzer:
     def __init__(self):
+        # Use all intents to get maximum information
         intents = discord.Intents.all()
-        self.bot = commands.Bot(command_prefix="!", intents=intents)
+        # Create bot without command prefix since we won't use commands
+        self.client = discord.Client(intents=intents)
 
-    def formatear_fecha(self, fecha):
-        return fecha.strftime("%d/%m/%Y a las %H:%M:%S") if isinstance(fecha, datetime) else "N/A"
+    def format_date(self, date):
+        return date.strftime("%d/%m/%Y a las %H:%M:%S") if isinstance(date, datetime) else "N/A"
 
-    def mostrar_insignias(self, flags):
-        insignias = []
-        if flags.early_supporter: insignias.append("Soporte Temprano")
-        if flags.partner: insignias.append("Partner")
-        if flags.hypesquad: insignias.append("HypeSquad")
-        if flags.bug_hunter: insignias.append("Cazador de Bugs")
-        if flags.verified_bot_developer: insignias.append("Dev Verificado")
-        if flags.discord_certified_moderator: insignias.append("Moderador Certificado")
-        return ", ".join(insignias) if insignias else "Ninguna"
+    def get_badges(self, flags: discord.PublicUserFlags):
+        badge_map = {
+            'staff': "Discord Staff",
+            'partner': "Partner",
+            'hypesquad': "HypeSquad",
+            'bug_hunter': "Bug Hunter Nivel 1",
+            'bug_hunter_level_2': "Bug Hunter Nivel 2",
+            'early_supporter': "Soporte Temprano",
+            'verified_bot_developer': "Dev Bot Verificado",
+            'certified_moderator': "Moderador Certificado",
+            'active_developer': "Dev Activo",
+        }
+        return ", ".join(name for attr, name in badge_map.items() if getattr(flags, attr, False)) or "Ninguna"
 
-    def construir_panel_usuario(self, user, member=None):
-        tabla = Table(show_header=False, box=None)
-        tabla.add_column(style="bold green", width=25)
-        tabla.add_column(style="cyan")
+    def build_user_panel(self, user: discord.User, member: discord.Member = None):
+        table = Table(show_header=False, box=None)
+        table.add_column(style="bold green", width=28)
+        table.add_column(style="cyan")
 
-        tabla.add_row("Nombre", f"{user.name}#{user.discriminator}")
-        tabla.add_row("ID", str(user.id))
-        tabla.add_row("Bot", "Sí" if user.bot else "No")
-        tabla.add_row("Creado el", self.formatear_fecha(user.created_at))
-        tabla.add_row("Avatar", user.avatar.url if user.avatar else "Sin avatar")
-        tabla.add_row("Insignias", self.mostrar_insignias(user.public_flags))
+        # Basic user info
+        table.add_row("Usuario", f"{user.name}#{user.discriminator}")
+        table.add_row("ID", str(user.id))
+        table.add_row("Bot", "Sí" if user.bot else "No")
+        table.add_row("Creado el", self.format_date(user.created_at))
+        avatar = user.avatar.url if user.avatar else "Sin avatar"
+        table.add_row("Avatar", avatar)
+        banner = getattr(user, 'banner', None)
+        table.add_row("Banner", banner.url if banner else "Sin banner")
+        # Badges
+        table.add_row("Insignias", self.get_badges(user.public_flags))
 
-        if hasattr(user, 'banner') and user.banner:
-            tabla.add_row("Banner", user.banner.url)
-
+        # Member-specific info
         if member:
-            tabla.add_row("Apodo", member.nick or "Ninguno")
-            tabla.add_row("Unido al servidor", self.formatear_fecha(member.joined_at))
-            tabla.add_row("Estado", str(member.status).title())
+            table.add_row("Apodo", member.nick or "Ninguno")
+            table.add_row("Unido el", self.format_date(member.joined_at))
+            table.add_row("Estado", str(member.status).capitalize())
+            # Activities
+            if member.activities:
+                acts = [f"{act.name} ({act.type.name})" for act in member.activities if isinstance(act, discord.Activity)]
+                table.add_row("Actividades", ", ".join(acts))
+            # Roles
             roles = [r.name for r in member.roles if r.name != "@everyone"]
-            tabla.add_row("Roles", ", ".join(roles) if roles else "Ninguno")
+            table.add_row("Roles", ", ".join(roles) if roles else "Ninguno")
+            # Top role color
+            table.add_row("Color del Rol Máximo", str(member.top_role.color))
+            # Boost
+            if member.premium_since:
+                table.add_row("Boost desde", self.format_date(member.premium_since))
+            # Device statuses
+            try:
+                devs = []
+                if member.desktop_status: devs.append("Escritorio")
+                if member.mobile_status: devs.append("Móvil")
+                if member.web_status: devs.append("Web")
+                table.add_row("Dispositivos", ", ".join(devs) if devs else "Desconocido")
+            except AttributeError:
+                pass
+        else:
+            table.add_row("Estado en servidor", "No en el servidor")
 
-            if member.activity:
-                actividad = f"{member.activity.name} ({member.activity.type.name})"
-                tabla.add_row("Actividad", actividad)
+        panel = Panel.fit(table, title="[bold magenta]Información Detallada[/]", border_style="magenta", padding=(1,2))
+        return panel
 
-        return Panel(tabla, title="[bold cyan]Información del Usuario[/]", border_style="cyan")
-
-    async def obtener_mensajes_usuario(self, member: discord.Member):
-        mensajes = []
-        for canal in member.guild.text_channels:
-            if not canal.permissions_for(member.guild.me).read_message_history:
+    async def fetch_messages(self, guild: discord.Guild, user_id: int, limit_per_channel: int = 50, max_messages: int = 20):
+        messages = []
+        for channel in guild.text_channels:
+            if not channel.permissions_for(guild.me).read_message_history:
                 continue
             try:
-                async for mensaje in canal.history(limit=50):
-                    if mensaje.author.id == member.id:
-                        mensajes.append(f"[{canal.name}] {mensaje.created_at.strftime('%d/%m/%Y %H:%M')} - {mensaje.content}")
-                    if len(mensajes) >= 10:
-                        break
+                async for msg in channel.history(limit=limit_per_channel):
+                    if msg.author.id == user_id:
+                        timestamp = msg.created_at.strftime("%d/%m/%Y %H:%M")
+                        messages.append(f"[{channel.name} | {timestamp}] {msg.content}")
+                        if len(messages) >= max_messages:
+                            return messages
             except Exception:
                 continue
-        return mensajes
+        return messages
 
-    async def analizar(self, user_id: int, token: str, server_id: int = None):
-        try:
-            await self.bot.login(token)
-            user = await self.bot.fetch_user(user_id)
-            member = None
-            mensajes = []
+    async def analyze(self, user_id: int, token: str, server_id: int = None):
+        await self.client.login(token)
+        await self.client.connect()
+        await self.client.wait_until_ready()
 
-            if server_id:
-                try:
-                    guild = await self.bot.fetch_guild(server_id)
-                    await guild.chunk()
-                    member = guild.get_member(user_id)
-                    if member:
-                        mensajes = await self.obtener_mensajes_usuario(member)
-                except discord.Forbidden:
-                    console.print("[red]El bot no tiene acceso al servidor especificado.[/]")
-                except discord.NotFound:
-                    console.print("[red]Servidor no encontrado.[/]")
+        user = await self.client.fetch_user(user_id)
+        member = None
+        messages = []
 
-            console.print(self.construir_panel_usuario(user, member))
+        if server_id:
+            try:
+                guild = await self.client.fetch_guild(server_id)
+                await guild.chunk()
+                member = guild.get_member(user_id)
+                if member:
+                    messages = await self.fetch_messages(guild, user_id)
+            except discord.Forbidden:
+                console.print("[yellow]Sin permisos para el servidor especificado.[/]")
+            except discord.NotFound:
+                console.print("[yellow]Servidor no encontrado.[/]")
 
-            if mensajes:
-                tabla = Table(title="[bold yellow]Últimos Mensajes[/]", box=None)
-                for msg in mensajes:
-                    tabla.add_row(Text(msg, overflow="fold"))
-                console.print(tabla)
+        console.print(self.build_user_panel(user, member))
 
-        except discord.LoginFailure:
-            console.print("[red]Token inválido.[/]")
-        except discord.NotFound:
-            console.print("[red]Usuario no encontrado.[/]")
-        except Exception as e:
-            console.print(f"[red]Error inesperado: {e}[/]")
-        finally:
-            await self.bot.close()
+        if messages:
+            msg_table = Table(title="[bold yellow]Últimos Mensajes[/]", show_header=False, box=None)
+            for m in messages:
+                msg_table.add_row(Text(m, overflow="fold"))
+            console.print(msg_table)
+
+        await self.client.close()
 
     async def run(self):
-        user_id = console.input("[bold green]ID del usuario: [/]").strip()
+        uid = console.input("[bold green]ID del usuario: [/]").strip()
         token = console.input("[bold green]Token del bot: [/]").strip()
-        server_id_input = console.input("[bold green]ID del servidor (opcional): [/]").strip()
+        sid = console.input("[bold green]ID del servidor (opcional): [/]").strip()
 
-        if not user_id.isdigit():
-            console.print("[red]El ID debe ser numérico.[/]")
+        if not uid.isdigit():
+            console.print("[red]El ID del usuario debe ser numérico.[/]")
             return
+        user_id = int(uid)
+        server_id = int(sid) if sid.isdigit() else None
 
-        user_id = int(user_id)
-        server_id = int(server_id_input) if server_id_input.isdigit() else None
-        await self.analizar(user_id, token, server_id)
+        try:
+            await self.analyze(user_id, token, server_id)
+        except discord.LoginFailure:
+            console.print("[red]Token inválido.[/]")
+        except Exception as e:
+            console.print(f"[red]Error inesperado: {e}[/]")
 
 if __name__ == "__main__":
     analyzer = DiscordUserAnalyzer()
