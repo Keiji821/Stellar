@@ -11,9 +11,7 @@ console = Console()
 
 class DiscordUserAnalyzer:
     def __init__(self):
-        # Use all intents to get maximum information
         intents = discord.Intents.all()
-        # Create bot without command prefix since we won't use commands
         self.client = discord.Client(intents=intents)
 
     def format_date(self, date):
