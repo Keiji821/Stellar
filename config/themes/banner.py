@@ -87,7 +87,7 @@ def obtener_info():
         "Usuario": usuario,
         "Fecha": now.strftime("%Y-%m-%d"),
         "Hora": now.strftime("%I:%M %p"),
-        "Modelo": obtener_modelo_celular(),
+        "Celular": obtener_modelo_celular(),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
         "Tiempo transcurrido": ta_str,
@@ -111,7 +111,7 @@ def crear_panel(info, panel_width):
     t.add_column(style=estilo_rgb(paleta['clave']), justify="right", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), min_width=30)
     
-    for key in ["Usuario", "Fecha", "Hora", "Modelo", "OS", "Kernel", "Tiempo transcurrido", "Shell", "Terminal"]:
+    for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Tiempo transcurrido", "Shell", "Terminal"]:
         t.add_row(f"{key}:", info[key])
     
     memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
