@@ -108,7 +108,7 @@ def render_bar(pct, color, width=20):
 
 def crear_panel(info, panel_width):
     t = Table.grid(expand=False)
-    t.add_column(style=estilo_rgb(paleta['clave']), justify="right", min_width=18)
+    t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), min_width=30)
     
     for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Tiempo transcurrido", "Shell", "Terminal"]:
