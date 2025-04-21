@@ -22,7 +22,7 @@ system_dir = os.path.expanduser("~/Stellar/config/system")
 
 def generar_paleta():
     def color_rgb():
-        return (random.randint(100, 255), (random.randint(100, 255)), (random.randint(100, 255))
+        return (random.randint(100, 255), (random.randint(100, 255)), (random.randint(100, 255)))
     return {
         'titulo': color_rgb(),
         'clave': color_rgb(),
