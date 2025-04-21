@@ -90,7 +90,7 @@ def obtener_info():
         "Modelo": obtener_modelo_celular(),
         "OS": f"Termux {platform.machine()}",
         "Kernel": platform.release(),
-        "Tiempo transcurrido":, ta_str,
+        "Tiempo transcurrido", :, ta_str,
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
         "MemoriaPorcentaje": vm.percent,
