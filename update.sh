@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+cd
+cd Stellar/config/themes
 mv banner.txt .
 mv banner_color.txt .
 mv banner_background.txt .
 mv banner_background_color.txt .
 git stash
+cd
+cd Stellar
 
 update_repo() {
     if ! git pull --force; then
