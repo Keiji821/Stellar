@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+move() {
 cd
 cd Stellar/config/system
 mv user.txt $HOME
@@ -12,6 +13,19 @@ mv banner_background_color.txt $HOME
 git stash
 cd
 cd Stellar
+}
+
+copy() {
+cd
+mv user.txt ~/Stellar/config/system
+mv banner.txt ~/Stellar/config/themes/
+mv banner_color.txt ~/Stellar/config/themes/
+mv banner_background.txt ~/Stellar/config/themes/
+mv banner_background_color.txt ~/Stellar/config/themes/
+}
+
+move
+copy
 
 update_repo() {
     if ! git pull --force; then
@@ -34,13 +48,7 @@ else
     exit 1
 fi
 
-cd
-mv user.txt ~/Stellar/config/system
-mv banner.txt ~/Stellar/config/themes/
-mv banner_color.txt ~/Stellar/config/themes/
-mv banner_background.txt ~/Stellar/config/themes/
-mv banner_background_color.txt ~/Stellar/config/themes/
-
+copy
 
 printf "¡Todo en orden!" | lolcat -a -d 20
 echo
