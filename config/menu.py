@@ -14,8 +14,7 @@ while True:
         print("Has presionado la tecla w")
     elif char == "s":
         print("Has presionado la tecla s")
-    elif char == "
-":
+    elif char == "":
         break
 
 termios.tcsetattr(fd, termios.TCSANOW, attr)
