@@ -30,10 +30,9 @@ def page4():
 def page5():
     console.print("[code][bold cyan]Pentesting[/code][/bold cyan]")
 
-
+mainpage()
 while True:
     char = sys.stdin.read(1)
-    mainpage()
     if char == "1":
         page1()
     elif char == "2":
