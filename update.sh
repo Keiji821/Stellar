@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
 
 move() {
-cd
-cd Stellar/config/system
+cd config/system
 mv user.txt $HOME
 cd
-cd Stellar/config/themes
+cd config/themes
 mv banner.txt $HOME
 mv banner_color.txt $HOME
 mv banner_background.txt $HOME
 mv banner_background_color.txt $HOME
 git stash
-cd
-cd Stellar
 }
 
-copy() {
 cd
+
+copy() {
 mv user.txt ~/Stellar/config/system
 mv banner.txt ~/Stellar/config/themes/
 mv banner_color.txt ~/Stellar/config/themes/
@@ -28,7 +26,6 @@ move
 copy
 
 update_repo() {
-    cd Stellar/config/system
     if ! git pull --force; then
         echo "Error al actualizar el repositorio" >&2
         exit 1
