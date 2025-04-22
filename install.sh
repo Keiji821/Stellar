@@ -18,74 +18,28 @@ amarillo2="\033;33m"
 cyan="\033[38;2;23;147;209m"
 
 PROGRESS_BAR_WIDTH=50
-progress() {
-    local percentage=$1
-    local filled=$(($PROGRESS_BAR_WIDTH * $percentage / 100))
-    local empty=$(($PROGRESS_BAR_WIDTH - $filled))
-    printf "${amarillo}[${cyan}"
-    printf "%${filled}s" | tr ' ' '█'
-    printf "${gris}%${empty}s" | tr ' ' ' '
-    printf "${amarillo}] ${verde}%3d%%${blanco}\r" "$percentage"
-}
-
-spinner() {
-    local pid=$!
-    local delay=0.1
-    local spinstr='|/-\'
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-        local temp=${spinstr#?}
-        printf "${amarillo} [%c]  ${blanco}" "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
-        sleep $delay
-        printf "\b\b\b\b\b\b"
-    done
-    printf "    \b\b\b\b"
-}
-
-clear
-
-status_msg() {
-    echo -e "${amarillo}[${verde}+${amarillo}]${blanco} $1"
-}
-
-handle_error() {
-    echo -e "${rojo}[ERROR]${blanco} $1"
-    exit 1
-}
-
-copy_config() {
-    status_msg "Copiando archivos de configuración..."
-    if [[ -f ~/Stellar/config/.bash_profile && -f ~/Stellar/config/.bashrc ]]; then
-        cp ~/Stellar/config/.bash_profile ~/ & spinner
-        cp ~/Stellar/config/.bashrc ~/ & spinner
-    else
-        handle_error "Archivos de configuración no encontrados en ~/Stellar/config/"
-    fi
-    progress 10
-}
-
-copy_config
+current_line=2
 
 user_config() {
     while true; do
         clear
         echo -e "${amarillo}Configuración de usuario${blanco}"
         echo -e "${amarillo}-----------------------${blanco}"
-        
+
         read -p "Nombre de usuario (4-15 caracteres): " usuario
-        
+
         if [[ -z "$usuario" ]]; then
             echo -e "${rojo}El campo no puede estar vacío${blanco}"
             sleep 1
             continue
         fi
-        
+
         if [[ "${#usuario}" -lt 4 || "${#usuario}" -gt 15 ]]; then
             echo -e "${rojo}Debe tener entre 4 y 15 caracteres${blanco}"
             sleep 1
             continue
         fi
-        
+
         if [[ ! "$usuario" =~ ^[a-zA-Z0-9_]+$ ]]; then
             echo -e "${rojo}Solo se permiten letras, números y _${blanco}"
             sleep 1
@@ -105,32 +59,59 @@ fi
 
 user_config
 
+progress() {
+    local percentage=$1
+    local filled=$((${PROGRESS_BAR_WIDTH} * ${percentage} / 100))
+    local empty=$((${PROGRESS_BAR_WIDTH} - ${filled}))
+    printf "\r${amarillo}[${cyan}"
+    printf "%${filled}s" | tr ' ' '■'
+    printf "%${empty}s" | tr ' ' '·'
+    printf "${amarillo}] ${verde}%3d%%${blanco}" "${percentage}"
+}
+
+show_package() {
+    printf "\033[${current_line}H\033[2K${amarillo}[${verde}+${amarillo}]${blanco} %s" "$1"
+    printf "\033[$((${current_line} + 1))H"
+}
+
 install_packages() {
-    status_msg "Actualizando paquetes..."
-    apt update -y && apt upgrade -y & spinner
-    progress 30
+    progress 0
+    echo -e "\n\n"
     
-    status_msg "Instalando dependencias principales..."
+    show_package "Actualizando paquetes..."
+    apt update -y && apt upgrade -y
+    progress 30
+
     local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils)
-    local i=0
-    for pkg in "${apt_packages[@]}"; do
-        apt install -y $pkg & spinner
-        progress=$((30 + (40 * (++i)/${#apt_packages[@]})))
+    local total=${#apt_packages[@]}
+    local step=$((40 / total))
+    
+    for ((i=0; i<total; i++)); do
+        show_package "Instalando ${apt_packages[$i]}"
+        apt install -y "${apt_packages[$i]}" 
+        progress=$((30 + (step * (i + 1))))
         progress $progress
     done
+
+    local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
+    total=${#pip_packages[@]}
+    step=$((30 / total))
     
-    status_msg "Instalando dependencias de Python..."
-    local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks 
-                      requests rich "rich[jupyter]" lolcat discord)
-    i=0
-    for pkg in "${pip_packages[@]}"; do
-        pip install $pkg & spinner
-        progress=$((70 + (30 * (++i)/${#pip_packages[@]})))
+    for ((i=0; i<total; i++)); do
+        show_package "Instalando ${pip_packages[$i]}"
+        pip install "${pip_packages[$i]}" 
+        progress=$((70 + (step * (i + 1))))
         progress $progress
     done
 }
 
-install_packages
+main() {
+    clear
+    echo -e "\n\n"
+    current_line=2
+    install_packages
+    progress 100
+    echo -e "\n${amarillo}[${verde}+${amarillo}]${blanco} ¡Instalación completada!\n"
+}
 
-echo
-status_msg "Instalación completada con éxito!"
+main
