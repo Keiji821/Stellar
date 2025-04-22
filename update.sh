@@ -19,7 +19,6 @@ update_repo() {
         exit 1
     fi
 }
-cd
 
 show_lolcat_message() {
     local message="$1"
