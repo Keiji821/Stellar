@@ -17,18 +17,61 @@ def mainpage():
     
 def page1():
     console.print("[code][bold cyan]Sistema[/code][/bold cyan]")
+    console.print("""
+bash:
+
+reload:
+
+ui:
+
+uninstall:
+
+update:
+""")
 
 def page2():
     console.print("[code][bold cyan]Utilidades[/code][/bold cyan]")
+    console.print("""
+ia:
+
+ia-image:
+
+traductor:
+
+myip
+""")
 
 def page3():
     console.print("[code][bold cyan]Osint[/code][/bold cyan]")
+    console.print("""
+ipinfo:
+
+urlinfo:
+
+userfinder:
+
+phoneinfo:
+
+emailsearch:
+""")
 
 def page4():
     console.print("[code][bold cyan]Osint - Discod[/code][/bold cyan]")
+    console.print("""
+userinfo:
+
+serverinfo:
+
+searchinvites:
+
+inviteinfo:
+""")
 
 def page5():
     console.print("[code][bold cyan]Pentesting[/code][/bold cyan]")
+    console.print("""
+ddos:
+""")
 
 mainpage()
 while True:
