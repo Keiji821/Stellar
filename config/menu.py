@@ -16,7 +16,20 @@ def page1():
     console.print("[bold white]Pagina principal[/bold white]", justify="center")
     
 def page2():
-    console.print("[code][bold cyan]OSINT[/code][/bold cyan]")
+    console.print("[code][bold cyan]Sistema[/code][/bold cyan]")
+
+def page3():
+    console.print("[code][bold cyan]Utilidades[/code][/bold cyan]")
+
+def page4():
+    console.print("[code][bold cyan]Osint[/code][/bold cyan]")
+
+def page5():
+    console.print("[code][bold cyan]Osint - Discod[/code][/bold cyan]")
+
+def page6():
+    console.print("[code][bold cyan]Pentesting[/code][/bold cyan]")
+
 
 while True:
     char = sys.stdin.read(1)
@@ -24,9 +37,14 @@ while True:
         page1()
     elif char == "2":
         page2()
-    elif char == "3":        
-    elif char == "4":       
-    elif char == "5":       
+    elif char == "3": 
+        page3()       
+    elif char == "4":  
+        page4()     
+    elif char == "5":  
+        page5()     
+    elif char == "6":  
+        page6()     
     elif char == "":
         break
 
