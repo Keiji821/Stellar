@@ -49,6 +49,3 @@ while True:
         break
 
 termios.tcsetattr(fd, termios.TCSANOW, attr)
-
-if __name__ == "__main__":
-    main()
