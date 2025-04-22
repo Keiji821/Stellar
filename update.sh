@@ -28,6 +28,7 @@ move
 copy
 
 update_repo() {
+    cd Stellar/config/system
     if ! git pull --force; then
         echo "Error al actualizar el repositorio" >&2
         exit 1
