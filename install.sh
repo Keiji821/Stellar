@@ -92,14 +92,14 @@ user_config() {
             continue
         fi
 
-        echo "$usuario" > ~/Stellar/config/system/user.txt && break
+        echo "$usuario" > config/system/user.txt && break
         echo -e "${verde}Usuario configurado correctamente!${blanco}"
         sleep 2
     done
     progress 20
 }
 
-if [[ ! -d ~/system ]]; then
+if [[ ! -d config/system ]]; then
     handle_error "Directorio system no encontrado en ~/"
 fi
 
