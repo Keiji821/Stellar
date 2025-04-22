@@ -6,91 +6,93 @@ import termios
 import sys
 import os
 
-console = Console(highlight=False)
+console = Console(highlight=False, width=80)
 
 pages = [
     {
-        "title": "🌟 Stellar Toolbox",
+        "title": "🚀 Stellar Toolbox",
         "content": """
-        [bold #7c4dff]Una herramienta multifuncional[/]
+        [b #8A2BE2]Herramienta multifuncional[/]
         
-        [italic #757575]Presiona → para navegar
-        Presiona Q para salir[/]""",
-        "color": "bold #7c4dff"
+        [italic #A0A0A0]Navegación:
+        ← → : Cambiar páginas
+        Q   : Salir del programa[/]""",
+        "color": "bold #8A2BE2",
+        "icon": "🌌"
     },
     {
-        "title": "🛠 Sistema",
+        "title": "⚙️ Sistema",
         "content": """
-        [bold cyan]● reload[/]    Reiniciar aplicación
-        [bold cyan]● ui[/]       Modo interfaz gráfica
-        [bold cyan]● uninstall[/] Desinstalar Stellar
-        [bold cyan]● update[/]    Actualizar versión
-        [bold cyan]● bash[/]     Terminal integrado""",
-        "color": "cyan"
+        [bold #20B2AA]• reload     Reiniciar aplicación
+        • ui        Modo interfaz gráfica
+        • uninstall Desinstalar herramienta
+        • update    Actualizar versión
+        • bash      Terminal integrado[/]""",
+        "color": "#20B2AA",
+        "icon": "⚙️"
     },
     {
         "title": "🔧 Utilidades",
         "content": """
-        [bold green]● ia[/]        Asistente conversacional
-        [bold green]● ia-image[/]  Generador de imágenes IA
-        [bold green]● traductor[/] Traducción en tiempo real
-        [bold green]● myip[/]      Información IP pública""",
-        "color": "green"
+        [bold #32CD32]• ia         Asistente conversacional
+        • ia-image   Generador de imágenes IA
+        • traductor  Traducción en tiempo real
+        • myip       Información de red[/]""",
+        "color": "#32CD32",
+        "icon": "🔧"
     },
     {
-        "title": "🔍 OSINT",
+        "title": "🕵️ OSINT",
         "content": """
-        [bold magenta]● ipinfo[/]     Geolocalización IP
-        [bold magenta]● urlinfo[/]    Analizar URL
-        [bold magenta]● userfinder[/] Buscar en redes
-        [bold magenta]● phoneinfo[/]  Información numérica
-        [bold magenta]● emailsearch[/] Búsqueda de emails""",
-        "color": "magenta"
+        [bold #DA70D6]• ipinfo      Geolocalización IP
+        • urlinfo     Analizador de URL
+        • userfinder  Búsqueda en redes
+        • phoneinfo   Información telefónica
+        • emailsearch Búsqueda de emails
+        • discord     Analizador de Discord[/]""",
+        "color": "#DA70D6",
+        "icon": "🕵️"
     },
     {
-        "title": "🛡 Pentesting",
+        "title": "🔒 Pentesting",
         "content": """
-        [bold red]● ddos[/]      Herramienta de stress
-        [bold red]● portscan[/]  Escáner de puertos
-        [bold red]● vulnscan[/]  Detectar vulnerabilidades
-        [bold red]● wireshark[/] Análisis de tráfico""",
-        "color": "red"
+        [bold #FF4500]• ddos       Herramienta de stress
+        • portscan   Escaneo de puertos
+        • vulnscan   Detección de vulnerabilidades
+        • wireshark  Análisis de tráfico[/]""",
+        "color": "#FF4500",
+        "icon": "🔒"
     }
 ]
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def create_panel(content, color, title):
+def create_panel(page):
     return Panel(
-        Text.from_markup(content.strip()),
-        style=color,
-        width=50,
-        title=title,
-        title_align="left",
-        padding=(1, 2),
-        border_style="#424242",
-        subtitle_align="right"
+        Text.from_markup(page["content"].strip()),
+        width=60,
+        title=f"{page['icon']} {page['title']}",
+        style=page["color"],
+        border_style="#404040",
+        padding=(1, 3),
+        subtitle=f"Página {pages.index(page)+1}/{len(pages)}",
+        subtitle_style="dim"
     )
 
 def show_page(page_num):
-    page = pages[page_num]
     clear_screen()
+    page = pages[page_num]
     
     console.print(
-        Text(f"Página {page_num + 1}/{len(pages)}", 
-        justify="right", 
-        style="#9e9e9e")
+        Columns([create_panel(page)], 
+        align="center", 
+        expand=True
     )
     
-    console.print(
-        Columns([create_panel(page["content"], page["color"], page["title"])], 
-        align="center"), 
-        justify="center"
-    )
-    
-    footer = Text("← Anterior | → Siguiente | Q Salir", justify="center", style="#616161")
-    console.print(f"\n{footer}")
+    footer = Text("← Anterior | → Siguiente | Q Salir", 
+                 style="dim #808080", justify="center")
+    console.print(f"\n{footer}", justify="center")
 
 def setup_terminal():
     fd = sys.stdin.fileno()
@@ -121,12 +123,10 @@ def main():
     original_settings = setup_terminal()
     try:
         handle_navigation()
-    except Exception as e:
-        console.print(f"[bold red]Error: {e}[/]")
     finally:
         reset_terminal(original_settings)
         clear_screen()
-        console.print("[bold #7c4dff]¡Hasta pronto![/]", justify="center")
+        console.print("[bold #8A2BE2]¡Hasta pronto! 👋[/]", justify="center")
 
 if __name__ == "__main__":
     main()
