@@ -92,7 +92,7 @@ user_config() {
             continue
         fi
 
-        echo "$usuario" > ~/config/system/user.txt && break
+        echo "$usuario" > ~/Stellar/config/system/user.txt && break
         echo -e "${verde}Usuario configurado correctamente!${blanco}"
         sleep 2
     done
