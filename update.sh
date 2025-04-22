@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-cd config/system
+cd
+cd Stellar/config/system
 mv user.txt $HOME
 cd
 cd Stellar/config/themes
