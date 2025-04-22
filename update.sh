@@ -8,6 +8,7 @@ mv banner.txt $HOME
 mv banner_color.txt $HOME
 mv banner_background.txt $HOME
 mv banner_background_color.txt $HOME
+cd
 
 cd Stellar && git stash
 
