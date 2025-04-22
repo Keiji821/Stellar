@@ -45,7 +45,7 @@ while True:
         page5()     
     elif char == "6":  
         page6()     
-    elif char == "":
+    elif char == "x":
         break
 
 termios.tcsetattr(fd, termios.TCSANOW, attr)
