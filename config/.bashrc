@@ -57,7 +57,7 @@ cd "$HOME"
 
 clear
 
-pkill -f "tor --SocksPort" 2>/dev/null
+pkill -f "tor" 2>/dev/null
 PORT=9052
 tor --SocksPort $PORT --RunAsDaemon 1 2>/dev/null & disown && \
 export ALL_PROXY="socks5h://localhost:$PORT" 2>/dev/null && \
