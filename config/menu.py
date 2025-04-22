@@ -88,7 +88,7 @@ def show_page(page_num):
         Columns([create_panel(page)], 
         align="center", 
         expand=True
-    )
+    ))
     
     footer = Text("← Anterior | → Siguiente | Q Salir", 
                  style="dim #808080", justify="center")
