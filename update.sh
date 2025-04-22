@@ -9,13 +9,6 @@ mv banner_color.txt $HOME
 mv banner_background.txt $HOME
 mv banner_background_color.txt $HOME
 
-cd
-mv user.txt ~/Stellar/config/system
-mv banner.txt ~/Stellar/config/themes/
-mv banner_color.txt ~/Stellar/config/themes/
-mv banner_background.txt ~/Stellar/config/themes/
-mv banner_background_color.txt ~/Stellar/config/themes/
-
 cd Stellar && git stash
 
 update_repo() {
