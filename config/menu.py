@@ -10,54 +10,50 @@ console = Console(highlight=False)
 
 pages = [
     {
-        "title": "Portada",
+        "title": "🌟 Stellar Toolbox",
         "content": """
-        [bold #DAA520]
-          ___  _          _           _       
-         / __|| |_   __ _| |_   ___  | |      
-         \__ \|  _| / _` |  _| / _ \ | |      
-         |___/ \__| \__,_|\__| \___/ |_|      
-        [/]                                  
-        [bold white]Una herramienta multifuncional[/]
-        [italic #808080]Presiona → para comenzar[/]""",
-        "color": "#DAA520"
+        [bold #7c4dff]Una herramienta multifuncional[/]
+        
+        [italic #757575]Presiona → para navegar
+        Presiona Q para salir[/]""",
+        "color": "bold #7c4dff"
     },
     {
-        "title": "Sistema",
+        "title": "🛠 Sistema",
         "content": """
-        [bold cyan]● reload[/]    - Reiniciar aplicación
-        [bold cyan]● ui[/]       - Modo interfaz gráfica
-        [bold cyan]● uninstall[/] - Desinstalar Stellar
-        [bold cyan]● update[/]    - Actualizar versión
-        [bold cyan]● bash[/]     - Terminal integrado""",
+        [bold cyan]● reload[/]    Reiniciar aplicación
+        [bold cyan]● ui[/]       Modo interfaz gráfica
+        [bold cyan]● uninstall[/] Desinstalar Stellar
+        [bold cyan]● update[/]    Actualizar versión
+        [bold cyan]● bash[/]     Terminal integrado""",
         "color": "cyan"
     },
     {
-        "title": "Utilidades",
+        "title": "🔧 Utilidades",
         "content": """
-        [bold green]● ia[/]        - Asistente conversacional
-        [bold green]● ia-image[/]  - Generador de imágenes IA
-        [bold green]● traductor[/] - Traducción en tiempo real
-        [bold green]● myip[/]      - Información IP pública""",
+        [bold green]● ia[/]        Asistente conversacional
+        [bold green]● ia-image[/]  Generador de imágenes IA
+        [bold green]● traductor[/] Traducción en tiempo real
+        [bold green]● myip[/]      Información IP pública""",
         "color": "green"
     },
     {
-        "title": "OSINT",
+        "title": "🔍 OSINT",
         "content": """
-        [bold magenta]● ipinfo[/]     - Geolocalización IP
-        [bold magenta]● urlinfo[/]    - Analizar URL
-        [bold magenta]● userfinder[/] - Buscar en redes
-        [bold magenta]● phoneinfo[/]  - Información numérica
-        [bold magenta]● emailsearch[/] - Búsqueda de emails""",
+        [bold magenta]● ipinfo[/]     Geolocalización IP
+        [bold magenta]● urlinfo[/]    Analizar URL
+        [bold magenta]● userfinder[/] Buscar en redes
+        [bold magenta]● phoneinfo[/]  Información numérica
+        [bold magenta]● emailsearch[/] Búsqueda de emails""",
         "color": "magenta"
     },
     {
-        "title": "Pentesting",
+        "title": "🛡 Pentesting",
         "content": """
-        [bold red]● ddos[/]      - Herramienta de stress
-        [bold red]● portscan[/]  - Escáner de puertos
-        [bold red]● vulnscan[/]  - Detectar vulnerabilidades
-        [bold red]● wireshark[/] - Análisis de tráfico""",
+        [bold red]● ddos[/]      Herramienta de stress
+        [bold red]● portscan[/]  Escáner de puertos
+        [bold red]● vulnscan[/]  Detectar vulnerabilidades
+        [bold red]● wireshark[/] Análisis de tráfico""",
         "color": "red"
     }
 ]
@@ -65,14 +61,16 @@ pages = [
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def get_centered_panel(content, color, title):
-    return Panel.fit(
+def create_panel(content, color, title):
+    return Panel(
         Text.from_markup(content.strip()),
         style=color,
-        width=40,
-        title=f"[bold]{title}[/]",
+        width=50,
+        title=title,
         title_align="left",
-        padding=(1, 2)
+        padding=(1, 2),
+        border_style="#424242",
+        subtitle_align="right"
     )
 
 def show_page(page_num):
@@ -80,18 +78,18 @@ def show_page(page_num):
     clear_screen()
     
     console.print(
-        Text(f"{page_num + 1}/{len(pages)}", 
+        Text(f"Página {page_num + 1}/{len(pages)}", 
         justify="right", 
-        style="dim")
+        style="#9e9e9e")
     )
     
     console.print(
-        Columns([get_centered_panel(page["content"], page["color"], page["title"])], 
+        Columns([create_panel(page["content"], page["color"], page["title"])], 
         align="center"), 
         justify="center"
     )
     
-    footer = Text("← Anterior | → Siguiente | Q Salir", justify="center", style="dim")
+    footer = Text("← Anterior | → Siguiente | Q Salir", justify="center", style="#616161")
     console.print(f"\n{footer}")
 
 def setup_terminal():
@@ -128,7 +126,7 @@ def main():
     finally:
         reset_terminal(original_settings)
         clear_screen()
-        console.print("[bold green]¡Hasta pronto![/]", justify="center")
+        console.print("[bold #7c4dff]¡Hasta pronto![/]", justify="center")
 
 if __name__ == "__main__":
     main()
