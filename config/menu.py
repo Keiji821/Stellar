@@ -5,7 +5,8 @@ import sys
 console = Console()
 
 fd = sys.stdin.fileno()
-termios.tcsetattr(fd, termios.TCSANOW, termios.tcgetattr(fd)[0])
+attr = termios.tcgetattr(fd)
+termios.tcsetattr(fd, termios.TCSANOW, attr)
 
 while True:
     char = sys.stdin.read(1)
@@ -13,7 +14,8 @@ while True:
         print("Has presionado la tecla w")
     elif char == "s":
         print("Has presionado la tecla s")
-    elif char == "":
+    elif char == "
+":
         break
 
-termios.tcsetattr(fd, termios.TCSANOW, termios.tcgetattr(fd)[0])
+termios.tcsetattr(fd, termios.TCSANOW, attr)
