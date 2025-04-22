@@ -1,40 +1,81 @@
-gris="${b}\033[1;30m"
+#!/bin/bash
+
+gris="\033[1;30m"
 blanco="\033[0m"
-blanco2="$b\033[1;37m"
-rojo="${b}\033[1;31m"
-rojo2="${b}\033[31m"
-azul="${b}\033[1;34m"
-azul2="${b}\033[34m"
-azul_agua="${b}\e[1;36m"
-azul_agua2="${b}\e[36m"
-verde="${b}\033[1;32m"
-verde2="${b}\033[32m"
-morado="$b\033[1;35m"
-morado2="$b\033[35m"
-amarillo="$b\033[1;33m"
-amarillo2="$b\033[33m"
-cyan="$b\033[38;2;23;147;209m"
+blanco2="\033[1;37m"
+rojo="\033[1;31m"
+rojo2="\033[31m"
+azul="\033[1;34m"
+azul2="\033[34m"
+azul_agua="\e[1;36m"
+azul_agua2="\e[36m"
+verde="\033[1;32m"
+verde2="\033[32m"
+morado="\033[1;35m"
+morado2="\033[35m"
+amarillo="\033[1;33m"
+amarillo2="\033;33m"
+cyan="\033[38;2;23;147;209m"
+
+PROGRESS_BAR_WIDTH=50
+progress() {
+    local percentage=$1
+    local filled=$(($PROGRESS_BAR_WIDTH * $percentage / 100))
+    local empty=$(($PROGRESS_BAR_WIDTH - $filled))
+    printf "${amarillo}[${cyan}"
+    printf "%${filled}s" | tr ' ' '█'
+    printf "${gris}%${empty}s" | tr ' ' ' '
+    printf "${amarillo}] ${verde}%3d%%${blanco}\r" "$percentage"
+}
+
+spinner() {
+    local pid=$!
+    local delay=0.1
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf "${amarillo} [%c]  ${blanco}" "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
 
 clear
 
-cp ~/Stellar/config/.bash_profile ~/.
-cp ~/Stellar/config/.bashrc ~/.
+status_msg() {
+    echo -e "${amarillo}[${verde}+${amarillo}]${blanco} $1"
+}
+
+handle_error() {
+    echo -e "${rojo}[ERROR]${blanco} $1"
+    exit 1
+}
+
+copy_config() {
+    status_msg "Copiando archivos de configuración..."
+    if [[ -f ~/Stellar/config/.bash_profile && -f ~/Stellar/config/.bashrc ]]; then
+        cp ~/Stellar/config/.bash_profile ~/ & spinner
+        cp ~/Stellar/config/.bashrc ~/ & spinner
+    else
+        handle_error "Archivos de configuración no encontrados en ~/Stellar/config/"
+    fi
+    progress 10
+}
+
+copy_config
 
 user_config() {
-    if [ ! -d ~/system ]; then
-        echo -e "${rojo}Error: Directorio system no encontrado${blanco}"
-        return 1
-    fi
-
     while true; do
         clear
-        echo -e "${amarillo Configuración de usuario ${blanco}"
+        echo -e "${amarillo}Configuración de usuario${blanco}"
         echo -e "${amarillo}-----------------------${blanco}"
         
         read -p "Nombre de usuario (4-15 caracteres): " usuario
         
         if [[ -z "$usuario" ]]; then
-            echo -e "${rojo}El campo no puede estar vacio${blanco}"
+            echo -e "${rojo}El campo no puede estar vacío${blanco}"
             sleep 1
             continue
         fi
@@ -46,58 +87,49 @@ user_config() {
         fi
         
         if [[ ! "$usuario" =~ ^[a-zA-Z0-9_]+$ ]]; then
-            echo -e "${rojo}Solo se permiten letras, numeros y _${blanco}"
+            echo -e "${rojo}Solo se permiten letras, números y _${blanco}"
             sleep 1
             continue
         fi
 
-        echo "$usuario" > ~/system/user.txt
+        echo "$usuario" > ~/system/user.txt && break
         echo -e "${verde}Usuario configurado correctamente!${blanco}"
         sleep 2
-        break
     done
+    progress 20
 }
+
+if [[ ! -d ~/system ]]; then
+    handle_error "Directorio system no encontrado en ~/"
+fi
 
 user_config
 
-cd
+install_packages() {
+    status_msg "Actualizando paquetes..."
+    apt update -y && apt upgrade -y & spinner
+    progress 30
+    
+    status_msg "Instalando dependencias principales..."
+    local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils)
+    for pkg in "${apt_packages[@]}"; do
+        apt install -y $pkg & spinner
+        progress=$((30 + (40 * (++i)/${#apt_packages[@]}))
+        progress $progress
+    done
+    
+    status_msg "Instalando dependencias de Python..."
+    local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks 
+                      requests rich "rich[jupyter]" lolcat discord)
+    i=0
+    for pkg in "${pip_packages[@]}"; do
+        pip install $pkg & spinner
+        progress=$((70 + (30 * (++i)/${#pip_packages[@]})))
+        progress $progress
+    done
+}
 
-printf "${amarillo}[${verde}+${amarillo}]${blanco} Iniciando instalación\n"
+install_packages
 
-apt-get update -y && apt-get upgrade -y &>/dev/null &
-
-apt install python &>/dev/null &
-
-apt install tor &>/dev/null &
-
-apt install cloudflared &>/dev/null &
-
-apt install exiftool &>/dev/null &
-
-apt install nmap &>/dev/null &
-
-apt install termux-api &>/dev/null &
-
-apt install dnsutils &>/dev/null &
-
-pip install beautifulsoup4 &>/dev/null &
-
-pip install bs4 &>/dev/null &
-
-pip install pyfiglet &>/dev/null &
-
-pip install phonenumbers &>/dev/null &
-
-pip install psutil &>/dev/null &
-
-pip install PySocks &>/dev/null &
-
-pip install requests &>/dev/null &
-
-pip install rich &>/dev/null &
-
-pip install "rich[jupyter]" &>/dev/null &
-
-pip install lolcat &>/dev/null &
-
-pip install discord &>/dev/null &
+echo
+status_msg "Instalación completada con éxito!"
