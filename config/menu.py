@@ -42,7 +42,7 @@ pages = [
         "icon": "🔧"
     },
     {
-        "title": "🕵️ OSINT",
+        "title": "🕵️ OSINT/Discord",
         "content": """
         [bold #DA70D6]• ipinfo      Geolocalización IP
         • urlinfo     Analizador de URL
@@ -76,8 +76,7 @@ def create_panel(page):
         style=page["color"],
         border_style="#404040",
         padding=(1, 3),
-        subtitle=f"Página {pages.index(page)+1}/{len(pages)}",
-        subtitle_style="dim"
+        subtitle=f"Página {pages.index(page)+1}/{len(pages)}"
     )
 
 def show_page(page_num):
@@ -85,10 +84,8 @@ def show_page(page_num):
     page = pages[page_num]
     
     console.print(
-        Columns([create_panel(page)], 
-        align="center", 
-        expand=True
-    ))
+        Columns([create_panel(page)], align="center", expand=True)
+    )
     
     footer = Text("← Anterior | → Siguiente | Q Salir", 
                  style="dim #808080", justify="center")
