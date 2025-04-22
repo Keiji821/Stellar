@@ -1,31 +1,24 @@
 #!/usr/bin/env bash
 
-move() {
 cd config/system
 mv user.txt $HOME
 cd
-cd config/themes
+cd Stellar/config/themes
 mv banner.txt $HOME
 mv banner_color.txt $HOME
 mv banner_background.txt $HOME
 mv banner_background_color.txt $HOME
 git stash
-}
-
 cd
 
-copy() {
 mv user.txt ~/Stellar/config/system
 mv banner.txt ~/Stellar/config/themes/
 mv banner_color.txt ~/Stellar/config/themes/
 mv banner_background.txt ~/Stellar/config/themes/
 mv banner_background_color.txt ~/Stellar/config/themes/
-}
-
-move
-copy
 
 cd Stellar
+
 update_repo() {
     if ! git pull --force; then
         echo "Error al actualizar el repositorio" >&2
@@ -48,7 +41,12 @@ else
     exit 1
 fi
 
-copy
+cd
+mv user.txt ~/Stellar/config/system
+mv banner.txt ~/Stellar/config/themes/
+mv banner_color.txt ~/Stellar/config/themes/
+mv banner_background.txt ~/Stellar/config/themes/
+mv banner_background_color.txt ~/Stellar/config/themes/
 
 printf "¡Todo en orden!" | lolcat -a -d 20
 echo
