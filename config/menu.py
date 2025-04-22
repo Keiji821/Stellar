@@ -11,7 +11,7 @@ fd = sys.stdin.fileno()
 attr = termios.tcgetattr(fd)
 termios.tcsetattr(fd, termios.TCSANOW, attr)
 
-def mainpage():
+def main():
     console.print("[code][bold green]Comandos de Stellar[/code][/bold green]", justify="center")
     console.print("[bold white]Pagina principal[/bold white]", justify="center")
     
@@ -49,4 +49,4 @@ while True:
 termios.tcsetattr(fd, termios.TCSANOW, attr)
 
 if __name__ == "__main__":
-    mainpage()
+    main()
