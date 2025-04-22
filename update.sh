@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-cd
-cd Stellar/config/system
+cd config/system
 mv user.txt $HOME
 cd
 cd Stellar/config/themes
@@ -9,9 +8,6 @@ mv banner.txt $HOME
 mv banner_color.txt $HOME
 mv banner_background.txt $HOME
 mv banner_background_color.txt $HOME
-cd && cd Stellar
-git stash
-cd
 
 mv user.txt ~/Stellar/config/system
 mv banner.txt ~/Stellar/config/themes/
@@ -19,7 +15,7 @@ mv banner_color.txt ~/Stellar/config/themes/
 mv banner_background.txt ~/Stellar/config/themes/
 mv banner_background_color.txt ~/Stellar/config/themes/
 
-cd Stellar
+cd Stellar && git stash
 
 update_repo() {
     if ! git pull --force; then
