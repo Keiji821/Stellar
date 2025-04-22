@@ -2,20 +2,13 @@
 
 gris="\033[1;30m"
 blanco="\033[0m"
-blanco2="\033[1;37m"
 rojo="\033[1;31m"
-rojo2="\033[31m"
-azul="\033[1;34m"
-azul2="\033[34m"
-azul_agua="\e[1;36m"
-azul_agua2="\e[36m"
 verde="\033[1;32m"
-verde2="\033[32m"
-morado="\033[1;35m"
-morado2="\033[35m"
 amarillo="\033[1;33m"
-amarillo2="\033;33m"
-cyan="\033[38;2;23;147;209m"
+azul="\033[1;34m"
+magenta="\033[1;35m"
+cyan="\033[1;36m"
+reset="\033[0m"
 
 PROGRESS_BAR_WIDTH=50
 current_line=2
@@ -53,42 +46,46 @@ user_config() {
     progress 20
 }
 
-if [[ ! -d config/system ]]; then
-    handle_error "Directorio system no encontrado en ~/"
-fi
-
-user_config
-
 progress() {
     local percentage=$1
     local filled=$((${PROGRESS_BAR_WIDTH} * ${percentage} / 100))
     local empty=$((${PROGRESS_BAR_WIDTH} - ${filled}))
-    printf "\r${amarillo}[${cyan}"
-    printf "%${filled}s" | tr ' ' '■'
-    printf "%${empty}s" | tr ' ' '·'
-    printf "${amarillo}] ${verde}%3d%%${blanco}" "${percentage}"
+    
+    if [ $percentage -lt 25 ]; then
+        bar_color="${rojo}"
+    elif [ $percentage -lt 75 ]; then
+        bar_color="${amarillo}"
+    else
+        bar_color="${verde}"
+    fi
+    
+    printf "\r${amarillo}┌${blanco}[${bar_color}"
+    printf "%${filled}s" | tr ' ' '█'
+    printf "%${empty}s" | tr ' ' '░'
+    printf "${blanco}]${amarillo}┐"
+    printf "\n${amarillo}└${blanco} Progreso: ${bar_color}%3d%% ${amarillo}┘${reset}" "${percentage}"
 }
 
 show_package() {
     printf "\033[${current_line}H\033[2K${amarillo}[${verde}+${amarillo}]${blanco} %s" "$1"
-    printf "\033[$((${current_line} + 1))H"
+    printf "\033[$((${current_line} + 2))H"
 }
 
 install_packages() {
     progress 0
     echo -e "\n\n"
-    
+
     show_package "Actualizando paquetes..."
-    apt update -y && apt upgrade -y
+    apt update -y > /dev/null 2>&1 && apt upgrade -y > /dev/null 2>&1
     progress 30
 
     local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils)
     local total=${#apt_packages[@]}
     local step=$((40 / total))
-    
+
     for ((i=0; i<total; i++)); do
         show_package "Instalando ${apt_packages[$i]}"
-        apt install -y "${apt_packages[$i]}" 
+        apt install -y "${apt_packages[$i]}" > /dev/null 2>&1
         progress=$((30 + (step * (i + 1))))
         progress $progress
     done
@@ -96,10 +93,10 @@ install_packages() {
     local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
     total=${#pip_packages[@]}
     step=$((30 / total))
-    
+
     for ((i=0; i<total; i++)); do
         show_package "Instalando ${pip_packages[$i]}"
-        pip install "${pip_packages[$i]}" 
+        pip install "${pip_packages[$i]}" > /dev/null 2>&1
         progress=$((70 + (step * (i + 1))))
         progress $progress
     done
@@ -111,7 +108,12 @@ main() {
     current_line=2
     install_packages
     progress 100
-    echo -e "\n${amarillo}[${verde}+${amarillo}]${blanco} ¡Instalación completada!\n"
+    echo -e "\n\n${amarillo}[${verde}+${amarillo}]${blanco} ¡Instalación completada!\n"
 }
 
+if [[ ! -d config/system ]]; then
+    handle_error "Directorio system no encontrado en ~/"
+fi
+
+user_config
 main
