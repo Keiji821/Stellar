@@ -25,12 +25,14 @@ mv banner_background_color.txt ~/Stellar/config/themes/
 move
 copy
 
+cd Stellar
 update_repo() {
     if ! git pull --force; then
         echo "Error al actualizar el repositorio" >&2
         exit 1
     fi
 }
+cd
 
 show_lolcat_message() {
     local message="$1"
