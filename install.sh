@@ -59,16 +59,16 @@ progress() {
         bar_color="${verde}"
     fi
     
-    printf "\r${amarillo}┌${blanco}[${bar_color}"
-    printf "%${filled}s" | tr ' ' '█'
-    printf "%${empty}s" | tr ' ' '░'
-    printf "${blanco}]${amarillo}┐"
-    printf "\n${amarillo}└${blanco} Progreso: ${bar_color}%3d%% ${amarillo}┘${reset}" "${percentage}"
+    printf "\r${amarillo}[${blanco}${bar_color}"
+    printf "%${filled}s" | tr ' ' '#'
+    printf "%${empty}s" | tr ' ' '.'
+    printf "${blanco}${amarillo}]"
+    printf " ${bar_color}%3d%%${reset}" "${percentage}"
 }
 
 show_package() {
     printf "\033[${current_line}H\033[2K${amarillo}[${verde}+${amarillo}]${blanco} %s" "$1"
-    printf "\033[$((${current_line} + 2))H"
+    printf "\033[$((${current_line} + 1))H"
 }
 
 install_packages() {
