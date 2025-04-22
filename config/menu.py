@@ -20,19 +20,10 @@ while True:
     char = sys.stdin.read(1)
     if char == "1":
         page1()
-
-    elif char == "2":
-        
-
-    elif char == "3":
-        
-
-    elif char == "4":
-        
-
-    elif char == "5":
-        
-
+    elif char == "2":        
+    elif char == "3":        
+    elif char == "4":       
+    elif char == "5":       
     elif char == "":
         break
 
