@@ -115,7 +115,7 @@ install_packages() {
     local i=0
     for pkg in "${apt_packages[@]}"; do
         apt install -y $pkg & spinner
-        progress=$((30 + (40 * (++i)/${#apt_packages[@]}))  # Paréntesis corregido
+        progress=$((30 + (40 * (++i)/${#apt_packages[@]})))
         progress $progress
     done
     
