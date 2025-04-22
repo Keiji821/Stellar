@@ -112,9 +112,10 @@ install_packages() {
     
     status_msg "Instalando dependencias principales..."
     local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils)
+    local i=0
     for pkg in "${apt_packages[@]}"; do
         apt install -y $pkg & spinner
-        progress=$((30 + (40 * (++i)/${#apt_packages[@]}))
+        progress=$((30 + (40 * (++i)/${#apt_packages[@]}))  # Paréntesis corregido
         progress $progress
     done
     
@@ -124,7 +125,7 @@ install_packages() {
     i=0
     for pkg in "${pip_packages[@]}"; do
         pip install $pkg & spinner
-        progress=$((70 + (30 * (++i)/${#pip_packages[@]})))
+        progress=$((70 + (30 * (++i)/${#pip_packages[@]}))
         progress $progress
     done
 }
