@@ -125,7 +125,7 @@ install_packages() {
     i=0
     for pkg in "${pip_packages[@]}"; do
         pip install $pkg & spinner
-        progress=$((70 + (30 * (++i)/${#pip_packages[@]}))
+        progress=$((70 + (30 * (++i)/${#pip_packages[@]})))
         progress $progress
     done
 }
