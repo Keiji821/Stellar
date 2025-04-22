@@ -1,10 +1,20 @@
 from rich.console import Console
 import termios
+import sys
 
 console = Console()
 
-fd = termios.stdin.fileno()
+fd = sys.stdin.fileno()
+termios.tcsetattr(fd, termios.TCSANOW, termios.tcgetattr(fd)[0])
 
-entrada = termios.read(fd, 10)
+while True:
+    char = sys.stdin.read(1)
+    if char == "w":
+        print("Has presionado la tecla w")
+    elif char == "s":
+        print("Has presionado la tecla s")
+    elif char == "
+":
+        break
 
-print(entrada)
+termios.tcsetattr(fd, termios.TCSANOW, termios.tcgetattr(fd)[0])
