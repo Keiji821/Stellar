@@ -3,22 +3,21 @@ from rich.console import Console
 from rich.panel import Panel
 import time
 import random
-import getpass
 
 def login_instagram(loader):
     console = Console()
     while True:
         try:
-            username = console.input("[bold cyan]Tu usuario de Instagram: [/bold cyan]")
-            password = getpass.getpass("[bold cyan]Contraseña: [/bold cyan]")
+            username = console.input("[bold green]Tu usuario de Instagram: [/bold green]")
+            password = console.input("[bold green]Contraseña: [/bold green]")
             try:
                 loader.login(username, password)
-                console.print("[green]✓ Inicio de sesión exitoso[/green]")
+                console.print("[green]Inicio de sesión exitoso[/green]")
                 return True
             except TwoFactorAuthRequiredException:
-                code = console.input("[bold yellow]Código 2FA: [/bold yellow]")
+                code = console.input("[bold green]Código 2FA: [/bold green]")
                 loader.two_factor_login(code)
-                console.print("[green]✓ Verificación 2FA exitosa[/green]")
+                console.print("[green]Verificación 2FA exitosa[/green]")
                 return True
             except Exception:
                 return False
@@ -32,27 +31,27 @@ def get_profile_info(loader, username):
         time.sleep(delay)
         profile = Profile.from_username(loader.context, username)
         info_panel = Panel.fit(
-            f"[bold]👤 Usuario:[/bold] @{username}\n"
-            f"[bold]📛 Nombre:[/bold] {profile.full_name}\n"
-            f"[bold]🔒 Privado:[/bold] {'Sí' if profile.is_private else 'No'}\n"
-            f"[bold]❤️ Seguidores:[/bold] {profile.followers:,}\n"
-            f"[bold]👥 Seguidos:[/bold] {profile.followees:,}\n"
-            f"[bold]📸 Publicaciones:[/bold] {profile.mediacount:,}\n"
-            f"[bold]📝 Biografía:[/bold] {profile.biography}",
-            title=f"[bold green]🔍 Información de @{username}[/bold green]",
+            f"Usuario: @{username}\n"
+            f"Nombre: {profile.full_name}\n"
+            f"Privado: {'Sí' if profile.is_private else 'No'}\n"
+            f"Seguidores: {profile.followers:,}\n"
+            f"Seguidos: {profile.followees:,}\n"
+            f"Publicaciones: {profile.mediacount:,}\n"
+            f"Biografía: {profile.biography}",
+            title=f"Información de @{username}",
             border_style="blue"
         )
         console.print(info_panel)
     except Exception as e:
-        console.print(f"[bold red]Error: {str(e)}[/bold red]")
+        console.print(f"Error: {str(e)}")
 
 def main():
     console = Console()
     L = Instaloader()
     
-    if console.input("\n[bold]¿Iniciar sesión? (s/n): [/bold]").lower() == 's':
+    if console.input("\n[bold green]¿Iniciar sesión? (s/n): [/bold green]").lower() == 's':
         if not login_instagram(L):
-            console.print("[yellow]Continuando sin sesión[/yellow]")
+            console.print("Continuando sin sesión")
     
     while True:
         try:
