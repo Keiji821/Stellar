@@ -145,7 +145,7 @@ userfinder() {
 }
 
 
-# Discord - Osint
+# Osint/Discord
 
 userinfo() {
     cd ~/Stellar/commands/osint/discord
@@ -171,11 +171,26 @@ inviteinfo() {
     cd
 }
 
+# Osint/Instagram
+
+inviteinfo() {
+    cd ~/Stellar/commands/osint/instagram
+    python profileinfo.py
+    cd
+
 # Pentest
 
 ddos() {
     cd ~/Stellar/commands/pentesting/main
     python ddos.py
+    cd
+}
+
+# Networks
+
+traceroute() {
+    cd ~/Stellar/commands/networks
+    python traceroute.py
     cd
 }
 
