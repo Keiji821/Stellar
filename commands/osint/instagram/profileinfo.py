@@ -1,5 +1,5 @@
 from instaloader import Instaloader, Profile
-from rich.console import console
+from rich.console import Console
 
 L = Instaloader()
 console = Console()
