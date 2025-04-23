@@ -41,6 +41,7 @@ async def on_ready():
             table.add_row("Temporal", "Sí" if invite.temporary else "No")
 
             console.print(table)
+            console.print("")
 
         except discord.NotFound:
             console.print(f"[bold red]Invitación inválida o expirada: {code}[/]")
