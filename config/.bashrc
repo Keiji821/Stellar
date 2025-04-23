@@ -173,7 +173,7 @@ inviteinfo() {
 
 # Osint/Instagram
 
-inviteinfo() {
+profileinfo() {
     cd ~/Stellar/commands/osint/instagram
     python profileinfo.py
     cd
