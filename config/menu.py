@@ -2,6 +2,7 @@ from rich.console import Console
 
 console = Console()
 
+console.print("[code]Sistema[code]", style="bold green", justify="center")
 console.print("""
 • reload > Recargar el banner
 • ui > Personaliza el banner y sus colores 
