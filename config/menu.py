@@ -2,6 +2,19 @@ from rich.console import Console
 
 console = Console()
 
+console.print("""
+ _____                                 _
+/  __ \                               | |
+| /  \/ ___  _ __ ___   __ _ _ __   __| | ___  ___
+| |    / _ \| '_ ` _ \ / _` | '_ \ / _` |/ _ \/ __|
+| \__/\ (_) | | | | | | (_| | | | | (_| | (_) \__ \
+ \____/\___/|_| |_| |_|\__,_|_| |_|\__,_|\___/|___/
+""", style="bold red", justify="center")
+console.print("""
+Stellar es un OS dedicado a termux para mejorar su aburrida apariencia pero también agrega una selección de comandos (scripts) para su uso, estos comandos están orientados al osint y hacking en varias áreas, abajo encontrarás los comandos listados.""", justify="center")
+console.print("")
+console.print("")
+console.print("")
 console.print("[code]Sistema[code]", style="bold green")
 console.print("""
 • reload > Recargar el banner
