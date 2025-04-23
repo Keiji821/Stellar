@@ -92,6 +92,7 @@ async def on_ready():
         for m in msgs:
             tb.add_row(m)
         console.print(Panel(tb, title="[bold yellow]Últimos Mensajes[/]", border_style="yellow"))
+        console.print("")
     await client.close()
 
 client.run(token)
