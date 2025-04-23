@@ -20,7 +20,8 @@ console.print("""
 
 console.print("")
 console.print("[code]Osint[code]", style="bold green", justify="center")
-console.print("""• ipinfo > Obtiene información de una ip 
+console.print("""
+• ipinfo > Obtiene información de una ip 
 • urlinfo > Analizador de URL
 • userfinder > Busca un nombre de usuario en diferentes páginas 
 • phoneinfo > Obtiene información de un número de teléfono 
@@ -28,7 +29,8 @@ console.print("""• ipinfo > Obtiene información de una ip
 
 console.print("")
 console.print("[code]Osint/Discord[code]", style="bold green", justify="center")
-console.print("""• userinfo > Obtiene información apartir de una id
+console.print("""
+• userinfo > Obtiene información apartir de una id
 • serverinfo > Obtiene información sobre un servidor a partir de su id
 • searchinvites > Busca invitaciones en páginas ingresando el nombre del servidor
 • inviteinfo > Obtiene información sobre un enlace de invitación""", style="bold cyan")
