@@ -4,7 +4,7 @@ import pyfiglet
 console = Console()
 
 console.print("")
-banner = pyfiglet.figlet_format("Comandos", font="doom")
+banner = pyfiglet.figlet_format("Comandos", font="cyberlarge")
 console.print(banner, style="bold red", justify="center")
 console.print("""
 Stellar es un OS dedicado a termux para mejorar su aburrida apariencia pero también agrega una selección de comandos (scripts) para su uso, estos comandos están orientados al osint y hacking en varias áreas, abajo encontrarás los comandos listados.""", justify="center")
