@@ -1,3 +1,8 @@
+from rich.console import Console
+
+console = Console()
+
+console.print("""
 • reload > Recargar el banner
 • ui > Personaliza el banner y sus colores 
 • uninstall > Desinstala Stellar
@@ -20,4 +25,4 @@
 • searchinvites > Busca invitaciones en páginas ingresando el nombre del servidor
 • inviteinfo > Obtiene información sobre un enlace de invitación
 
-• ddos > Realiza un ataque ddos mediante la ip y puerto
+• ddos > Realiza un ataque ddos mediante la ip y puerto""")
