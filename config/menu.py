@@ -10,56 +10,66 @@ console = Console(highlight=False, width=80)
 
 pages = [
     {
-        "title": "🚀 Stellar Toolbox",
+        "title": "Comandos de Stellar",
         "content": """
         [b #8A2BE2]Herramienta multifuncional[/]
         
-        [italic #A0A0A0]Navegación:
-        ← → : Cambiar páginas
-        Q   : Salir del programa[/]""",
+        [italic #A0A0A0]Stellar principalmente es un OS para Termux pero también incluye una selección de comandos (scripts) orientados al osint y hacking.[/]""",
         "color": "bold #8A2BE2",
         "icon": "🌌"
     },
     {
-        "title": "⚙️ Sistema",
+        "title": "Sistema",
         "content": """
-        [bold #20B2AA]• reload     Reiniciar aplicación
-        • ui        Modo interfaz gráfica
-        • uninstall Desinstalar herramienta
-        • update    Actualizar versión
-        • bash      Terminal integrado[/]""",
+        [bold #20B2AA]
+        • reload > Recargar el banner
+        • ui > Personaliza el banner y sus colores 
+        • uninstall > Desinstala Stellar
+        • update > Actualiza desde el repositorio de github
+        • bash > Reinicia su sesión de la g
+terminal[/]""",
         "color": "#20B2AA",
         "icon": "⚙️"
     },
     {
-        "title": "🔧 Utilidades",
+        "title": "Utilidades",
         "content": """
-        [bold #32CD32]• ia         Asistente conversacional
-        • ia-image   Generador de imágenes IA
-        • traductor  Traducción en tiempo real
-        • myip       Información de red[/]""",
+        [bold #32CD32]
+        • ia > Un servicio de ai desde de una API gratuita 
+        • ia-image > Generador de imágenes IA
+        • traductor > Traducción en tiempo real
+        • myip > Muestra tu ip real[/]""",
         "color": "#32CD32",
         "icon": "🔧"
     },
     {
-        "title": "🕵️ OSINT/Discord",
+        "title": "OSINT",
         "content": """
-        [bold #DA70D6]• ipinfo      Geolocalización IP
-        • urlinfo     Analizador de URL
-        • userfinder  Búsqueda en redes
-        • phoneinfo   Información telefónica
-        • emailsearch Búsqueda de emails
-        • discord     Analizador de Discord[/]""",
+        [bold #DA70D6]
+        • ipinfo > Obtiene información de una ip 
+        • urlinfo > Analizador de URL
+        • userfinder > Busca un nombre de usuario en diferentes páginas 
+        • phoneinfo > Obtiene información de un número de teléfono 
+        • emailsearch > Búsqueda de emails[/]""",
         "color": "#DA70D6",
         "icon": "🕵️"
     },
     {
-        "title": "🔒 Pentesting",
+        "title": "OSINT/Discord",
         "content": """
-        [bold #FF4500]• ddos       Herramienta de stress
-        • portscan   Escaneo de puertos
-        • vulnscan   Detección de vulnerabilidades
-        • wireshark  Análisis de tráfico[/]""",
+        [bold #DA70D6]
+        • userinfo > Obtiene información apartir de una id
+        • serverinfo > Obtiene información sobre un servidor a partir de su id
+        • searchinvites > Busca invitaciones en páginas ingresando el nombre del servidor
+        • inviteinfo > Obtiene información sobre un enlace de invitación[/]""",
+        "color": "#DA70D6",
+        "icon": "🕵️"
+    },
+    {
+        "title": "Pentesting",
+        "content": """
+        [bold #FF4500]
+        • ddos > Realiza un ataque DDOS[/]""",
         "color": "#FF4500",
         "icon": "🔒"
     }
