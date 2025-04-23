@@ -2,6 +2,7 @@ from instaloader import Instaloader, Profile
 from rich.console import console
 
 L = Instaloader()
+console = Console()
 
 usuario = console.input("[bold green]Ingrese un nombre de usuario: [bold green]")
 
