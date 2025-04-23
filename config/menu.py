@@ -7,13 +7,13 @@
 • ia > Un servicio de ai desde de una API gratuita 
 • ia-image > Generador de imágenes IA
 • traductor > Traducción en tiempo real
-• myip > Muestra tu ip real[/]""",
+• myip > Muestra tu ip real
    
 • ipinfo > Obtiene información de una ip 
 • urlinfo > Analizador de URL
 • userfinder > Busca un nombre de usuario en diferentes páginas 
 • phoneinfo > Obtiene información de un número de teléfono 
-• emailsearch > Búsqueda de emails[/]
+• emailsearch > Búsqueda de emails
 
 • userinfo > Obtiene información apartir de una id
 • serverinfo > Obtiene información sobre un servidor a partir de su id
