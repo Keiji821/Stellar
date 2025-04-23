@@ -3,22 +3,34 @@ from rich.console import Console
 from rich.panel import Panel
 import time
 import random
+import requests
 
 console = Console()
 L = Instaloader()
 
+L.context.sleep = True
+L.context.max_connection_attempts = 2
+L.context.request_timeout = 45
+L.context.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+def check_internet():
+    try:
+        requests.get("https://www.google.com", timeout=5)
+        return True
+    except:
+        return False
+
 def get_profile_info(username):
     try:
-        # Configuración para reducir detección
-        L.context.sleep = True
-        L.context.max_connection_attempts = 1
-        L.context.request_timeout = 30
-        
-        # Retardo aleatorio
-        time.sleep(random.uniform(3, 7))
-        
+        if not check_internet():
+            console.print("Error: No hay conexión a internet")
+            return
+
+        delay = random.uniform(5, 15)
+        time.sleep(delay)
+
         profile = Profile.from_username(L.context, username)
-        
+
         info_panel = Panel.fit(
             f"Usuario: @{username}\n"
             f"Nombre: {profile.full_name}\n"
@@ -31,24 +43,36 @@ def get_profile_info(username):
             border_style="blue"
         )
         console.print(info_panel)
-        
+
     except Exception as e:
-        console.print(f"[red]Error al obtener información:[/red]")
-        console.print(f"Instagram ha bloqueado la solicitud. Intenta de nuevo más tarde.")
-        console.print(f"Detalle técnico: {str(e)}")
+        console.print(f"Error: {str(e)}")
 
 def main():
-    console.print("\n[bold green]Consulta de perfiles públicos de Instagram[/bold green]")
-    
+    console.print("CONSULTOR DE PERFILES DE INSTAGRAM")
+
     while True:
-        username = console.input("\n[bold green]Ingrese usuario (@nombre) o 'salir': [/bold green]")
-        if username.lower() in ['exit', 'salir', 'q']:
-            break
+        try:
+            username = input("\nIngrese usuario (sin @) o 'salir': ").strip()
             
-        get_profile_info(username.strip('@'))
-        
-        # Espera entre consultas
-        time.sleep(random.uniform(5, 10))
+            if username.lower() in ['exit', 'salir', 'q']:
+                console.print("Saliendo del programa...")
+                break
+                
+            if not username:
+                console.print("Error: Debes ingresar un nombre de usuario")
+                continue
+
+            get_profile_info(username)
+
+            if random.random() < 0.3:
+                wait_time = random.uniform(20, 40)
+                time.sleep(wait_time)
+            else:
+                time.sleep(random.uniform(8, 15))
+
+        except KeyboardInterrupt:
+            console.print("\nOperación cancelada")
+            continue
 
 if __name__ == "__main__":
     main()
