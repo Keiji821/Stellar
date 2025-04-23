@@ -19,7 +19,7 @@ console.print("""
 • myip > Muestra tu ip real""", style="bold cyan")
 
 console.print("")
-console.print("[code]Osint[code]", style="bold green", justify="center")
+console.print("[code]Osint[code]", style="bold green")
 console.print("""
 • ipinfo > Obtiene información de una ip 
 • urlinfo > Analizador de URL
