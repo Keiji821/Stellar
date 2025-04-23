@@ -3,6 +3,7 @@ import pyfiglet
 
 console = Console()
 
+console.print("")
 banner = pyfiglet.figlet_format("Comandos", font="doom")
 console.print(banner, style="bold red", justify="center")
 console.print("""
