@@ -177,6 +177,7 @@ inviteinfo() {
     cd ~/Stellar/commands/osint/instagram
     python profileinfo.py
     cd
+}
 
 # Pentest
 
