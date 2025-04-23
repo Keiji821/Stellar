@@ -2,7 +2,7 @@ from rich.console import Console
 
 console = Console()
 
-console.print("[code]Sistema[code]", style="bold green", justify="center")
+console.print("[code]Sistema[code]", style="bold green")
 console.print("""
 • reload > Recargar el banner
 • ui > Personaliza el banner y sus colores 
@@ -11,7 +11,7 @@ console.print("""
 • bash > Reinicia su sesión de la terminal""", style="bold cyan")
 
 console.print("")
-console.print("[code]Utilidades[code]", style="bold green", justify="center")
+console.print("[code]Utilidades[code]", style="bold green")
 console.print("""
 • ia > Un servicio de ai desde de una API gratuita 
 • ia-image > Generador de imágenes IA
@@ -28,7 +28,7 @@ console.print("""
 • emailsearch > Búsqueda de emails""", style="bold cyan")
 
 console.print("")
-console.print("[code]Osint/Discord[code]", style="bold green", justify="center")
+console.print("[code]Osint/Discord[code]", style="bold green")
 console.print("""
 • userinfo > Obtiene información apartir de una id
 • serverinfo > Obtiene información sobre un servidor a partir de su id
@@ -36,6 +36,6 @@ console.print("""
 • inviteinfo > Obtiene información sobre un enlace de invitación""", style="bold cyan")
 
 console.print("")
-console.print("[code]Pentesting[code]", style="bold green", justify="center")
+console.print("[code]Pentesting[code]", style="bold green")
 console.print("""
 • ddos > Realiza un ataque ddos mediante la ip y puerto""", style="bold cyan")
