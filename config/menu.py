@@ -59,5 +59,5 @@ table.add_row("Pentesting", style="bold green")
 
 table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto")
 
-console.print(table, style="grey90", justify="center")
+console.print(table, style="grey50", justify="center")
 console.print("")
