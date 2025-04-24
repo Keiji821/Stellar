@@ -12,7 +12,7 @@ Stellar es un OS dedicado a termux para mejorar su aburrida apariencia pero tamb
 
 Stellar puede ser modificado y clonado, es un proyecto de codigo abierto el cual mejora significativamente la seguridad en tu terminal de termux brindando una capa de anonimato con tor.
 
-Att: [underline]Keiji821[/underline]""", justify="center")
+[bold cyan]Att: [underline]Keiji821[/underline][/bold cyan]""", justify="center")
 console.print("")
 console.print("")
 console.print("")
