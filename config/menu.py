@@ -18,10 +18,10 @@ console.print("")
 console.print("")
 
 table = Table(title="Lista", title_justify="center", title_style="bold green")
-table.add_column("[bold green]Comando", style="bold red", no_wrap=False)
-table.add_column("[bold green]Descripción", style="bold white")
+table.add_column("[bold yellow]Comando", style="bold red", no_wrap=False)
+table.add_column("[bold yellow]Descripción", style="bold white")
 
-table.add_row("[code]Sistema[code]", style="bold cyan")
+table.add_row("[code]Sistema[code]", style="bold white")
 
 table.add_row("• reload", "Recargar el banner")
 table.add_row("• ui", "Personaliza el banner y sus colores") 
@@ -30,7 +30,7 @@ table.add_row("• update", "Actualiza desde el repositorio de github")
 table.add_row("• bash", "Reinicia su sesión de la terminal")
 
 table.add_row("")
-table.add_row("[code]Utilidades[code]", style="bold cyan")
+table.add_row("[code]Utilidades[code]", style="bold white")
 
 table.add_row("• ia", "Un servicio de ai desde de una API gratuita")
 table.add_row("• ia-image", "Generador de imágenes IA")
@@ -38,7 +38,7 @@ table.add_row("• traductor", "Traducción en tiempo real")
 table.add_row("• myip", "Muestra tu ip real")
 
 table.add_row("")
-table.add_row("[code]Osint[code]", style="bold cyan")
+table.add_row("[code]Osint[code]", style="bold white")
 
 table.add_row("• ipinfo", "Obtiene información de una ip") 
 table.add_row("• urlinfo", "Analizador de URL")
@@ -47,7 +47,7 @@ table.add_row("• phoneinfo", "Obtiene información de un número de teléfono"
 table.add_row("• emailsearch", "Búsqueda de emails")
 
 table.add_row("")
-table.add_row("[code]Osint/Discord[code]", style="bold cyan")
+table.add_row("[code]Osint/Discord[code]", style="bold white")
 
 table.add_row("• userinfo", "Obtiene información apartir de una id")
 table.add_row("• serverinfo", "Obtiene información sobre un servidor a partir de su id")
@@ -55,7 +55,7 @@ table.add_row("• searchinvites", "Busca invitaciones en páginas ingresando el
 table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitación")
 
 table.add_row("")
-table.add_row("[code]Pentesting[code]", style="bold cyan")
+table.add_row("[code]Pentesting[code]", style="bold white")
 
 table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto")
 
