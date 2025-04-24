@@ -18,7 +18,7 @@ console.print("")
 console.print("")
 
 table = Table(title="Lista", title_justify="center", title_style="bold green")
-table.add_column("[bold yellow]Comando", style="code", no_wrap=False)
+table.add_column("[bold yellow]Comando", style="bold red", no_wrap=False)
 table.add_column("[bold yellow]Descripción", style="code")
 
 table.add_row("[code]Sistema[code]", style="bold white")
