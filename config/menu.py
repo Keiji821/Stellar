@@ -24,7 +24,7 @@ table.add_column("[bold green]Descripción", style="code")
 table.add_row("[code]Sistema[code]", style="bold green")
 
 table.add_row("• reload", "Recargar el banner")
-table.add_row ("• ui", "Personaliza el banner y sus colores") 
+table.add_row("• ui", "Personaliza el banner y sus colores") 
 table.add_row("• uninstall", "Desinstala Stellar")
 table.add_row("• update", "Actualiza desde el repositorio de github")
 table.add_row("• bash", "Reinicia su sesión de la terminal")
