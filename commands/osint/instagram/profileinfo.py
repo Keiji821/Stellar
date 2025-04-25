@@ -1,43 +1,92 @@
 import requests
+from bs4 import BeautifulSoup
+import re
+import json
+import random
+import time
 from rich.console import Console
-from rich.prompt import Prompt
-from rich.panel import Panel
 
 console = Console()
 
-def osint_instagram(username):
-    url = f"https://i.instagram.com/api/v1/users/web_profile_info/?username={username}"
-    headers = {
-        "User-Agent": "Mozilla/5.0",
-        "x-ig-app-id": "936619743392459"
-    }
+class InstagramScraperPro:
+    def __init__(self):
+        self.session = requests.Session()
+        self.user_agents = [
+            'Mozilla/5.0 (Linux; Android 14; SM-S911B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+            'Instagram 295.0.0.19.105 Android (33/13; 480dpi; 1080x2260; samsung; SM-S901B; s5e9925; qcom; en_US; 438409712)',
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        ]
+        
+    def _random_delay(self):
+        time.sleep(random.uniform(8, 15))
+        
+    def _get_html(self, username):
+        try:
+            self._random_delay()
+            headers = {'User-Agent': random.choice(self.user_agents)}
+            response = self.session.get(
+                f"https://www.instagram.com/{username}/",
+                headers=headers,
+                timeout=20
+            )
+            return response.text if response.status_code == 200 else None
+        except Exception as e:
+            return None
 
-    try:
-        res = requests.get(url, headers=headers)
-        if res.status_code != 200:
-            console.print(f"[bold red]Error {res.status_code}[/bold red]: No se pudo acceder al perfil.")
-            return
+    def _extract_data(self, html, username):
+        soup = BeautifulSoup(html, 'html.parser')
+        
+        meta_description = soup.find('meta', property='og:description')
+        title = soup.find('title').text if soup.find('title') else 'N/A'
+        image = soup.find('meta', property='og:image')['content'] if soup.find('meta', property='og:image') else 'N/A'
+        
+        stats = None
+        if meta_description:
+            stats = re.search(r'(\d+) Followers, (\d+) Following, (\d+) Posts', meta_description['content'])
+        
+        is_private = False
+        if 'Private' in title:
+            is_private = True
+        
+        return {
+            'username': username,
+            'full_name': title.split('(')[0].replace('• Instagram', '').strip() if '(' in title else title.replace('• Instagram', '').strip(),
+            'biography': meta_description['content'].split('-')[0].strip() if meta_description else 'N/A',
+            'followers': int(stats.group(1)) if stats else 0,
+            'following': int(stats.group(2)) if stats else 0,
+            'posts': int(stats.group(3)) if stats else 0,
+            'profile_pic': image,
+            'is_private': is_private,
+            'url': f"https://www.instagram.com/{username}/"
+        }
 
-        data = res.json()
-        user = data.get("data", {}).get("user", {})
+    def get_profile(self, username):
+        html = self._get_html(username)
+        if not html:
+            return None
+        
+        profile_data = self._extract_data(html, username)
+        
+        return profile_data
 
-        if not user:
-            console.print("[bold red]No se pudo extraer la información del perfil.[/bold red]")
-            return
+scraper = InstagramScraperPro()
+username = console.input("[bold green]Ingrese el nombre de usuario de Instagram: [/bold green]")
 
-        console.print(Panel.fit(f"[bold cyan]Perfil OSINT de Instagram: @{username}[/bold cyan]", border_style="bright_blue"))
-        console.print(f"[bold]Nombre completo:[/bold] {user.get('full_name', 'N/A')}")
-        console.print(f"[bold]Biografía:[/bold] {user.get('biography', 'N/A')}")
-        console.print(f"[bold]Seguidores:[/bold] {user.get('edge_followed_by', {}).get('count', 'N/A')}")
-        console.print(f"[bold]Siguiendo:[/bold] {user.get('edge_follow', {}).get('count', 'N/A')}")
-        console.print(f"[bold]Publicaciones:[/bold] {user.get('edge_owner_to_timeline_media', {}).get('count', 'N/A')}")
-        console.print(f"[bold]Privado:[/bold] {'Sí' if user.get('is_private') else 'No'}")
-        console.print(f"[bold]Verificado:[/bold] {'Sí' if user.get('is_verified') else 'No'}")
-        console.print(f"[bold]Foto de perfil:[/bold] {user.get('profile_pic_url_hd', 'N/A')}")
+profile = scraper.get_profile(username)
 
-    except Exception as e:
-        console.print(f"[bold red]Error al procesar los datos:[/bold red] {e}")
-
-if __name__ == "__main__":
-    username = Prompt.ask("[bold green]Ingresa el nombre de usuario[/bold green]")
-    osint_instagram(username)
+if profile:
+    console.print(f"""
+[bold]👤 Usuario:[/] @{profile['username']}
+[bold]🏷 Nombre:[/] {profile['full_name']}
+[bold]📝 Biografía:[/] {profile['biography']}
+[bold]👥 Seguidores:[/] {profile['followers']}
+[bold]🔄 Siguiendo:[/] {profile['following']}
+[bold]📸 Posts:[/] {profile['posts']}
+[bold]🖼 Foto:[/] {profile['profile_pic']}
+[bold]🔒 Privado:[/] {'Sí' if profile['is_private'] else 'No'}
+[bold]🔗 Perfil:[/] {profile['url']}
+""")
+else:
+    console.print("[bold red]Error: Revisa conexión e intentalo de nuevo[/bold red]")
