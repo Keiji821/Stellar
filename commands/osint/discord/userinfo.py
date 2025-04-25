@@ -38,9 +38,9 @@ def format_delta(dt):
     if days == 0: return "hoy"
     if days == 1: return "ayer"
     if days < 30: return f"hace {days} días"
-    months = days // 30
+    months = days 
     if months < 12: return f"hace {months} meses"
-    years = months // 12
+    years = months 
     return f"hace {years} años"
 
 def get_badges(flags):
@@ -73,7 +73,7 @@ def get_activity_details(activity):
         return f"🎮 {activity.name} ({activity.platform})"
     return f"{activity.type_emoji} {activity.name}" if hasattr(activity, 'type_emoji') else activity.name
 
-async def fetch_user_data(user):
+async def fetch_user_data(user, member=None):
     data = {
         "General": [
             ("Nombre", f"{user}"),
@@ -159,9 +159,8 @@ async def on_ready():
                 messages = await fetch_messages(guild, user_id)
                 server_data = await fetch_member_data(member) if member else {}
 
-        user_data = await fetch_user_data(user)
+        user_data = await fetch_user_data(user, member)
         
-        # Mostrar datos principales
         main_table = Table.grid(padding=(0, 2))
         main_table.add_column(style="bold cyan", width=25)
         main_table.add_column(style="bold yellow")
