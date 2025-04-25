@@ -187,7 +187,6 @@ async def on_ready():
 
         console.print(Panel.fit(main_table, title=f"[bold underline]🔍 INVESTIGACIÓN DE {user}"))
         
-        # Mostrar mensajes
         if messages:
             msg_table = Table(title="Últimos Mensajes", box=box.ROUNDED)
             msg_table.add_column("Canal", style="cyan")
