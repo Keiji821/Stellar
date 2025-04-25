@@ -87,6 +87,10 @@ async def fetch_user_data(user):
             ("Avatar", user.avatar.url if user.avatar else "—"),
             ("Banner", user.banner.url if user.banner else "—"),
             ("Banner Server", member.guild_avatar.url if member and member.guild_avatar else "—")
+        ],
+        "Bio": [
+            ("Biografía", user.bio if hasattr(user, 'bio') else "—"),
+            ("Nombre completo", f"{user.name}#{user.discriminator}"),
         ]
     }
     return data
@@ -111,7 +115,11 @@ async def fetch_member_data(member):
         "Actividades": [
             (activity.type.name.title(), get_activity_details(activity))
             for activity in member.activities if not isinstance(activity, discord.Spotify)
-        ] or [("Sin actividades", "—")]
+        ] or [("Sin actividades", "—")],
+        "Roles Detallados": [
+            (role.name, role.color)
+            for role in member.roles if role != member.guild.default_role
+        ] or [("Sin roles adicionales", "—")]
     }
 
 async def fetch_messages(guild, user_id):
@@ -130,6 +138,8 @@ async def fetch_messages(guild, user_id):
                         "embeds": len(msg.embeds),
                         "reactions": len(msg.reactions)
                     })
+                    if len(messages) >= MAX_TOTAL_MESSAGES:
+                        break
         except Exception as e:
             continue
     return messages
@@ -177,6 +187,7 @@ async def on_ready():
 
         console.print(Panel.fit(main_table, title=f"[bold underline]🔍 INVESTIGACIÓN DE {user}"))
         
+        # Mostrar mensajes
         if messages:
             msg_table = Table(title="Últimos Mensajes", box=box.ROUNDED)
             msg_table.add_column("Canal", style="cyan")
