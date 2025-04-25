@@ -2,120 +2,204 @@ import discord
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
-from datetime import datetime
+from rich.markdown import Markdown
+from datetime import datetime, timezone
+from discord import Embed, ActivityType
 
 console = Console()
-user_id = int(console.input("[bold green]ID del usuario: [/]").strip())
-token = console.input("[bold green]Token del bot: [/]").strip()
-server_input = console.input("[bold green]ID del servidor (opcional): [/]").strip()
-server_id = int(server_input) if server_input.isdigit() else None
-
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
+MAX_MESSAGES_PER_CHANNEL = 100
+MAX_TOTAL_MESSAGES = 50
+
+def get_input(prompt, type_cast=str, optional=False):
+    while True:
+        value = console.input(prompt).strip()
+        if not value and optional:
+            return None
+        try:
+            return type_cast(value)
+        except ValueError:
+            console.print("[red]¡Valor inválido![/]")
+
+user_id = get_input("[bold green]ID del usuario: [/]", int)
+token = get_input("[bold green]Token del bot: [/]")
+server_id = get_input("[bold green]ID del servidor (opcional): [/]", int, True)
+
 def fmt_fecha(dt):
-    return dt.strftime("%d/%m/%Y %H:%M:%S") if isinstance(dt, datetime) else "—"
+    if not dt: return "—"
+    return f"{dt.strftime('%d/%m/%Y %H:%M:%S')} ({format_delta(dt)})"
+
+def format_delta(dt):
+    now = datetime.now(timezone.utc)
+    delta = now - dt
+    days = delta.days
+    if days == 0: return "hoy"
+    if days == 1: return "ayer"
+    if days < 30: return f"hace {days} días"
+    months = days // 30
+    if months < 12: return f"hace {months} meses"
+    years = months // 12
+    return f"hace {years} años"
 
 def get_badges(flags):
-    mapa = {
-        "staff": "Discord Staff", "partner": "Partner", "hypesquad": "HypeSquad",
-        "bug_hunter": "Bug Hunter I", "bug_hunter_level_2": "Bug Hunter II",
-        "early_supporter": "Soporte Temprano", "verified_bot_developer": "Dev Bot Verif.",
-        "certified_moderator": "Mod Certificado", "active_developer": "Dev Activo"
+    badge_map = {
+        "staff": "<:staff:1041825305650515998> Discord Staff",
+        "partner": "<:partner:1041825332523610163> Partner",
+        "hypesquad": "<:hypesquad:1041825358881767464> HypeSquad",
+        "hypesquad_bravery": "<:bravery:1041825384691794000> Bravery",
+        "hypesquad_brilliance": "<:brilliance:1041825409188507648> Brilliance",
+        "hypesquad_balance": "<:balance:1041825432864325642> Balance",
+        "bug_hunter": "<:bughunter:1041825458556477440> Bug Hunter I",
+        "bug_hunter_level_2": "<:bughunter2:1041825484565336074> Bug Hunter II",
+        "early_supporter": "<:earlysupporter:1041825511334322246> Early Supporter",
+        "verified_bot_developer": "<:dev:1041825537825902632> Dev Verificado",
+        "certified_moderator": "<:mod:1041825563440517120> Moderador Certificado",
+        "active_developer": "<:activedev:1041825589363114054> Dev Activo",
+        "premium": "<:nitro:1041825613621825566> Nitro",
+        "system": "⚙️ Sistema",
+        "verified": "<:verified:1041825640997658644> Verificado"
     }
-    return ", ".join(n for k, n in mapa.items() if getattr(flags, k, False)) or "Ninguna"
+    badges = [v for k, v in badge_map.items() if getattr(flags, k, False)]
+    return " ".join(badges) if badges else "Ninguna"
 
-async def fetch_msgs(guild, uid, per_channel=50, max_total=20):
-    mensajes = []
-    for canal in guild.text_channels:
-        if not canal.permissions_for(guild.me).read_message_history:
+def get_activity_details(activity):
+    if isinstance(activity, discord.Spotify):
+        return f"🎵 {activity.title} - {activity.artist}"
+    if isinstance(activity, discord.CustomActivity):
+        return f"📝 {activity.name}"
+    if activity.type == ActivityType.streaming:
+        return f"🎮 {activity.name} ({activity.platform})"
+    return f"{activity.type_emoji} {activity.name}" if hasattr(activity, 'type_emoji') else activity.name
+
+async def fetch_user_data(user):
+    data = {
+        "General": [
+            ("Nombre", f"{user}"),
+            ("ID", user.id),
+            ("Bot", "✅ Sí" if user.bot else "❌ No"),
+            ("Sistema", "✅ Sí" if user.system else "❌ No"),
+            ("Creado", fmt_fecha(user.created_at)),
+            ("Insignias", get_badges(user.public_flags)),
+        ],
+        "Media": [
+            ("Avatar", user.avatar.url if user.avatar else "—"),
+            ("Banner", user.banner.url if user.banner else "—"),
+            ("Banner Server", member.guild_avatar.url if member and member.guild_avatar else "—")
+        ]
+    }
+    return data
+
+async def fetch_member_data(member):
+    roles = [role.mention for role in member.roles if role != member.guild.default_role]
+    permissions = [perm for perm, value in member.guild_permissions if value]
+    
+    return {
+        "Servidor": [
+            ("Apodo", member.nick or "—"),
+            ("Unido", fmt_fecha(member.joined_at)),
+            ("Boost", fmt_fecha(member.premium_since)),
+            ("Roles", f"{len(roles)} roles" + (f"\nTop: {member.top_role.mention}" if roles else "")),
+            ("Jerarquía", f"#{len(member.roles)} en jerarquía"),
+            ("Permisos", ", ".join(perm.replace('_', ' ').title() for perm in permissions[:5]) + ("..." if len(permissions)>5 else "")),
+            ("En Timeout", fmt_fecha(member.timed_out_until) if member.is_timed_out() else "No"),
+            ("Mobile", "✅" if member.mobile_status != discord.Status.offline else "❌"),
+            ("Web", "✅" if member.web_status != discord.Status.offline else "❌"),
+            ("Escritorio", "✅" if member.desktop_status != discord.Status.offline else "❌")
+        ],
+        "Actividades": [
+            (activity.type.name.title(), get_activity_details(activity))
+            for activity in member.activities if not isinstance(activity, discord.Spotify)
+        ] or [("Sin actividades", "—")]
+    }
+
+async def fetch_messages(guild, user_id):
+    messages = []
+    for channel in guild.text_channels:
+        if not channel.permissions_for(guild.me).read_message_history:
             continue
         try:
-            async for m in canal.history(limit=per_channel):
-                if m.author.id == uid:
-                    timestamp = m.created_at.strftime("%d/%m %H:%M")
-                    mensajes.append(f"[{canal.name} | {timestamp}] {m.content}")
-                    if len(mensajes) >= max_total:
-                        return mensajes
-        except:
+            async for msg in channel.history(limit=MAX_MESSAGES_PER_CHANNEL):
+                if msg.author.id == user_id and len(messages) < MAX_TOTAL_MESSAGES:
+                    messages.append({
+                        "content": msg.content,
+                        "channel": channel.name,
+                        "timestamp": msg.created_at,
+                        "attachments": len(msg.attachments),
+                        "embeds": len(msg.embeds),
+                        "reactions": len(msg.reactions)
+                    })
+        except Exception as e:
             continue
-    return mensajes
+    return messages
 
 @client.event
 async def on_ready():
     try:
         user = await client.fetch_user(user_id)
-    except discord.NotFound:
-        console.print("[bold red]Usuario no encontrado[/]")
-        return await client.close()
-    
-    member = None
-    mensajes = []
+        member = None
+        messages = []
+        server_data = {}
 
-    if server_id:
-        try:
-            guild = await client.fetch_guild(server_id)
-            await guild.chunk()
-            member = guild.get_member(user_id)
-            if member:
-                mensajes = await fetch_msgs(guild, user_id)
-        except discord.Forbidden:
-            console.print("[yellow]Sin permisos para ese servidor[/]")
-        except discord.NotFound:
-            console.print("[yellow]Servidor no encontrado[/]")
+        if server_id:
+            guild = client.get_guild(server_id)
+            if guild:
+                member = await guild.fetch_member(user_id)
+                messages = await fetch_messages(guild, user_id)
+                server_data = await fetch_member_data(member) if member else {}
 
-    tabla = Table(show_header=False, box=None)
-    tabla.add_column(style="bold green", width=24)
-    tabla.add_column(style="cyan")
-
-    tabla.add_row("Usuario", f"{user.name}#{user.discriminator}")
-    tabla.add_row("ID", str(user.id))
-    tabla.add_row("Bot", "Sí" if user.bot else "No")
-    tabla.add_row("Creado", fmt_fecha(user.created_at))
-    tabla.add_row("Avatar", user.avatar.url if user.avatar else "—")
-    tabla.add_row("Banner", getattr(user, "banner").url if getattr(user, "banner", None) else "—")
-    tabla.add_row("Insignias", get_badges(user.public_flags))
-
-    if member:
-        tabla.add_row("Apodo", member.nick or "—")
-        tabla.add_row("Unido", fmt_fecha(member.joined_at))
-        tabla.add_row("Estado", str(member.status).capitalize())
+        user_data = await fetch_user_data(user)
         
-        actividades = [
-            f"{a.name} ({a.type.name})" 
-            for a in member.activities 
-            if isinstance(a, discord.Activity)
-        ]
-        tabla.add_row("Actividades", ", ".join(actividades) if actividades else "—")
+        # Mostrar datos principales
+        main_table = Table.grid(padding=(0, 2))
+        main_table.add_column(style="bold cyan", width=25)
+        main_table.add_column(style="bold yellow")
+        
+        for category, items in user_data.items():
+            main_table.add_row(Panel.fit(
+                "\n".join(f"[bold]{k}:[/] {v}" for k, v in items),
+                title=f"[magenta]{category}[/]",
+                border_style="green"
+            ))
+        
+        if server_data:
+            server_panels = []
+            for category, items in server_data.items():
+                tbl = Table(show_header=False, box=None, show_lines=True)
+                tbl.add_column(style="bold blue")
+                tbl.add_column(style="white")
+                for k, v in items:
+                    tbl.add_row(k, str(v))
+                server_panels.append(Panel.fit(tbl, title=f"[cyan]{category}[/]", border_style="blue"))
+            
+            main_table.add_row(*server_panels)
 
-        roles = [r.name for r in member.roles if r.name != "@everyone"]
-        tabla.add_row("Roles", ", ".join(roles) if roles else "Ninguno")
-        tabla.add_row("Color top role", str(member.top_role.color))
+        console.print(Panel.fit(main_table, title=f"[bold underline]🔍 INVESTIGACIÓN DE {user}"))
+        
+        if messages:
+            msg_table = Table(title="Últimos Mensajes", box=box.ROUNDED)
+            msg_table.add_column("Canal", style="cyan")
+            msg_table.add_column("Fecha", style="yellow")
+            msg_table.add_column("Contenido", style="white")
+            msg_table.add_column("Adjuntos", justify="right")
+            
+            for msg in messages:
+                content = Markdown(msg['content']) if len(msg['content']) < 100 else msg['content'][:97] + "..."
+                msg_table.add_row(
+                    msg['channel'],
+                    msg['timestamp'].strftime("%d/%m %H:%M"),
+                    content,
+                    f"📎{msg['attachments']} 🖼️{msg['embeds']} ❤️{msg['reactions']}"
+                )
+            
+            console.print(Panel(msg_table, title="📨 HISTORIAL DE MENSAJES", border_style="yellow"))
 
-        if member.premium_since:
-            tabla.add_row("Boost desde", fmt_fecha(member.premium_since))
-
-        dispositivos = []
-        for atributo, nombre in [
-            ("desktop_status", "Escritorio"),
-            ("mobile_status", "Móvil"),
-            ("web_status", "Web")
-        ]:
-            estado = getattr(member, atributo, None)
-            if estado and estado != discord.Status.offline:
-                dispositivos.append(nombre)
-        tabla.add_row("Dispositivos", ", ".join(dispositivos) if dispositivos else "Desconocido")
-    else:
-        tabla.add_row("En servidor", "No")
-
-    console.print(Panel.fit(tabla, title="[bold magenta]Usuario Detallado[/]", border_style="magenta"))
-
-    if mensajes:
-        tabla_mensajes = Table(show_header=False, box=None)
-        for m in mensajes:
-            tabla_mensajes.add_row(m)
-        console.print(Panel(tabla_mensajes, title="[bold yellow]Últimos Mensajes[/]", border_style="yellow"))
-    
-    await client.close()
+    except discord.NotFound:
+        console.print("[bold red]❌ Usuario no encontrado[/]")
+    except discord.Forbidden:
+        console.print("[bold red]🔒 Sin permisos para acceder al servidor[/]")
+    finally:
+        await client.close()
 
 client.run(token)
