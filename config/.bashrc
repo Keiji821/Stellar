@@ -57,25 +57,6 @@ cd "$HOME"
 
 clear
 
-
-pkill -f "tor" 2>/dev/null
-PORT=9052
-tor --SocksPort $PORT --RunAsDaemon 1 2>/dev/null &
-disown
-
-sleep 2
-if ! curl --socks5 localhost:$PORT --silent --fail http://ip-api.com/json/ > /dev/null; then
-    echo "Error: Tor no se ha iniciado correctamente en el puerto $PORT"
-    exit 1
-fi
-
-export ALL_PROXY="socks5h://localhost:$PORT" 2>/dev/null
-git config --global http.proxy "socks5://127.0.0.1:$PORT" 2>/dev/null
-git config --global https.proxy "socks5://127.0.0.1:$PORT" 2>/dev/null
-
-echo "${verde}Proxy Tor configurado correctamente en el puerto $PORT!"
-
-
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
 clear
