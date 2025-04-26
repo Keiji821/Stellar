@@ -57,6 +57,40 @@ cd "$HOME"
 
 clear
 
+pkill -f "tor" 2>/dev/null
+
+PORT=9052
+LOG_DIR="${TMPDIR:-/tmp}"
+TOR_LOG="${LOG_DIR}/tor_$PORT.log"
+
+touch "$TOR_LOG" || {
+    echo -e "${rojo}No se pudo crear archivo log en $TOR_LOG${blanco}"
+    TOR_LOG="/dev/null"
+}
+
+tor --SocksPort $PORT --RunAsDaemon 1 > "$TOR_LOG" 2>&1 || {
+    echo -e "${rojo}Error al iniciar Tor${blanco}"
+    [ -f "$TOR_LOG" ] && tail "$TOR_LOG"
+    exit 1
+}
+
+disown
+
+for i in {1..3}; do
+    sleep 2
+    if curl --socks5 localhost:$PORT --silent --fail http://ip-api.com/json/ >/dev/null; then
+        export ALL_PROXY="socks5h://localhost:$PORT" 2>/dev/null
+        git config --global http.proxy "socks5://127.0.0.1:$PORT" 2>/dev/null
+        git config --global https.proxy "socks5://127.0.0.1:$PORT" 2>/dev/null
+        echo -e "${verde}Proxy Tor configurado en puerto $PORT!${blanco}"
+        exit 0
+    fi
+done
+
+echo -e "${rojo}Error: Tor no responde en puerto $PORT${blanco}"
+[ -f "$TOR_LOG" ] && tail "$TOR_LOG"
+exit 1
+
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
 clear
