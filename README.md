@@ -6,3 +6,5 @@
 ![Maintained](https://img.shields.io/badge/Maintained%20by-Developers-2ea44f?style=for-the-badge)
 
 ![Stellar](https://img.shields.io/badge/Stellar-00C9FF?style=for-the-badge&logo=stellar&logoColor=white&colorA=6C00FF&colorB=00C9FF)
+
+![Stellar](https://img.shields.io/badge/🌟_Stellar-6C00FF?style=for-the-badge&logoColor=white)
