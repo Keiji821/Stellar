@@ -11,5 +11,5 @@
 
 <div align="center">
     <img src="https://img.shields.io/badge/Stellar-6C00FF?style=for-the-badge&logo=stellar&logoColor=white&labelColor=121212"><br>
-    <strong>Texto centrado aquí</strong>
+    <strong>Stellar, es un programa hecho en python y bash para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.</strong>
   </div>
