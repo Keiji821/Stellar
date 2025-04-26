@@ -1,4 +1,6 @@
 <p align= "right"> <kbd> <img  src="https://i.pinimg.com/originals/da/7e/60/da7e60bdbd618963e42b1beda0dc769b.jpg?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
+![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white)
+![Maintained](https://img.shields.io/badge/Maintained%20by-Developer-2ea44f?style=for-the-badge)
 
 ##
 
@@ -9,8 +11,6 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
-![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white)
-![Maintained](https://img.shields.io/badge/Maintained%20by-Developer-2ea44f?style=for-the-badge)
 
 </div>
 
