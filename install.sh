@@ -82,7 +82,7 @@ install_packages() {
     apt update -y > /dev/null 2>&1 && apt upgrade -y > /dev/null 2>&1
     progress 30
 
-    local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils)
+    local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     local total=${#apt_packages[@]}
     local step=$((40 / total))
 
