@@ -8,3 +8,5 @@
 ![Stellar](https://img.shields.io/badge/Stellar-00C9FF?style=for-the-badge&logo=stellar&logoColor=white&colorA=6C00FF&colorB=00C9FF)
 
 ![Stellar](https://img.shields.io/badge/🌟_Stellar-6C00FF?style=for-the-badge&logoColor=white)
+
+![Stellar](https://img.shields.io/badge/Stellar-6C00FF?style=for-the-badge&logo=stellar&logoColor=white&labelColor=121212)
