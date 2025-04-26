@@ -58,8 +58,9 @@ cd "$HOME"
 clear
 
 pkill -f "tor"
-export ALL_PROXY="socks5h://localhost:9052"
-tor &>/dev/null &
+pkill 9050
+export ALL_PROXY="socks5h://localhost:9050"
+tor &>tor.txt &
 
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
