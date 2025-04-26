@@ -5,4 +5,4 @@
 ![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white)
 ![Maintained](https://img.shields.io/badge/Maintained%20by-Developers-2ea44f?style=for-the-badge)
 
-![Custom](https://img.shields.io/badge/Stellar-brightcyan?style=for-the-badge)
+![Stellar](https://img.shields.io/badge/Stellar-00C9FF?style=for-the-badge&logo=stellar&logoColor=white&colorA=6C00FF&colorB=00C9FF)
