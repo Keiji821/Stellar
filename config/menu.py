@@ -6,7 +6,7 @@ console = Console()
 
 console.print("")
 banner = pyfiglet.figlet_format("Comandos", font="cyberlarge")
-console.print(banner, style="bright_red", justify="center")
+console.print(banner, style="bright_blue", justify="center")
 console.print("""
 Stellar es un OS dedicado a termux para mejorar su aburrida apariencia pero también agrega una selección de comandos (scripts) para su uso, estos comandos están orientados al osint y hacking en varias áreas, abajo encontrarás los comandos listados.
 
@@ -60,5 +60,5 @@ table.add_row("Pentesting", style="bold green")
 
 table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto")
 
-console.print(table, style="bright_red", justify="center")
+console.print(table, style="bright_cyan", justify="center")
 console.print("")
