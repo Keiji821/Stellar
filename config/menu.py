@@ -56,9 +56,15 @@ table.add_row("• searchinvites", "Busca invitaciones en páginas ingresando el
 table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitación")
 
 table.add_row("")
+table.add_row("Osint/Instagram", style="bold green")
+
+table.add_row("• profileinfo", "Obtiene los metadatos del perfil")
+
+table.add_row("")
 table.add_row("Pentesting", style="bold green")
 
 table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto")
+
 
 console.print(table, style="bright_cyan", justify="center")
 console.print("")
