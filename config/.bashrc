@@ -182,7 +182,7 @@ profileinfo() {
 
 ddos() {
     cd ~/Stellar/commands/pentesting/main
-    python ddos.py
+    node ddos.js
     cd
 }
 
