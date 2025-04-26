@@ -22,3 +22,29 @@
 
 Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.</strong>
   </div>
+
+
+<details>
+<summary><b>Pasos de instalación</b></summary>
+
+
+</details>
+
+<details>
+<summary><b>Características</b></summary>
+
+
+</details>
+
+<details>
+<summary><b>Guía de uso</b></summary>
+
+
+
+</details>
+
+<details>
+<summary><b>Autores</b></summary>
+
+
+</details>
