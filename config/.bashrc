@@ -58,8 +58,8 @@ cd "$HOME"
 clear
 
 pkill -f "tor"
-pkill 9050
-export ALL_PROXY="socks5h://localhost:9050"
+pkill 9052
+export ALL_PROXY="socks5h://localhost:9052"
 tor &>tor.txt &
 
 cp ~/Stellar/config/.bash_profile ~/.
