@@ -11,83 +11,60 @@ user_config(){
     echo "$username" > ~/Stellar/config/system/user.txt
 }
 
-iniciar_instalacion(){
+install_tasks(){
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
-    total=$(( ${#apt_packages[@]} + ${#pip_packages[@]} + 2 ))
-    step=0
-    spinner=('|' '/' '-' '\\')
-    idx=0
 
-    logtext="Instalador de Stellar\n\n"
+    echo "== Instalador de Stellar =="  
+    echo
 
-    # Función para refrescar la ventana
-    show(){
-        dialog --title "Instalador de Stellar" --infobox "$logtext" 20 70
-    }
-
-    # Inicio
-    ((step++))
-    logtext+="[*] Preparando actualización... ($step/$total)\n"
-    show
-    sleep 0.5
-
-    # Actualizar lista de paquetes
-    ((step++))
-    logtext+="[*] Actualizando lista de paquetes... ($step/$total)\n"
-    show
-    apt update -y >/dev/null 2>&1
-    logtext+="[✔] Lista de paquetes actualizada. ($step/$total)\n\n"
-    show
-    sleep 0.5
-
-    # Upgrade sistema
-    ((step++))
-    logtext+="[*] Actualizando sistema... ($step/$total)\n"
-    show
-    apt upgrade -y >/dev/null 2>&1
-    logtext+="[✔] Sistema actualizado. ($step/$total)\n\n"
-    show
-    sleep 0.5
-
-    # Paquetes APT
-    logtext+="== Instalación de paquetes APT ==\n"
-    show
-    for pkg in "${apt_packages[@]}"; do
-        ((step++))
-        # animación breve de spinner
-        char="${spinner[idx]}"; idx=$(( (idx+1)%4 ))
-        logtext+="[${char}] Instalando $pkg... ($step/$total)\n"
-        show
-        apt install -y "$pkg" >/dev/null 2>&1
-        logtext+="[✔] $pkg instalado. ($step/$total)\n"
-        show
-        sleep 0.3
-    done
-    logtext+="\n"
-
-    # Paquetes PIP
-    logtext+="== Instalación de paquetes PIP ==\n"
-    show
-    for pkg in "${pip_packages[@]}"; do
-        ((step++))
-        char="${spinner[idx]}"; idx=$(( (idx+1)%4 ))
-        logtext+="[${char}] Instalando $pkg... ($step/$total)\n"
-        show
-        pip install "$pkg" >/dev/null 2>&1
-        logtext+="[✔] $pkg instalado. ($step/$total)\n"
-        show
-        sleep 0.3
-    done
-    logtext+="\n[✔] Instalación completada exitosamente. ($step/$total)\n"
-    show
+    echo "[*] Preparando instalación..."
     sleep 1
+
+    echo "[*] Actualizando lista de paquetes..."
+    apt update -y >/dev/null 2>&1
+    echo "[✔] Lista de paquetes actualizada."
+    echo
+
+    echo "[*] Actualizando sistema..."
+    apt upgrade -y >/dev/null 2>&1
+    echo "[✔] Sistema actualizado."
+    echo
+
+    echo "== Instalación de paquetes APT =="
+    for pkg in "${apt_packages[@]}"; do
+        echo "[*] Instalando $pkg (APT)..."
+        if apt install -y "$pkg" >/dev/null 2>&1; then
+            echo "[✔] $pkg instalado correctamente."
+        else
+            echo "[✖] Error al instalar $pkg."
+        fi
+        sleep 0.3
+    done
+    echo
+
+    echo "== Instalación de paquetes PIP =="
+    for pkg in "${pip_packages[@]}"; do
+        echo "[*] Instalando $pkg (pip)..."
+        if pip install "$pkg" >/dev/null 2>&1; then
+            echo "[✔] $pkg instalado correctamente."
+        else
+            echo "[✖] Error al instalar $pkg."
+        fi
+        sleep 0.3
+    done
+    echo
+
+    echo "[✔] ¡Instalación completada exitosamente!"
 }
 
 main(){
     [[ ! -d ~/Stellar ]] && mkdir -p ~/Stellar
     user_config
-    iniciar_instalacion
+
+    # Aquí va todo el output de install_tasks dentro de la caja
+    install_tasks | dialog --title "Instalador de Stellar" --progressbox 20 70
+
     dialog --title "Instalación Completa" --msgbox "¡Todos los componentes se instalaron correctamente!" 8 50
     clear
 }
