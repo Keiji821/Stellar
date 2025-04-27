@@ -29,45 +29,40 @@ iniciar_instalacion() {
 
     mkfifo "$PROGRESO_CANAL"
 
-    dialog --title "Instalador Stellar" --gauge "Preparando instalación..." 10 70 0 < "$PROGRESO_CANAL" &
+    dialog --title "Instalador Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
     exec 3>"$PROGRESO_CANAL"
 
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
 
-    total_items=$(( ${#apt_packages[@]} + ${#pip_packages[@]} + 2 ))
-    current_item=0
-
-    enviar_progreso() {
-        porcentaje=$(( 100 * current_item / total_items ))
-        echo "$porcentaje"
-    }
-
-    echo "0" >&3
+    echo "[●] Preparando la instalación..." >&3
     sleep 1
 
-    echo "5" >&3
+    echo "[●] Actualizando lista de paquetes..." >&3
     apt update -y >/dev/null 2>&1
+    echo "[✔] Lista de paquetes actualizada." >&3
+    sleep 0.5
 
-    echo "10" >&3
+    echo "[●] Actualizando sistema..." >&3
     apt upgrade -y >/dev/null 2>&1
+    echo "[✔] Sistema actualizado." >&3
+    sleep 0.5
 
     for pkg in "${apt_packages[@]}"; do
-        current_item=$((current_item + 1))
-        enviar_progreso >&3
-        echo "Instalando $pkg (APT)..." >&3
+        echo "[●] Instalando $pkg (APT)..." >&3
         apt install -y "$pkg" >/dev/null 2>&1
+        echo "[✔] $pkg instalado correctamente." >&3
+        sleep 0.3
     done
 
     for pkg in "${pip_packages[@]}"; do
-        current_item=$((current_item + 1))
-        enviar_progreso >&3
-        echo "Instalando $pkg (pip)..." >&3
+        echo "[●] Instalando $pkg (pip)..." >&3
         pip install "$pkg" >/dev/null 2>&1
+        echo "[✔] $pkg instalado correctamente." >&3
+        sleep 0.3
     done
 
-    echo "100" >&3
-    echo "Instalación completada exitosamente!" >&3
+    echo "[✔] ¡Instalación completada exitosamente!" >&3
     sleep 2
 
     exec 3>&-
