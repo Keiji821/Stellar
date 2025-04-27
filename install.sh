@@ -18,15 +18,21 @@ current_line=2
 
 user_config() {
     while true; do
-        usuario=$(dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Por favor, ingresa un nombre de usuario (4-15 caracteres):" 10 50 3>&1 1>&2)
+        usuario=$(dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Ingresa un nombre de usuario (4-15 caracteres):" 10 50 "" 3>&1 1>&2)
 
-        if [[ -z "$usuario" || "$usuario" == "" ]]; then
-            dialog --title "Error" --msgbox "El campo no puede estar vacío. Por favor ingresa un nombre de usuario válido." 6 50
+        if [[ $? -ne 0 ]]; then
+            clear
+            echo "Instalación cancelada."
+            exit 1
+        fi
+
+        if [[ -z "$usuario" ]]; then
+            dialog --title "Error" --msgbox "El campo no puede estar vacío." 6 50
             continue
         fi
 
         if [[ "${#usuario}" -lt 4 || "${#usuario}" -gt 15 ]]; then
-            dialog --title "Error" --msgbox "El nombre de usuario debe tener entre 4 y 15 caracteres." 6 50
+            dialog --title "Error" --msgbox "El nombre debe tener entre 4 y 15 caracteres." 6 50
             continue
         fi
 
@@ -36,21 +42,40 @@ user_config() {
         fi
 
         echo "$usuario" > ~/Stellar/config/system/user.txt
-        dialog --title "Éxito" --msgbox "Usuario configurado correctamente!" 6 50
         break
     done
+    progress 20
 }
 
 progress() {
-    dialog --title "Instalación en progreso" --backtitle "Stellar OS Installer" --gauge "Instalando... Por favor espere." 10 70 $1
+    local percentage=$1
+    local filled=$((${PROGRESS_BAR_WIDTH} * ${percentage} / 100))
+    local empty=$((${PROGRESS_BAR_WIDTH} - ${filled}))
+
+    if [ $percentage -lt 25 ]; then
+        bar_color="${rojo}"
+    elif [ $percentage -lt 75 ]; then
+        bar_color="${amarillo}"
+    else
+        bar_color="${verde}"
+    fi
+
+    printf "\r${amarillo}[${blanco}${bar_color}"
+    printf "%${filled}s" | tr ' ' '#'
+    printf "%${empty}s" | tr ' ' '.'
+    printf "${blanco}${amarillo}]"
+    printf " ${bar_color}%3d%%${reset}" "${percentage}"
 }
 
 show_package() {
-    dialog --title "Instalando paquetes" --msgbox "$1" 6 50
+    printf "\033[${current_line}H\033[2K${amarillo}[${verde}+${amarillo}]${blanco} %s" "$1"
+    printf "\033[$((${current_line} + 1))H"
 }
 
 install_packages() {
     progress 0
+    echo -e "\n\n"
+
     show_package "Actualizando paquetes..."
     apt update -y > /dev/null 2>&1 && apt upgrade -y > /dev/null 2>&1
     progress 30
@@ -62,7 +87,8 @@ install_packages() {
     for ((i=0; i<total; i++)); do
         show_package "Instalando ${apt_packages[$i]}"
         apt install -y "${apt_packages[$i]}" > /dev/null 2>&1
-        progress $((30 + (step * (i + 1))))
+        progress=$((30 + (step * (i + 1))))
+        progress $progress
     done
 
     local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
@@ -72,21 +98,22 @@ install_packages() {
     for ((i=0; i<total; i++)); do
         show_package "Instalando ${pip_packages[$i]}"
         pip install "${pip_packages[$i]}" > /dev/null 2>&1
-        progress $((70 + (step * (i + 1))))
+        progress=$((70 + (step * (i + 1))))
+        progress $progress
     done
 }
 
 main() {
     clear
+    echo -e "\n\n"
     current_line=2
     install_packages
     progress 100
-    dialog --title "Instalación completada" --msgbox "¡La instalación ha sido completada con éxito!" 6 50
+    echo -e "\n\n${amarillo}[${verde}+${amarillo}]${blanco} ¡Instalación completada!\n"
 }
 
 if [[ ! -d ~/Stellar/config/system ]]; then
-    dialog --title "Error" --msgbox "Directorio system no encontrado en ~/Stellar/config/" 6 50
-    exit 1
+    handle_error "Directorio system no encontrado en ~/"
 fi
 
 user_config
