@@ -1,47 +1,49 @@
 #!/bin/bash
 
-gris="\033[1;30m"
-blanco="\033[0m"
-rojo="\033[1;31m"
-verde="\033[1;32m"
-amarillo="\033[1;33m"
-azul="\033[1;34m"
-magenta="\033[1;35m"
-cyan="\033[1;36m"
-reset="\033[0m"
+rojo='\033[0;31m'
+verde='\033[0;32m'
+amarillo='\033[0;33m'
+azul='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+blanco='\033[0m'
+reset='\033[0m'
 
 PROGRESS_BAR_WIDTH=50
-current_line=2
 
 user_config() {
-    while true; do
-        usuario=$(dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Ingresa un nombre de usuario (4-15 caracteres):" 10 50 "" 3>&1 1>&2)
+    local valid_username=''
+    while [[ -z "$valid_username" ]]; do
+        username=$(dialog --title "Configuración de Usuario" --inputbox "Ingrese un nombre de usuario (4-15 caracteres, letras/números/_):" 10 60 3>&1 1>&2 2>&3)
+        dialog_return=$?
 
-        if [[ $? -ne 0 ]]; then
+        if [[ $dialog_return -ne 0 ]]; then
             clear
             echo "Instalación cancelada."
             exit 1
         fi
 
-        if [[ -z "$usuario" ]]; then
-            dialog --title "Error" --msgbox "El campo no puede estar vacío." 6 50
+        if [[ -z "$username" ]]; then
+            dialog --msgbox "Error: El campo no puede estar vacío." 6 40
             continue
         fi
 
-        if [[ "${#usuario}" -lt 4 || "${#usuario}" -gt 15 ]]; then
-            dialog --title "Error" --msgbox "El nombre debe tener entre 4 y 15 caracteres." 6 50
+        if [[ ${#username} -lt 4 || ${#username} -gt 15 ]]; then
+            dialog --msgbox "Error: El nombre de usuario debe tener entre 4 y 15 caracteres." 6 40
             continue
         fi
 
-        if [[ ! "$usuario" =~ ^[a-zA-Z0-9_]+$ ]]; then
-            dialog --title "Error" --msgbox "Solo se permiten letras, números y _." 6 50
+        if ! [[ "$username" =~ ^[a-zA-Z0-9_]+$ ]]; then
+            dialog --msgbox "Error: Solo se permiten letras, números y guiones bajos (_)." 6 40
             continue
         fi
 
-        echo "$usuario" > ~/Stellar/config/system/user.txt
-        break
+        valid_username=$username
     done
-    progress 20
+
+    echo "$valid_username" > ~/Stellar/config/system/user.txt
+
+    dialog --msgbox "Nombre de usuario configurado correctamente: $valid_username" 6 40
 }
 
 progress() {
@@ -57,21 +59,17 @@ progress() {
         bar_color="${verde}"
     fi
 
-    printf "\r${amarillo}[${blanco}${bar_color}"
-    printf "%${filled}s" | tr ' ' '#'
-    printf "%${empty}s" | tr ' ' '.'
-    printf "${blanco}${amarillo}]"
+    printf "\r[${bar_color}$(printf '#%.0s' $(seq 1 $filled))${reset}$(printf '.%.0s' $(seq 1 $empty))]"
     printf " ${bar_color}%3d%%${reset}" "${percentage}"
+    printf "\n"
 }
 
 show_package() {
-    printf "\033[${current_line}H\033[2K${amarillo}[${verde}+${amarillo}]${blanco} %s" "$1"
-    printf "\033[$((${current_line} + 1))H"
+    printf "\r${azul}[${verde}+${azul}]${blanco} %s\n" "$1"
 }
 
 install_packages() {
     progress 0
-    echo -e "\n\n"
 
     show_package "Actualizando paquetes..."
     apt update -y > /dev/null 2>&1 && apt upgrade -y > /dev/null 2>&1
@@ -102,15 +100,13 @@ install_packages() {
 
 main() {
     clear
-    echo -e "\n\n"
-    current_line=2
     install_packages
     progress 100
-    echo -e "\n\n${amarillo}[${verde}+${amarillo}]${blanco} ¡Instalación completada!\n"
+    echo -e "\n${verde}[+] Instalación completada con éxito.\n"
 }
 
 if [[ ! -d ~/Stellar/config/system ]]; then
-    dialog --title "Error" --msgbox "Directorio system no encontrado en ~/" 6 50
+    dialog --title "Error" --msgbox "Directorio system no encontrado en ~/." 6 40
     exit 1
 fi
 
