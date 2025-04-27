@@ -29,6 +29,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 <details>
 <summary><b>Pasos de instalación</b></summary>
 
+<kbd>Hola</kbd><br><br>
 
 </details>
 
