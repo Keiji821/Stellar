@@ -1,5 +1,8 @@
 #!/bin/bash
 
+LOG="$HOME/stellar_install.log"
+trap 'rm -f "$LOG"' EXIT
+
 user_config(){
     while true; do
         username=$(dialog --title "Configuración de Usuario" \
@@ -11,66 +14,80 @@ user_config(){
     echo "$username" > ~/Stellar/config/system/user.txt
 }
 
-iniciar_instalacion(){
-    (
-        apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
-        pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
-        total_steps=$(( ${#apt_packages[@]} + ${#pip_packages[@]} + 2 ))
-        current=0
-        spinner=('|' '/' '-' '\\')
-        idx=0
+install_tasks(){
+    apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
+    pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
+    total_steps=$(( ${#apt_packages[@]} + ${#pip_packages[@]} + 2 ))
+    current=0
+    spinner=('|' '/' '-' '\\')
+    idx=0
 
-        spinner_next(){
-            echo -n "${spinner[idx]}"
-            idx=$(( (idx+1) % 4 ))
-        }
+    spinner_next(){
+        printf "%s" "${spinner[idx]}"
+        idx=$(( (idx+1) % 4 ))
+    }
 
-        echo "== Instalador de Stellar =="
+    echo "== Instalador de Stellar =="                        >> "$LOG"
+    echo                                                    >> "$LOG"
+    echo "[*] Preparando actualización... (0/$total_steps)" >> "$LOG"
+    sleep 0.5
 
-        echo
-        echo "Preparando actualización..."
-        apt update -y >/dev/null 2>&1
-        ((current++))
-        echo "[✔] Lista de paquetes actualizada ($current/$total_steps)"
+    echo "[${spinner_next}] Actualizando lista de paquetes... ($((++current))/$total_steps)" >> "$LOG"
+    apt update -y   >> "$LOG" 2>&1
+    echo "[✔] Lista de paquetes actualizada ($current/$total_steps)"                   >> "$LOG"
+    sleep 0.3
 
-        echo "Actualizando sistema..."
-        apt upgrade -y >/dev/null 2>&1
-        ((current++))
-        echo "[✔] Sistema actualizado ($current/$total_steps)"
+    echo "[${spinner_next}] Actualizando sistema... ($((++current))/$total_steps)"      >> "$LOG"
+    apt upgrade -y  >> "$LOG" 2>&1
+    echo "[✔] Sistema actualizado ($current/$total_steps)"                             >> "$LOG"
+    sleep 0.3
 
-        echo
-        echo "Instalando paquetes APT..."
-        for pkg in "${apt_packages[@]}"; do
-            echo "[$(spinner_next)] Instalando $pkg..."
-            if apt install -y "$pkg" >/dev/null 2>&1; then
-                echo "[✔] $pkg instalado ($((++current))/$total_steps)"
-            else
-                echo "[✖] Error al instalar $pkg ($((++current))/$total_steps)"
-            fi
-            sleep 0.2
-        done
+    echo                                                    >> "$LOG"
+    echo "== Instalación de paquetes APT =="                 >> "$LOG"
+    for pkg in "${apt_packages[@]}"; do
+        echo "[${spinner_next}] Instalando $pkg (APT) ($((current+1))/$total_steps)" >> "$LOG"
+        if apt install -y "$pkg" >> "$LOG" 2>&1; then
+            current=$((current+1))
+            echo "[✔] $pkg instalado ($current/$total_steps)"                        >> "$LOG"
+        else
+            current=$((current+1))
+            echo "[✖] Error al instalar $pkg ($current/$total_steps)"               >> "$LOG"
+        fi
+        sleep 0.2
+    done
 
-        echo
-        echo "Instalando paquetes PIP..."
-        for pkg in "${pip_packages[@]}"; do
-            echo "[$(spinner_next)] Instalando $pkg..."
-            if pip install "$pkg" >/dev/null 2>&1; then
-                echo "[✔] $pkg instalado ($((++current))/$total_steps)"
-            else
-                echo "[✖] Error al instalar $pkg ($((++current))/$total_steps)"
-            fi
-            sleep 0.2
-        done
+    echo                                                    >> "$LOG"
+    echo "== Instalación de paquetes PIP =="                 >> "$LOG"
+    for pkg in "${pip_packages[@]}"; do
+        echo "[${spinner_next}] Instalando $pkg (pip) ($((current+1))/$total_steps)" >> "$LOG"
+        if pip install "$pkg" >> "$LOG" 2>&1; then
+            current=$((current+1))
+            echo "[✔] $pkg instalado ($current/$total_steps)"                        >> "$LOG"
+        else
+            current=$((current+1))
+            echo "[✖] Error al instalar $pkg ($current/$total_steps)"               >> "$LOG"
+        fi
+        sleep 0.2
+    done
 
-        echo
-        echo "[✔] Instalación completada exitosamente."
-    ) | dialog --title "Instalador de Stellar" --programbox 30 80
+    echo                                                    >> "$LOG"
+    echo "[✔] Instalación completada exitosamente ($current/$total_steps)"           >> "$LOG"
 }
 
 main(){
     [[ ! -d ~/Stellar ]] && mkdir -p ~/Stellar
+    > "$LOG"
     user_config
-    iniciar_instalacion
+
+    dialog --title "Instalador de Stellar" --tailboxbg "$LOG" 20 70 &
+    DLG_PID=$!
+
+    install_tasks
+
+    # damos un segundo para que tailbox bg muestre la última línea
+    sleep 1
+    kill "$DLG_PID" 2>/dev/null
+
     dialog --title "Instalación Completa" --msgbox "¡Todos los componentes se instalaron correctamente!" 8 50
     clear
 }
