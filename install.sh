@@ -1,13 +1,12 @@
 #!/bin/bash
 
-rojo='\033[0;31m'
-verde='\033[0;32m'
-amarillo='\033[0;33m'
-azul='\033[0;34m'
-magenta='\033[0;35m'
-cyan='\033[0;36m'
 blanco='\033[0m'
-reset='\033[0m'
+rojo='\033[1;31m'
+verde='\033[1;32m'
+amarillo='\033[1;33m'
+azul='\033[1;34m'
+magenta='\033[1;35m'
+cyan='\033[1;36m'
 
 PROGRESS_BAR_WIDTH=50
 
@@ -69,7 +68,8 @@ install_packages() {
 
     for ((i=0; i<total; i++)); do
         show_progress $((20 + (step * (i + 1)) / 2)) "Instalando ${apt_packages[$i]}..."
-        apt install -y "${apt_packages[$i]}" > /dev/null 2>&1
+        apt install -y "${apt_packages[$i]}" > /dev/null 2>&1 &
+        wait $!
     done
 
     local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
@@ -78,7 +78,8 @@ install_packages() {
 
     for ((i=0; i<total; i++)); do
         show_progress $((70 + (step * (i + 1)) / 2)) "Instalando ${pip_packages[$i]}..."
-        pip install "${pip_packages[$i]}" > /dev/null 2>&1
+        pip install "${pip_packages[$i]}" > /dev/null 2>&1 &
+        wait $!
     done
 
     show_progress 100 "Instalación completada con éxito."
