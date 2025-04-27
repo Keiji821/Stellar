@@ -47,7 +47,6 @@ iniciar_instalacion() {
 
     echo "XXX\n5\nActualizando lista de paquetes...\nXXX" >&3
     apt update -y >/dev/null 2>&1
-
     echo "XXX\n10\nActualizando sistema...\nXXX" >&3
     apt upgrade -y >/dev/null 2>&1
 
