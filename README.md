@@ -13,6 +13,8 @@
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
 [![Node](https://img.shields.io/badge/NODE.js-00d8ff?style=for-the-badge&logo=node.js&logoColor=black&labelColor=00d8ff)](https://nodejs.org/)
 
+[![JavaScript Runtime](https://img.shields.io/badge/JavaScript_Runtime-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
+
 
 </div>
 
