@@ -29,11 +29,17 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 <details>
 <summary><b>Pasos de instalación</b></summary>
 
-```git clone https://github.com/Keiji821/Stellar```
+```shell script
+git clone https://github.com/Keiji821/Stellar
+```
 
-```cd Stellar```
+```shell script
+cd Stellar
+```
 
-```bash install.sh```
+```shell script
+bash install.sh
+```
 
 Después de ejecutar el archivo install.sh stellar empezará descarga todas las dependencias necesarias al finalizar reiniciará su sesión de termux.
 
