@@ -22,9 +22,7 @@ install_dependencies() {
 
 user_config() {
     while true; do
-        username=$(dialog --title "Configuración de Usuario" --colors \
-                          --inputbox "\Z1Ingrese nombre de usuario (4-15 caracteres, solo alfanuméricos y _):\Z0" \
-                          10 60 3>&1 1>&2 2>&3)
+        username=$(dialog --title "Configuración de Usuario" --colors --inputbox "\Z1Ingrese nombre de usuario (4-15 caracteres, solo alfanuméricos y _):\Z0" 10 60 3>&1 1>&2 2>&3)
 
         local exit_code=$?
 
