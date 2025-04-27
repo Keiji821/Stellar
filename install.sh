@@ -19,26 +19,25 @@ current_line=2
 user_config() {
     while true; do
         dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Por favor, ingresa un nombre de usuario (4-15 caracteres):" 10 50 2>/tmp/username.txt
-
         usuario=$(cat /tmp/username.txt)
 
         if [[ -z "$usuario" ]]; then
-            dialog --title "Error" --msgbox "El campo no puede estar vacío" 6 30
+            dialog --title "Error" --msgbox "El campo no puede estar vacío. Por favor ingresa un nombre de usuario válido." 6 50
             continue
         fi
 
         if [[ "${#usuario}" -lt 4 || "${#usuario}" -gt 15 ]]; then
-            dialog --title "Error" --msgbox "Debe tener entre 4 y 15 caracteres" 6 30
+            dialog --title "Error" --msgbox "El nombre de usuario debe tener entre 4 y 15 caracteres." 6 50
             continue
         fi
 
         if [[ ! "$usuario" =~ ^[a-zA-Z0-9_]+$ ]]; then
-            dialog --title "Error" --msgbox "Solo se permiten letras, números y _" 6 30
+            dialog --title "Error" --msgbox "Solo se permiten letras, números y _." 6 50
             continue
         fi
 
         echo "$usuario" > config/system/user.txt
-        dialog --title "Éxito" --msgbox "Usuario configurado correctamente!" 6 30
+        dialog --title "Éxito" --msgbox "Usuario configurado correctamente!" 6 50
         break
     done
 }
