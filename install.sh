@@ -20,7 +20,7 @@ user_config() {
     while true; do
         usuario=$(dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Por favor, ingresa un nombre de usuario (4-15 caracteres):" 10 50 3>&1 1>&2)
 
-        if [[ -z "$usuario" ]]; then
+        if [[ -z "$usuario" || "$usuario" == "" ]]; then
             dialog --title "Error" --msgbox "El campo no puede estar vacío. Por favor ingresa un nombre de usuario válido." 6 50
             continue
         fi
