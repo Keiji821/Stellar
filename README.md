@@ -63,6 +63,11 @@ Después de ejecutar el archivo `install.sh` Stellar empezará descarga todas la
 <details>
 <summary><b>Autores</b></summary>
 
+
+- Keiji821 (Desarrollador)
+
+<h4>Contactos</h4>
+
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
 <img src="https://img.shields.io/badge/Discord-Keiji-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
