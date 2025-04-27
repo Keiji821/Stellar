@@ -5,8 +5,6 @@ PROGRESO_CANAL="$HOME/.progress_pipe"
 user_config() {
     while true; do
         username=$(dialog --title "Configuración de Usuario" \
-                          --colors \
-                          --backtitle " " \
                           --inputbox "Ingrese un nombre de usuario (4-15 caracteres, letras/números/_):" 10 60 3>&1 1>&2 2>&3)
 
         if [[ $? -ne 0 ]]; then
@@ -31,40 +29,40 @@ iniciar_instalacion() {
 
     mkfifo "$PROGRESO_CANAL"
 
-    dialog --colors --backtitle " " --title "Instalador de Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
+    dialog --title "Instalador de Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
     exec 3>"$PROGRESO_CANAL"
 
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
 
-    echo "[\Zb\Z1●\Zn] Preparando la instalación..." >&3
+    echo "[*] Preparando la instalación..." >&3
     sleep 1
 
-    echo "[\Zb\Z1●\Zn] Actualizando lista de paquetes..." >&3
+    echo "[*] Actualizando lista de paquetes..." >&3
     apt update -y >/dev/null 2>&1
-    echo "[\Zb\Z2✔\Zn] Lista de paquetes actualizada." >&3
+    echo "[✔] Lista de paquetes actualizada." >&3
     sleep 0.5
 
-    echo "[\Zb\Z1●\Zn] Actualizando sistema..." >&3
+    echo "[*] Actualizando sistema..." >&3
     apt upgrade -y >/dev/null 2>&1
-    echo "[\Zb\Z2✔\Zn] Sistema actualizado." >&3
+    echo "[✔] Sistema actualizado." >&3
     sleep 0.5
 
     for pkg in "${apt_packages[@]}"; do
-        echo "[\Zb\Z1●\Zn] Instalando $pkg (APT)..." >&3
+        echo "[*] Instalando $pkg (APT)..." >&3
         apt install -y "$pkg" >/dev/null 2>&1
-        echo "[\Zb\Z2✔\Zn] $pkg instalado correctamente." >&3
+        echo "[✔] $pkg instalado correctamente." >&3
         sleep 0.3
     done
 
     for pkg in "${pip_packages[@]}"; do
-        echo "[\Zb\Z1●\Zn] Instalando $pkg (pip)..." >&3
+        echo "[*] Instalando $pkg (pip)..." >&3
         pip install "$pkg" >/dev/null 2>&1
-        echo "[\Zb\Z2✔\Zn] $pkg instalado correctamente." >&3
+        echo "[✔] $pkg instalado correctamente." >&3
         sleep 0.3
     done
 
-    echo "[\Zb\Z2✔\Zn] ¡Instalación completada exitosamente!" >&3
+    echo "[✔] ¡Instalación completada exitosamente!" >&3
     sleep 2
 
     exec 3>&-
@@ -77,7 +75,7 @@ main() {
     user_config
     iniciar_instalacion
 
-    dialog --colors --backtitle " " --title "Instalación Completa" --msgbox "\n\Zb\Z2¡Todos los componentes se instalaron correctamente!\Zn" 8 50
+    dialog --title "Instalación Completa" --msgbox "¡Todos los componentes se instalaron correctamente!" 8 50
     clear
 }
 
