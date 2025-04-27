@@ -66,7 +66,7 @@ Después de ejecutar el archivo `install.sh` Stellar empezará descarga todas la
 
 - Keiji821 (Desarrollador)
 
-<h4>Contactos</h4>
+<h4>Contactos:</h4>
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
