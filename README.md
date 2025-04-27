@@ -29,7 +29,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 <details>
 <summary><b>Pasos de instalación</b></summary>
 
-
+```git clone https://github.com/Keiji821/Stellar```
 
 </details>
 
