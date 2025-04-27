@@ -20,7 +20,7 @@
 
 <div align="center">
     <img src="https://img.shields.io/badge/Stellar-6C00FF?style=for-the-badge&logo=stellar&logoColor=white&labelColor=121212"><br>
-    <strong><kbd>Stellar</kbd><br><br>, es un programa hecho en python y bash para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.
+    <strong>Stellar, es un programa hecho en python y bash para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.
 
 Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.</strong>
   </div>
