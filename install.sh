@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROGRESO_CANAL="/tmp/progress_pipe"
+PROGRESO_CANAL="$HOME/.progress_pipe"
 
 user_config() {
     while true; do
@@ -23,11 +23,11 @@ user_config() {
 }
 
 iniciar_instalacion() {
-    mkdir -p /tmp
-
-    if [[ ! -p "$PROGRESO_CANAL" ]]; then
-        mkfifo "$PROGRESO_CANAL"
+    if [[ -e "$PROGRESO_CANAL" ]]; then
+        rm -f "$PROGRESO_CANAL"
     fi
+
+    mkfifo "$PROGRESO_CANAL"
 
     dialog --title "Instalador Stellar" --gauge "Preparando instalación..." 10 70 0 < "$PROGRESO_CANAL" &
     exec 3>"$PROGRESO_CANAL"
