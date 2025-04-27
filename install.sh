@@ -42,14 +42,11 @@ user_config() {
     done
 
     echo "$valid_username" > ~/Stellar/config/system/user.txt
-
-    dialog --msgbox "Nombre de usuario configurado correctamente: $valid_username" 6 40
 }
 
-progress() {
+show_progress() {
     local percentage=$1
-    local filled=$((${PROGRESS_BAR_WIDTH} * ${percentage} / 100))
-    local empty=$((${PROGRESS_BAR_WIDTH} - ${filled}))
+    local message=$2
 
     if [ $percentage -lt 25 ]; then
         bar_color="${rojo}"
@@ -59,50 +56,38 @@ progress() {
         bar_color="${verde}"
     fi
 
-    printf "\r[${bar_color}$(printf '#%.0s' $(seq 1 $filled))${reset}$(printf '.%.0s' $(seq 1 $empty))]"
-    printf " ${bar_color}%3d%%${reset}" "${percentage}"
-    printf "\n"
-}
-
-show_package() {
-    printf "\r${azul}[${verde}+${azul}]${blanco} %s\n" "$1"
+    dialog --gauge "$message" 10 60 $percentage
 }
 
 install_packages() {
-    progress 0
-
-    show_package "Actualizando paquetes..."
+    dialog --infobox "Actualizando paquetes..." 6 40
     apt update -y > /dev/null 2>&1 && apt upgrade -y > /dev/null 2>&1
-    progress 30
 
     local apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     local total=${#apt_packages[@]}
-    local step=$((40 / total))
+    local step=$((70 / total))
 
     for ((i=0; i<total; i++)); do
-        show_package "Instalando ${apt_packages[$i]}"
+        show_progress $((20 + (step * (i + 1)) / 2)) "Instalando ${apt_packages[$i]}..."
         apt install -y "${apt_packages[$i]}" > /dev/null 2>&1
-        progress=$((30 + (step * (i + 1))))
-        progress $progress
     done
 
     local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
     total=${#pip_packages[@]}
-    step=$((30 / total))
+    step=$((50 / total))
 
     for ((i=0; i<total; i++)); do
-        show_package "Instalando ${pip_packages[$i]}"
+        show_progress $((70 + (step * (i + 1)) / 2)) "Instalando ${pip_packages[$i]}..."
         pip install "${pip_packages[$i]}" > /dev/null 2>&1
-        progress=$((70 + (step * (i + 1))))
-        progress $progress
     done
+
+    show_progress 100 "Instalación completada con éxito."
+    sleep 2
 }
 
 main() {
-    clear
+    user_config
     install_packages
-    progress 100
-    echo -e "\n${verde}[+] Instalación completada con éxito.\n"
 }
 
 if [[ ! -d ~/Stellar/config/system ]]; then
@@ -110,5 +95,4 @@ if [[ ! -d ~/Stellar/config/system ]]; then
     exit 1
 fi
 
-user_config
 main
