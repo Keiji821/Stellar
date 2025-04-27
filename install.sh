@@ -67,46 +67,46 @@ iniciar_instalacion() {
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
 
-    echo -e "\033[32m➔ Preparando instalación...\033[0m" >&3
+    echo "➔ Preparando instalación..." >&3
     sleep 1
 
-    echo -e "\033[33m➔ Actualizando paquetes...\033[0m" >&3
+    echo "➔ Actualizando paquetes..." >&3
     if apt update -y >/dev/null 2>&1; then
-        echo -e "\033[32m✔ Paquetes actualizados.\033[0m" >&3
+        echo "✔ Paquetes actualizados." >&3
     else
-        echo -e "\033[31m✘ Error actualizando paquetes.\033[0m" >&3
+        echo "✘ Error actualizando paquetes." >&3
     fi
     sleep 0.5
 
-    echo -e "\033[33m➔ Actualizando sistema...\033[0m" >&3
+    echo "➔ Actualizando sistema..." >&3
     if apt upgrade -y >/dev/null 2>&1; then
-        echo -e "\033[32m✔ Sistema actualizado.\033[0m" >&3
+        echo "✔ Sistema actualizado." >&3
     else
-        echo -e "\033[31m✘ Error actualizando sistema.\033[0m" >&3
+        echo "✘ Error actualizando sistema." >&3
     fi
     sleep 0.5
 
     for pkg in "${apt_packages[@]}"; do
-        echo -e "\033[33m➔ Instalando $pkg...\033[0m" >&3
+        echo "➔ Instalando $pkg..." >&3
         if apt install -y "$pkg" >/dev/null 2>&1; then
-            echo -e "\033[32m✔ $pkg instalado.\033[0m" >&3
+            echo "✔ $pkg instalado." >&3
         else
-            echo -e "\033[31m✘ Error instalando $pkg.\033[0m" >&3
+            echo "✘ Error instalando $pkg." >&3
         fi
         sleep 0.3
     done
 
     for pkg in "${pip_packages[@]}"; do
-        echo -e "\033[33m➔ Instalando $pkg...\033[0m" >&3
+        echo "➔ Instalando $pkg..." >&3
         if pip install "$pkg" >/dev/null 2>&1; then
-            echo -e "\033[32m✔ $pkg instalado.\033[0m" >&3
+            echo "✔ $pkg instalado." >&3
         else
-            echo -e "\033[31m✘ Error instalando $pkg.\033[0m" >&3
+            echo "✘ Error instalando $pkg." >&3
         fi
         sleep 0.3
     done
 
-    echo -e "\033[32m✔ Instalación completada!\033[0m" >&3
+    echo "✔ Instalación completada!" >&3
     sleep 2
 
     exec 3>&-
