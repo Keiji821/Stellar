@@ -53,7 +53,7 @@ progress() {
     local percentage=$1
     local filled=$((${PROGRESS_BAR_WIDTH} * ${percentage} / 100))
     local empty=$((${PROGRESS_BAR_WIDTH} - ${filled}))
-    
+
     if [ $percentage -lt 25 ]; then
         bar_color="${rojo}"
     elif [ $percentage -lt 75 ]; then
@@ -61,7 +61,7 @@ progress() {
     else
         bar_color="${verde}"
     fi
-    
+
     printf "\r${amarillo}[${blanco}${bar_color}"
     printf "%${filled}s" | tr ' ' '#'
     printf "%${empty}s" | tr ' ' '.'
@@ -115,7 +115,8 @@ main() {
 }
 
 if [[ ! -d config/system ]]; then
-    handle_error "Directorio system no encontrado en ~/"
+    echo -e "${rojo}Directorio system no encontrado en ~/${blanco}"
+    exit 1
 fi
 
 user_config
