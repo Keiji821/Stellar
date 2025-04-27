@@ -35,34 +35,46 @@ iniciar_instalacion() {
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
 
-    echo "[*] Preparando la instalación..." >&3
+    echo "➔ Preparando la instalación..." >&3
     sleep 1
 
-    echo "[*] Actualizando lista de paquetes..." >&3
-    apt update -y >/dev/null 2>&1
-    echo "[✔] Lista de paquetes actualizada." >&3
+    echo "➔ Actualizando lista de paquetes..." >&3
+    if apt update -y >/dev/null 2>&1; then
+        echo "✔ Lista de paquetes actualizada." >&3
+    else
+        echo "✘ Error al actualizar lista de paquetes." >&3
+    fi
     sleep 0.5
 
-    echo "[*] Actualizando sistema..." >&3
-    apt upgrade -y >/dev/null 2>&1
-    echo "[✔] Sistema actualizado." >&3
+    echo "➔ Actualizando sistema..." >&3
+    if apt upgrade -y >/dev/null 2>&1; then
+        echo "✔ Sistema actualizado." >&3
+    else
+        echo "✘ Error al actualizar el sistema." >&3
+    fi
     sleep 0.5
 
     for pkg in "${apt_packages[@]}"; do
-        echo "[*] Instalando $pkg (APT)..." >&3
-        apt install -y "$pkg" >/dev/null 2>&1
-        echo "[✔] $pkg instalado correctamente." >&3
+        echo "➔ Instalando $pkg (APT)..." >&3
+        if apt install -y "$pkg" >/dev/null 2>&1; then
+            echo "✔ $pkg instalado correctamente." >&3
+        else
+            echo "✘ Error al instalar $pkg." >&3
+        fi
         sleep 0.3
     done
 
     for pkg in "${pip_packages[@]}"; do
-        echo "[*] Instalando $pkg (pip)..." >&3
-        pip install "$pkg" >/dev/null 2>&1
-        echo "[✔] $pkg instalado correctamente." >&3
+        echo "➔ Instalando $pkg (pip)..." >&3
+        if pip install "$pkg" >/dev/null 2>&1; then
+            echo "✔ $pkg instalado correctamente." >&3
+        else
+            echo "✘ Error al instalar $pkg (pip)." >&3
+        fi
         sleep 0.3
     done
 
-    echo "[✔] ¡Instalación completada exitosamente!" >&3
+    echo "✔ ¡Instalación completada exitosamente!" >&3
     sleep 2
 
     exec 3>&-
