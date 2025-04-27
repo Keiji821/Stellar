@@ -1,17 +1,9 @@
 #!/bin/bash
-PIPE="$HOME/.stellar_pipe"
-trap 'cleanup' EXIT
-
-cleanup(){
-    [[ -n "$DIALOG_PID" ]] && kill $DIALOG_PID 2>/dev/null
-    exec 3>&- 2>/dev/null
-    rm -f "$PIPE"
-}
 
 user_config(){
     while true; do
         username=$(dialog --title "Configuración de Usuario" \
-                          --inputbox "Usuario (4–15 caracteres, letras/números/_):" 10 60 3>&1 2>&1)
+                          --inputbox "Ingrese un nombre de usuario (4–15 caracteres, letras/números/_):" 10 60 3>&1 2>&1)
         [[ $? -ne 0 ]] && { clear; echo "Instalación cancelada."; exit 1; }
         [[ ${#username} -ge 4 && ${#username} -le 15 && "$username" =~ ^[a-zA-Z0-9_]+$ ]] && break
     done
@@ -20,79 +12,83 @@ user_config(){
 }
 
 iniciar_instalacion(){
-    rm -f "$PIPE"
-    mkfifo "$PIPE"
-    dialog --title "Instalador de Stellar" --programbox 20 70 < "$PIPE" &
-    DIALOG_PID=$!
-    exec 3> "$PIPE"
-    # espera a que dialog esté leyendo
-    sleep 0.2
-
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
     total=$(( ${#apt_packages[@]} + ${#pip_packages[@]} + 2 ))
     step=0
     spinner=('|' '/' '-' '\\')
     idx=0
-    spin(){ printf "%s" "${spinner[idx]}"; idx=$(( (idx+1)%4 )); }
 
-    echo "== Instalador de Stellar ==" >&3
-    echo "" >&3
+    logtext="Instalador de Stellar\n\n"
 
-    echo "Preparando actualización... (0/$total)" >&3
-    sleep 0.3
+    # Función para refrescar la ventana
+    show(){
+        dialog --title "Instalador de Stellar" --infobox "$logtext" 20 70
+    }
 
+    # Inicio
     ((step++))
-    echo "[$(spin)] Actualizando APT... ($step/$total)" >&3
+    logtext+="[*] Preparando actualización... ($step/$total)\n"
+    show
+    sleep 0.5
+
+    # Actualizar lista de paquetes
+    ((step++))
+    logtext+="[*] Actualizando lista de paquetes... ($step/$total)\n"
+    show
     apt update -y >/dev/null 2>&1
-    echo "[✔] APT actualizado. ($step/$total)" >&3
-    sleep 0.3
+    logtext+="[✔] Lista de paquetes actualizada. ($step/$total)\n\n"
+    show
+    sleep 0.5
 
+    # Upgrade sistema
     ((step++))
-    echo "[$(spin)] Upgrade de sistema... ($step/$total)" >&3
+    logtext+="[*] Actualizando sistema... ($step/$total)\n"
+    show
     apt upgrade -y >/dev/null 2>&1
-    echo "[✔] Sistema upgraded. ($step/$total)" >&3
-    sleep 0.3
+    logtext+="[✔] Sistema actualizado. ($step/$total)\n\n"
+    show
+    sleep 0.5
 
-    echo "" >&3
-    echo "== Paquetes APT ==" >&3
+    # Paquetes APT
+    logtext+="== Instalación de paquetes APT ==\n"
+    show
     for pkg in "${apt_packages[@]}"; do
         ((step++))
-        echo "[$(spin)] Instalando $pkg... ($step/$total)" >&3
-        if apt install -y "$pkg" >/dev/null 2>&1; then
-            echo "[✔] $pkg instalado. ($step/$total)" >&3
-        else
-            echo "[✖] Error con $pkg. ($step/$total)" >&3
-        fi
-        sleep 0.2
+        # animación breve de spinner
+        char="${spinner[idx]}"; idx=$(( (idx+1)%4 ))
+        logtext+="[${char}] Instalando $pkg... ($step/$total)\n"
+        show
+        apt install -y "$pkg" >/dev/null 2>&1
+        logtext+="[✔] $pkg instalado. ($step/$total)\n"
+        show
+        sleep 0.3
     done
+    logtext+="\n"
 
-    echo "" >&3
-    echo "== Paquetes PIP ==" >&3
+    # Paquetes PIP
+    logtext+="== Instalación de paquetes PIP ==\n"
+    show
     for pkg in "${pip_packages[@]}"; do
         ((step++))
-        echo "[$(spin)] Instalando $pkg... ($step/$total)" >&3
-        if pip install "$pkg" >/dev/null 2>&1; then
-            echo "[✔] $pkg instalado. ($step/$total)" >&3
-        else
-            echo "[✖] Error con $pkg. ($step/$total)" >&3
-        fi
-        sleep 0.2
+        char="${spinner[idx]}"; idx=$(( (idx+1)%4 ))
+        logtext+="[${char}] Instalando $pkg... ($step/$total)\n"
+        show
+        pip install "$pkg" >/dev/null 2>&1
+        logtext+="[✔] $pkg instalado. ($step/$total)\n"
+        show
+        sleep 0.3
     done
-
-    echo "" >&3
-    echo "[✔] Instalación completa. ($step/$total)" >&3
+    logtext+="\n[✔] Instalación completada exitosamente. ($step/$total)\n"
+    show
     sleep 1
-
-    exec 3>&-
 }
 
 main(){
     [[ ! -d ~/Stellar ]] && mkdir -p ~/Stellar
     user_config
     iniciar_instalacion
-    dialog --title "Instalación Completa" \
-           --msgbox "¡Todos los componentes se instalaron correctamente!" 8 50
+    dialog --title "Instalación Completa" --msgbox "¡Todos los componentes se instalaron correctamente!" 8 50
     clear
 }
 
