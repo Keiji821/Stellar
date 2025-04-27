@@ -10,9 +10,6 @@ magenta="\033[1;35m"
 cyan="\033[1;36m"
 reset="\033[0m"
 
-cp ~/Stellar/config/.bash_profile ~/.
-cp ~/Stellar/config/.bashrc ~/.
-
 PROGRESS_BAR_WIDTH=50
 current_line=2
 
@@ -113,7 +110,8 @@ main() {
 }
 
 if [[ ! -d ~/Stellar/config/system ]]; then
-    handle_error "Directorio system no encontrado en ~/"
+    dialog --title "Error" --msgbox "Directorio system no encontrado en ~/" 6 50
+    exit 1
 fi
 
 user_config
