@@ -63,5 +63,19 @@ Después de ejecutar el archivo `install.sh` Stellar empezará descarga todas la
 <details>
 <summary><b>Autores</b></summary>
 
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/TuUsuario">
+        <img src="https://avatars.githubusercontent.com/u/TuID" width="100px;" alt="TuNombre"/>
+        <br />
+        <sub><b>TuNombre</b></sub>
+      </a>
+      <br />
+      <a href="https://discord.com/users/TuID" title="Discord">
+        <img src="https://img.shields.io/badge/Discord-Keiji-%235865F2?style=flat&logo=discord&logoColor=white" />
+      </a>
+    </td>
+</table>
 
 </details>
