@@ -18,8 +18,7 @@ current_line=2
 
 user_config() {
     while true; do
-        dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Por favor, ingresa un nombre de usuario (4-15 caracteres):" 10 50 2>/tmp/username.txt
-        usuario=$(cat /tmp/username.txt)
+        usuario=$(dialog --title "Configuración de usuario" --backtitle "Stellar OS Installer" --inputbox "Por favor, ingresa un nombre de usuario (4-15 caracteres):" 10 50 3>&1 1>&2)
 
         if [[ -z "$usuario" ]]; then
             dialog --title "Error" --msgbox "El campo no puede estar vacío. Por favor ingresa un nombre de usuario válido." 6 50
@@ -36,7 +35,7 @@ user_config() {
             continue
         fi
 
-        echo "$usuario" > config/system/user.txt
+        echo "$usuario" > ~/Stellar/config/system/user.txt
         dialog --title "Éxito" --msgbox "Usuario configurado correctamente!" 6 50
         break
     done
@@ -82,11 +81,11 @@ main() {
     current_line=2
     install_packages
     progress 100
-    dialog --title "Instalación completa" --msgbox "¡Instalación completada exitosamente!" 6 50
+    dialog --title "Instalación completada" --msgbox "¡La instalación ha sido completada con éxito!" 6 50
 }
 
-if [[ ! -d config/system ]]; then
-    dialog --title "Error" --msgbox "Directorio system no encontrado en ~/" 6 50
+if [[ ! -d ~/Stellar/config/system ]]; then
+    dialog --title "Error" --msgbox "Directorio system no encontrado en ~/Stellar/config/" 6 50
     exit 1
 fi
 
