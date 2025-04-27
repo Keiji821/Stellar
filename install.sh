@@ -22,14 +22,14 @@ install_dependencies() {
 
 user_config() {
     while true; do
-        username=$(dialog --title "Configuración de Usuario" \
-                          --inputbox "Ingrese nombre de usuario (4-15 caracteres, solo alfanuméricos y _):" \
+        username=$(dialog --title "Configuración de Usuario" --colors \
+                          --inputbox "\Z1Ingrese nombre de usuario (4-15 caracteres, solo alfanuméricos y _):\Z0" \
                           10 60 3>&1 1>&2 2>&3)
-        
+
         local exit_code=$?
-        
+
         if [[ $exit_code -ne 0 ]]; then
-            dialog --title "Confirmación" --yesno "¿Cancelar instalación?" 6 50 && {
+            dialog --title "Confirmación" --yesno "\Z1¿Cancelar instalación?\Z0" 6 50 && {
                 clear
                 echo "Instalación cancelada."
                 exit 1
@@ -38,12 +38,12 @@ user_config() {
         fi
 
         if [[ -z "$username" ]]; then
-            dialog --msgbox "El nombre de usuario no puede estar vacío." 6 50
+            dialog --msgbox "\Z1El nombre de usuario no puede estar vacío.\Z0" 6 50
             continue
         fi
 
         if [[ ${#username} -lt 4 || ${#username} -gt 15 ]]; then
-            dialog --msgbox "Longitud inválida (debe ser 4-15 caracteres)." 6 50
+            dialog --msgbox "\Z1Longitud inválida (debe ser 4-15 caracteres).\Z0" 6 50
             continue
         fi
 
@@ -52,7 +52,7 @@ user_config() {
             echo "$username" > "$USER_FILE"
             break
         else
-            dialog --msgbox "Caracteres inválidos. Solo se permiten letras, números y _." 6 60
+            dialog --msgbox "\Z1Caracteres inválidos. Solo se permiten letras, números y _.\Z0" 6 60
         fi
     done
 }
@@ -61,52 +61,52 @@ iniciar_instalacion() {
     [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
     mkfifo "$PROGRESO_CANAL"
 
-    dialog --title "Instalador Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
+    dialog --title "Instalador Stellar" --colors --programbox 20 70 < "$PROGRESO_CANAL" &
     exec 3>"$PROGRESO_CANAL"
 
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
 
-    echo "➔ Preparando instalación..." >&3
+    echo "\Z2➔ Preparando instalación...\Z0" >&3
     sleep 1
 
-    echo "➔ Actualizando paquetes..." >&3
+    echo "\Z3➔ Actualizando paquetes...\Z0" >&3
     if apt update -y >/dev/null 2>&1; then
-        echo "✔ Paquetes actualizados." >&3
+        echo "\Z2✔ Paquetes actualizados.\Z0" >&3
     else
-        echo "✘ Error actualizando paquetes." >&3
+        echo "\Z1✘ Error actualizando paquetes.\Z0" >&3
     fi
     sleep 0.5
 
-    echo "➔ Actualizando sistema..." >&3
+    echo "\Z3➔ Actualizando sistema...\Z0" >&3
     if apt upgrade -y >/dev/null 2>&1; then
-        echo "✔ Sistema actualizado." >&3
+        echo "\Z2✔ Sistema actualizado.\Z0" >&3
     else
-        echo "✘ Error actualizando sistema." >&3
+        echo "\Z1✘ Error actualizando sistema.\Z0" >&3
     fi
     sleep 0.5
 
     for pkg in "${apt_packages[@]}"; do
-        echo "➔ Instalando $pkg..." >&3
+        echo "\Z3➔ Instalando $pkg...\Z0" >&3
         if apt install -y "$pkg" >/dev/null 2>&1; then
-            echo "✔ $pkg instalado." >&3
+            echo "\Z2✔ $pkg instalado.\Z0" >&3
         else
-            echo "✘ Error instalando $pkg." >&3
+            echo "\Z1✘ Error instalando $pkg.\Z0" >&3
         fi
         sleep 0.3
     done
 
     for pkg in "${pip_packages[@]}"; do
-        echo "➔ Instalando $pkg..." >&3
+        echo "\Z3➔ Instalando $pkg...\Z0" >&3
         if pip install "$pkg" >/dev/null 2>&1; then
-            echo "✔ $pkg instalado." >&3
+            echo "\Z2✔ $pkg instalado.\Z0" >&3
         else
-            echo "✘ Error instalando $pkg." >&3
+            echo "\Z1✘ Error instalando $pkg.\Z0" >&3
         fi
         sleep 0.3
     done
 
-    echo "✔ Instalación completada!" >&3
+    echo "\Z2✔ Instalación completada!\Z0" >&3
     sleep 2
 
     exec 3>&-
@@ -120,7 +120,7 @@ main() {
     user_config
     iniciar_instalacion
 
-    dialog --title "Completado" --msgbox "¡Instalación finalizada correctamente!" 8 50
+    dialog --title "Completado" --colors --msgbox "\Z2¡Instalación finalizada correctamente!\Z0" 8 50
     clear
 }
 
