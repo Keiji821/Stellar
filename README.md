@@ -43,7 +43,7 @@ cd Stellar
 bash install.sh
 ```
 
-Después de ejecutar el archivo `install.sh` Stellar empezará descarga todas las dependencias necesarias al finalizar se reiniciará automáticamente su sesión de termux.
+Después de ejecutar el archivo `install.sh` Stellar empezará a descargar todas las dependencias necesarias al finalizar se reiniciará automáticamente su sesión de termux.
 
 </details>
 
