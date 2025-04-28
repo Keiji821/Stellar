@@ -61,7 +61,7 @@ iniciar_instalacion() {
     [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
     mkfifo "$PROGRESO_CANAL"
 
-    dialog --title "Instalador Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
+    dialog --title "Instalación de Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
     exec 3>"$PROGRESO_CANAL"
 
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
