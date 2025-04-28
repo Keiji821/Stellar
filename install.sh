@@ -4,13 +4,6 @@ PROGRESO_CANAL="$HOME/.stellar_install_pipe"
 CONFIG_DIR="$HOME/Stellar/config/system"
 USER_FILE="$CONFIG_DIR/user.txt"
 
-check_environment() {
-    if ! [[ $(uname -o) == *Android* ]]; then
-        echo "Este script solo funciona en Termux (Android)."
-        exit 1
-    fi
-}
-
 install_dependencies() {
     if ! command -v dialog &> /dev/null; then
         pkg install dialog -y >/dev/null 2>&1 || {
@@ -114,7 +107,6 @@ iniciar_instalacion() {
 }
 
 main() {
-    check_environment
     install_dependencies
     [[ ! -d ~/Stellar ]] && mkdir -p ~/Stellar
     user_config
