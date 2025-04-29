@@ -45,7 +45,7 @@ cd Stellar
 bash install.sh
 ```
 
-Al ejecutar el archivo `install.sh' se le abrirá una ventana de diálogo la cual es la siguiente:
+Al ejecutar el archivo `install.sh` se le abrirá una ventana de diálogo la cual es la siguiente:
 
 ![User](https://github.com/Keiji821/Stellar/blob/master/images%2Fuser.jpg)
 
