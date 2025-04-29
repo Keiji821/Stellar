@@ -68,6 +68,31 @@ La instalación se habrá completado y Stellar OS estará instalado en su termux
 <details>
 <summary><b>Características</b></summary>
 
+Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
+
+| Categoría      | Comando         | Descripción |
+|----------------|-----------------|-------------|
+| **Sistema**    | `reload`        | Recargar el banner |
+|               | `ui`           | Personaliza el banner y sus colores |
+|               | `uninstall`    | Desinstala Stellar |
+|               | `update`       | Actualiza desde el repositorio de GitHub |
+|               | `bash`         | Reinicia tu sesión de la terminal |
+| **Utilidades** | `ia`           | Un servicio de AI desde una API gratuita |
+|               | `ia-image`     | Generador de imágenes IA |
+|               | `traductor`    | Traducción en tiempo real |
+|               | `myip`         | Muestra tu IP real |
+| **OSINT**      | `ipinfo`       | Obtiene información de una IP |
+|               | `urlinfo`      | Analizador de URL |
+|               | `userfinder`   | Busca un nombre de usuario en diferentes páginas |
+|               | `phoneinfo`    | Obtiene información de un número de teléfono |
+|               | `metadatainfo` | Extrae metadatos de imágenes y documentos |
+|               | `emailsearch`  | Búsqueda de emails |
+| **OSINT/Discord** | `userinfo`     | Obtiene información a partir de una ID |
+|               | `serverinfo`   | Obtiene información sobre un servidor a partir de su ID |
+|               | `searchinvites`| Busca invitaciones en páginas ingresando el nombre del servidor |
+|               | `inviteinfo`   | Obtiene información sobre un enlace de invitación |
+| **OSINT/Instagram** | `profileinfo` | Obtiene los metadatos del perfil |
+| **Pentesting** | `ddos`         | Realiza un ataque DDoS mediante la IP y puerto |
 
 </details>
 
