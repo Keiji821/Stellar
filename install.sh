@@ -81,7 +81,7 @@ iniciar_instalacion() {
     sleep 1
 
     echo "➔ Actualizando paquetes..." >&3
-    if ! pkg update -y >> "$LOG_FILE" 2>&1; then
+    if ! apt update -y >> "$LOG_FILE" 2>&1; then
         echo "✘ Error actualizando paquetes. Ver $LOG_FILE" >&3
         exit 1
     fi
@@ -89,7 +89,7 @@ iniciar_instalacion() {
     sleep 0.5
 
     echo "➔ Actualizando sistema..." >&3
-    if ! pkg upgrade -y >> "$LOG_FILE" 2>&1; then
+    if ! apt upgrade -y >> "$LOG_FILE" 2>&1; then
         echo "✘ Error actualizando sistema. Ver $LOG_FILE" >&3
         exit 1
     fi
@@ -98,7 +98,7 @@ iniciar_instalacion() {
 
     for pkg in "${apt_packages[@]}"; do
         echo "➔ Instalando $pkg..." >&3
-        if ! pkg install -y "$pkg" >> "$LOG_FILE" 2>&1; then
+        if ! apt install -y "$pkg" >> "$LOG_FILE" 2>&1; then
             echo "✘ Error instalando $pkg. Ver $LOG_FILE" >&3
             exit 1
         fi
