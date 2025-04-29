@@ -81,25 +81,29 @@ Stellar OS ofrece una selección de comandos, orientados al osint y hacking, est
 |               | `ia-image`     | Generador de imágenes IA |
 |               | `traductor`    | Traducción en tiempo real |
 |               | `myip`         | Muestra tu IP real |
-| **OSINT**      | `ipinfo`       | Obtiene información de una IP |
+| **Osint**      | `ipinfo`       | Obtiene información de una IP |
 |               | `urlinfo`      | Analizador de URL |
 |               | `userfinder`   | Busca un nombre de usuario en diferentes páginas |
 |               | `phoneinfo`    | Obtiene información de un número de teléfono |
 |               | `metadatainfo` | Extrae metadatos de imágenes y documentos |
 |               | `emailsearch`  | Búsqueda de emails |
-| **OSINT/Discord** | `userinfo`     | Obtiene información a partir de una ID |
+| **Osint/Discord** | `userinfo`     | Obtiene información a partir de una ID |
 |               | `serverinfo`   | Obtiene información sobre un servidor a partir de su ID |
 |               | `searchinvites`| Busca invitaciones en páginas ingresando el nombre del servidor |
 |               | `inviteinfo`   | Obtiene información sobre un enlace de invitación |
-| **OSINT/Instagram** | `profileinfo` | Obtiene los metadatos del perfil |
+| **Osint/Instagram** | `profileinfo` | Obtiene los metadatos del perfil |
 | **Pentesting** | `ddos`         | Realiza un ataque DDoS mediante la IP y puerto |
+
+Stellar también incluye en segundo plano una capa de protección con TOR ejecutándose en todo momento en su termux para su anonimato.
 
 </details>
 
 <details>
 <summary><b>Guía de uso</b></summary>
 
+El uso es simple, se instala y empieza a usar su termux como normalmente lo hace y con el comandos `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
+El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
 
 </details>
 
