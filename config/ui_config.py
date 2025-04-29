@@ -3,5 +3,5 @@ from rich.panel import Panel
 from rich.text import Text
 from rich.table import Table
 import os
-import sys
+from os import system
 
