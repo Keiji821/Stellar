@@ -11,7 +11,7 @@ mv banner_background.txt $HOME
 mv banner_background_color.txt $HOME
 cd
 
-cd Stellar && git stash &>/dev/null &
+cd Stellar && git stash
 
 update_repo() {
     if ! git pull --force; then
