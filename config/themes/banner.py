@@ -90,7 +90,6 @@ def obtener_info():
         "Celular": obtener_modelo_celular(),
         "OS": f"{platform.machine()}",
         "Kernel": platform.release(),
-        "Tiempo transcurrido": ta_str,
         "Shell": os.path.basename(os.getenv("SHELL", "bash")),
         "Terminal": os.getenv("TERM", "unknown"),
         "MemoriaPorcentaje": vm.percent,
@@ -111,8 +110,8 @@ def crear_panel(info, panel_width):
     t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
     
-    for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Tiempo transcurrido", "Shell", "Terminal"]:
-        t.add_row(f"{key}:", info[key])
+    for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Shell", "Terminal"]:
+        t.add_row(f"{key}: ", info[key])
     
     memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
     t.add_row("Memoria:", memoria_bar)
