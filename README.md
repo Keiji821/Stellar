@@ -94,7 +94,7 @@ Stellar OS ofrece una selección de comandos, orientados al osint y hacking, est
 | **Osint/Instagram** | `profileinfo` | Obtiene los metadatos del perfil |
 | **Pentesting** | `ddos`         | Realiza un ataque DDoS mediante la IP y puerto |
 
-Stellar también incluye en segundo plano una capa de protección con TOR ejecutándose en todo momento en su termux para su anonimato.
+Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
 
 </details>
 
