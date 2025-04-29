@@ -49,7 +49,7 @@ Al ejecutar el archivo `install.sh` se le abrirá una ventana de diálogo la cua
 
 ![User](https://github.com/Keiji821/Stellar/blob/master/images%2Fuser.jpg)
 
-En el campo que se muestra en la imagen es decir en el diálogo, deberá ingresar el nombre de usuario que desea usar en Stellar OS al ingresar el nombre usuario deseado debe dar clic o tocar el botón [OK] para continuar con la instalación.
+En el campo que se muestra en la imagen es decir en el diálogo, deberá ingresar el nombre de usuario que desea usar en Stellar OS al ingresar el nombre usuario deseado debe dar clic o tocar el botón `[OK]` para continuar con la instalación.
 
 Al continuar se le abrirá la siguiente ventana:
 
@@ -61,7 +61,7 @@ Después se mostrará lo siguiente:
 
 ![Done](https://github.com/Keiji821/Stellar/blob/master/images%2Fdone.jpg)
 
-La instalación se habrá completado y Stellar OS estará instalado en su termux al dar clic o tocar el botón [OK] su sesión de termux se reiniciará y mostrará un nuevo diseño para su terminal.
+La instalación se habrá completado y Stellar OS estará instalado en su termux al dar clic o tocar el botón `[OK]` su sesión de termux se reiniciará y mostrará un nuevo diseño para su terminal.
 
 </details>
 
