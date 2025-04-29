@@ -101,7 +101,7 @@ Stellar también incluye en segundo plano una capa de protección con `TOR` ejec
 <details>
 <summary><b>Guía de uso</b></summary>
 
-El uso es simple, se instala y empieza a usar su termux como normalmente lo hace y con el comandos `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
+El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
 El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
 
