@@ -131,3 +131,5 @@ main() {
 }
 
 main
+reset
+bash
