@@ -29,6 +29,7 @@ if banner_color=="y":
 ]
     for color in colors:
        console.print(f"[{color}]{color}[/{color}]")
+       console.print("")
 
 color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
 os.system(f"echo {color_selection} > banner_color.txt")
@@ -41,6 +42,7 @@ if banner_background=="y":
     if banner_background_color=="y":
         for color in colors:
             console.print(f"[{color}]{color}[/{color}]")
+            console.print("")
     banner_background_color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
     os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
 
