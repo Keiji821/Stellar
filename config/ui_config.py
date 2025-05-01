@@ -40,6 +40,16 @@ if banner_background=="y":
     os.system("echo Sí > banner_background.txt")
     banner_background_color = console.input("[bold green]¿Desea agregar un color al fondo de su banner? (y/n): [/bold green]")
     if banner_background_color=="y":
+        colors = [
+    "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
+    "bright_black", "bright_red", "bright_green", "bright_yellow", 
+    "bright_blue", "bright_magenta", "bright_cyan", "bright_white",
+    "dark_red", "dark_green", "dark_yellow", "dark_blue",
+    "dark_magenta", "dark_cyan", "grey0", "grey19", "grey30",
+    "grey37", "grey46", "grey50", "grey54", "grey58", "grey62",
+    "grey66", "grey70", "grey74", "grey78", "grey82", "grey85",
+    "grey89", "grey93", "grey100", "orange1", "orange3", "orange4"
+]
         for color in colors:
             console.print(f"[{color}]{color}[/{color}]")
             console.print("")
