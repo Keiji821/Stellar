@@ -7,7 +7,7 @@ console = Console()
 
 os.system("clear")
 
-os.chdir("./Stellar/config/themes")
+os.chdir("themes")
 
 banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
 if banner=="y":
