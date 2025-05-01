@@ -15,7 +15,7 @@ if banner=="y":
     os.system("cd && cd Stellar/config/themes && nano banner.txt")
 
 banner_color = console.input("¿Desea configurar el color de su banner? (y/n): ", style="bold green")
-if banner_color=="y"
+if banner_color=="y":
     bcolor = console.input("¿Desea ver los colores disponibles? (y/n): ", style="bold green")
     if bcolor=="y":
         colors = [
