@@ -10,9 +10,8 @@ os.system("clear")
 
 banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
 if banner=="y":
-    console.print("Presione [code][Enter][/code] para configurar su banner", style="bold green")
-    os.system("rm -rf banner.txt")
-    os.system("cd && cd Stellar/config/themes && nano banner.txt")
+    console.print("[bold green]Presione [code][bold yellow][Enter][/code] [bold green]para configurar su banner[/bold green]")
+    os.system("cd && cd Stellar/config/themes && rm -rf banner.txt && nano banner.txt")
 
 banner_color = console.input("[bold green]¿Desea configurar el color de su banner? (y/n): [/bold green]")
 if banner_color=="y":
