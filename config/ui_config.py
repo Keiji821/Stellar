@@ -7,11 +7,12 @@ console = Console()
 
 os.system("clear")
 
+os.chdir("./Stellar/config/themes")
 
 banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
 if banner=="y":
     console.print("[bold green]Presione [code][bold yellow][Enter][/code] [bold green]para configurar su banner[/bold green]")
-    os.system("cd && cd Stellar/config/themes && rm -rf banner.txt && nano banner.txt")
+    os.system("rm -rf banner.txt && nano banner.txt")
 
 banner_color = console.input("[bold green]¿Desea configurar el color de su banner? (y/n): [/bold green]")
 if banner_color=="y":
@@ -55,8 +56,6 @@ if banner_background=="y":
             console.print("")
     banner_background_color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
     os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
-
-
 
 console.print("")
 console.print("[code]Configuraciónes aplicadas correctamente[/code]", style="bold green", justify="center")
