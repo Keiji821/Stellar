@@ -8,15 +8,15 @@ console = Console()
 os.system("clear")
 
 
-banner = console.input("¿Desea configurar el contenido del banner? (y/n): ", style="bold green")
+banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
 if banner=="y":
     console.print("Presione [code][Enter][/code] para configurar su banner", style="bold green")
     os.system("rm -rf banner.txt")
     os.system("cd && cd Stellar/config/themes && nano banner.txt")
 
-banner_color = console.input("¿Desea configurar el color de su banner? (y/n): ", style="bold green")
+banner_color = console.input("[bold green]¿Desea configurar el color de su banner? (y/n): [/bold green]")
 if banner_color=="y":
-    bcolor = console.input("¿Desea ver los colores disponibles? (y/n): ", style="bold green")
+    bcolor = console.input("[bold green]¿Desea ver los colores disponibles? (y/n): [/bold green]")
     if bcolor=="y":
         colors = [
     "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
@@ -31,18 +31,18 @@ if banner_color=="y":
     for color in colors:
        console.print(f"[{color}]{color}[/{color}]")
 
-color_selection = console.input("Ingrese el color a configurar: ", style="bold green")
+color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
 os.system(f"echo {color_selection} > banner_color.txt")
 
 
-banner_background = console.input("¿Desea que su banner tenga un fondo de color? (y/n): ", style="bold green")
+banner_background = console.input("[bold green]¿Desea que su banner tenga un fondo de color? (y/n): [/bold green]")
 if banner_background=="y":
     os.system("echo Sí > banner_background.txt")
-    banner_background_color = console.input("¿Desea agregar un color al fondo de su banner? (y/n): ", style="bold green")
+    banner_background_color = console.input("[bold green]¿Desea agregar un color al fondo de su banner? (y/n): [/bold green]")
     if banner_background_color=="y":
         for color in colors:
             console.print(f"[{color}]{color}[/{color}]")
-    banner_background_color_selection = console.input("Ingrese el color a configurar: ", style="bold green")
+    banner_background_color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
     os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
 
 
