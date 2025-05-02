@@ -59,7 +59,7 @@ if banner_background=="y":
 
 termux_background = console.input("[bold green]¿Desea agregar un tema de fondo para su Termux? (y/n): [/bold green]")
 if termux_background=="y":
-    termux_background_list = console.input("[bold green]Pulse [code][bold yellow][Enter][/code] para ver un listado de temas por defecto[/bold green]")
+    termux_background_list = console.input("[bold green]Pulse [code][bold yellow][Enter][/code] [bold green]para ver un listado de temas por defecto[/bold green]")
 
     dracula = """
 background=#282A36
