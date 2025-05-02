@@ -170,7 +170,7 @@ if termux_background=="y":
     termux_background_select = console.input("[bold green]Ingrese una opción: [/bold green]")    
     if termux_background_select=="s":
         theme = console.input("[bold green]Ingrese el tema por defecto a usar: [/bold green]")
-        os.chdir("$HOME/.termux")
+        os.chdir(os.path.expanduser("~/.termux"))
         if theme=="dracula":
             os.system(f"rm -rf colors.properties && echo {dracula} > colors.properties")
         if theme=="nord":
