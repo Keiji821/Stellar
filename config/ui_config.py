@@ -173,15 +173,15 @@ if termux_background=="y":
         theme = console.input("[bold green]Ingrese el tema por defecto a usar: [/bold green]")
         
         if theme=="dracula":
-            os.system(f"rm -rf colors.properties && echo {dracula} > colors.properties")
+            os.system(f"rm -rf colors.properties && echo -e {dracula} > colors.properties")
         if theme=="nord":
-            os.system(f"rm -rf colors.properties && echo {nord} > colors.properties")
+            os.system(f"rm -rf colors.properties && echo -e {nord} > colors.properties")
         if theme=="gruvbox":
-            os.system(f"rm -rf colors.properties && echo {gruvbox} > colors.properties")
+            os.system(f"rm -rf colors.properties && echo -e {gruvbox} > colors.properties")
         if theme=="tokyo_night":
-            os.system(f"rm -rf colors.properties && echo {tokyo_night} > colors.properties")
+            os.system(f"rm -rf colors.properties && echo -e {tokyo_night} > colors.properties")
         if theme=="one_dark":
-            os.system(f"rm -rf colors.properties && echo {one_dark} > colors.properties")
+            os.system(f"rm -rf colors.properties && echo -e {one_dark} > colors.properties")
     if termux_background_select=="c":
         os.system("cd && cd .termux && rm -rf colors.properties && nano colors properties")
 
