@@ -57,7 +57,7 @@ if banner_background=="y":
     os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
 
 
-termux_background = console.input("[bold green]Desea agregar un tema de fondo para su Termux? (y/n): [/bold green]")
+termux_background = console.input("[bold green]¿Desea agregar un tema de fondo para su Termux? (y/n): [/bold green]")
 if termux_background=="y":
     termux_background_list = console.input("[bold green]Pulse [code][bold yellow][Enter][/code] para ver un listado de temas por defecto[/bold green]")
 
@@ -185,5 +185,5 @@ color15=#FFFFFF"""
 console.print("")
 console.print("[code]Configuraciónes aplicadas correctamente[/code]", style="bold green", justify="center")
 console.print("""
-Escriba el comando "bash" o "login" para aplicar los cambios correctamente""", justify="center")
+Escriba el comando "bash" o "login" para aplicar los cambios correctamente, para aplicar el tema de fondo de Termux reinicie la aplicación.""", justify="center")
 console.print("")
