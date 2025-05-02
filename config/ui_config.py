@@ -166,7 +166,7 @@ if termux_background=="y":
     console.print("""
 • dracula
 • nord
-• druvbox
+• gruvbox
 • tokyo_night
 • one_dark
 """)
