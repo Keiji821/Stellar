@@ -4,7 +4,6 @@ from os import system
 
 console = Console()
 
-
 os.system("clear")
 
 os.chdir("themes")
