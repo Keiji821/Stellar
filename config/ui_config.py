@@ -149,7 +149,8 @@ if banner_background=="y":
     banner_background_color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
     os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
 
-        os.chdir(os.path.expanduser("~/.termux"))
+
+os.chdir(os.path.expanduser("~/.termux"))
 
 termux_background = console.input("[bold green]¿Desea agregar un tema de fondo para su Termux? (y/n): [/bold green]")
 if termux_background=="y":
