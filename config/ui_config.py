@@ -139,6 +139,8 @@ if banner_color=="y":
 
 
 banner_background = console.input("[bold green]¿Desea que su banner tenga un fondo? (y/n): [/bold green]")
+if banner_background=="n":
+    os.system("echo No > banner_background.txt")    
 if banner_background=="y":
     os.system("echo Sí > banner_background.txt")
     banner_background_color = console.input("[bold green]¿Desea agregar un color al fondo de su banner? (y/n): [/bold green]")
