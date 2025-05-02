@@ -130,8 +130,8 @@ banner_color = console.input("[bold green]¿Desea configurar el color de su bann
 if banner_color=="y":
     bcolor = console.input("[bold green]¿Desea ver los colores disponibles? (y/n): [/bold green]")
     if bcolor=="y":       
-    for color in colors:
-       console.print(f"[{color}]{color}[/{color}]")
+        for color in colors:
+           console.print(f"[{color}]{color}[/{color}]")
        console.print("")
 
     color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
