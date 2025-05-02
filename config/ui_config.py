@@ -149,6 +149,7 @@ if banner_background=="y":
     banner_background_color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
     os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
 
+        os.chdir(os.path.expanduser("~/.termux"))
 
 termux_background = console.input("[bold green]¿Desea agregar un tema de fondo para su Termux? (y/n): [/bold green]")
 if termux_background=="y":
@@ -170,7 +171,7 @@ if termux_background=="y":
     termux_background_select = console.input("[bold green]Ingrese una opción: [/bold green]")    
     if termux_background_select=="s":
         theme = console.input("[bold green]Ingrese el tema por defecto a usar: [/bold green]")
-        os.chdir(os.path.expanduser("~/.termux"))
+        
         if theme=="dracula":
             os.system(f"rm -rf colors.properties && echo {dracula} > colors.properties")
         if theme=="nord":
