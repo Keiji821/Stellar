@@ -109,16 +109,8 @@ color13=#BF68D9
 color14=#48B0BD
 color15=#FFFFFF"""
 
-banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
-if banner=="y":
-    console.print("[bold green]Presione [code][bold yellow][Enter][/code] [bold green]para configurar su banner[/bold green]")
-    os.system("rm -rf banner.txt && nano banner.txt")
-
-banner_color = console.input("[bold green]¿Desea configurar el color de su banner? (y/n): [/bold green]")
-if banner_color=="y":
-    bcolor = console.input("[bold green]¿Desea ver los colores disponibles? (y/n): [/bold green]")
-    if bcolor=="y":
-        colors = [
+# colors/banner/background
+colors = [
     "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
     "bright_black", "bright_red", "bright_green", "bright_yellow", 
     "bright_blue", "bright_magenta", "bright_cyan", "bright_white",
@@ -128,6 +120,16 @@ if banner_color=="y":
     "grey66", "grey70", "grey74", "grey78", "grey82", "grey85",
     "grey89", "grey93", "grey100", "orange1", "orange3", "orange4"
 ]
+
+banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
+if banner=="y":
+    console.print("[bold green]Presione [code][bold yellow][Enter][/code] [bold green]para configurar su banner[/bold green]")
+    os.system("rm -rf banner.txt && nano banner.txt")
+
+banner_color = console.input("[bold green]¿Desea configurar el color de su banner? (y/n): [/bold green]")
+if banner_color=="y":
+    bcolor = console.input("[bold green]¿Desea ver los colores disponibles? (y/n): [/bold green]")
+    if bcolor=="y":       
     for color in colors:
        console.print(f"[{color}]{color}[/{color}]")
        console.print("")
