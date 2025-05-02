@@ -171,16 +171,16 @@ if termux_background=="y":
     if termux_background_select=="s":
         theme = console.input("[bold green]Ingrese el tema por defecto a usar: [/bold green]")
         
-    if theme=="dracula":
-        os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{dracula}\nEOF')
-    if theme=="nord":
-        os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{nord}\nEOF')
-    if theme=="gruvbox":
-        os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{gruvbox}\nEOF')
-    if theme=="tokyo_night":
-        os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{tokyo_night}\nEOF')
-    if theme=="one_dark":
-        os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{one_dark}\nEOF')
+        if theme=="dracula":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{dracula}\nEOF')
+        if theme=="nord":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{nord}\nEOF')
+        if theme=="gruvbox":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{gruvbox}\nEOF')
+        if theme=="tokyo_night":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{tokyo_night}\nEOF')
+        if theme=="one_dark":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{one_dark}\nEOF')
     if termux_background_select=="c":
         os.system("cd && cd .termux && rm -rf colors.properties && nano colors properties")
 
