@@ -174,7 +174,7 @@ color15=#FFFFFF"""
 • Ingrese "s" para elegir un banner por defecto
 • Ingrese "c" para configurar un banner desde cero""")
     termux_background_select = console.input("[bold green]Ingrese una opción: [/bold green]")    
-if termux_background_select=="s":
+    if termux_background_select=="s":
         theme = console.input("[bold green]Ingrese el tema por defecto a usar: [/bold green]")
         os.system(f"cd && cd .termux && rm -rf colors.properties && echo {theme} > colors.properties")
     if termux_background_select=="c":
