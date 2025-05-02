@@ -1,5 +1,6 @@
 from rich.console import Console
 from rich.panel import Panel
+from rich.text import Text
 import os
 from os import system
 
