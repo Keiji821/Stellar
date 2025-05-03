@@ -69,12 +69,6 @@ text_banner = Text(banner, style=style)
 
 def obtener_info():
     now = datetime.datetime.now()
-    try:
-        ta = time.time() - psutil.boot_time()
-        ta_str = f"{int(ta//3600)}h {int((ta%3600)//60)}m"
-    except:
-        ta_str = "No disponible"
-
     vm = psutil.virtual_memory()
     du = psutil.disk_usage(os.path.expanduser("~"))
 
@@ -133,26 +127,24 @@ def crear_panel(info, panel_width=None):
     )
 
 if __name__ == "__main__":
+    os.system('clear' if os.name == 'posix' else 'cls')
+    
     info = obtener_info()
     terminal_cols = shutil.get_terminal_size().columns
-    banner_width = max(len(line) for line in banner.splitlines())
+    banner_width = max(len(line) for line in banner.splitlines()) if banner else 0
     
     min_panel_width = 54
     espacio_entre = 4
     
+
     if terminal_cols >= (banner_width + min_panel_width + espacio_entre):
         panel_width = terminal_cols - banner_width - espacio_entre
         panel = crear_panel(info, panel_width)
-        disposicion = Columns([text_banner, panel], expand=False)
+        contenido = Columns([text_banner, panel], expand=False)
     else:
         panel = crear_panel(info)
-        disposicion = Columns([text_banner], expand=False)
+        contenido = Columns([text_banner, panel], expand=True)
     
-    console.print(disposicion)
-    if 'panel' in locals():
-        console.print(panel)
+    console.print(contenido)
     
-    console.print()
-    console.print()
-    console.print()
-    console.print()
+    console.print("\n" * 3)
