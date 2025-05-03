@@ -22,7 +22,7 @@ system_dir = os.path.expanduser("~/Stellar/config/system")
 
 def generar_paleta():
     def color_rgb():
-        return (random.randint(100, 255), (random.randint(100, 255)), (random.randint(100, 255)))
+        return (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255))
     return {
         'titulo': color_rgb(),
         'clave': color_rgb(),
@@ -74,10 +74,10 @@ def obtener_info():
         ta_str = f"{int(ta//3600)}h {int((ta%3600)//60)}m"
     except:
         ta_str = "No disponible"
-    
+
     vm = psutil.virtual_memory()
     du = psutil.disk_usage(os.path.expanduser("~"))
-    
+
     try:
         ip = requests.get("https://api.ipify.org", timeout=2).text
     except:
@@ -105,22 +105,22 @@ def render_bar(pct, color, width=20):
     filled = int(pct * width / 100)
     return Text("█" * filled + "░" * (width - filled), style=estilo_rgb(color))
 
-def crear_panel(info, panel_width):
+def crear_panel(info, panel_width=None):
     t = Table.grid(expand=False)
     t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
-    
+
     for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Shell", "Terminal"]:
         t.add_row(f"{key}: ", info[key])
-    
+
     memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
     t.add_row("Memoria:", memoria_bar)
     t.add_row("", f"{info['MemoriaUsada']} / {info['MemoriaTotal']}")
-    
+
     disco_bar = render_bar(info['DiscoPorcentaje'], paleta['disco'])
     t.add_row("Almacenamiento:", disco_bar)
     t.add_row("", f"{info['DiscoUsado']} / {info['DiscoTotal']}")
-    
+
     t.add_row("IP:", Text(info["IP"], style=estilo_rgb(paleta['borde'])))
 
     return Panel(
@@ -134,11 +134,24 @@ def crear_panel(info, panel_width):
 
 if __name__ == "__main__":
     info = obtener_info()
-    cols = shutil.get_terminal_size().columns
+    terminal_cols = shutil.get_terminal_size().columns
     banner_width = max(len(line) for line in banner.splitlines())
-    info_width = cols - banner_width - 4
-    panel = crear_panel(info, info_width)
-    console.print(Columns([text_banner, panel], expand=False))
+    
+    min_panel_width = 54
+    espacio_entre = 4
+    
+    if terminal_cols >= (banner_width + min_panel_width + espacio_entre):
+        panel_width = terminal_cols - banner_width - espacio_entre
+        panel = crear_panel(info, panel_width)
+        disposicion = Columns([text_banner, panel], expand=False)
+    else:
+        panel = crear_panel(info)
+        disposicion = Columns([text_banner], expand=False)
+    
+    console.print(disposicion)
+    if 'panel' in locals():
+        console.print(panel)
+    
     console.print()
     console.print()
     console.print()
