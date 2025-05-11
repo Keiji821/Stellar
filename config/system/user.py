@@ -5,10 +5,20 @@ from rich.table import Table
 
 console = Console()
 
-os.path.expanduser("~/Stellar/config/themes")
-
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
+
+os.path.expanduser("~/Stellar/config/themes")
+
+with open("banner_color.txt", encoding="utf-8") as f:
+    user = f.read().strip()
+
+with open("banner_background.txt", encoding="utf-8") as f:
+    user = f.read().strip()
+
+with open("banner_background_color.txt", encoding="utf-8") as f:
+    user = f.read().strip()
+
 
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="bold white", no_wrap=False)
