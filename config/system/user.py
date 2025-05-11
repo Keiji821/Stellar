@@ -8,7 +8,8 @@ console = Console()
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
 
-os.chdir("~/Stellar/config/themes")
+os.path.expanduser("~")
+os.chdir("Stellar/config/themes")
 
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
