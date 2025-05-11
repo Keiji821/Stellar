@@ -10,7 +10,6 @@ os.path.expanduser("~/Stellar/config/themes")
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
 
-
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="bold white", no_wrap=False)
 table.add_column("[bold green]Descripción", style="bold white")
