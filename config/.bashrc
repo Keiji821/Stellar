@@ -110,9 +110,11 @@ my() {
     cd
 }
 
-
-
-
+userconf() {
+    cd ~/Stellar/config/system
+    python user.sh
+    cd
+}
 
 # Osint
 
