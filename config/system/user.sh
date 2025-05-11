@@ -27,7 +27,6 @@ if [ "$respuesta" = "y" ] || [ "$respuesta" = "Y" ]; then
     read username
     echo "$username" > "$user_file"
     echo -e "${verde}Usuario guardado en $user_file${blanco}"
-    
 elif [ "$respuesta" = "n" ] || [ "$respuesta" = "N" ]; then
     if [ -f "$user_file" ]; then
         username=$(cat "$user_file")
