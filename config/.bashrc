@@ -104,6 +104,15 @@ update() {
     cd
 }
 
+my() {
+    cd ~/Stellar/config/system
+    python user.py
+    cd
+}
+
+
+
+
 
 # Osint
 
