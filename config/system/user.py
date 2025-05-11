@@ -5,7 +5,7 @@ from rich.table import Table
 
 console = Console()
 
-
+os.chdir("~/Stellar/config/themes")
 
 table = Table(title="Lista", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="bold white", no_wrap=False)
