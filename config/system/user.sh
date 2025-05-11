@@ -19,21 +19,26 @@ cyan="\033[38;2;23;147;209m"
 
 user_file="user.txt"
 
+clear
 echo -ne "${azul}¿Desea configurar un nombre de usuario? (y/n) ${blanco}"
-read respuesta
+read -r respuesta
 
-if [ "$respuesta" = "y" ] || [ "$respuesta" = "Y" ]; then
+if [[ "$respuesta" =~ [yY] ]]; then
     echo -ne "${verde}Introduce tu nombre de usuario: ${blanco}"
-    read username
+    read -r username
     echo "$username" > "$user_file"
     echo -e "${verde}Usuario guardado en $user_file${blanco}"
-elif [ "$respuesta" = "n" ] || [ "$respuesta" = "N" ]; then
-    if [ -f "$user_file" ]; then
-        username=$(cat "$user_file")
+    sleep 2
+elif [[ "$respuesta" =~ [nN] ]]; then
+    if [[ -f "$user_file" ]]; then
+        username=$(<"$user_file")
         echo -e "${azul}Usuario actual: ${cyan}$username${blanco}"
+        sleep 2
     else
         echo -e "${rojo}No hay usuario configurado${blanco}"
+        sleep 2
     fi
 else
     echo -e "${rojo}Opción no válida${blanco}"
+    sleep 1
 fi
