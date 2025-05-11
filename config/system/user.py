@@ -8,7 +8,7 @@ console = Console()
 os.path.expanduser("~/Stellar/config/themes")
 
 user = open("user.txt", encoding="utf-8") as f:
-    return f.read().strip()
+           return f.read().strip()
 
 table = Table(title="Lista", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="bold white", no_wrap=False)
