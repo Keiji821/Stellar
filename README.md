@@ -78,29 +78,29 @@ La instalación se habrá completado y Stellar OS estará instalado en su termux
 
 Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
 
-| Categoría          | Comando         | Descripción                                                                 |
-|--------------------|-----------------|-----------------------------------------------------------------------------|
-| **Sistema**        | `reload`        | Recarga el banner del sistema.                                              |
-|                    | `ui`            | Personaliza el banner y sus colores.                                        |
-|                    | `uninstall`     | Desinstala Stellar por completo.                                            |
-|                    | `update`        | Actualiza Stellar desde el repositorio de GitHub.                           |
-|                    | `bash`          | Reinicia la sesión actual de la terminal.                                   |
-| **Utilidades**     | `ia`            | Accede a un servicio de IA mediante una API gratuita.                       |
-|                    | `ia-image`      | Genera imágenes mediante inteligencia artificial.                           |
-|                    | `traductor`     | Traduce texto en tiempo real.                                               |
-|                    | `myip`          | Muestra tu dirección IP pública.                                            |
-| **OSINT**          | `ipinfo`        | Obtiene información detallada de una dirección IP.                         |
-|                    | `urlinfo`       | Analiza una URL y muestra información relevante.                            |
-|                    | `userfinder`    | Busca un nombre de usuario en múltiples plataformas.                        |
-|                    | `phoneinfo`     | Obtiene información asociada a un número de teléfono.                       |
-|                    | `metadatainfo`  | Extrae metadatos de archivos (imágenes, documentos, etc.).                 |
-|                    | `emailsearch`   | Realiza búsquedas de correos electrónicos en distintas fuentes.             |
-| **OSINT/Discord**  | `userinfo`      | Obtiene información de un usuario de Discord mediante su ID.               |
-|                    | `serverinfo`    | Muestra información de un servidor de Discord usando su ID.                |
-|                    | `searchinvites` | Busca invitaciones de Discord en diversas páginas web.                     |
-|                    | `inviteinfo`    | Proporciona detalles sobre un enlace de invitación de Discord.             |
-| **OSINT/Instagram**| `profileinfo`   | Extrae metadatos de un perfil de Instagram.                                |
-| **Pentesting**     | `ddos`          | Realiza un ataque DDoS a un objetivo específico (IP + puerto).             |
+| Comando       | Descripción |
+|---------------|-------------|
+| `reload`      | Recarga el banner del sistema. |
+| `ui`          | Personaliza el banner y sus colores. |
+| `uninstall`   | Desinstala Stellar por completo. |
+| `update`      | Actualiza Stellar desde GitHub. |
+| `bash`        | Reinicia la sesión de terminal. |
+| `ia`          | Servicio de IA con API gratuita. |
+| `ia-image`    | Generador de imágenes con IA. |
+| `traductor`   | Traducción en tiempo real. |
+| `myip`        | Muestra tu IP pública. |
+| `ipinfo`      | Obtiene información de una IP. |
+| `urlinfo`     | Analiza URLs. |
+| `userfinder`  | Busca usuarios en múltiples plataformas. |
+| `phoneinfo`   | Info de un número telefónico. |
+| `metadatainfo`| Extrae metadatos de archivos. |
+| `emailsearch` | Búsqueda de correos electrónicos. |
+| `userinfo`    | Info de usuario de Discord (ID). |
+| `serverinfo`  | Info de servidor de Discord (ID). |
+| `searchinvites`| Busca invitaciones de Discord. |
+| `inviteinfo`  | Analiza enlaces de invitación. |
+| `profileinfo` | Metadatos de perfil de Instagram. |
+| `ddos`        | Ataque DDoS (IP + puerto). |
 
 Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
 
