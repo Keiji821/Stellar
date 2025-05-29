@@ -33,8 +33,8 @@ table.add_row("• bash", "Reinicia su sesión de la terminal")
 table.add_row("")
 table.add_row("Utilidades", style="bold green")
 
-table.add_row("• ia", "Un servicio de ai desde de una API gratuita", "En mantenimiento")
-table.add_row("• ia-image", "Generador de imágenes IA", "En mantenimiento")
+table.add_row("• ia", "Un servicio de ai desde de una API gratuita", "🔴 En mantenimiento")
+table.add_row("• ia-image", "Generador de imágenes IA", "🔴 En mantenimiento")
 table.add_row("• traductor", "Traducción en tiempo real")
 table.add_row("• myip", "Muestra tu ip real")
 
