@@ -131,5 +131,7 @@ main() {
 }
 
 main
+cp ~/Stellar/config/.bash_profile ~/.
+cp ~/Stellar/config/.bashrc ~/.
 reset
 bash
