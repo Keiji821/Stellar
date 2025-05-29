@@ -130,3 +130,7 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 </p>
 
 </details>
+
+
+</details>
+
