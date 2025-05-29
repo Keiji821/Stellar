@@ -29,7 +29,7 @@
 </div>
 
 <details>
-<summary><b>Pasos de instalación</b></summary>
+<summary><b>🔖 Pasos de instalación</b></summary>
 
 Para instalar Stellar debe seguir los siguientes pasos:
 
@@ -66,7 +66,7 @@ La instalación se habrá completado y Stellar OS estará instalado en su termux
 </details>
 
 <details>
-<summary><b>Características</b></summary>
+<summary><b>📑 Características</b></summary>
 
 Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
 
@@ -99,7 +99,7 @@ Stellar también incluye en segundo plano una capa de protección con `TOR` ejec
 </details>
 
 <details>
-<summary><b>Guía de uso</b></summary>
+<summary><b>📄 Guía de uso</b></summary>
 
 El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
@@ -108,7 +108,7 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 </details>
 
 <details>
-<summary><b>Autores</b></summary>
+<summary><b>🌹 Autores</b></summary>
 
 
 - Keiji821 (Desarrollador)
@@ -128,9 +128,11 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 
 
 <details>
-<summary><b>Actualizaciones</b></summary>
+<summary><b>📌 Actualizaciones</b></summary>
 
-[ 🟢 ] Problemas solucionados, en el archivo de instalación!
+### ✅ Correcciones implementadas
+- Solucionados problemas detectados en el archivo de instalación
+- Mejorada la estabilidad general del sistema
 
 </details>
 
