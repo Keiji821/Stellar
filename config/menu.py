@@ -20,6 +20,7 @@ console.print("")
 table = Table(title="Lista", title_justify="center", title_style="bold green")
 table.add_column("[bold green]Comando", style="bold white", no_wrap=False)
 table.add_column("[bold green]Descripción", style="bold white")
+table.add_column("[bold green]Estado", style="bold white")
 
 table.add_row("Sistema", style="bold green")
 
@@ -32,8 +33,8 @@ table.add_row("• bash", "Reinicia su sesión de la terminal")
 table.add_row("")
 table.add_row("Utilidades", style="bold green")
 
-table.add_row("• ia", "Un servicio de ai desde de una API gratuita")
-table.add_row("• ia-image", "Generador de imágenes IA")
+table.add_row("• ia", "Un servicio de ai desde de una API gratuita", "En mantenimiento")
+table.add_row("• ia-image", "Generador de imágenes IA", "En mantenimiento")
 table.add_row("• traductor", "Traducción en tiempo real")
 table.add_row("• myip", "Muestra tu ip real")
 
