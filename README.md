@@ -21,9 +21,11 @@
     <strong></strong>
   </div>
 
+```shell script
 Stellar, es un programa hecho en python, bash y nodejs para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.
 
 Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
+```
 
 <details>
 <summary><b>Pasos de instalación</b></summary>
