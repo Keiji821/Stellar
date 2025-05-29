@@ -126,3 +126,13 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 
 </details>
 
+
+<details>
+<summary><b>Actualizaciones</b></summary>
+
+#
+[ 🟢 ] Problemas solucionados, en el archivo de instalación!
+#
+
+</details>
+
