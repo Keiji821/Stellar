@@ -58,7 +58,7 @@ table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitac
 table.add_row("")
 table.add_row("Osint/Instagram", style="bold green")
 
-table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟢 Activo")
+table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟢 En mantenimiento")
 
 table.add_row("")
 table.add_row("Pentesting", style="bold green")
