@@ -76,6 +76,7 @@ iniciar_instalacion() {
 
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
+    npm_packages=(chalk)
 
     echo "➔ Preparando instalación..." >&3
     sleep 1
@@ -109,6 +110,16 @@ iniciar_instalacion() {
     for pkg in "${pip_packages[@]}"; do
         echo "➔ Instalando $pkg..." >&3
         if ! pip install "$pkg" >> "$LOG_FILE" 2>&1; then
+            echo "✘ Error instalando $pkg. Ver $LOG_FILE" >&3
+            exit 1
+        fi
+        echo "✔ $pkg instalado." >&3
+        sleep 0.3
+    done
+
+    for pkg in "${npm_packages[@]}"; do
+        echo "➔ Instalando $pkg..." >&3
+        if ! npm install -g "$pkg" >> "$LOG_FILE" 2>&1; then
             echo "✘ Error instalando $pkg. Ver $LOG_FILE" >&3
             exit 1
         fi
