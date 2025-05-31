@@ -130,7 +130,7 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 <details>
 <summary><b>📌 Actualizaciones</b></summary>
 
-[![Estado](https://img.shields.io/badge/V1.0 Beta-Correcciones_Implementadas-success)](https://)
+[![Estado](https://img.shields.io/badge/V1.0_Beta-Correcciones_Implementadas-success)](https://)
 ###### - Solucionados los problemas en el archivo de instalación
 ###### - Mejorada la estabilidad general del sistema
 
