@@ -140,6 +140,8 @@ border-radius: 4px;">v1.0 Beta</kbd>
 <details>
 <summary><b>📜 Historial de versiones</b></summary>
 
+<p align= "center"> <kbd> <img  src="https://i.pinimg.com/originals/34/1e/80/341e800b1f29d3e34ea2eba5a6af205c.gif?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
+
 | Versión  | Estado      |  
 |----------|-------------|  
 |  `1.0`   | `Beta`      |  
