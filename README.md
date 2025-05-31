@@ -125,6 +125,7 @@ bash install.sh
 <details>
 <summary><b>📌 Historial de actualizaciones</b></summary>
 
+<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 31 may</kbd>
 <kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.1</kbd>
 <kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
