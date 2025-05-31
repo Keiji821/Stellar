@@ -121,9 +121,6 @@ bash install.sh
 </details>
 
 
-</details>
-
-
 <details>
 <summary><b>📌 Actualizaciones</b></summary>
 
