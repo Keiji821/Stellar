@@ -133,7 +133,8 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 <p align="center">
   <img src="https://github.com/Keiji821/Stellar/blob/master/images%2Fdecorations%2Fbar.gif" width="600">
 </p>
-<kbd>v1.0 Beta</kbd><br><br><kbd>Correcciones implementadas:
+<kbd>v1.0 Beta</kbd><br><br>
+<kbd>Correcciones implementadas:
 
 - Problemas en el archivo de instalación corregidos
 - Mejoras de estabilidad en el sistema</kbd><br><br> 
