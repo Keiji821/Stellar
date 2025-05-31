@@ -151,27 +151,6 @@ color13=#6c71c4
 color14=#2aa198
 color15=#fdf6e3"""
 
-tokyo_night = """
-background=#1A1B26
-foreground=#A9B1D6
-cursor=#A9B1D6
-color0=#16161E
-color1=#F7768E
-color2=#9ECE6A
-color3=#E0AF68
-color4=#7AA2F7
-color5=#BB9AF7
-color6=#7DCFFF
-color7=#ACB0D0
-color8=#565F89
-color9=#F7768E
-color10=#9ECE6A
-color11=#E0AF68
-color12=#7AA2F7
-color13=#BB9AF7
-color14=#7DCFFF
-color15=#CFC9C2"""
-
 catppuccin_latte = """
 background=#EFF1F5
 foreground=#4C4F69
@@ -333,6 +312,13 @@ if termux_background=="y":
 • gruvbox
 • tokyo_night
 • one_dark
+• solarized_dark
+• monokai
+• catppuccin_latte
+• everforest
+• horizon
+• material_ocean
+• cyberpunk_neon
 """)
     console.print("""[bold cyan]Opciones[/bold cyan]
 
@@ -353,6 +339,20 @@ if termux_background=="y":
             os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{tokyo_night}\nEOF')
         if theme=="one_dark":
             os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{one_dark}\nEOF')
+        if theme=="solarized_dark":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{solarized_dark}\nEOF')
+        if theme=="monokai":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{monokai}\nEOF')
+        if theme=="catppuccin_latte":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{catppuccin_latte}\nEOF')
+        if theme=="everforest":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{everforest}\nEOF')
+        if theme=="horizon":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{horizon}\nEOF')
+        if theme=="material_ocean":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{material_ocean}\nEOF')
+        if theme=="cyberpunk_neon":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{cyberpunk_neon}\nEOF')
     if termux_background_select=="c":
         os.system("cd && cd .termux && rm -rf colors.properties && nano colors.properties")
 
