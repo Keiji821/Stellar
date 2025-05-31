@@ -126,6 +126,14 @@ bash install.sh
 <summary><b>📌 Actualizaciones</b></summary>
 
 <kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
+border-radius: 4px;">v1.1</kbd>
+<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
+```diff
++ Solucionado el problema del archivo de personalización de interfaz >> ui
++ Se han agregado +12 temas por defecto para el fondo de termux
+```
+
+<kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.0</kbd>
 <kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
 ```diff
