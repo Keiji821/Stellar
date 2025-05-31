@@ -1,8 +1,5 @@
 <p align= "center"> <kbd> <img  src="https://github.com/Keiji821/Stellar/blob/master/images%2Fdecorations%2Fsakura.jpg?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
 
-
-##
-
 <div align="center">
 
 ![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/Mentenido%20(Sí)-2ea44f?style=for-the-badge)
