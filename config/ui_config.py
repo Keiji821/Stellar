@@ -184,7 +184,7 @@ if termux_background=="y":
         if theme=="one_dark":
             os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{one_dark}\nEOF')
     if termux_background_select=="c":
-        os.system("cd && cd .termux && rm -rf colors.properties && nano colors properties")
+        os.system("cd && cd .termux && rm -rf colors.properties && nano colors.properties")
 
 console.print("")
 console.print("[code]Configuraciónes aplicadas correctamente[/code]", style="bold green", justify="center")
