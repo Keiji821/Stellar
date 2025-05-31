@@ -132,6 +132,7 @@ border-radius: 4px;">v1.1</kbd><kbd style="background-color: #2ECC71; color: whi
 + Se han agregado +12 temas por defecto para el fondo de termux en el comando >> ui
 ```
 
+<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 29 may</kbd>
 <kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.0</kbd>
 <kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
