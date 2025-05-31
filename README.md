@@ -127,7 +127,7 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 <details>
 <summary><b>📌 Actualizaciones</b></summary>
 
-
+<kbd>v1.0 Beta</kbd><br><br>
 
 </details>
 
