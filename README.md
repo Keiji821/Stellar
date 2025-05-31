@@ -130,9 +130,6 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 <details>
 <summary><b>📌 Actualizaciones</b></summary>
 
-<p align="center">
-  <img src="https://media.discordapp.net/attachments/1053506628093214791/1082561140397187112/linha_8-3-1-3-1-1-1-1.gif" alt="Animación descriptiva">
-</p>
 [![Estado](https://img.shields.io/badge/❤️-Correcciones_Implementadas-success)](https://)
 ###### - Solucionados los problemas en el archivo de instalación
 ###### - Mejorada la estabilidad general del sistema
