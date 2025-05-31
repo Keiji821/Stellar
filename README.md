@@ -28,7 +28,7 @@
 <details>
 <summary><b>🔖 Pasos de instalación</b></summary>
 
-Para instalar Stellar debe seguir los siguientes pasos:
+##### Para instalar Stellar debe seguir los siguientes pasos:
 
 ```shell script
 git clone https://github.com/Keiji821/Stellar
@@ -42,30 +42,30 @@ cd Stellar
 bash install.sh
 ```
 
-Al ejecutar el archivo `install.sh` se le abrirá una ventana de diálogo la cual es la siguiente:
+##### Al ejecutar el archivo `install.sh` se le abrirá una ventana de diálogo la cual es la siguiente:
 
 ![User](https://github.com/Keiji821/Stellar/blob/master/images%2Fuser.jpg)
 
-En el campo que se muestra en la imagen es decir en el diálogo, deberá ingresar el nombre de usuario que desea usar en Stellar OS al ingresar el nombre usuario deseado debe dar clic o tocar el botón `[OK]` para continuar con la instalación.
+##### En el campo que se muestra en la imagen es decir en el diálogo, deberá ingresar el nombre de usuario que desea usar en Stellar OS al ingresar el nombre usuario deseado debe dar clic o tocar el botón `[OK]` para continuar con la instalación.
 
-Al continuar se le abrirá la siguiente ventana:
+##### Al continuar se le abrirá la siguiente ventana:
 
 ![Install](https://github.com/Keiji821/Stellar/blob/master/images%2Finstall.jpg)
 
-En esta parte se empezarán a descargar las dependencias de Stellar OS y la configuración inicial.
+##### En esta parte se empezarán a descargar las dependencias de Stellar OS y la configuración inicial.
 
-Después se mostrará lo siguiente:
+##### Después se mostrará lo siguiente:
 
 ![Done](https://github.com/Keiji821/Stellar/blob/master/images%2Fdone.jpg)
 
-La instalación se habrá completado y Stellar OS estará instalado en su termux al dar clic o tocar el botón `[OK]` su sesión de termux se reiniciará y mostrará un nuevo diseño para su terminal.
+##### La instalación se habrá completado y Stellar OS estará instalado en su termux al dar clic o tocar el botón `[OK]` su sesión de termux se reiniciará y mostrará un nuevo diseño para su terminal.
 
 </details>
 
 <details>
 <summary><b>📑 Características</b></summary>
 
-Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
+##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
 
 | Comando       | Descripción |
 |---------------|-------------|
@@ -91,16 +91,16 @@ Stellar OS ofrece una selección de comandos, orientados al osint y hacking, est
 | `profileinfo` | Metadatos de perfil de Instagram. |
 | `ddos`        | Ataque DDoS (IP + puerto). |
 
-Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
+##### Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
 
 </details>
 
 <details>
 <summary><b>📄 Guía de uso</b></summary>
 
-###### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
+##### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
-El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
+##### El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
 
 </details>
 
