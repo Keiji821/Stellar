@@ -151,7 +151,7 @@ border-radius: 4px;">v1.0</kbd>
 | Versión  | Estado      |  
 |----------|-------------|  
 |  `1.1`   | `Estable`   |  
-|  `1.0`   | `Estable`   |  
+|  `1.0`   | `Beta`   |  
 
 
 </details>
