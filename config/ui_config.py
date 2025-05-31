@@ -256,6 +256,48 @@ color13=#EE64AC
 color14=#59E1E3
 color15=#E6E6E6"""
 
+matrix = """
+background=#000000
+foreground=#00FF00
+cursor=#00FF00
+color0=#000000
+color1=#FF0000
+color2=#00FF00
+color3=#FFFF00
+color4=#0000FF
+color5=#FF00FF
+color6=#00FFFF
+color7=#BBBBBB
+color8=#555555
+color9=#FF5555
+color10=#55FF55
+color11=#FFFF55
+color12=#5555FF
+color13=#FF55FF
+color14=#55FFFF
+color15=#FFFFFF"""
+
+hacker_purple = """
+background=#0D0208
+foreground=#00FF41
+cursor=#00FF41
+color0=#0D0208
+color1=#FF0000
+color2=#00FF41
+color3=#FFFF00
+color4=#0080FF
+color5=#FF00FF
+color6=#00FFFF
+color7=#C0C0C0
+color8=#333333
+color9=#FF3333
+color10=#33FF33
+color11=#FFFF33
+color12=#3399FF
+color13=#FF33FF
+color14=#33FFFF
+color15=#FFFFFF"""
+
 
 
 # colors/banner/background
