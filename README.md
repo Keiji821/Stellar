@@ -123,7 +123,7 @@ bash install.sh
 
 
 <details>
-<summary><b>📌 Actualizaciones</b></summary>
+<summary><b>📌 Historial de actualizaciones</b></summary>
 
 <kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.1</kbd>
