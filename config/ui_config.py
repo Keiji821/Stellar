@@ -298,6 +298,48 @@ color13=#FF33FF
 color14=#33FFFF
 color15=#FFFFFF"""
 
+cyberpunk_red = """
+background=#000000
+foreground=#FF0000
+cursor=#FF0000
+color0=#000000
+color1=#FF0000
+color2=#00FF00
+color3=#FF6600
+color4=#0066FF
+color5=#CC00FF
+color6=#00FFFF
+color7=#AAAAAA
+color8=#333333
+color9=#FF3333
+color10=#33FF33
+color11=#FF9933
+color12=#3399FF
+color13=#CC33FF
+color14=#33FFFF
+color15=#FFFFFF"""
+
+hacker_retro = """
+background=#121212
+foreground=#00FF00
+cursor=#00FF00
+color0=#121212
+color1=#FF0044
+color2=#00CC00
+color3=#FFA800
+color4=#0088FF
+color5=#CC00CC
+color6=#00CCCC
+color7=#C0C0C0
+color8=#333333
+color9=#FF3366
+color10=#33FF33
+color11=#FFCC33
+color12=#3399FF
+color13=#CC33FF
+color14=#33FFFF
+color15=#FFFFFF"""
+
 
 
 # colors/banner/background
@@ -361,6 +403,10 @@ if termux_background=="y":
 • horizon
 • material_ocean
 • cyberpunk_neon
+• matrix
+• hacker_purple
+• cyberpunk_red
+• hacker_retro
 """)
     console.print("""[bold cyan]Opciones[/bold cyan]
 
@@ -395,6 +441,14 @@ if termux_background=="y":
             os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{material_ocean}\nEOF')
         if theme=="cyberpunk_neon":
             os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{cyberpunk_neon}\nEOF')
+        if theme=="matrix":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{matrix}\nEOF')
+        if theme=="hacker_purple":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{hacker_purple}\nEOF')
+        if theme=="cyberpunk_red":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{cyberpunk_red}\nEOF')
+        if theme=="hacker_retro":
+            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{hacker_retro}\nEOF')
     if termux_background_select=="c":
         os.system("cd && cd .termux && rm -rf colors.properties && nano colors.properties")
 
