@@ -130,7 +130,7 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 <details>
 <summary><b>📌 Actualizaciones</b></summary>
 
-[![animated](https://github.com/Keiji821/Stellar/blob/master/images%2Fdecorations%2Fbar.gif)]
+<p align= "center"> <kbd> <img  src="https://github.com/Keiji821/Stellar/blob/master/images%2Fdecorations%2Fbar.gif?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
 [![Estado](https://img.shields.io/badge/❤️-Correcciones_Implementadas-success)](https://)
 ###### - Solucionados los problemas en el archivo de instalación
 ###### - Mejorada la estabilidad general del sistema
