@@ -126,7 +126,7 @@ bash install.sh
 <summary><b>📌 Actualizaciones</b></summary>
 
 <kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
-border-radius: 4px;">v1.0 Beta</kbd>
+border-radius: 4px;">v1.0</kbd>
 <kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
 ```diff
 + Solucionado el problema del archivo de instalación
@@ -142,7 +142,7 @@ border-radius: 4px;">v1.0 Beta</kbd>
 
 | Versión  | Estado      |  
 |----------|-------------|  
-|  `1.0`   | `Beta`      |  
+|  `1.0`   | `Estable`   |  
 
 
 </details>
