@@ -107,10 +107,10 @@ bash install.sh
 <details>
 <summary><b>🌹 Autores</b></summary>
 
+```diff
++ Keiji821 (Desarrollador)```
 
-- Keiji821 (Desarrollador)
-
-<h4>Contactos:</h4>
+##### Contactos:
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
