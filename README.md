@@ -108,7 +108,8 @@ bash install.sh
 <summary><b>🌹 Autores</b></summary>
 
 ```diff
-+ Keiji821 (Desarrollador)```
++ Keiji821 (Desarrollador)
+```
 
 ##### Contactos:
 
