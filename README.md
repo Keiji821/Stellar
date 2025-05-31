@@ -125,14 +125,14 @@ bash install.sh
 <details>
 <summary><b>📌 Historial de actualizaciones</b></summary>
 
-<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 31 may</kbd><kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
+<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 31 may • 2025</kbd><kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.1</kbd><kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
 ```diff
 + Solucionado el problema del archivo de personalización de interfaz >> ui
 + Se han agregado +12 temas por defecto para el fondo de termux en el comando >> ui
 ```
 
-<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 29 may</kbd><kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
+<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 29 may • 2025</kbd><kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.0</kbd><kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
 ```diff
 + Solucionado el problema del archivo de instalación
