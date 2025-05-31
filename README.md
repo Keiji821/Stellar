@@ -129,7 +129,6 @@ El comando `ui` también permite modificar el tema de termux el tema de fondo ya
 
 <kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
 border-radius: 4px;">v1.0 Beta</kbd>
-
 <kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
 ```diff
 + Solucionado el problema del archivo de instalación
