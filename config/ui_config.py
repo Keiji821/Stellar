@@ -130,6 +130,29 @@ color13=#ae81ff
 color14=#a1efe4
 color15=#f9f8f5"""
 
+solarized_dark = """
+background=#002b36
+foreground=#839496
+cursor=#839496
+color0=#073642
+color1=#dc322f
+color2=#859900
+color3=#b58900
+color4=#268bd2
+color5=#d33682
+color6=#2aa198
+color7=#eee8d5
+color8=#586e75
+color9=#cb4b16
+color10=#859900
+color11=#b58900
+color12=#268bd2
+color13=#6c71c4
+color14=#2aa198
+color15=#fdf6e3"""
+
+
+
 # colors/banner/background
 colors = [
     "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
