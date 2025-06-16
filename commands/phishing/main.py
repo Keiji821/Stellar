@@ -43,7 +43,7 @@ def track():
         border_style="cyan"
     ))
     
-    return render_template("index.html")
+    return render_template("basic.html")
 
 if __name__ == '__main__':
     from waitress import serve
