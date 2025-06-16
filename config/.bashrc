@@ -205,6 +205,14 @@ traceroute() {
     cd
 }
 
+# Phishing
+
+tunnel() {
+    cd ~/Stellar/commands/phishing
+    python tunnel.py
+    cd
+}
+
 # Misc
 
 ia() {
