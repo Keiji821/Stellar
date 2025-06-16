@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord | Inicia sesión</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+    <style>
+        :root {
+            --discord-blurple: #5865F2;
+            --discord-green: #57F287;
+            --discord-yellow: #FEE75C;
+            --discord-fuchsia: #EB459E;
+            --discord-red: #ED4245;
+            --discord-white: #FFFFFF;
+            --discord-light: #F2F3F5;
+            --discord-greyple: #99AAB5;
+            --discord-dark: #2C2F33;
+            --discord-darker: #23272A;
+            --discord-not-quite-black: #1E1F22;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--discord-not-quite-black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--discord-white);
+            overflow: hidden;
+        }
+        
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231E1F22"/><path d="M0 0L100 100M100 0L0 100" stroke="%232c2f33" stroke-width="0.5"/></svg>');
+            z-index: -1;
+        }
+        
+        .login-container {
+            background-color: var(--discord-darker);
+            width: 480px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+            padding: 32px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .login-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--discord-white);
+        }
+        
+        .login-header p {
+            font-size: 16px;
+            color: var(--discord-greyple);
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--discord-greyple);
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--discord-not-quite-black);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            color: var(--discord-white);
+            font-size: 16px;
+            transition: border-color 0.2s ease-in-out;
+        }
+        
+        .login-form input:focus {
+            border-color: var(--discord-blurple);
+            outline: none;
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--discord-blurple);
+            border: none;
+            border-radius: 3px;
+            color: var(--discord-white);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.17s ease;
+        }
+        
+        .login-form button:hover {
+            background-color: #4752C4;
+        }
+        
+        .login-form .link {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--discord-blurple);
+            text-decoration: none;
+        }
+        
+        .login-form .link:hover {
+            text-decoration: underline;
+        }
+        
+        .register-link {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--discord-greyple);
+        }
+        
+        .register-link a {
+            color: var(--discord-blurple);
+            text-decoration: none;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .qr-login {
+            margin-top: 20px;
+            text-align: center;
+            color: var(--discord-greyple);
+            font-size: 14px;
+        }
+        
+        .qr-login a {
+            color: var(--discord-blurple);
+            text-decoration: none;
+        }
+        
+        .qr-login a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: var(--discord-red);
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+        
+        .discord-footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: var(--discord-greyple);
+            font-size: 12px;
+        }
+        
+        .discord-footer a {
+            color: var(--discord-blurple);
+            text-decoration: none;
+        }
+        
+        .discord-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Bienvenido de nuevo</h1>
+            <p>¡Estamos muy contentos de verte de nuevo!</p>
+        </div>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="email">Correo electrónico o número de teléfono</label>
+                <input type="text" id="email" name="email" autocomplete="off" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+                <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Iniciar sesión</button>
+                <div class="error-message" id="errorMessage">Correo electrónico o contraseña incorrectos.</div>
+            </div>
+        </form>
+        
+        <div class="register-link">
+            ¿Necesitas una cuenta? <a href="#">Registrarse</a>
+        </div>
+        
+        <div class="qr-login">
+            <a href="#">Iniciar sesión con código QR</a>
+        </div>
+    </div>
+    
+    <div class="discord-footer">
+        <p>Esta es una réplica de la interfaz de Discord. No es el sitio oficial.</p>
+        <p>Para acceder a Discord real, visita <a href="https://discord.com">discord.com</a></p>
+    </div>
 
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+           
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (email && password) {
+                if (email === 'usuario@ejemplo.com' && password === 'discord123') {
+                    alert('Inicio de sesión simulado con éxito');
+                } else {
+                   
+                    errorMessage.style.display = 'block';
+                    
+                    
+                    this.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                }
+            } else {
+                errorMessage.textContent = 'Por favor completa todos los campos';
+                errorMessage.style.display = 'block';
+            }
+        });
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
