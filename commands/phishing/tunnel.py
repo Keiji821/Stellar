@@ -55,7 +55,6 @@ try:
         "cloudflared", "tunnel",
         "--url", f"http://127.0.0.1:{puerto}",
         "--protocol", "http2",
-        "--dns", "1.1.1.1",
         "--no-autoupdate",
         "--metrics", "localhost:0"
     ]
