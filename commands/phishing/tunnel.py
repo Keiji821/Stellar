@@ -17,23 +17,52 @@ def handler(signum, frame):
 
 def setup_environment():
     os.environ['DNS_SERVER'] = '1.1.1.1'
+    
+    config_content = """
+tunnel: kami-tunnel
+credentials-file: /data/data/com.termux/files/home/.cloudflared/kami-tunnel.json
+protocol: http2
+metrics: localhost:0
+no-autoupdate: true
+originRequest:
+  connectTimeout: 30s
+  tlsTimeout: 10s
+  tcpKeepAlive: 30s
+  noHappyEyeballs: false
+  keepAliveConnections: 100
+  keepAliveTimeout: 90s
+  httpHostHeader: ""
+  originServerName: ""
+  caPool: ""
+  noTLSVerify: false
+  disableChunkedEncoding: false
+  bastionMode: false
+  proxyAddress: 127.0.0.1
+  proxyPort: 0
+  proxyType: ""
+  ipRules: []
+  http2Origin: false
+"""
+    os.makedirs("/data/data/com.termux/files/home/.cloudflared", exist_ok=True)
+    with open("/data/data/com.termux/files/home/.cloudflared/config.yml", "w") as f:
+        f.write(config_content)
+    
     try:
-        subprocess.run(["cloudflared", "--version"], 
-                      check=True, 
-                      stdout=subprocess.DEVNULL, 
-                      stderr=subprocess.DEVNULL)
+        subprocess.run(["cloudflared", "--version"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except:
         console.print("[bold yellow]Instalando cloudflared...[/bold yellow]")
-        subprocess.run(["pkg", "install", "cloudflared", "-y"], 
-                      stdout=subprocess.DEVNULL, 
-                      stderr=subprocess.DEVNULL)
+        subprocess.run(["pkg", "install", "cloudflared", "-y"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
     try:
         import waitress, flask, rich
     except ImportError:
         console.print("[bold yellow]Instalando dependencias Python...[/bold yellow]")
-        subprocess.run(["pip", "install", "waitress", "flask", "rich"], 
-                      stdout=subprocess.DEVNULL, 
-                      stderr=subprocess.DEVNULL)
+        subprocess.run(["pip", "install", "waitress", "flask", "rich"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
+    # Crear túnel persistente
+    if not os.path.exists("/data/data/com.termux/files/home/.cloudflared/kami-tunnel.json"):
+        console.print("[bold yellow]Creando túnel persistente...[/bold yellow]")
+        subprocess.run(["cloudflared", "tunnel", "create", "kami-tunnel"], stdout=subprocess.DEVNULL)
 
 console.print(Panel("[bold cyan]INICIANDO SERVIDOR KAMI[/bold cyan]", expand=False))
 setup_environment()
@@ -51,12 +80,11 @@ try:
     
     signal.signal(signal.SIGINT, handler)
     
+    # Comando optimizado con configuración persistente
     cloudflared_cmd = [
         "cloudflared", "tunnel",
-        "--url", f"http://127.0.0.1:{puerto}",
-        "--protocol", "http2",
-        "--no-autoupdate",
-        "--metrics", "localhost:0"
+        "--config", "/data/data/com.termux/files/home/.cloudflared/config.yml",
+        "run", "--url", f"http://127.0.0.1:{puerto}"
     ]
     
     subprocess.run(cloudflared_cmd)
