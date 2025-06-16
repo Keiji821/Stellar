@@ -4,6 +4,7 @@ from rich.panel import Panel
 import subprocess
 import signal
 import sys
+import time
 
 console = Console()
 
