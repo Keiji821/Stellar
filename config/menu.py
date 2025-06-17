@@ -33,7 +33,7 @@ table.add_row("• myip", "Muestra tu IP real", "🟢 Activo")
 table.add_row("")
 table.add_row("[code]Osint", style="bold green")
 
-table.add_row("• ipinfo", "Obtiene información de una ip", "🟢 Activo") 
+table.add_row("• ipinfo", "Obtiene información de una IP", "🟢 Activo") 
 table.add_row("• urlinfo", "Analizador de URL", "🟢 Activo")
 table.add_row("• userfinder", "Busca un nombre de usuario en diferentes páginas", "🟢 Activo")
 table.add_row("• phoneinfo", "Obtiene información de un número de teléfono", "🟢 Activo")
