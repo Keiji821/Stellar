@@ -32,8 +32,8 @@ table.add_row("• bash", "Reinicia su sesión de la terminal", "🟢 Activo")
 table.add_row("")
 table.add_row("Utilidades", style="bold green")
 
-table.add_row("• ia", "Un servicio de ai desde de una API gratuita", "🔴 En mantenimiento")
-table.add_row("• ia-image", "Generador de imágenes IA", "🔴 En mantenimiento")
+table.add_row("• ia", "Un servicio de ai desde de una API gratuita", "🟡 Dañado")
+table.add_row("• ia-image", "Generador de imágenes IA", "🟡 Dañado")
 table.add_row("• traductor", "Traducción en tiempo real", "🟢 Activo")
 table.add_row("• myip", "Muestra tu ip real", "🟢 Activo")
 
@@ -58,15 +58,12 @@ table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitac
 table.add_row("")
 table.add_row("Osint/Instagram", style="bold green")
 
-table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🔴 En mantenimiento")
+table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟡 Dañado")
 
 table.add_row("")
 table.add_row("Pentesting", style="bold green")
 
 table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto", "🟢 Activo")
-
-table.add_row("¡Próximamente más comandos serán agregados!")
-
 
 console.print(table, style="bright_cyan", justify="center")
 console.print("")
