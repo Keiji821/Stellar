@@ -9,7 +9,6 @@ banner = pyfiglet.figlet_format("Comandos", font="cyberlarge")
 console.print(banner, style="bright_blue", justify="center")
 
 console.print("")
-console.print("")
 
 table = Table(title="Lista", title_justify="center", title_style="bold green")
 table.add_column("[bold green]Comando", style="bold white", no_wrap=False)
