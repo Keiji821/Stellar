@@ -28,7 +28,7 @@ table.add_row("[code]Utilidades", style="bold green")
 table.add_row("• ia", "Un servicio de IA desde de una API gratuita", "🟡 Dañado")
 table.add_row("• ia-image", "Generador de imágenes IA", "🟡 Dañado")
 table.add_row("• traductor", "Traducción en tiempo real", "🟢 Activo")
-table.add_row("• myip", "Muestra tu ip real", "🟢 Activo")
+table.add_row("• myip", "Muestra tu IP real", "🟢 Activo")
 
 table.add_row("")
 table.add_row("[code]Osint", style="bold green")
