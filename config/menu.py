@@ -43,7 +43,7 @@ table.add_row("• emailsearch", "Búsqueda de emails", "🟢 Activo")
 table.add_row("")
 table.add_row("[code]Osint/Discord", style="bold green")
 
-table.add_row("• userinfo", "Obtiene información apartir de una id", "🟢 Activo")
+table.add_row("• userinfo", "Obtiene información apartir de una ID", "🟢 Activo")
 table.add_row("• serverinfo", "Obtiene información sobre un servidor a partir de su id", "🟢 Activo")
 table.add_row("• searchinvites", "Busca invitaciones en páginas ingresando el nombre del servidor", "🟢 Activo")
 table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitación", "🟢 Activo")
@@ -56,7 +56,7 @@ table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟡 Daña
 table.add_row("")
 table.add_row("[code]Pentesting", style="bold green")
 
-table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto", "🟢 Activo")
+table.add_row("• ddos", "Realiza un ataque DDOS mediante la ip y puerto", "🟢 Activo")
 
 console.print(table, style="bright_cyan", justify="center")
 console.print("")
