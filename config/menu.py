@@ -56,7 +56,7 @@ table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟡 Daña
 table.add_row("")
 table.add_row("[code]Pentesting", style="bold green")
 
-table.add_row("• ddos", "Realiza un ataque DDOS mediante la ip y puerto", "🟢 Activo")
+table.add_row("• ddos", "Realiza un ataque DDOS mediante la IP y puerto", "🟢 Activo")
 
 console.print(table, style="bright_cyan", justify="center")
 console.print("")
