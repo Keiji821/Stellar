@@ -30,10 +30,13 @@ table = Table(
     title_justify="center",
     border_style="bright_blue",
     header_style="bold magenta",
+    show_header=True,
+    show_edge=True,
+    show_lines=True
 )
-table.add_column("[bold cyan]Comando", style="cyan")
-table.add_column("[bold cyan]Descripción", style="white")
-table.add_column("[bold cyan]Estado", justify="center")
+table.add_column("[bold cyan]Comando", style="cyan", min_width=15)
+table.add_column("[bold cyan]Descripción", style="white", min_width=30)
+table.add_column("[bold cyan]Estado", justify="center", min_width=15)
 
 commands = {
     "Sistema": [
@@ -72,7 +75,7 @@ commands = {
 }
 
 for category, items in commands.items():
-    table.add_row(Rule(f"[bold]{category}[/bold]"), end_section=True)
+    table.add_row(Rule(f"[bold]{category}[/bold]", style="bold green"))
     for cmd, desc, status in items:
         color = "green" if "🟢" in status else "red"
         table.add_row(f"• {cmd}", desc, f"[{color}]{status}[/{color}]")
