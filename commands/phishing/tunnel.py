@@ -5,88 +5,129 @@ import subprocess
 import signal
 import sys
 import time
-import os
+from pathlib import Path
 
 console = Console()
 
 def handler(signum, frame):
     console.print("\n[bold red]Deteniendo servicios...[/bold red]")
-    subprocess.run(["pkill", "-f", "python main.py"], stderr=subprocess.DEVNULL)
-    subprocess.run(["pkill", "-f", "cloudflared"], stderr=subprocess.DEVNULL)
+    subprocess.run(["pkill", "-f", "python main.py"], 
+                   stderr=subprocess.DEVNULL,
+                   timeout=5)
+    subprocess.run(["pkill", "-f", "cloudflared tunnel run"],
+                   stderr=subprocess.DEVNULL,
+                   timeout=5)
     sys.exit(0)
 
 def setup_environment():
-    os.environ['DNS_SERVER'] = '1.1.1.1'
-    cloudflared_dir = os.path.expanduser("~/.cloudflared")
-    os.makedirs(cloudflared_dir, exist_ok=True)
+    cloudflared_dir = Path.home() / ".cloudflared"
+    cloudflared_dir.mkdir(exist_ok=True)
     
-    cert_path = os.path.join(cloudflared_dir, "cert.pem")
-    if not os.path.exists(cert_path):
-        console.print("[bold yellow]Obteniendo certificado de Cloudflare...[/bold yellow]")
-        console.print("[bold cyan]Por favor inicia sesión en tu cuenta de Cloudflare[/bold cyan]")
-        subprocess.run(["cloudflared", "tunnel", "login"])
+    cred_file = cloudflared_dir / "kami-tunnel.json"
+    if not cred_file.exists():
+        console.print(Panel(
+            "[bold red]ERROR: Credenciales no encontradas[/bold red]\n"
+            "Por favor crea el túnel manualmente con:\n"
+            "[bold cyan]cloudflared tunnel create kami-tunnel[/bold cyan]\n"
+            "y coloca el archivo JSON en ~/.cloudflared/",
+            title="Configuración Requerida",
+            expand=False
+        ))
+        sys.exit(1)
     
-    config_path = os.path.join(cloudflared_dir, "config.yml")
-    config_content = f"""
+    config_file = cloudflared_dir / "config.yml"
+    config_content = f"""\
 tunnel: kami-tunnel
-credentials-file: {os.path.join(cloudflared_dir, "kami-tunnel.json")}
+credentials-file: {cred_file}
 protocol: http2
-metrics: localhost:0
+metrics: 0
 no-autoupdate: true
 """
-    with open(config_path, "w") as f:
-        f.write(config_content)
+    config_file.write_text(config_content)
     
     try:
-        subprocess.run(["cloudflared", "--version"], 
-                      check=True, 
-                      stdout=subprocess.DEVNULL, 
-                      stderr=subprocess.DEVNULL)
-    except:
-        console.print("[bold yellow]Instalando cloudflared...[/bold yellow]")
-        subprocess.run(["pkg", "install", "cloudflared", "-y"], 
-                      stdout=subprocess.DEVNULL, 
-                      stderr=subprocess.DEVNULL)
+        result = subprocess.run(["cloudflared", "--version"], 
+                              check=True,
+                              capture_output=True,
+                              text=True)
+        console.print(f"[dim]Cloudflared: {result.stdout.strip()}[/dim]")
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        console.print(Panel(
+            "[bold red]ERROR: Cloudflared no instalado[/bold red]\n"
+            "Descarga desde: [bold cyan]https://github.com/cloudflare/cloudflared/releases[/bold cyan]",
+            title="Dependencia Faltante",
+            expand=False
+        ))
+        sys.exit(1)
     
     try:
         import waitress, flask, rich
+        console.print("[dim]Dependencias Python: OK[/dim]")
     except ImportError:
         console.print("[bold yellow]Instalando dependencias Python...[/bold yellow]")
-        subprocess.run(["pip", "install", "waitress", "flask", "rich"], 
-                      stdout=subprocess.DEVNULL, 
-                      stderr=subprocess.DEVNULL)
-    
-    cred_path = os.path.join(cloudflared_dir, "kami-tunnel.json")
-    if not os.path.exists(cred_path):
-        console.print("[bold yellow]Creando túnel persistente...[/bold yellow]")
-        subprocess.run(["cloudflared", "tunnel", "create", "kami-tunnel"])
+        subprocess.run(["pip", "install", "waitress", "flask", "rich"], check=True)
 
-console.print(Panel("[bold cyan]INICIANDO SERVIDOR KAMI[/bold cyan]", expand=False))
-setup_environment()
-
-try:
-    with console.status("[bold green]Iniciando servicios...[/bold green]") as status:
-        flask_proc = subprocess.Popen(
+def start_flask_app():
+    try:
+        console.print("[dim]Iniciando servidor Flask...[/dim]")
+        return subprocess.Popen(
             ["python", "main.py"],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
+            text=True
         )
-        time.sleep(3)
+    except Exception as e:
+        console.print(f"[bold red]ERROR iniciando Flask:[/bold red] {str(e)}")
+        sys.exit(1)
 
-    puerto = console.input("\n[bold green]>> Ingresa puerto (ENTER para 50000): [/bold green]") or "50000"
+def run_cloudflared_tunnel(port):
+    console.print(Panel(
+        f"[green]Túnel activo en puerto {port}[/green]\n"
+        "[yellow]Nota: La primera conexión puede tardar 1-2 minutos[/yellow]",
+        title="Estado del Túnel",
+        expand=False
+    ))
     
-    signal.signal(signal.SIGINT, handler)
-    
-    cloudflared_cmd = [
+    cmd = [
         "cloudflared", "tunnel",
-        "--config", os.path.expanduser("~/.cloudflared/config.yml"),
-        "run", "--url", f"http://127.0.0.1:{puerto}"
+        "--config", str(Path.home() / ".cloudflared" / "config.yml"),
+        "run", "--url", f"http://localhost:{port}"
     ]
     
-    subprocess.run(cloudflared_cmd)
+    with subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True
+    ) as process:
+        try:
+            for line in process.stdout:
+                if "Connection registered" in line:
+                    console.print(f"[bold green]✓ Túnel activo:[/bold green] {line.split()[-1]}")
+                console.print(f"[dim][cloudflared][/dim] {line.strip()}")
+        except KeyboardInterrupt:
+            handler(None, None)
 
-except KeyboardInterrupt:
-    handler(None, None)
-except Exception as e:
-    console.print(f"[bold red]Error: {str(e)}[/bold red]")
-    sys.exit(1)
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, handler)
+    
+    console.print(Panel(
+        "[bold cyan]SERVIDOR KAMI CON CLOUDFLARE TUNNEL[/bold cyan]",
+        subtitle="Modo sin autenticación interactiva",
+        expand=False
+    ))
+    
+    with console.status("[bold green]Verificando entorno...[/bold green]"):
+        setup_environment()
+    
+    flask_process = start_flask_app()
+    time.sleep(3)
+    
+    puerto = console.input("\n[bold green]>> Puerto local (default 50000): [/bold green]") or "50000"
+    
+    try:
+        run_cloudflared_tunnel(puerto)
+    except Exception as e:
+        console.print(f"[bold red]Error crítico:[/bold red] {str(e)}")
+    finally:
+        handler(None, None)
