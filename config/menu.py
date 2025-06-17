@@ -6,11 +6,11 @@ import pyfiglet
 
 console = Console()
 
-banner = pyfiglet.figlet_format("Stellar OS", font="cyberlarge")
+banner = pyfiglet.figlet_format("Comandos", font="cyberlarge")
 console.print(
     Panel.fit(
         banner,
-        title="[bold cyan]Termux Edition[/bold cyan]",
+        title="[bold cyan]Stellar[/bold cyan]",
         subtitle="[italic]by Keiji821[/italic]",
         border_style="bright_blue",
     ),
