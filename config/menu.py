@@ -7,13 +7,7 @@ console = Console()
 console.print("")
 banner = pyfiglet.figlet_format("Comandos", font="cyberlarge")
 console.print(banner, style="bright_blue", justify="center")
-console.print("""
-Stellar es un OS dedicado a termux para mejorar su aburrida apariencia pero también agrega una selección de comandos (scripts) para su uso, estos comandos están orientados al osint y hacking en varias áreas, abajo encontrarás los comandos listados.
 
-Stellar puede ser modificado y clonado, es un proyecto de codigo abierto el cual mejora significativamente la seguridad en tu terminal de termux brindando una capa de anonimato con tor.
-
-[bold cyan]Att: [underline]Keiji821[/underline][/bold cyan]""", justify="center")
-console.print("")
 console.print("")
 console.print("")
 
