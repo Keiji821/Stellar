@@ -22,7 +22,7 @@ table.add_column("[bold green]Comando", style="bold white", no_wrap=False)
 table.add_column("[bold green]Descripción", style="bold white")
 table.add_column("[bold green]Estado", style="bold white")
 
-table.add_row("Sistema", style="bold green")
+table.add_row("[code]Sistema[/code]", style="bold green")
 table.add_row("• reload", "Recargar el banner", "🟢 Activo")
 table.add_row("• ui", "Personaliza el banner y sus colores", "🟢 Activo") 
 table.add_row("• uninstall", "Desinstala Stellar", "🟢 Activo")
