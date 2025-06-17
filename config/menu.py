@@ -1,72 +1,88 @@
 from rich.console import Console
 from rich.table import Table
+from rich.panel import Panel
+from rich.rule import Rule
 import pyfiglet
 
 console = Console()
 
-console.print("")
-banner = pyfiglet.figlet_format("Comandos", font="cyberlarge")
-console.print(banner, style="bright_blue", justify="center")
-console.print("""
-Stellar es un OS dedicado a termux para mejorar su aburrida apariencia pero también agrega una selección de comandos (scripts) para su uso, estos comandos están orientados al osint y hacking en varias áreas, abajo encontrarás los comandos listados.
+banner = pyfiglet.figlet_format("Stellar OS", font="cyberlarge")
+console.print(
+    Panel.fit(
+        banner,
+        title="[bold cyan]Termux Edition[/bold cyan]",
+        subtitle="[italic]by Keiji821[/italic]",
+        border_style="bright_blue",
+    ),
+    justify="center"
+)
 
-Stellar puede ser modificado y clonado, es un proyecto de codigo abierto el cual mejora significativamente la seguridad en tu terminal de termux brindando una capa de anonimato con tor.
+console.print(
+    Panel.fit(
+        "[bold white]Stellar[/bold white] mejora Termux con:[bold cyan]\n• Interfaz personalizable\n• Comandos OSINT/Hacking\n• Integración con Tor[/bold cyan]",
+        border_style="blue",
+    ),
+    justify="center"
+)
 
-[bold cyan]Att: [underline]Keiji821[/underline][/bold cyan]""", justify="center")
-console.print("")
-console.print("")
-console.print("")
+table = Table(
+    title="📜 [bold green]Lista de Comandos[/bold green]",
+    title_justify="center",
+    border_style="bright_blue",
+    header_style="bold magenta",
+)
+table.add_column("[bold cyan]Comando", style="cyan")
+table.add_column("[bold cyan]Descripción", style="white")
+table.add_column("[bold cyan]Estado", justify="center")
 
-table = Table(title="Lista", title_justify="center", title_style="bold green")
-table.add_column("[bold green]Comando", style="bold white", no_wrap=False)
-table.add_column("[bold green]Descripción", style="bold white")
-table.add_column("[bold green]Estado", style="bold white")
+commands = {
+    "Sistema": [
+        ("reload", "Recarga el banner", "🟢 Activo"),
+        ("ui", "Personaliza la interfaz", "🟢 Activo"),
+        ("uninstall", "Desinstala Stellar", "🟢 Activo"),
+        ("update", "Actualiza desde GitHub", "🟢 Activo"),
+        ("bash", "Reinicia la sesión", "🟢 Activo")
+    ],
+    "Utilidades": [
+        ("ia", "Chat con IA (API gratuita)", "🔴 En mantenimiento"),
+        ("ia-image", "Generador de imágenes IA", "🔴 En mantenimiento"),
+        ("traductor", "Traducción en tiempo real", "🟢 Activo"),
+        ("myip", "Muestra tu IP pública", "🟢 Activo")
+    ],
+    "OSINT": [
+        ("ipinfo", "Información de una IP", "🟢 Activo"),
+        ("urlinfo", "Analizador de URLs", "🟢 Activo"),
+        ("userfinder", "Busca usuarios en redes", "🟢 Activo"),
+        ("phoneinfo", "Info de números telefónicos", "🟢 Activo"),
+        ("metadatainfo", "Extrae metadatos de archivos", "🟢 Activo"),
+        ("emailsearch", "Búsqueda de correos", "🟢 Activo")
+    ],
+    "OSINT/Discord": [
+        ("userinfo", "Obtiene info de usuario por ID", "🟢 Activo"),
+        ("serverinfo", "Info de servidor por ID", "🟢 Activo"),
+        ("searchinvites", "Busca invitaciones", "🟢 Activo"),
+        ("inviteinfo", "Analiza enlaces de invitación", "🟢 Activo")
+    ],
+    "OSINT/Instagram": [
+        ("profileinfo", "Obtiene metadatos de perfil", "🔴 En mantenimiento")
+    ],
+    "Pentesting": [
+        ("ddos", "Ataque DDOS (IP+Puerto)", "🟢 Activo")
+    ]
+}
 
-table.add_row("Sistema", style="bold green")
-table.add_row("• reload", "Recargar el banner", "🟢 Activo")
-table.add_row("• ui", "Personaliza el banner y sus colores", "🟢 Activo") 
-table.add_row("• uninstall", "Desinstala Stellar", "🟢 Activo")
-table.add_row("• update", "Actualiza desde el repositorio de github", "🟢 Activo")
-table.add_row("• bash", "Reinicia su sesión de la terminal", "🟢 Activo")
+for category, items in commands.items():
+    table.add_row(Rule(f"[bold]{category}[/bold]"), end_section=True)
+    for cmd, desc, status in items:
+        color = "green" if "🟢" in status else "red"
+        table.add_row(f"• {cmd}", desc, f"[{color}]{status}[/{color}]")
 
-table.add_row("")
-table.add_row("Utilidades", style="bold green")
+console.print(table, justify="center")
 
-table.add_row("• ia", "Un servicio de ai desde de una API gratuita", "🔴 En mantenimiento")
-table.add_row("• ia-image", "Generador de imágenes IA", "🔴 En mantenimiento")
-table.add_row("• traductor", "Traducción en tiempo real", "🟢 Activo")
-table.add_row("• myip", "Muestra tu ip real", "🟢 Activo")
-
-table.add_row("")
-table.add_row("Osint", style="bold green")
-
-table.add_row("• ipinfo", "Obtiene información de una ip", "🟢 Activo") 
-table.add_row("• urlinfo", "Analizador de URL", "🟢 Activo")
-table.add_row("• userfinder", "Busca un nombre de usuario en diferentes páginas", "🟢 Activo")
-table.add_row("• phoneinfo", "Obtiene información de un número de teléfono", "🟢 Activo")
-table.add_row("• metadatainfo", "Extrae metadatos de imágenes y documentos", "🟢 Activo")
-table.add_row("• emailsearch", "Búsqueda de emails", "🟢 Activo")
-
-table.add_row("")
-table.add_row("Osint/Discord", style="bold green")
-
-table.add_row("• userinfo", "Obtiene información apartir de una id", "🟢 Activo")
-table.add_row("• serverinfo", "Obtiene información sobre un servidor a partir de su id", "🟢 Activo")
-table.add_row("• searchinvites", "Busca invitaciones en páginas ingresando el nombre del servidor", "🟢 Activo")
-table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitación", "🟢 Activo")
-
-table.add_row("")
-table.add_row("Osint/Instagram", style="bold green")
-
-table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🔴 En mantenimiento")
-
-table.add_row("")
-table.add_row("Pentesting", style="bold green")
-
-table.add_row("• ddos", "Realiza un ataque ddos mediante la ip y puerto", "🟢 Activo")
-
-table.add_row("¡Próximamente más comandos serán agregados!")
-
-
-console.print(table, style="bright_cyan", justify="center")
-console.print("")
+console.print(
+    Panel.fit(
+        "[bold yellow]🚀 ¡Próximamente más comandos![/bold yellow]",
+        border_style="green",
+    ),
+    justify="center"
+)
