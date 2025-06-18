@@ -6,12 +6,20 @@ USER_FILE="$CONFIG_DIR/user.txt"
 LOG_FILE="$HOME/stellar_install.log"
 
 cleanup() {
-    if { >&3; } 2>/dev/null; then
-        exec 3>&-
-    fi
     [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
 }
 trap cleanup EXIT ERR
+
+setup_progress_pipe() {
+    [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
+    mkfifo "$PROGRESO_CANAL" || {
+        echo "Error: No se pudo crear la tubería FIFO." >&2
+        exit 1
+    }
+    
+    dialog --title "Instalación de Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
+    exec 3>"$PROGRESO_CANAL"
+}
 
 install_dependencies() {
     echo "➔ Verificando dependencias..." >&3
@@ -62,20 +70,6 @@ user_config() {
 }
 
 iniciar_instalacion() {
-    [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
-    if ! mkfifo "$PROGRESO_CANAL"; then
-        echo "Error: No se pudo crear la tubería FIFO." >&2
-        exit 1
-    fi
-
-    dialog --title "Instalación de Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
-    if [[ $? -ne 0 ]]; then
-        echo "Error: No se pudo iniciar dialog." >&2
-        rm -f "$PROGRESO_CANAL"
-        exit 1
-    fi
-    exec 3>"$PROGRESO_CANAL"
-
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
     npm_packages=(chalk)
@@ -134,6 +128,7 @@ iniciar_instalacion() {
 }
 
 main() {
+    setup_progress_pipe
     install_dependencies
     [[ ! -d ~/Stellar ]] && mkdir -p ~/Stellar
     user_config
