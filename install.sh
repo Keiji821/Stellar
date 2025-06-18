@@ -6,7 +6,9 @@ USER_FILE="$CONFIG_DIR/user.txt"
 LOG_FILE="$HOME/stellar_install.log"
 
 cleanup() {
-    exec 3>&-
+    if { >&3; } 2>/dev/null; then
+        exec 3>&-
+    fi
     [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
 }
 trap cleanup EXIT ERR
@@ -25,7 +27,7 @@ user_config() {
     while true; do
         username=$(dialog --title "Configuración de Usuario" \
                         --inputbox "Ingrese nombre de usuario (4-15 caracteres, solo alfanuméricos y _):" \
-                        10 60 3>&1 1>&2 2>&3)
+                        10 60 2>&1 1>&3)
         local exit_code=$?
 
         case $exit_code in
