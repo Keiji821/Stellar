@@ -11,31 +11,42 @@ cleanup() {
 }
 trap cleanup EXIT ERR
 
+show_error() {
+    local msg="$1"
+    echo "✘ Error: $msg" >&3
+    echo "    Detalles en: $LOG_FILE" >&3
+    sleep 3
+}
+
 install_dependencies() {
     if ! command -v dialog &> /dev/null; then
-        echo "Instalando dialog..."
-        pkg install dialog -y >> "$LOG_FILE" 2>&1 || {
-            echo "✘ Error: No se pudo instalar dialog. Ver $LOG_FILE"
-            exit 1
-        }
+        echo "➔ Instalando dialog..." >&3
+        if ! pkg install dialog -y >> "$LOG_FILE" 2>&1; then
+            show_error "Instalación de dialog fallida"
+            return 1
+        fi
     fi
+    return 0
 }
 
 user_config() {
     while true; do
-        username=$(dialog --title "Configuración de Usuario" \
-                        --inputbox "Ingrese nombre de usuario (4-15 caracteres, solo alfanuméricos y _):" \
-                        10 60 3>&1 1>&2 2>&3)
+        username=$(dialog --title "CONFIGURACIÓN DE USUARIO" \
+                         --inputbox "\nNombre de usuario (4-15 caracteres):\nSolo letras, números y _" \
+                         10 60 3>&1 1>&2 2>&3)
         local exit_code=$?
 
         case $exit_code in
             0)
                 if [[ -z "$username" ]]; then
-                    dialog --msgbox "El nombre de usuario no puede estar vacío." 6 50
+                    dialog --msgbox "El nombre no puede estar vacío." 6 50
+                    continue
                 elif [[ ${#username} -lt 4 || ${#username} -gt 15 ]]; then
-                    dialog --msgbox "Longitud inválida (debe ser 4-15 caracteres)." 6 50
+                    dialog --msgbox "Longitud inválida (4-15 caracteres)." 7 50
+                    continue
                 elif [[ ! "$username" =~ ^[a-zA-Z0-9_]+$ ]]; then
-                    dialog --msgbox "Caracteres inválidos. Solo letras, números y _." 6 60
+                    dialog --msgbox "Caracteres inválidos. Solo letras, números y _." 7 60
+                    continue
                 else
                     mkdir -p "$CONFIG_DIR"
                     echo "$username" > "$USER_FILE"
@@ -43,9 +54,14 @@ user_config() {
                 fi
                 ;;
             1)
-                dialog --title "Confirmación" --yesno "¿Cancelar instalación?" 6 50 && exit 1
+                dialog --title "CONFIRMACIÓN" --yesno "¿Cancelar instalación?" 7 50
+                if [[ $? -eq 0 ]]; then
+                    echo "Instalación cancelada por usuario" >> "$LOG_FILE"
+                    exit 1
+                fi
                 ;;
             *)
+                show_error "Error inesperado"
                 exit 1
                 ;;
         esac
@@ -54,12 +70,12 @@ user_config() {
 
 iniciar_instalacion() {
     [[ -e "$PROGRESO_CANAL" ]] && rm -f "$PROGRESO_CANAL"
-    mkfifo "$PROGRESO_CANAL" || {
-        echo "Error: No se pudo crear la tubería FIFO." >&2
+    if ! mkfifo "$PROGRESO_CANAL"; then
+        show_error "No se creó el canal de progreso"
         exit 1
-    }
+    fi
 
-    dialog --title "Instalación de Stellar" --programbox 20 70 < "$PROGRESO_CANAL" &
+    dialog --title "INSTALACIÓN DE STELLAR" --programbox 20 70 < "$PROGRESO_CANAL" &
     exec 3>"$PROGRESO_CANAL"
 
     apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
@@ -69,49 +85,86 @@ iniciar_instalacion() {
     echo "➔ Preparando instalación..." >&3
     sleep 1
 
-    echo "➔ Actualizando paquetes..." >&3
-    apt update -y >> "$LOG_FILE" 2>&1 || {
-        echo "✘ Error actualizando paquetes. Ver $LOG_FILE" >&3
-        exit 1
-    }
-    echo "✔ Paquetes actualizados." >&3
+    echo "➔ Actualizando repositorios..." >&3
+    if ! apt update -y >> "$LOG_FILE" 2>&1; then
+        show_error "Error actualizando repositorios"
+        echo "➔ Solución alternativa..." >&3
+        if ! apt update -y --fix-missing >> "$LOG_FILE" 2>&1; then
+            show_error "Error persistente en repositorios"
+            exit 1
+        fi
+    fi
+    echo "✔ Repositorios actualizados" >&3
     sleep 0.5
 
     echo "➔ Actualizando sistema..." >&3
-    apt upgrade -y >> "$LOG_FILE" 2>&1 || {
-        echo "✘ Error actualizando sistema. Ver $LOG_FILE" >&3
+    if ! apt upgrade -y >> "$LOG_FILE" 2>&1; then
+        show_error "Error actualizando sistema"
         exit 1
-    }
-    echo "✔ Sistema actualizado." >&3
+    fi
+    echo "✔ Sistema actualizado" >&3
     sleep 0.5
 
     for pkg in "${apt_packages[@]}"; do
         echo "➔ Instalando $pkg..." >&3
-        apt install -y "$pkg" >> "$LOG_FILE" 2>&1 || {
-            echo "✘ Error instalando $pkg. Ver $LOG_FILE" >&3
-            exit 1
-        }
-        echo "✔ $pkg instalado." >&3
+        
+        if dpkg -s "$pkg" &> /dev/null; then
+            echo "✔ $pkg ya instalado" >&3
+            sleep 0.2
+            continue
+        fi
+        
+        if ! apt install -y "$pkg" >> "$LOG_FILE" 2>&1; then
+            show_error "Instalando $pkg"
+            echo "➔ Reintentando $pkg..." >&3
+            if ! apt install -y --reinstall "$pkg" >> "$LOG_FILE" 2>&1; then
+                show_error "Error persistente con $pkg"
+                exit 1
+            fi
+        fi
+        echo "✔ $pkg instalado" >&3
         sleep 0.3
     done
 
     for pkg in "${pip_packages[@]}"; do
         echo "➔ Instalando $pkg..." >&3
-        pip install --no-cache-dir "$pkg" >> "$LOG_FILE" 2>&1 || {
-            echo "✘ Error instalando $pkg. Ver $LOG_FILE" >&3
-            exit 1
-        }
-        echo "✔ $pkg instalado." >&3
+        
+        if pip show "$pkg" &> /dev/null; then
+            echo "✔ $pkg ya instalado" >&3
+            sleep 0.2
+            continue
+        fi
+        
+        if ! pip install --no-cache-dir "$pkg" >> "$LOG_FILE" 2>&1; then
+            show_error "Instalando $pkg"
+            echo "➔ Instalación local..." >&3
+            if ! pip install --user --no-cache-dir "$pkg" >> "$LOG_FILE" 2>&1; then
+                show_error "Error persistente con $pkg"
+                exit 1
+            fi
+        fi
+        echo "✔ $pkg instalado" >&3
         sleep 0.3
     done
 
     for pkg in "${npm_packages[@]}"; do
         echo "➔ Instalando $pkg..." >&3
-        npm install -g "$pkg" >> "$LOG_FILE" 2>&1 || {
-            echo "✘ Error instalando $pkg. Ver $LOG_FILE" >&3
-            exit 1
-        }
-        echo "✔ $pkg instalado." >&3
+        
+        if npm list -g "$pkg" &> /dev/null; then
+            echo "✔ $pkg ya instalado" >&3
+            sleep 0.2
+            continue
+        fi
+        
+        if ! npm install -g "$pkg" >> "$LOG_FILE" 2>&1; then
+            show_error "Instalando $pkg"
+            echo "➔ Permisos elevados..." >&3
+            if ! npm install -g "$pkg" --unsafe-perm >> "$LOG_FILE" 2>&1; then
+                show_error "Error persistente con $pkg"
+                exit 1
+            fi
+        fi
+        echo "✔ $pkg instalado" >&3
         sleep 0.3
     done
 
@@ -120,19 +173,23 @@ iniciar_instalacion() {
 }
 
 main() {
-    install_dependencies
-    [[ ! -d ~/Stellar ]] && mkdir -p ~/Stellar
+    echo "Inicio: $(date)" > "$LOG_FILE"
+    mkdir -p ~/Stellar
+    
+    if ! install_dependencies; then
+        exit 1
+    fi
     
     user_config
-    
     iniciar_instalacion
 
-    dialog --title "Completado" --msgbox "¡Instalación finalizada correctamente!" 8 50
+    dialog --title "COMPLETADO" --msgbox "\n¡Stellar instalado correctamente!\n\nPuede comenzar a usar el sistema." 10 50
     clear
+    
+    cp ~/Stellar/config/.bash_profile ~/.
+    cp ~/Stellar/config/.bashrc ~/.
+    reset
+    bash
 }
 
 main
-cp ~/Stellar/config/.bash_profile ~/.
-cp ~/Stellar/config/.bashrc ~/.
-reset
-bash
