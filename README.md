@@ -20,9 +20,9 @@
 
 <div align="center">
 
-`Stellar, es un programa hecho en python, bash y nodejs para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.`
+Stellar, es un programa hecho en python, bash y nodejs para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.
 
-`Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.`
+Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
 </div>
 
 <details>
@@ -41,24 +41,6 @@ cd Stellar
 ```shell script
 bash install.sh
 ```
-
-##### Al ejecutar el archivo `install.sh` se le abrirá una ventana de diálogo la cual es la siguiente:
-
-![User](https://github.com/Keiji821/Stellar/blob/master/images%2Fuser.jpg)
-
-##### En el campo que se muestra en la imagen es decir en el diálogo, deberá ingresar el nombre de usuario que desea usar en Stellar OS al ingresar el nombre usuario deseado debe dar clic o tocar el botón `[OK]` para continuar con la instalación.
-
-##### Al continuar se le abrirá la siguiente ventana:
-
-![Install](https://github.com/Keiji821/Stellar/blob/master/images%2Finstall.jpg)
-
-##### En esta parte se empezarán a descargar las dependencias de Stellar OS y la configuración inicial.
-
-##### Después se mostrará lo siguiente:
-
-![Done](https://github.com/Keiji821/Stellar/blob/master/images%2Fdone.jpg)
-
-##### La instalación se habrá completado y Stellar OS estará instalado en su termux al dar clic o tocar el botón `[OK]` su sesión de termux se reiniciará y mostrará un nuevo diseño para su terminal.
 
 </details>
 
