@@ -227,7 +227,7 @@ install_dependencies() {
     local packages=()
     
     if command -v apt-get >/dev/null; then
-        packages=(python3 python3-pip tor cloudflared exiftool nmap termux-api dnsutils nodejs npm)
+        packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs npm)
     elif command -v pkg >/dev/null; then
         packages=(python python-pip tor cloudflared exiftool nmap termux-api dnsutils nodejs npm)
     elif command -v pacman >/dev/null; then
