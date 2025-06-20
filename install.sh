@@ -2,32 +2,17 @@
 
 CONFIG_DIR="$HOME/Stellar/config/system"
 USER_FILE="$CONFIG_DIR/user.txt"
-LOG_DIR="/tmp/stellar_install_logs"
-mkdir -p "$LOG_DIR"
 
 gris="\033[1;30m"
 blanco="\033[0m"
 blanco2="\033[1;37m"
 rojo="\033[1;31m"
-rojo2="\033[31m"
 azul="\033[1;34m"
-azul2="\033[34m"
 azul_agua="\e[1;36m"
-azul_agua2="\e[36m"
 verde="\033[1;32m"
-verde2="\033[32m"
 morado="\033[1;35m"
-morado2="\033[35m"
 amarillo="\033[1;33m"
-amarillo2="\033[33m"
 cyan="\033[38;2;23;147;209m"
-
-trap 'show_error "Instalación interrumpida por el usuario"; cleanup; exit 1' INT TERM
-
-cleanup() {
-    show_warning "Limpiando archivos temporales..."
-    rm -rf "$LOG_DIR"/*.log
-}
 
 show_header() {
     clear
@@ -52,15 +37,10 @@ show_warning() {
 
 show_error() {
     echo -e "${rojo}✘ Error: $1${blanco}"
-    echo -e "${rojo2}Detalles en $LOG_DIR/error.log${blanco}"
 }
 
 show_progress() {
     echo -e "${cyan}➔ $1...${blanco}"
-}
-
-log_error() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: $1" >> "$LOG_DIR/error.log"
 }
 
 prompt_continue() {
@@ -114,18 +94,16 @@ install_pkg() {
         return 0
     fi
 
-    if sudo apt-get install -y "$pkg" >> "$LOG_DIR/apt_install.log" 2>&1; then
+    if sudo apt-get install -y "$pkg"; then
         show_message "$pkg instalado correctamente"
         return 0
     else
-        log_error "Falló la instalación de $pkg"
         show_warning "Reintentando instalación de $pkg"
         
-        if sudo apt-get install -y --fix-broken "$pkg" >> "$LOG_DIR/apt_install_retry.log" 2>&1; then
+        if sudo apt-get install -y --fix-broken "$pkg"; then
             show_message "$pkg instalado después de reintento"
             return 0
         else
-            log_error "Falló el reintento de instalación de $pkg"
             show_error "No se pudo instalar $pkg"
             return 1
         fi
@@ -141,18 +119,16 @@ install_pip() {
         return 0
     fi
 
-    if pip install --upgrade --no-cache-dir "$pkg" >> "$LOG_DIR/pip_install.log" 2>&1; then
+    if pip install --upgrade --no-cache-dir "$pkg"; then
         show_message "$pkg instalado correctamente (pip)"
         return 0
     else
-        log_error "Falló la instalación pip de $pkg"
         show_warning "Intentando instalación local de $pkg"
         
-        if pip install --user --upgrade --no-cache-dir "$pkg" >> "$LOG_DIR/pip_install_user.log" 2>&1; then
+        if pip install --user --upgrade --no-cache-dir "$pkg"; then
             show_message "$pkg instalado localmente (pip)"
             return 0
         else
-            log_error "Falló la instalación local pip de $pkg"
             show_error "No se pudo instalar $pkg via pip"
             return 1
         fi
@@ -168,18 +144,16 @@ install_npm() {
         return 0
     fi
 
-    if npm install -g "$pkg" >> "$LOG_DIR/npm_install.log" 2>&1; then
+    if npm install -g "$pkg"; then
         show_message "$pkg instalado correctamente (npm)"
         return 0
     else
-        log_error "Falló la instalación npm de $pkg"
         show_warning "Intentando con permisos elevados"
         
-        if npm install -g "$pkg" --unsafe-perm >> "$LOG_DIR/npm_install_unsafe.log" 2>&1; then
+        if npm install -g "$pkg" --unsafe-perm; then
             show_message "$pkg instalado con permisos elevados (npm)"
             return 0
         else
-            log_error "Falló la instalación npm con unsafe-perm de $pkg"
             show_error "No se pudo instalar $pkg via npm"
             return 1
         fi
@@ -212,35 +186,31 @@ user_config() {
 
 update_system() {
     show_progress "Limpiando caché de paquetes"
-    sudo apt-get clean >> "$LOG_DIR/apt_clean.log" 2>&1
+    sudo apt-get clean
     
     show_progress "Actualizando lista de paquetes"
-    if timeout 300 sudo apt-get update -y >> "$LOG_DIR/apt_update.log" 2>&1; then
+    if sudo apt-get update -y; then
         show_message "Repositorios actualizados correctamente"
     else
-        log_error "Timeout o error en apt-get update"
         show_warning "Intentando solución alternativa para repositorios"
         
-        if timeout 300 sudo apt-get update -y --fix-missing >> "$LOG_DIR/apt_update_retry.log" 2>&1; then
+        if sudo apt-get update -y --fix-missing; then
             show_message "Repositorios actualizados después de reintento"
         else
-            log_error "Falló el reintento de apt-get update"
             show_error "No se pudieron actualizar los repositorios"
             return 1
         fi
     fi
 
     show_progress "Actualizando sistema (esto puede tomar tiempo)"
-    if timeout 600 sudo apt-get upgrade -y >> "$LOG_DIR/apt_upgrade.log" 2>&1; then
+    if sudo apt-get upgrade -y; then
         show_message "Sistema actualizado correctamente"
     else
-        log_error "Timeout o error en apt-get upgrade"
         show_warning "Intentando actualización mínima"
         
-        if timeout 300 sudo apt-get --fix-broken install -y >> "$LOG_DIR/apt_fix.log" 2>&1; then
+        if sudo apt-get --fix-broken install -y; then
             show_message "Problemas de dependencias resueltos"
         else
-            log_error "Falló la reparación de dependencias"
             show_error "Error al actualizar el sistema"
             return 1
         fi
@@ -326,7 +296,6 @@ main_install() {
     fi
 
     show_error "La instalación no pudo completarse"
-    echo -e "${amarillo}Revise los logs en $LOG_DIR para más detalles.${blanco}"
     prompt_continue "Presione Enter para salir"
     return 1
 }
