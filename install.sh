@@ -90,14 +90,6 @@ check_internet() {
     return 0
 }
 
-check_root() {
-    if [ "$(id -u)" -ne 0 ]; then
-        show_error "Este script debe ejecutarse como root o con sudo"
-        return 1
-    fi
-    return 0
-}
-
 validate_username() {
     local username=$1
     if [[ -z "$username" ]]; then
@@ -122,14 +114,14 @@ install_pkg() {
         return 0
     fi
 
-    if apt-get install -y "$pkg" >> "$LOG_DIR/apt_install.log" 2>&1; then
+    if sudo apt-get install -y "$pkg" >> "$LOG_DIR/apt_install.log" 2>&1; then
         show_message "$pkg instalado correctamente"
         return 0
     else
         log_error "Falló la instalación de $pkg"
         show_warning "Reintentando instalación de $pkg"
         
-        if apt-get install -y --fix-broken "$pkg" >> "$LOG_DIR/apt_install_retry.log" 2>&1; then
+        if sudo apt-get install -y --fix-broken "$pkg" >> "$LOG_DIR/apt_install_retry.log" 2>&1; then
             show_message "$pkg instalado después de reintento"
             return 0
         else
@@ -220,16 +212,16 @@ user_config() {
 
 update_system() {
     show_progress "Limpiando caché de paquetes"
-    apt-get clean >> "$LOG_DIR/apt_clean.log" 2>&1
+    sudo apt-get clean >> "$LOG_DIR/apt_clean.log" 2>&1
     
     show_progress "Actualizando lista de paquetes"
-    if timeout 300 apt-get update -y >> "$LOG_DIR/apt_update.log" 2>&1; then
+    if timeout 300 sudo apt-get update -y >> "$LOG_DIR/apt_update.log" 2>&1; then
         show_message "Repositorios actualizados correctamente"
     else
         log_error "Timeout o error en apt-get update"
         show_warning "Intentando solución alternativa para repositorios"
         
-        if timeout 300 apt-get update -y --fix-missing >> "$LOG_DIR/apt_update_retry.log" 2>&1; then
+        if timeout 300 sudo apt-get update -y --fix-missing >> "$LOG_DIR/apt_update_retry.log" 2>&1; then
             show_message "Repositorios actualizados después de reintento"
         else
             log_error "Falló el reintento de apt-get update"
@@ -239,13 +231,13 @@ update_system() {
     fi
 
     show_progress "Actualizando sistema (esto puede tomar tiempo)"
-    if timeout 600 apt-get upgrade -y >> "$LOG_DIR/apt_upgrade.log" 2>&1; then
+    if timeout 600 sudo apt-get upgrade -y >> "$LOG_DIR/apt_upgrade.log" 2>&1; then
         show_message "Sistema actualizado correctamente"
     else
         log_error "Timeout o error en apt-get upgrade"
         show_warning "Intentando actualización mínima"
         
-        if timeout 300 apt-get --fix-broken install -y >> "$LOG_DIR/apt_fix.log" 2>&1; then
+        if timeout 300 sudo apt-get --fix-broken install -y >> "$LOG_DIR/apt_fix.log" 2>&1; then
             show_message "Problemas de dependencias resueltos"
         else
             log_error "Falló la reparación de dependencias"
@@ -307,10 +299,6 @@ main_install() {
         prompt_continue "Verifique su conexión a Internet y reintente"
         exit 1
     fi
-    
-    if ! check_root; then
-        exit 1
-    fi
 
     show_message "INICIANDO INSTALACIÓN DE STELLAR"
     echo -e "${gris}================================================${blanco}"
@@ -327,7 +315,7 @@ main_install() {
                 echo -e "${amarillo}Recomendamos reiniciar el sistema.${blanco}"
                 
                 if prompt_yesno "¿Desea reiniciar ahora?"; then
-                    shutdown -r now
+                    sudo shutdown -r now
                 else
                     prompt_continue "Presione Enter para finalizar"
                     exec bash
