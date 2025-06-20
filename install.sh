@@ -89,25 +89,36 @@ install_pkg() {
     local pkg=$1
     show_progress "Instalando $pkg"
     
-    if dpkg -l | grep -q "^ii  $pkg "; then
+    if command -v dpkg >/dev/null && dpkg -l | grep -q "^ii  $pkg "; then
         show_message "$pkg ya está instalado"
         return 0
     fi
 
-    if sudo apt-get install -y "$pkg"; then
-        show_message "$pkg instalado correctamente"
-        return 0
-    else
-        show_warning "Reintentando instalación de $pkg"
-        
-        if sudo apt-get install -y --fix-broken "$pkg"; then
-            show_message "$pkg instalado después de reintento"
+    if command -v apt-get >/dev/null; then
+        if apt-get install -y "$pkg"; then
+            show_message "$pkg instalado correctamente"
             return 0
         else
-            show_error "No se pudo instalar $pkg"
-            return 1
+            show_warning "Reintentando instalación de $pkg"
+            if apt-get install -y --fix-broken "$pkg"; then
+                show_message "$pkg instalado después de reintento"
+                return 0
+            fi
+        fi
+    elif command -v pkg >/dev/null; then
+        if pkg install -y "$pkg"; then
+            show_message "$pkg instalado correctamente"
+            return 0
+        fi
+    elif command -v pacman >/dev/null; then
+        if pacman -S --noconfirm "$pkg"; then
+            show_message "$pkg instalado correctamente"
+            return 0
         fi
     fi
+
+    show_error "No se pudo instalar $pkg"
+    return 1
 }
 
 install_pip() {
@@ -124,7 +135,6 @@ install_pip() {
         return 0
     else
         show_warning "Intentando instalación local de $pkg"
-        
         if pip install --user --upgrade --no-cache-dir "$pkg"; then
             show_message "$pkg instalado localmente (pip)"
             return 0
@@ -149,7 +159,6 @@ install_npm() {
         return 0
     else
         show_warning "Intentando con permisos elevados"
-        
         if npm install -g "$pkg" --unsafe-perm; then
             show_message "$pkg instalado con permisos elevados (npm)"
             return 0
@@ -185,43 +194,47 @@ user_config() {
 }
 
 update_system() {
-    show_progress "Limpiando caché de paquetes"
-    sudo apt-get clean
-    
-    show_progress "Actualizando lista de paquetes"
-    if sudo apt-get update -y; then
-        show_message "Repositorios actualizados correctamente"
-    else
-        show_warning "Intentando solución alternativa para repositorios"
-        
-        if sudo apt-get update -y --fix-missing; then
-            show_message "Repositorios actualizados después de reintento"
-        else
-            show_error "No se pudieron actualizar los repositorios"
-            return 1
+    if command -v apt-get >/dev/null; then
+        show_progress "Actualizando lista de paquetes (APT)"
+        if apt-get update -y; then
+            show_message "Repositorios actualizados correctamente"
+            
+            show_progress "Actualizando sistema (APT)"
+            if apt-get upgrade -y; then
+                show_message "Sistema actualizado correctamente"
+                return 0
+            fi
+        fi
+    elif command -v pkg >/dev/null; then
+        show_progress "Actualizando sistema (Termux)"
+        if pkg update -y && pkg upgrade -y; then
+            show_message "Sistema actualizado correctamente"
+            return 0
+        fi
+    elif command -v pacman >/dev/null; then
+        show_progress "Actualizando sistema (Pacman)"
+        if pacman -Syu --noconfirm; then
+            show_message "Sistema actualizado correctamente"
+            return 0
         fi
     fi
 
-    show_progress "Actualizando sistema (esto puede tomar tiempo)"
-    if sudo apt-get upgrade -y; then
-        show_message "Sistema actualizado correctamente"
-    else
-        show_warning "Intentando actualización mínima"
-        
-        if sudo apt-get --fix-broken install -y; then
-            show_message "Problemas de dependencias resueltos"
-        else
-            show_error "Error al actualizar el sistema"
-            return 1
-        fi
-    fi
-
-    return 0
+    show_error "Error al actualizar el sistema"
+    return 1
 }
 
 install_dependencies() {
-    local apt_packages=(python3 python3-pip tor cloudflared exiftool nmap termux-api dnsutils nodejs npm)
-    for pkg in "${apt_packages[@]}"; do
+    local packages=()
+    
+    if command -v apt-get >/dev/null; then
+        packages=(python3 python3-pip tor cloudflared exiftool nmap termux-api dnsutils nodejs npm)
+    elif command -v pkg >/dev/null; then
+        packages=(python python-pip tor cloudflared exiftool nmap termux-api dnsutils nodejs npm)
+    elif command -v pacman >/dev/null; then
+        packages=(python python-pip tor cloudflared exiftool nmap dnsutils nodejs npm)
+    fi
+
+    for pkg in "${packages[@]}"; do
         if ! install_pkg "$pkg"; then
             return 1
         fi
@@ -282,14 +295,8 @@ main_install() {
             if finalize_installation; then
                 show_header
                 echo -e "${verde}¡Stellar se ha instalado correctamente!${blanco}"
-                echo -e "${amarillo}Recomendamos reiniciar el sistema.${blanco}"
-                
-                if prompt_yesno "¿Desea reiniciar ahora?"; then
-                    sudo shutdown -r now
-                else
-                    prompt_continue "Presione Enter para finalizar"
-                    exec bash
-                fi
+                prompt_continue "Presione Enter para finalizar"
+                exec bash
                 return 0
             fi
         fi
