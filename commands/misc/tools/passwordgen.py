@@ -4,6 +4,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 from rich.columns import Columns
+from rich import box
 
 console = Console()
 
