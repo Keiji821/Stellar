@@ -124,9 +124,9 @@ weebhook-mass-spam() {
     cd
 }
 
-() {
-    cd ~/Stellar/commands/general/Discord/weebhookraid
-    python weebhook_mass_spam.py
+mass-delete-channels() {
+    cd ~/Stellar/commands/general/Discord/botraid
+    python mass_delete_channels.py
     cd
 }
 
