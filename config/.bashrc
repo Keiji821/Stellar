@@ -245,7 +245,7 @@ passwordgen() {
     cd
 }
 
-passwordgen() {
+encrypt-file() {
     cd ~/Stellar/commands/misc/tools
     python encrypt-file.py
     cd
