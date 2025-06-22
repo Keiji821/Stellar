@@ -99,6 +99,7 @@ class DiscordRoleMapper:
             console.print("- Verificar ID/invitación")
             console.print("- Usar token válido para más detalles")
             console.print("- Asegurar que el bot esté en el servidor (con token)")
+            console.print("")
             return
 
         table = Table(
