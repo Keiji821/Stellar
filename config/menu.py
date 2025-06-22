@@ -33,6 +33,12 @@ table.add_row("• passwordgen", "Genera contraseñas seguras para usar", "🟢 
 table.add_row("• encrypt-file", "Encripta archivos", "🟢 Activo")
 
 table.add_row("")
+table.add_row("[code]Discord", style="bold green")
+
+table.add_row("• weebhook-mass-spam", "Envia mensajes a un canal de forma masiva", "🟢 Activo")
+table.add_row("• mass-delete-channels", "Elimina de forma masiva canales", "🟡 En proceso")
+
+table.add_row("")
 table.add_row("[code]Osint", style="bold green")
 
 table.add_row("• ipinfo", "Obtiene información de una IP", "🟢 Activo") 
@@ -47,7 +53,7 @@ table.add_row("[code]Osint/Discord", style="bold green")
 
 table.add_row("• userinfo", "Obtiene información apartir de una ID", "🟢 Activo")
 table.add_row("• serverinfo", "Obtiene información sobre un servidor", "🟢 Activo")
-table.add_row("• searchinvites", "Busca invitaciones en el internet", "🟢 Activo")
+table.add_row("• searchinvites", "Busca enlaces de invitación", "🟢 Activo")
 table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitación", "🟢 Activo")
 table.add_row("• role-mapper", "Mapea roles apartir del ID del servidor", "🟢 Activo")
 table.add_row("• mutual-servers", "Verifica si hay un servidor común entre usuarios", "🟢 Activo")
@@ -56,16 +62,6 @@ table.add_row("")
 table.add_row("[code]Osint/Instagram", style="bold green")
 
 table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🔴 Dañado")
-
-table.add_row("")
-table.add_row("[code]WeebHookRaid/Discord", style="bold green")
-
-table.add_row("• weebhook-mass-spam", "Envia mensajes a un canal de forma masiva", "🟢 Activo")
-
-table.add_row("")
-table.add_row("[code]BotRaid/Discord", style="bold green")
-
-table.add_row("• mass-delete-channels", "Elimina de forma masiva canales", "🟢 Activo")
 
 table.add_row("")
 table.add_row("[code]Phishing", style="bold green")
