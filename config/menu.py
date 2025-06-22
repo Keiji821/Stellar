@@ -26,7 +26,7 @@ table.add_row("")
 table.add_row("[code]Utilidades", style="bold green")
 
 table.add_row("• ia", "Un servicio de IA desde de una API gratuita", "🟢 Activo")
-table.add_row("• ia-image", "Generador de imágenes IA", "🟡 Dañado")
+table.add_row("• ia-image", "Generador de imágenes IA", "🔴 Dañado")
 table.add_row("• traductor", "Traducción en tiempo real", "🟢 Activo")
 table.add_row("• myip", "Muestra tu IP real", "🟢 Activo")
 table.add_row("• passwordgen", "Genera contraseñas seguras para usar", "🟢 Activo")
@@ -52,12 +52,12 @@ table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitac
 table.add_row("")
 table.add_row("[code]Osint/Instagram", style="bold green")
 
-table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟡 Dañado")
+table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🔴 Dañado")
 
 table.add_row("")
 table.add_row("[code]Phishing", style="bold green")
 
-table.add_row("• tunnel", "Expone una imagen que captura la IP", "🔴 En proceso")
+table.add_row("• tunnel", "Expone una imagen que captura la IP", "🟡 En proceso")
 
 table.add_row("")
 table.add_row("[code]Pentesting", style="bold green")
