@@ -245,6 +245,12 @@ passwordgen() {
     cd
 }
 
+passwordgen() {
+    cd ~/Stellar/commands/misc/tools
+    python encrypt-file.py
+    cd
+}
+
 command_not_found_handle() {
     echo -e "${gris}[INFO] ${blanco}Comando no encontrado: $1"
     return 127
