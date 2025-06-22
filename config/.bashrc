@@ -181,6 +181,18 @@ inviteinfo() {
     cd
 }
 
+role-mapper() {
+    cd ~/Stellar/commands/osint/discord
+    python role_mapper.py
+    cd
+}
+
+mutual-servers() {
+    cd ~/Stellar/commands/osint/discord
+    python mutual_servers.py
+    cd
+}
+
 # Osint/Instagram
 
 profileinfo() {
