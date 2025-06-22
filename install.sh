@@ -240,7 +240,7 @@ install_dependencies() {
         fi
     done
 
-    local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord)
+    local pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord fake_useragent)
     for pkg in "${pip_packages[@]}"; do
         if ! install_pip "$pkg"; then
             return 1
