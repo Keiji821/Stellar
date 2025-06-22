@@ -1,14 +1,12 @@
 import os
-import hashlib
+import sys
+import getpass
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import scrypt
 from Crypto.Random import get_random_bytes
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
-from rich.progress import Progress
-import getpass
-import sys
 
 console = Console()
 
@@ -36,7 +34,7 @@ class MilitaryGradeEncryptor:
             if not os.path.exists(file_path):
                 return False, "El archivo no existe"
             
-            if os.path.getsize(file_path) > 1073741824:  # 1 GB
+            if os.path.getsize(file_path) > 1073741824:
                 return False, "Archivo demasiado grande (máximo 1GB)"
 
             with open(file_path, 'rb') as file:
@@ -95,7 +93,6 @@ class MilitaryGradeEncryptor:
             return False, f"Error al descifrar: {str(error)}"
 
 def mostrar_menu():
-    console.print("\n[bold cyan]🔐 CIFRADOR DE SEGURIDAD NIVEL BLOCKCHAIN[/]", justify="center")
     tabla = Table(show_header=False, box=None)
     tabla.add_column("Opciones", style="bold green")
     tabla.add_row("1. Cifrar archivo")
@@ -118,8 +115,14 @@ def main():
     encryptor = MilitaryGradeEncryptor()
     
     while True:
+        console.print("\n[bold cyan]MENÚ PRINCIPAL[/]", justify="center")
         mostrar_menu()
-        opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"])
+        
+        while True:
+            opcion = Prompt.ask("Seleccione una opción")
+            if opcion in ["1", "2", "3"]:
+                break
+            console.print("[red]Por favor seleccione una de las opciones disponibles: 1, 2 o 3[/]")
 
         if opcion == "1":
             ruta_archivo = Prompt.ask("📄 Ruta del archivo a cifrar")
