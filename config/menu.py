@@ -58,6 +58,16 @@ table.add_row("[code]Osint/Instagram", style="bold green")
 table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🔴 Dañado")
 
 table.add_row("")
+table.add_row("[code]WeebHookRaid/Discord", style="bold green")
+
+table.add_row("• weebhook-mass-spam", "Envia mensajes a un canal de forma masiva", "🟢 Activo")
+
+table.add_row("")
+table.add_row("[code]BotRaid/Discord", style="bold green")
+
+table.add_row("• mass-delete-channels", "Elimina de forma masiva canales", "🟢 Activo")
+
+table.add_row("")
 table.add_row("[code]Phishing", style="bold green")
 
 table.add_row("• tunnel", "Expone una imagen que captura la IP", "🟡 En proceso")
