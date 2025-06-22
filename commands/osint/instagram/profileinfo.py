@@ -29,14 +29,16 @@ class InstagramScraperPremium:
             'Sec-Fetch-Site': 'none',
             'Sec-Fetch-User': '?1'
         }
-        self.estado = "INICIALIZADO"
+        self.estado = "Inicializado"
         self.registro = []
         
-    def _log(self, mensaje, nivel="INFO"):
+    def _log(self, mensaje, nivel="Info"):
         log_entry = f"[{time.strftime('%H:%M:%S')}] [{nivel}] {mensaje}"
         self.registro.append(log_entry)
-        if nivel == "ERROR":
+        if nivel == "Error":
             self.console.print(log_entry, style="bold red")
+        elif nivel == "Advertencia":
+            self.console.print(log_entry, style="bold yellow")
         else:
             self.console.print(log_entry, style="bold cyan")
 
@@ -48,14 +50,14 @@ class InstagramScraperPremium:
     def _get_html(self, username):
         for intento in range(1, self.max_retries + 1):
             try:
-                self.estado = f"INTENTO {intento}/{self.max_retries}"
+                self.estado = f"Intento {intento}/{self.max_retries}"
                 self._log(f"Obteniendo perfil de @{username}")
                 
                 self._random_delay()
                 
                 user_agent = self.ua.random
                 self.headers['User-Agent'] = user_agent
-                self._log(f"User-Agent: {user_agent}")
+                self._log(f"User-agent: {user_agent}")
                 
                 response = self.session.get(
                     f"https://www.instagram.com/{username}/",
@@ -64,22 +66,22 @@ class InstagramScraperPremium:
                 )
                 
                 if response.status_code == 200:
-                    self._log("Perfil obtenido con éxito", "ÉXITO")
+                    self._log("Perfil obtenido con éxito", "Éxito")
                     return response.text
                 elif response.status_code == 404:
-                    self._log("Perfil no encontrado (404)", "ERROR")
+                    self._log("Perfil no encontrado (404)", "Error")
                     return None
                 else:
-                    self._log(f"Respuesta HTTP: {response.status_code}", "ADVERTENCIA")
+                    self._log(f"Respuesta HTTP: {response.status_code}", "Advertencia")
                     
             except requests.exceptions.Timeout:
-                self._log("Tiempo de espera agotado", "ERROR")
+                self._log("Tiempo de espera agotado", "Error")
             except requests.exceptions.TooManyRedirects:
-                self._log("Demasiadas redirecciones", "ERROR")
+                self._log("Demasiadas redirecciones", "Error")
             except requests.exceptions.RequestException as e:
-                self._log(f"Error de conexión: {str(e)}", "ERROR")
+                self._log(f"Error de conexión: {str(e)}", "Error")
                 
-        self._log(f"Fallo al obtener perfil después de {self.max_retries} intentos", "ERROR")
+        self._log(f"Fallo al obtener perfil después de {self.max_retries} intentos", "Error")
         return None
 
     def _parse_profile(self, html, username):
@@ -91,16 +93,24 @@ class InstagramScraperPremium:
             meta_image = soup.find('meta', property='og:image')
             
             if not meta_description or not title:
-                self._log("Datos críticos faltantes en el perfil", "ADVERTENCIA")
+                self._log("Datos críticos faltantes en el perfil", "Advertencia")
                 return None
                 
             stats_pattern = r'([\d,]+) seguidores, ([\d,]+) seguidos, ([\d,]+) publicaciones'
             stats_match = re.search(stats_pattern, meta_description['content'])
             
+            full_name = title.text.split('(')[0].replace('• Instagram', '').strip()
+            if len(full_name) > 80:
+                full_name = full_name[:77] + '...'
+                
+            biography = meta_description['content'].split('-')[0].strip()
+            if len(biography) > 150:
+                biography = biography[:147] + '...'
+            
             return {
                 'username': username,
-                'full_name': title.text.split('(')[0].replace('• Instagram', '').strip(),
-                'biography': meta_description['content'].split('-')[0].strip(),
+                'full_name': full_name,
+                'biography': biography,
                 'followers': int(stats_match.group(1).replace(',', '')) if stats_match else 0,
                 'following': int(stats_match.group(2).replace(',', '')) if stats_match else 0,
                 'posts': int(stats_match.group(3).replace(',', '')) if stats_match else 0,
@@ -111,10 +121,14 @@ class InstagramScraperPremium:
             }
             
         except Exception as e:
-            self._log(f"Error al analizar perfil: {str(e)}", "ERROR")
+            self._log(f"Error al analizar perfil: {str(e)}", "Error")
             return None
 
     def get_profile(self, username):
+        if not username:
+            self._log("Nombre de usuario vacío", "Error")
+            return {'status': 'error', 'message': 'Nombre de usuario vacío'}
+            
         html = self._get_html(username)
         if not html:
             return {'status': 'error', 'message': 'Error al obtener perfil'}
@@ -128,7 +142,7 @@ class InstagramScraperPremium:
     def batch_scrape(self, usernames):
         resultados = []
         with Progress(console=self.console) as progress:
-            tarea = progress.add_task("[bold green]Escaneando perfiles...", total=len(usernames))
+            tarea = progress.add_task("[bold green]Escaneando perfiles...[/bold green]", total=len(usernames))
             
             with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
                 futuros = {executor.submit(self.get_profile, user): user for user in usernames}
@@ -139,35 +153,35 @@ class InstagramScraperPremium:
                         resultado = futuro.result()
                         resultados.append(resultado)
                     except Exception as e:
-                        self._log(f"Error para @{usuario}: {str(e)}", "ERROR")
+                        self._log(f"Error para @{usuario}: {str(e)}", "Error")
                     progress.update(tarea, advance=1)
                     
         return resultados
 
 def mostrar_resultados(perfil, consola):
     if perfil.get('status') != 'success':
-        consola.print(f"[bold red]ERROR: {perfil.get('message', 'Error desconocido')}[/bold red]")
+        consola.print(f"[bold red]Error: {perfil.get('message', 'Error desconocido')}[/bold red]")
         return
 
     tabla = Table(
-        title=f"[bold green]INFORMACIÓN DE @{perfil['username']}[/bold green]", 
+        title=f"[bold green]Información de @{perfil['username']}[/bold green]", 
         box=None,
         show_header=False,
         style="bold green"
     )
-    tabla.add_column("Campo", style="bold cyan")
+    tabla.add_column("Campo", style="bold cyan", width=20)
     tabla.add_column("Valor", style="bold white")
 
     campos = [
-        ("USUARIO", f"@{perfil['username']}"),
-        ("NOMBRE COMPLETO", perfil['full_name']),
-        ("BIOGRAFÍA", perfil['biography']),
-        ("SEGUIDORES", f"{perfil['followers']:,}"),
-        ("SIGUIENDO", f"{perfil['following']:,}"),
-        ("PUBLICACIONES", f"{perfil['posts']:,}"),
-        ("PRIVADO", "Sí" if perfil['is_private'] else "No"),
-        ("ENLACE", perfil['url']),
-        ("FOTO DE PERFIL", perfil['profile_pic'][:60] + "..." if len(perfil['profile_pic']) > 60 else perfil['profile_pic'])
+        ("Usuario", f"@{perfil['username']}"),
+        ("Nombre completo", perfil['full_name']),
+        ("Biografía", perfil['biography']),
+        ("Seguidores", f"{perfil['followers']:,}"),
+        ("Siguiendo", f"{perfil['following']:,}"),
+        ("Publicaciones", f"{perfil['posts']:,}"),
+        ("Privado", "Sí" if perfil['is_private'] else "No"),
+        ("Enlace", perfil['url']),
+        ("Foto de perfil", perfil['profile_pic'][:60] + "..." if len(perfil['profile_pic']) > 60 else perfil['profile_pic'])
     ]
 
     for campo, valor in campos:
@@ -180,25 +194,25 @@ if __name__ == "__main__":
     
     try:
         scraper = InstagramScraperPremium()
-        usuario = consola.input("[bold green]INGRESE NOMBRE DE USUARIO DE INSTAGRAM: [/bold green]").strip()
+        usuario = consola.input("[bold green]Ingrese nombre de usuario de Instagram: [/bold green]").strip()
         
-        if not usuario:
-            consola.print("[bold red]ERROR: Debe ingresar un nombre de usuario[/bold red]")
-            sys.exit(1)
-            
         perfil = scraper.get_profile(usuario)
         mostrar_resultados(perfil, consola)
         
-        consola.print("\n[bold yellow]REGISTRO DE EJECUCIÓN:[/bold yellow]")
+        consola.print("\n[bold yellow]Registro de ejecución:[/bold yellow]")
         for entrada in scraper.registro:
-            if "ERROR" in entrada:
+            if "Error" in entrada:
                 consola.print(entrada, style="bold red")
-            elif "ADVERTENCIA" in entrada:
+            elif "Advertencia" in entrada:
                 consola.print(entrada, style="bold yellow")
             else:
                 consola.print(entrada, style="bold cyan")
                 
+        consola.print()
+                
     except KeyboardInterrupt:
         consola.print("\n[bold red]Operación cancelada por el usuario[/bold red]")
+        consola.print()
     except Exception as e:
         consola.print(f"[bold red]Error crítico: {str(e)}[/bold red]")
+        consola.print()
