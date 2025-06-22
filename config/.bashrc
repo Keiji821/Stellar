@@ -116,6 +116,20 @@ userconf() {
     cd
 }
 
+# Discord
+
+weebhook-mass-spam() {
+    cd ~/Stellar/commands/general/Discord/weebhookraid
+    python weebhook_mass_spam.py
+    cd
+}
+
+() {
+    cd ~/Stellar/commands/general/Discord/weebhookraid
+    python weebhook_mass_spam.py
+    cd
+}
+
 # Osint
 
 ipinfo() {
