@@ -2,87 +2,141 @@ import requests
 from rich.console import Console
 from rich.table import Table
 from rich.prompt import Prompt
+from rich import box
 
 console = Console()
 
 class DiscordRoleMapper:
-    def __init__(self, bot_token):
-        self.headers = {'Authorization': f'Bot {bot_token}'}
+    def __init__(self, token=None):
+        self.headers = {'Authorization': f'Bot {token}'} if token else {}
         self.base_url = "https://discord.com/api/v10"
+        self.token = token
 
-    def _make_request(self, url):
+    def _fetch(self, url, public=False):
         try:
-            response = requests.get(url, headers=self.headers)
-            if response.status_code == 200:
-                return response.json()
-            console.print(f"[red]Error API: {response.status_code} - {response.text}[/]")
-            return None
-        except Exception as e:
-            console.print(f"[red]Error de conexión: {str(e)}[/]")
-            return None
-
-    def get_server_roles(self, guild_id):
-        roles = self._make_request(f"{self.base_url}/guilds/{guild_id}/roles")
-        if not roles or not isinstance(roles, list):
+            response = requests.get(
+                url,
+                headers={} if public else self.headers,
+                timeout=15
+            )
+            return response.json() if response.status_code == 200 else None
+        except requests.RequestException:
             return None
 
-        members = self._make_request(f"{self.base_url}/guilds/{guild_id}/members?limit=1000") or []
+    def get_roles(self, identifier):
+        if self.token:
+            guild_data = self._fetch(f"{self.base_url}/guilds/{identifier}")
+            if guild_data:
+                return self._process_private_roles(identifier, guild_data.get('name', 'Unknown'))
         
-        role_members = {role['id']: 0 for role in roles if isinstance(role, dict)}
+        if 'discord.gg/' in identifier:
+            invite_code = identifier.split('/')[-1]
+        else:
+            invite_code = identifier
+            
+        invite_data = self._fetch(f"{self.base_url}/invites/{invite_code}?with_counts=true", public=True)
+        if invite_data and invite_data.get('guild'):
+            return self._process_public_roles(invite_data)
+        
+        return None
+
+    def _process_private_roles(self, guild_id, guild_name):
+        roles = self._fetch(f"{self.base_url}/guilds/{guild_id}/roles") or []
+        members = self._fetch(f"{self.base_url}/guilds/{guild_id}/members?limit=1000") or []
+        
+        role_counts = {role['id']: 0 for role in roles if 'id' in role}
         for member in members:
-            if isinstance(member, dict):
-                for role_id in member.get('roles', []):
-                    role_members[role_id] = role_members.get(role_id, 0) + 1
+            for role_id in member.get('roles', []):
+                if role_id in role_counts:
+                    role_counts[role_id] += 1
+        
+        return {
+            'name': guild_name,
+            'id': guild_id,
+            'type': 'private',
+            'roles': sorted(
+                [
+                    {
+                        'name': r.get('name', 'N/A'),
+                        'position': r.get('position', 0),
+                        'color': f"#{r['color']:06x}" if r.get('color') else "Default",
+                        'members': role_counts.get(r.get('id'), 0)
+                    }
+                    for r in roles
+                    if isinstance(r, dict)
+                ],
+                key=lambda x: x['position'],
+                reverse=True
+            )
+        }
 
-        return sorted(
-            [
-                {
-                    'name': role.get('name', 'N/A'),
-                    'id': role.get('id', ''),
-                    'position': role.get('position', 0),
-                    'color': f"#{role['color']:06x}" if role.get('color') else "Default",
-                    'members': role_members.get(role.get('id'), 0)
-                }
-                for role in roles
-                if isinstance(role, dict)
-            ],
-            key=lambda x: x['position'],
-            reverse=True
-        )
+    def _process_public_roles(self, invite_data):
+        guild = invite_data['guild']
+        roles = self._fetch(f"{self.base_url}/guilds/{guild['id']}/roles", public=True) or []
+        return {
+            'name': guild.get('name', 'Unknown'),
+            'id': guild['id'],
+            'type': 'public',
+            'roles': sorted(
+                [
+                    {
+                        'name': r.get('name', 'N/A'),
+                        'position': r.get('position', 0),
+                        'color': f"#{r['color']:06x}" if r.get('color') else "Default"
+                    }
+                    for r in roles
+                    if isinstance(r, dict)
+                ],
+                key=lambda x: x['position'],
+                reverse=True
+            )
+        }
 
-    def display_results(self, guild_id, roles):
-        if not roles:
-            console.print("[red]No se recibieron datos válidos de roles[/]")
+    def display(self, data):
+        if not data:
+            console.print("\n[bold red]Error: No se pudieron obtener datos[/]")
+            console.print("[bold yellow]Soluciones:[/]")
+            console.print("- Verificar ID/invitación")
+            console.print("- Usar token válido para más detalles")
+            console.print("- Asegurar que el bot esté en el servidor (con token)")
             return
 
-        table = Table(title=f"Mapa de Roles: {guild_id}")
-        table.add_column("Rol", style="cyan")
-        table.add_column("Posición", justify="right")
-        table.add_column("Color")
-        table.add_column("Miembros", justify="right")
-        table.add_column("ID", style="dim")
+        table = Table(
+            title=f"[bold]{data['name']}[/] - Modo {'Privado' if data['type'] == 'private' else 'Público'}",
+            box=box.ROUNDED,
+            header_style="bold magenta"
+        )
+        table.add_column("Rol", style="bold cyan", width=25)
+        table.add_column("Posición", justify="center")
+        table.add_column("Color", justify="center")
+        if data['type'] == 'private':
+            table.add_column("Miembros", justify="center")
 
-        for role in roles:
-            table.add_row(
+        for role in data['roles']:
+            row = [
                 role['name'],
                 str(role['position']),
-                role['color'],
-                str(role['members']),
-                role['id']
-            )
+                role['color']
+            ]
+            if data['type'] == 'private':
+                row.append(str(role.get('members', 0)))
+            table.add_row(*row)
+
         console.print(table)
+        console.print(f"[dim]ID Servidor: {data['id']}[/]")
+
+def main():
+    token = Prompt.ask("[bold green]Token bot (opcional)[/]", default="", show_default=False)
+    identifier = Prompt.ask("[bold green]ID servidor o invitación[/]")
+    
+    mapper = DiscordRoleMapper(token.strip() or None)
+    role_data = mapper.get_roles(identifier.strip())
+    mapper.display(role_data)
 
 if __name__ == "__main__":
-    bot_token = Prompt.ask("[bold green]Ingrese el token del bot[/bold green]")
-    analyzer = DiscordRoleMapper(bot_token)
-    
-    guild_id = Prompt.ask("[bold green]ID del servidor[/bold green]")
-    
-    roles = analyzer.get_server_roles(guild_id)
-    if roles:
-        analyzer.display_results(guild_id, roles)
-    else:
-        console.print("[red]No se pudieron obtener los roles. Verifique:")
-        console.print("- Token válido con permisos 'guilds' y 'members'")
-        console.print("- ID correcto del servidor")
-        console.print("- El bot está agregado al servidor[/]")
+    try:
+        main()
+    except KeyboardInterrupt:
+        console.print("\n[bold red]Cancelado[/]")
+    except Exception as e:
+        console.print(f"\n[bold red]Error: {str(e)}[/]")
