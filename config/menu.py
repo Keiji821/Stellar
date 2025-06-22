@@ -57,7 +57,7 @@ table.add_row("• profileinfo", "Obtiene los metadatos del perfil", "🟡 Daña
 table.add_row("")
 table.add_row("[code]Phishing", style="bold green")
 
-table.add_row("• tunnel", "Crea una url dónde se expone una imagen y captura la IP", "🔴 En proceso")
+table.add_row("• tunnel", "Expone una imagen que captura la IP", "🔴 En proceso")
 
 table.add_row("")
 table.add_row("[code]Pentesting", style="bold green")
