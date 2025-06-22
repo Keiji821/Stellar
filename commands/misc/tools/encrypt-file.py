@@ -8,6 +8,7 @@ from rich.prompt import Prompt
 from rich.table import Table
 from rich.progress import Progress
 import getpass
+import sys
 
 console = Console()
 
@@ -32,6 +33,12 @@ class MilitaryGradeEncryptor:
 
     def encrypt_file(self, file_path, passphrase):
         try:
+            if not os.path.exists(file_path):
+                return False, "El archivo no existe"
+            
+            if os.path.getsize(file_path) > 1073741824:  # 1 GB
+                return False, "Archivo demasiado grande (máximo 1GB)"
+
             with open(file_path, 'rb') as file:
                 file_data = file.read()
 
@@ -49,10 +56,21 @@ class MilitaryGradeEncryptor:
             os.remove(file_path)
             return True, encrypted_path
         except Exception as error:
-            return False, str(error)
+            return False, f"Error al cifrar: {str(error)}"
 
     def decrypt_file(self, file_path, passphrase):
         try:
+            if not os.path.exists(file_path):
+                return False, "El archivo cifrado no existe"
+            
+            if not file_path.endswith('.milenc'):
+                return False, "El archivo debe tener extensión .milenc"
+            
+            file_size = os.path.getsize(file_path)
+            min_size = self.salt_length + self.nonce_length + self.tag_length + 1
+            if file_size < min_size:
+                return False, "Archivo cifrado corrupto o inválido"
+
             with open(file_path, 'rb') as file:
                 salt = file.read(self.salt_length)
                 nonce = file.read(self.nonce_length)
@@ -64,79 +82,77 @@ class MilitaryGradeEncryptor:
             decrypted_data = cipher.decrypt_and_verify(ciphertext, tag)
 
             decrypted_path = file_path.replace('.milenc', '')
+            if os.path.exists(decrypted_path):
+                return False, "El archivo original ya existe"
+
             with open(decrypted_path, 'wb') as file:
                 file.write(decrypted_data)
 
             return True, decrypted_path
+        except ValueError as error:
+            return False, "Frase secreta incorrecta o archivo corrupto"
         except Exception as error:
-            return False, str(error)
+            return False, f"Error al descifrar: {str(error)}"
 
-def show_menu():
+def mostrar_menu():
     console.print("\n[bold cyan]🔐 CIFRADOR DE SEGURIDAD NIVEL BLOCKCHAIN[/]", justify="center")
-    table = Table(show_header=False, box=None)
-    table.add_column("Opciones", style="bold green")
-    table.add_row("1. Cifrar archivo")
-    table.add_row("2. Descifrar archivo")
-    table.add_row("3. Salir")
-    console.print(table)
+    tabla = Table(show_header=False, box=None)
+    tabla.add_column("Opciones", style="bold green")
+    tabla.add_row("1. Cifrar archivo")
+    tabla.add_row("2. Descifrar archivo")
+    tabla.add_row("3. Salir")
+    console.print(tabla)
 
-def get_passphrase():
+def obtener_frase_secreta():
     while True:
         passphrase = getpass.getpass("🔑 Frase secreta (mínimo 16 caracteres): ")
         if len(passphrase) >= 16:
             confirm = getpass.getpass("🔑 Confirmar frase secreta: ")
             if passphrase == confirm:
                 return passphrase
-            console.print("[red]Las frases no coinciden[/]")
+            console.print("[red]Error: Las frases no coinciden[/]")
         else:
-            console.print("[red]La frase debe tener al menos 16 caracteres[/]")
+            console.print("[red]Error: La frase debe tener al menos 16 caracteres[/]")
 
 def main():
     encryptor = MilitaryGradeEncryptor()
     
     while True:
-        show_menu()
-        option = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"])
+        mostrar_menu()
+        opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"])
 
-        if option == "1":
-            file_path = Prompt.ask("📄 Ruta del archivo a cifrar")
-            if not os.path.exists(file_path):
-                console.print("[red]El archivo no existe[/]")
-                continue
-                
-            passphrase = get_passphrase()
-            success, result = encryptor.encrypt_file(file_path, passphrase)
+        if opcion == "1":
+            ruta_archivo = Prompt.ask("📄 Ruta del archivo a cifrar")
+            resultado = encryptor.encrypt_file(ruta_archivo, obtener_frase_secreta())
             
-            if success:
-                console.print(f"[green]✓ Archivo cifrado: {result}[/]")
-                console.print("[yellow]⚠️ GUARDE SU FRASE SECRETA. SIN ELLA, SUS ARCHIVOS SON IRRECUPERABLES.[/]")
+            if resultado[0]:
+                console.print(f"[green]✓ Archivo cifrado con éxito: {resultado[1]}[/]")
+                console.print("[yellow]⚠️ ¡ADVERTENCIA! GUARDE SU FRASE SECRETA EN UN LUGAR SEGURO. SIN ELLA, SUS ARCHIVOS SON IRRECUPERABLES.[/]")
             else:
-                console.print(f"[red]✗ Error: {result}[/]")
+                console.print(f"[red]✗ Error: {resultado[1]}[/]")
 
-        elif option == "2":
-            file_path = Prompt.ask("📄 Ruta del archivo cifrado")
-            if not file_path.endswith('.milenc'):
-                file_path += '.milenc'
+        elif opcion == "2":
+            ruta_archivo = Prompt.ask("📄 Ruta del archivo cifrado")
+            if not ruta_archivo.endswith('.milenc'):
+                ruta_archivo += '.milenc'
                 
-            if not os.path.exists(file_path):
-                console.print("[red]El archivo cifrado no existe[/]")
-                continue
-                
-            passphrase = getpass.getpass("🔑 Frase secreta: ")
-            success, result = encryptor.decrypt_file(file_path, passphrase)
+            resultado = encryptor.decrypt_file(ruta_archivo, getpass.getpass("🔑 Frase secreta: "))
             
-            if success:
-                console.print(f"[green]✓ Archivo descifrado: {result}[/]")
+            if resultado[0]:
+                console.print(f"[green]✓ Archivo descifrado con éxito: {resultado[1]}[/]")
             else:
-                console.print(f"[red]✗ Error: {result}[/]")
+                console.print(f"[red]✗ Error: {resultado[1]}[/]")
 
-        elif option == "3":
+        elif opcion == "3":
+            console.print("[bold green]Saliendo del sistema...[/]")
             break
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        console.print("\n[red]Operación cancelada[/]")
+        console.print("\n[red]Operación cancelada por el usuario[/]")
+        sys.exit(0)
     except Exception as error:
         console.print(f"[red]Error crítico: {str(error)}[/]")
+        sys.exit(1)
