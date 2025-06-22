@@ -21,6 +21,8 @@ table.add_row("• ui", "Personaliza el banner y sus colores", "🟢 Activo")
 table.add_row("• uninstall", "Desinstala Stellar", "🟢 Activo")
 table.add_row("• update", "Actualiza desde el repositorio de github", "🟢 Activo")
 table.add_row("• bash", "Reinicia su sesión de la terminal", "🟢 Activo")
+table.add_row("• history -c", "Elimina cache de comandos en la terminal", "🟢 Activo")
+table.add_row("• reset", "Reestablece la terminal", "🟢 Activo")
 
 table.add_row("")
 table.add_row("[code]Utilidades", style="bold green")
