@@ -56,7 +56,7 @@ table.add_row("[code]Osint/Discord", style="bold green")
 table.add_row("• userinfo", "Obtiene información apartir de una ID", "🟢 Activo")
 table.add_row("• serverinfo", "Obtiene información sobre un servidor", "🟢 Activo")
 table.add_row("• searchinvites", "Busca enlaces de invitación", "🟢 Activo")
-table.add_row("• inviteinfo", "Obtiene información sobre un enlace de invitación", "🟢 Activo")
+table.add_row("• inviteinfo", "Obtiene datos sobre un enlace de invitación", "🟢 Activo")
 table.add_row("• role-mapper", "Mapea roles apartir del ID del servidor", "🟢 Activo")
 table.add_row("• mutual-servers", "Verifica si hay un servidor común entre usuarios", "🟢 Activo")
 
