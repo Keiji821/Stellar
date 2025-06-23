@@ -12,8 +12,8 @@ console.print("")
 
 table = Table(title="Lista", title_justify="center", title_style="bold green")
 table.add_column("[bold green]Comando", style="bold white", no_wrap=False)
-table.add_column("[bold green]Descripción", style="bold white")
-table.add_column("[bold green]Estado", style="bold white")
+table.add_column("[bold green]Descripción", style="bold white", no_wrap=True)
+table.add_column("[bold green]Estado", style="bold white", no_wrap=False)
 
 table.add_row("[code]Sistema", style="bold green")
 table.add_row("• reload", "Recargar el banner", "🟢 Activo")
