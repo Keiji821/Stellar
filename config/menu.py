@@ -37,8 +37,8 @@ table.add_row("• encrypt-file", "Encripta archivos", "🟢 Activo")
 table.add_row("")
 table.add_row("[code]Discord", style="bold green")
 
-table.add_row("• weebhook-mass-spam", "Envia mensajes a un canal de forma masiva", "🟢 Activo")
-table.add_row("• mass-delete-channels", "Elimina de forma masiva canales", "🟡 En proceso")
+table.add_row("• webhook-mass-spam", "Envia mensajes a un canal de forma masiva", "🟢 Activo")
+table.add_row("• mass-delete-channels", "Elimina de forma masiva canales", "🟡 Inactivo")
 
 table.add_row("")
 table.add_row("[code]Osint", style="bold green")
