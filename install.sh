@@ -49,12 +49,6 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-Color8="\033[38;5;"
-Fondo8="\033[48;5;"
-
-ColorRGB="\033[38;2;"
-FondoRGB="\033[48;2;"
-
 header_color="${Cian_Brillante}${Negrita}"
 success_color="${Verde_Brillante}"
 warning_color="${Amarillo_Brillante}"
