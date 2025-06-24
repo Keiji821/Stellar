@@ -82,3 +82,5 @@ echo -e "│     ${Blanco}Gracias por haber utilizado Stellar!${Magenta}     │
 echo -e "│             ${Cian}Atte: Keiji821${Magenta}                │"
 echo -e "╰──────────────────────────────────────────────╯${Reset}"
 echo -e "${Azul}¡Hasta pronto! :)${Reset}\n"
+echo
+echo
