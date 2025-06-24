@@ -2,6 +2,7 @@
 
 CONFIG_DIR="$HOME/Stellar/config/system"
 
+Gris="\033[1;30m"
 Negro="\033[0;30m"
 Rojo="\033[0;31m"
 Verde="\033[0;32m"
