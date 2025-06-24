@@ -5,7 +5,7 @@ import pyfiglet
 console = Console()
 
 console.print("")
-banner = pyfiglet.figlet_format("Comandos", font="bloody")
+banner = pyfiglet.figlet_format("Comandos", font="elite")
 console.print(banner, style="bright_cyan", justify="center")
 
 console.print("")
