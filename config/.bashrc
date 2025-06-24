@@ -47,12 +47,6 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-Color8="\033[38;5;"
-Fondo8="\033[48;5;"
-
-ColorRGB="\033[38;2;"
-FondoRGB="\033[48;2;"
-
 clear
 cd
 
@@ -104,8 +98,8 @@ cd Stellar/config/themes
 clear
 python banner.py
 cd
-printf "${ColorRGB}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
-printf "${ColorRGB}[INFO] ${Blanco_Brillante}Escriba (menu) para ver los comandos disponibles.\n"
+printf "${Gris}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
+printf "${Gris}[INFO] ${Blanco_Brillante}Escriba (menu) para ver los comandos disponibles.\n"
 
 # Sistema
 
