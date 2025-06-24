@@ -77,6 +77,7 @@ if [ -d "$carpeta" ]; then
     cd "$carpeta"
 else
     printf "${Rojo_Brillante}¡Carpeta no encontrada!${Blanco_Brillante}\n"
+    echo
     exit 1
 fi
 
@@ -99,5 +100,6 @@ if [ -f "$imagen" ]; then
     printf "${Amarillo_Brillante}╰──────────────────────────────────┴──────────────────────────────────╯\n"
 else
     printf "${Rojo_Brillante}¡Archivo no encontrado!${Blanco_Brillante}\n"
+    echo
     exit 1
 fi
