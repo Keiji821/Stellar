@@ -1,7 +1,7 @@
 cp ~/Stellar/config/.bashrc ~/.
 
 preexec() {
-    printf "${gris}[INFO] ${blanco}Ejecutando comando: $1"
+    printf "${Gris}[INFO] ${Blanco_Brillante}Ejecutando comando: $1"
     echo
 
 }
