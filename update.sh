@@ -54,7 +54,7 @@ Tachado="\033[9m"
 show_message() {
     local message="$1"
     echo -e "\n${Azul_Brillante}╭──────────────────────────────────────────────╮"
-    echo -e "│  ${Blanco}$message${Azul_Brillante}  │"
+    echo -e "│  ${Blanco}$message${Azul_Brillante}     │"
     echo -e "╰──────────────────────────────────────────────╯${Reset}"
 }
 
@@ -148,7 +148,7 @@ main() {
     echo -e "  ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║ "
     echo -e "  ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ${Reset}"
     echo -e "${Azul_Brillante}╭──────────────────────────────────────────────╮"
-    echo -e "│          ${Blanco}ACTUALIZACIÓN DE STELLAR${Azul_Brillante}           │"
+    echo -e "│          ${Blanco}ACTUALIZACIÓN DE STELLAR${Azul_Brillante}            │"
     echo -e "╰──────────────────────────────────────────────╯${Reset}"
 
     if ! backup_config; then
