@@ -46,64 +46,49 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-Color8="\033[38;5;"
-Fondo8="\033[48;5;"
+termux-setup-storage >/dev/null 2>&1
+sleep 3
 
-ColorRGB="\033[38;2;"
-FondoRGB="\033[48;2;"
+cd ~/storage || { echo -e "${Rojo_Brillante}Error: No se pudo acceder al storage${Reset}"; exit 1; }
 
-termux-setup-storage &>/dev/null &
-sleep 5
-
-cd
-cd storage
 echo
-printf "${Verde_Brillante}Directorios ⤵\n"
+echo -e "${Verde_Brillante}Directorios disponibles:${Reset}"
 echo
 ls
-printf "${Verde_Brillante}\n"
-read -p 'Directorio: ' directorio
+echo
+read -p "$(echo -e "${Verde_Brillante}Directorio: ${Reset}")" directorio
 
-if [ -d "$directorio" ]; then
-    cd "$directorio"
-else
-    printf "${Rojo_Brillante}¡Directorio no encontrado!${Blanco_Brillante}\n"
-    exit 1
-fi
+[ -d "$directorio" ] && cd "$directorio" || { echo -e "${Rojo_Brillante}¡Directorio no encontrado!${Reset}"; exit 1; }
 
 echo
-printf "${Amarillo_Brillante}Recuerda escribir el nombre de las carpetas sin las comillas.\n"
-printf "${Verde_Brillante}Carpetas ⤵\n"
+echo -e "${Amarillo_Brillante}Escribe el nombre de las carpetas sin comillas${Reset}"
+echo -e "${Verde_Brillante}Carpetas disponibles:${Reset}"
 echo
 ls
-printf "${Verde_Brillante}\n"
-read -p 'Carpeta: ' carpeta
+echo
+read -p "$(echo -e "${Verde_Brillante}Carpeta: ${Reset}")" carpeta
 
-if [ -d "$carpeta" ]; then
-    cd "$carpeta"
-else
-    printf "${Rojo_Brillante}¡Carpeta no encontrada!${Blanco_Brillante}\n"
-    exit 1
-fi
+[ -d "$carpeta" ] && cd "$carpeta" || { echo -e "${Rojo_Brillante}¡Carpeta no encontrada!${Reset}"; exit 1; }
 
 echo
-printf "${Verde_Brillante}Archivos ⤵\n"
+echo -e "${Verde_Brillante}Archivos disponibles:${Reset}"
 echo
 ls
-printf "${Verde_Brillante}\n"
-read -p 'Archivo: ' imagen
+echo
+read -p "$(echo -e "${Verde_Brillante}Archivo: ${Reset}")" imagen
 
 if [ -f "$imagen" ]; then
     echo
-    printf "${Rojo_Brillante}                           Datos del archivo\n"
-    printf "${Amarillo_Brillante}╭──────────────────────────────────┳──────────────────────────────────\n"
-    exiftool "${imagen}" | while IFS= read -r line; do
-        campo=$(echo "$line" | cut -d: -f1)
-        valor=$(echo "$line" | cut -d: -f2-)
-        printf "│ ${campo} │ ${valor}\n"
+    echo -e "${Rojo_Brillante}                           Datos del archivo${Reset}"
+    echo -e "${Amarillo_Brillante}╭──────────────────────────────────┬──────────────────────────────────${Reset}"
+    exiftool "$imagen" | while IFS= read -r line; do
+        campo=$(echo "$line" | cut -d: -f1 | xargs)
+        valor=$(echo "$line" | cut -d: -f2- | sed 's/^[[:space:]]*//')
+        printf "${Amarillo_Brillante}│ ${Blanco_Brillante}%-30s ${Amarillo_Brillante}│ ${Blanco}%s${Reset}\n" "$campo" "$valor"
     done
-    printf "${Amarillo_Brillante}╰──────────────────────────────────┴─────────────────────────────────\n"
+    echo -e "${Amarillo_Brillante}╰──────────────────────────────────┴──────────────────────────────────${Reset}"
+    echo
 else
-    printf "${Rojo_Brillante}¡Archivo no encontrado!${Blanco_Brillante}\n"
+    echo -e "${Rojo_Brillante}¡Archivo no encontrado!${Reset}"
     exit 1
 fi
