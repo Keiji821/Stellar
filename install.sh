@@ -1,60 +1,110 @@
 #!/bin/bash
 
 CONFIG_DIR="$HOME/Stellar/config/system"
-USER_FILE="$CONFIG_DIR/user.txt"
 
-gris="\033[1;30m"
-blanco="\033[0m"
-blanco2="\033[1;37m"
-rojo="\033[1;31m"
-azul="\033[1;34m"
-azul_agua="\e[1;36m"
-verde="\033[1;32m"
-morado="\033[1;35m"
-amarillo="\033[1;33m"
-cyan="\033[38;2;23;147;209m"
+Negro="\033[0;30m"
+Rojo="\033[0;31m"
+Verde="\033[0;32m"
+Amarillo="\033[0;33m"
+Azul="\033[0;34m"
+Magenta="\033[0;35m"
+Cian="\033[0;36m"
+Blanco="\033[0;37m"
+
+Negro_Brillante="\033[1;30m"
+Rojo_Brillante="\033[1;31m"
+Verde_Brillante="\033[1;32m"
+Amarillo_Brillante="\033[1;33m"
+Azul_Brillante="\033[1;34m"
+Magenta_Brillante="\033[1;35m"
+Cian_Brillante="\033[1;36m"
+Blanco_Brillante="\033[1;37m"
+
+Fondo_Negro="\033[40m"
+Fondo_Rojo="\033[41m"
+Fondo_Verde="\033[42m"
+Fondo_Amarillo="\033[43m"
+Fondo_Azul="\033[44m"
+Fondo_Magenta="\033[45m"
+Fondo_Cian="\033[46m"
+Fondo_Blanco="\033[47m"
+
+Fondo_Negro_Brillante="\033[0;100m"
+Fondo_Rojo_Brillante="\033[0;101m"
+Fondo_Verde_Brillante="\033[0;102m"
+Fondo_Amarillo_Brillante="\033[0;103m"
+Fondo_Azul_Brillante="\033[0;104m"
+Fondo_Magenta_Brillante="\033[0;105m"
+Fondo_Cian_Brillante="\033[0;106m"
+Fondo_Blanco_Brillante="\033[0;107m"
+
+Reset="\033[0m"
+Negrita="\033[1m"
+Atenuado="\033[2m"
+Italico="\033[3m"
+Subrayado="\033[4m"
+Parpadeo="\033[5m"
+Invertido="\033[7m"
+Oculto="\033[8m"
+Tachado="\033[9m"
+
+Color8="\033[38;5;"
+Fondo8="\033[48;5;"
+
+ColorRGB="\033[38;2;"
+FondoRGB="\033[48;2;"
+
+header_color="${Cian_Brillante}${Negrita}"
+success_color="${Verde_Brillante}"
+warning_color="${Amarillo_Brillante}"
+error_color="${Rojo_Brillante}"
+prompt_color="${Magenta_Brillante}"
+progress_color="${Azul_Brillante}"
+info_color="${Blanco_Brillante}"
+separator_color="${Fondo_Cian_Brillante}${Negro}"
+box_color="${Fondo_Negro_Brillante}${Blanco_Brillante}"
 
 show_header() {
     clear
-    echo -e "${azul_agua}"
-    echo "███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗ "
-    echo "██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗"
-    echo "███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝"
-    echo "╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗"
-    echo "███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║"
-    echo "╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝"
-    echo -e "${blanco}"
-    echo "========================================================"
+    echo -e "${header_color}"
+    echo -e "  ███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗  "
+    echo -e "  ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗ "
+    echo -e "  ███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝ "
+    echo -e "  ╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗ "
+    echo -e "  ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║ "
+    echo -e "  ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ "
+    echo -e "${Reset}"
+    echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
 }
 
 show_message() {
-    echo -e "${verde}✔ $1${blanco}"
+    echo -e "${success_color}${Negrita}  ✦ ✔ $1${Reset}"
 }
 
 show_warning() {
-    echo -e "${amarillo}⚠ $1${blanco}"
+    echo -e "${warning_color}${Negrita}  ✦ ⚠ $1${Reset}"
 }
 
 show_error() {
-    echo -e "${rojo}✘ Error: $1${blanco}"
+    echo -e "${error_color}${Negrita}  ✦ ✘ Error: $1${Reset}"
 }
 
 show_progress() {
-    echo -e "${cyan}➔ $1...${blanco}"
+    echo -e "${progress_color}${Negrita}  ✦ ➔ $1...${Reset}"
 }
 
 prompt_continue() {
-    echo -e "${morado}$1${blanco}"
-    read -rp "Presione Enter para continuar..."
+    echo -e "${prompt_color}${Negrita}  ✦ $1${Reset}"
+    read -rp "  ➤ Presione Enter para continuar..."
 }
 
 prompt_yesno() {
     while true; do
-        read -rp "$(echo -e "${morado}$1 [s/n]: ${blanco}")" yn
+        read -rp "$(echo -e "${prompt_color}${Negrita}  ✦ $1 [s/n]: ${Reset}")" yn
         case $yn in
             [Ss]*) return 0 ;;
             [Nn]*) return 1 ;;
-            *) echo -e "${amarillo}Por favor responda s o n${blanco}" ;;
+            *) echo -e "${warning_color}${Negrita}  ✦ Por favor responda s o n${Reset}" ;;
         esac
     done
 }
@@ -70,25 +120,10 @@ check_internet() {
     return 0
 }
 
-validate_username() {
-    local username=$1
-    if [[ -z "$username" ]]; then
-        show_error "El nombre de usuario no puede estar vacío"
-        return 1
-    elif [[ ${#username} -lt 4 || ${#username} -gt 15 ]]; then
-        show_error "Longitud inválida (debe ser 4-15 caracteres)"
-        return 1
-    elif [[ ! "$username" =~ ^[a-zA-Z0-9_]+$ ]]; then
-        show_error "Caracteres inválidos. Solo letras, números y _"
-        return 1
-    fi
-    return 0
-}
-
 install_pkg() {
     local pkg=$1
     show_progress "Instalando $pkg"
-    
+
     if command -v dpkg >/dev/null && dpkg -l | grep -q "^ii  $pkg "; then
         show_message "$pkg ya está instalado"
         return 0
@@ -124,7 +159,7 @@ install_pkg() {
 install_pip() {
     local pkg=$1
     show_progress "Instalando $pkg (pip)"
-    
+
     if pip show "$pkg" > /dev/null 2>&1; then
         show_message "$pkg ya está instalado (pip)"
         return 0
@@ -148,7 +183,7 @@ install_pip() {
 install_npm() {
     local pkg=$1
     show_progress "Instalando $pkg (npm)"
-    
+
     if npm list -g "$pkg" --depth=0 > /dev/null 2>&1; then
         show_message "$pkg ya está instalado (npm)"
         return 0
@@ -169,36 +204,12 @@ install_npm() {
     fi
 }
 
-user_config() {
-    while true; do
-        show_header
-        echo -e "${azul}CONFIGURACIÓN DE USUARIO${blanco}"
-        echo -e "${gris}----------------------------------------${blanco}"
-        echo -e "${blanco2}Ingrese un nombre de usuario para Stellar"
-        echo -e "Requisitos:"
-        echo -e " - 4-15 caracteres"
-        echo -e " - Solo letras, números y guiones bajos (_)"
-        echo -e "${gris}----------------------------------------${blanco}"
-        read -rp "Nombre de usuario: " username
-
-        if validate_username "$username"; then
-            mkdir -p "$CONFIG_DIR"
-            echo "$username" > "$USER_FILE"
-            show_message "Usuario configurado correctamente: $username"
-            sleep 1
-            return 0
-        fi
-
-        prompt_continue "Intente nuevamente"
-    done
-}
-
 update_system() {
     if command -v apt-get >/dev/null; then
         show_progress "Actualizando lista de paquetes (APT)"
         if apt-get update -y; then
             show_message "Repositorios actualizados correctamente"
-            
+
             show_progress "Actualizando sistema (APT)"
             if apt-get upgrade -y; then
                 show_message "Sistema actualizado correctamente"
@@ -225,7 +236,7 @@ update_system() {
 
 install_dependencies() {
     local packages=()
-    
+
     if command -v apt-get >/dev/null; then
         packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     elif command -v pkg >/dev/null; then
@@ -259,42 +270,46 @@ install_dependencies() {
 
 finalize_installation() {
     show_progress "Configurando entorno"
-    
+
     if [ -f ~/Stellar/config/.bash_profile ]; then
         cp ~/Stellar/config/.bash_profile ~/.
     fi
-    
+
     if [ -f ~/Stellar/config/.bashrc ]; then
         cp ~/Stellar/config/.bashrc ~/.
     fi
 
     chmod 755 ~/Stellar
-    chmod 644 "$USER_FILE"
 
-    show_message "✔ Configuración completada"
+    show_message "Configuración completada"
     return 0
 }
 
 main_install() {
     show_header
-    
+
     if ! check_internet; then
         prompt_continue "Verifique su conexión a Internet y reintente"
         exit 1
     fi
 
-    show_message "INICIANDO INSTALACIÓN DE STELLAR"
-    echo -e "${gris}================================================${blanco}"
+    echo -e "${separator_color}│                                                    │${Reset}"
+    echo -e "${separator_color}│  ${header_color}${Negrita}INSTALACIÓN DE STELLAR${Reset}${separator_color}                       │${Reset}"
+    echo -e "${separator_color}│                                                    │${Reset}"
+    echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
+    echo ""
 
     mkdir -p ~/Stellar/{config,tools,modules}
-
-    user_config
 
     if update_system; then
         if install_dependencies; then
             if finalize_installation; then
                 show_header
-                echo -e "${verde}¡Stellar se ha instalado correctamente!${blanco}"
+                echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
+                echo -e "${separator_color}│                                                    │${Reset}"
+                echo -e "${separator_color}│  ${success_color}${Negrita}¡STELLAR INSTALADO CORRECTAMENTE!${Reset}${separator_color}              │${Reset}"
+                echo -e "${separator_color}│                                                    │${Reset}"
+                echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
                 prompt_continue "Presione Enter para finalizar"
                 exec bash
                 return 0
@@ -302,7 +317,11 @@ main_install() {
         fi
     fi
 
-    show_error "La instalación no pudo completarse"
+    echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
+    echo -e "${separator_color}│                                                    │${Reset}"
+    echo -e "${separator_color}│  ${error_color}${Negrita}ERROR EN LA INSTALACIÓN${Reset}${separator_color}                         │${Reset}"
+    echo -e "${separator_color}│                                                    │${Reset}"
+    echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
     prompt_continue "Presione Enter para salir"
     return 1
 }
