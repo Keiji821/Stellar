@@ -34,6 +34,6 @@ table.add_row("Color del banner", banner_color)
 table.add_row("Fondo del banner", banner_background)
 table.add_row("Color del fondo del banner", banner_background_color)
 
-console.print(table, style="bright_cyan", justify="center")
+console.print(table, style="bright_white", justify="center")
 console.print("")
 
