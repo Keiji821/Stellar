@@ -5,12 +5,12 @@ import pyfiglet
 console = Console()
 
 console.print("")
-banner = pyfiglet.figlet_format("Comandos", font="cosmic")
+banner = pyfiglet.figlet_format("Comandos", font="standard")
 console.print(banner, style="bright_blue", justify="center")
 
 console.print("")
 
-table = Table(title="Lista", title_justify="left", title_style="bold green")
+table = Table(title="Lista", title_justify="center", title_style="bold green")
 table.add_column("[bold green]Comando", style="code", no_wrap=False)
 table.add_column("[bold green]Descripción", style="code", no_wrap=False)
 table.add_column("[bold green]Estado", style="code", no_wrap=False)
