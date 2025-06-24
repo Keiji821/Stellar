@@ -85,3 +85,5 @@ echo -e "╰──────────────────────�
 echo -e "${Azul}¡Hasta pronto! :)${Reset}\n"
 echo
 echo
+sleep 3
+login
