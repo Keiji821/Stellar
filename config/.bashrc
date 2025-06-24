@@ -1,21 +1,57 @@
 #!/bin/bash
 
-gris="\033[1;30m"
-blanco="\033[0m"
-blanco2="\033[1;37m"
-rojo="\033[1;31m"
-rojo2="\033[31m"
-azul="\033[1;34m"
-azul2="\033[34m"
-azul_agua="\e[1;36m"
-azul_agua2="\e[36m"
-verde="\033[1;32m"
-verde2="\033[32m"
-morado="\033[1;35m"
-morado2="\033[35m"
-amarillo="\033[1;33m"
-amarillo2="\033[33m"
-cyan="\033[38;2;23;147;209m"
+Gris="\033[1;30m"
+Negro="\033[0;30m"
+Rojo="\033[0;31m"
+Verde="\033[0;32m"
+Amarillo="\033[0;33m"
+Azul="\033[0;34m"
+Magenta="\033[0;35m"
+Cian="\033[0;36m"
+Blanco="\033[0;37m"
+
+Negro_Brillante="\033[1;30m"
+Rojo_Brillante="\033[1;31m"
+Verde_Brillante="\033[1;32m"
+Amarillo_Brillante="\033[1;33m"
+Azul_Brillante="\033[1;34m"
+Magenta_Brillante="\033[1;35m"
+Cian_Brillante="\033[1;36m"
+Blanco_Brillante="\033[1;37m"
+
+Fondo_Negro="\033[40m"
+Fondo_Rojo="\033[41m"
+Fondo_Verde="\033[42m"
+Fondo_Amarillo="\033[43m"
+Fondo_Azul="\033[44m"
+Fondo_Magenta="\033[45m"
+Fondo_Cian="\033[46m"
+Fondo_Blanco="\033[47m"
+
+Fondo_Negro_Brillante="\033[0;100m"
+Fondo_Rojo_Brillante="\033[0;101m"
+Fondo_Verde_Brillante="\033[0;102m"
+Fondo_Amarillo_Brillante="\033[0;103m"
+Fondo_Azul_Brillante="\033[0;104m"
+Fondo_Magenta_Brillante="\033[0;105m"
+Fondo_Cian_Brillante="\033[0;106m"
+Fondo_Blanco_Brillante="\033[0;107m"
+
+Reset="\033[0m"
+Negrita="\033[1m"
+Atenuado="\033[2m"
+Italico="\033[3m"
+Subrayado="\033[4m"
+Parpadeo="\033[5m"
+Invertido="\033[7m"
+Oculto="\033[8m"
+Tachado="\033[9m"
+
+Color8="\033[38;5;"
+Fondo8="\033[48;5;"
+
+ColorRGB="\033[38;2;"
+FondoRGB="\033[48;2;"
 
 clear
 cd
@@ -68,8 +104,8 @@ cd Stellar/config/themes
 clear
 python banner.py
 cd
-printf "${gris}[INFO] ${blanco}Stellar se ha iniciado correctamente.\n"
-printf "${gris}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.\n"
+printf "${ColorRGB}[INFO] ${blanco}Stellar se ha iniciado correctamente.\n"
+printf "${ColorRGB}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.\n"
 
 # Sistema
 
