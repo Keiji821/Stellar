@@ -99,7 +99,7 @@ clear
 python banner.py
 cd
 printf "${Gris}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
-printf "${Gris}[INFO] ${Blanco_Brillante}Escriba (menu) para ver los comandos disponibles.\n"
+printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Verde_Brillante}menu${Blanco_Brillante} para ver los comandos disponibles.\n"
 
 # Sistema
 
