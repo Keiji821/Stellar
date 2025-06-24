@@ -308,6 +308,6 @@ encrypt-file() {
 }
 
 command_not_found_handle() {
-    echo -e "${gris}[INFO] ${blanco}Comando no encontrado: $1"
+    echo -e "${Gris}[INFO] ${blanco}Comando no encontrado: $1"
     return 127
 }
