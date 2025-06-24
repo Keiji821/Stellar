@@ -176,4 +176,5 @@ main() {
 }
 
 main
-login
+echo
+echo 
