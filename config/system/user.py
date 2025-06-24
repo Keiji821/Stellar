@@ -24,7 +24,7 @@ table = Table(title="Perfil", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="code", no_wrap=False)
 table.add_column("[bold green] Descripción", style="code")
 
-table.add_row("[code]General[/code]")
+table.add_row("General", style="bold green")
 table.add_row("")
 table.add_row("Usuario", user)
 table.add_row("")
