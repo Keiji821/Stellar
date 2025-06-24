@@ -49,7 +49,6 @@ Tachado="\033[9m"
 
 user_file="user.txt"
 
-clear
 echo -ne "${Verde_Brillante}¿Desea configurar un nombre de usuario? (y/n) ${Reset}"
 read -r respuesta
 
@@ -72,3 +71,5 @@ else
     echo -e "${Rojo_Brillante}Opción no válida${Reset}"
     sleep 1
 fi
+echo
+echo
