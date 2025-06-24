@@ -6,7 +6,7 @@ console = Console()
 
 console.print("")
 banner = pyfiglet.figlet_format("Comandos", font="slant")
-console.print(banner, style="bright_cyan", justify="center")
+console.print(f"[code]{banner}[/code]", style="bright_cyan", justify="center")
 
 console.print("")
 
