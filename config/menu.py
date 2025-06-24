@@ -6,11 +6,11 @@ console = Console()
 
 console.print("")
 banner = pyfiglet.figlet_format("Comandos", font="cosmic")
-console.print(banner, style="bright_blue", justify="center")
+console.print(banner, style="bright_blue", justify="right")
 
 console.print("")
 
-table = Table(title="Lista", title_justify="center", title_style="bold green")
+table = Table(title="Lista", title_justify="right", title_style="bold green")
 table.add_column("[bold green]Comando", style="code", no_wrap=False)
 table.add_column("[bold green]Descripción", style="code", no_wrap=False)
 table.add_column("[bold green]Estado", style="code", no_wrap=False)
