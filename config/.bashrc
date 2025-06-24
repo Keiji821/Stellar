@@ -104,8 +104,8 @@ cd Stellar/config/themes
 clear
 python banner.py
 cd
-printf "${ColorRGB}[INFO] ${blanco}Stellar se ha iniciado correctamente.\n"
-printf "${ColorRGB}[INFO] ${blanco}Escriba (menu) para ver los comandos disponibles.\n"
+printf "${ColorRGB}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
+printf "${ColorRGB}[INFO] ${Blanco_Brillante}Escriba (menu) para ver los comandos disponibles.\n"
 
 # Sistema
 
