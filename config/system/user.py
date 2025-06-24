@@ -21,14 +21,14 @@ with open("banner_background_color.txt", encoding="utf-8") as f:
 
 
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
-table.add_column(f"[bold green] Información", style="bold white", no_wrap=False)
-table.add_column("[bold green]Descripción", style="bold white")
+table.add_column(f"[bold green] Información", style="code", no_wrap=False)
+table.add_column("[bold green] Descripción", style="code")
 
 table.add_row("[code]General[/code]")
 table.add_row("")
 table.add_row("Usuario", user)
 table.add_row("")
-table.add_row("[code]Preferencias[/code]")
+table.add_row("Preferencias", style="bold green")
 table.add_row("")
 table.add_row("Color del banner", banner_color)
 table.add_row("Fondo del banner", banner_background)
