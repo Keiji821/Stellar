@@ -47,24 +47,23 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-# Configuración de usuario 
-if [ "$user" == "Stellar" ]; then
+if [ ! -f "user.txt" ]; then
     while true; do
-        printf ",${Verde_Brillante}"
-        read -p "No tiene un usuario configurado ¿Desea configurarlo? (y/n):" response_user
-        
+        echo -e "${Verde_Brillante}No tiene un usuario configurado ¿Desea configurarlo? (y/n):${Reset}"
+        read -p "" response_user
+
         case $response_user in
             [yY])
                 while true; do
-                    printf ",${Verde_Brillante}"
-                    read -p "Ingrese un nombre de usuario:" response_user_config
+                    echo -e "${Verde_Brillante}Ingrese un nombre de usuario:${Reset}"
+                    read -p "" response_user_config
                     response_user_config=$(echo "$response_user_config" | tr -d '[:space:]')
-                    
+
                     if [ -z "$response_user_config" ]; then
                         echo -e "${Rojo_Brillante}Error: No se puede dejar en blanco. Intente de nuevo.${Reset}"
                         continue
                     fi
-                    
+
                     if echo "$response_user_config" > "user.txt"; then
                         echo -e "${Verde_Brillante}✓ Usuario configurado correctamente${Reset}"
                         break
@@ -86,22 +85,24 @@ if [ "$user" == "Stellar" ]; then
 fi
 
 # Configuración de método de bloqueo
-if [ -z "$login_method" ]; then
+if [ ! -f "login_method.txt" ]; then
     while true; do
-        printf "${Verde_Brillante}No tiene un método de bloqueo\n"
-        read -p "¿Desea configurar uno? (y/n/no para desactivar): " login_method_response
+        echo -e "${Verde_Brillante}No tiene un método de bloqueo configurado"
+        echo -e "¿Desea configurar uno? (y/n/no para desactivar):${Reset}"
+        read -p "" login_method_response
         login_method_response=$(echo "$login_method_response" | tr '[:upper:]' '[:lower:]')
-        
+
         case $login_method_response in
             y)
                 while true; do
                     echo
                     echo -e "${Negrita}${Verde}Métodos disponibles:${Reset}"
-                    echo -e "${Verde}1. Huella dactilar, solo funciona en termux teniendo descargado termux-api,si procede con este metodo su Termux se dañara hagalo bajo su propio riesgo${Reset}"
+                    echo -e "${Verde}1. Huella dactilar (requiere termux-api)${Reset}"
+                    echo -e "${Rojo}ADVERTENCIA: Si procede con este método, su Termux podría tener comportamiento inesperado${Reset}"
                     echo
-                    printf "${Verde_Brillante}"
-                    read -p "Seleccione un método (1) o 'no' para desactivar: " login_method_response_list
-                    
+                    echo -e "${Verde_Brillante}Seleccione un método (1) o 'no' para desactivar:${Reset}"
+                    read -p "" login_method_response_list
+
                     if [ "$login_method_response_list" == "1" ]; then
                         method="termux-fingerprint"
                         break
@@ -113,7 +114,7 @@ if [ -z "$login_method" ]; then
                         continue
                     fi
                 done
-                
+
                 if echo "$method" > "login_method.txt"; then
                     if [ "$method" == "no" ]; then
                         echo -e "${Verde_Brillante}✓ Método de desbloqueo desactivado${Reset}"
@@ -132,7 +133,6 @@ if [ -z "$login_method" ]; then
             no)
                 echo "no" > "login_method.txt"
                 echo -e "${Verde_Brillante}✓ Método de desbloqueo desactivado${Reset}"
-                printf "\n"
                 break
                 ;;
             *)
