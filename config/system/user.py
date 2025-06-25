@@ -48,7 +48,20 @@ if user=="Stellar":
 # Contraseña
 
 # Bloqueo
+if login_method="":
+    while True:
+        login_method_response = console.input("No tiene un método de bloqueo para su Termux\n¿Desea configurar uno? (y/n): ", style="bold green")
+        if login_method_response=="":
+            login_method_response_list = console.input("Métodos disponibles: Huella dactilar\nSeleccione un método de bloqueo: ", style="bold green")
+            if not login_method_response_list:
+                console.print("Error: No puede quedar vacío, Intente de nuevo.", style="bold green")
+                continúe
+            else:
+                os.system(f"echo {login_method_response_list} > login_method.txt")
+                console.print("Su método de desbloqueo ha sido correctamente configurado", style"bold green")
 
+            
+console.print("")
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="code", no_wrap=False)
 table.add_column("[bold green] Descripción", style="code")
