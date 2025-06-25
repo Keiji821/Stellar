@@ -31,14 +31,16 @@ with open("banner_background.txt", encoding="utf-8") as f:
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
-
-if user=="":
-    response_user = console.input("No tiene un usuario
+while True:
+    if user=="":
+        response_user = console.input("No tiene un usuario
 configurado\n¿Desea configurarlo? (y/n): ", style="bold green")
-    if response_user=="y":
-        response_user_config = console.input("Ingrese un nombre de usuario: ", style="bold green")
-        if response_user_config=="":
-            exit
+            if response_user=="y":
+                response_user_config = console.input("Ingrese un nombre de usuario: ", style="bold green")
+
+    if not response_user_config:
+        console.print("Error: No se puede dejar en blanco. Intente de nuevo.", style="bold red")
+        continue
 
 
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
