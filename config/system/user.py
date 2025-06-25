@@ -35,7 +35,7 @@ while True:
     if user=="":
         response_user = console.input("No tiene un usuario configurado\n¿Desea configurarlo? (y/n): ", style="bold green")
         if response_user=="y":
-                response_user_config = console.input("Ingrese un nombre de usuario: ", style="bold green")
+            response_user_config = console.input("Ingrese un nombre de usuario: ", style="bold green")
 
     if not response_user_config:
         console.print("Error: No se puede dejar en blanco. Intente de nuevo.", style="bold red")
