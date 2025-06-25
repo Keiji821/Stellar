@@ -50,7 +50,7 @@ Tachado="\033[9m"
 clear
 cd
 
-if [ -f ~/login_method.txt ]; then
+if [ -f ~/Stellar/config/system/login_method.txt ]; then
     method=$(cat ~/login_method.txt)
     if [ "$method" == "termux-fingerprint" ]; then
         termux-fingerprint
