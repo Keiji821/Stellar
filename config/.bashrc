@@ -52,19 +52,37 @@ cd
 
 # Método de desbloqueo - Huella dactilar
 cd ~/Stellar/config/system
+
 if [ -f login_method.txt ]; then
     method=$(cat login_method.txt)
-    if [ "$method" == "termux-fingerprint" ]; then
-        termux-fingerprint
-        if [ $? -ne 0 ]; then
-            killall -9 bash 2>/dev/null
-            pkill -9 -u $(whoami) 2>/dev/null
-            exit 1
-        fi
-    elif [ "$method" == "no" ]; then
-        :
+    
+    if [ "$method" = "termux-fingerprint" ]; then
+        termux-toast -c red -b black -g medium "🔐 Verificación de huella requerida"
+        
+        response=$(termux-fingerprint)
+        
+        auth_result=$(echo "$response" | grep -o '"auth_result": "[^"]*' | cut -d'"' -f4)
+        
+        case "$auth_result" in
+            "AUTH_RESULT_SUCCESS")
+                termux-toast -c green -b black -g medium "✅ Autenticación exitosa"
+                ;;
+            "AUTH_RESULT_FAILURE")
+                termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión...."
+                killall -9 bash 2>/dev/null
+                pkill -9 -u $(whoami) 2>/dev/null
+                exit 1
+                ;;
+            *)
+                echo -e "\033[1;31m❌ Error en la verificación - Cerrando sesión...\033[0m"
+                killall -9 bash 2>/dev/null
+                pkill -9 -u $(whoami) 2>/dev/null
+                exit 1
+                ;;
+        esac
     fi
 fi
+
 cd
 
 input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/config/system/user.txt" 2>/dev/null || {
