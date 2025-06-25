@@ -23,7 +23,7 @@ async def delete_channels(bot, guild_id):
     for channel in guild.channels:
         try:
             await channel.delete()
-            await asyncio.sleep(1)  # Evitar rate limits
+            await asyncio.sleep(1)
             console.print(f"[dim]Eliminado: #{channel.name}[/]")
         except Exception as e:
             console.print(f"[red]Error en #{channel.name}: {str(e)}[/]")
