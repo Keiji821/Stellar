@@ -93,7 +93,7 @@ if [ -z "$login_method" ]; then
             y)
                 while true; do
                     echo -e "${Negrita}${Verde}Métodos disponibles:${Reset}"
-                    echo -e "${Verde}1. Huella dactilar${Reset}"
+                    echo -e "${Verde}1. Huella dactilar, solo funciona en termux teniendo descargado termux-api,\nsi procede con este metodo su Termux se dañara\nhagalo bajo su propio riesgo${Reset}"
                     read -p "${Verde_Brillante}Seleccione un método (1) o 'no' para desactivar: ${Reset}" login_method_response_list
                     
                     if [ "$login_method_response_list" == "1" ]; then
