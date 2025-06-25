@@ -49,7 +49,7 @@ Tachado="\033[9m"
 
 error() {
     echo -e "${Rojo_Brillante}$1${Reset}"
-    sleep 2
+    sleep 1
 }
 
 success() {
@@ -59,130 +59,101 @@ success() {
 
 check_termux_api() {
     if ! pkg list-installed | grep -q 'termux-api'; then
-        error "Termux-API no está instalado. Instálelo con: pkg install termux-api"
+        error "Termux-API no está instalado. Instale con: pkg install termux-api"
         return 1
     fi
     return 0
 }
 
+color_prompt() {
+    echo -ne "$1"
+    read -p "$2" response
+    echo -ne "${Reset}"
+    echo "$response"
+}
 
 configure_user() {
-    if [ -f "user.txt" ]; then
-        return 0
-    fi
+    [ -f "user.txt" ] && return 0
 
     while true; do
-        echo -e "${Verde_Brillante}No tiene un usuario configurado"
-        read -p "¿Desea configurarlo? (y/n): ${Reset}" response_user
-
-        case $response_user in
+        response=$(color_prompt "${Verde_Brillante}" "No tiene usuario configurado\n¿Desea configurarlo? (y/n): ")
+        
+        case $response in
             [yY]*)
                 while true; do
-                    read -p "$(echo -e ${Verde_Brillante}Ingrese un nombre de usuario: ${Reset})" response_user_config
-                    response_user_config=$(echo "$response_user_config" | xargs)  # Trim spaces
+                    username=$(color_prompt "${Verde_Brillante}" "Ingrese nombre de usuario: ")
+                    username=$(echo "$username" | xargs)
                     
-                    if [ -z "$response_user_config" ]; then
-                        error "Error: No se puede dejar en blanco. Intente de nuevo."
-                        continue
-                    fi
+                    [ -z "$username" ] && error "No puede estar vacío" && continue
                     
-                    if echo "$response_user_config" > "user.txt"; then
-                        success "✓ Usuario configurado correctamente"
+                    if echo "$username" > "user.txt"; then
+                        success "✓ Usuario configurado"
                         return 0
                     else
-                        error "Error al guardar el usuario"
+                        error "Error al guardar"
                         continue
                     fi
                 done
                 ;;
-            [nN]*)
-                return 0
-                ;;
-            *)
-                error "Error: Opción no válida. Por favor ingrese 'y' o 'n'."
-                ;;
+            [nN]*) return 0 ;;
+            *) error "Opción no válida. Use 'y' o 'n'" ;;
         esac
     done
 }
 
 configure_auth() {
-    if [ -f "login_method.txt" ]; then
-        return 0
-    fi
+    [ -f "login_method.txt" ] && return 0
 
     while true; do
-        echo -e "${Verde_Brillante}No tiene un método de bloqueo configurado"
-        read -p "¿Desea configurar uno? (y/n/no para desactivar): ${Reset}" login_method_response
-        login_method_response=$(echo "$login_method_response" | tr '[:upper:]' '[:lower:]')
-
-        case $login_method_response in
+        response=$(color_prompt "${Verde_Brillante}" "No tiene método de bloqueo\n¿Desea configurarlo? (y/n/no): ")
+        response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+        
+        case $response in
             y)
+                echo -e "\n${Negrita}${Verde}Métodos disponibles:${Reset}"
+                echo -e "${Verde}1. Huella dactilar${Reset}"
+                echo -e "${Rojo}ADVERTENCIA: Requiere Termux-API${Reset}"
+                
                 while true; do
-                    echo -e "\n${Negrita}${Verde}Métodos disponibles:${Reset}"
-                    echo -e "${Verde}1. Huella dactilar${Reset}"
-                    echo -e "${Rojo}ADVERTENCIA: Requiere Termux-API instalado${Reset}"
-                    read -p "$(echo -e ${Verde_Brillante}Seleccione un método (1) o escribe no para desactivar: ${Reset})" login_method_response_list
-
-                    if [ "$login_method_response_list" == "1" ]; then
-
-                        if ! check_termux_api; then
-                            continue
-                        fi
-                        method="termux-fingerprint"
-                        break
-                    elif [ "$login_method_response_list" == "no" ]; then
-                        method="no"
-                        break
+                    option=$(color_prompt "${Verde_Brillante}" "Seleccione (1) o 'no': ")
+                    
+                    if [ "$option" = "1" ]; then
+                        check_termux_api || continue
+                        echo "termux-fingerprint" > "login_method.txt"
+                        success "✓ Método configurado"
+                        return 0
+                    elif [ "$option" = "no" ]; then
+                        echo "no" > "login_method.txt"
+                        success "✓ Método desactivado"
+                        return 0
                     else
-                        error "Error: Opción no válida. Intente nuevamente."
+                        error "Opción no válida"
                         continue
                     fi
                 done
-
-                
-                if echo "$method" > "login_method.txt"; then
-                    if [ "$method" == "no" ]; then
-                        success "✓ Método de desbloqueo desactivado"
-                    else
-                        success "✓ Método de desbloqueo configurado correctamente"
-                    fi
-                    return 0
-                else
-                    error "Error al guardar el método"
-                    continue
-                fi
-                ;;
-            n)
-                return 0
                 ;;
             no)
-                if echo "no" > "login_method.txt"; then
-                    success "✓ Método de desbloqueo desactivado"
-                    return 0
-                else
-                    error "Error al desactivar el método"
-                    continue
-                fi
+                echo "no" > "login_method.txt"
+                success "✓ Método desactivado"
+                return 0
                 ;;
-            *)
-                error "Error: Opción no válida. Por favor ingrese 'y', 'n' o 'no'."
-                ;;
+            n) return 0 ;;
+            *) error "Opción no válida. Use 'y', 'n' o 'no'" ;;
         esac
     done
 }
 
 main() {
     cd ~/Stellar/config/system || {
-        error "Error: No se pudo acceder al directorio ~/Stellar/config/system"
+        error "Error: No se pudo acceder al directorio"
         exit 1
     }
 
     configure_user
-
     configure_auth
 
-    echo -e "\n${Verde_Brillante}Configuración completada. Presione Enter para continuar...${Reset}"
-    read
+    echo -e "\n${Verde_Brillante}Configuración completada${Reset}"
+    read -p "Presione Enter para continuar..."
 }
 
 main
