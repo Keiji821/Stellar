@@ -46,7 +46,7 @@ if user=="Stellar":
                 console.print("Usuario configurado correctamente", style="bold green")
 
 # Bloqueo
-if login_method="":
+if login_method=="":
     while True:
         login_method_response = console.input("No tiene un método de bloqueo para su Termux\n¿Desea configurar uno? (y/n): ", style="bold green")
         if login_method_response=="":
