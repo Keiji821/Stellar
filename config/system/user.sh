@@ -47,97 +47,142 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-if [ ! -f "user.txt" ]; then
+error() {
+    echo -e "${Rojo_Brillante}$1${Reset}"
+    sleep 2
+}
+
+success() {
+    echo -e "${Verde_Brillante}$1${Reset}"
+    sleep 1
+}
+
+check_termux_api() {
+    if ! pkg list-installed | grep -q 'termux-api'; then
+        error "Termux-API no está instalado. Instálelo con: pkg install termux-api"
+        return 1
+    fi
+    return 0
+}
+
+
+configure_user() {
+    if [ -f "user.txt" ]; then
+        return 0
+    fi
+
     while true; do
-        echo -e "${Verde_Brillante}No tiene un usuario configurado ¿Desea configurarlo? (y/n):${Reset}"
-        read -p "" response_user
+        echo -e "${Verde_Brillante}No tiene un usuario configurado"
+        read -p "¿Desea configurarlo? (y/n): ${Reset}" response_user
 
         case $response_user in
-            [yY])
+            [yY]*)
                 while true; do
-                    echo -e "${Verde_Brillante}Ingrese un nombre de usuario:${Reset}"
-                    read -p "" response_user_config
-                    response_user_config=$(echo "$response_user_config" | tr -d '[:space:]')
-
+                    read -p "$(echo -e ${Verde_Brillante}Ingrese un nombre de usuario: ${Reset})" response_user_config
+                    response_user_config=$(echo "$response_user_config" | xargs)  # Trim spaces
+                    
                     if [ -z "$response_user_config" ]; then
-                        echo -e "${Rojo_Brillante}Error: No se puede dejar en blanco. Intente de nuevo.${Reset}"
+                        error "Error: No se puede dejar en blanco. Intente de nuevo."
                         continue
                     fi
-
+                    
                     if echo "$response_user_config" > "user.txt"; then
-                        echo -e "${Verde_Brillante}✓ Usuario configurado correctamente${Reset}"
-                        break
+                        success "✓ Usuario configurado correctamente"
+                        return 0
                     else
-                        echo -e "${Rojo_Brillante}Error al guardar el usuario${Reset}"
+                        error "Error al guardar el usuario"
                         continue
                     fi
                 done
-                break
                 ;;
-            [nN])
-                break
+            [nN]*)
+                return 0
                 ;;
             *)
-                echo -e "${Rojo_Brillante}Error: Opción no válida. Por favor ingrese 'y' o 'n'.${Reset}"
+                error "Error: Opción no válida. Por favor ingrese 'y' o 'n'."
                 ;;
         esac
     done
-fi
+}
 
-# Configuración de método de bloqueo
-if [ ! -f "login_method.txt" ]; then
+configure_auth() {
+    if [ -f "login_method.txt" ]; then
+        return 0
+    fi
+
     while true; do
         echo -e "${Verde_Brillante}No tiene un método de bloqueo configurado"
-        echo -e "¿Desea configurar uno? (y/n/no para desactivar):${Reset}"
-        read -p "" login_method_response
+        read -p "¿Desea configurar uno? (y/n/no para desactivar): ${Reset}" login_method_response
         login_method_response=$(echo "$login_method_response" | tr '[:upper:]' '[:lower:]')
 
         case $login_method_response in
             y)
                 while true; do
-                    echo
-                    echo -e "${Negrita}${Verde}Métodos disponibles:${Reset}"
-                    echo -e "${Verde}1. Huella dactilar (requiere termux-api)${Reset}"
-                    echo -e "${Rojo}ADVERTENCIA: Si procede con este método, su Termux podría tener comportamiento inesperado${Reset}"
-                    echo
-                    echo -e "${Verde_Brillante}Seleccione un método (1) o 'no' para desactivar:${Reset}"
-                    read -p "" login_method_response_list
+                    echo -e "\n${Negrita}${Verde}Métodos disponibles:${Reset}"
+                    echo -e "${Verde}1. Huella dactilar${Reset}"
+                    echo -e "${Rojo}ADVERTENCIA: Requiere Termux-API instalado${Reset}"
+                    read -p "$(echo -e ${Verde_Brillante}Seleccione un método (1) o 'no' para desactivar: ${Reset})" login_method_response_list
 
                     if [ "$login_method_response_list" == "1" ]; then
+
+                        if ! check_termux_api; then
+                            continue
+                        fi
                         method="termux-fingerprint"
                         break
                     elif [ "$login_method_response_list" == "no" ]; then
                         method="no"
                         break
                     else
-                        echo -e "${Rojo_Brillante}Error: Opción no válida. Intente nuevamente.${Reset}"
+                        error "Error: Opción no válida. Intente nuevamente."
                         continue
                     fi
                 done
 
+                
                 if echo "$method" > "login_method.txt"; then
                     if [ "$method" == "no" ]; then
-                        echo -e "${Verde_Brillante}✓ Método de desbloqueo desactivado${Reset}"
+                        success "✓ Método de desbloqueo desactivado"
                     else
-                        echo -e "${Verde_Brillante}✓ Método de desbloqueo configurado correctamente${Reset}"
+                        success "✓ Método de desbloqueo configurado correctamente"
                     fi
-                    break
+                    return 0
                 else
-                    echo -e "${Rojo_Brillante}Error al guardar el método${Reset}"
+                    error "Error al guardar el método"
                     continue
                 fi
                 ;;
             n)
-                break
+                return 0
                 ;;
             no)
-                echo "no" > "login_method.txt"
-                echo -e "${Verde_Brillante}✓ Método de desbloqueo desactivado${Reset}"
-                break
+                if echo "no" > "login_method.txt"; then
+                    success "✓ Método de desbloqueo desactivado"
+                    return 0
+                else
+                    error "Error al desactivar el método"
+                    continue
+                fi
                 ;;
             *)
-                echo -e "${Rojo_Brillante}Error: Opción no válida. Por favor ingrese 'y', 'n' o 'no'.${Reset}"
+                error "Error: Opción no válida. Por favor ingrese 'y', 'n' o 'no'."
                 ;;
         esac
     done
-fi
+}
+
+main() {
+    cd ~/Stellar/config/system || {
+        error "Error: No se pudo acceder al directorio ~/Stellar/config/system"
+        exit 1
+    }
+
+    configure_user
+
+    configure_auth
+
+    echo -e "\n${Verde_Brillante}Configuración completada. Presione Enter para continuar...${Reset}"
+    read
+}
+
+main
