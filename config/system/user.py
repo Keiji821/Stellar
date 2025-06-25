@@ -5,10 +5,14 @@ from rich.table import Table
 
 console = Console()
 
+# Sistema
+
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
 
 os.chdir(os.path.expanduser("~/Stellar/config/themes"))
+
+# Temas
 
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
