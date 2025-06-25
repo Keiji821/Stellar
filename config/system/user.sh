@@ -121,7 +121,7 @@ configure_auth() {
                     echo -e "\n${Negrita}${Verde}Métodos disponibles:${Reset}"
                     echo -e "${Verde}1. Huella dactilar${Reset}"
                     echo -e "${Rojo}ADVERTENCIA: Requiere Termux-API instalado${Reset}"
-                    read -p "$(echo -e ${Verde_Brillante}Seleccione un método (1) o 'no' para desactivar: ${Reset})" login_method_response_list
+                    read -p "$(echo -e ${Verde_Brillante}Seleccione un método (1) o escribe no para desactivar: ${Reset})" login_method_response_list
 
                     if [ "$login_method_response_list" == "1" ]; then
 
