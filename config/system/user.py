@@ -58,12 +58,14 @@ if login_method == "":
         if login_method_response.lower() == "y":
             while True:
                 login_method_response_list = console.input("[bold green]Métodos disponibles: Huella dactilar\nSeleccione un método de bloqueo: [/bold green]")
+                if login_method_response_list=="Huella dactilar":
+                    login_method_response_list = "termux-fingerprint"
                 if not login_method_response_list.strip():
                     console.print("Error: No puede quedar vacío. Intente de nuevo.", style="bold red")
                 else:
                     with open("login_method.txt", "w") as f:
                         f.write(login_method_response_list)
-                    console.print("Su método de desbloqueo ha sido correctamente configurado", style="bold green")
+                    console.print("Su método de desbloqueo ha configurado correctamente", style="bold green")
                     break
             break
         elif login_method_response.lower() == "n":
