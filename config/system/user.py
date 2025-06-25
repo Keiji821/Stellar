@@ -35,9 +35,9 @@ with open("banner_background_color.txt", encoding="utf-8") as f:
 
 if user=="Stellar":
     while True:
-        response_user = console.input("No tiene un usuario configurado\n¿Desea configurarlo? (y/n): ", style="bold green")
+        response_user = console.input([bold green]"No tiene un usuario configurado\n¿Desea configurarlo? (y/n): [/bold green]")
         if response_user=="y":
-            response_user_config = console.input("Ingrese un nombre de usuario: ", style="bold green")
+            response_user_config = console.input("[bold green]Ingrese un nombre de usuario: [/bold green]")
             if not response_user_config:
                 console.print("Error: No se puede dejar en blanco. Intente de nuevo.", style="bold red")
                 continue
@@ -48,9 +48,9 @@ if user=="Stellar":
 # Bloqueo
 if login_method=="":
     while True:
-        login_method_response = console.input("No tiene un método de bloqueo para su Termux\n¿Desea configurar uno? (y/n): ", style="bold green")
+        login_method_response = console.input("[bold green]No tiene un método de bloqueo para su Termux\n¿Desea configurar uno? (y/n): [/bold green]")
         if login_method_response=="":
-            login_method_response_list = console.input("Métodos disponibles: Huella dactilar\nSeleccione un método de bloqueo: ", style="bold green")
+            login_method_response_list = console.input("[bold green]Métodos disponibles: Huella dactilar\nSeleccione un método de bloqueo: [/bold green]")
             if not login_method_response_list:
                 console.print("Error: No puede quedar vacío, Intente de nuevo.", style="bold green")
                 continúe
