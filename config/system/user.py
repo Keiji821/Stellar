@@ -56,7 +56,7 @@ if login_method=="":
                 continúe
             else:
                 os.system(f"echo {login_method_response_list} > login_method.txt")
-                console.print("Su método de desbloqueo ha sido correctamente configurado", style"bold green")
+                console.print("Su método de desbloqueo ha sido correctamente configurado", style="bold green")
 
             
 console.print("")
