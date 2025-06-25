@@ -35,7 +35,7 @@ with open("banner_background_color.txt", encoding="utf-8") as f:
 
 if user=="Stellar":
     while True:
-        response_user = console.input([bold green]"No tiene un usuario configurado\n¿Desea configurarlo? (y/n): [/bold green]")
+        response_user = console.input("[bold green]No tiene un usuario configurado\n¿Desea configurarlo? (y/n): [/bold green]")
         if response_user=="y":
             response_user_config = console.input("[bold green]Ingrese un nombre de usuario: [/bold green]")
             if not response_user_config:
