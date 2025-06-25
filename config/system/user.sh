@@ -132,7 +132,7 @@ if [ -z "$login_method" ]; then
             no)
                 echo "no" > "login_method.txt"
                 echo -e "${Verde_Brillante}✓ Método de desbloqueo desactivado${Reset}"
-                echo
+                printf "\n"
                 break
                 ;;
             *)
