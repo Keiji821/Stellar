@@ -88,16 +88,18 @@ fi
 # Configuración de método de bloqueo
 if [ -z "$login_method" ]; then
     while true; do
-        printf ",${Verde_Brillante}"
-        read -p "No tiene un método de bloqueo\n¿Desea configurar uno? (y/n/no para desactivar):" login_method_response
+        printf "${Verde_Brillante}No tiene un método de bloqueo"
+        read -p "¿Desea configurar uno? (y/n/no para desactivar):" login_method_response
         login_method_response=$(echo "$login_method_response" | tr '[:upper:]' '[:lower:]')
         
         case $login_method_response in
             y)
                 while true; do
+                    echo
                     echo -e "${Negrita}${Verde}Métodos disponibles:${Reset}"
                     echo -e "${Verde}1. Huella dactilar, solo funciona en termux teniendo descargado termux-api,\nsi procede con este metodo su Termux se dañara\nhagalo bajo su propio riesgo${Reset}"
-                    printf ",${Verde_Brillante}"
+                    echo
+                    printf "${Verde_Brillante}"
                     read -p "Seleccione un método (1) o 'no' para desactivar:" login_method_response_list
                     
                     if [ "$login_method_response_list" == "1" ]; then
