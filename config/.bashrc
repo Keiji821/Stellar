@@ -140,12 +140,6 @@ my() {
     cd
 }
 
-userconf() {
-    cd ~/Stellar/config/system
-    bash user.sh
-    cd
-}
-
 # Discord
 
 weebhook-mass-spam() {
