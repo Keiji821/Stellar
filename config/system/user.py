@@ -10,6 +10,8 @@ console = Console()
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
 
+# Ruta
+
 os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 
 # Temas
