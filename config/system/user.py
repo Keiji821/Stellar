@@ -45,8 +45,6 @@ if user=="Stellar":
                 os.system(f"echo {response_user_config} > user.txt")
                 console.print("Usuario configurado correctamente", style="bold green")
 
-# Contraseña
-
 # Bloqueo
 if login_method="":
     while True:
