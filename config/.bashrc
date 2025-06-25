@@ -50,6 +50,7 @@ Tachado="\033[9m"
 clear
 cd
 
+# Método de desbloqueo - Huella dactilar
 if [ -f ~/Stellar/config/system/login_method.txt ]; then
     method=$(cat ~/login_method.txt)
     if [ "$method" == "termux-fingerprint" ]; then
