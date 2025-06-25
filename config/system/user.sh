@@ -14,6 +14,7 @@ Reset="\033[0m"
 Negrita="\033[1m"
 Subrayado="\033[4m"
 
+# Configuración de usuario 
 if [ "$user" == "Stellar" ]; then
     while true; do
         read -p "${Verde_Brillante}No tiene un usuario configurado\n¿Desea configurarlo? (y/n): ${Reset}" response_user
