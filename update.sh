@@ -134,8 +134,7 @@ restore_config() {
 
     safe_move "$HOME/user.txt" "$CONFIG_SYSTEM_DIR/" || return 1
     safe_move "$HOME/login_method.txt" "$CONFIG_SYSTEM_DIR/" || return 1
-    safe_move "$HOME/password.txt"
-"$CONFIG_SYSTEM_DIR/" || return 1
+    safe_move "$HOME/password.txt" "$CONFIG_SYSTEM_DIR/" || return 1
     safe_move "$HOME/banner.txt" "$CONFIG_THEMES_DIR/" || return 1
     safe_move "$HOME/banner_color.txt" "$CONFIG_THEMES_DIR/" || return 1
     safe_move "$HOME/banner_background.txt" "$CONFIG_THEMES_DIR/" || return 1
