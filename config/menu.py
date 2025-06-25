@@ -24,7 +24,8 @@ table.add_row("• update", "Actualiza desde el repositorio de github", "🟢 Ac
 table.add_row("• bash", "Reinicia su sesión de la terminal", "🟢 Activo")
 table.add_row("• history -c", "Elimina cache de comandos en la terminal", "🟢 Activo")
 table.add_row("• reset", "Reestablece la terminal", "🟢 Activo")
-table.add_row("• my", "Administra y configura tu perfil de Stellar", "🟢 Activo")
+table.add_row("• my", "Visualiza tu perfil de Stellar", "🟢 Activo")
+table.add_row("• userconf", "Administra y configura tu perfil de Stellar", "🟢 Activo")
 
 table.add_row("")
 table.add_row("[code]Utilidades", style="bold green")
