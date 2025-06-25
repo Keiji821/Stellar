@@ -74,7 +74,7 @@ if [ -f login_method.txt ]; then
                 exit 1
                 ;;
             *)
-                echo -e "\033[1;31m❌ Error en la verificación - Cerrando sesión...\033[0m"
+                printf "${Rojo_Brillante}❌ Error en la verificación - Cerrando sesión..."
                 killall -9 bash 2>/dev/null
                 pkill -9 -u $(whoami) 2>/dev/null
                 exit 1
