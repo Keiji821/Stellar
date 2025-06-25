@@ -41,6 +41,11 @@ if user=="Stellar":
             if not response_user_config:
                 console.print("Error: No se puede dejar en blanco. Intente de nuevo.", style="bold red")
                 continue
+            else:
+                os.system(f"echo {response_user_config} > user.txt")
+                console.print("Usuario configurado correctamente", style="bold green")
+
+# Contraseña
 
 
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
