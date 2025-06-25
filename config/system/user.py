@@ -10,6 +10,12 @@ console = Console()
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
 
+with open("password.txt", encoding="utf-8") as f:
+    password = f.read().strip()
+
+with open("login_method.txt", encoding="utf-8") as f:
+    login_method = f.read().strip()
+
 # Ruta
 
 os.chdir(os.path.expanduser("~/Stellar/config/themes"))
@@ -24,6 +30,15 @@ with open("banner_background.txt", encoding="utf-8") as f:
 
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
+
+
+if user=="":
+    response_user = console.input("No tiene un usuario
+configurado\n¿Desea configurarlo? (y/n): ", style="bold green")
+    if response_user=="y":
+        response_user_config = console.input("Ingrese un nombre de usuario: ", style="bold green")
+        if response_user_config=="":
+            exit
 
 
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
