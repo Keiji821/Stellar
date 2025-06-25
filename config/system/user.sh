@@ -51,7 +51,7 @@ Tachado="\033[9m"
 if [ "$user" == "Stellar" ]; then
     while true; do
         printf ",${Verde_Brillante}"
-        read -p "No tiene un usuario configurado\n¿Desea configurarlo? (y/n):" response_user
+        read -p "No tiene un usuario configurado ¿Desea configurarlo? (y/n):" response_user
         
         case $response_user in
             [yY])
@@ -88,8 +88,8 @@ fi
 # Configuración de método de bloqueo
 if [ -z "$login_method" ]; then
     while true; do
-        printf "${Verde_Brillante}No tiene un método de bloqueo"
-        read -p "¿Desea configurar uno? (y/n/no para desactivar):" login_method_response
+        printf "${Verde_Brillante}No tiene un método de bloqueo\n"
+        read -p "¿Desea configurar uno? (y/n/no para desactivar): " login_method_response
         login_method_response=$(echo "$login_method_response" | tr '[:upper:]' '[:lower:]')
         
         case $login_method_response in
@@ -97,10 +97,10 @@ if [ -z "$login_method" ]; then
                 while true; do
                     echo
                     echo -e "${Negrita}${Verde}Métodos disponibles:${Reset}"
-                    echo -e "${Verde}1. Huella dactilar, solo funciona en termux teniendo descargado termux-api,\nsi procede con este metodo su Termux se dañara\nhagalo bajo su propio riesgo${Reset}"
+                    echo -e "${Verde}1. Huella dactilar, solo funciona en termux teniendo descargado termux-api,si procede con este metodo su Termux se dañara hagalo bajo su propio riesgo${Reset}"
                     echo
                     printf "${Verde_Brillante}"
-                    read -p "Seleccione un método (1) o 'no' para desactivar:" login_method_response_list
+                    read -p "Seleccione un método (1) o 'no' para desactivar: " login_method_response_list
                     
                     if [ "$login_method_response_list" == "1" ]; then
                         method="termux-fingerprint"
@@ -132,6 +132,7 @@ if [ -z "$login_method" ]; then
             no)
                 echo "no" > "login_method.txt"
                 echo -e "${Verde_Brillante}✓ Método de desbloqueo desactivado${Reset}"
+                echo
                 break
                 ;;
             *)
