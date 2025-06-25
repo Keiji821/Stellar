@@ -157,7 +157,7 @@ my() {
 
 userconf() {
     cd ~/Stellar/config/system
-    python user.sh
+    bash user.sh
     cd
 }
 
