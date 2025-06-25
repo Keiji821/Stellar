@@ -65,23 +65,16 @@ check_termux_api() {
     return 0
 }
 
-color_prompt() {
-    echo -ne "$1"
-    read -p "$2" response
-    echo -ne "${Reset}"
-    echo "$response"
-}
-
 configure_user() {
     [ -f "user.txt" ] && return 0
 
     while true; do
-        response=$(color_prompt "${Verde_Brillante}" "No tiene usuario configurado\n¿Desea configurarlo? (y/n): ")
-        
+        read -p "$(echo -e "${Verde_Brillante}No tiene usuario configurado\n¿Desea configurarlo? (y/n): ${Reset}")" response
+
         case $response in
             [yY]*)
                 while true; do
-                    username=$(color_prompt "${Verde_Brillante}" "Ingrese nombre de usuario: ")
+                    read -p "$(echo -e "${Verde_Brillante}Ingrese nombre de usuario: ${Reset}")" username
                     username=$(echo "$username" | xargs)
                     
                     [ -z "$username" ] && error "No puede estar vacío" && continue
@@ -105,17 +98,17 @@ configure_auth() {
     [ -f "login_method.txt" ] && return 0
 
     while true; do
-        response=$(color_prompt "${Verde_Brillante}" "No tiene método de bloqueo\n¿Desea configurarlo? (y/n/no): ")
+        read -p "$(echo -e "${Verde_Brillante}No tiene método de bloqueo\n¿Desea configurarlo? (y/n/no): ${Reset}")" response
         response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
         
         case $response in
             y)
-                echo -e "\n${Negrita}${Verde}Métodos disponibles:${Reset}"
+                echo -e "\n${Verde}Métodos disponibles:${Reset}"
                 echo -e "${Verde}1. Huella dactilar${Reset}"
                 echo -e "${Rojo}ADVERTENCIA: Requiere Termux-API${Reset}"
                 
                 while true; do
-                    option=$(color_prompt "${Verde_Brillante}" "Seleccione (1) o 'no': ")
+                    read -p "$(echo -e "${Verde_Brillante}Seleccione (1) o 'no': ${Reset}")" option
                     
                     if [ "$option" = "1" ]; then
                         check_termux_api || continue
@@ -149,11 +142,11 @@ main() {
         exit 1
     }
 
-    configure_user
-    configure_auth
+    configure_user || exit 1
+    configure_auth || exit 1
 
     echo -e "\n${Verde_Brillante}Configuración completada${Reset}"
-    read -p "Presione Enter para continuar..."
+    read -p "$(echo -e "${Amarillo}Presione Enter para continuar...${Reset}")"
 }
 
 main
