@@ -31,32 +31,45 @@ with open("banner_background.txt", encoding="utf-8") as f:
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
-# Usuario 
-
-if user=="Stellar":
+# Configuración de usuario
+if user == "Stellar":
     while True:
         response_user = console.input("[bold green]No tiene un usuario configurado\n¿Desea configurarlo? (y/n): [/bold green]")
-        if response_user=="y":
-            response_user_config = console.input("[bold green]Ingrese un nombre de usuario: [/bold green]")
-            if not response_user_config:
-                console.print("Error: No se puede dejar en blanco. Intente de nuevo.", style="bold red")
-                continue
-            else:
-                os.system(f"echo {response_user_config} > user.txt")
-                console.print("Usuario configurado correctamente", style="bold green")
+        if response_user.lower() == "y":
+            while True:
+                response_user_config = console.input("[bold green]Ingrese un nombre de usuario: [/bold green]")
+                if not response_user_config.strip():
+                    console.print("Error: No se puede dejar en blanco. Intente de nuevo.", style="bold red")
+                else:
+                    with open("user.txt", "w") as f:
+                        f.write(response_user_config)
+                    console.print("Usuario configurado correctamente", style="bold green")
+                    break
+            break
+        elif response_user.lower() == "n":
+            break
+        else:
+            console.print("Error: Opción no válida. Por favor ingrese 'y' o 'n'.", style="bold red")
 
-# Bloqueo
-if login_method=="":
+# Configuración de método de bloqueo
+if login_method == "":
     while True:
         login_method_response = console.input("[bold green]No tiene un método de bloqueo para su Termux\n¿Desea configurar uno? (y/n): [/bold green]")
-        if login_method_response=="":
-            login_method_response_list = console.input("[bold green]Métodos disponibles: Huella dactilar\nSeleccione un método de bloqueo: [/bold green]")
-            if not login_method_response_list:
-                console.print("Error: No puede quedar vacío, Intente de nuevo.", style="bold green")
-                continúe
-            else:
-                os.system(f"echo {login_method_response_list} > login_method.txt")
-                console.print("Su método de desbloqueo ha sido correctamente configurado", style="bold green")
+        if login_method_response.lower() == "y":
+            while True:
+                login_method_response_list = console.input("[bold green]Métodos disponibles: Huella dactilar\nSeleccione un método de bloqueo: [/bold green]")
+                if not login_method_response_list.strip():
+                    console.print("Error: No puede quedar vacío. Intente de nuevo.", style="bold red")
+                else:
+                    with open("login_method.txt", "w") as f:
+                        f.write(login_method_response_list)
+                    console.print("Su método de desbloqueo ha sido correctamente configurado", style="bold green")
+                    break
+            break
+        elif login_method_response.lower() == "n":
+            break
+        else:
+            console.print("Error: Opción no válida. Por favor ingrese 'y' o 'n'.", style="bold red")
 
             
 console.print("")
