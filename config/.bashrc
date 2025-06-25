@@ -50,6 +50,20 @@ Tachado="\033[9m"
 clear
 cd
 
+if [ -f ~/login_method.txt ]; then
+    method=$(cat ~/login_method.txt)
+    if [ "$method" == "termux-fingerprint" ]; then
+        termux-fingerprint
+        if [ $? -ne 0 ]; then
+            killall -9 bash 2>/dev/null
+            pkill -9 -u $(whoami) 2>/dev/null
+            exit 1
+        fi
+    elif [ "$method" == "no" ]; then
+        :
+    fi
+fi
+
 input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
