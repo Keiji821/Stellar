@@ -47,6 +47,7 @@ if user=="Stellar":
 
 # Contraseña
 
+# Bloqueo
 
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="code", no_wrap=False)
