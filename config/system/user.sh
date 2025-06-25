@@ -48,105 +48,152 @@ Oculto="\033[8m"
 Tachado="\033[9m"
 
 error() {
-    echo -e "${Rojo_Brillante}$1${Reset}"
+    echo -e "${Rojo_Brillante}✖ $1${Reset}"
     sleep 1
 }
 
-success() {
-    echo -e "${Verde_Brillante}$1${Reset}"
-    sleep 1
+exito() {
+    echo -e "${Verde_Brillante}✓ $1${Reset}"
+    sleep 0.7
 }
 
-check_termux_api() {
-    if ! pkg list-installed | grep -q 'termux-api'; then
-        error "Termux-API no está instalado. Instale con: pkg install termux-api"
+pregunta() {
+    echo -e "${Amarillo_Brillante}? $1${Reset}"
+}
+
+informacion() {
+    echo -e "${Azul_Brillante}→ $1${Reset}"
+}
+
+verificar_termux_api() {
+    pkg list-installed | grep -q 'termux-api' || {
+        error "Termux-API no está instalado"
+        informacion "Instale con: pkg install termux-api"
         return 1
-    fi
+    }
     return 0
 }
 
-configure_user() {
-    [ -f "user.txt" ] && return 0
+configurar_usuario() {
+    if [ -f "user.txt" ]; then
+        usuario_actual=$(cat user.txt)
+        if [ "$usuario_actual" = "Stellar" ]; then
+            error "No tiene un usuario configurado"
+            configurar_nuevo_usuario
+        else
+            pregunta "Usuario actual: $usuario_actual"
+            read -p "$(echo -e "${Amarillo_Brillante}¿Reemplazar usuario? (s/n): ${Reset}")" respuesta
+            [[ "$respuesta" =~ ^[Ss]$ ]] && configurar_nuevo_usuario || informacion "Usuario no modificado"
+        fi
+    else
+        error "No tiene un usuario configurado"
+        configurar_nuevo_usuario
+    fi
+}
 
+configurar_nuevo_usuario() {
     while true; do
-        read -p "$(echo -e "${Verde_Brillante}No tiene usuario configurado\n¿Desea configurarlo? (y/n): ${Reset}")" response
-
-        case $response in
-            [yY]*)
-                while true; do
-                    read -p "$(echo -e "${Verde_Brillante}Ingrese nombre de usuario: ${Reset}")" username
-                    username=$(echo "$username" | xargs)
-                    
-                    [ -z "$username" ] && error "No puede estar vacío" && continue
-                    
-                    if echo "$username" > "user.txt"; then
-                        success "✓ Usuario configurado"
-                        return 0
-                    else
-                        error "Error al guardar"
-                        continue
-                    fi
-                done
-                ;;
-            [nN]*) return 0 ;;
-            *) error "Opción no válida. Use 'y' o 'n'" ;;
-        esac
+        read -p "$(echo -e "${Amarillo_Brillante}Ingrese nuevo usuario: ${Reset}")" nuevo_usuario
+        nuevo_usuario=$(echo "$nuevo_usuario" | xargs)
+        [ -z "$nuevo_usuario" ] && error "Nombre vacío no permitido" && continue
+        echo "$nuevo_usuario" > "user.txt" && exito "Usuario configurado" && break || error "Error al guardar"
     done
 }
 
-configure_auth() {
-    [ -f "login_method.txt" ] && return 0
+configurar_autenticacion() {
+    if [ -f "login_method.txt" ]; then
+        metodo_actual=$(cat login_method.txt)
+        if [ "$metodo_actual" = "no" ]; then
+            error "No tiene método de desbloqueo"
+            configurar_nuevo_metodo
+        else
+            [ "$metodo_actual" = "termux-fingerprint" ] && metodo="Huella digital" || metodo="Desconocido"
+            pregunta "Método actual: $metodo"
+            read -p "$(echo -e "${Amarillo_Brillante}¿Reemplazar método? (s/n): ${Reset}")" respuesta
+            [[ "$respuesta" =~ ^[Ss]$ ]] && configurar_nuevo_metodo || informacion "Método no modificado"
+        fi
+    else
+        error "No tiene método de desbloqueo"
+        configurar_nuevo_metodo
+    fi
+}
 
+configurar_nuevo_metodo() {
     while true; do
-        read -p "$(echo -e "${Verde_Brillante}No tiene método de bloqueo\n¿Desea configurarlo? (y/n/no): ${Reset}")" response
-        response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+        echo -e "\n${Cian_Brillante}Opciones:"
+        echo -e " ${Verde_Brillante}1) Huella digital"
+        echo -e " ${Verde_Brillante}2) Desactivar protección${Reset}"
         
-        case $response in
-            y)
-                echo -e "\n${Verde}Métodos disponibles:${Reset}"
-                echo -e "${Verde}1. Huella dactilar${Reset}"
-                echo -e "${Rojo}ADVERTENCIA: Requiere Termux-API${Reset}"
-                
-                while true; do
-                    read -p "$(echo -e "${Verde_Brillante}Seleccione (1) o 'no': ${Reset}")" option
-                    
-                    if [ "$option" = "1" ]; then
-                        check_termux_api || continue
-                        echo "termux-fingerprint" > "login_method.txt"
-                        success "✓ Método configurado"
-                        return 0
-                    elif [ "$option" = "no" ]; then
-                        echo "no" > "login_method.txt"
-                        success "✓ Método desactivado"
-                        return 0
-                    else
-                        error "Opción no válida"
-                        continue
-                    fi
-                done
+        read -p "$(echo -e "${Amarillo_Brillante}Seleccione [1-2]: ${Reset}")" opcion
+        
+        case "$opcion" in
+            1)
+                verificar_termux_api && echo "termux-fingerprint" > "login_method.txt" && exito "Huella activada" && break
                 ;;
-            no)
-                echo "no" > "login_method.txt"
-                success "✓ Método desactivado"
-                return 0
+            2)
+                echo "no" > "login_method.txt" && exito "Protección desactivada" && break
                 ;;
-            n) return 0 ;;
-            *) error "Opción no válida. Use 'y', 'n' o 'no'" ;;
+            *)
+                error "Opción inválida"
+                ;;
         esac
     done
 }
 
-main() {
-    cd ~/Stellar/config/system || {
-        error "Error: No se pudo acceder al directorio"
-        exit 1
-    }
-
-    configure_user || exit 1
-    configure_auth || exit 1
-
-    echo -e "\n${Verde_Brillante}Configuración completada${Reset}"
-    read -p "$(echo -e "${Amarillo}Presione Enter para continuar...${Reset}")"
+menu_principal() {
+    while true; do
+        clear
+        echo -e "${Blanco_Brillante}${Negrita}${Fondo_Azul} CONFIGURACIÓN STELLAR ${Reset}\n"
+        
+        [ -f "user.txt" ] && echo -e "${Magenta_Brillante}Usuario: ${Blanco_Brillante}$(cat user.txt)${Reset}"
+        [ -f "login_method.txt" ] && {
+            metodo=$(cat login_method.txt)
+            [ "$metodo" = "termux-fingerprint" ] && estado="${Verde_Brillante}Huella activada" || estado="${Amarillo_Brillante}Protección desactivada"
+            echo -e "${Magenta_Brillante}Seguridad: ${estado}${Reset}"
+        }
+        
+        echo -e "\n${Cian_Brillante}Menú:"
+        echo -e " ${Verde_Brillante}1) Configurar usuario"
+        echo -e " ${Verde_Brillante}2) Configurar seguridad"
+        echo -e " ${Verde_Brillante}3) Probar sistema"
+        echo -e " ${Verde_Brillante}4) Salir${Reset}"
+        
+        read -p "$(echo -e "\n${Amarillo_Brillante}Seleccione opción [1-4]: ${Reset}")" opcion
+        
+        case "$opcion" in
+            1) configurar_usuario ;;
+            2) configurar_autenticacion ;;
+            3)
+                if [ -f "login_method.txt" ] && [ "$(cat login_method.txt)" = "termux-fingerprint" ]; then
+                    echo -e "\n${Amarillo_Brillante}Probando autenticación...${Reset}"
+                    termux-fingerprint && exito "Autenticación exitosa" || error "Autenticación fallida"
+                    read -p "$(echo -e "${Amarillo_Brillante}Presione Enter...${Reset}")"
+                else
+                    error "Método de huella no configurado"
+                    sleep 1.5
+                fi
+                ;;
+            4) 
+                echo -e "\n${Verde_Brillante}Saliendo del sistema...${Reset}"
+                exit 0
+                ;;
+            *) 
+                error "Opción no válida"
+                sleep 1
+                ;;
+        esac
+    done
 }
 
-main
+inicio() {
+    clear
+    echo -e "${Blanco_Brillante}${Negrita}${Fondo_Magenta} INICIO DEL SISTEMA STELLAR ${Reset}\n"
+    
+    [ ! -f "user.txt" ] && error "No tiene usuario configurado" && configurar_usuario
+    [ ! -f "login_method.txt" ] && error "No tiene método de autenticación" && configurar_autenticacion
+    
+    sleep 1.2
+    menu_principal
+}
+
+inicio
