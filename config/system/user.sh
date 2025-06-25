@@ -50,12 +50,14 @@ Tachado="\033[9m"
 # Configuración de usuario 
 if [ "$user" == "Stellar" ]; then
     while true; do
-        read -p "${Verde_Brillante}No tiene un usuario configurado\n¿Desea configurarlo? (y/n): ${Reset}" response_user
+        printf ",${Verde_Brillante}"
+        read -p "No tiene un usuario configurado\n¿Desea configurarlo? (y/n):" response_user
         
         case $response_user in
             [yY])
                 while true; do
-                    read -p "${Verde_Brillante}Ingrese un nombre de usuario: ${Reset}" response_user_config
+                    printf ",${Verde_Brillante}"
+                    read -p "Ingrese un nombre de usuario:" response_user_config
                     response_user_config=$(echo "$response_user_config" | tr -d '[:space:]')
                     
                     if [ -z "$response_user_config" ]; then
@@ -86,7 +88,8 @@ fi
 # Configuración de método de bloqueo
 if [ -z "$login_method" ]; then
     while true; do
-        read -p "${Verde_Brillante}No tiene un método de bloqueo\n¿Desea configurar uno? (y/n/no para desactivar): ${Reset}" login_method_response
+        printf ",${Verde_Brillante}"
+        read -p "No tiene un método de bloqueo\n¿Desea configurar uno? (y/n/no para desactivar):" login_method_response
         login_method_response=$(echo "$login_method_response" | tr '[:upper:]' '[:lower:]')
         
         case $login_method_response in
@@ -94,7 +97,8 @@ if [ -z "$login_method" ]; then
                 while true; do
                     echo -e "${Negrita}${Verde}Métodos disponibles:${Reset}"
                     echo -e "${Verde}1. Huella dactilar, solo funciona en termux teniendo descargado termux-api,\nsi procede con este metodo su Termux se dañara\nhagalo bajo su propio riesgo${Reset}"
-                    read -p "${Verde_Brillante}Seleccione un método (1) o 'no' para desactivar: ${Reset}" login_method_response_list
+                    printf ",${Verde_Brillante}"
+                    read -p "Seleccione un método (1) o 'no' para desactivar:" login_method_response_list
                     
                     if [ "$login_method_response_list" == "1" ]; then
                         method="termux-fingerprint"
