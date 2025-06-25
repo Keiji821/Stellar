@@ -51,7 +51,8 @@ clear
 cd
 
 # Método de desbloqueo - Huella dactilar
-if [ -f ~/Stellar/config/system/login_method.txt ]; then
+cd ~/Stellar/config/system
+if [ -f login_method.txt ]; then
     method=$(cat ~/login_method.txt)
     if [ "$method" == "termux-fingerprint" ]; then
         termux-fingerprint
@@ -64,6 +65,7 @@ if [ -f ~/Stellar/config/system/login_method.txt ]; then
         :
     fi
 fi
+cd
 
 input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
