@@ -76,7 +76,7 @@ table.add_row("• tunnel", "Expone una imagen que captura la IP", "🔴 Dañado
 table.add_row("")
 table.add_row("[code]Pentesting", style="bold green")
 table.add_row("")
-table.add_row("• ddos", "Realiza un ataque DDOS mediante la IP y puerto", "🟢 Activo")
+table.add_row("• ddos", "Realiza un ataque DDOS mediante la IP y puerto", "🟠 Inestable")
 
 console.print(table, style="bright_white", justify="center")
 console.print("")
