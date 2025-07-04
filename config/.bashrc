@@ -48,6 +48,7 @@ Oculto="\033[8m"
 Tachado="\033[9m"
 
 clear
+history -c
 cd
 
 # Método de desbloqueo - Huella dactilar
