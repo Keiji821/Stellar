@@ -128,7 +128,7 @@ bash install.sh
 </details>
 
 <details>
-<summary><b>`📄` Guía de uso</b></summary>
+<summary><b>📄 Guía de uso</b></summary>
 
 ##### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
@@ -138,7 +138,7 @@ bash install.sh
 
 #
 
-# `🖋️` Autores
+### `🖋️` Autores
 
 ```diff
 + Keiji821 (Desarrollador)
