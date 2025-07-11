@@ -88,19 +88,16 @@ bash install.sh
 
 </details>
 
-<details>
-<summary><b>🌹 Autores</b></summary>
+# Autores
 
 ```diff
 + Keiji821 (Desarrollador)
 ```
 
-##### Contactame
+##### Contactame, para dudas, colaboraciones
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
 <img src="https://img.shields.io/badge/Discord-Keiji-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
   </a>
 </p>
-
-</details>
