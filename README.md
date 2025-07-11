@@ -94,7 +94,7 @@ bash install.sh
 + Keiji821 (Desarrollador)
 ```
 
-##### Contactame, para dudas, colaboraciones
+##### Contactame, para dudas y colaboraciones.
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
