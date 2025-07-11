@@ -165,3 +165,7 @@ bash install.sh
 <img src="https://img.shields.io/badge/Discord-Keiji-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
   </a>
 </p>
+
+##### Si deseas donar al proyecto y contribuir
+
+[![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717)](https://pay.binance.com/en)
