@@ -22,14 +22,18 @@
 
 Stellar, es un programa hecho en python, bash y nodejs para mejorar la aburrida apariencia de termux para darle una apariencia nueva añadiendo nuevas funcionalidades.
 
+</div>
+
 Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
 
 ⚠️ Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.
 
 ⚠️ Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.
 
+⚠️ Aún en constante desarrollo, pueden haber fallos.
 
-</div>
+⚠️ Still under constant development, there may be errors.
+
 
 <details>
 <summary><b>🔖 Pasos de instalación</b></summary>
