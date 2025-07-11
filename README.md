@@ -93,45 +93,12 @@ bash install.sh
 + Keiji821 (Desarrollador)
 ```
 
-##### Contactos:
+##### Contactame
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
 <img src="https://img.shields.io/badge/Discord-Keiji-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
   </a>
 </p>
-
-</details>
-
-
-<details>
-<summary><b>📌 Historial de actualizaciones</b></summary>
-
-<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 31 may • 2025</kbd><kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
-border-radius: 4px;">v1.1</kbd><kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
-```diff
-+ Solucionado el problema del archivo de personalización de interfaz >> ui
-+ Se han agregado +12 temas por defecto para el fondo de termux en el comando >> ui
-```
-
-<kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Fecha: 29 may • 2025</kbd><kbd style="background-color: #5865F2; color: white; padding: 3px 8px; 
-border-radius: 4px;">v1.0</kbd><kbd style="background-color: #2ECC71; color: white; padding: 3px 8px; border-radius: 4px;">Correcciónes implementadas:</kbd>
-```diff
-+ Solucionado el problema del archivo de instalación
-+ Mejoras de estabilidad en el programa
-```
-
-</details>
-
-<details>
-<summary><b>📜 Historial de versiones</b></summary>
-
-<p align= "center"> <kbd> <img  src="https://i.pinimg.com/originals/34/1e/80/341e800b1f29d3e34ea2eba5a6af205c.gif?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
-
-| Versión  | Estado      |  
-|----------|-------------|  
-|  `1.1`   | `Estable`   |  
-|  `1.0`   | `Beta`   |  
-
 
 </details>
