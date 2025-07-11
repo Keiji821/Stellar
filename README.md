@@ -138,7 +138,7 @@ bash install.sh
 
 #
 
-### `🖋️` Autores
+# `🖋️` Autores
 
 ```diff
 + Keiji821 (Desarrollador)
