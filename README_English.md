@@ -20,30 +20,22 @@
 
 <div align="center">
 
-Stellar, es un programa hecho en `python`, `bash` y `nodejs` para mejorar la aburrida apariencia de `termux` para darle una apariencia nueva añadiendo nuevas funcionalidades.
+Stellar is a program made in `python`, `bash` and `nodejs` to improve the boring appearance of `termux` to give it a new look by adding new features.
 
-Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
+Although it includes some tools in the form of commands oriented towards hacking and osint, it focuses on improving the appearance of Termux by providing layers of customization.
 
 </div>
 
 #
 
-⚠️ `Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.`
-
-⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
-
-⚠️ `Aún en constante desarrollo, pueden haber fallos.`
-
-⚠️ `Still under constant development, there may be errors.`
-
-`📌` Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
+`📌` If you want to contribute to Stellar or report a bug or error within the program, contact me on my Discord by adding me with the username `keiji100`
 
 #
 
 <details>
-<summary><b>🔖 Pasos de instalación</b></summary>
+<summary><b>🔖 Installation steps</b></summary>
 
-##### Para instalar Stellar debe seguir los siguientes pasos:
+##### To install Stellar you must follow the following steps:
 
 ```shell script
 git clone https://github.com/Keiji821/Stellar
@@ -57,27 +49,27 @@ cd Stellar
 bash install.sh
 ```
 
-##### Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡asegurese de tener una buena conexión a internet para la correcta instalación! luego de haberse instalado Stellar su sesión de Termux de reiniciará, es recomendable que cierres Termux luego de instalar Stellar para que funcione correctamente `TOR`
+##### After running `bash install.sh` everything will be installed automatically, make sure you have a good internet connection for a proper installation! After installing Stellar, your session will be `termux` will restart, to be able to use the program correctly close `termux` and reopen it so that `TOR` runs correctly.
 
 </details>
 
 <details>
 <summary><b>📑 Características</b></summary>
 
-##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
+##### Stellar OS offers a selection of commands, oriented to osint and hacking, these commands are optional use the main purpose of this project is to give a new face to termux without the need so many problematic things, The commands (scripts) included in Stellar OS are the following:
 
 
-#### `🔧` Sistema
-| Comando       | Descripción |  
+#### `🔧` System
+| Command       | Description |  
 |--------------|-------------|  
-| `reload`     | Recarga el banner del sistema. |  
-| `ui`         | Personaliza el banner y sus colores. |  
-| `uninstall`  | Desinstala Stellar por completo. |  
-| `update`     | Actualiza Stellar desde GitHub. |  
-| `bash`       | Reinicia la sesión de terminal. |  
-| `history -c` | Elimina el historial de comandos de la terminal. |  
-| `reset`      | Restablece la terminal a su estado inicial. |  
-| `my`         | Muestra tu perfil de Stellar. |  
+| `reload`     | Reload the system banner. |  
+| `ui`         | Customize the banner and its colors. |  
+| `uninstall`  | Uninstall Stellar completely. |  
+| `update`     | Update Stellar from GitHub. |  
+| `bash`       | Restart the terminal session. |  
+| `history -c` | Deletes the terminal command history. |  
+| `reset`      | Resets the terminal to its initial state. |  
+| `my`         | Show your Stellar profile. |  
 | `userconf`   | Configura tu perfil de Stellar. |  
 
 #### `🛠️` Utilidades
