@@ -173,4 +173,4 @@ Si te gustó y te gusta este proyecto y te resulta útil considera apoyar a este
 
 [![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717)](https://pay.binance.com/en)
 
-[![PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-0070BA?style=for-the-badge&logo=paypal&logoColor=white&labelColor=003087)](https://paypal.me/felixdppdcg69)
+[![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
