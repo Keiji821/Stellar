@@ -36,6 +36,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 ⚠️ `Still under constant development, there may be errors.`
 
+#
 
 <details>
 <summary><b>🔖 Pasos de instalación</b></summary>
