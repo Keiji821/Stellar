@@ -27,6 +27,8 @@ While it includes some command-line tools focused on hacking and OSINT, its prim
 
 #
 
+⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
+
 ⚠️ `Still under constant development, there may be errors.`
 
 `📌` To contribute to Stellar or report any bugs/issues, contact me on Discord: `keiji100`
