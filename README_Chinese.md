@@ -149,11 +149,10 @@ bash install.sh
   </a>
 </p>
 
-##### `❤️` 捐贈 
+##### `❤️` 捐赠支持
 
-如果您喜歡這個項目並發現它有用，請考慮透過捐贈任何金額來支持它及其發展。
+如果您喜欢这个项目并觉得它有用，请考虑通过捐赠任意金额来支持项目的发展。
 
+[![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=捐赠&labelColor=black&message=763579717)](https://pay.binance.com/en)
 
-[![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717)](https://pay.binance.com/en)
-
-[![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+[![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=捐赠&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
