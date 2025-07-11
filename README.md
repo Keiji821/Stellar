@@ -65,10 +65,9 @@ bash install.sh
 <summary><b>📑 Características</b></summary>
 
 ##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
+  
 
-### **📌 Comandos de Stellar**  
-
-#### **🔧 Sistema**  
+#### `🔧` Sistema
 | Comando       | Descripción |  
 |--------------|-------------|  
 | `reload`     | Recarga el banner del sistema. |  
@@ -81,7 +80,7 @@ bash install.sh
 | `my`         | Muestra tu perfil de Stellar. |  
 | `userconf`   | Configura tu perfil de Stellar. |  
 
-#### **🛠️ Utilidades**  
+#### `🛠️` Utilidades
 | Comando          | Descripción |  
 |-----------------|-------------|  
 | `ia`            | Servicio de IA con API gratuita. |  
@@ -91,7 +90,7 @@ bash install.sh
 | `passwordgen`   | Genera contraseñas seguras. |  
 | `encrypt-file`  | Encripta archivos. |  
 
-#### **📡 OSINT (Búsqueda de información)**  
+#### `📡` OSINT (Búsqueda de información)  
 | Comando          | Descripción |  
 |-----------------|-------------|  
 | `ipinfo`        | Obtiene información de una IP. |  
@@ -101,7 +100,7 @@ bash install.sh
 | `metadatainfo`  | Extrae metadatos de archivos. |  
 | `emailsearch`   | Búsqueda de correos electrónicos. |  
 
-#### **📱 Discord**  
+#### `📱` Discord
 | Comando               | Descripción |  
 |----------------------|-------------|  
 | `userinfo`           | Obtiene información de un usuario (ID). |  
@@ -113,12 +112,12 @@ bash install.sh
 | `webhook-mass-spam`  | Envía mensajes masivos a un webhook. |  
 | `mass-delete-channels` | Elimina canales masivamente (en servidores propios). |  
 
-#### **📸 Instagram OSINT**  
+#### `📸` Instagram OSINT 
 | Comando          | Descripción |  
 |-----------------|-------------|  
 | `profileinfo`   | Extrae metadatos de perfiles de Instagram. |  
 
-#### **🛡️ Pentesting**  
+#### `🛡️` Pentesting 
 | Comando       | Descripción |  
 |--------------|-------------|  
 | `ddos`       | Realiza un ataque DDoS (IP + puerto). |  
