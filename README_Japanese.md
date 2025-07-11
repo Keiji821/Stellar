@@ -1,49 +1,44 @@
-<p align= "center"> <kbd> <img  src="https://i.pinimg.com/originals/02/87/d3/0287d3ba8b3330fca99f69e2001d3168.gif?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
+<p align="center"> <kbd> <img src="https://i.pinimg.com/originals/02/87/d3/0287d3ba8b3330fca99f69e2001d3168.gif?semt=ais_hybrid&w=740" width="420"> </kbd><br><br>
 
 <div align="center">
 
-![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/Mentenido%20(Sí)-2ea44f?style=for-the-badge)
+![オープンソース](https://img.shields.io/badge/オープンソース-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![メンテナンス中](https://img.shields.io/badge/メンテナンス中(はい)-2ea44f?style=for-the-badge)
 
-<h4>Hecho en</h4>
+<h4>使用技術:</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
 [![JavaScript Runtime](https://img.shields.io/badge/JavaScript_Runtime-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
-
 
 </div>
 
 <div align="center">
     <img src="https://img.shields.io/badge/Stellar-6C00FF?style=for-the-badge&logo=stellar&logoColor=white&labelColor=121212"><br>
     <strong></strong>
-  </div>
+</div>
 
 <div align="center">
 
-Stellar, es un programa hecho en `python`, `bash` y `nodejs` para mejorar la aburrida apariencia de `termux` para darle una apariencia nueva añadiendo nuevas funcionalidades.
+Stellarは`Python`、`Bash`、`Node.js`で開発されたプログラムで、`Termux`の見た目を改善し、新しい機能を追加します。
 
-Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
+ハッキングやOSINT向けのツールも含まれていますが、主な目的はTermuxのカスタマイズ性を高めることです。
 
 </div>
 
 #
 
-⚠️ `Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.`
+⚠️ `近日対応予定: 日本語、中国語、韓国語、英語、ポルトガル語のサポート`
 
-⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
+⚠️ `現在も開発中です - バグが含まれている可能性があります`
 
-⚠️ `Aún en constante desarrollo, pueden haber fallos.`
-
-⚠️ `Still under constant development, there may be errors.`
-
-`📌` Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
+`📌` Stellarへの貢献やバグ報告は、Discordで`keiji100`までご連絡ください
 
 #
 
 <details>
-<summary><b>🔖 Pasos de instalación</b></summary>
+<summary><b>🔖 インストール方法</b></summary>
 
-##### Para instalar Stellar debe seguir los siguientes pasos:
+##### Stellarをインストールする手順:
 
 ```shell script
 git clone https://github.com/Keiji821/Stellar
@@ -57,94 +52,96 @@ cd Stellar
 bash install.sh
 ```
 
-##### Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡asegurese de tener una buena conexión a internet para la correcta instalación! luego de haberse instalado Stellar su sesión de Termux de reiniciará, es recomendable que cierres Termux luego de instalar Stellar para que funcione correctamente `TOR`
+##### `bash install.sh`を実行すると自動的にインストールされます（安定したインターネット接続が必要です）。インストール後、Termuxセッションが再起動します。TORを正しく機能させるため、Termuxを完全に閉じてから再度開くことを推奨します。
 
 </details>
 
 <details>
-<summary><b>📑 Características</b></summary>
+<summary><b>📑 機能一覧</b></summary>
 
-##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
+##### Stellar OSはOSINTやハッキング向けのコマンドを提供します（全てオプション）。主な目的はTermuxのカスタマイズです。
 
-
-#### `🔧` Sistema
-| Comando       | Descripción |  
+#### `🔧` システム
+| コマンド       | 説明 |  
 |--------------|-------------|  
-| `reload`     | Recarga el banner del sistema. |  
-| `ui`         | Personaliza el banner y sus colores. |  
-| `uninstall`  | Desinstala Stellar por completo. |  
-| `update`     | Actualiza Stellar desde GitHub. |  
-| `bash`       | Reinicia la sesión de terminal. |  
-| `history -c` | Elimina el historial de comandos de la terminal. |  
-| `reset`      | Restablece la terminal a su estado inicial. |  
-| `my`         | Muestra tu perfil de Stellar. |  
-| `userconf`   | Configura tu perfil de Stellar. |  
+| `reload`     | システムバナーを再読み込み |  
+| `ui`         | バナーの見た目と色をカスタマイズ |  
+| `uninstall`  | Stellarを完全にアンインストール |  
+| `update`     | GitHubからStellarを更新 |  
+| `bash`       | ターミナルセッションを再起動 |  
+| `history -c` | コマンド履歴を消去 |  
+| `reset`      | ターミナルを初期状態にリセット |  
+| `my`         | Stellarプロフィールを表示 |  
+| `userconf`   | Stellarプロフィールを設定 |  
 
-#### `🛠️` Utilidades
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `ia`            | Servicio de IA con API gratuita. |  
-| `ia-image`      | Generador de imágenes con IA. |  
-| `traductor`     | Traducción en tiempo real. |  
-| `myip`          | Muestra tu IP pública. |  
-| `passwordgen`   | Genera contraseñas seguras. |  
-| `encrypt-file`  | Encripta archivos. |  
+#### `🛠️` ユーティリティ
+| コマンド         | 説明 |  
+|----------------|-------------|  
+| `ia`           | 無料AI APIサービス |  
+| `ia-image`     | AI画像生成ツール |  
+| `translator`   | リアルタイム翻訳 |  
+| `myip`         | 公開IPを表示 |  
+| `passwordgen`  | 安全なパスワード生成 |  
+| `encrypt-file` | ファイル暗号化ツール |  
 
-#### `📡` OSINT (Búsqueda de información)  
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `ipinfo`        | Obtiene información de una IP. |  
-| `urlinfo`       | Analiza URLs. |  
-| `userfinder`    | Busca usuarios en múltiples plataformas. |  
-| `phoneinfo`     | Obtiene información de un número telefónico. |  
-| `metadatainfo`  | Extrae metadatos de archivos. |  
-| `emailsearch`   | Búsqueda de correos electrónicos. |  
+#### `📡` OSINT (情報収集)  
+| コマンド         | 説明 |  
+|----------------|-------------|  
+| `ipinfo`       | IPアドレス情報の取得 |  
+| `urlinfo`      | URL分析ツール |  
+| `userfinder`   | 複数プラットフォームでのユーザー検索 |  
+| `phoneinfo`    | 電話番号検索 |  
+| `metadatainfo` | ファイルメタデータ抽出 |  
+| `emailsearch`  | メール検索ツール |  
 
 #### `📱` Discord
-| Comando               | Descripción |  
-|----------------------|-------------|  
-| `userinfo`           | Obtiene información de un usuario (ID). |  
-| `serverinfo`         | Obtiene información de un servidor (ID). |  
-| `searchinvites`      | Busca invitaciones de Discord. |  
-| `inviteinfo`         | Analiza enlaces de invitación. |  
-| `role-mapper`        | Mapea roles usando el ID del servidor. |  
-| `mutual-servers`     | Verifica servidores en común entre usuarios. |  
-| `webhook-mass-spam`  | Envía mensajes masivos a un webhook. |  
-| `mass-delete-channels` | Elimina canales masivamente (en servidores propios). |  
+| コマンド                | 説明 |  
+|-----------------------|-------------|  
+| `userinfo`            | ユーザー情報取得(ID使用) |  
+| `serverinfo`          | サーバー情報取得(ID使用) |  
+| `searchinvites`       | Discord招待リンク検索 |  
+| `inviteinfo`          | 招待リンク分析 |  
+| `role-mapper`         | サーバーロールマッピング(サーバーID必要) |  
+| `mutual-servers`      | ユーザー間の共通サーバー確認 |  
+| `webhook-mass-spam`   | Webhookスパムツール |  
+| `mass-delete-channels`| チャンネル一括削除(所有サーバーのみ) |  
 
 #### `📸` Instagram OSINT 
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `profileinfo`   | Extrae metadatos de perfiles de Instagram. |  
+| コマンド        | 説明 |  
+|---------------|-------------|  
+| `profileinfo` | Instagramプロフィールメタデータ抽出 |  
 
-#### `🛡️` Pentesting 
-| Comando       | Descripción |  
-|--------------|-------------|  
-| `ddos`       | Realiza un ataque DDoS (IP + puerto). |  
-| `tunnel`     | Expone una imagen que captura la IP del visitante. |  
+#### `🛡️` ペネトレーションテスト 
+| コマンド    | 説明 |  
+|-----------|-------------|  
+| `ddos`    | DDoS攻撃ツール(IP+ポート) |  
+| `tunnel`  | 訪問者のIPを取得する画像をホスト |  
 
-##### Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
+##### StellarはバックグラウンドでTORを実行し、匿名性を保護します。
 
 </details>
 
 <details>
-<summary><b>📄 Guía de uso</b></summary>
+<summary><b>📄 使用ガイド</b></summary>
 
-##### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
+##### 使い方は簡単です。インストール後、通常通りTermuxを使用できます。`ui`コマンドで以下をカスタマイズ可能:
+- ASCIIアートの表示
+- カラースキーム
+- 背景色（ライト/ダークテーマ含む）
 
-##### El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
+##### `ui`コマンドではTermuxのテーマ全体をカスタマイズでき、ダークからライト/ブルー背景などに変更できます。
 
 </details>
 
 #
 
-# `🖋️` Autores
+# `🖋️` 作者
 
 ```diff
-+ Keiji821 (Desarrollador)
++ Keiji821 (開発者)
 ```
 
-##### Contactame, para dudas y colaboraciones.
+##### 質問や協力の依頼はこちらまで
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
