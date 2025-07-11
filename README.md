@@ -66,29 +66,63 @@ bash install.sh
 
 ##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
 
-| Comando       | Descripción |
-|---------------|-------------|
-| `reload`      | Recarga el banner del sistema. |
-| `ui`          | Personaliza el banner y sus colores. |
-| `uninstall`   | Desinstala Stellar por completo. |
-| `update`      | Actualiza Stellar desde GitHub. |
-| `bash`        | Reinicia la sesión de terminal. |
-| `ia`          | Servicio de IA con API gratuita. |
-| `ia-image`    | Generador de imágenes con IA. |
-| `traductor`   | Traducción en tiempo real. |
-| `myip`        | Muestra tu IP pública. |
-| `ipinfo`      | Obtiene información de una IP. |
-| `urlinfo`     | Analiza URLs. |
-| `userfinder`  | Busca usuarios en múltiples plataformas. |
-| `phoneinfo`   | Info de un número telefónico. |
-| `metadatainfo`| Extrae metadatos de archivos. |
-| `emailsearch` | Búsqueda de correos electrónicos. |
-| `userinfo`    | Info de usuario de Discord (ID). |
-| `serverinfo`  | Info de servidor de Discord (ID). |
-| `searchinvites`| Busca invitaciones de Discord. |
-| `inviteinfo`  | Analiza enlaces de invitación. |
-| `profileinfo` | Metadatos de perfil de Instagram. |
-| `ddos`        | Ataque DDoS (IP + puerto). |
+### **📌 Comandos de Stellar**  
+
+#### **🔧 Sistema**  
+| Comando       | Descripción |  
+|--------------|-------------|  
+| `reload`     | Recarga el banner del sistema. |  
+| `ui`         | Personaliza el banner y sus colores. |  
+| `uninstall`  | Desinstala Stellar por completo. |  
+| `update`     | Actualiza Stellar desde GitHub. |  
+| `bash`       | Reinicia la sesión de terminal. |  
+| `history -c` | Elimina el historial de comandos de la terminal. |  
+| `reset`      | Restablece la terminal a su estado inicial. |  
+| `my`         | Muestra tu perfil de Stellar. |  
+| `userconf`   | Configura tu perfil de Stellar. |  
+
+#### **🛠️ Utilidades**  
+| Comando          | Descripción |  
+|-----------------|-------------|  
+| `ia`            | Servicio de IA con API gratuita. |  
+| `ia-image`      | Generador de imágenes con IA. |  
+| `traductor`     | Traducción en tiempo real. |  
+| `myip`          | Muestra tu IP pública. |  
+| `passwordgen`   | Genera contraseñas seguras. |  
+| `encrypt-file`  | Encripta archivos. |  
+
+#### **📡 OSINT (Búsqueda de información)**  
+| Comando          | Descripción |  
+|-----------------|-------------|  
+| `ipinfo`        | Obtiene información de una IP. |  
+| `urlinfo`       | Analiza URLs. |  
+| `userfinder`    | Busca usuarios en múltiples plataformas. |  
+| `phoneinfo`     | Obtiene información de un número telefónico. |  
+| `metadatainfo`  | Extrae metadatos de archivos. |  
+| `emailsearch`   | Búsqueda de correos electrónicos. |  
+
+#### **📱 Discord**  
+| Comando               | Descripción |  
+|----------------------|-------------|  
+| `userinfo`           | Obtiene información de un usuario (ID). |  
+| `serverinfo`         | Obtiene información de un servidor (ID). |  
+| `searchinvites`      | Busca invitaciones de Discord. |  
+| `inviteinfo`         | Analiza enlaces de invitación. |  
+| `role-mapper`        | Mapea roles usando el ID del servidor. |  
+| `mutual-servers`     | Verifica servidores en común entre usuarios. |  
+| `webhook-mass-spam`  | Envía mensajes masivos a un webhook. |  
+| `mass-delete-channels` | Elimina canales masivamente (en servidores propios). |  
+
+#### **📸 Instagram OSINT**  
+| Comando          | Descripción |  
+|-----------------|-------------|  
+| `profileinfo`   | Extrae metadatos de perfiles de Instagram. |  
+
+#### **🛡️ Pentesting**  
+| Comando       | Descripción |  
+|--------------|-------------|  
+| `ddos`       | Realiza un ataque DDoS (IP + puerto). |  
+| `tunnel`     | Expone una imagen que captura la IP del visitante. |  
 
 ##### Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
 
