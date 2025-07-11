@@ -1,49 +1,44 @@
-<p align= "center"> <kbd> <img  src="https://i.pinimg.com/originals/02/87/d3/0287d3ba8b3330fca99f69e2001d3168.gif?semt=ais_hybrid&w=740"width="420"> </kbd><br><br>
+<p align="center"> <kbd> <img src="https://i.pinimg.com/originals/02/87/d3/0287d3ba8b3330fca99f69e2001d3168.gif?semt=ais_hybrid&w=740" width="420"> </kbd><br><br>
 
 <div align="center">
 
-![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/Mentenido%20(Sí)-2ea44f?style=for-the-badge)
+![Código Aberto](https://img.shields.io/badge/Código_Aberto-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Manutenção](https://img.shields.io/badge/Mantido_(Sim)-2ea44f?style=for-the-badge)
 
-<h4>Hecho en</h4>
+<h4>Construído com:</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
-[![JavaScript Runtime](https://img.shields.io/badge/JavaScript_Runtime-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
-
+[![JavaScript Runtime](https://img.shields.io/badge/Ambiente_JavaScript-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
 
 </div>
 
 <div align="center">
     <img src="https://img.shields.io/badge/Stellar-6C00FF?style=for-the-badge&logo=stellar&logoColor=white&labelColor=121212"><br>
     <strong></strong>
-  </div>
+</div>
 
 <div align="center">
 
-Stellar, es un programa hecho en `python`, `bash` y `nodejs` para mejorar la aburrida apariencia de `termux` para darle una apariencia nueva añadiendo nuevas funcionalidades.
+Stellar é um programa desenvolvido em `Python`, `Bash` e `Node.js` para melhorar a aparência básica do `Termux`, adicionando novos recursos.
 
-Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
+Embora inclua algumas ferramentas focadas em hacking e OSINT, seu principal objetivo é melhorar a interface visual do Termux com amplas opções de personalização.
 
 </div>
 
 #
 
-⚠️ `Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.`
+⚠️ `Em breve: Suporte para japonês, chinês, coreano, inglês e português`
 
-⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
+⚠️ `Ainda em desenvolvimento ativo - podem existir alguns bugs`
 
-⚠️ `Aún en constante desarrollo, pueden haber fallos.`
-
-⚠️ `Still under constant development, there may be errors.`
-
-`📌` Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
+`📌` Para contribuir com o Stellar ou reportar bugs/problemas, contate-me no Discord: `keiji100`
 
 #
 
 <details>
-<summary><b>🔖 Pasos de instalación</b></summary>
+<summary><b>🔖 Passos de Instalação</b></summary>
 
-##### Para instalar Stellar debe seguir los siguientes pasos:
+##### Siga estes passos para instalar o Stellar:
 
 ```shell script
 git clone https://github.com/Keiji821/Stellar
@@ -57,94 +52,96 @@ cd Stellar
 bash install.sh
 ```
 
-##### Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡asegurese de tener una buena conexión a internet para la correcta instalación! luego de haberse instalado Stellar su sesión de Termux de reiniciará, es recomendable que cierres Termux luego de instalar Stellar para que funcione correctamente `TOR`
+##### Após executar `bash install.sh`, tudo será instalado automaticamente (garanta uma conexão estável com a internet). Após a instalação, sua sessão no Termux será reiniciada. Para o funcionamento adequado do TOR, recomenda-se fechar e reabrir completamente o Termux.
 
 </details>
 
 <details>
-<summary><b>📑 Características</b></summary>
+<summary><b>📑 Funcionalidades</b></summary>
 
-##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
-
+##### O Stellar OS oferece um conjunto de comandos focados em OSINT e hacking (todos opcionais). O objetivo principal permanece sendo a personalização do Termux.
 
 #### `🔧` Sistema
-| Comando       | Descripción |  
+| Comando       | Descrição |  
 |--------------|-------------|  
-| `reload`     | Recarga el banner del sistema. |  
-| `ui`         | Personaliza el banner y sus colores. |  
-| `uninstall`  | Desinstala Stellar por completo. |  
-| `update`     | Actualiza Stellar desde GitHub. |  
-| `bash`       | Reinicia la sesión de terminal. |  
-| `history -c` | Elimina el historial de comandos de la terminal. |  
-| `reset`      | Restablece la terminal a su estado inicial. |  
-| `my`         | Muestra tu perfil de Stellar. |  
-| `userconf`   | Configura tu perfil de Stellar. |  
+| `reload`     | Recarrega o banner do sistema |  
+| `ui`         | Personaliza a aparência e cores do banner |  
+| `uninstall`  | Remove completamente o Stellar |  
+| `update`     | Atualiza o Stellar a partir do GitHub |  
+| `bash`       | Reinicia a sessão do terminal |  
+| `history -c` | Limpa o histórico de comandos |  
+| `reset`      | Redefine o terminal para o estado padrão |  
+| `my`         | Exibe seu perfil no Stellar |  
+| `userconf`   | Configura seu perfil no Stellar |  
 
-#### `🛠️` Utilidades
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `ia`            | Servicio de IA con API gratuita. |  
-| `ia-image`      | Generador de imágenes con IA. |  
-| `traductor`     | Traducción en tiempo real. |  
-| `myip`          | Muestra tu IP pública. |  
-| `passwordgen`   | Genera contraseñas seguras. |  
-| `encrypt-file`  | Encripta archivos. |  
+#### `🛠️` Utilitários
+| Comando         | Descrição |  
+|----------------|-------------|  
+| `ia`           | Serviço de API de IA gratuito |  
+| `ia-image`     | Gerador de imagens com IA |  
+| `translator`   | Tradução em tempo real |  
+| `myip`         | Mostra seu IP público |  
+| `passwordgen`  | Gera senhas seguras |  
+| `encrypt-file` | Ferramenta de criptografia de arquivos |  
 
-#### `📡` OSINT (Búsqueda de información)  
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `ipinfo`        | Obtiene información de una IP. |  
-| `urlinfo`       | Analiza URLs. |  
-| `userfinder`    | Busca usuarios en múltiples plataformas. |  
-| `phoneinfo`     | Obtiene información de un número telefónico. |  
-| `metadatainfo`  | Extrae metadatos de archivos. |  
-| `emailsearch`   | Búsqueda de correos electrónicos. |  
+#### `📡` OSINT (Coleta de Informações)  
+| Comando         | Descrição |  
+|----------------|-------------|  
+| `ipinfo`       | Obtém informações de endereço IP |  
+| `urlinfo`      | Ferramenta de análise de URL |  
+| `userfinder`   | Busca de usuários em múltiplas plataformas |  
+| `phoneinfo`    | Consulta de números telefônicos |  
+| `metadatainfo` | Extração de metadados de arquivos |  
+| `emailsearch`  | Ferramenta de busca de e-mails |  
 
 #### `📱` Discord
-| Comando               | Descripción |  
-|----------------------|-------------|  
-| `userinfo`           | Obtiene información de un usuario (ID). |  
-| `serverinfo`         | Obtiene información de un servidor (ID). |  
-| `searchinvites`      | Busca invitaciones de Discord. |  
-| `inviteinfo`         | Analiza enlaces de invitación. |  
-| `role-mapper`        | Mapea roles usando el ID del servidor. |  
-| `mutual-servers`     | Verifica servidores en común entre usuarios. |  
-| `webhook-mass-spam`  | Envía mensajes masivos a un webhook. |  
-| `mass-delete-channels` | Elimina canales masivamente (en servidores propios). |  
+| Comando                | Descrição |  
+|-----------------------|-------------|  
+| `userinfo`            | Obtém informações de usuário (usando ID) |  
+| `serverinfo`          | Obtém informações de servidor (usando ID) |  
+| `searchinvites`       | Busca por convites do Discord |  
+| `inviteinfo`          | Analisa links de convite |  
+| `role-mapper`         | Mapeamento de cargos (requer ID do servidor) |  
+| `mutual-servers`      | Verifica servidores em comum entre usuários |  
+| `webhook-mass-spam`   | Ferramenta de spam em webhooks |  
+| `mass-delete-channels`| Exclusão em massa de canais (apenas servidores próprios) |  
 
 #### `📸` Instagram OSINT 
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `profileinfo`   | Extrae metadatos de perfiles de Instagram. |  
+| Comando        | Descrição |  
+|---------------|-------------|  
+| `profileinfo` | Extração de metadados de perfil do Instagram |  
 
-#### `🛡️` Pentesting 
-| Comando       | Descripción |  
-|--------------|-------------|  
-| `ddos`       | Realiza un ataque DDoS (IP + puerto). |  
-| `tunnel`     | Expone una imagen que captura la IP del visitante. |  
+#### `🛡️` Testes de Penetração 
+| Comando    | Descrição |  
+|-----------|-------------|  
+| `ddos`    | Ferramenta de ataque DDoS (IP+porta) |  
+| `tunnel`  | Hospeda imagem que captura IPs de visitantes |  
 
-##### Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
+##### O Stellar executa o TOR em segundo plano continuamente para proteção de anonimato.
 
 </details>
 
 <details>
-<summary><b>📄 Guía de uso</b></summary>
+<summary><b>📄 Guia de Uso</b></summary>
 
-##### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
+##### Uso simples - após a instalação, use o Termux normalmente. O comando `ui` permite personalizar:
+- Exibição de arte ASCII
+- Esquemas de cores
+- Cores de fundo (incluindo temas claro/escuro)
 
-##### El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
+##### O comando `ui` também permite personalização completa do tema do Termux, incluindo mudança de fundo escuro para claro/azul, etc.
 
 </details>
 
 #
 
-# `🖋️` Autores
+# `🖋️` Autor
 
 ```diff
-+ Keiji821 (Desarrollador)
++ Keiji821 (Desenvolvedor)
 ```
 
-##### Contactame, para dudas y colaboraciones.
+##### Para dúvidas ou colaborações, entre em contato
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
