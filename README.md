@@ -166,7 +166,7 @@ bash install.sh
   </a>
 </p>
 
-##### ❤️ Donaciones 
+##### `❤️` Donaciones 
 
 Si te gustó y te gusta este proyecto y te resulta útil considera apoyar a este proyecto y a su desarrollo donando la cantidad que desees.
 
