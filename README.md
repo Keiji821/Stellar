@@ -36,6 +36,8 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 ⚠️ `Still under constant development, there may be errors.`
 
+Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
+
 #
 
 <details>
