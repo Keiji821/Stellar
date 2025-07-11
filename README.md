@@ -103,6 +103,8 @@ bash install.sh
 
 </details>
 
+#
+
 # 🖋️ Autores
 
 ```diff
