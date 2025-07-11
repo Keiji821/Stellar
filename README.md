@@ -28,6 +28,12 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 #
 
+`🗃️` Documentación
+
+- [Documentation in English]()
+
+#
+
 ⚠️ `Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.`
 
 ⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
