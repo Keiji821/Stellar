@@ -32,6 +32,14 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 - [Documentation in English](https://github.com/Keiji821/Stellar/blob/master/README_English.md)
 
+- [日本語のドキュメント](https://github.com/Keiji821/Stellar/blob/master/README_Japanese.md)
+
+- [中文文檔](https://github.com/Keiji821/Stellar/blob/master/README_Chinese.md)
+
+- [한국어 문서](https://github.com/Keiji821/Stellar/blob/master/README_Korean.md)
+
+- [Documentação em português](https://github.com/Keiji821/Stellar/blob/master/README_Portuguese.md)
+
 #
 
 ⚠️ `Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.`
