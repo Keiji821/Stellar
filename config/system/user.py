@@ -68,7 +68,7 @@ with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
 if banner_background_color=="":
-    color_background_banner = "no"
+    banner_background_color = "no"
 
 banner_background_color_tr = {
 'no': 'No configurado',
