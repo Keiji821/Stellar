@@ -1,12 +1,7 @@
 from rich.console import Console
 from rich.table import Table
-import pyfiglet
 
 console = Console()
-
-console.print("")
-banner = pyfiglet.figlet_format("Comandos", font="ansi_shadow")
-console.print(banner, style="bright_magenta", justify="center")
 
 console.print("")
 
