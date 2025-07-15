@@ -9,7 +9,27 @@ console = Console()
 # Sistema
 
 response = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
-ip = response.json()
+data = response.json()
+
+ip = str(data.get("ip"))
+
+is_tor = str(data.get("is_tor"))
+if is_tor == "True":
+    is_tor = "Sí"
+if is_tor == "False":
+    is_tor = "No"  
+
+is_proxy = str(data.get("is_proxy"))
+if is_proxy == "True":
+    is_proxy = "Sí"
+if is_proxy == "False":
+    is_proxy = "No"
+
+is_vpn = str(data.get("is_vpn"))
+if is_vpn == "True":
+    is_vpn = "Sí"
+if is_vpn == "False":
+    is_vpn = "No"
 
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
