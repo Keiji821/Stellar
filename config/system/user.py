@@ -6,11 +6,10 @@ import requests
 
 console = Console()
 
-# IP
-
-
-
 # Sistema
+
+response = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
+ip = response.json()
 
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
@@ -61,6 +60,8 @@ table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
 table.add_row("Tor", "Activado • del sistema")
+table.add_row("")
+table.add_row("Tu IP en el internet", ip)
 
 console.print(table, style="bright_white", justify="center")
 console.print("")
