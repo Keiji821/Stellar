@@ -56,7 +56,7 @@ table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
 table.add_row("🧄 Tor", "Activado | Del sistema")
-table.add_row("¡Próximamente!")
+table.add_row("¡Próximamente más opciones!")
 
 console.print(table, style="bright_white", justify="center")
 console.print("")
