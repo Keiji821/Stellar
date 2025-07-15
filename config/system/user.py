@@ -49,15 +49,15 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
+if banner_color=="":
+    banner_color = "no"
+
 banner_color_tr = {
 'no': 'No configurado',
 'bold green': 'Verde intenso',
 'bold yellow': 'Amarillo intenso',
 }
 color_banner = banner_color_tr.get(banner_color)
-
-if color_banner=="":
-    color_banner = "No configurado"
 
 with open("banner_background.txt", encoding="utf-8") as f:
     banner_background = f.read().strip()
@@ -67,15 +67,15 @@ if banner_background=="no":
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
+if banner_background_color=="":
+    color_background_banner = "no"
+
 banner_background_color_tr = {
 'no': 'No configurado',
 'bold green': 'Verde intenso',
 'bold yellow': 'Amarillo intenso',
 }
 color_background_banner = banner_background_color_tr.get(banner_background_color)
-
-if color_background_banner=="":
-    color_background_banner = "No configurado"
 
 # Perfíl 
             
