@@ -6,6 +6,10 @@ import requests
 
 console = Console()
 
+# IP
+
+
+
 # Sistema
 
 with open("user.txt", encoding="utf-8") as f:
