@@ -55,7 +55,7 @@ table.add_row("Contraseña", password)
 table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
-tablet.add_row("🧄 Tor", "Activado | Del sistema")
+table.add_row("🧄 Tor", "Activado | Del sistema")
 table.add_row("¡Próximamente!")
 
 console.print(table, style="bright_white", justify="center")
