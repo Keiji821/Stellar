@@ -2,6 +2,7 @@ from rich.console import Console
 import os
 from os import system
 from rich.table import Table
+import requests
 
 console = Console()
 
