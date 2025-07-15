@@ -49,11 +49,23 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
+banner_color_tr = {
+'bold green': 'Verde intenso',
+'bold yellow': 'Amarillo intenso',
+}
+color_banner = banner_color_tr.get(banner_color)
+
 with open("banner_background.txt", encoding="utf-8") as f:
     banner_background = f.read().strip()
 
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
+
+banner_background_color_tr = {
+'bold green': 'Verde intenso',
+'bold yellow': 'Amarillo intenso',
+}
+color_background_banner = banner_background_color_tr.get(banner_background_color)
 
 # Perfíl 
             
@@ -68,9 +80,9 @@ table.add_row("Usuario", user)
 table.add_row("")
 table.add_row("Preferencias", style="bold green")
 table.add_row("")
-table.add_row("Color del banner", banner_color)
+table.add_row("Color del banner", color_banner)
 table.add_row("Fondo del banner", banner_background)
-table.add_row("Color del fondo del banner", banner_background_color)
+table.add_row("Color del fondo del banner", color_background_banner)
 table.add_row("")
 table.add_row("Seguridad", style="bold green")
 table.add_row("")
@@ -79,10 +91,10 @@ table.add_row("Contraseña", password)
 table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
-table.add_row("TOR", f"{is_tor} | del sistema")
-table.add_row("VPN", f"{is_vpn} | del sistema")
-table.add_row("PROXY", f"{is_proxy} | del sistema")
-table.add_row("Tu IP enmascarada", ip)
+table.add_row("🧄 TOR", f"{is_tor} | del sistema")
+table.add_row("🔌 VPN", f"{is_vpn} | del sistema")
+table.add_row("🌐 PROXY", f"{is_proxy} | del sistema")
+table.add_row("• > Tu IP enmascarada", ip)
 
 console.print(table, style="bright_white", justify="center")
 console.print("")
