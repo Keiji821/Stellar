@@ -80,7 +80,7 @@ table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
 table.add_row("TOR", f"{is_tor} | del sistema")
-table.add_row("VPN", f"{is_vpn) | del sistema")
+table.add_row("VPN", f"{is_vpn} | del sistema")
 tablet.add_row("PROXY", f"{is_proxy} | del sistema")
 table.add_row("Tu IP enmascarada", ip)
 
