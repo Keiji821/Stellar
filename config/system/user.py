@@ -15,21 +15,21 @@ ip = str(data.get("ip"))
 
 is_tor = str(data.get("is_tor"))
 if is_tor == "True":
-    is_tor = "Sí"
+    is_tor = "Activado"
 if is_tor == "False":
-    is_tor = "No"  
+    is_tor = "Desactivado"  
 
 is_proxy = str(data.get("is_proxy"))
 if is_proxy == "True":
-    is_proxy = "Sí"
+    is_proxy = "Activado"
 if is_proxy == "False":
-    is_proxy = "No"
+    is_proxy = "Desactivado"
 
 is_vpn = str(data.get("is_vpn"))
 if is_vpn == "True":
-    is_vpn = "Sí"
+    is_vpn = "Activado"
 if is_vpn == "False":
-    is_vpn = "No"
+    is_vpn = "Desactivado"
 
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
@@ -79,9 +79,10 @@ table.add_row("Contraseña", password)
 table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
-table.add_row("Tor", "Activado • del sistema")
-table.add_row("")
-table.add_row("Tu IP en el internet", ip)
+table.add_row("TOR", f"{is_tor} | del sistema")
+table.add_row("VPN", f"{is_vpn) | del sistema")
+tablet.add_row("PROXY", f"{is_proxy} | del sistema")
+table.add_row("Tu IP enmascarada", ip)
 
 console.print(table, style="bright_white", justify="center")
 console.print("")
