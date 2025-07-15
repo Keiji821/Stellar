@@ -56,6 +56,7 @@ banner_color_tr = {
 'no': 'No configurado',
 'bold green': 'Verde intenso',
 'bold yellow': 'Amarillo intenso',
+'bold white': 'Blanco intenso',
 }
 color_banner = banner_color_tr.get(banner_color)
 
@@ -74,6 +75,7 @@ banner_background_color_tr = {
 'no': 'No configurado',
 'bold green': 'Verde intenso',
 'bold yellow': 'Amarillo intenso',
+'bold white': 'Blanco intenso',
 }
 color_background_banner = banner_background_color_tr.get(banner_background_color)
 
