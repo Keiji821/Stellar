@@ -8,7 +8,7 @@ console = Console()
 
 # Sistema
 
-response = requests.get(f'https://api.ipapi.is/?ip={IpQuery}')
+response = requests.get(f'https://api.ipapi.is/?ip=')
 data = response.json()
 
 ip = str(data.get("ip"))
