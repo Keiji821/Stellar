@@ -50,6 +50,7 @@ with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
 banner_color_tr = {
+'no': 'No configurado',
 'bold green': 'Verde intenso',
 'bold yellow': 'Amarillo intenso',
 }
@@ -57,11 +58,14 @@ color_banner = banner_color_tr.get(banner_color)
 
 with open("banner_background.txt", encoding="utf-8") as f:
     banner_background = f.read().strip()
+if banner_background=="no":
+    banner_background = "No configurado"
 
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
 banner_background_color_tr = {
+'no': 'No configurado',
 'bold green': 'Verde intenso',
 'bold yellow': 'Amarillo intenso',
 }
