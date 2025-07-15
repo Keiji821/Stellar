@@ -30,6 +30,8 @@ with open("banner_background.txt", encoding="utf-8") as f:
 
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
+
+# Perfíl 
             
 console.print("")
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
@@ -45,6 +47,15 @@ table.add_row("")
 table.add_row("Color del banner", banner_color)
 table.add_row("Fondo del banner", banner_background)
 table.add_row("Color del fondo del banner", banner_background_color)
+table.add_row("")
+table.add_row("Seguridad", style="bold green")
+table.add_row("")
+table.add_row("Método de verificación", login_method)
+table.add_row("Contraseña", password)
+table.add_row("")
+table.add_row("Privacidad", style="bold green")
+table.add_row("")
+table.add_row("¡Próximamente!")
 
 console.print(table, style="bright_white", justify="center")
 console.print("")
