@@ -126,6 +126,7 @@ clear
 pkill -f "tor"
 pkill -f "cloudflared"
 pkill -f 9052
+pkill -f 5053
 export puerto="9052"
 export ALL_PROXY="socks5h://localhost:${puerto}"
 tor --SocksPort $puerto \
