@@ -31,6 +31,10 @@ if is_vpn == "True":
 if is_vpn == "False":
     is_vpn = "Desactivado"
 
+network = str(data.get("company", {}).get("network"))
+
+route = str(data.get("asn", {}).get("route"))
+
 with open("user.txt", encoding="utf-8") as f:
     user = f.read().strip()
 
@@ -110,6 +114,8 @@ table.add_row("")
 table.add_row("Red/Sistema", style="bold green")
 table.add_row("")
 table.add_row("Tú IP enmascarada", ip)
+table.add_row("Red" network)
+table.add_row("Ruta" ruta)
 
 
 console.print(table, style="bright_white", justify="center")
