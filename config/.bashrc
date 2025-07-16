@@ -124,9 +124,7 @@ cd "$HOME"
 clear
 
 pkill -f "tor"
-pkill -f "cloudflared"
 pkill -f 9052
-pkill -f 5053
 export puerto="9052"
 export ALL_PROXY="socks5h://localhost:${puerto}"
 tor --SocksPort $puerto \
@@ -137,9 +135,6 @@ tor --SocksPort $puerto \
     --ClientOnly 1 \
     --AvoidDiskWrites 1 \
     &>tor.txt &
-export puerto2="5053"
-export DNS_OVER_HTTPS="https://127.0.0.1:$puerto2/dns-query"
-cloudflared proxy-dns --port $puerto2 --upstream "https://1.1.1.1/dns-query" &> cloudflared.txt &
 
 
 cp ~/Stellar/config/.bash_profile ~/.
