@@ -127,7 +127,14 @@ pkill -f "tor"
 pkill -f 9052
 export puerto="9052"
 export ALL_PROXY="socks5h://localhost:${puerto}"
-tor --SocksPort $puerto &>tor.txt &
+tor --SocksPort $puerto \
+    --NewCircuitPeriod 60 \
+    --MaxCircuitDirtiness 600 \
+    --NumEntryGuards 3 \
+    --CircuitBuildTimeout 60 \
+    --ClientOnly 1 \
+    --AvoidDiskWrites 1 \
+    &>tor.txt &
 
 cp ~/Stellar/config/.bash_profile ~/.
 cd Stellar/config/themes
