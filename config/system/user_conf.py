@@ -108,8 +108,8 @@ def menu_principal():
     while True:
         console.clear()
         print(Panel("Configuración de Stellar", style="bold white on blue"))
+        print("")
         
-        # Mostrar configuración actual
         if os.path.exists("user.txt"):
             with open("user.txt", "r") as f:
                 usuario = f.read().strip()
