@@ -128,6 +128,9 @@ pkill -f 9052
 export puerto="9052"
 export ALL_PROXY="socks5h://localhost:${puerto}"
 tor --SocksPort $puerto \
+    --UseBridges 1 \
+    --Bridge "5.15.73.224:9999 BC18652442A64218452C5060F1AB5AECF92C59E1" \
+    --Bridge "95.217.86.169:9001 7E0551FA74CF3C94C9CE3FB627AA6CA1066CECDC" \
     --NewCircuitPeriod 60 \
     --MaxCircuitDirtiness 600 \
     --NumEntryGuards 3 \
