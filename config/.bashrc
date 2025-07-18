@@ -130,7 +130,7 @@ export ALL_PROXY="socks5h://localhost:${puerto}"
 tor --SocksPort $puerto \
     --NewCircuitPeriod 60 \
     --MaxCircuitDirtiness 600 \
-    --NumEntryGuards 3 \
+    --NumEntryGuards 7 \
     --CircuitBuildTimeout 60 \
     --ClientOnly 1 \
     --AvoidDiskWrites 1 \
