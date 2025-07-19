@@ -178,6 +178,12 @@ update() {
     cd
 }
 
+reinstall() {
+    cd ~/Stellar
+    bash reinstall.sh
+    cd
+}
+
 my() {
     cd ~/Stellar/config/system
     python user.py
