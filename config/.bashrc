@@ -355,3 +355,42 @@ command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
     return 127
 }
+
+cat > archivo.properties << 'EOF'
+allow-external-apps = true
+default-working-directory = /data/data/com.termux/files/home
+disable-terminal-session-change-toast = true
+hide-soft-keyboard-on-startup = true
+soft-keyboard-toggle-behaviour = enable/disable
+terminal-transcript-rows = 2000
+volume-keys = volume
+
+fullscreen = true
+use-fullscreen-workaround = true
+
+terminal-cursor-blink-rate = 0
+terminal-cursor-style = bar
+
+extra-keys-style = default
+extra-keys-text-all-caps = true
+extra-keys = [[ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP]]
+extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
+              ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]
+
+use-black-ui = true
+
+disable-hardware-keyboard-shortcuts = true
+shortcut.create-session = ctrl + t
+shortcut.next-session = ctrl + 2
+shortcut.previous-session = ctrl + 1
+shortcut.rename-session = ctrl + n
+
+bell-character = vibrate
+back-key=escape
+
+enforce-char-based-input = true
+ctrl-space-workaround = true
+
+terminal-margin-horizontal=3
+terminal-margin-vertical=0
+EOF
