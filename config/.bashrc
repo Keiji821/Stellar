@@ -351,11 +351,6 @@ encrypt-file() {
     cd
 }
 
-command_not_found_handle() {
-    echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
-    return 127
-}
-
 cd ~/.termux
 cat > termux.properties << 'EOF'
 # allow-external-apps = true
@@ -396,3 +391,13 @@ terminal-cursor-style = bar
 # terminal-margin-vertical=0
 EOF
 cd
+
+export HISTCONTROL=ignoredups:erasedups
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export EDITOR=nano
+
+command_not_found_handle() {
+    echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
+    return 127
+}
