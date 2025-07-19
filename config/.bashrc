@@ -356,7 +356,8 @@ command_not_found_handle() {
     return 127
 }
 
-cat > archivo.properties << 'EOF'
+cd ~/.termux
+cat > termux.properties << 'EOF'
 allow-external-apps = true
 default-working-directory = /data/data/com.termux/files/home
 disable-terminal-session-change-toast = true
@@ -394,3 +395,4 @@ ctrl-space-workaround = true
 terminal-margin-horizontal=3
 terminal-margin-vertical=0
 EOF
+cd
