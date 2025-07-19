@@ -294,8 +294,6 @@ main_install() {
     echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
     echo ""
 
-    mkdir -p ~/Stellar/{config,tools,modules}
-
     if update_system; then
         if install_dependencies; then
             if finalize_installation; then
