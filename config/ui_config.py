@@ -1,15 +1,28 @@
-from rich.console import Console
 import os
-from os import system
+import subprocess
+import time
+from rich.console import Console
+from rich.panel import Panel
+from rich.prompt import Prompt, Confirm
+from rich.text import Text
+from rich.table import Table
+from rich.box import ROUNDED, SQUARE
+from rich import print as rprint
+from pathlib import Path
 
 console = Console()
 
-os.system("clear")
+STELLAR_DIR = Path("~/Stellar").expanduser()
+THEMES_DIR = STELLAR_DIR / "config/themes"
+SYSTEM_DIR = STELLAR_DIR / "config/system"
+TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
 
-os.chdir("themes")
+THEMES_DIR.mkdir(parents=True, exist_ok=True)
+SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
 
-# themes/termux
-dracula = """
+# Mantener la estructura original de los temas para Termux
+def dracula():
+    return """
 background=#282A36
 foreground=#F8F8F2
 color0=#21222C
@@ -27,9 +40,11 @@ color11=#F4F99D
 color12=#CAA9FA
 color13=#FF92D0
 color14=#9AEDFE
-color15=#E6E6E6"""
+color15=#E6E6E6
+"""
 
-nord = """
+def nord():
+    return """
 background=#2E3440
 foreground=#D8DEE9
 color0=#3B4252
@@ -47,9 +62,11 @@ color11=#ECEFF4
 color12=#5E81AC
 color13=#EBCB8B
 color14=#B48EAD
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-gruvbox = """
+def gruvbox():
+    return """
 background=#282828
 foreground=#EBDBB2
 color0=#1D2021
@@ -67,9 +84,11 @@ color11=#FABD2F
 color12=#83A598
 color13=#D3869B
 color14=#8EC07C
-color15=#EBDBB2"""
+color15=#EBDBB2
+"""
 
-tokyo_night = """
+def tokyo_night():
+    return """
 background=#1A1B26
 foreground=#A9B1D6
 color0=#16161E
@@ -87,9 +106,11 @@ color11=#FF9E64
 color12=#7AA2F7
 color13=#BB9AF7
 color14=#0DB9D7
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-one_dark = """
+def one_dark():
+    return """
 background=#282C34
 foreground=#ABB2BF
 color0=#1E2127
@@ -107,9 +128,11 @@ color11=#D19A66
 color12=#4FA6ED
 color13=#BF68D9
 color14=#48B0BD
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-monokai = """
+def monokai():
+    return """
 background=#272822
 foreground=#f8f8f2
 cursor=#f8f8f2
@@ -128,9 +151,11 @@ color11=#f4bf75
 color12=#66d9ef
 color13=#ae81ff
 color14=#a1efe4
-color15=#f9f8f5"""
+color15=#f9f8f5
+"""
 
-solarized_dark = """
+def solarized_dark():
+    return """
 background=#002b36
 foreground=#839496
 cursor=#839496
@@ -149,9 +174,11 @@ color11=#b58900
 color12=#268bd2
 color13=#6c71c4
 color14=#2aa198
-color15=#fdf6e3"""
+color15=#fdf6e3
+"""
 
-catppuccin_latte = """
+def catppuccin_latte():
+    return """
 background=#EFF1F5
 foreground=#4C4F69
 cursor=#4C4F69
@@ -170,9 +197,11 @@ color11=#DF8E1D
 color12=#1E66F5
 color13=#EA76CB
 color14=#179299
-color15=#BCC0CC"""
+color15=#BCC0CC
+"""
 
-cyberpunk_neon = """
+def cyberpunk_neon():
+    return """
 background=#0C0C0C
 foreground=#00FF9D
 cursor=#00FF9D
@@ -191,9 +220,11 @@ color11=#FFD700
 color12=#00A1FF
 color13=#FF00AA
 color14=#00FFFF
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-everforest = """
+def everforest():
+    return """
 background=#2B3339
 foreground=#D5C9AB
 cursor=#D5C9AB
@@ -212,9 +243,11 @@ color11=#DBBC7F
 color12=#7FBBB3
 color13=#D699B6
 color14=#83C092
-color15=#DEE2D9"""
+color15=#DEE2D9
+"""
 
-material_ocean = """
+def material_ocean():
+    return """
 background=#0F111A
 foreground=#8F93A2
 cursor=#8F93A2
@@ -233,9 +266,11 @@ color11=#FAE3B0
 color12=#96CDFB
 color13=#D5AEEA
 color14=#89DCEB
-color15=#A6ADC8"""
+color15=#A6ADC8
+"""
 
-horizon = """
+def horizon():
+    return """
 background=#1C1E26
 foreground=#CBCED0
 cursor=#CBCED0
@@ -254,9 +289,11 @@ color11=#FAB795
 color12=#26BBD9
 color13=#EE64AC
 color14=#59E1E3
-color15=#E6E6E6"""
+color15=#E6E6E6
+"""
 
-matrix = """
+def matrix():
+    return """
 background=#000000
 foreground=#00FF00
 cursor=#00FF00
@@ -275,9 +312,11 @@ color11=#FFFF55
 color12=#5555FF
 color13=#FF55FF
 color14=#55FFFF
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-hacker_purple = """
+def hacker_purple():
+    return """
 background=#0D0208
 foreground=#00FF41
 cursor=#00FF41
@@ -296,9 +335,11 @@ color11=#FFFF33
 color12=#3399FF
 color13=#FF33FF
 color14=#33FFFF
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-cyberpunk_red = """
+def cyberpunk_red():
+    return """
 background=#000000
 foreground=#FF0000
 cursor=#FF0000
@@ -317,9 +358,11 @@ color11=#FF9933
 color12=#3399FF
 color13=#CC33FF
 color14=#33FFFF
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
-hacker_retro = """
+def hacker_retro():
+    return """
 background=#121212
 foreground=#00FF00
 cursor=#00FF00
@@ -338,12 +381,29 @@ color11=#FFCC33
 color12=#3399FF
 color13=#CC33FF
 color14=#33FFFF
-color15=#FFFFFF"""
+color15=#FFFFFF
+"""
 
+THEMES = {
+    "dracula": dracula(),
+    "nord": nord(),
+    "gruvbox": gruvbox(),
+    "tokyo_night": tokyo_night(),
+    "one_dark": one_dark(),
+    "monokai": monokai(),
+    "solarized_dark": solarized_dark(),
+    "catppuccin_latte": catppuccin_latte(),
+    "cyberpunk_neon": cyberpunk_neon(),
+    "everforest": everforest(),
+    "material_ocean": material_ocean(),
+    "horizon": horizon(),
+    "matrix": matrix(),
+    "hacker_purple": hacker_purple(),
+    "cyberpunk_red": cyberpunk_red(),
+    "hacker_retro": hacker_retro()
+}
 
-
-# colors/banner/background
-colors = [
+COLORS = [
     "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
     "bright_black", "bright_red", "bright_green", "bright_yellow", 
     "bright_blue", "bright_magenta", "bright_cyan", "bright_white",
@@ -354,106 +414,225 @@ colors = [
     "grey89", "grey93", "grey100", "orange1", "orange3", "orange4"
 ]
 
-banner = console.input("[bold green]¿Desea configurar el contenido del banner? (y/n): [/bold green]")
-if banner=="y":
-    console.print("[bold green]Presione [code][bold yellow][Enter][/code] [bold green]para configurar su banner[/bold green]")
-    os.system("rm -rf banner.txt && nano banner.txt")
+def error(mensaje):
+    console.print(f"[bold red]✖[/bold red] {mensaje}")
 
-banner_color = console.input("[bold green]¿Desea configurar el color de su banner? (y/n): [/bold green]")
-if banner_color=="y":
-    bcolor = console.input("[bold green]¿Desea ver los colores disponibles? (y/n): [/bold green]")
-    if bcolor=="y":       
-        for color in colors:
-           console.print(f"[{color}]{color}[/{color}]")
-           console.print("")
+def exito(mensaje):
+    console.print(f"[bold green]✓[/bold green] {mensaje}")
 
-    color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
-    os.system(f"echo {color_selection} > banner_color.txt")
+def pregunta(mensaje):
+    console.print(f"[bold yellow]?[/bold yellow] {mensaje}")
 
+def informacion(mensaje):
+    console.print(f"[bold cyan]→[/bold cyan] {mensaje}")
 
-banner_background = console.input("[bold green]¿Desea que su banner tenga un fondo? (y/n): [/bold green]")
-if banner_background=="n":
-    os.system("echo No > banner_background.txt")    
-if banner_background=="y":
-    os.system("echo Sí > banner_background.txt")
-    banner_background_color = console.input("[bold green]¿Desea agregar un color al fondo de su banner? (y/n): [/bold green]")
-    if banner_background_color=="y":
-        for color in colors:
+def verificar_termux_api():
+    try:
+        result = subprocess.run(['pkg', 'list-installed'], 
+                               capture_output=True, text=True, check=True)
+        return 'termux-api' in result.stdout
+    except subprocess.CalledProcessError:
+        return False
+
+def configurar_banner():
+    if Confirm.ask("[bold green]¿Configurar contenido del banner?[/bold green]"):
+        banner_path = THEMES_DIR / "banner.txt"
+        subprocess.run(["nano", str(banner_path)])
+        exito("Banner configurado correctamente")
+    
+    if Confirm.ask("[bold green]¿Configurar color del banner?[/bold green]"):
+        for color in COLORS:
             console.print(f"[{color}]{color}[/{color}]")
-            console.print("")
-    banner_background_color_selection = console.input("[bold green]Ingrese el color a configurar: [/bold green]")
-    os.system(f"echo {banner_background_color_selection} > banner_background_color.txt")
+        color = Prompt.ask("[green]Seleccione color[/green]", choices=COLORS)
+        (THEMES_DIR / "banner_color.txt").write_text(color)
+        exito(f"Color del banner configurado: {color}")
+    
+    if Confirm.ask("[bold green]¿Agregar fondo al banner?[/bold green]"):
+        (THEMES_DIR / "banner_background.txt").write_text("si")
+        for color in COLORS:
+            console.print(f"[{color}]{color}[/{color}]")
+        bg_color = Prompt.ask("[green]Seleccione color de fondo[/green]", choices=COLORS)
+        (THEMES_DIR / "banner_background_color.txt").write_text(bg_color)
+        exito(f"Color de fondo configurado: {bg_color}")
+    else:
+        (THEMES_DIR / "banner_background.txt").write_text("no")
+        exito("Fondo de banner desactivado")
 
+def configurar_tema_termux():
+    if not Confirm.ask("[bold green]¿Configurar tema de Termux?[/bold green]"):
+        return
+    
+    console.print("[bold cyan]Temas disponibles:[/bold cyan]")
+    theme_table = Table(show_header=True, header_style="bold magenta", box=SQUARE)
+    theme_table.add_column("Nombre", style="cyan")
+    theme_table.add_column("Preview", width=30)
+    
+    for name in THEMES:
+        colors = THEMES[name].split('\n')
+        preview = Text("")
+        for i in range(1, 8):
+            if any(f"color{i}=" in line for line in colors):
+                color_line = [line for line in colors if f"color{i}=" in line][0]
+                color_val = color_line.split('=')[1]
+                preview.append("■■■ ", style=f"on {color_val}")
+        theme_table.add_row(name, preview)
+    
+    console.print(theme_table)
+    
+    opcion = Prompt.ask("[green]Seleccione una opción[/green]", choices=["s", "c"], default="s")
+    
+    if opcion == "s":
+        tema = Prompt.ask("[green]Ingrese el nombre del tema[/green]", choices=list(THEMES.keys()))
+        TERMUX_COLORS_PATH.write_text(THEMES[tema])
+        exito(f"Tema {tema} aplicado correctamente")
+    else:
+        subprocess.run(["nano", str(TERMUX_COLORS_PATH)])
+        exito("Tema personalizado configurado")
 
-termux_background = console.input("[bold green]¿Desea agregar un tema de fondo para su Termux? (y/n): [/bold green]")
-if termux_background=="y":
-    termux_background_list = console.input("[bold green]Pulse [code][bold yellow][Enter][/code] [bold green]para ver un listado de temas por defecto[/bold green]")
+def configurar_usuario():
+    user_path = SYSTEM_DIR / "user.txt"
+    
+    if user_path.exists():
+        usuario_actual = user_path.read_text().strip()
+        if usuario_actual == "Stellar":
+            error("Usuario no configurado")
+        else:
+            pregunta(f"Usuario actual: [bold magenta]{usuario_actual}[/bold magenta]")
+            if not Confirm.ask("[yellow]¿Reemplazar usuario?[/yellow]", default=False):
+                informacion("Usuario no modificado")
+                return
+    
+    while True:
+        nuevo_usuario = Prompt.ask("[cyan]Ingrese nuevo usuario[/cyan]", default="").strip()
+        if nuevo_usuario:
+            user_path.write_text(nuevo_usuario)
+            exito(f"Usuario [bold]{nuevo_usuario}[/bold] configurado correctamente")
+            return
+        error("Nombre vacío no permitido")
 
-    console.print("[bold cyan]Temas por defecto[/bold cyan]")
-    console.print("""
-• dracula
-• nord
-• gruvbox
-• tokyo_night
-• one_dark
-• solarized_dark
-• monokai
-• catppuccin_latte
-• everforest
-• horizon
-• material_ocean
-• cyberpunk_neon
-• matrix
-• hacker_purple
-• cyberpunk_red
-• hacker_retro
-""")
-    console.print("""[bold cyan]Opciones[/bold cyan]
+def configurar_autenticacion():
+    metodo_path = SYSTEM_DIR / "login_method.txt"
+    
+    if metodo_path.exists():
+        metodo_actual = metodo_path.read_text().strip()
+        if metodo_actual == "no":
+            error("No tiene método de desbloqueo configurado")
+        else:
+            metodo = "Huella digital" if metodo_actual == "termux-fingerprint" else "Desconocido"
+            pregunta(f"Método actual: [bold magenta]{metodo}[/bold magenta]")
+            if not Confirm.ask("[yellow]¿Reemplazar método?[/yellow]", default=False):
+                informacion("Método no modificado")
+                return
+    
+    table = Table(box=ROUNDED, show_header=False)
+    table.add_column("Opciones", style="cyan")
+    table.add_row("[bold green]1)[/bold green] Huella digital")
+    table.add_row("[bold green]2)[/bold green] Desactivar protección")
+    console.print(table)
 
-• Ingrese "s" para elegir un banner por defecto
-• Ingrese "c" para configurar un banner desde cero
-""")
-    termux_background_select = console.input("[bold green]Ingrese una opción: [/bold green]")    
-    if termux_background_select=="s":
-        theme = console.input("[bold green]Ingrese el tema por defecto a usar: [/bold green]")
+    opcion = Prompt.ask("[cyan]Seleccione [1-2][/cyan]", choices=["1", "2"], default="1")
+
+    if opcion == "1":
+        if verificar_termux_api():
+            metodo_path.write_text("termux-fingerprint")
+            exito("Autenticación por huella digital activada")
+        else:
+            error("Termux-API no está instalado")
+            informacion("Instale con: [bold]pkg install termux-api[/bold]")
+    else:
+        metodo_path.write_text("no")
+        exito("Protección desactivada")
+
+def probar_autenticacion():
+    metodo_path = SYSTEM_DIR / "login_method.txt"
+    
+    if not metodo_path.exists():
+        error("No tiene método de autenticación configurado")
+        time.sleep(1.5)
+        return
+    
+    metodo = metodo_path.read_text().strip()
+    
+    if metodo == "termux-fingerprint":
+        rprint("\n[bold yellow]Probando autenticación...[/bold yellow]")
+        try:
+            subprocess.run(['termux-fingerprint'], check=True)
+            exito("Autenticación exitosa")
+        except subprocess.CalledProcessError:
+            error("Autenticación fallida")
+        Prompt.ask("[yellow]Presione Enter para continuar...[/yellow]")
+    else:
+        error("Método de huella no configurado")
+        time.sleep(1.5)
+
+def mostrar_encabezado():
+    rprint(Panel.fit(
+        "[bold white]Configuración de Stellar[/bold white]",
+        style="bold white on blue",
+        subtitle="[yellow]Sistema de Temas y Autenticación[/yellow]"
+    ))
+
+def mostrar_estado():
+    estado_table = Table(show_header=False, box=None)
+    estado_table.add_column("Configuración", style="magenta")
+    estado_table.add_column("Valor", style="cyan")
+    
+    user_path = SYSTEM_DIR / "user.txt"
+    if user_path.exists():
+        usuario = user_path.read_text().strip()
+        estado_table.add_row("Usuario:", f"[bold]{usuario}[/bold]")
+    
+    metodo_path = SYSTEM_DIR / "login_method.txt"
+    if metodo_path.exists():
+        metodo = metodo_path.read_text().strip()
+        estado = "[bold green]Huella activada" if metodo == "termux-fingerprint" else "[bold yellow]Protección desactivada"
+        estado_table.add_row("Seguridad:", estado)
+    
+    banner_path = THEMES_DIR / "banner.txt"
+    if banner_path.exists():
+        estado_table.add_row("Banner:", "[bold green]Configurado[/bold green]")
+    
+    console.print(estado_table)
+
+def menu_principal():
+    while True:
+        mostrar_encabezado()
+        mostrar_estado()
         
-        if theme=="dracula":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{dracula}\nEOF')
-        if theme=="nord":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{nord}\nEOF')
-        if theme=="gruvbox":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{gruvbox}\nEOF')
-        if theme=="tokyo_night":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{tokyo_night}\nEOF')
-        if theme=="one_dark":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{one_dark}\nEOF')
-        if theme=="solarized_dark":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{solarized_dark}\nEOF')
-        if theme=="monokai":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{monokai}\nEOF')
-        if theme=="catppuccin_latte":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{catppuccin_latte}\nEOF')
-        if theme=="everforest":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{everforest}\nEOF')
-        if theme=="horizon":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{horizon}\nEOF')
-        if theme=="material_ocean":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{material_ocean}\nEOF')
-        if theme=="cyberpunk_neon":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{cyberpunk_neon}\nEOF')
-        if theme=="matrix":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{matrix}\nEOF')
-        if theme=="hacker_purple":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{hacker_purple}\nEOF')
-        if theme=="cyberpunk_red":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{cyberpunk_red}\nEOF')
-        if theme=="hacker_retro":
-            os.system(f'cat << "EOF" > ~/.termux/colors.properties\n{hacker_retro}\nEOF')
-    if termux_background_select=="c":
-        os.system("cd && cd .termux && rm -rf colors.properties && nano colors.properties")
+        menu_table = Table(box=ROUNDED, show_header=False)
+        menu_table.add_column("Opciones", style="cyan")
+        menu_table.add_row("[bold green]1)[/bold green] Configurar banner")
+        menu_table.add_row("[bold green]2)[/bold green] Configurar tema Termux")
+        menu_table.add_row("[bold green]3)[/bold green] Configurar usuario")
+        menu_table.add_row("[bold green]4)[/bold green] Configurar autenticación")
+        menu_table.add_row("[bold green]5)[/bold green] Probar autenticación")
+        menu_table.add_row("[bold green]6)[/bold green] Salir")
+        console.print(menu_table)
+        
+        opcion = Prompt.ask("[cyan]Seleccione opción [1-6][/cyan]", choices=["1", "2", "3", "4", "5", "6"])
+        
+        if opcion == "1":
+            configurar_banner()
+        elif opcion == "2":
+            configurar_tema_termux()
+        elif opcion == "3":
+            configurar_usuario()
+        elif opcion == "4":
+            configurar_autenticacion()
+        elif opcion == "5":
+            probar_autenticacion()
+        elif opcion == "6":
+            rprint("\n[bold green]Saliendo del sistema...[/bold green]")
+            exit(0)
 
-console.print("")
-console.print("[code]Configuraciónes aplicadas correctamente[/code]", style="bold green", justify="center")
-console.print("""
-Escriba el comando "bash" o "login" para aplicar los cambios correctamente, para aplicar el tema de fondo de Termux reinicie la aplicación.""", justify="center")
-console.print("")
+def inicio():
+    rprint(Panel.fit(
+        "[bold white]Sistema de Configuración Stellar[/bold white]",
+        style="bold white on magenta",
+        subtitle="[yellow]Bienvenido[/yellow]"
+    ))
+    
+    menu_principal()
+
+if __name__ == "__main__":
+    inicio()
