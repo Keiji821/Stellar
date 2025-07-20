@@ -124,12 +124,13 @@ bash install.sh
 <details>
 <summary><b>📄 Usage Guide</b></summary>
 
-##### Simple to use - after installation, use Termux as normal. The `ui` command lets you customize:
+##### Simple to use - after installation, use Termux as normal. The `user-config` command lets you customize:
 - ASCII art display
 - Color schemes
 - Background colors (including light/dark themes)
+- User and verification method 
 
-##### The `ui` command also allows complete Termux theme customization, including changing from dark to light/blue backgrounds.
+##### The `user-config` command also allows complete Termux theme customization, including changing from dark to light/blue backgrounds.
 
 </details>
 
