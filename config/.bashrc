@@ -160,9 +160,9 @@ reload() {
     cd
 }
 
-ui() {
+user-config() {
     cd ~/Stellar/config
-    python ui_config.py
+    python user_config.py
     cd
 }
 
@@ -187,12 +187,6 @@ reinstall() {
 my() {
     cd ~/Stellar/config/system
     python user.py
-    cd
-}
-
-userconf() {
-    cd ~/Stellar/config/system
-    python user_conf.py
     cd
 }
 
