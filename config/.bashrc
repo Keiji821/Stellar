@@ -124,7 +124,7 @@ cd "$HOME"
 clear
 
 pkill -f "tor"
-pkill -f 9052
+pkill -f "9052"
 export puerto="9052"
 export ALL_PROXY="socks5h://localhost:${puerto}"
 tor --SocksPort $puerto \
