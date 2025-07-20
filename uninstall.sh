@@ -47,26 +47,21 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-clear
-echo -e "==============================${Reset}"
-echo -e "${Cian_Brillante}STELLAR OS"
-echo -e "==============================${Reset}"
-
 echo -e "${Rojo_Brillante}¿Desea eliminar Stellar completamente?${Reset}"
 read -p "Esta acción no se puede deshacer [S/N]: " respuesta
 
 if [[ "$respuesta" =~ ^[SsYy]$|^[Ss]í$|^[Ss]i$ ]]; then
-    echo -e "\n${Rojo}➤ Eliminando archivos de Stellar...${Reset}"
+    echo -e "${Rojo}➤ Eliminando archivos de Stellar...${Reset}"
     rm -rf ~/Stellar
     rm -f ~/.bashrc
     rm -f ~/.bash_profile
     echo -e "${Verde_Brillante}✔ Stellar se ha eliminado completamente${Reset}"
 else
-    echo -e "\n${Amarillo_Brillante}➤ Operación cancelada${Reset}"
+    echo -e "${Amarillo_Brillante}➤ Operación cancelada${Reset}"
 fi
 
-echo -e "\n${Magenta_Brillante}Gracias por haber utilizado Stellar!"
+echo -e "${Magenta_Brillante}Gracias por haber utilizado Stellar!"
 echo -e "${Cian_Brillante}Atte: Keiji821${Reset}"
-echo -e "${Azul_Brillante}¡Hasta pronto! :)${Reset}\n"
+echo -e "${Azul_Brillante}¡Hasta pronto! :)${Reset}"
 sleep 3
 login
