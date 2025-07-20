@@ -85,14 +85,13 @@ bash install.sh
 | Comando       | Descripción |  
 |--------------|-------------|  
 | `reload`     | Recarga el banner del sistema. |  
-| `ui`         | Personaliza el banner y sus colores. |  
+| `user-config`         | Personaliza el banner y tu perfil de Stellar. |  
 | `uninstall`  | Desinstala Stellar por completo. |  
 | `update`     | Actualiza Stellar desde GitHub. |  
 | `bash`       | Reinicia la sesión de terminal. |  
 | `history -c` | Elimina el historial de comandos de la terminal. |  
 | `reset`      | Restablece la terminal a su estado inicial. |  
 | `my`         | Muestra tu perfil de Stellar. |  
-| `userconf`   | Configura tu perfil de Stellar. |  
 
 #### `🛠️` Utilidades
 | Comando          | Descripción |  
@@ -144,9 +143,9 @@ bash install.sh
 <details>
 <summary><b>📄 Guía de uso</b></summary>
 
-##### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `ui` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
+##### El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `user-config` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
-##### El comando `ui` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
+##### El comando `user-config` también permite modificar el tema de termux el tema de fondo ya sea para cambiar el fondo oscuro que tiene por uno blanco o azul.
 
 </details>
 
