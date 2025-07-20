@@ -65,14 +65,13 @@ bash install.sh
 | 命令       | 说明 |  
 |--------------|-------------|  
 | `reload`     | 重新加载系统横幅 |  
-| `ui`         | 自定义横幅外观和颜色 |  
+| `user-config`| 自訂您的 Stellar 介面和設定文件 |  
 | `uninstall`  | 完全卸载Stellar |  
 | `update`     | 从GitHub更新Stellar |  
 | `bash`       | 重启终端会话 |  
 | `history -c` | 清除终端命令历史 |  
 | `reset`      | 将终端重置为默认状态 |  
-| `my`         | 显示您的Stellar个人资料 |  
-| `userconf`   | 配置您的Stellar个人资料 |  
+| `my`         | 显示您的Stellar个人资料 |   
 
 #### `🛠️` 实用工具
 | 命令         | 说明 |  
@@ -124,12 +123,12 @@ bash install.sh
 <details>
 <summary><b>📄 使用指南</b></summary>
 
-##### 使用简单 - 安装后，正常使用Termux即可。`ui`命令可让您自定义：
+##### 使用简单 - 安装后，正常使用Termux即可。`user-config`命令可让您自定义：
 - ASCII艺术显示
 - 配色方案
 - 背景颜色（包括浅色/深色主题）
 
-##### `ui`命令还允许完全自定义Termux主题，包括从深色改为浅色/蓝色背景等。
+##### `user-config`命令还允许完全自定义Termux主题，包括从深色改为浅色/蓝色背景等。
 
 </details>
 
