@@ -57,15 +57,6 @@ error_color="${Rojo_Brillante}"
 prompt_color="${Magenta_Brillante}"
 progress_color="${Azul_Brillante}"
 info_color="${Blanco_Brillante}"
-separator_color="${Fondo_Cian_Brillante}${Negro}"
-box_color="${Fondo_Negro_Brillante}${Blanco_Brillante}"
-
-show_header() {
-    clear
-    echo -e "=============================${Reset}"
-    echo -e "${header_color}STELLAR OS"
-    echo -e "=============================${Reset}"
-}
 
 show_message() {
     echo -e "${success_color}${Negrita}✔ $1${Reset}"
@@ -192,8 +183,6 @@ restore_configs() {
 }
 
 main_reinstall() {
-    show_header
-
     if ! check_internet; then
         show_error "Se requiere conexión a Internet para reinstalar"
         exit 1
@@ -218,8 +207,7 @@ main_reinstall() {
         exit 1
     fi
 
-    show_header
-    echo -e "${success_color}${Negrita}¡REINSTALACIÓN COMPLETADA CON ÉXITO!${Reset}"
+    show_message "¡REINSTALACIÓN COMPLETADA CON ÉXITO!"
     prompt_continue "Presione Enter para finalizar"
     exec bash
 }
