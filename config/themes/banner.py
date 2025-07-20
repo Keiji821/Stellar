@@ -86,8 +86,8 @@ def obtener_info():
             if response.status_code == 200:
                 ip = response.text.strip()
                 break
-            elif response.status_code == 429:  # Too Many Requests
-                time.sleep(1)  # Pequeña pausa antes de intentar con otro servicio
+            elif response.status_code == 429:
+                time.sleep(1)
                 continue
         except (requests.RequestException, ConnectionError):
             continue
