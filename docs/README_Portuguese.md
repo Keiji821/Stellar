@@ -65,14 +65,13 @@ bash install.sh
 | Comando       | Descrição |  
 |--------------|-------------|  
 | `reload`     | Recarrega o banner do sistema |  
-| `ui`         | Personaliza a aparência e cores do banner |  
+| `user-config`| Personalize sua interface e perfil Stellar |  
 | `uninstall`  | Remove completamente o Stellar |  
 | `update`     | Atualiza o Stellar a partir do GitHub |  
 | `bash`       | Reinicia a sessão do terminal |  
 | `history -c` | Limpa o histórico de comandos |  
 | `reset`      | Redefine o terminal para o estado padrão |  
 | `my`         | Exibe seu perfil no Stellar |  
-| `userconf`   | Configura seu perfil no Stellar |  
 
 #### `🛠️` Utilitários
 | Comando         | Descrição |  
@@ -124,12 +123,13 @@ bash install.sh
 <details>
 <summary><b>📄 Guia de Uso</b></summary>
 
-##### Uso simples - após a instalação, use o Termux normalmente. O comando `ui` permite personalizar:
+##### Uso simples - após a instalação, use o Termux normalmente. O comando `user-config` permite personalizar:
 - Exibição de arte ASCII
 - Esquemas de cores
 - Cores de fundo (incluindo temas claro/escuro)
+- Usuário e método de verificação
 
-##### O comando `ui` também permite personalização completa do tema do Termux, incluindo mudança de fundo escuro para claro/azul, etc.
+##### O comando `user-config` também permite personalização completa do tema do Termux, incluindo mudança de fundo escuro para claro/azul, etc.
 
 </details>
 
