@@ -62,45 +62,39 @@ box_color="${Fondo_Negro_Brillante}${Blanco_Brillante}"
 
 show_header() {
     clear
-    echo -e "${header_color}"
-    echo -e "  ███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗  "
-    echo -e "  ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗ "
-    echo -e "  ███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝ "
-    echo -e "  ╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗ "
-    echo -e "  ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║ "
-    echo -e "  ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ "
-    echo -e "${Reset}"
-    echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
+    echo -e "=============================${Reset}"
+    echo -e "${header_color}STELLAR OS"
+    echo -e "=============================${Reset}"
 }
 
 show_message() {
-    echo -e "${success_color}${Negrita}  ✦ ✔ $1${Reset}"
+    echo -e "${success_color}${Negrita}✔ $1${Reset}"
 }
 
 show_warning() {
-    echo -e "${warning_color}${Negrita}  ✦ ⚠ $1${Reset}"
+    echo -e "${warning_color}${Negrita}⚠ $1${Reset}"
 }
 
 show_error() {
-    echo -e "${error_color}${Negrita}  ✦ ✘ Error: $1${Reset}"
+    echo -e "${error_color}${Negrita}✘ Error: $1${Reset}"
 }
 
 show_progress() {
-    echo -e "${progress_color}${Negrita}  ✦ ➔ $1...${Reset}"
+    echo -e "${progress_color}${Negrita}↳ $1...${Reset}"
 }
 
 prompt_continue() {
-    echo -e "${prompt_color}${Negrita}  ✦ $1${Reset}"
-    read -rp "  ➤ Presione Enter para continuar..."
+    echo -e "${prompt_color}${Negrita}$1${Reset}"
+    read -rp "Presione Enter para continuar..."
 }
 
 prompt_yesno() {
     while true; do
-        read -rp "$(echo -e "${prompt_color}${Negrita}  ✦ $1 [s/n]: ${Reset}")" yn
+        read -rp "$(echo -e "${prompt_color}${Negrita}$1 [s/n]: ${Reset}")" yn
         case $yn in
             [Ss]*) return 0 ;;
             [Nn]*) return 1 ;;
-            *) echo -e "${warning_color}${Negrita}  ✦ Por favor responda s o n${Reset}" ;;
+            *) echo -e "${warning_color}${Negrita}Por favor responda s o n${Reset}" ;;
         esac
     done
 }
@@ -205,11 +199,6 @@ main_reinstall() {
         exit 1
     fi
 
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}│  ${header_color}${Negrita}REINSTALACIÓN COMPLETA DE STELLAR${Reset}${separator_color}             │${Reset}"
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
-
     if ! git_force_update; then
         show_error "No se pudo actualizar el código base"
         exit 1
@@ -230,11 +219,7 @@ main_reinstall() {
     fi
 
     show_header
-    echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}│  ${success_color}${Negrita}¡REINSTALACIÓN COMPLETADA CON ÉXITO!${Reset}${separator_color}         │${Reset}"
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
+    echo -e "${success_color}${Negrita}¡REINSTALACIÓN COMPLETADA CON ÉXITO!${Reset}"
     prompt_continue "Presione Enter para finalizar"
     exec bash
 }
