@@ -373,7 +373,7 @@ volume-keys = volume
 # terminal-cursor-blink-rate = 0
 terminal-cursor-style = bar
 
-extra-keys-style = arrows-all
+extra-keys-style = arrows-only
 # extra-keys-text-all-caps = true
 # extra-keys = [[ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP]]
 # extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
