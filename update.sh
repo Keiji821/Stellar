@@ -52,45 +52,37 @@ Oculto="\033[8m"
 Tachado="\033[9m"
 
 show_message() {
-    local message="$1"
-    echo -e "\n${Azul_Brillante}╭──────────────────────────────────────────────╮"
-    echo -e "│  ${Blanco}$message${Azul_Brillante}     │"
-    echo -e "╰──────────────────────────────────────────────╯${Reset}"
+    echo -e "=====================${Reset}"
+    echo -e "\n${Azul_Brillante}$1"
+    echo -e "=====================${Reset}"
 }
 
 show_progress() {
-    local message="$1"
-    echo -e "${Azul_Brillante}➤ ${Blanco}$message...${Reset}"
+    echo -e "${Azul_Brillante}➤ ${Blanco}$1...${Reset}"
 }
 
 show_warning() {
-    local message="$1"
-    echo -e "${Amarillo_Brillante}⚠ ${Amarillo}$message${Reset}"
+    echo -e "${Amarillo_Brillante}⚠ ${Amarillo}$1${Reset}"
 }
 
 show_success() {
-    local message="$1"
-    echo -e "${Verde_Brillante}✔ ${Verde}$message${Reset}"
+    echo -e "${Verde_Brillante}✔ ${Verde}$1${Reset}"
 }
 
 show_error() {
-    local message="$1"
-    echo -e "${Rojo_Brillante}✘ ${Rojo}Error: $message${Reset}"
+    echo -e "${Rojo_Brillante}✘ ${Rojo}Error: $1${Reset}"
 }
 
 safe_move() {
-    local src="$1"
-    local dest="$2"
-
-    if [[ ! -f "$src" ]]; then
-        show_warning "Archivo no encontrado: $src"
+    if [[ ! -f "$1" ]]; then
+        show_warning "Archivo no encontrado: $1"
         return 1
     fi
 
-    if mv -v "$src" "$dest"; then
+    if mv -v "$1" "$2"; then
         return 0
     else
-        show_error "Falló al mover $src"
+        show_error "Falló al mover $1"
         return 1
     fi
 }
@@ -144,23 +136,17 @@ restore_config() {
 }
 
 main() {
-    echo -e "${Cian}"
-    echo -e "  ███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗  "
-    echo -e "  ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗ "
-    echo -e "  ███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝ "
-    echo -e "  ╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗ "
-    echo -e "  ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║ "
-    echo -e "  ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ${Reset}"
-    echo -e "${Azul_Brillante}╭──────────────────────────────────────────────╮"
-    echo -e "│          ${Blanco}ACTUALIZACIÓN DE STELLAR${Azul_Brillante}            │"
-    echo -e "╰──────────────────────────────────────────────╯${Reset}"
+    clear
+    echo -e "==============================${Reset}"
+    echo -e "${Cian_Brillante}STELLAR OS"
+    echo -e "=============================${Reset}"
 
     if ! backup_config; then
         show_warning "Algunos archivos no se resguardaron"
     fi
 
     if ! update_repository; then
-        show_message "FALLA CRÍTICA: No se pudo actualizar Stellar"
+        show_error "No se pudo actualizar Stellar"
         exit 1
     fi
 
@@ -168,10 +154,8 @@ main() {
         show_warning "Algunas configuraciones no se restauraron"
     fi
 
-    show_message "¡Actualización completada exitosamente!"
+    show_message "Actualización completada"
     show_success "Configuración personalizada preservada"
 }
 
 main
-echo
-echo
