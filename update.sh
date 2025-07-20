@@ -51,12 +51,6 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-show_message() {
-    echo -e "=====================${Reset}"
-    echo -e "\n${Azul_Brillante}$1"
-    echo -e "=====================${Reset}"
-}
-
 show_progress() {
     echo -e "${Azul_Brillante}➤ ${Blanco}$1...${Reset}"
 }
@@ -136,11 +130,6 @@ restore_config() {
 }
 
 main() {
-    clear
-    echo -e "==============================${Reset}"
-    echo -e "${Cian_Brillante}STELLAR OS"
-    echo -e "=============================${Reset}"
-
     if ! backup_config; then
         show_warning "Algunos archivos no se resguardaron"
     fi
@@ -154,8 +143,7 @@ main() {
         show_warning "Algunas configuraciones no se restauraron"
     fi
 
-    show_message "Actualización completada"
-    show_success "Configuración personalizada preservada"
+    show_success "Actualización completada - Configuración preservada"
 }
 
 main
