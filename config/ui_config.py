@@ -20,7 +20,6 @@ TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
 THEMES_DIR.mkdir(parents=True, exist_ok=True)
 SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
 
-# Mantener la estructura original de los temas para Termux
 def dracula():
     return """
 background=#282A36
