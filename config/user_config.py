@@ -368,14 +368,14 @@ def limpiar_pantalla():
 
 def mostrar_header(texto):
     ancho = 72
-    panel = Panel.fit(
+    panel = Panel(
         Align.center(Text(texto, style="bold white"), vertical="middle"),
         style="bold white on rgb(50,57,150)",
         padding=(1, 2),
-        width=ancho,
-        subtitle=Text("Sistema de Configuración Stellar", style="yellow", justify="center")
+        width=ancho
     )
     console.print(panel)
+    console.print(Align.center(Text("Estado Actual", style="bold magenta"), width=ancho))
 
 def mostrar_error(mensaje):
     console.print(f"✖ [bold red]{mensaje}[/bold red]")
@@ -391,12 +391,7 @@ def mostrar_informacion(mensaje):
 
 def verificar_termux_api():
     try:
-        resultado = subprocess.run(
-            ['pkg', 'list-installed'],
-            capture_output=True,
-            text=True,
-            check=True
-        )
+        resultado = subprocess.run(['pkg', 'list-installed'], capture_output=True, text=True, check=True)
         return 'termux-api' in resultado.stdout
     except:
         return False
@@ -418,7 +413,7 @@ def cambiar_color_banner():
         for color in fila:
             linea += f"[{color}]{color.ljust(15)}[/{color}]"
         console.print(linea)
-    color = Prompt.ask("\nSeleccione color para el banner", choices=COLORES_DISPONIBLES)
+    color = Prompt.ask("\nSeleccione color para el banner")
     (THEMES_DIR / "banner_color.txt").write_text(color)
     mostrar_exito(f"Color del banner configurado: {color}")
     input("\n[cyan]Pulsa Enter para volver al menú...[/cyan]")
@@ -445,7 +440,7 @@ def configurar_banner():
         menu.add_row("3", "Vista previa del banner")
         menu.add_row("0", "Volver al menú principal")
         console.print(menu)
-        opcion = Prompt.ask("Seleccione opción", choices=["1", "2", "3", "0"])
+        opcion = Prompt.ask("Seleccione opción")
         if opcion == "1":
             editar_banner_texto()
         elif opcion == "2":
@@ -461,8 +456,8 @@ def elegir_tema_predeterminado():
     temas = list(TERMUX_THEMES.keys())
     for t in temas:
         console.print(f"[bold]{t}[/bold]")
-    tema = Prompt.ask("Elija un tema", choices=temas)
-    TERMUX_COLORS_PATH.write_text(TERMUX_THEMES[tema])
+    tema = Prompt.ask("Elija un tema")
+    TERMUX_COLORS_PATH.write_text(TERMUX_THEMES.get(tema, ""))
     mostrar_exito(f"Tema {tema} aplicado.")
     input("\n[cyan]Pulsa Enter para volver al menú...[/cyan]")
 
@@ -495,7 +490,7 @@ def configurar_tema_termux():
         menu.add_row("3", "Mostrar tema actual")
         menu.add_row("0", "Volver al menú principal")
         console.print(menu)
-        opcion = Prompt.ask("Seleccione opción", choices=["1", "2", "3", "0"])
+        opcion = Prompt.ask("Seleccione opción")
         if opcion == "1":
             elegir_tema_predeterminado()
         elif opcion == "2":
@@ -540,7 +535,7 @@ def configurar_usuario():
         menu.add_row("2", "Mostrar usuario actual")
         menu.add_row("0", "Volver al menú principal")
         console.print(menu)
-        opcion = Prompt.ask("Seleccione opción", choices=["1", "2", "0"])
+        opcion = Prompt.ask("Seleccione opción")
         if opcion == "1":
             editar_usuario()
         elif opcion == "2":
@@ -592,7 +587,7 @@ def configurar_autenticacion():
         menu.add_row("3", "Mostrar método actual")
         menu.add_row("0", "Volver al menú principal")
         console.print(menu)
-        opcion = Prompt.ask("Seleccione opción", choices=["1", "2", "3", "0"])
+        opcion = Prompt.ask("Seleccione opción")
         if opcion == "1":
             activar_huella()
         elif opcion == "2":
@@ -626,7 +621,7 @@ def probar_autenticacion():
 
 def mostrar_estado_actual():
     estado_tabla = Table(
-        title="[bold magenta]Estado Actual[/bold magenta]",
+        title="",
         box=ROUNDED,
         header_style="bold cyan",
         title_style="bold yellow"
@@ -645,17 +640,18 @@ def mostrar_estado_actual():
     banner_path = THEMES_DIR / "banner.txt"
     if banner_path.exists():
         estado_tabla.add_row("Banner", "[bold green]Configurado[/bold green]")
-    console.print(estado_tabla)
+    console.print(Align.center(estado_tabla, width=72))
 
 def menu_principal():
+    opciones_validas = [
+        "1", "1.1", "1.2", "1.3", "2", "2.1", "2.2", "2.3",
+        "3", "3.1", "3.2", "4", "4.1", "4.2", "4.3", "5", "0"
+    ]
     while True:
         limpiar_pantalla()
         mostrar_header("Panel Principal")
         mostrar_estado_actual()
-        menu_tabla = Table(
-            box=ROUNDED,
-            show_header=False
-        )
+        menu_tabla = Table(box=ROUNDED, show_header=False)
         menu_tabla.add_column("Opción", style="magenta", width=10)
         menu_tabla.add_column("Descripción", style="cyan")
         menu_tabla.add_row("1", "Configurar banner")
@@ -675,14 +671,12 @@ def menu_principal():
         menu_tabla.add_row("4.3", "Mostrar método actual")
         menu_tabla.add_row("5", "Probar autenticación")
         menu_tabla.add_row("0", "Salir del sistema")
-        console.print(menu_tabla)
-        opcion = Prompt.ask("\nSeleccione opción", choices=[
-            "1", "1.1", "1.2", "1.3",
-            "2", "2.1", "2.2", "2.3",
-            "3", "3.1", "3.2",
-            "4", "4.1", "4.2", "4.3",
-            "5", "0"
-        ])
+        console.print(Align.center(menu_tabla, width=80))
+        opcion = Prompt.ask("Seleccione opción")
+        if opcion not in opciones_validas:
+            mostrar_error("Opción inválida")
+            time.sleep(1)
+            continue
         if opcion == "1":
             configurar_banner()
         elif opcion == "1.1":
