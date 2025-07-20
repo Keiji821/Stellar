@@ -21,50 +21,14 @@ Magenta_Brillante="\033[1;35m"
 Cian_Brillante="\033[1;36m"
 Blanco_Brillante="\033[1;37m"
 
-Fondo_Negro="\033[40m"
-Fondo_Rojo="\033[41m"
-Fondo_Verde="\033[42m"
-Fondo_Amarillo="\033[43m"
-Fondo_Azul="\033[44m"
-Fondo_Magenta="\033[45m"
-Fondo_Cian="\033[46m"
-Fondo_Blanco="\033[47m"
-
-Fondo_Negro_Brillante="\033[0;100m"
-Fondo_Rojo_Brillante="\033[0;101m"
-Fondo_Verde_Brillante="\033[0;102m"
-Fondo_Amarillo_Brillante="\033[0;103m"
-Fondo_Azul_Brillante="\033[0;104m"
-Fondo_Magenta_Brillante="\033[0;105m"
-Fondo_Cian_Brillante="\033[0;106m"
-Fondo_Blanco_Brillante="\033[0;107m"
-
 Reset="\033[0m"
 Negrita="\033[1m"
-Atenuado="\033[2m"
-Italico="\033[3m"
-Subrayado="\033[4m"
-Parpadeo="\033[5m"
-Invertido="\033[7m"
-Oculto="\033[8m"
-Tachado="\033[9m"
 
-header_color="${Cian_Brillante}${Negrita}"
 success_color="${Verde_Brillante}"
 warning_color="${Amarillo_Brillante}"
 error_color="${Rojo_Brillante}"
 prompt_color="${Magenta_Brillante}"
 progress_color="${Azul_Brillante}"
-info_color="${Blanco_Brillante}"
-separator_color="${Fondo_Cian_Brillante}${Negro}"
-box_color="${Fondo_Negro_Brillante}${Blanco_Brillante}"
-
-show_header() {
-    clear
-    echo -e "============================${Reset}"
-    echo -e "${header_color}STELLAR OS"
-    echo -e "============================${Reset}"
-}
 
 show_message() {
     echo -e "${success_color}${Negrita}✔ $1${Reset}"
@@ -195,26 +159,26 @@ install_npm() {
 
 update_system() {
     if command -v apt-get >/dev/null; then
-        show_progress "Actualizando lista de paquetes (APT)"
+        show_progress "Actualizando lista de paquetes"
         if apt-get update -y; then
-            show_message "Repositorios actualizados correctamente"
+            show_message "Repositorios actualizados"
 
-            show_progress "Actualizando sistema (APT)"
+            show_progress "Actualizando sistema"
             if apt-get upgrade -y; then
-                show_message "Sistema actualizado correctamente"
+                show_message "Sistema actualizado"
                 return 0
             fi
         fi
     elif command -v pkg >/dev/null; then
-        show_progress "Actualizando sistema (Termux)"
+        show_progress "Actualizando sistema"
         if pkg update -y && pkg upgrade -y; then
-            show_message "Sistema actualizado correctamente"
+            show_message "Sistema actualizado"
             return 0
         fi
     elif command -v pacman >/dev/null; then
-        show_progress "Actualizando sistema (Pacman)"
+        show_progress "Actualizando sistema"
         if pacman -Syu --noconfirm; then
-            show_message "Sistema actualizado correctamente"
+            show_message "Sistema actualizado"
             return 0
         fi
     fi
@@ -275,8 +239,6 @@ finalize_installation() {
 }
 
 main_install() {
-    show_header
-
     if ! check_internet; then
         prompt_continue "Verifique su conexión a Internet y reintente"
         exit 1
@@ -285,10 +247,7 @@ main_install() {
     if update_system; then
         if install_dependencies; then
             if finalize_installation; then
-                echo
-                show_header
-                echo -e "${success_color}${Negrita}¡STELLAR INSTALADO CORRECTAMENTE!${Reset}"
-                echo
+                show_message "¡STELLAR INSTALADO CORRECTAMENTE!"
                 prompt_continue "Presione Enter para finalizar"
                 exec bash
                 return 0
@@ -296,10 +255,7 @@ main_install() {
         fi
     fi
 
-    echo
-    show_header
-    echo -e "${error_color}${Negrita}ERROR EN LA INSTALACIÓN${Reset}"
-    echo
+    show_error "ERROR EN LA INSTALACIÓN"
     prompt_continue "Presione Enter para salir"
     return 1
 }
