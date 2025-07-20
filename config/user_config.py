@@ -462,7 +462,7 @@ def mostrar_previa_tema(tema, contenido):
         title=f"[bold]{tema.upper()}[/bold]",
         border_style="bright_magenta",
         padding=(1, 2)
-    )
+    ))
 
 def configurar_tema_termux():
     mostrar_titulo("Configuración de Tema para Termux")
