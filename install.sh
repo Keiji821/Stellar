@@ -61,45 +61,38 @@ box_color="${Fondo_Negro_Brillante}${Blanco_Brillante}"
 
 show_header() {
     clear
-    echo -e "${header_color}"
-    echo -e "  ███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗  "
-    echo -e "  ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗ "
-    echo -e "  ███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝ "
-    echo -e "  ╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗ "
-    echo -e "  ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║ "
-    echo -e "  ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ "
-    echo -e "${Reset}"
-    echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
+    echo -e "${header_color}=== INSTALADOR STELLAR ==="
+    echo -e "============================${Reset}"
 }
 
 show_message() {
-    echo -e "${success_color}${Negrita}  ✦ ✔ $1${Reset}"
+    echo -e "${success_color}${Negrita}✔ $1${Reset}"
 }
 
 show_warning() {
-    echo -e "${warning_color}${Negrita}  ✦ ⚠ $1${Reset}"
+    echo -e "${warning_color}${Negrita}⚠ $1${Reset}"
 }
 
 show_error() {
-    echo -e "${error_color}${Negrita}  ✦ ✘ Error: $1${Reset}"
+    echo -e "${error_color}${Negrita}✘ Error: $1${Reset}"
 }
 
 show_progress() {
-    echo -e "${progress_color}${Negrita}  ✦ ➔ $1...${Reset}"
+    echo -e "${progress_color}${Negrita}↳ $1...${Reset}"
 }
 
 prompt_continue() {
-    echo -e "${prompt_color}${Negrita}  ✦ $1${Reset}"
-    read -rp "  ➤ Presione Enter para continuar..."
+    echo -e "${prompt_color}${Negrita}$1${Reset}"
+    read -rp "Presione Enter para continuar..."
 }
 
 prompt_yesno() {
     while true; do
-        read -rp "$(echo -e "${prompt_color}${Negrita}  ✦ $1 [s/n]: ${Reset}")" yn
+        read -rp "$(echo -e "${prompt_color}${Negrita}$1 [s/n]: ${Reset}")" yn
         case $yn in
             [Ss]*) return 0 ;;
             [Nn]*) return 1 ;;
-            *) echo -e "${warning_color}${Negrita}  ✦ Por favor responda s o n${Reset}" ;;
+            *) echo -e "${warning_color}${Negrita}Por favor responda s o n${Reset}" ;;
         esac
     done
 }
@@ -288,21 +281,13 @@ main_install() {
         exit 1
     fi
 
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}│  ${header_color}${Negrita}INSTALACIÓN DE STELLAR${Reset}${separator_color}                       │${Reset}"
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
-    echo ""
-
     if update_system; then
         if install_dependencies; then
             if finalize_installation; then
+                echo
                 show_header
-                echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
-                echo -e "${separator_color}│                                                    │${Reset}"
-                echo -e "${separator_color}│  ${success_color}${Negrita}¡STELLAR INSTALADO CORRECTAMENTE!${Reset}${separator_color}              │${Reset}"
-                echo -e "${separator_color}│                                                    │${Reset}"
-                echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
+                echo -e "${success_color}${Negrita}¡STELLAR INSTALADO CORRECTAMENTE!${Reset}"
+                echo
                 prompt_continue "Presione Enter para finalizar"
                 exec bash
                 return 0
@@ -310,11 +295,10 @@ main_install() {
         fi
     fi
 
-    echo -e "${separator_color}╭──────────────────────────────────────────────────────╮${Reset}"
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}│  ${error_color}${Negrita}ERROR EN LA INSTALACIÓN${Reset}${separator_color}                         │${Reset}"
-    echo -e "${separator_color}│                                                    │${Reset}"
-    echo -e "${separator_color}╰──────────────────────────────────────────────────────╯${Reset}"
+    echo
+    show_header
+    echo -e "${error_color}${Negrita}ERROR EN LA INSTALACIÓN${Reset}"
+    echo
     prompt_continue "Presione Enter para salir"
     return 1
 }
