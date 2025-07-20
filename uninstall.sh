@@ -48,16 +48,9 @@ Oculto="\033[8m"
 Tachado="\033[9m"
 
 clear
-echo -e "${Cian}"
-echo -e "  ███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗  "
-echo -e "  ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗ "
-echo -e "  ███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝ "
-echo -e "  ╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗ "
-echo -e "  ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║ "
-echo -e "  ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ${Reset}"
-echo -e "${Magenta}╭──────────────────────────────────────────────╮"
-echo -e "│          ${Blanco}DESINSTALACIÓN DE STELLAR${Magenta}          │"
-echo -e "╰──────────────────────────────────────────────╯${Reset}"
+echo -e "==============================${Reset}"
+echo -e "${Cian_Brillante}STELLAR OS"
+echo -e "==============================${Reset}"
 
 echo -e "${Rojo_Brillante}¿Desea eliminar Stellar completamente?${Reset}"
 read -p "Esta acción no se puede deshacer [S/N]: " respuesta
@@ -72,12 +65,8 @@ else
     echo -e "\n${Amarillo_Brillante}➤ Operación cancelada${Reset}"
 fi
 
-echo -e "\n${Magenta}╭──────────────────────────────────────────────╮"
-echo -e "│     ${Blanco}Gracias por haber utilizado Stellar!${Magenta}     │"
-echo -e "│             ${Cian}Atte: Keiji821${Magenta}                │"
-echo -e "╰──────────────────────────────────────────────╯${Reset}"
-echo -e "${Azul}¡Hasta pronto! :)${Reset}\n"
-echo
-echo
+echo -e "\n${Magenta_Brillante}Gracias por haber utilizado Stellar!"
+echo -e "${Cian_Brillante}Atte: Keiji821${Reset}"
+echo -e "${Azul_Brillante}¡Hasta pronto! :)${Reset}\n"
 sleep 3
 login
