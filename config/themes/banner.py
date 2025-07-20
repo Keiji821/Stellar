@@ -22,7 +22,7 @@ system_dir = os.path.expanduser("~/Stellar/config/system")
 
 def generar_paleta():
     def color_rgb():
-        return (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255))
+        return (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255)
     return {
         'titulo': color_rgb(),
         'clave': color_rgb(),
@@ -72,10 +72,25 @@ def obtener_info():
     vm = psutil.virtual_memory()
     du = psutil.disk_usage(os.path.expanduser("~"))
 
-    try:
-        ip = requests.get("https://api.ipify.org", timeout=2).text
-    except:
-        ip = "No disponible"
+    ip_services = [
+        "https://api.ipify.org",
+        "https://ipinfo.io/ip",
+        "https://ifconfig.me/ip",
+        "https://ident.me"
+    ]
+    
+    ip = "No disponible"
+    for service in ip_services:
+        try:
+            response = requests.get(service, timeout=2)
+            if response.status_code == 200:
+                ip = response.text.strip()
+                break
+            elif response.status_code == 429:  # Too Many Requests
+                time.sleep(1)  # Pequeña pausa antes de intentar con otro servicio
+                continue
+        except (requests.RequestException, ConnectionError):
+            continue
 
     return {
         "Usuario": usuario,
@@ -136,7 +151,6 @@ if __name__ == "__main__":
     min_panel_width = 54
     espacio_entre = 4
 
-
     if terminal_cols >= (banner_width + min_panel_width + espacio_entre):
         panel_width = terminal_cols - banner_width - espacio_entre
         panel = crear_panel(info, panel_width)
@@ -146,5 +160,4 @@ if __name__ == "__main__":
         contenido = Columns([text_banner, panel], expand=True)
 
     console.print(contenido)
-
     console.print("\n" * 3)
