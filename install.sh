@@ -61,7 +61,8 @@ box_color="${Fondo_Negro_Brillante}${Blanco_Brillante}"
 
 show_header() {
     clear
-    echo -e "${header_color}=== INSTALADOR STELLAR ==="
+    echo -e "============================${Reset}"
+    echo -e "${header_color}STELLAR OS"
     echo -e "============================${Reset}"
 }
 
