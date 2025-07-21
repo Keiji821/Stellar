@@ -846,7 +846,7 @@ def menu_principal():
                 border_style="bright_green"
             ))
             time.sleep(1)
-            exit(0)
+            os.system("reload")
 
 def inicio():
     limpiar_pantalla()
