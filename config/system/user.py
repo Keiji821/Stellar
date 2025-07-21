@@ -230,12 +230,12 @@ user_banner = Panel(
     style=banner_color,
     expand=False
 )
+
+console.print(user_banner, style=banner_background_color, justify="center")
 if banner_background_color=="":
     console.print(user_banner, justify="center")
 if banner_background_color=="no":
     console.print(user_banner, justify="center")
-
-console.print(user_banner, style=banner_background_color, justify="center")
 
 console.print("")
 
