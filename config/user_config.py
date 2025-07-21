@@ -19,14 +19,14 @@ TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
 THEMES_DIR.mkdir(parents=True, exist_ok=True)
 SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
 
-COLOR_PRIMARY = "bold bright_cyan"
-COLOR_SECONDARY = "bold bright_magenta"
-COLOR_ACCENT = "bold bright_yellow"
-COLOR_SUCCESS = "bold bright_green"
-COLOR_ERROR = "bold bright_red"
-COLOR_WARNING = "bold bright_yellow"
-COLOR_INFO = "bold bright_blue"
-COLOR_HIGHLIGHT = "bold bright_white on rgb(40,42,54)"
+COLOR_PRIMARY = "bold cyan"
+COLOR_SECONDARY = "bold magenta"
+COLOR_ACCENT = "bold yellow"
+COLOR_SUCCESS = "bold green"
+COLOR_ERROR = "bold red"
+COLOR_WARNING = "bold yellow"
+COLOR_INFO = "bold blue"
+COLOR_HIGHLIGHT = "bold white on rgb(40,42,54)"
 
 TERMUX_THEMES = {
     "dracula": """
