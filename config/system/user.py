@@ -216,8 +216,6 @@ table.add_row("")
 table.add_row("Tú IP enmascarada", ip)
 table.add_row("Red", network)
 table.add_row("Ruta", route)
-table.add_row("")
-table.add_row(banner)
 
 
 console.print(table, style="bright_white", justify="center")
