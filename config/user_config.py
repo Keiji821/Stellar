@@ -358,7 +358,7 @@ color11=#FFCC33
 color12=#3399FF
 color13=#CC33FF
 color14=#33FFFF
-color15=#FFFFFF
+color15=#FFFFFF"
 """
 }
 
@@ -448,11 +448,55 @@ def cambiar_color_banner():
     mostrar_exito(f"Color del banner actualizado: [{color}]{color}[/]")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
+def cambiar_color_fondo_banner():
+    limpiar_pantalla()
+    mostrar_header("CAMBIAR COLOR DE FONDO DEL BANNER")
+    
+    table = Table.grid(padding=(0, 2))
+    fila_actual = []
+    for i, color in enumerate(COLORES_DISPONIBLES):
+        if es_color_valido(color):
+            muestra = f"[{color}]{color}[/]"
+            fila_actual.append(muestra)
+            if len(fila_actual) == 4 or i == len(COLORES_DISPONIBLES) - 1:
+                table.add_row(*fila_actual)
+                fila_actual = []
+    
+    console.print(table, justify="center")
+    
+    while True:
+        color = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione color para el fondo →[/]").strip()
+        if es_color_valido(color):
+            break
+        mostrar_error(f"Color '{color}' no válido. Intente nuevamente")
+    
+    (THEMES_DIR / "banner_background_color.txt").write_text(color)
+    mostrar_exito(f"Color de fondo actualizado: [{color}]{color}[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+
+def toggle_fondo_banner():
+    limpiar_pantalla()
+    mostrar_header("ACTIVAR/DESACTIVAR FONDO DEL BANNER")
+    
+    path = THEMES_DIR / "banner_background.txt"
+    fondo_actual = "no"
+    if path.exists():
+        fondo_actual = path.read_text().strip()
+    
+    nuevo_estado = "yes" if fondo_actual == "no" else "no"
+    estado = "activado" if nuevo_estado == "yes" else "desactivado"
+    
+    path.write_text(nuevo_estado)
+    mostrar_exito(f"Fondo del banner {estado}")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+
 def banner_preview():
     limpiar_pantalla()
     mostrar_header("VISTA PREVIA DEL BANNER")
     path = THEMES_DIR / "banner.txt"
     color_path = THEMES_DIR / "banner_color.txt"
+    fondo_path = THEMES_DIR / "banner_background.txt"
+    fondo_color_path = THEMES_DIR / "banner_background_color.txt"
     
     if path.exists():
         banner = path.read_text()
@@ -469,13 +513,24 @@ def banner_preview():
         
         texto_banner = Text(banner, style=estilo)
         
+        estilo_fondo = None
+        fondo_activado = fondo_path.exists() and fondo_path.read_text().strip() == "yes"
+        
+        if fondo_activado:
+            color_fondo = fondo_color_path.read_text().strip() if fondo_color_path.exists() else "bold white"
+            if es_color_valido(color_fondo):
+                estilo_fondo = Style.parse(color_fondo)
+            else:
+                mostrar_advertencia(f"Color de fondo '{color_fondo}' no válido")
+        
         preview = Panel(
             Align.center(texto_banner),
             title="[bold]VISTA PREVIA",
             border_style=estilo,
             box=DOUBLE,
             width=ancho_panel,
-            padding=(1, 2)
+            padding=(1, 2),
+            style=estilo_fondo
         )
         console.print(Align.center(preview))
     else:
@@ -494,7 +549,9 @@ def configurar_banner():
         
         menu.add_row("1", "Editar texto del banner")
         menu.add_row("2", "Cambiar color del banner")
-        menu.add_row("3", "Vista previa del banner")
+        menu.add_row("3", "Cambiar color de fondo")
+        menu.add_row("4", "Activar/Desactivar fondo")
+        menu.add_row("5", "Vista previa del banner")
         menu.add_row("0", "[bold bright_red]Volver al menú principal[/]")
         
         console.print(Align.center(menu))
@@ -502,7 +559,9 @@ def configurar_banner():
         
         if opcion == "1": editar_banner_texto()
         elif opcion == "2": cambiar_color_banner()
-        elif opcion == "3": banner_preview()
+        elif opcion == "3": cambiar_color_fondo_banner()
+        elif opcion == "4": toggle_fondo_banner()
+        elif opcion == "5": banner_preview()
         elif opcion == "0": break
         else: 
             mostrar_error("Opción inválida")
@@ -770,11 +829,15 @@ def mostrar_estado_actual():
     banner_path = THEMES_DIR / "banner.txt"
     estado_tabla.add_row("Banner", "[bright_green]Configurado[/]" if banner_path.exists() else "[bright_red]No configurado[/]")
     
+    fondo_path = THEMES_DIR / "banner_background.txt"
+    fondo_estado = "[bright_green]Activado[/]" if fondo_path.exists() and fondo_path.read_text().strip() == "yes" else "[bright_red]Desactivado[/]"
+    estado_tabla.add_row("Fondo Banner", fondo_estado)
+    
     console.print(Align.center(estado_tabla, width=72))
 
 def menu_principal():
     opciones_validas = [
-        "1", "1.1", "1.2", "1.3", "2", "2.1", "2.2", "2.3",
+        "1", "1.1", "1.2", "1.3", "1.4", "1.5", "2", "2.1", "2.2", "2.3",
         "3", "3.1", "3.2", "4", "4.1", "4.2", "4.3", "5", "0"
     ]
     
@@ -795,7 +858,9 @@ def menu_principal():
         menu_tabla.add_row("1", "[bold]Configurar banner[/]")
         menu_tabla.add_row("1.1", "  Editar texto del banner")
         menu_tabla.add_row("1.2", "  Cambiar color del banner")
-        menu_tabla.add_row("1.3", "  Vista previa del banner")
+        menu_tabla.add_row("1.3", "  Cambiar color de fondo")
+        menu_tabla.add_row("1.4", "  Activar/Desactivar fondo")
+        menu_tabla.add_row("1.5", "  Vista previa del banner")
         menu_tabla.add_row("", "")
         menu_tabla.add_row("2", "[bold]Configurar tema Termux[/]")
         menu_tabla.add_row("2.1", "  Elegir tema predefinido")
@@ -825,7 +890,9 @@ def menu_principal():
         if opcion == "1": configurar_banner()
         elif opcion == "1.1": editar_banner_texto()
         elif opcion == "1.2": cambiar_color_banner()
-        elif opcion == "1.3": banner_preview()
+        elif opcion == "1.3": cambiar_color_fondo_banner()
+        elif opcion == "1.4": toggle_fondo_banner()
+        elif opcion == "1.5": banner_preview()
         elif opcion == "2": configurar_tema_termux()
         elif opcion == "2.1": elegir_tema_predeterminado()
         elif opcion == "2.2": crear_tema_personalizado()
