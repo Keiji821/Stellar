@@ -420,7 +420,7 @@ def editar_banner_texto():
     path = THEMES_DIR / "banner.txt"
     subprocess.run(["nano", str(path)])
     mostrar_exito("Texto del banner editado correctamente")
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def cambiar_color_banner():
     limpiar_pantalla()
@@ -446,7 +446,7 @@ def cambiar_color_banner():
     
     (THEMES_DIR / "banner_color.txt").write_text(color)
     mostrar_exito(f"Color del banner actualizado: [{color}]{color}[/]")
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def banner_preview():
     limpiar_pantalla()
