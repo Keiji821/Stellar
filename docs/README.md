@@ -60,6 +60,14 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 ##### Para instalar Stellar debe seguir los siguientes pasos:
 
 ```shell script
+pkg update && pkg upgrade
+```
+
+```shell script
+pkg install git -y
+```
+
+```shell script
 git clone https://github.com/Keiji821/Stellar
 ```
 
