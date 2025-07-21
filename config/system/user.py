@@ -230,7 +230,7 @@ user_banner = Panel(
     style=banner_color,
     expand=False
 )
-console.print(user_banner, justify="center")
+console.print(user_banner, style=banner_background_color, justify="center")
 
 console.print("")
 
