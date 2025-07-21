@@ -378,12 +378,8 @@ def limpiar_pantalla():
 
 def mostrar_header(texto):
     ancho = 78
-    panel = Panel(
-        Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT)), 
-        style="bold bright_white on rgb(30,30,40)",
-        padding=(1, 2),
-        width=ancho,
-        box=HEAVY)
+    panel =
+Panel(Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT)), style="bold bright_white on rgb(30,30,40)", padding=(1, 2), width=ancho, box=HEAVY))
     console.print(panel)
     console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho))
 
