@@ -483,8 +483,8 @@ def toggle_fondo_banner():
     if path.exists():
         fondo_actual = path.read_text().strip()
     
-    nuevo_estado = "yes" if fondo_actual == "no" else "no"
-    estado = "activado" if nuevo_estado == "yes" else "desactivado"
+    nuevo_estado = "si" if fondo_actual == "no" else "no"
+    estado = "activado" if nuevo_estado == "si" else "desactivado"
     
     path.write_text(nuevo_estado)
     mostrar_exito(f"Fondo del banner {estado}")
@@ -514,7 +514,7 @@ def banner_preview():
         texto_banner = Text(banner, style=estilo)
         
         estilo_fondo = None
-        fondo_activado = fondo_path.exists() and fondo_path.read_text().strip() == "yes"
+        fondo_activado = fondo_path.exists() and fondo_path.read_text().strip() == "si"
         
         if fondo_activado:
             color_fondo = fondo_color_path.read_text().strip() if fondo_color_path.exists() else "bold white"
