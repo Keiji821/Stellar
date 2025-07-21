@@ -400,6 +400,13 @@ def mostrar_advertencia(mensaje):
 def mostrar_informacion(mensaje):
     console.print(f"[bold bright_white on blue] INFORMACIÓN [/] [bold bright_blue]→[/] {mensaje}")
 
+def es_color_valido(color):
+    try:
+        Style.parse(color)
+        return True
+    except:
+        return False
+
 def verificar_termux_api():
     try:
         resultado = subprocess.run(['pkg', 'list-installed'], capture_output=True, text=True, check=True)
@@ -419,22 +426,24 @@ def cambiar_color_banner():
     limpiar_pantalla()
     mostrar_header("CAMBIAR COLOR DEL BANNER")
     
-    table = Table.grid(padding=(0, 3))
-    table.add_column(style=COLOR_SECONDARY)
-    table.add_column(style=COLOR_SECONDARY)
-    table.add_column(style=COLOR_SECONDARY)
-    table.add_column(style=COLOR_SECONDARY)
-    
-    for i in range(0, len(COLORES_DISPONIBLES), 4):
-        fila = COLORES_DISPONIBLES[i:i+4]
-        row_data = []
-        for color in fila:
-            row_data.append(f"[{color}]{color}[/]")
-        table.add_row(*row_data)
+    table = Table.grid(padding=(0, 2))
+    fila_actual = []
+    for i, color in enumerate(COLORES_DISPONIBLES):
+        if es_color_valido(color):
+            muestra = f"[{color}]{color}[/]"
+            fila_actual.append(muestra)
+            if len(fila_actual) == 4 or i == len(COLORES_DISPONIBLES) - 1:
+                table.add_row(*fila_actual)
+                fila_actual = []
     
     console.print(table, justify="center")
     
-    color = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione color para el banner →[/]")
+    while True:
+        color = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione color para el banner →[/]").strip()
+        if es_color_valido(color):
+            break
+        mostrar_error(f"Color '{color}' no válido. Intente nuevamente")
+    
     (THEMES_DIR / "banner_color.txt").write_text(color)
     mostrar_exito(f"Color del banner actualizado: [{color}]{color}[/]")
     input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
@@ -447,14 +456,26 @@ def banner_preview():
     
     if path.exists():
         banner = path.read_text()
-        color = color_path.read_text() if color_path.exists() else "bright_white"
+        color = color_path.read_text().strip() if color_path.exists() else "bright_white"
+        
+        lineas = banner.splitlines()
+        ancho_max = max(len(linea) for linea in lineas) if lineas else 20
+        ancho_panel = min(ancho_max + 8, 80)
+        
+        estilo = Style.parse(color) if es_color_valido(color) else Style.parse("bright_white")
+        
+        if not es_color_valido(color):
+            mostrar_advertencia(f"Color '{color}' no válido. Usando blanco brillante")
+        
+        texto_banner = Text(banner, style=estilo)
         
         preview = Panel(
-            Align.center(Text(banner, style=color)),
+            Align.center(texto_banner),
             title="[bold]VISTA PREVIA",
-            border_style=color,
+            border_style=estilo,
             box=DOUBLE,
-            width=60
+            width=ancho_panel,
+            padding=(1, 2)
         )
         console.print(Align.center(preview))
     else:
@@ -495,25 +516,27 @@ def elegir_tema_predeterminado():
     table.add_column("Tema", style=COLOR_ACCENT)
     table.add_column("Muestra", style=COLOR_PRIMARY)
     
-    for tema in TERMUX_THEMES.keys():
-        color_sample = ""
-        if tema == "dracula": color_sample = "[#FF5555]█[/] [#50FA7B]█[/] [#BD93F9]█"
-        elif tema == "nord": color_sample = "[#BF616A]█[/] [#A3BE8C]█[/] [#81A1C1]█"
-        elif tema == "gruvbox": color_sample = "[#CC241D]█[/] [#98971A]█[/] [#458588]█"
-        elif tema == "tokyo_night": color_sample = "[#F7768E]█[/] [#9ECE6A]█[/] [#7AA2F7]█"
-        elif tema == "one_dark": color_sample = "[#E06C75]█[/] [#98C379]█[/] [#61AFEF]█"
-        elif tema == "monokai": color_sample = "[#f92672]█[/] [#a6e22e]█[/] [#66d9ef]█"
-        elif tema == "solarized_dark": color_sample = "[#dc322f]█[/] [#859900]█[/] [#268bd2]█"
-        elif tema == "catppuccin_latte": color_sample = "[#D20F39]█[/] [#40A02B]█[/] [#1E66F5]█"
-        elif tema == "cyberpunk_neon": color_sample = "[#FF3559]█[/] [#00FF9D]█[/] [#00A1FF]█"
-        elif tema == "everforest": color_sample = "[#E67E80]█[/] [#A7C080]█[/] [#7FBBB3]█"
-        elif tema == "material_ocean": color_sample = "[#F28FAD]█[/] [#ABE9B3]█[/] [#96CDFB]█"
-        elif tema == "horizon": color_sample = "[#E95678]█[/] [#29D398]█[/] [#26BBD9]█"
-        elif tema == "matrix": color_sample = "[#FF0000]█[/] [#00FF00]█[/] [#0000FF]█"
-        elif tema == "hacker_purple": color_sample = "[#FF0000]█[/] [#00FF41]█[/] [#0080FF]█"
-        elif tema == "cyberpunk_red": color_sample = "[#FF0000]█[/] [#00FF00]█[/] [#0066FF]█"
-        elif tema == "hacker_retro": color_sample = "[#FF0044]█[/] [#00CC00]█[/] [#0088FF]█"
-        table.add_row(f"[bold]{tema}[/]", color_sample)
+    temas_muestras = {
+        "dracula": "[#FF5555]█[/] [#50FA7B]█[/] [#BD93F9]█",
+        "nord": "[#BF616A]█[/] [#A3BE8C]█[/] [#81A1C1]█",
+        "gruvbox": "[#CC241D]█[/] [#98971A]█[/] [#458588]█",
+        "tokyo_night": "[#F7768E]█[/] [#9ECE6A]█[/] [#7AA2F7]█",
+        "one_dark": "[#E06C75]█[/] [#98C379]█[/] [#61AFEF]█",
+        "monokai": "[#f92672]█[/] [#a6e22e]█[/] [#66d9ef]█",
+        "solarized_dark": "[#dc322f]█[/] [#859900]█[/] [#268bd2]█",
+        "catppuccin_latte": "[#D20F39]█[/] [#40A02B]█[/] [#1E66F5]█",
+        "cyberpunk_neon": "[#FF3559]█[/] [#00FF9D]█[/] [#00A1FF]█",
+        "everforest": "[#E67E80]█[/] [#A7C080]█[/] [#7FBBB3]█",
+        "material_ocean": "[#F28FAD]█[/] [#ABE9B3]█[/] [#96CDFB]█",
+        "horizon": "[#E95678]█[/] [#29D398]█[/] [#26BBD9]█",
+        "matrix": "[#FF0000]█[/] [#00FF00]█[/] [#0000FF]█",
+        "hacker_purple": "[#FF0000]█[/] [#00FF41]█[/] [#0080FF]█",
+        "cyberpunk_red": "[#FF0000]█[/] [#00FF00]█[/] [#0066FF]█",
+        "hacker_retro": "[#FF0044]█[/] [#00CC00]█[/] [#0088FF]█"
+    }
+    
+    for tema, muestra in temas_muestras.items():
+        table.add_row(f"[bold]{tema}[/]", muestra)
     
     console.print(Align.center(table))
     
