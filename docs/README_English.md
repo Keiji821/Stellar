@@ -41,6 +41,14 @@ While it includes some command-line tools focused on hacking and OSINT, its prim
 ##### Follow these steps to install Stellar:
 
 ```shell script
+pkg update && pkg upgrade
+```
+
+```shell script
+pkg install git -y
+```
+
+```shell script
 git clone https://github.com/Keiji821/Stellar
 ```
 
