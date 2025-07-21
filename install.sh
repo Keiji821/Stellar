@@ -123,11 +123,6 @@ install_pkg() {
             show_message "$pkg instalado correctamente"
             return 0
         fi
-    elif command -v pacman >/dev/null; then
-        if pacman -S --noconfirm "$pkg"; then
-            show_message "$pkg instalado correctamente"
-            return 0
-        fi
     fi
 
     show_error "No se pudo instalar $pkg"
@@ -200,12 +195,6 @@ update_system() {
             show_message "Sistema actualizado"
             return 0
         fi
-    elif command -v pacman >/dev/null; then
-        show_progress "Actualizando sistema"
-        if pacman -Syu --noconfirm; then
-            show_message "Sistema actualizado"
-            return 0
-        fi
     fi
 
     show_error "Error al actualizar el sistema"
@@ -219,8 +208,6 @@ install_dependencies() {
         packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
     elif command -v pkg >/dev/null; then
         packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
-    elif command -v pacman >/dev/null; then
-        packages=(python tor cloudflared exiftool nmap dnsutils nodejs)
     fi
 
     for pkg in "${packages[@]}"; do
