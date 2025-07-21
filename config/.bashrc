@@ -367,7 +367,7 @@ volume-keys = volume
 # terminal-cursor-blink-rate = 0
 terminal-cursor-style = bar
 
-extra-keys-style = {"background":"#FF5722","margin":"5dp","corner-radius":"10dp"}
+extra-keys-style = background:#FF5722
 # extra-keys-text-all-caps = true
 extra-keys = [[ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP]]
 extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
