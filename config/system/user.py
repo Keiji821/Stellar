@@ -50,6 +50,9 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 
 # Temas
 
+with open("banner.txt", encoding="utf-8") as f:
+    banner = f.read().strip()
+
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
@@ -213,6 +216,8 @@ table.add_row("")
 table.add_row("Tú IP enmascarada", ip)
 table.add_row("Red", network)
 table.add_row("Ruta", route)
+table.add_row("")
+table.add_row(banner)
 
 
 console.print(table, style="bright_white", justify="center")
