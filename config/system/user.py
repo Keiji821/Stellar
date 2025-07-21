@@ -232,9 +232,9 @@ user_banner = Panel(
 )
 
 if banner_background not in ("", "no", "No configurado"):
-    style = f"on {banner_background_color}"
-
-console.print(user_banner, style=style, justify="center")
+    console.print(user_banner, style=f"on {banner_background_color}", justify="center")
+else:
+    console.print(user_banner, justify="center")
 
 console.print("")
 
