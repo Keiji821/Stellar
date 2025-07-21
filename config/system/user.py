@@ -225,7 +225,7 @@ console.print(table, style="bright_white", justify="center")
 
 styled_banner = Text.from_markup(
     f"[on {banner_background_color}]{banner}[/]"
-    if banner_background_color not in ("", "no")
+    if banner_background_color not in ("", "no", "No configurado")
     else banner
 )
 
