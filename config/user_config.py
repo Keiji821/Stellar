@@ -386,19 +386,19 @@ def mostrar_header(texto):
         box=HEAVY
     )
     console.print(panel)
-    console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho)
+    console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho))
 
 def mostrar_error(mensaje):
-    console.print(f"⛔ [bold bright_white on red] ERROR [/] [bold bright_red]→[/] {mensaje}")
+    console.print(f"[bold bright_white on red] ERROR [/] [bold bright_red]→[/] {mensaje}")
 
 def mostrar_exito(mensaje):
-    console.print(f"✅ [bold bright_white on green] ÉXITO [/] [bold bright_green]→[/] {mensaje}")
+    console.print(f"[bold bright_white on green] ÉXITO [/] [bold bright_green]→[/] {mensaje}")
 
 def mostrar_advertencia(mensaje):
-    console.print(f"⚠️  [bold bright_white on yellow] ADVERTENCIA [/] [bold bright_yellow]→[/] {mensaje}")
+    console.print(f"[bold bright_white on yellow] ADVERTENCIA [/] [bold bright_yellow]→[/] {mensaje}")
 
 def mostrar_informacion(mensaje):
-    console.print(f"ℹ️  [bold bright_white on blue] INFORMACIÓN [/] [bold bright_blue]→[/] {mensaje}")
+    console.print(f"[bold bright_white on blue] INFORMACIÓN [/] [bold bright_blue]→[/] {mensaje}")
 
 def verificar_termux_api():
     try:
