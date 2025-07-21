@@ -226,8 +226,8 @@ user_banner = Panel(
     banner,
     title="[bold green]Banner",
     title_align="center",
-    border_style="bright_white",
-    style="bright_white",
+    border_style="bold white",
+    style=banner_color,
     expand=False
 )
 console.print(user_banner, justify="center")
