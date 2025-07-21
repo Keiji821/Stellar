@@ -369,8 +369,8 @@ terminal-cursor-style = bar
 
 extra-keys-style = {"background":"#FF5722","margin":"5dp","corner-radius":"10dp"}
 # extra-keys-text-all-caps = true
-# extra-keys = [[ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP]]
-# extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
+extra-keys = [[ESC, TAB, CTRL, ALT, {key: '-', popup: '|'}, DOWN, UP]]
+extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
               ['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]
 
 # use-black-ui = true
