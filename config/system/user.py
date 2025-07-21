@@ -232,7 +232,7 @@ user_banner = Panel(
 )
 if banner_background_color=="":
     console.print(user_banner, justify="center")
-if banner_background_color=="no"
+if banner_background_color=="no":
     console.print(user_banner, justify="center")
 
 console.print(user_banner, style=banner_background_color, justify="center")
