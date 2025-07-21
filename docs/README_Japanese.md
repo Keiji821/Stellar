@@ -41,6 +41,14 @@ Stellarは`Python`、`Bash`、`Node.js`で開発されたプログラムで、`T
 ##### Stellarをインストールする手順:
 
 ```shell script
+pkg update && pkg upgrade
+```
+
+```shell script
+pkg install git -y
+```
+
+```shell script
 git clone https://github.com/Keiji821/Stellar
 ```
 
