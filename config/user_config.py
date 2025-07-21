@@ -842,7 +842,7 @@ def menu_principal():
             limpiar_pantalla()
             console.print(Panel.fit(
                 "[bold bright_green]Saliendo del sistema Stellar...", 
-                box=HEAVY,
+                box=ROUNDED,
                 border_style="bright_green"
             ))
             time.sleep(1)
