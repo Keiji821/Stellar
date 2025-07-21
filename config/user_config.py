@@ -379,7 +379,7 @@ def limpiar_pantalla():
 def mostrar_header(texto):
     ancho = 78
     panel = Panel(
-        Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT)),  # Corregido aquí
+        Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT)),
         style="bold bright_white on rgb(30,30,40)",
         padding=(1, 2),
         width=ancho,
