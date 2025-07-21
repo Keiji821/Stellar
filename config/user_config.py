@@ -547,7 +547,7 @@ def elegir_tema_predeterminado():
         mostrar_exito(f"Tema [bold]{tema}[/] aplicado")
     else:
         mostrar_error("Tema no válido")
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def crear_tema_personalizado():
     limpiar_pantalla()
@@ -555,7 +555,7 @@ def crear_tema_personalizado():
     subprocess.run(["nano", str(TERMUX_COLORS_PATH)])
     subprocess.run(["termux-reload-settings"])
     mostrar_exito("Tema personalizado configurado")
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def listar_tema_actual():
     limpiar_pantalla()
@@ -565,7 +565,7 @@ def listar_tema_actual():
         console.print(Panel.fit(tema, title="[bold]COLORES ACTUALES", box=DOUBLE, border_style=COLOR_ACCENT))
     else:
         mostrar_advertencia("No hay tema configurado")
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configurar_tema_termux():
     while True:
@@ -605,7 +605,7 @@ def editar_usuario():
             break
         mostrar_error("Nombre de usuario no válido")
     
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def mostrar_usuario():
     limpiar_pantalla()
@@ -624,7 +624,7 @@ def mostrar_usuario():
     else:
         mostrar_advertencia("Usuario no configurado")
     
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configurar_usuario():
     while True:
@@ -661,7 +661,7 @@ def activar_huella():
         mostrar_error("Termux-API no instalado")
         mostrar_informacion("Instale con: [bold]pkg install termux-api[/]")
     
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def desactivar_proteccion():
     limpiar_pantalla()
@@ -669,7 +669,7 @@ def desactivar_proteccion():
     metodo_path = SYSTEM_DIR / "login_method.txt"
     metodo_path.write_text("no")
     mostrar_exito("Protección desactivada")
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def mostrar_metodo_actual():
     limpiar_pantalla()
@@ -691,7 +691,7 @@ def mostrar_metodo_actual():
     else:
         mostrar_advertencia("No configurado")
     
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configurar_autenticacion():
     while True:
@@ -726,7 +726,7 @@ def probar_autenticacion():
     if not metodo_path.exists():
         mostrar_error("Método no configurado")
         time.sleep(2)
-        input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+        console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
         return
     
     metodo = metodo_path.read_text().strip()
@@ -741,7 +741,7 @@ def probar_autenticacion():
         mostrar_error("Método de huella no configurado")
         time.sleep(2)
     
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def mostrar_estado_actual():
     estado_tabla = Table(
