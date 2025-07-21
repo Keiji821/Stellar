@@ -41,6 +41,14 @@ Stellar는 `Python`, `Bash`, `Node.js`로 개발된 프로그램으로, `Termux`
 ##### Stellar를 설치하려면 다음 단계를 따르세요:
 
 ```shell script
+pkg update && pkg upgrade
+```
+
+```shell script
+pkg install git -y
+```
+
+```shell script
 git clone https://github.com/Keiji821/Stellar
 ```
 
