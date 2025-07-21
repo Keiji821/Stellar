@@ -383,8 +383,7 @@ def mostrar_header(texto):
         style="bold bright_white on rgb(30,30,40)",
         padding=(1, 2),
         width=ancho,
-        box=HEAVY
-    )
+        box=HEAVY)
     console.print(panel)
     console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho))
 
