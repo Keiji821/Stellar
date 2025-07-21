@@ -2,6 +2,7 @@ from rich.console import Console
 import os
 from os import system
 from rich.table import Table
+from rich.panel import Panel
 import requests
 
 console = Console()
@@ -221,10 +222,15 @@ console.print(table, style="bright_white", justify="center")
 
 # Banner
 
-user_banner = Table(title="Banner", title_justify="center", title_style="bold green")
-table.add_column(f"[bold green] Banner", style="code", no_wrap=False)
-table.add_row(banner)
-console.print(user_banner, style="bright_white", justify="center")
+user_banner = Panel(
+    banner,
+    title="[bold green]Banner",
+    title_align="center",
+    border_style="bright_white",
+    style="bright_white",
+    expand=False
+)
+console.print(user_banner, justify="center")
 
 console.print("")
 
