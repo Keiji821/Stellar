@@ -481,7 +481,7 @@ def banner_preview():
     else:
         mostrar_advertencia("No se encontró archivo de banner")
     
-    input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
+    console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configurar_banner():
     while True:
