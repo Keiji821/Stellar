@@ -217,7 +217,14 @@ table.add_row("Tú IP enmascarada", ip)
 table.add_row("Red", network)
 table.add_row("Ruta", route)
 
-
 console.print(table, style="bright_white", justify="center")
+
+# Banner
+
+user_banner = Table(title="Perfil", title_justify="center", title_style="bold green")
+table.add_column(f"[bold green] Banner", style="code", no_wrap=False)
+table.add_row(banner)
+console.print(user_banner, style="bright_white", justify="center")
+
 console.print("")
 
