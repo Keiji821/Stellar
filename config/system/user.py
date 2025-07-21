@@ -3,6 +3,7 @@ import os
 from os import system
 from rich.table import Table
 from rich.panel import Panel
+from rich.text import Text
 import requests
 
 console = Console()
@@ -222,19 +223,21 @@ console.print(table, style="bright_white", justify="center")
 
 # Banner
 
+styled_banner = Text.from_markup(
+    f"[on {banner_background_color}]{banner}[/]"
+    if banner_background_color not in ("", "no")
+    else banner
+)
+
 user_banner = Panel(
-    banner,
+    styled_banner,
     title="[bold green]Banner",
     title_align="center",
     border_style="bold white",
     style=banner_color,
     expand=False
 )
-
-if banner_background not in ("", "no", "No configurado"):
-    console.print(user_banner, style=f"on {banner_background_color}", justify="center")
-else:
-    console.print(user_banner, justify="center")
+console.print(user_banner, justify="center")
 
 console.print("")
 
