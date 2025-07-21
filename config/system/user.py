@@ -231,7 +231,7 @@ user_banner = Panel(
     expand=False
 )
 
-console.print(user_banner, style=f"[code][{banner_background_color}]", justify="center")
+console.print(user_banner, style=f"code {banner_background_color}", justify="center")
 if banner_background_color=="":
     console.print(user_banner, justify="center")
 if banner_background_color=="no":
