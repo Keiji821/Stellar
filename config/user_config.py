@@ -846,7 +846,7 @@ def menu_principal():
                 border_style="bright_green"
             ))
             time.sleep(1)
-            os.system("reload")
+            os.system("python ~/Stellar/config/themes/banner.py")
             exit(0)
 
 def inicio():
