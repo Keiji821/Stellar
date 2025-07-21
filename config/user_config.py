@@ -379,14 +379,14 @@ def limpiar_pantalla():
 def mostrar_header(texto):
     ancho = 78
     panel = Panel(
-        Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT)), 
+        Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT)),
         style="bold bright_white on rgb(30,30,40)",
         padding=(1, 2),
         width=ancho,
         box=HEAVY
-    ))
+    )
     console.print(panel)
-    console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho))
+    console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho)
 
 def mostrar_error(mensaje):
     console.print(f"⛔ [bold bright_white on red] ERROR [/] [bold bright_red]→[/] {mensaje}")
@@ -450,8 +450,7 @@ def banner_preview():
         color = color_path.read_text() if color_path.exists() else "bright_white"
         
         preview = Panel(
-            Align.center(Text(banner, style=color), 
-            vertical="middle"),
+            Align.center(Text(banner, style=color)),
             title="[bold]VISTA PREVIA",
             border_style=color,
             box=DOUBLE,
