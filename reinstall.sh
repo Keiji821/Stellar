@@ -128,8 +128,6 @@ reinstall_pkg() {
         pkg reinstall -y "$pkg" && return 0
     elif command -v apt-get >/dev/null; then
         apt-get install --reinstall -y "$pkg" && return 0
-    elif command -v pacman >/dev/null; then
-        pacman -S --noconfirm "$pkg" && return 0
     fi
 
     show_error "No se pudo reinstalar $pkg"
