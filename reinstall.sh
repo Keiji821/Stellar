@@ -155,7 +155,7 @@ clean_pycache() {
 }
 
 reinstall_dependencies() {
-    local packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs)
+    local packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
     for pkg in "${packages[@]}"; do
         if ! reinstall_pkg "$pkg"; then
             return 1
