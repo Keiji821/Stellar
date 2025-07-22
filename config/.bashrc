@@ -392,10 +392,7 @@ extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
 EOF
 cd
 
-export HISTCONTROL=ignoredups:erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=20000
-export EDITOR=nano
+alias ls='lsd --icon-theme unicode'
 
 command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
