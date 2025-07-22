@@ -55,6 +55,9 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 with open("banner.txt", encoding="utf-8") as f:
     banner = f.read().strip()
 
+if banner not in (""):
+    banner = "Configurado"
+
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
@@ -198,6 +201,7 @@ table.add_row("Usuario", user)
 table.add_row("")
 table.add_row("Preferencias", style="bold green")
 table.add_row("")
+table.add_row("Banner", banner)
 table.add_row("Color del banner", color_banner)
 table.add_row("Fondo del banner", banner_background)
 table.add_row("Color del fondo del banner", color_background_banner)
