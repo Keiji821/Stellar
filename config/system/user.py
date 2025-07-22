@@ -53,9 +53,9 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 # Temas
 
 with open("banner.txt", encoding="utf-8") as f:
-    banner = f.read().strip()
-    if banner == "":
-        banner = "No configurado"
+    bannerTable = f.read().strip()
+    if bannerTable == "":
+        bannerTable = "No configurado"
 
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
@@ -226,10 +226,13 @@ console.print(table, style="bright_white", justify="center")
 
 # Banner
 
+with open("banner.txt", encoding="utf-8") as f:
+    bannerHeader = f.read().strip()
+
 styled_banner = Text.from_markup(
-    f"[on {banner_background_color}]{banner}[/]"
+    f"[on {banner_background_color}]{bannerHeader}[/]"
     if banner_background_color not in ("", "no", "No configurado")
-    else banner
+    else bannerHeader
 )
 
 user_banner = Panel(
