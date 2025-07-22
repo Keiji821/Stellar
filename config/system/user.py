@@ -54,14 +54,13 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 
 with open("banner.txt", encoding="utf-8") as f:
     banner = f.read().strip()
-
-if not banner:
-    banner = "Configurado"
+    if banner == "":
+        banner = "Configurado"
 
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
-if banner_color=="":
+if banner_color == "":
     banner_color = "no"
 
 banner_color_tr = {
@@ -122,13 +121,13 @@ color_banner = banner_color_tr.get(banner_color)
 
 with open("banner_background.txt", encoding="utf-8") as f:
     banner_background = f.read().strip()
-if banner_background=="no":
+if banner_background == "no":
     banner_background = "No configurado"
 
 with open("banner_background_color.txt", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
-if banner_background_color=="":
+if banner_background_color == "":
     banner_background_color = "no"
 
 banner_background_color_tr = {
