@@ -55,7 +55,7 @@ os.chdir(os.path.expanduser("~/Stellar/config/themes"))
 with open("banner.txt", encoding="utf-8") as f:
     banner = f.read().strip()
     if banner == "":
-        banner = "Configurado"
+        banner = "No configurado"
 
 with open("banner_color.txt", encoding="utf-8") as f:
     banner_color = f.read().strip()
