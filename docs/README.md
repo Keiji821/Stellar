@@ -42,9 +42,9 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 #
 
-⚠️ `Próximamente soporte para el idioma, japonés, chino, coreano, ingles y portugués.`
+⚠️ `Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.`
 
-⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
+⚠️ `In-program support for Japanese, Chinese, Korean, English, and Portuguese is coming soon.`
 
 ⚠️ `Aún en constante desarrollo, pueden haber fallos.`
 
