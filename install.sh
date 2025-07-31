@@ -53,7 +53,7 @@ progress_color="${Azul_Brillante}"
 
 clear
 
-read -r -d '' banner << EOF
+banner = """
 #####
 #     # ##### ###### #      #        ##   #####
 #         #   #      #      #       #  #  #    #
@@ -62,8 +62,7 @@ read -r -d '' banner << EOF
 #     #   #   #      #      #      #    # #   #
  #####    #   ###### ###### ###### #    # #    # 
 
-                                   @Instalador/Installer
-EOF
+                                   @Instalador/Installer"""
 
 printf "${Azul_Brillante} $banner ${Reset}"
 printf "\n"
