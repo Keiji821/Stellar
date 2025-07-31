@@ -53,7 +53,7 @@ progress_color="${Azul_Brillante}"
 
 clear
 
-banner = """
+banner="""
 #####
 #     # ##### ###### #      #        ##   #####
 #         #   #      #      #       #  #  #    #
