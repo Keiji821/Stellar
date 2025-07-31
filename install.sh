@@ -1,4 +1,4 @@
-Gris="\033[1;30m"
+1Gris="\033[1;30m"
 Negro="\033[0;30m"
 Rojo="\033[0;31m"
 Verde="\033[0;32m"
@@ -99,8 +99,8 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
 fi
 
 
-apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
-pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord fake_useragent pycryptodome)
+apt_packages=python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
+pip_packages=beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord fake_useragent pycryptodome)
 
 
 # Instalador/Installer - Stellar
@@ -117,8 +117,10 @@ fi
 
 printf "\n"
 
+printf "${Verde_Brillante}"
 apt install $apt_packages -y 
 pip install $pip_packages
+printf "${Reset}"
 
 printf "\n"
 
