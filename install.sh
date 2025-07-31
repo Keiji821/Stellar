@@ -123,6 +123,7 @@ printf "\n"
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Verde_Brillante}[+]${Amarillo_Brillante}${Blanco_Brillante} Empezando instalación... ${Reset}"
+    sleep 5
    
     apt install "${apt_packages[@]}" -y
     if [[ $? -ne 0 ]]; then
@@ -141,6 +142,7 @@ fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
     printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Starting installation... ${Reset}"
+    sleep 5
 
     apt install "${apt_packages[@]}" -y
     if [[ $? -ne 0 ]]; then
