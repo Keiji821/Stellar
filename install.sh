@@ -135,7 +135,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     pip3 install "${pip_packages[@]}"
     if [[ $? -ne 0 ]]; then
         printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}"
-    exit 1
+        exit 1
     fi
 fi
 
@@ -145,7 +145,7 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
     apt install "${apt_packages[@]}" -y
     if [[ $? -ne 0 ]]; then
         printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some APT packages failed to install. Please review the previous errors. ${Reset}"
-    exit 1
+        exit 1
     fi
 
     printf "\n"
