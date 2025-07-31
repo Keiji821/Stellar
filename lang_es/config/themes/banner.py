@@ -17,8 +17,8 @@ from rich import box
 
 console = Console()
 
-themes_dir = os.path.expanduser("~/Stellar/config/themes")
-system_dir = os.path.expanduser("~/Stellar/config/system")
+themes_dir = os.path.expanduser("~/Stellar/lang_es/config/themes")
+system_dir = os.path.expanduser("~/Stellar/lang_es/config/system")
 
 def generar_paleta():
     def color_rgb():
