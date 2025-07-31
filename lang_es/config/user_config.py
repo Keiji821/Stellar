@@ -12,7 +12,7 @@ from rich.style import Style
 from pathlib import Path
 
 console = Console()
-STELLAR_DIR = Path("~/Stellar").expanduser()
+STELLAR_DIR = Path("~/Stellar/lang_es").expanduser()
 THEMES_DIR = STELLAR_DIR / "config/themes"
 SYSTEM_DIR = STELLAR_DIR / "config/system"
 TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
