@@ -69,7 +69,7 @@ printf "${Azul_Brillante} $banner ${Reset}"
 printf "\n"
 printf "\n${Magenta_Brillante}⭐ Created by: Keiji821 ${Reset}"
 printf "\n${Cian_Brillante}🔵 My Discord contact: ${Verde_Brillante}keiji100 ${Reset}"
-printf "\n${Magenta_Brillante}📦 Repository ${Rojo_Brillante} >>> ${Cian_Brillante}${Subrayado}https://github.com/Keiji821/Stellar ${Reset}\n"
+printf "\n${Magenta_Brillante}📦 Repository ${Rojo_Brillante} >>> ${Cian_Brillante}${Subrayado}https://github.com/Keiji821/Stellar${Reset}\n"
 printf "\n"
 
 # Inicio/Start - Stellar
