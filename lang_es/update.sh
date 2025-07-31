@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 STELLAR_DIR="$HOME/Stellar"
-CONFIG_SYSTEM_DIR="$STELLAR_DIR/config/system"
-CONFIG_THEMES_DIR="$STELLAR_DIR/config/themes"
+CONFIG_SYSTEM_DIR="$STELLAR_DIR/lang_es/config/system"
+CONFIG_THEMES_DIR="$STELLAR_DIR/lang_es/config/themes"
 
 Gris="\033[1;30m"
 Negro="\033[0;30m"
