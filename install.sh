@@ -65,8 +65,8 @@ read -r -d '' banner << EOF
 EOF
 
 printf "${Azul_Brillante} $banner ${Reset}"
-printf "${Magenta_Brillante}Created by: Keiji821"
-printf "${Magenta_Brillante}Repository >>> https://github.com/Keiji821/Stellar\n"
+printf "\n${Magenta_Brillante}Created by: Keiji821"
+printf "\n${Magenta_Brillante}Repository >>> https://github.com/Keiji821/Stellar\n"
 
 # Inicio/Start - Stellar
 
