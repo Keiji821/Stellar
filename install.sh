@@ -90,7 +90,8 @@ printf "\n"
 # Dependencias/Dependencies - Stellar
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Instalando dependencias necesarias para el correcto funcionamiento de Stellar...\nEsperé un momento... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Instalando dependencias necesarias para el correcto funcionamiento de Stellar ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante}Esperé un momento... ${Reset}"
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
