@@ -53,11 +53,14 @@ progress_color="${Azul_Brillante}"
 
 clear
 
-printf "${Fondo_Blanco_Brillante}${Azul_Brillante}  ____  _       _ _ ${Reset}"
-printf "${Fondo_Blanco_Brillante}${Azul_Brillante} / ___|| |_ ___| | | __ _ _ __ ${Reset}"
-printf "${Fondo_Blanco_Brillante}${Azul_Brillante} \___ \| __/ _ \ | |/ _` | '__| ${Reset}"
-printf "${Fondo_Blanco_Brillante}${Azul_Brillante}  ___) | ||  __/ | | (_| | | ${Reset}"
-printf "${Fondo_Blanco_Brillante}${Azul_Brillante} |____/ \__\___|_|_|\__,_|_| ${Reset}"
+banner="""
+   _____ __       ____
+  / ___// /____  / / /___ ______
+  \__ \/ __/ _ \/ / / __ `/ ___/
+ ___/ / /_/  __/ / / /_/ / /
+/____/\__/\___/_/_/\__,_/_/"""
+printf "${Fondo_Blanco_Brillante}${Azul_Brillante} $banner ${Reset}"
+
 
 # Inicio/Start - Stellar
 
