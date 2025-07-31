@@ -64,12 +64,12 @@ read -r -d '' banner << EOF
 
 EOF
 
-printf "${Fondo_Blanco_Brillante}${Azul_Brillante} $banner ${Reset}"
+printf "${Azul_Brillante} $banner ${Reset}"
 
 
 # Inicio/Start - Stellar
 
-echo
+echo "\n"
 
 printf "${Amarillo_Brillante}"
 read -p "Elija su idioma/Choose your language (Español/English): " language
