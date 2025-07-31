@@ -144,7 +144,7 @@ printf "\n"
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Verde_Brillante}✓ ¡Stellar se ha instalado correctamente!${Reset}"
-    printf "\n${Rojo_Brillante} ${Rojo_Brillante}[!]${Verde_Brillante}Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Verde_Brillante} funcione correctamente ${Reset}"
+    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante}Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Verde_Brillante} funcione correctamente ${Reset}"
     printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante} Iniciando sesión en Stellar...${Reset}"
    sleep 5
    login
@@ -153,7 +153,7 @@ fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
     printf "\n${Verde_Brillante}✓ Stellar has been installed successfully!${Reset}"    
-    printf "\n${Rojo_Brillante} ${Rojo_Brillante}[!]${Verde_Brillante}Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Verde_Brillante} work properly ${Reset}"
+    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante}Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Verde_Brillante} work properly ${Reset}"
     printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante} Logging in to Stellar...${Reset}"
    sleep 5
    login
