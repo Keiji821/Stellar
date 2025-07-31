@@ -51,12 +51,28 @@ error_color="${Rojo_Brillante}"
 prompt_color="${Magenta_Brillante}"
 progress_color="${Azul_Brillante}"
 
+# Inicio/Start - Stellar
+
+
+
+
+# Dependencias/Dependencies - Stellar
+
 apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
 pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord fake_useragent pycryptodome)
+
+# Instalador/Installer - Stellar
 
 apt install $apt_packages
 pip install $pip_packages
 
+sleep 5
+
 cp ~/Stellar/lang_es/config/.bash_profile ~/.
 cp ~/Stellar/lang_es/config/.bashrc ~/.
+
+
+# Final/End - Stellar
+
+
 
