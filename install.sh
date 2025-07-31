@@ -146,14 +146,14 @@ printf "\n"
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Verde_Brillante}✓${Blanco_Brillante} ¡Stellar se ha instalado correctamente!${Reset}"
-    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Verde_Brillante} funcione correctamente ${Reset}"
+    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Blanco_Brillante} funcione correctamente ${Reset}"
 
     Salir=""
 
     while [[ "$Salir" != "Salir" ]]; do
-    
-        printf "\n${Verde_Brillante}"
-        read -p "\n¿Desea salir del programa?\nEscriba "Salir" para continuar: "
+           
+        printf "\n${Verde_Brillante}¿Desea salir del programa?\n" 
+        read -p "Escriba "Salir" para continuar: "
     
         case "$Salir" in
             Salir)
