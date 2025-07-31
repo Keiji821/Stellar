@@ -72,7 +72,7 @@ printf "${Azul_Brillante} $banner ${Reset}"
 echo "\n"
 
 printf "${Amarillo_Brillante}"
-read -p "Elija su idioma/Choose your language (Español/English): " language
+read -p "• Elija su idioma/Choose your language (Español/English): " language
 
 if [ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]; then
     printf "${Verde_Brillante}[+]${Subrayado}${Verde_Brillante} Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
