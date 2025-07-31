@@ -57,17 +57,19 @@ read -r -d '' banner << EOF
 #####
 #     # ##### ###### #      #        ##   #####
 #         #   #      #      #       #  #  #    #
- #####    #   #####  #      #      #    # #    #  @Instalador/Installer
+ #####    #   #####  #      #      #    # #    #  
       #   #   #      #      #      ###### #####
 #     #   #   #      #      #      #    # #   #
  #####    #   ###### ###### ###### #    # #    # 
 
+                                   @Instalador/Installer
 EOF
 
 printf "${Azul_Brillante} $banner ${Reset}"
 printf "\n"
 printf "\n${Magenta_Brillante}⭐ Created by: Keiji821"
-printf "\n${Magenta_Brillante}📦 Repository >>> https://github.com/Keiji821/Stellar\n"
+printf "\n${Cian_Brillante}🗨️ My Discord contact: ${Verde_Brillante}keiji100"
+printf "\n${Magenta_Brillante}📦 Repository ${Rojo_Brillante} >>> ${Cian_Brillante}${Subrayado}https://github.com/Keiji821/Stellar\n"
 printf "\n"
 
 # Inicio/Start - Stellar
