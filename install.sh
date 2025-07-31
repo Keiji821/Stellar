@@ -175,8 +175,8 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
 
     while [[ "$Exit" != "Exit" ]]; do
     
-        printf "\n${Verde_Brillante}"
-        read -p "\nDo you want to exit the program?\nType "Exit" to continue: "
+        printf "\n${Verde_Brillante}Do you want to exit the program?\n" 
+        read -p "Type "Exit" to continue: "
     
         case "$Exit" in
             Exit)
