@@ -51,13 +51,12 @@ error_color="${Rojo_Brillante}"
 prompt_color="${Magenta_Brillante}"
 progress_color="${Azul_Brillante}"
 
-banner="""
+banner="
  ____  _       _ _
 / ___|| |_ ___| | | __ _ _ __
 \___ \| __/ _ \ | |/ _` | '__|
  ___) | ||  __/ | | (_| | |
-|____/ \__\___|_|_|\__,_|_|
-"""
+|____/ \__\___|_|_|\__,_|_|"
 
 # Inicio/Start - Stellar
 
