@@ -79,21 +79,23 @@ printf "${Amarillo_Brillante}"
 read -p "• Elija su idioma/Choose your language (Español/English): " language
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
-    printf "\n${Verde_Brillante}[+]${Subrayado}${Verde_Brillante} Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
+    printf "\n${Verde_Brillante}[+]${Verde_Brillante} Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
-    printf "\n${Verde_Brillante}[+]${Subrayado}${Verde_Brillante}Stellar has started installing on your Termux/Terminal ${Reset}"
+    printf "\n${Verde_Brillante}[+]${Verde_Brillante}Stellar has started installing on your Termux/Terminal ${Reset}"
 fi
+
+printf "\n"
 
 # Dependencias/Dependencies - Stellar
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Subrayado}${Amarillo_Brillante}Instalando dependencias necesarias para el correcto funcionamiento de Stellar... Esperé un momento... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}Instalando dependencias necesarias para el correcto funcionamiento de Stellar... Esperé un momento... ${Reset}"
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Subrayado}${Amarillo_Brillante}Installing dependencies required for Stellar to run properly... Please wait... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}Installing dependencies required for Stellar to run properly... Please wait... ${Reset}"
 fi
 
 
@@ -103,24 +105,29 @@ pip_packages=(beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich 
 
 # Instalador/Installer - Stellar
 
+printf "\n"
+
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
-    printf "\n${Verde_Brillante}[+]${Subrayado}${Amarillo_Brillante}Empezando instalación... ${Reset}"
+    printf "\n${Verde_Brillante}[+]${Amarillo_Brillante}Empezando instalación... ${Reset}"
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
-    printf "\n${Verde_Brillante}[!]${Subrayado}${Amarillo_Brillante}Starting installation... ${Reset}"
+    printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}Starting installation... ${Reset}"
 fi
+
+printf "\n"
 
 apt install $apt_packages -y 
 pip install $pip_packages
 
+printf "\n"
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Subrayado}${Amarillo_Brillante}Finalizando instalación... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}Finalizando instalación... ${Reset}"
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Subrayado}${Amarillo_Brillante}Finishing installation... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}Finishing installation... ${Reset}"
 fi
 
 sleep 5
@@ -131,19 +138,21 @@ cp ~/Stellar/lang_es/config/.bashrc ~/.
 
 # Final/End - Stellar
 
+printf "\n"
+
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
-    printf "\n${Subrayado}${Verde_Brillante}✓ ¡Stellar se ha instalado correctamente!${Reset}"
-    printf "\n${Subrayado}${Rojo_Brillante} ${Rojo_Brillante}[!]${Verde_Brillante} Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Verde_Brillante} funcione correctamente ${Reset}"
-    printf "\n${Subrayado}${Amarillo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante} Iniciando sesión en Stellar...${Reset}"
+    printf "\n${Verde_Brillante}✓ ¡Stellar se ha instalado correctamente!${Reset}"
+    printf "\n${Rojo_Brillante} ${Rojo_Brillante}[!]${Verde_Brillante}Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Verde_Brillante} funcione correctamente ${Reset}"
+    printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante} Iniciando sesión en Stellar...${Reset}"
    sleep 3
    login
 fi
 
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
-    printf "\n${Subrayado}${Verde_Brillante}✓ Stellar has been installed successfully!${Reset}"    
-    printf "\n${Subrayado}${Rojo_Brillante} ${Rojo_Brillante}[!]${Verde_Brillante} Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Verde_Brillante} work properly ${Reset}"
-    printf "\n${Subrayado}${Amarillo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante} Logging in to Stellar...${Reset}"
+    printf "\n${Verde_Brillante}✓ Stellar has been installed successfully!${Reset}"    
+    printf "\n${Rojo_Brillante} ${Rojo_Brillante}[!]${Verde_Brillante}Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Verde_Brillante} work properly ${Reset}"
+    printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Verde_Brillante} Logging in to Stellar...${Reset}"
    sleep 3
    login
 fi
