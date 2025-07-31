@@ -156,7 +156,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
         read -p "\n¿Desea salir del programa?\nEscriba "Salir" para continuar: "
     
         case "$Salir" in
-            Salir
+            Salir)
                  printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Iniciando sesión en Stellar...${Reset}"
         esac
 done
@@ -179,7 +179,7 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
         read -p "\nDo you want to exit the program?\nType "Exit" to continue: "
     
         case "$Exit" in
-            Exit
+            Exit)
                  printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Logging in to Stellar...${Reset}"
         esac
 done    
