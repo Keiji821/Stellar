@@ -91,12 +91,12 @@ printf "\n"
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Instalando dependencias necesarias para el correcto funcionamiento de Stellar ${Reset}"
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante}Esperé un momento... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Esperé un momento... ${Reset}"
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Installing dependencies required for Stellar to run properly ${Reset}"
-    printf "\n{Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante}Please wait... ${Reset}"
+    printf "\n{Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Please wait... ${Reset}"
 fi
 
 
@@ -153,7 +153,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     while [[ "$Salir" != "Salir" ]]; do
            
         printf "\n${Verde_Brillante}¿Desea salir del programa?\n" 
-        read -p "Escriba "Salir" para continuar: "
+        read -p "Escriba "Salir" para continuar: " Salir
     
         case "$Salir" in
             Salir)
@@ -176,7 +176,7 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
     while [[ "$Exit" != "Exit" ]]; do
     
         printf "\n${Verde_Brillante}Do you want to exit the program?\n" 
-        read -p "Type "Exit" to continue: "
+        read -p "Type "Exit" to continue: " Exit
     
         case "$Exit" in
             Exit)
