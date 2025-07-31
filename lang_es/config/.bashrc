@@ -173,7 +173,7 @@ uninstall() {
 }
 
 update() {
-    cd ~/Stellar/lang_es/update.sh
+    cd ~/Stellar/lang_es
     bash update.sh
     cd
 }
