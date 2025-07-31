@@ -119,6 +119,7 @@ printf "\n"
 printf "${Verde_Brillante}"
 apt install $apt_packages -y 
 pip install $pip_packages
+sleep 3
 printf "${Reset}"
 
 printf "\n"
