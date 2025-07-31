@@ -53,13 +53,13 @@ progress_color="${Azul_Brillante}"
 
 clear
 
-banner=``
+banner=("
    _____ __       ____
   / ___// /____  / / /___ ______
   \__ \/ __/ _ \/ / / __ `/ ___/
  ___/ / /_/  __/ / / /_/ / /
-/____/\__/\___/_/_/\__,_/_/
-``
+/____/\__/\___/_/_/\__,_/_/")
+
 printf "${Fondo_Blanco_Brillante}${Azul_Brillante} $banner ${Reset}"
 
 
