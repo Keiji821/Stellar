@@ -51,10 +51,27 @@ error_color="${Rojo_Brillante}"
 prompt_color="${Magenta_Brillante}"
 progress_color="${Azul_Brillante}"
 
+banner="""
+ ____  _       _ _
+/ ___|| |_ ___| | | __ _ _ __
+\___ \| __/ _ \ | |/ _` | '__|
+ ___) | ||  __/ | | (_| | |
+|____/ \__\___|_|_|\__,_|_|
+"""
+
 # Inicio/Start - Stellar
 
+read -p "Elija su idioma/Choose your language (Español/English): " language
 
+if [ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]; then
+    printf "${Subrayado}${Verde_Brillante}Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
 
+if
+
+if [ "$language" == "English" || "$language" == "english" ]; then
+    printf "${Subrayado}${Verde_Brillante}Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
+
+if
 
 # Dependencias/Dependencies - Stellar
 
