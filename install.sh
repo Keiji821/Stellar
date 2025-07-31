@@ -60,16 +60,18 @@ read -r -d '' banner << EOF
  #####    #   #####  #      #      #    # #    #
       #   #   #      #      #      ###### #####
 #     #   #   #      #      #      #    # #   #
- #####    #   ###### ###### ###### #    # #    #
+ #####    #   ###### ###### ###### #    # #    # @Instalador/Installer
 
 EOF
 
 printf "${Azul_Brillante} $banner ${Reset}"
+printf " "
+
+
 
 
 # Inicio/Start - Stellar
 
-echo "\n"
 
 printf "${Amarillo_Brillante}"
 read -p "• Elija su idioma/Choose your language (Español/English): " language
