@@ -99,8 +99,8 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
 fi
 
 
-apt_packages=python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
-pip_packages=beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord fake_useragent pycryptodome)
+apt_packages=python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd
+pip_packages=beautifulsoup4 pyfiglet phonenumbers psutil PySocks requests rich "rich[jupyter]" lolcat discord fake_useragent pycryptodome
 
 
 # Instalador/Installer - Stellar
