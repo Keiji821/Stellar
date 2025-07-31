@@ -52,7 +52,7 @@ history -c
 cd
 
 # Método de desbloqueo - Huella dactilar
-cd ~/Stellar/config/system
+cd ~/Stellar/lang_es/config/system
 
 if [ -f login_method.txt ]; then
     method=$(cat login_method.txt)
@@ -86,7 +86,7 @@ fi
 
 cd
 
-input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/config/system/user.txt" 2>/dev/null || {
+input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/lang_es/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
     echo "$input" > "$HOME/Stellar/config/system/user.txt"
@@ -137,8 +137,8 @@ tor --SocksPort $puerto \
     &>tor.txt &
 
 
-cp ~/Stellar/config/.bash_profile ~/.
-cd Stellar/config/themes
+cp ~/Stellar/lang_es/config/.bash_profile ~/.
+cd Stellar/lang_es/config/themes
 clear
 python banner.py
 cd
@@ -148,20 +148,20 @@ printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante
 # Sistema
 
 menu() {
-    cd ~/Stellar/config
+    cd ~/Stellar/lang_es/config
     python menu.py
     cd
 }
 
 reload() {
-    cd ~/Stellar/config/themes
+    cd ~/Stellar/lang_es/config/themes
     clear
     python banner.py
     cd
 }
 
 user-config() {
-    cd ~/Stellar/config
+    cd ~/Stellar/lang_es/config
     python user_config.py
     cd
 }
@@ -185,7 +185,7 @@ reinstall() {
 }
 
 my() {
-    cd ~/Stellar/config/system
+    cd ~/Stellar/lang_es/config/system
     python user.py
     cd
 }
@@ -193,13 +193,13 @@ my() {
 # Discord
 
 weebhook-mass-spam() {
-    cd ~/Stellar/commands/general/Discord/weebhookraid
+    cd ~/Stellar/lang_es/commands/general/Discord/weebhookraid
     python weebhook_mass_spam.py
     cd
 }
 
 mass-delete-channels() {
-    cd ~/Stellar/commands/general/Discord/botraid
+    cd ~/Stellar/lang_es/commands/general/Discord/botraid
     python mass_delete_channels.py
     cd
 }
@@ -207,37 +207,37 @@ mass-delete-channels() {
 # Osint
 
 ipinfo() {
-    cd ~/Stellar/commands/osint/main
+    cd ~/Stellar/lang_es/commands/osint/main
     python ipinfo.py
     cd
 }
 
 phoneinfo() {
-    cd ~/Stellar/commands/osint/main
+    cd ~/Stellar/lang_es/commands/osint/main
     python phoneinfo.py
     cd
 }
 
 urlinfo() {
-    cd ~/Stellar/commands/osint/main
+    cd ~/Stellar/lang_es/commands/osint/main
     python urlinfo.py
     cd
 }
 
 metadatainfo() {
-    cd ~/Stellar/commands/osint/main
+    cd ~/Stellar/lang_es/commands/osint/main
     bash metadatainfo.sh
     cd
 }
 
 emailsearch() {
-    cd ~/Stellar/commands/osint/main
+    cd ~/Stellar/lang_es/commands/osint/main
     python emailfinder.py
     cd
 }
 
 userfinder() {
-    cd ~/Stellar/commands/osint/main
+    cd ~/Stellar/lang_es/commands/osint/main
     python userfinder.py
     cd
 }
@@ -246,37 +246,37 @@ userfinder() {
 # Osint/Discord
 
 userinfo() {
-    cd ~/Stellar/commands/osint/discord
+    cd ~/Stellar/lang_es/commands/osint/discord
     python userinfo.py
     cd
 }
 
 serverinfo() {
-    cd ~/Stellar/commands/osint/discord
+    cd ~/Stellar/lang_es/commands/osint/discord
     python serverinfo.py
     cd
 }
 
 searchinvites() {
-    cd ~/Stellar/commands/osint/discord
+    cd ~/Stellar/lang_es/commands/osint/discord
     python searchserverinvites.py
     cd
 }
 
 inviteinfo() {
-    cd ~/Stellar/commands/osint/discord
+    cd ~/Stellar/lang_es/commands/osint/discord
     python inviteinfo.py
     cd
 }
 
 role-mapper() {
-    cd ~/Stellar/commands/osint/discord
+    cd ~/Stellar/lang_es/commands/osint/discord
     python role_mapper.py
     cd
 }
 
 mutual-servers() {
-    cd ~/Stellar/commands/osint/discord
+    cd ~/Stellar/lang_es/commands/osint/discord
     python mutual_servers.py
     cd
 }
@@ -284,7 +284,7 @@ mutual-servers() {
 # Osint/Instagram
 
 profileinfo() {
-    cd ~/Stellar/commands/osint/instagram
+    cd ~/Stellar/lang_es/commands/osint/instagram
     python profileinfo.py
     cd
 }
@@ -292,7 +292,7 @@ profileinfo() {
 # Pentest
 
 ddos() {
-    cd ~/Stellar/commands/pentesting/main
+    cd ~/Stellar/lang_es/commands/pentesting/main
     node ddos.js
     cd
 }
@@ -300,7 +300,7 @@ ddos() {
 # Networks
 
 traceroute() {
-    cd ~/Stellar/commands/networks
+    cd ~/Stellar/lang_es/commands/networks
     python traceroute.py
     cd
 }
@@ -308,7 +308,7 @@ traceroute() {
 # Phishing
 
 tunnel() {
-    cd ~/Stellar/commands/phishing
+    cd ~/Stellar/lang_es/commands/phishing
     python tunnel.py
     cd
 }
@@ -316,37 +316,37 @@ tunnel() {
 # Misc
 
 ia() {
-    cd ~/Stellar/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     python iahttp.py
     cd
 }
 
 ia-image() {
-    cd ~/Stellar/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     python ia_image.py
     cd
 }
 
 traductor() {
-    cd ~/Stellar/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     python traductor.py
     cd
 }
 
 myip() {
-    cd ~/Stellar/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     python myip.py
     cd
 }
 
 passwordgen() {
-    cd ~/Stellar/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     python passwordgen.py
     cd
 }
 
 encrypt-file() {
-    cd ~/Stellar/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     python encrypt-file.py
     cd
 }
