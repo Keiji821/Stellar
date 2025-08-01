@@ -66,3 +66,27 @@ printf "\n${Magenta_Brillante}📦 Repository ${Rojo_Brillante} >>> ${Cian_Brill
 printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
+
+# Inicio/Start - Stellar
+
+printf "${Amarillo_Brillante}"
+read -p "• Elija su idioma/Choose your language (Español/English): " language
+
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+    printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar ha empezado a reinstalarse en su Termux/Terminal ${Reset}"
+fi
+
+sleep 3
+
+if [[ "$language" == "English" || "$language" == "english" ]]; then
+    printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar has started reinstall on your Termux/Terminal ${Reset}"
+fi
+
+sleep 3
+
+printf "\n"
+
+# Reinstalador/Reinstaller - Stellar
+
+
+git pull --force 
