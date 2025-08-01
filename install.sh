@@ -83,9 +83,13 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
 fi
 
+sleep 3
+
 if [[ "$language" == "English" || "$language" == "english" ]]; then
     printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar has started installing on your Termux/Terminal ${Reset}"
 fi
+
+sleep 3
 
 printf "\n"
 
@@ -96,11 +100,14 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Esperé un momento... ${Reset}"
 fi
 
+sleep 3
+
 if [[ "$language" == "English" || "$language" == "english" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Installing dependencies required for Stellar to run properly ${Reset}"
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Please wait... ${Reset}"
 fi
 
+sleep 3
 
 apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
 pip_packages=(
@@ -162,6 +169,8 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
 fi
 
 printf "\n"
+
+sleep 3
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
