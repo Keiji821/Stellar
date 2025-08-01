@@ -48,7 +48,7 @@ with open("login_method.txt", encoding="utf-8") as f:
 
 # Ruta
 
-os.chdir(os.path.expanduser("~/Stellar/config/themes"))
+os.chdir(os.path.expanduser("~/Stellar/lang_es/config/themes"))
 
 # Temas
 
