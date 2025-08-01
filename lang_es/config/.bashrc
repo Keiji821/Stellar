@@ -193,13 +193,13 @@ my() {
 # Discord
 
 weebhook-mass-spam() {
-    cd ~/Stellar/lang_es/commands/general/Discord/weebhookraid
+    cd ~/Stellar/lang_es/commands/general/discord/weebhookraid
     python weebhook_mass_spam.py
     cd
 }
 
 mass-delete-channels() {
-    cd ~/Stellar/lang_es/commands/general/Discord/botraid
+    cd ~/Stellar/lang_es/commands/general/discord/botraid
     python mass_delete_channels.py
     cd
 }
