@@ -197,7 +197,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     while [[ "$Salir" != "Salir" ]]; do
            
         printf "\n${Verde_Brillante}¿Desea salir del programa?\n" 
-        read -p "Escriba "Salir" para continuar: " Salir
+        read -p "Escriba (Salir) para continuar: " Salir
     
         case "$Salir" in
             Salir)
@@ -220,7 +220,7 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
     while [[ "$Exit" != "Exit" ]]; do
     
         printf "\n${Verde_Brillante}Do you want to exit the program?\n" 
-        read -p "Type "Exit" to continue: " Exit
+        read -p "Type (Exit) to continue: " Exit
     
         case "$Exit" in
             Exit)
