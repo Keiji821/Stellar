@@ -45,12 +45,6 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-success_color="${Verde_Brillante}"
-warning_color="${Amarillo_Brillante}"
-error_color="${Rojo_Brillante}"
-prompt_color="${Magenta_Brillante}"
-progress_color="${Azul_Brillante}"
-
 clear
 
 banner="""
