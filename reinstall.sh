@@ -88,5 +88,89 @@ printf "\n"
 
 # Reinstalador/Reinstaller - Stellar
 
+apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
+pip_packages=(
+    beautifulsoup4
+    pyfiglet
+    phonenumbers
+    psutil
+    PySocks
+    requests
+    rich
+    "rich[jupyter]"
+    lolcat
+    discord
+    fake_useragent
+    pycryptodome
+)
+
 
 git pull --force 
+
+printf "\n"
+
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+    printf "\n${Verde_Brillante}[+]${Amarillo_Brillante}${Blanco_Brillante} Empezando reinstalación... ${Reset}"
+    sleep 5
+
+    apt update && apt upgrade && pkg update && pkg upgrade 
+    apt install "${apt_packages[@]}" -y
+    if [[ $? -ne 0 ]]; then
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}"
+        exit 1
+    fi
+
+    printf "\n"
+
+    pip3 install "${pip_packages[@]}"
+    if [[ $? -ne 0 ]]; then
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}"
+        exit 1
+    fi
+fi
+
+if [[ "$language" == "English" || "$language" == "english" ]]; then
+    printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Starting installation... ${Reset}"
+    sleep 5
+    
+    apt update && apt upgrade && pkg update && pkg upgrade 
+    apt install "${apt_packages[@]}" -y
+    if [[ $? -ne 0 ]]; then
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some APT packages failed to reinstall. Please review the previous errors. ${Reset}"
+        exit 1
+    fi
+
+    printf "\n"
+
+    pip3 install "${pip_packages[@]}"
+    if [[ $? -ne 0 ]]; then
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some PIP packages failed to install. Please review the previous errors. ${Reset}"
+        exit 1
+    fi
+fi
+
+printf "\n"
+
+sleep 3
+
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
+    cp ~/Stellar/lang_es/config/.bash_profile ~/.
+    cp ~/Stellar/lang_es/config/.bashrc ~/.
+fi
+
+if [[ "$language" == "English" || "$language" == "english" ]]; then
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finishing installation... ${Reset}"
+fi
+
+sleep 5
+
+pip clean
+
+# Final/End
+
+
+
+
+
+
