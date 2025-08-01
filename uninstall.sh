@@ -47,6 +47,31 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
+clear
+
+banner="""
+#####
+#     # ##### ###### #      #        ##   #####
+#         #   #      #      #       #  #  #    #
+ #####    #   #####  #      #      #    # #    #  
+      #   #   #      #      #      ###### #####
+#     #   #   #      #      #      #    # #   #
+ #####    #   ###### ###### ###### #    # #    # 
+
+                                   @Desinstalador/Uninstaller"""
+
+printf "${Azul_Brillante} ${banner} ${Reset}"
+printf "\n"
+printf "\n${Magenta_Brillante}⭐ Created by: Keiji821 ${Reset}"
+printf "\n${Cian_Brillante}🔵 My Discord contact: ${Verde_Brillante}keiji100 ${Reset}"
+printf "\n${Magenta_Brillante}📦 Repository ${Rojo_Brillante} >>> ${Cian_Brillante}${Subrayado}https://github.com/Keiji821/Stellar${Reset}\n"
+printf "\n"
+printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
+printf "\n"
+
+
+# Desinstalador/Uninstaller
+
 echo -e "${Rojo_Brillante}¿Desea eliminar Stellar completamente?${Reset}"
 read -p "Esta acción no se puede deshacer [S/N]: " respuesta
 
