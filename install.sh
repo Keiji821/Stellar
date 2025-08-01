@@ -70,6 +70,8 @@ printf "\n${Magenta_Brillante}⭐ Created by: Keiji821 ${Reset}"
 printf "\n${Cian_Brillante}🔵 My Discord contact: ${Verde_Brillante}keiji100 ${Reset}"
 printf "\n${Magenta_Brillante}📦 Repository ${Rojo_Brillante} >>> ${Cian_Brillante}${Subrayado}https://github.com/Keiji821/Stellar${Reset}\n"
 printf "\n"
+printf "\n{Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
+printf "\n"
 
 # Inicio/Start - Stellar
 
@@ -163,6 +165,8 @@ printf "\n"
 
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
+    cp ~/Stellar/lang_es/config/.bash_profile ~/.
+cp ~/Stellar/lang_es/config/.bashrc ~/.
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
@@ -170,10 +174,6 @@ if [[ "$language" == "English" || "$language" == "english" ]]; then
 fi
 
 sleep 5
-
-cp ~/Stellar/lang_es/config/.bash_profile ~/.
-cp ~/Stellar/lang_es/config/.bashrc ~/.
-
 
 # Final/End - Stellar
 
@@ -223,5 +223,3 @@ done
    sleep 5
    login
 fi
-
-
