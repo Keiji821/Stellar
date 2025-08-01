@@ -72,21 +72,43 @@ printf "\n"
 
 # Desinstalador/Uninstaller
 
-echo -e "${Rojo_Brillante}¿Desea eliminar Stellar completamente?${Reset}"
-read -p "Esta acción no se puede deshacer [S/N]: " respuesta
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+    echo -e "${Rojo_Brillante}¿Desea eliminar Stellar completamente?${Reset}"
+    read -p "\nEsta acción no se puede deshacer [S/N]: " respuesta
 
-if [[ "$respuesta" =~ ^[SsYy]$|^[Ss]í$|^[Ss]i$ ]]; then
-    echo -e "${Rojo}➤ Eliminando archivos de Stellar...${Reset}"
-    rm -rf ~/Stellar
-    rm -f ~/.bashrc
-    rm -f ~/.bash_profile
-    echo -e "${Verde_Brillante}✔ Stellar se ha eliminado completamente${Reset}"
-else
-    echo -e "${Amarillo_Brillante}➤ Operación cancelada${Reset}"
-fi
-
-echo -e "${Magenta_Brillante}Gracias por haber utilizado Stellar!"
-echo -e "${Cian_Brillante}Atte: Keiji821${Reset}"
-echo -e "${Azul_Brillante}¡Hasta pronto! :)${Reset}"
+    if [[ "$respuesta" =~ ^[SsYy]$|^[Ss]í$|^[Ss]i$ ]]; then
+        echo -e "\n${Rojo_Brillante}➤ Eliminando archivos de Stellar...${Reset}"
+        rm -rf ~/Stellar
+        rm -f ~/.bashrc
+        rm -f ~/.bash_profile
+        echo -e "\n${Verde_Brillante}✔ Stellar se ha eliminado completamente${Reset}"
+        echo -e "\n${Magenta_Brillante}Gracias por haber utilizado Stellar!"
+        echo -e "\n${Cian_Brillante}Atte: Keiji821${Reset}"
+        echo -e "\n${Azul_Brillante}¡Hasta pronto! :)${Reset}"
+    else
+        echo -e "${Amarillo_Brillante}➤ Operación cancelada${Reset}"
+    fi
 sleep 3
 login
+fi
+
+
+if [[ "$language" == "English" || "$language" == "english" ]]; then
+    echo -e "${Rojo_Brillante}Do you want to remove Stellar completely?${Reset}"
+    read -p "\nThis action cannot be undone [S/N]: " respuesta
+
+    if [[ "$respuesta" =~ ^[SsYy]$|^[Ss]í$|^[Ss]i$ ]]; then
+        echo -e "\n${Rojo_Brillante}➤ Deleting files from Stellar...${Reset}"
+        rm -rf ~/Stellar
+        rm -f ~/.bashrc
+        rm -f ~/.bash_profile
+        echo -e "\n${Verde_Brillante}✔ Stellar has been completely removed${Reset}"
+        echo -e "\n${Magenta_Brillante}Thank you for using Stellar!"
+        echo -e "\n${Cian_Brillante}Atte: Keiji821${Reset}"
+        echo -e "\n${Azul_Brillante}¡See you soon! :)${Reset}"
+    else
+        echo -e "${Amarillo_Brillante}➤ Operation cancelled${Reset}"
+    fi
+sleep 3
+login
+fi
