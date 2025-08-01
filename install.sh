@@ -166,7 +166,7 @@ printf "\n"
 if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
     cp ~/Stellar/lang_es/config/.bash_profile ~/.
-cp ~/Stellar/lang_es/config/.bashrc ~/.
+    cp ~/Stellar/lang_es/config/.bashrc ~/.
 fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
