@@ -98,7 +98,7 @@ fi
 
 if [[ "$language" == "English" || "$language" == "english" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Installing dependencies required for Stellar to run properly ${Reset}"
-    printf "\n{Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Please wait... ${Reset}"
+    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Please wait... ${Reset}"
 fi
 
 
