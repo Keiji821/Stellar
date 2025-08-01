@@ -169,8 +169,52 @@ pip clean
 
 # Final/End
 
+printf "\n"
+
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+    printf "\n${Verde_Brillante}✓${Blanco_Brillante} ¡Stellar se ha reinstalado correctamente!${Reset}"
+    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Blanco_Brillante} funcione correctamente ${Reset}"
+
+    Salir=""
+
+    while [[ "$Salir" != "Salir" ]]; do
+
+        printf "\n${Verde_Brillante}¿Desea salir del programa?\n" 
+        read -p "Escriba (Salir) para continuar: " Salir
+
+        case "$Salir" in
+            Salir)
+                 printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Iniciando sesión en Stellar...${Reset}"
+        esac
+done
 
 
+   sleep 5
+   login
+fi
+
+
+if [[ "$language" == "English" || "$language" == "english" ]]; then
+    printf "\n${Verde_Brillante}✓${Blanco_Brillante} Stellar has been reinstalled successfully!${Reset}"    
+    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Blanco_Brillante} work properly ${Reset}"
+
+    Exit=""
+
+    while [[ "$Exit" != "Exit" ]]; do
+
+        printf "\n${Verde_Brillante}Do you want to exit the program?\n" 
+        read -p "Type (Exit) to continue: " Exit
+
+        case "$Exit" in
+            Exit)
+                 printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Logging in to Stellar...${Reset}"
+        esac
+done    
+
+
+   sleep 5
+   login
+fi
 
 
 
