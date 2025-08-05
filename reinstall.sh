@@ -72,13 +72,13 @@ printf "\n"
 printf "${Amarillo_Brillante}"
 read -p "• Elija su idioma/Choose your language (Español/English): " language
 
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
     printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar ha empezado a reinstalarse en su Termux/Terminal ${Reset}"
 fi
 
 sleep 3
 
-if [[ "$language" == "English" || "$language" == "english" ]]; then
+if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar has started reinstall on your Termux/Terminal ${Reset}"
 fi
 
@@ -109,7 +109,7 @@ git pull --force
 
 printf "\n"
 
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
     printf "\n${Verde_Brillante}[+]${Amarillo_Brillante}${Blanco_Brillante} Empezando reinstalación... ${Reset}"
     sleep 5
 
@@ -129,7 +129,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     fi
 fi
 
-if [[ "$language" == "English" || "$language" == "english" ]]; then
+if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Starting installation... ${Reset}"
     sleep 5
     
@@ -153,13 +153,13 @@ printf "\n"
 
 sleep 3
 
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
     cp ~/Stellar/lang_es/config/.bash_profile ~/.
     cp ~/Stellar/lang_es/config/.bashrc ~/.
 fi
 
-if [[ "$language" == "English" || "$language" == "english" ]]; then
+if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finishing installation... ${Reset}"
 fi
 
@@ -171,7 +171,7 @@ pip clean
 
 printf "\n"
 
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
     printf "\n${Verde_Brillante}✓${Blanco_Brillante} ¡Stellar se ha reinstalado correctamente!${Reset}"
     printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Blanco_Brillante} funcione correctamente ${Reset}"
 
@@ -194,7 +194,7 @@ done
 fi
 
 
-if [[ "$language" == "English" || "$language" == "english" ]]; then
+if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     printf "\n${Verde_Brillante}✓${Blanco_Brillante} Stellar has been reinstalled successfully!${Reset}"    
     printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Blanco_Brillante} work properly ${Reset}"
 
