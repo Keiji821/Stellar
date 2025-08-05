@@ -75,7 +75,7 @@ read -p "• Elija su idioma/Choose your language (Español/English): " language
 
 # Desinstalador/Uninstaller
 
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" ]]; then
+if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
     echo -e "${Rojo_Brillante}¿Desea eliminar Stellar completamente?${Reset}"
     read -p "\nEsta acción no se puede deshacer [S/N]: " respuesta
 
@@ -97,7 +97,7 @@ login
 fi
 
 
-if [[ "$language" == "English" || "$language" == "english" ]]; then
+if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     echo -e "${Rojo_Brillante}Do you want to remove Stellar completely?${Reset}"
     read -p "\nThis action cannot be undone [S/N]: " respuesta
 
