@@ -69,7 +69,7 @@ printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
 
-printf "${Amarillo_Brillante}"
+printf "\n${Amarillo_Brillante}"
 read -p "• Elija su idioma/Choose your language (Español/English): " language
 
 
