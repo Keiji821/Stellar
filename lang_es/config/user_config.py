@@ -6,11 +6,16 @@ from rich.panel import Panel
 from rich.prompt import Prompt, Confirm
 from rich.text import Text
 from rich.table import Table
-from rich.box import ROUNDED, HEAVY, DOUBLE
+from rich.box import ROUNDED, HEAVY, DOUBLE, SQUARE
 from rich.align import Align
 from rich.style import Style
+from rich.live import Live
+from rich.layout import Layout
+from rich.progress import Progress, SpinnerColumn, TextColumn
 from pathlib import Path
+import shutil
 
+# Configuración inicial
 console = Console()
 STELLAR_DIR = Path("~/Stellar/lang_es").expanduser()
 THEMES_DIR = STELLAR_DIR / "config/themes"
@@ -19,386 +24,69 @@ TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
 THEMES_DIR.mkdir(parents=True, exist_ok=True)
 SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
 
-COLOR_PRIMARY = "bold cyan"
-COLOR_SECONDARY = "bold magenta"
-COLOR_ACCENT = "bold yellow"
-COLOR_SUCCESS = "bold green"
-COLOR_ERROR = "bold red"
-COLOR_WARNING = "bold yellow"
-COLOR_INFO = "bold blue"
-COLOR_HIGHLIGHT = "bold white on rgb(40,42,54)"
+# Paleta de colores mejorada
+COLOR_PRIMARY = "bold #6A89CC"
+COLOR_SECONDARY = "bold #B8E994"
+COLOR_ACCENT = "bold #F8C291"
+COLOR_SUCCESS = "bold #78E08F"
+COLOR_ERROR = "bold #E55039"
+COLOR_WARNING = "bold #FAD390"
+COLOR_INFO = "bold #4FC1E9"
+COLOR_HIGHLIGHT = "bold #FFFFFF on #2C3A47"
+COLOR_BG = "#1E272E"
+COLOR_PANEL = "#2C3A47"
+COLOR_BORDER = "#4FC1E9"
 
-TERMUX_THEMES = {
-    "dracula": """
-background=#282A36
-foreground=#F8F8F2
-color0=#21222C
-color1=#FF5555
-color2=#50FA7B
-color3=#F1FA8C
-color4=#BD93F9
-color5=#FF79C6
-color6=#8BE9FD
-color7=#BFBFBF
-color8=#4D4D4D
-color9=#FF6E67
-color10=#5AF78E
-color11=#F4F99D
-color12=#CAA9FA
-color13=#FF92D0
-color14=#9AEDFE
-color15=#E6E6E6
-""",
-    "nord": """
-background=#2E3440
-foreground=#D8DEE9
-color0=#3B4252
-color1=#BF616A
-color2=#A3BE8C
-color3=#EBCB8B
-color4=#81A1C1
-color5=#B48EAD
-color6=#88C0D0
-color7=#E5E9F0
-color8=#4C566A
-color9=#D08770
-color10=#8FBCBB
-color11=#ECEFF4
-color12=#5E81AC
-color13=#EBCB8B
-color14=#B48EAD
-color15=#FFFFFF
-""",
-    "gruvbox": """
-background=#282828
-foreground=#EBDBB2
-color0=#1D2021
-color1=#CC241D
-color2=#98971A
-color3=#D79921
-color4=#458588
-color5=#B16286
-color6=#689D6A
-color7=#A89984
-color8=#928374
-color9=#FB4934
-color10=#B8BB26
-color11=#FABD2F
-color12=#83A598
-color13=#D3869B
-color14=#8EC07C
-color15=#EBDBB2
-""",
-    "tokyo_night": """
-background=#1A1B26
-foreground=#A9B1D6
-color0=#16161E
-color1=#F7768E
-color2=#9ECE6A
-color3=#E0AF68
-color4=#7AA2F7
-color5=#BB9AF7
-color6=#7DCFFF
-color7=#C0CAF5
-color8=#414868
-color9=#FF7A93
-color10=#B9F27C
-color11=#FF9E64
-color12=#7AA2F7
-color13=#BB9AF7
-color14=#0DB9D7
-color15=#FFFFFF
-""",
-    "one_dark": """
-background=#282C34
-foreground=#ABB2BF
-color0=#1E2127
-color1=#E06C75
-color2=#98C379
-color3=#E5C07B
-color4=#61AFEF
-color5=#C678DD
-color6=#56B6C2
-color7=#DCDFE4
-color8=#5C6370
-color9=#BE5046
-color10=#7ECA9C
-color11=#D19A66
-color12=#4FA6ED
-color13=#BF68D9
-color14=#48B0BD
-color15=#FFFFFF
-""",
-    "monokai": """
-background=#272822
-foreground=#f8f8f2
-cursor=#f8f8f2
-color0=#272822
-color1=#f92672
-color2=#a6e22e
-color3=#f4bf75
-color4=#66d9ef
-color5=#ae81ff
-color6=#a1efe4
-color7=#f8f8f2
-color8=#75715e
-color9=#f92672
-color10=#a6e22e
-color11=#f4bf75
-color12=#66d9ef
-color13=#ae81ff
-color14=#a1efe4
-color15=#f9f8f5
-""",
-    "solarized_dark": """
-background=#002b36
-foreground=#839496
-cursor=#839496
-color0=#073642
-color1=#dc322f
-color2=#859900
-color3=#b58900
-color4=#268bd2
-color5=#d33682
-color6=#2aa198
-color7=#eee8d5
-color8=#586e75
-color9=#cb4b16
-color10=#859900
-color11=#b58900
-color12=#268bd2
-color13=#6c71c4
-color14=#2aa198
-color15=#fdf6e3
-""",
-    "catppuccin_latte": """
-background=#EFF1F5
-foreground=#4C4F69
-cursor=#4C4F69
-color0=#5C5F77
-color1=#D20F39
-color2=#40A02B
-color3=#DF8E1D
-color4=#1E66F5
-color5=#EA76CB
-color6=#179299
-color7=#ACB0BE
-color8=#6C6F85
-color9=#D20F39
-color10=#40A02B
-color11=#DF8E1D
-color12=#1E66F5
-color13=#EA76CB
-color14=#179299
-color15=#BCC0CC
-""",
-    "cyberpunk_neon": """
-background=#0C0C0C
-foreground=#00FF9D
-cursor=#00FF9D
-color0=#000000
-color1=#FF3559
-color2=#00FF9D
-color3=#FFD700
-color4=#00A1FF
-color5=#FF00AA
-color6=#00FFFF
-color7=#CCCCCC
-color8=#333333
-color9=#FF3559
-color10=#00FF9D
-color11=#FFD700
-color12=#00A1FF
-color13=#FF00AA
-color14=#00FFFF
-color15=#FFFFFF
-""",
-    "everforest": """
-background=#2B3339
-foreground=#D5C9AB
-cursor=#D5C9AB
-color0=#4B565C
-color1=#E67E80
-color2=#A7C080
-color3=#DBBC7F
-color4=#7FBBB3
-color5=#D699B6
-color6=#83C092
-color7=#D5C9AB
-color8=#4B565C
-color9=#E67E80
-color10=#A7C080
-color11=#DBBC7F
-color12=#7FBBB3
-color13=#D699B6
-color14=#83C092
-color15=#DEE2D9
-""",
-    "material_ocean": """
-background=#0F111A
-foreground=#8F93A2
-cursor=#8F93A2
-color0=#1E1E2E
-color1=#F28FAD
-color2=#ABE9B3
-color3=#FAE3B0
-color4=#96CDFB
-color5=#D5AEEA
-color6=#89DCEB
-color7=#BAC2DE
-color8=#585B70
-color9=#F28FAD
-color10=#ABE9B3
-color11=#FAE3B0
-color12=#96CDFB
-color13=#D5AEEA
-color14=#89DCEB
-color15=#A6ADC8
-""",
-    "horizon": """
-background=#1C1E26
-foreground=#CBCED0
-cursor=#CBCED0
-color0=#16161C
-color1=#E95678
-color2=#29D398
-color3=#FAB795
-color4=#26BBD9
-color5=#EE64AC
-color6=#59E1E3
-color7=#CBCED0
-color8=#3E4058
-color9=#E95678
-color10=#29D398
-color11=#FAB795
-color12=#26BBD9
-color13=#EE64AC
-color14=#59E1E3
-color15=#E6E6E6
-""",
-    "matrix": """
-background=#000000
-foreground=#00FF00
-cursor=#00FF00
-color0=#000000
-color1=#FF0000
-color2=#00FF00
-color3=#FFFF00
-color4=#0000FF
-color5=#FF00FF
-color6=#00FFFF
-color7=#BBBBBB
-color8=#555555
-color9=#FF5555
-color10=#55FF55
-color11=#FFFF55
-color12=#5555FF
-color13=#FF55FF
-color14=#55FFFF
-color15=#FFFFFF
-""",
-    "hacker_purple": """
-background=#0D0208
-foreground=#00FF41
-cursor=#00FF41
-color0=#0D0208
-color1=#FF0000
-color2=#00FF41
-color3=#FFFF00
-color4=#0080FF
-color5=#FF00FF
-color6=#00FFFF
-color7=#C0C0C0
-color8=#333333
-color9=#FF3333
-color10=#33FF33
-color11=#FFFF33
-color12=#3399FF
-color13=#FF33FF
-color14=#33FFFF
-color15=#FFFFFF
-""",
-    "cyberpunk_red": """
-background=#000000
-foreground=#FF0000
-cursor=#FF0000
-color0=#000000
-color1=#FF0000
-color2=#00FF00
-color3=#FF6600
-color4=#0066FF
-color5=#CC00FF
-color6=#00FFFF
-color7=#AAAAAA
-color8=#333333
-color9=#FF3333
-color10=#33FF33
-color11=#FF9933
-color12=#3399FF
-color13=#CC33FF
-color14=#33FFFF
-color15=#FFFFFF
-""",
-    "hacker_retro": """
-background=#121212
-foreground=#00FF00
-cursor=#00FF00
-color0=#121212
-color1=#FF0044
-color2=#00CC00
-color3=#FFA800
-color4=#0088FF
-color5=#CC00CC
-color6=#00CCCC
-color7=#C0C0C0
-color8=#333333
-color9=#FF3366
-color10=#33FF33
-color11=#FFCC33
-color12=#3399FF
-color13=#CC33FF
-color14=#33FFFF
-color15=#FFFFFF"
-"""
-}
-
-COLORES_DISPONIBLES = [
-    "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
-    "bright_black", "bright_red", "bright_green", "bright_yellow", 
-    "bright_blue", "bright_magenta", "bright_cyan", "bright_white",
-    "dark_red", "dark_green", "dark_yellow", "dark_blue",
-    "dark_magenta", "dark_cyan", "grey0", "grey19", "grey30",
-    "grey37", "grey46", "grey50", "grey54", "grey58", "grey62",
-    "grey66", "grey70", "grey74", "grey78", "grey82", "grey85",
-    "grey89", "grey93", "grey100", "orange1", "orange3", "orange4"
-]
+# Nuevas constantes para animaciones
+SPINNER = "dots"
+SPINNER_SPEED = 0.5
 
 def limpiar_pantalla():
     os.system("clear")
 
 def mostrar_header(texto):
-    ancho = 78
-    panel = Panel(
-        Align.center(Text(texto, style=Style.parse(COLOR_HIGHLIGHT))),
-        style="bold bright_white on rgb(30,30,40)",
-        padding=(1, 2),
-        width=ancho,
-        box=HEAVY
+    ancho = min(shutil.get_terminal_size().columns - 4, 90)
+    titulo = Text.assemble(
+        ("★ ", "bold " + COLOR_ACCENT),
+        (texto, "bold " + COLOR_HIGHLIGHT),
+        (" ★", "bold " + COLOR_ACCENT)
     )
-    console.print(panel)
-    console.print(Align.center(Text("ESTADO ACTUAL", style=COLOR_ACCENT), width=ancho))
+    panel = Panel(
+        Align.center(titulo),
+        style=f"bold white on {COLOR_BG}",
+        padding=(0, 2),
+        width=ancho,
+        box=HEAVY,
+        border_style=COLOR_BORDER
+    )
+    console.print(panel, justify="center")
+    console.print()
+
+def mostrar_subtitulo(texto):
+    console.print(Align.center(Text(f"» {texto} «", style=COLOR_SECONDARY + " dim"), width=80))
+    console.print()
 
 def mostrar_error(mensaje):
-    console.print(f"[bold bright_white on red] ERROR [/] [bold bright_red]→[/] {mensaje}")
+    console.print(f"[{COLOR_ERROR}]✖ ERROR →[/] {mensaje}", justify="center")
 
 def mostrar_exito(mensaje):
-    console.print(f"[bold bright_white on green] ÉXITO [/] [bold bright_green]→[/] {mensaje}")
+    console.print(f"[{COLOR_SUCCESS}]✓ ÉXITO →[/] {mensaje}", justify="center")
 
 def mostrar_advertencia(mensaje):
-    console.print(f"[bold bright_white on yellow] ADVERTENCIA [/] [bold bright_yellow]→[/] {mensaje}")
+    console.print(f"[{COLOR_WARNING}]⚠ ADVERTENCIA →[/] {mensaje}", justify="center")
 
 def mostrar_informacion(mensaje):
-    console.print(f"[bold bright_white on blue] INFORMACIÓN [/] [bold bright_blue]→[/] {mensaje}")
+    console.print(f"[{COLOR_INFO}]ℹ INFORMACIÓN →[/] {mensaje}", justify="center")
+
+def mostrar_carga(mensaje):
+    with Progress(
+        SpinnerColumn(spinner_name=SPINNER, style=COLOR_ACCENT),
+        TextColumn("[progress.description]{task.description}"),
+        transient=True,
+        console=console
+    ) as progress:
+        progress.add_task(description=mensaje, total=None)
+        time.sleep(SPINNER_SPEED)
 
 def es_color_valido(color):
     try:
@@ -414,32 +102,66 @@ def verificar_termux_api():
     except:
         return False
 
+def crear_tabla_menu(opciones, ancho=50):
+    tabla = Table.grid(padding=(1, 4), expand=True)
+    tabla.add_column(style=COLOR_ACCENT + " bold", width=10, justify="center")
+    tabla.add_column(style=COLOR_PRIMARY, width=ancho-14)
+    
+    for opcion, descripcion in opciones:
+        tabla.add_row(opcion, descripcion)
+    
+    return tabla
+
+def crear_tabla_estado():
+    tabla = Table(
+        box=SQUARE,
+        header_style=COLOR_ACCENT,
+        border_style=COLOR_BORDER,
+        expand=True
+    )
+    tabla.add_column("Configuración", style=COLOR_PRIMARY, width=25)
+    tabla.add_column("Estado", style=COLOR_SECONDARY, width=25)
+    return tabla
+
 def editar_banner_texto():
     limpiar_pantalla()
     mostrar_header("EDITAR TEXTO DEL BANNER")
+    mostrar_subtitulo("Usa nano para personalizar tu banner")
+    
     path = THEMES_DIR / "banner.txt"
+    if not path.exists():
+        path.write_text("Stellar Terminal\nPersonaliza tu experiencia")
+    
     subprocess.run(["nano", str(path)])
     mostrar_exito("Texto del banner editado correctamente")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
-def cambiar_color_banner():
-    limpiar_pantalla()
-    mostrar_header("CAMBIAR COLOR DEL BANNER")
-    
-    table = Table.grid(padding=(0, 2))
+def mostrar_paleta_colores():
+    table = Table.grid(padding=(0, 1), expand=True)
     fila_actual = []
+    
     for i, color in enumerate(COLORES_DISPONIBLES):
         if es_color_valido(color):
-            muestra = f"[{color}]{color}[/]"
-            fila_actual.append(muestra)
-            if len(fila_actual) == 4 or i == len(COLORES_DISPONIBLES) - 1:
+            muestra = f"[on {color}]   [/] [bold]{color}[/]"
+            celda = Panel(muestra, width=22, box=SQUARE, border_style="dim")
+            fila_actual.append(celda)
+            
+            if len(fila_actual) == 3 or i == len(COLORES_DISPONIBLES) - 1:
                 table.add_row(*fila_actual)
                 fila_actual = []
     
-    console.print(table, justify="center")
+    console.print(Align.center(table))
+    console.print()
+
+def cambiar_color_banner():
+    limpiar_pantalla()
+    mostrar_header("CAMBIAR COLOR DEL BANNER")
+    mostrar_subtitulo("Selecciona un color de la paleta")
+    
+    mostrar_paleta_colores()
     
     while True:
-        color = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione color para el banner →[/]").strip()
+        color = Prompt.ask(f"[{COLOR_ACCENT}]» Seleccione color para el banner →[/]").strip().lower()
         if es_color_valido(color):
             break
         mostrar_error(f"Color '{color}' no válido. Intente nuevamente")
@@ -451,21 +173,12 @@ def cambiar_color_banner():
 def cambiar_color_fondo_banner():
     limpiar_pantalla()
     mostrar_header("CAMBIAR COLOR DE FONDO DEL BANNER")
+    mostrar_subtitulo("Selecciona un color de fondo")
     
-    table = Table.grid(padding=(0, 2))
-    fila_actual = []
-    for i, color in enumerate(COLORES_DISPONIBLES):
-        if es_color_valido(color):
-            muestra = f"[{color}]{color}[/]"
-            fila_actual.append(muestra)
-            if len(fila_actual) == 4 or i == len(COLORES_DISPONIBLES) - 1:
-                table.add_row(*fila_actual)
-                fila_actual = []
-    
-    console.print(table, justify="center")
+    mostrar_paleta_colores()
     
     while True:
-        color = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione color para el fondo →[/]").strip()
+        color = Prompt.ask(f"[{COLOR_ACCENT}]» Seleccione color para el fondo →[/]").strip().lower()
         if es_color_valido(color):
             break
         mostrar_error(f"Color '{color}' no válido. Intente nuevamente")
@@ -483,16 +196,22 @@ def toggle_fondo_banner():
     if path.exists():
         fondo_actual = path.read_text().strip()
     
-    nuevo_estado = "si" if fondo_actual == "no" else "no"
-    estado = "activado" if nuevo_estado == "si" else "desactivado"
+    estado = "ACTIVADO" if fondo_actual == "no" else "DESACTIVADO"
+    color_estado = COLOR_SUCCESS if estado == "ACTIVADO" else COLOR_WARNING
     
-    path.write_text(nuevo_estado)
-    mostrar_exito(f"Fondo del banner {estado}")
+    if Confirm.ask(f"[{COLOR_ACCENT}]» ¿{estado} fondo del banner?[/]", default=True):
+        nuevo_estado = "si" if fondo_actual == "no" else "no"
+        path.write_text(nuevo_estado)
+        mostrar_exito(f"Fondo del banner [bold {color_estado}]{estado}[/]")
+    else:
+        mostrar_informacion("Operación cancelada")
+    
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def banner_preview():
     limpiar_pantalla()
     mostrar_header("VISTA PREVIA DEL BANNER")
+    
     path = THEMES_DIR / "banner.txt"
     color_path = THEMES_DIR / "banner_color.txt"
     fondo_path = THEMES_DIR / "banner_background.txt"
@@ -508,20 +227,17 @@ def banner_preview():
         
         estilo = Style.parse(color) if es_color_valido(color) else Style.parse("bright_white")
         
-        if not es_color_valido(color):
-            mostrar_advertencia(f"Color '{color}' no válido. Usando blanco brillante")
-        
         texto_banner = Text(banner, style=estilo)
         
         estilo_fondo = None
         fondo_activado = fondo_path.exists() and fondo_path.read_text().strip() == "si"
         
         if fondo_activado:
-            color_fondo = fondo_color_path.read_text().strip() if fondo_color_path.exists() else "bold white"
+            color_fondo = fondo_color_path.read_text().strip() if fondo_color_path.exists() else "black"
             if es_color_valido(color_fondo):
-                estilo_fondo = Style.parse(color_fondo)
+                estilo_fondo = Style(bgcolor=color_fondo)
             else:
-                mostrar_advertencia(f"Color de fondo '{color_fondo}' no válido")
+                estilo_fondo = Style(bgcolor="black")
         
         preview = Panel(
             Align.center(texto_banner),
@@ -543,19 +259,19 @@ def configurar_banner():
         limpiar_pantalla()
         mostrar_header("CONFIGURACIÓN DE BANNER")
         
-        menu = Table.grid(padding=(1, 4))
-        menu.add_column("Opción", style=COLOR_ACCENT, justify="center")
-        menu.add_column("Descripción", style=COLOR_PRIMARY)
+        opciones = [
+            ("1", "Editar texto del banner"),
+            ("2", "Cambiar color del banner"),
+            ("3", "Cambiar color de fondo"),
+            ("4", "Activar/Desactivar fondo"),
+            ("5", "Vista previa del banner"),
+            ("0", "[bold bright_red]Volver al menú principal[/]")
+        ]
         
-        menu.add_row("1", "Editar texto del banner")
-        menu.add_row("2", "Cambiar color del banner")
-        menu.add_row("3", "Cambiar color de fondo")
-        menu.add_row("4", "Activar/Desactivar fondo")
-        menu.add_row("5", "Vista previa del banner")
-        menu.add_row("0", "[bold bright_red]Volver al menú principal[/]")
+        tabla_menu = crear_tabla_menu(opciones, ancho=60)
+        console.print(Align.center(tabla_menu))
         
-        console.print(Align.center(menu))
-        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione una opción →[/]")
+        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]» Seleccione una opción →[/]")
         
         if opcion == "1": editar_banner_texto()
         elif opcion == "2": cambiar_color_banner()
@@ -567,43 +283,48 @@ def configurar_banner():
             mostrar_error("Opción inválida")
             time.sleep(1)
 
-def elegir_tema_predeterminado():
-    limpiar_pantalla()
-    mostrar_header("SELECCIONAR TEMA PREDEFINIDO")
-    
-    table = Table.grid(padding=(1, 3), expand=True)
-    table.add_column("Tema", style=COLOR_ACCENT)
-    table.add_column("Muestra", style=COLOR_PRIMARY)
+def mostrar_temas():
+    tabla = Table.grid(padding=(1, 2), expand=True)
+    tabla.add_column("Tema", style=COLOR_ACCENT + " bold", width=20)
+    tabla.add_column("Muestra", style=COLOR_PRIMARY, width=40)
     
     temas_muestras = {
-        "dracula": "[#FF5555]█[/] [#50FA7B]█[/] [#BD93F9]█",
-        "nord": "[#BF616A]█[/] [#A3BE8C]█[/] [#81A1C1]█",
-        "gruvbox": "[#CC241D]█[/] [#98971A]█[/] [#458588]█",
-        "tokyo_night": "[#F7768E]█[/] [#9ECE6A]█[/] [#7AA2F7]█",
-        "one_dark": "[#E06C75]█[/] [#98C379]█[/] [#61AFEF]█",
-        "monokai": "[#f92672]█[/] [#a6e22e]█[/] [#66d9ef]█",
-        "solarized_dark": "[#dc322f]█[/] [#859900]█[/] [#268bd2]█",
-        "catppuccin_latte": "[#D20F39]█[/] [#40A02B]█[/] [#1E66F5]█",
-        "cyberpunk_neon": "[#FF3559]█[/] [#00FF9D]█[/] [#00A1FF]█",
-        "everforest": "[#E67E80]█[/] [#A7C080]█[/] [#7FBBB3]█",
-        "material_ocean": "[#F28FAD]█[/] [#ABE9B3]█[/] [#96CDFB]█",
-        "horizon": "[#E95678]█[/] [#29D398]█[/] [#26BBD9]█",
-        "matrix": "[#FF0000]█[/] [#00FF00]█[/] [#0000FF]█",
-        "hacker_purple": "[#FF0000]█[/] [#00FF41]█[/] [#0080FF]█",
-        "cyberpunk_red": "[#FF0000]█[/] [#00FF00]█[/] [#0066FF]█",
-        "hacker_retro": "[#FF0044]█[/] [#00CC00]█[/] [#0088FF]█"
+        "dracula": "[#FF5555]█[/][#50FA7B]█[/][#BD93F9]█",
+        "nord": "[#BF616A]█[/][#A3BE8C]█[/][#81A1C1]█",
+        "gruvbox": "[#CC241D]█[/][#98971A]█[/][#458588]█",
+        "tokyo_night": "[#F7768E]█[/][#9ECE6A]█[/][#7AA2F7]█",
+        "one_dark": "[#E06C75]█[/][#98C379]█[/][#61AFEF]█",
+        "monokai": "[#f92672]█[/][#a6e22e]█[/][#66d9ef]█",
+        "solarized_dark": "[#dc322f]█[/][#859900]█[/][#268bd2]█",
+        "catppuccin_latte": "[#D20F39]█[/][#40A02B]█[/][#1E66F5]█",
+        "cyberpunk_neon": "[#FF3559]█[/][#00FF9D]█[/][#00A1FF]█",
+        "everforest": "[#E67E80]█[/][#A7C080]█[/][#7FBBB3]█",
+        "material_ocean": "[#F28FAD]█[/][#ABE9B3]█[/][#96CDFB]█",
+        "horizon": "[#E95678]█[/][#29D398]█[/][#26BBD9]█",
+        "matrix": "[#FF0000]█[/][#00FF00]█[/][#0000FF]█",
+        "hacker_purple": "[#FF0000]█[/][#00FF41]█[/][#0080FF]█",
+        "cyberpunk_red": "[#FF0000]█[/][#00FF00]█[/][#0066FF]█",
+        "hacker_retro": "[#FF0044]█[/][#00CC00]█[/][#0088FF]█"
     }
     
     for tema, muestra in temas_muestras.items():
-        table.add_row(f"[bold]{tema}[/]", muestra)
+        tabla.add_row(f"[bold]{tema}[/]", muestra)
     
-    console.print(Align.center(table))
+    console.print(Align.center(tabla))
+
+def elegir_tema_predeterminado():
+    limpiar_pantalla()
+    mostrar_header("SELECCIONAR TEMA PREDEFINIDO")
+    mostrar_subtitulo("Elige un tema de la lista")
     
-    tema = Prompt.ask(f"\n[{COLOR_ACCENT}]Elija un tema →[/]")
+    mostrar_temas()
+    
+    tema = Prompt.ask(f"\n[{COLOR_ACCENT}]» Elija un tema →[/]")
     if tema in TERMUX_THEMES:
         TERMUX_COLORS_PATH.write_text(TERMUX_THEMES[tema])
         subprocess.run(["termux-reload-settings"])
         mostrar_exito(f"Tema [bold]{tema}[/] aplicado")
+        mostrar_carga("Aplicando configuración")
     else:
         mostrar_error("Tema no válido")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
@@ -611,6 +332,11 @@ def elegir_tema_predeterminado():
 def crear_tema_personalizado():
     limpiar_pantalla()
     mostrar_header("CREAR TEMA PERSONALIZADO")
+    mostrar_subtitulo("Usa nano para crear tu propio tema")
+    
+    if not TERMUX_COLORS_PATH.exists():
+        TERMUX_COLORS_PATH.write_text("# Personaliza tu tema\nbackground=#000000\nforeground=#FFFFFF\n")
+    
     subprocess.run(["nano", str(TERMUX_COLORS_PATH)])
     subprocess.run(["termux-reload-settings"])
     mostrar_exito("Tema personalizado configurado")
@@ -619,11 +345,20 @@ def crear_tema_personalizado():
 def listar_tema_actual():
     limpiar_pantalla()
     mostrar_header("TEMA ACTUAL TERMUX")
+    
     if TERMUX_COLORS_PATH.exists():
         tema = TERMUX_COLORS_PATH.read_text()
-        console.print(Panel.fit(tema, title="[bold]COLORES ACTUALES", box=DOUBLE, border_style=COLOR_ACCENT))
+        panel = Panel.fit(
+            tema, 
+            title="[bold]COLORES ACTUALES", 
+            box=DOUBLE, 
+            border_style=COLOR_ACCENT,
+            padding=(1, 4)
+        )
+        console.print(Align.center(panel))
     else:
         mostrar_advertencia("No hay tema configurado")
+    
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configurar_tema_termux():
@@ -631,17 +366,17 @@ def configurar_tema_termux():
         limpiar_pantalla()
         mostrar_header("CONFIGURAR TEMA TERMUX")
         
-        menu = Table.grid(padding=(1, 4))
-        menu.add_column("Opción", style=COLOR_ACCENT, justify="center")
-        menu.add_column("Descripción", style=COLOR_PRIMARY)
+        opciones = [
+            ("1", "Elegir tema predefinido"),
+            ("2", "Crear tema personalizado"),
+            ("3", "Mostrar tema actual"),
+            ("0", "[bold bright_red]Volver al menú principal[/]")
+        ]
         
-        menu.add_row("1", "Elegir tema predefinido")
-        menu.add_row("2", "Crear tema personalizado")
-        menu.add_row("3", "Mostrar tema actual")
-        menu.add_row("0", "[bold bright_red]Volver al menú principal[/]")
+        tabla_menu = crear_tabla_menu(opciones, ancho=60)
+        console.print(Align.center(tabla_menu))
         
-        console.print(Align.center(menu))
-        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione una opción →[/]")
+        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]» Seleccione una opción →[/]")
         
         if opcion == "1": elegir_tema_predeterminado()
         elif opcion == "2": crear_tema_personalizado()
@@ -657,7 +392,7 @@ def editar_usuario():
     user_path = SYSTEM_DIR / "user.txt"
     
     while True:
-        nuevo_usuario = Prompt.ask(f"[{COLOR_ACCENT}]Ingrese nuevo nombre de usuario →[/]").strip()
+        nuevo_usuario = Prompt.ask(f"[{COLOR_ACCENT}]» Ingrese nuevo nombre de usuario →[/]").strip()
         if nuevo_usuario:
             user_path.write_text(nuevo_usuario)
             mostrar_exito(f"Usuario [bold]{nuevo_usuario}[/] configurado")
@@ -673,13 +408,14 @@ def mostrar_usuario():
     
     if user_path.exists():
         usuario = user_path.read_text().strip()
-        console.print(Panel.fit(
+        panel = Panel.fit(
             f"[bold {COLOR_ACCENT}]{usuario}[/]", 
             title="USUARIO",
             box=DOUBLE,
             border_style=COLOR_ACCENT,
             width=30
-        ))
+        )
+        console.print(Align.center(panel))
     else:
         mostrar_advertencia("Usuario no configurado")
     
@@ -690,16 +426,16 @@ def configurar_usuario():
         limpiar_pantalla()
         mostrar_header("CONFIGURACIÓN DE USUARIO")
         
-        menu = Table.grid(padding=(1, 4))
-        menu.add_column("Opción", style=COLOR_ACCENT, justify="center")
-        menu.add_column("Descripción", style=COLOR_PRIMARY)
+        opciones = [
+            ("1", "Editar usuario"),
+            ("2", "Mostrar usuario actual"),
+            ("0", "[bold bright_red]Volver al menú principal[/]")
+        ]
         
-        menu.add_row("1", "Editar usuario")
-        menu.add_row("2", "Mostrar usuario actual")
-        menu.add_row("0", "[bold bright_red]Volver al menú principal[/]")
+        tabla_menu = crear_tabla_menu(opciones, ancho=60)
+        console.print(Align.center(tabla_menu))
         
-        console.print(Align.center(menu))
-        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione una opción →[/]")
+        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]» Seleccione una opción →[/]")
         
         if opcion == "1": editar_usuario()
         elif opcion == "2": mostrar_usuario()
@@ -716,6 +452,7 @@ def activar_huella():
         metodo_path = SYSTEM_DIR / "login_method.txt"
         metodo_path.write_text("termux-fingerprint")
         mostrar_exito("Autenticación por huella activada")
+        mostrar_carga("Configurando seguridad")
     else:
         mostrar_error("Termux-API no instalado")
         mostrar_informacion("Instale con: [bold]pkg install termux-api[/]")
@@ -725,9 +462,14 @@ def activar_huella():
 def desactivar_proteccion():
     limpiar_pantalla()
     mostrar_header("DESACTIVAR PROTECCIÓN")
-    metodo_path = SYSTEM_DIR / "login_method.txt"
-    metodo_path.write_text("no")
-    mostrar_exito("Protección desactivada")
+    
+    if Confirm.ask(f"[{COLOR_ACCENT}]» ¿Desactivar protección?[/]", default=False):
+        metodo_path = SYSTEM_DIR / "login_method.txt"
+        metodo_path.write_text("no")
+        mostrar_exito("Protección desactivada")
+    else:
+        mostrar_informacion("Operación cancelada")
+    
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def mostrar_metodo_actual():
@@ -738,15 +480,18 @@ def mostrar_metodo_actual():
     if metodo_path.exists():
         metodo = metodo_path.read_text().strip()
         if metodo == "termux-fingerprint":
-            estado = "[bold bright_green on black] HUELLA ACTIVADA "
+            estado = "[bold bright_green]HUELLA ACTIVADA[/]"
+            icono = "🔒"
         else:
-            estado = "[bold bright_red on black] PROTECCIÓN DESACTIVADA "
-        console.print(Panel.fit(
-            estado, 
+            estado = "[bold bright_red]PROTECCIÓN DESACTIVADA[/]"
+            icono = "🔓"
+        panel = Panel.fit(
+            f"{icono} {estado}", 
             width=30,
             box=DOUBLE,
             border_style=COLOR_ACCENT
-        ))
+        )
+        console.print(Align.center(panel))
     else:
         mostrar_advertencia("No configurado")
     
@@ -757,17 +502,17 @@ def configurar_autenticacion():
         limpiar_pantalla()
         mostrar_header("CONFIGURACIÓN DE AUTENTICACIÓN")
         
-        menu = Table.grid(padding=(1, 4))
-        menu.add_column("Opción", style=COLOR_ACCENT, justify="center")
-        menu.add_column("Descripción", style=COLOR_PRIMARY)
+        opciones = [
+            ("1", "Activar huella digital"),
+            ("2", "Desactivar protección"),
+            ("3", "Mostrar método actual"),
+            ("0", "[bold bright_red]Volver al menú principal[/]")
+        ]
         
-        menu.add_row("1", "Activar huella digital")
-        menu.add_row("2", "Desactivar protección")
-        menu.add_row("3", "Mostrar método actual")
-        menu.add_row("0", "[bold bright_red]Volver al menú principal[/]")
+        tabla_menu = crear_tabla_menu(opciones, ancho=60)
+        console.print(Align.center(tabla_menu))
         
-        console.print(Align.center(menu))
-        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione una opción →[/]")
+        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]» Seleccione una opción →[/]")
         
         if opcion == "1": activar_huella()
         elif opcion == "2": desactivar_proteccion()
@@ -790,12 +535,12 @@ def probar_autenticacion():
     
     metodo = metodo_path.read_text().strip()
     if metodo == "termux-fingerprint":
-        console.print(f"\n[{COLOR_WARNING}]Probando autenticación...[/]")
+        console.print(f"\n[{COLOR_WARNING}]» Probando autenticación...[/]")
         try:
             subprocess.run(['termux-fingerprint'], check=True)
-            mostrar_exito("Autenticación exitosa")
+            mostrar_exito("Autenticación exitosa ✅")
         except:
-            mostrar_error("Autenticación fallida")
+            mostrar_error("Autenticación fallida ❌")
     else:
         mostrar_error("Método de huella no configurado")
         time.sleep(2)
@@ -803,14 +548,9 @@ def probar_autenticacion():
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def mostrar_estado_actual():
-    estado_tabla = Table(
-        box=ROUNDED,
-        header_style=COLOR_ACCENT,
-        border_style=COLOR_SECONDARY
-    )
-    estado_tabla.add_column("Configuración", style=COLOR_PRIMARY)
-    estado_tabla.add_column("Estado", style=COLOR_SECONDARY)
+    estado_tabla = crear_tabla_estado()
     
+    # Usuario
     user_path = SYSTEM_DIR / "user.txt"
     if user_path.exists():
         usuario = user_path.read_text().strip()
@@ -818,119 +558,91 @@ def mostrar_estado_actual():
     else:
         estado_tabla.add_row("Usuario", "[bright_red]No configurado[/]")
     
+    # Autenticación
     metodo_path = SYSTEM_DIR / "login_method.txt"
     if metodo_path.exists():
         metodo = metodo_path.read_text().strip()
-        estado = "[bright_green]Activada[/]" if metodo == "termux-fingerprint" else "[bright_red]Desactivada[/]"
+        if metodo == "termux-fingerprint":
+            estado = "[bright_green]Huella activada[/]"
+        else:
+            estado = "[bright_red]Desactivada[/]"
         estado_tabla.add_row("Autenticación", estado)
     else:
         estado_tabla.add_row("Autenticación", "[bright_red]No configurada[/]")
     
+    # Banner
     banner_path = THEMES_DIR / "banner.txt"
     estado_tabla.add_row("Banner", "[bright_green]Configurado[/]" if banner_path.exists() else "[bright_red]No configurado[/]")
     
+    # Fondo Banner
     fondo_path = THEMES_DIR / "banner_background.txt"
-    fondo_estado = "[bright_green]Activado[/]" if fondo_path.exists() and fondo_path.read_text().strip() == "yes" else "[bright_red]Desactivado[/]"
+    fondo_estado = "[bright_green]Activado[/]" if fondo_path.exists() and fondo_path.read_text().strip() == "si" else "[bright_red]Desactivado[/]"
     estado_tabla.add_row("Fondo Banner", fondo_estado)
+    
+    # Tema Termux
+    estado_tabla.add_row("Tema Termux", "[bright_green]Configurado[/]" if TERMUX_COLORS_PATH.exists() else "[bright_red]No configurado[/]")
     
     console.print(Align.center(estado_tabla, width=72))
 
 def menu_principal():
-    opciones_validas = [
-        "1", "1.1", "1.2", "1.3", "1.4", "1.5", "2", "2.1", "2.2", "2.3",
-        "3", "3.1", "3.2", "4", "4.1", "4.2", "4.3", "5", "0"
-    ]
-    
     while True:
         limpiar_pantalla()
         mostrar_header("PANEL PRINCIPAL STELLAR")
+        console.print(Align.center(Text("ESTADO DEL SISTEMA", style=COLOR_ACCENT), width=80))
         mostrar_estado_actual()
+        console.print()
         
-        menu_tabla = Table(
-            box=HEAVY,
-            show_header=False,
-            border_style=COLOR_SECONDARY,
-            width=78
-        )
-        menu_tabla.add_column("Opción", style=COLOR_ACCENT, width=8)
-        menu_tabla.add_column("Descripción", style=COLOR_PRIMARY)
+        opciones = [
+            ("1", "Configurar banner"),
+            ("2", "Configurar tema Termux"),
+            ("3", "Configurar usuario"),
+            ("4", "Configurar autenticación"),
+            ("5", "[bold " + COLOR_WARNING + "]Probar autenticación[/]"),
+            ("0", "[bold bright_red]Salir del sistema[/]")
+        ]
         
-        menu_tabla.add_row("1", "[bold]Configurar banner[/]")
-        menu_tabla.add_row("1.1", "  Editar texto del banner")
-        menu_tabla.add_row("1.2", "  Cambiar color del banner")
-        menu_tabla.add_row("1.3", "  Cambiar color de fondo")
-        menu_tabla.add_row("1.4", "  Activar/Desactivar fondo")
-        menu_tabla.add_row("1.5", "  Vista previa del banner")
-        menu_tabla.add_row("", "")
-        menu_tabla.add_row("2", "[bold]Configurar tema Termux[/]")
-        menu_tabla.add_row("2.1", "  Elegir tema predefinido")
-        menu_tabla.add_row("2.2", "  Crear tema personalizado")
-        menu_tabla.add_row("2.3", "  Mostrar tema actual")
-        menu_tabla.add_row("", "")
-        menu_tabla.add_row("3", "[bold]Configurar usuario[/]")
-        menu_tabla.add_row("3.1", "  Editar usuario")
-        menu_tabla.add_row("3.2", "  Mostrar usuario actual")
-        menu_tabla.add_row("", "")
-        menu_tabla.add_row("4", "[bold]Configurar autenticación[/]")
-        menu_tabla.add_row("4.1", "  Activar huella")
-        menu_tabla.add_row("4.2", "  Desactivar protección")
-        menu_tabla.add_row("4.3", "  Mostrar método actual")
-        menu_tabla.add_row("", "")
-        menu_tabla.add_row("5", "[bold bright_yellow]Probar autenticación[/]")
-        menu_tabla.add_row("0", "[bold bright_red]Salir del sistema[/]")
+        tabla_menu = crear_tabla_menu(opciones, ancho=60)
+        console.print(Align.center(tabla_menu))
+        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]» Seleccione opción →[/]")
         
-        console.print(Align.center(menu_tabla))
-        opcion = Prompt.ask(f"\n[{COLOR_ACCENT}]Seleccione opción →[/]")
-        
-        if opcion not in opciones_validas:
-            mostrar_error("Opción inválida")
-            time.sleep(1)
-            continue
-            
         if opcion == "1": configurar_banner()
-        elif opcion == "1.1": editar_banner_texto()
-        elif opcion == "1.2": cambiar_color_banner()
-        elif opcion == "1.3": cambiar_color_fondo_banner()
-        elif opcion == "1.4": toggle_fondo_banner()
-        elif opcion == "1.5": banner_preview()
         elif opcion == "2": configurar_tema_termux()
-        elif opcion == "2.1": elegir_tema_predeterminado()
-        elif opcion == "2.2": crear_tema_personalizado()
-        elif opcion == "2.3": listar_tema_actual()
         elif opcion == "3": configurar_usuario()
-        elif opcion == "3.1": editar_usuario()
-        elif opcion == "3.2": mostrar_usuario()
         elif opcion == "4": configurar_autenticacion()
-        elif opcion == "4.1": activar_huella()
-        elif opcion == "4.2": desactivar_proteccion()
-        elif opcion == "4.3": mostrar_metodo_actual()
         elif opcion == "5": probar_autenticacion()
         elif opcion == "0":
             limpiar_pantalla()
-            console.print(Panel.fit(
-                "[bold bright_green]Saliendo del sistema Stellar...", 
+            console.print(Align.center(Panel.fit(
+                "[bold bright_green]Saliendo del sistema Stellar...\n¡Hasta pronto! ✨", 
                 box=ROUNDED,
-                border_style="bright_green"
-            ))
-            time.sleep(1)
+                border_style="bright_green",
+                width=50
+            )))
+            time.sleep(1.5)
             os.system("python ~/Stellar/config/themes/banner.py")
             exit(0)
+        else: 
+            mostrar_error("Opción inválida")
+            time.sleep(1)
 
 def inicio():
     limpiar_pantalla()
     mostrar_header("SISTEMA DE CONFIGURACIÓN STELLAR")
+    mostrar_carga("Inicializando sistema")
     
+    # Crear archivos esenciales si no existen
     user_path = SYSTEM_DIR / "user.txt"
     if not user_path.exists():
-        mostrar_advertencia("Usuario no configurado")
-        editar_usuario()
+        user_path.write_text("Usuario Stellar")
     
     metodo_path = SYSTEM_DIR / "login_method.txt"
     if not metodo_path.exists():
-        mostrar_advertencia("Autenticación no configurada")
-        activar_huella()
+        metodo_path.write_text("no")
     
-    time.sleep(1)
+    banner_path = THEMES_DIR / "banner.txt"
+    if not banner_path.exists():
+        banner_path.write_text("Stellar Terminal\nPersonaliza tu experiencia")
+    
     menu_principal()
 
 if __name__ == "__main__":
