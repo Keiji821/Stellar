@@ -12,7 +12,7 @@ table.add_column("[bold green]Estado", style="code", no_wrap=False)
 
 table.add_row("[code]Sistema", style="bold green")
 table.add_row("")
-table.add_row("✦ reload", "Recargar el banner", "🔐 Sistema")
+table.add_row("✧ reload", "Recargar el banner", "🔐 Sistema")
 table.add_row("• user-config", "Personaliza la interfaz y tu perfíl Stellar", "🔐 Sistema")
 table.add_row("• my", "Visualiza tu perfil de Stellar", "🔐 Sistema")
 table.add_row("• uninstall", "Desinstala Stellar", "🔐 Sistema")
