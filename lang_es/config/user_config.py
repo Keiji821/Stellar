@@ -619,7 +619,7 @@ def menu_principal():
                 width=50
             )))
             time.sleep(1.5)
-            os.system("python ~/Stellar/config/themes/banner.py")
+            os.system("reload")
             exit(0)
         else: 
             mostrar_error("Opción inválida")
