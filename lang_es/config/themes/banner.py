@@ -14,22 +14,41 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.columns import Columns
 from rich import box
+from rich.layout import Layout
+from rich.live import Live
+from rich.progress import ProgressBar
+from rich.rule import Rule
 
 console = Console()
 
 themes_dir = os.path.expanduser("~/Stellar/lang_es/config/themes")
 system_dir = os.path.expanduser("~/Stellar/lang_es/config/system")
 
+# Paleta de colores moderna y profesional
+COLOR_PRIMARY = "#6A89CC"
+COLOR_SECONDARY = "#B8E994"
+COLOR_ACCENT = "#F8C291"
+COLOR_SUCCESS = "#78E08F"
+COLOR_ERROR = "#E55039"
+COLOR_WARNING = "#FAD390"
+COLOR_INFO = "#4FC1E9"
+COLOR_HIGHLIGHT = "#FFFFFF"
+COLOR_BG = "#1E272E"
+
+# Generar paleta con colores armonizados
 def generar_paleta():
     def color_rgb():
         return (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255))
+    
+    # Colores principales basados en la paleta profesional
     return {
-        'titulo': color_rgb(),
-        'clave': color_rgb(),
-        'valor': color_rgb(),
-        'memoria': color_rgb(),
-        'disco': color_rgb(),
-        'borde': color_rgb()
+        'titulo': (106, 137, 204),      # Azul primario
+        'clave': (184, 233, 148),       # Verde secundario
+        'valor': (248, 194, 145),       # Naranja acento
+        'memoria': (79, 193, 233),      # Azul información
+        'disco': (120, 224, 143),       # Verde éxito
+        'borde': (245, 211, 144),       # Amarillo advertencia
+        'fondo': (30, 39, 46)           # Fondo oscuro
     }
 
 def estilo_rgb(color):
@@ -57,9 +76,9 @@ def procesar_estilo(cadena):
 
 paleta = generar_paleta()
 banner = leer_archivo(f"{themes_dir}/banner.txt")
-col = leer_archivo(f"{themes_dir}/banner_color.txt", "#6E97B7")
+col = leer_archivo(f"{themes_dir}/banner_color.txt", COLOR_PRIMARY)
 bg = leer_archivo(f"{themes_dir}/banner_background.txt", "no")
-bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", "#4D8FAC")
+bgcol = leer_archivo(f"{themes_dir}/banner_background_color.txt", COLOR_BG)
 usuario = leer_archivo(f"{system_dir}/user.txt", "Usuario")
 
 style = procesar_estilo(col)
@@ -78,7 +97,7 @@ def obtener_info():
         "https://ifconfig.me/ip",
         "https://ident.me"
     ]
-    
+
     ip = "No disponible"
     for service in ip_services:
         try:
@@ -91,6 +110,25 @@ def obtener_info():
                 continue
         except (requests.RequestException, ConnectionError):
             continue
+
+    # Obtener temperatura de la CPU si es posible
+    temp = "N/A"
+    try:
+        if hasattr(psutil, "sensors_temperatures"):
+            temps = psutil.sensors_temperatures()
+            if 'cpu_thermal' in temps:
+                temp = f"{temps['cpu_thermal'][0].current}°C"
+            elif 'coretemp' in temps:
+                temp = f"{temps['coretemp'][0].current}°C"
+    except:
+        pass
+
+    # Obtener porcentaje de batería
+    bateria = "N/A"
+    try:
+        bateria = f"{psutil.sensors_battery().percent}%"
+    except:
+        pass
 
     return {
         "Usuario": usuario,
@@ -107,57 +145,141 @@ def obtener_info():
         "DiscoPorcentaje": du.percent,
         "DiscoTotal": f"{du.total//(1024**3):,} GB",
         "DiscoUsado": f"{du.used//(1024**3):,} GB",
+        "Temperatura": temp,
+        "Batería": bateria,
         "IP": ip
     }
 
 def render_bar(pct, color, width=20):
     filled = int(pct * width / 100)
-    return Text("█" * filled + "░" * (width - filled), style=estilo_rgb(color))
+    bar = "█" * filled + "░" * (width - filled)
+    return Text(bar, style=Style(color=f"rgb({color[0]},{color[1]},{color[2]}"))
 
 def crear_panel(info, panel_width=None):
-    t = Table.grid(expand=False)
-    t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
-    t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
+    # Crear layout con dos columnas
+    layout = Layout(name="root")
+    layout.split(
+        Layout(name="header", size=3),
+        Layout(name="main", ratio=1),
+        Layout(name="footer", size=7)
+    )
+    
+    # Header con título y hora
+    fecha_hora = Text(f"{info['Fecha']} | {info['Hora']}", style="bold " + estilo_rgb(paleta['clave']).color)
+    layout["header"].update(
+        Panel(
+            Text.assemble(
+                ("STELLAR ", f"bold rgb({paleta['titulo'][0]},{paleta['titulo'][1]},{paleta['titulo'][2]})"),
+                ("TERMINAL", "bold white")
+            ),
+            subtitle=fecha_hora,
+            border_style=estilo_rgb(paleta['borde']),
+            box=box.ROUNDED,
+            padding=(0, 1)
+    )
+    
+    # Crear tabla principal con información
+    t = Table.grid(expand=True, padding=(0, 1))
+    t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=14)
+    t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=10)
+    t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=14)
+    t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=10)
+    
+    # Agregar información en dos columnas
+    t.add_row("Usuario:", info['Usuario'], "Modelo:", info['Celular'])
+    t.add_row("Sistema:", info['OS'], "Kernel:", info['Kernel'])
+    t.add_row("Shell:", info['Shell'], "Terminal:", info['Terminal'])
+    t.add_row("Batería:", info['Batería'], "Temperatura:", info['Temperatura'])
+    t.add_row("", "", "", "")
+    
+    # Sección de memoria
+    t.add_row(
+        "Memoria:", 
+        Text.assemble(
+            (f"{info['MemoriaPorcentaje']}% ", estilo_rgb(paleta['memoria'])),
+            f"({info['MemoriaUsada']}/{info['MemoriaTotal']})"
+        ),
+        "",
+        ""
+    )
+    t.add_row(render_bar(info['MemoriaPorcentaje'], paleta['memoria'], 30), "", "", "")
+    
+    # Sección de almacenamiento
+    t.add_row(
+        "Almacenamiento:", 
+        Text.assemble(
+            (f"{info['DiscoPorcentaje']}% ", estilo_rgb(paleta['disco'])),
+            f"({info['DiscoUsado']}/{info['DiscoTotal']})"
+        ),
+        "",
+        ""
+    )
+    t.add_row(render_bar(info['DiscoPorcentaje'], paleta['disco'], 30), "", "", "")
+    
+    # Agregar tabla al layout principal
+    layout["main"].update(
+        Panel(
+            t,
+            box=box.SQUARE,
+            border_style=estilo_rgb(paleta['borde']),
+            padding=(1, 2)
+    )
+    
+    # Footer con IP y decoración
+    ip_text = Text(f"IP: {info['IP']}", style="bold " + estilo_rgb(paleta['borde']).color)
+    layout["footer"].update(
+        Columns([
+            Panel(
+                Text("CONECTADO", style="bold " + estilo_rgb(COLOR_SUCCESS).color),
+                box=box.SQUARE,
+                border_style=estilo_rgb(COLOR_SUCCESS)
+            ),
+            Panel(
+                ip_text,
+                box=box.SQUARE,
+                border_style=estilo_rgb(paleta['borde']))
+        ])
+    )
+    
+    return layout
 
-    for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Shell", "Terminal"]:
-        t.add_row(f"{key}: ", info[key])
-
-    memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
-    t.add_row("Memoria:", memoria_bar)
-    t.add_row("", f"{info['MemoriaUsada']} / {info['MemoriaTotal']}")
-
-    disco_bar = render_bar(info['DiscoPorcentaje'], paleta['disco'])
-    t.add_row("Almacenamiento:", disco_bar)
-    t.add_row("", f"{info['DiscoUsado']} / {info['DiscoTotal']}")
-
-    t.add_row("IP:", Text(info["IP"], style=estilo_rgb(paleta['borde'])))
-
+def crear_banner_panel():
     return Panel(
-        t,
-        title=Text("♥", style=estilo_rgb(paleta['titulo'])),
-        border_style=estilo_rgb(paleta['borde']),
+        text_banner,
+        box=box.ROUNDED,
+        border_style=style,
         padding=(1, 2),
-        width=panel_width,
-        box=box.SQUARE
+        width=min(40, shutil.get_terminal_size().columns//2)
     )
 
 if __name__ == "__main__":
     os.system('clear' if os.name == 'posix' else 'cls')
-
     info = obtener_info()
     terminal_cols = shutil.get_terminal_size().columns
-    banner_width = max(len(line) for line in banner.splitlines()) if banner else 0
-
-    min_panel_width = 54
-    espacio_entre = 4
-
-    if terminal_cols >= (banner_width + min_panel_width + espacio_entre):
-        panel_width = terminal_cols - banner_width - espacio_entre
-        panel = crear_panel(info, panel_width)
-        contenido = Columns([text_banner, panel], expand=False)
+    
+    # Crear layout principal
+    main_layout = Layout(name="root")
+    
+    if terminal_cols > 100:
+        # Pantalla grande: banner y panel lado a lado
+        main_layout.split_row(
+            Layout(name="banner", ratio=1),
+            Layout(name="panel", ratio=2)
+        )
+        banner_panel = crear_banner_panel()
+        main_layout["banner"].update(banner_panel)
+        main_layout["panel"].update(crear_panel(info))
+        console.print(main_layout)
     else:
-        panel = crear_panel(info)
-        contenido = Columns([text_banner, panel], expand=True)
-
-    console.print(contenido)
-    console.print("\n" * 3)
+        # Pantalla pequeña: banner arriba, panel abajo
+        main_layout.split(
+            Layout(name="banner", size=min(15, shutil.get_terminal_size().lines//3)),
+            Layout(name="panel", ratio=1)
+        )
+        banner_panel = crear_banner_panel()
+        main_layout["banner"].update(banner_panel)
+        main_layout["panel"].update(crear_panel(info))
+        console.print(main_layout)
+    
+    # Espacio adicional al final
+    console.print("\n" * 2)
