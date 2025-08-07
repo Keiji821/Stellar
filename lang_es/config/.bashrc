@@ -138,7 +138,7 @@ tor --SocksPort $puerto \
 
 
 cp ~/Stellar/lang_es/config/.bash_profile ~/.
-cd Stellar/lang_es/config/themes
+cd ~/Stellar/lang_es/config/themes
 clear
 python banner.py
 cd
