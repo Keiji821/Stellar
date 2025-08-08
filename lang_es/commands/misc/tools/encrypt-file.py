@@ -33,7 +33,7 @@ class MilitaryGradeEncryptor:
         try:
             if not os.path.exists(file_path):
                 return False, "El archivo no existe"
-            
+
             if os.path.getsize(file_path) > 1073741824:
                 return False, "Archivo demasiado grande (máximo 1GB)"
 
@@ -60,10 +60,10 @@ class MilitaryGradeEncryptor:
         try:
             if not os.path.exists(file_path):
                 return False, "El archivo cifrado no existe"
-            
+
             if not file_path.endswith('.milenc'):
                 return False, "El archivo debe tener extensión .milenc"
-            
+
             file_size = os.path.getsize(file_path)
             min_size = self.salt_length + self.nonce_length + self.tag_length + 1
             if file_size < min_size:
@@ -113,11 +113,11 @@ def obtener_frase_secreta():
 
 def main():
     encryptor = MilitaryGradeEncryptor()
-    
+
     while True:
         console.print("\n[bold cyan]MENÚ PRINCIPAL[/]", justify="center")
         mostrar_menu()
-        
+
         while True:
             opcion = Prompt.ask("Seleccione una opción")
             if opcion in ["1", "2", "3"]:
@@ -127,7 +127,7 @@ def main():
         if opcion == "1":
             ruta_archivo = Prompt.ask("📄 Ruta del archivo a cifrar")
             resultado = encryptor.encrypt_file(ruta_archivo, obtener_frase_secreta())
-            
+
             if resultado[0]:
                 console.print(f"[green]✓ Archivo cifrado con éxito: {resultado[1]}[/]")
                 console.print("[yellow]⚠️ ¡ADVERTENCIA! GUARDE SU FRASE SECRETA EN UN LUGAR SEGURO. SIN ELLA, SUS ARCHIVOS SON IRRECUPERABLES.[/]")
@@ -138,9 +138,9 @@ def main():
             ruta_archivo = Prompt.ask("📄 Ruta del archivo cifrado")
             if not ruta_archivo.endswith('.milenc'):
                 ruta_archivo += '.milenc'
-                
+
             resultado = encryptor.decrypt_file(ruta_archivo, getpass.getpass("🔑 Frase secreta: "))
-            
+
             if resultado[0]:
                 console.print(f"[green]✓ Archivo descifrado con éxito: {resultado[1]}[/]")
             else:
