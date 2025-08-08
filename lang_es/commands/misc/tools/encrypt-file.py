@@ -1,6 +1,7 @@
 import os
 import sys
 import getpass
+from pathlib import Path
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import scrypt
 from Crypto.Random import get_random_bytes
@@ -19,6 +20,9 @@ class FileEncryptor:
         self.tag_length = 16
         self.max_file_size = 1073741824
 
+    def _expand_path(self, path):
+        return str(Path(path).expanduser())
+
     def _derive_key(self, password, salt=None):
         salt = salt if salt is not None else get_random_bytes(self.salt_length)
         key = scrypt(
@@ -33,28 +37,29 @@ class FileEncryptor:
 
     def encrypt_file(self, input_path, password):
         try:
-            if not os.path.isfile(input_path):
+            full_path = self._expand_path(input_path)
+            if not os.path.isfile(full_path):
                 return False, f"El archivo {input_path} no existe"
 
-            file_size = os.path.getsize(input_path)
+            file_size = os.path.getsize(full_path)
             if file_size > self.max_file_size:
                 return False, f"Archivo demasiado grande (máximo {self.max_file_size//1024//1024}MB)"
 
-            with open(input_path, 'rb') as f:
+            with open(full_path, 'rb') as f:
                 plaintext = f.read()
 
             key, salt = self._derive_key(password)
             cipher = AES.new(key, AES.MODE_GCM)
             ciphertext, tag = cipher.encrypt_and_digest(plaintext)
 
-            output_path = input_path + '.enc'
+            output_path = full_path + '.enc'
             with open(output_path, 'wb') as f:
                 f.write(salt)
                 f.write(cipher.nonce)
                 f.write(tag)
                 f.write(ciphertext)
 
-            os.remove(input_path)
+            os.remove(full_path)
             return True, output_path
 
         except Exception as e:
@@ -62,17 +67,18 @@ class FileEncryptor:
 
     def decrypt_file(self, input_path, password):
         try:
-            if not os.path.isfile(input_path):
+            full_path = self._expand_path(input_path)
+            if not os.path.isfile(full_path):
                 return False, f"El archivo {input_path} no existe"
 
-            if not input_path.endswith('.enc'):
+            if not full_path.endswith('.enc'):
                 return False, "El archivo debe tener extensión .enc"
 
             min_size = self.salt_length + self.nonce_length + self.tag_length + 1
-            if os.path.getsize(input_path) < min_size:
+            if os.path.getsize(full_path) < min_size:
                 return False, "Archivo cifrado corrupto o inválido"
 
-            with open(input_path, 'rb') as f:
+            with open(full_path, 'rb') as f:
                 salt = f.read(self.salt_length)
                 nonce = f.read(self.nonce_length)
                 tag = f.read(self.tag_length)
@@ -82,7 +88,7 @@ class FileEncryptor:
             cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
             plaintext = cipher.decrypt_and_verify(ciphertext, tag)
 
-            output_path = input_path[:-4]
+            output_path = full_path[:-4]
             if os.path.exists(output_path):
                 return False, "El archivo original ya existe"
 
@@ -117,15 +123,16 @@ def get_password():
 
 def main():
     encryptor = FileEncryptor()
+    
+    console.print(f"\n[bold cyan]Directorio actual: {Path.home()}[/]", justify="center")
+    console.print("[bold cyan]MENÚ PRINCIPAL[/]", justify="center")
 
     while True:
-        console.print("\n[bold cyan]MENÚ PRINCIPAL[/]", justify="center")
         show_menu()
-
         option = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"])
 
         if option == "1":
-            file_path = Prompt.ask("📄 Ruta del archivo a cifrar")
+            file_path = Prompt.ask("📄 Ruta del archivo a cifrar (puedes usar ~/)")
             result = encryptor.encrypt_file(file_path, get_password())
 
             if result[0]:
@@ -135,7 +142,7 @@ def main():
                 console.print(f"[red]✗ {result[1]}[/]")
 
         elif option == "2":
-            file_path = Prompt.ask("📄 Ruta del archivo cifrado")
+            file_path = Prompt.ask("📄 Ruta del archivo cifrado (puedes usar ~/)")
             if not file_path.endswith('.enc'):
                 file_path += '.enc'
 
