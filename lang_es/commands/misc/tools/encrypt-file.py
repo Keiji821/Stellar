@@ -15,46 +15,45 @@ class MilitaryGradeEncryptor:
         self.iterations = 1048576
         self.salt_length = 32
         self.key_length = 32
-        self.nonce_length = 16
+        self.nonce_length = 12
         self.tag_length = 16
+        self.max_file_size = 1073741824
 
     def _derive_key(self, passphrase, salt=None):
-        salt = get_random_bytes(self.salt_length) if salt is None else salt
-        return scrypt(
-            passphrase.encode(),
+        salt = salt if salt else get_random_bytes(self.salt_length)
+        key = scrypt(
+            password=passphrase.encode(),
             salt=salt,
             key_len=self.key_length,
             N=self.iterations,
             r=8,
             p=1
-        ), salt
+        )
+        return key, salt
 
     def encrypt_file(self, file_path, passphrase):
         try:
             if not os.path.exists(file_path):
                 return False, "El archivo no existe"
 
-            if os.path.getsize(file_path) > 1073741824:
-                return False, "Archivo demasiado grande (máximo 1GB)"
+            if os.path.getsize(file_path) > self.max_file_size:
+                return False, f"Archivo demasiado grande (máximo {self.max_file_size//1024//1024}MB)"
 
-            with open(file_path, 'rb') as file:
-                file_data = file.read()
+            with open(file_path, 'rb') as f:
+                plaintext = f.read()
 
             key, salt = self._derive_key(passphrase)
             cipher = AES.new(key, AES.MODE_GCM)
-            ciphertext, tag = cipher.encrypt_and_digest(file_data)
+            ciphertext, tag = cipher.encrypt_and_digest(plaintext)
 
             encrypted_path = file_path + '.milenc'
-            with open(encrypted_path, 'wb') as file:
-                file.write(salt)
-                file.write(cipher.nonce)
-                file.write(tag)
-                file.write(ciphertext)
+            with open(encrypted_path, 'wb') as f:
+                [f.write(x) for x in (salt, cipher.nonce, tag, ciphertext)]
 
             os.remove(file_path)
             return True, encrypted_path
-        except Exception as error:
-            return False, f"Error al cifrar: {str(error)}"
+        except Exception as e:
+            return False, f"Error al cifrar: {str(e)}"
 
     def decrypt_file(self, file_path, passphrase):
         try:
@@ -69,28 +68,28 @@ class MilitaryGradeEncryptor:
             if file_size < min_size:
                 return False, "Archivo cifrado corrupto o inválido"
 
-            with open(file_path, 'rb') as file:
-                salt = file.read(self.salt_length)
-                nonce = file.read(self.nonce_length)
-                tag = file.read(self.tag_length)
-                ciphertext = file.read()
+            with open(file_path, 'rb') as f:
+                salt = f.read(self.salt_length)
+                nonce = f.read(self.nonce_length)
+                tag = f.read(self.tag_length)
+                ciphertext = f.read()
 
             key, _ = self._derive_key(passphrase, salt)
             cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
-            decrypted_data = cipher.decrypt_and_verify(ciphertext, tag)
+            plaintext = cipher.decrypt_and_verify(ciphertext, tag)
 
-            decrypted_path = file_path.replace('.milenc', '')
+            decrypted_path = file_path[:-7]  # Remove .milenc extension
             if os.path.exists(decrypted_path):
                 return False, "El archivo original ya existe"
 
-            with open(decrypted_path, 'wb') as file:
-                file.write(decrypted_data)
+            with open(decrypted_path, 'wb') as f:
+                f.write(plaintext)
 
             return True, decrypted_path
-        except ValueError as error:
+        except ValueError:
             return False, "Frase secreta incorrecta o archivo corrupto"
-        except Exception as error:
-            return False, f"Error al descifrar: {str(error)}"
+        except Exception as e:
+            return False, f"Error al descifrar: {str(e)}"
 
 def mostrar_menu():
     tabla = Table(show_header=False, box=None)
@@ -118,11 +117,7 @@ def main():
         console.print("\n[bold cyan]MENÚ PRINCIPAL[/]", justify="center")
         mostrar_menu()
 
-        while True:
-            opcion = Prompt.ask("Seleccione una opción")
-            if opcion in ["1", "2", "3"]:
-                break
-            console.print("[red]Por favor seleccione una de las opciones disponibles: 1, 2 o 3[/]")
+        opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3"])
 
         if opcion == "1":
             ruta_archivo = Prompt.ask("📄 Ruta del archivo a cifrar")
@@ -130,7 +125,7 @@ def main():
 
             if resultado[0]:
                 console.print(f"[green]✓ Archivo cifrado con éxito: {resultado[1]}[/]")
-                console.print("[yellow]⚠️ ¡ADVERTENCIA! GUARDE SU FRASE SECRETA EN UN LUGAR SEGURO. SIN ELLA, SUS ARCHIVOS SON IRRECUPERABLES.[/]")
+                console.print("[yellow]⚠️ ¡ADVERTENCIA! GUARDE SU FRASE SECRETA EN UN LUGAR SEGURO.[/]")
             else:
                 console.print(f"[red]✗ Error: {resultado[1]}[/]")
 
@@ -148,7 +143,7 @@ def main():
 
         elif opcion == "3":
             console.print("[bold green]Saliendo del sistema...[/]")
-            break
+            sys.exit(0)
 
 if __name__ == "__main__":
     try:
@@ -156,6 +151,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         console.print("\n[red]Operación cancelada por el usuario[/]")
         sys.exit(0)
-    except Exception as error:
-        console.print(f"[red]Error crítico: {str(error)}[/]")
+    except Exception as e:
+        console.print(f"[red]Error crítico: {str(e)}[/]")
         sys.exit(1)
