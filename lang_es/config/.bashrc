@@ -47,9 +47,20 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
+# ┌────────────────────────────────┐
+# │ Cleaning and starting                   │
+# └────────────────────────────────┘
+
+
 clear
 history -c
 cd
+
+
+# ┌────────────────────────────────┐
+# │ Security lock for the screen                   │
+# └────────────────────────────────┘
+
 
 # Método de desbloqueo - Huella dactilar
 cd ~/Stellar/lang_es/config/system
@@ -85,6 +96,12 @@ if [ -f login_method.txt ]; then
 fi
 
 cd
+
+
+# ┌────────────────────────────────┐
+# │ Definition of PS1 (input)                 │
+# └────────────────────────────────┘
+
 
 input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/lang_es/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
@@ -144,7 +161,6 @@ tor --SocksPort $puerto \
 # ┌────────────────────────────────┐
 # │ Imports and banner                    │
 # └────────────────────────────────┘
-
 
 cp ~/Stellar/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/lang_es/config/themes
