@@ -49,40 +49,40 @@ class WebhookManager:
                 retry_after = respuesta.json().get('retry_after', 1)
                 time.sleep(retry_after)
                 return self.enviar_mensaje(webhook, payload)
-            return False, f"Codigo de estado: {respuesta.status_code}"
+            return False, f"Código de estado: {respuesta.status_code}"
         except Exception as e:
             return False, str(e)
 
     def mostrar_resumen(self, webhooks, mensaje, cantidad, delay, hilos):
-        tabla = Table(title="Resumen de Configuracion")
-        tabla.add_column("Parametro", style="cyan")
-        tabla.add_column("Valor", style="magenta")
+        tabla = Table(title="[bold]Resumen de Configuración[/]")
+        tabla.add_column("[bold cyan]Parámetro[/]", style="bold cyan")
+        tabla.add_column("[bold magenta]Valor[/]", style="bold magenta")
 
-        tabla.add_row("Webhooks validos", str(len(webhooks)))
-        tabla.add_row("Mensaje", mensaje[:50] + "..." if len(mensaje) > 50 else mensaje)
-        tabla.add_row("Repeticiones", str(cantidad))
-        tabla.add_row("Delay (seg)", str(delay))
-        tabla.add_row("Hilos", str(hilos))
+        tabla.add_row("[bold]Webhooks válidos[/]", f"[bold]{len(webhooks)}[/]")
+        tabla.add_row("[bold]Mensaje[/]", f"[bold]{mensaje[:50] + '...' if len(mensaje) > 50 else mensaje}[/]")
+        tabla.add_row("[bold]Repeticiones[/]", f"[bold]{cantidad}[/]")
+        tabla.add_row("[bold]Delay (seg)[/]", f"[bold]{delay}[/]")
+        tabla.add_row("[bold]Hilos[/]", f"[bold]{hilos}[/]")
 
-        console.print(Panel.fit(tabla))
+        console.print(Panel.fit(tabla, style="bold blue"))
 
     def obtener_datos(self):
-        console.print(Panel.fit("Configuracion de Webhooks"))
+        console.print(Panel.fit("[bold]Configuración de Webhooks[/]", style="bold green"))
         
         webhooks = []
         while not webhooks:
-            urls = Prompt.ask("Ingrese URLs de webhooks (separadas por coma)").split(',')
+            urls = Prompt.ask("[bold green]Ingrese URLs de webhooks (separadas por coma)[/]").split(',')
             webhooks = [url.strip() for url in urls if self.validar_webhook(url.strip())]
             if not webhooks:
-                console.print("No se encontraron webhooks validos. Intente nuevamente.", style="red")
+                console.print("[bold red]No se encontraron webhooks válidos. Intente nuevamente.[/]")
 
-        mensaje = Prompt.ask("Mensaje a enviar")
-        cantidad = int(Prompt.ask("Cantidad de envios por webhook", default="1"))
-        delay = float(Prompt.ask("Delay entre envios (segundos)", default="0.5"))
-        hilos = int(Prompt.ask("Numero de hilos a usar", default="5"))
+        mensaje = Prompt.ask("[bold green]Mensaje a enviar[/]")
+        cantidad = int(Prompt.ask("[bold green]Cantidad de envíos por webhook[/]", default="1"))
+        delay = float(Prompt.ask("[bold green]Delay entre envíos (segundos)[/]", default="0.5"))
+        hilos = int(Prompt.ask("[bold green]Número de hilos a usar[/]", default="5"))
 
-        username = Prompt.ask("Nombre de usuario personalizado (opcional)", default="")
-        avatar_url = Prompt.ask("URL de avatar personalizado (opcional)", default="")
+        username = Prompt.ask("[bold green]Nombre de usuario personalizado (opcional)[/]", default="")
+        avatar_url = Prompt.ask("[bold green]URL de avatar personalizado (opcional)[/]", default="")
 
         payload = {"content": mensaje}
         if username: payload["username"] = username
@@ -90,18 +90,18 @@ class WebhookManager:
 
         self.mostrar_resumen(webhooks, mensaje, cantidad, delay, hilos)
 
-        if not Prompt.ask("Confirmar envio? (s/n)", default="s").lower().startswith('s'):
-            console.print("Operacion cancelada", style="red")
+        if not Prompt.ask("[bold red]¿Confirmar envío? (s/n)[/]", default="s").lower().startswith('s'):
+            console.print("[bold red]Operación cancelada[/]")
             exit()
 
         return webhooks, payload, cantidad, delay, hilos
 
     def ejecutar_envios(self, webhooks, payload, cantidad, delay, hilos):
         total_tareas = len(webhooks) * cantidad
-        console.print(f"\nIniciando envio de {total_tareas} mensajes...")
+        console.print(f"\n[bold]Iniciando envío de {total_tareas} mensajes...[/]")
 
         with Progress() as progreso:
-            tarea = progreso.add_task("Progreso", total=total_tareas)
+            tarea = progreso.add_task("[bold cyan]Progreso[/]", total=total_tareas)
 
             with ThreadPoolExecutor(max_workers=hilos) as executor:
                 futuros = []
@@ -124,18 +124,18 @@ class WebhookManager:
         self.mostrar_resultados()
 
     def mostrar_resultados(self):
-        tabla = Table(title="Resultados Finales")
-        tabla.add_column("Estadistica", style="cyan")
-        tabla.add_column("Cantidad", style="magenta")
+        tabla = Table(title="[bold]Resultados Finales[/]")
+        tabla.add_column("[bold cyan]Estadística[/]", style="bold cyan")
+        tabla.add_column("[bold magenta]Cantidad[/]", style="bold magenta")
 
-        tabla.add_row("Envios exitosos", str(self.stats['exitosos']))
-        tabla.add_row("Envios fallidos", str(self.stats['fallidos']))
-        tabla.add_row("Rate limits encontrados", str(self.stats['rate_limited']))
-        tabla.add_row("Tasa de exito", 
-                     f"{(self.stats['exitosos']/sum(self.stats.values()))*100:.2f}%")
+        tabla.add_row("[bold]Envíos exitosos[/]", f"[bold]{self.stats['exitosos']}[/]")
+        tabla.add_row("[bold]Envíos fallidos[/]", f"[bold]{self.stats['fallidos']}[/]")
+        tabla.add_row("[bold]Rate limits encontrados[/]", f"[bold]{self.stats['rate_limited']}[/]")
+        tabla.add_row("[bold]Tasa de éxito[/]", 
+                     f"[bold]{(self.stats['exitosos']/sum(self.stats.values()))*100:.2f}%[/]")
 
-        console.print(Panel.fit(tabla))
-        console.print("Proceso completado", style="green")
+        console.print(Panel.fit(tabla, style="bold blue"))
+        console.print("[bold green]Proceso completado[/]")
 
 if __name__ == "__main__":
     manager = WebhookManager()
@@ -143,6 +143,6 @@ if __name__ == "__main__":
         webhooks, payload, cantidad, delay, hilos = manager.obtener_datos()
         manager.ejecutar_envios(webhooks, payload, cantidad, delay, hilos)
     except KeyboardInterrupt:
-        console.print("\nEjecucion interrumpida por el usuario", style="red")
+        console.print("\n[bold red]Ejecución interrumpida por el usuario[/]")
     except Exception as e:
-        console.print(f"\nError inesperado: {str(e)}", style="red")
+        console.print(f"\n[bold red]Error inesperado: {str(e)}[/]")
