@@ -58,7 +58,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Security lock for the screen                 │
+# │ Security lock for the screen             │
 # └────────────────────────────────┘
 
 
@@ -99,7 +99,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Definition of PS1 (input)            │
+# │ Definition of PS1 (input)          │
 # └────────────────────────────────┘
 
 
