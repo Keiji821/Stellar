@@ -48,7 +48,7 @@ Oculto="\033[8m"
 Tachado="\033[9m"
 
 # ┌────────────────────────────────┐
-# │ Cleaning and starting                   │
+# │ Cleaning and starting                 │
 # └────────────────────────────────┘
 
 
