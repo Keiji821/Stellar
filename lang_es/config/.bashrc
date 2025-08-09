@@ -147,7 +147,7 @@ printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante
 
 
 # ┌────────────────────────────────┐
-# │ Definition of commands             │
+# │ Definition of commands               │
 # └────────────────────────────────┘
 
 # Sistema
