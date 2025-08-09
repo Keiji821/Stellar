@@ -141,6 +141,10 @@ tor --SocksPort $puerto \
     --AvoidDiskWrites 1 \
     &>tor.txt &
 
+# ┌────────────────────────────────┐
+# │ Imports and banner                          │
+# └────────────────────────────────┘
+
 
 cp ~/Stellar/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/lang_es/config/themes
