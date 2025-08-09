@@ -352,7 +352,7 @@ encrypt-file() {
 }
 
 # ┌────────────────────────────────┐
-# │ Termux Properties and Modifications.     │
+# │ Termux Properties and Modifications    │
 # └────────────────────────────────┘
 
 cd ~/.termux
