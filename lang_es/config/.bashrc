@@ -351,6 +351,7 @@ encrypt-file() {
     cd
 }
 
+#### Termux Properties and Modifications
 cd ~/.termux
 cat > termux.properties << 'EOF'
 # allow-external-apps = true
@@ -391,6 +392,9 @@ extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
 # terminal-margin-vertical=0
 EOF
 cd
+
+termux-x11 :0 &
+export DISPLAY=:0
 
 alias ls='lsd --icon-theme unicode'
 
