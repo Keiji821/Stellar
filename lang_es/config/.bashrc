@@ -351,7 +351,10 @@ encrypt-file() {
     cd
 }
 
-# Termux Properties and Modifications
+# <=====================================>
+# | Termux Properties and Modifications |
+# <=====================================>
+
 cd ~/.termux
 cat > termux.properties << 'EOF'
 # allow-external-apps = true
