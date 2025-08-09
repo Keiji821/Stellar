@@ -142,7 +142,7 @@ tor --SocksPort $puerto \
     &>tor.txt &
 
 # ┌────────────────────────────────┐
-# │ Imports and banner                      │
+# │ Imports and banner                     │
 # └────────────────────────────────┘
 
 
