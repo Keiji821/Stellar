@@ -58,7 +58,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Security lock for the screen           │
+# │ Security lock for the screen          │
 # └────────────────────────────────┘
 
 
