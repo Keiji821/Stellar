@@ -103,7 +103,7 @@ fi
 
 sleep 3
 
-apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd)
+apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd x11-repo termux-x11-nightly)
 pip_packages=(
     beautifulsoup4
     pyfiglet
