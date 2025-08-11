@@ -68,6 +68,11 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 </details>
 
 <details>
+<summary><b>🖼️ Galería</b></summary>
+
+</details>
+
+<details>
 <summary><b>🔖 Pasos de instalación</b></summary>
 
 ##### Para instalar Stellar debe seguir los siguientes pasos:
