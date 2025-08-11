@@ -2,13 +2,13 @@
 
 <div align="center">
 
-![Código Aberto](https://img.shields.io/badge/Código_Aberto-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Manutenção](https://img.shields.io/badge/Mantido_(Sim)-2ea44f?style=for-the-badge)
+![Código Aberto](https://img.shields.io/badge/Código_Aberto-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Mantido](https://img.shields.io/badge/Mantido_(Sim)-2ea44f?style=for-the-badge)
 
-<h4>Construído com:</h4>
+<h4>Construído com</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
-[![JavaScript Runtime](https://img.shields.io/badge/Ambiente_JavaScript-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
+[![Runtime JavaScript](https://img.shields.io/badge/Runtime_JavaScript-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
 
 </div>
 
@@ -19,137 +19,205 @@
 
 <div align="center">
 
-Stellar é um programa desenvolvido em `Python`, `Bash` e `Node.js` para melhorar a aparência básica do `Termux`, adicionando novos recursos.
+Stellar é um programa desenvolvido em `Python`, `Bash` e `NodeJS` projetado para melhorar a aparência básica do `Termux` com um visual renovado e novas funcionalidades.
 
-Embora inclua algumas ferramentas focadas em hacking e OSINT, seu principal objetivo é melhorar a interface visual do Termux com amplas opções de personalização.
+Embora inclua algumas ferramentas de comandos para hacking e OSINT, seu foco principal é oferecer múltiplas camadas de personalização para aprimorar a experiência visual do Termux.
 
 </div>
 
-#
+## `🗃️` Documentação 
 
-⚠️ `Em breve: Suporte para japonês, chinês, coreano, inglês e português`
+- [Documentação em Inglês](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
+- [Documentação em Japonês](https://github.com/Keiji821/Stellar/blob/master/docs/README_Japanese.md)
+- [Documentação em Chinês](https://github.com/Keiji821/Stellar/blob/master/docs/README_Chinese.md)
+- [Documentação em Coreano](https://github.com/Keiji821/Stellar/blob/master/docs/README_Korean.md)
+- [Documentação em Português](https://github.com/Keiji821/Stellar/blob/master/docs/README_Portuguese.md)
 
-⚠️ `Ainda em desenvolvimento ativo - podem existir alguns bugs`
+## `📄` Informações de Status
 
-`📌` Para contribuir com o Stellar ou reportar bugs/problemas, contate-me no Discord: `keiji100`
+`⚠️` Em breve: Suporte para japonês, chinês, coreano, inglês e português na interface
 
-#
+`⚠️` Em desenvolvimento ativo - pode conter bugs
+
+`📌` Para contribuir ou reportar bugs, contate via Discord: `keiji100`
+
+## `📜` Conteúdo
 
 <details>
-<summary><b>🔖 Passos de Instalação</b></summary>
+<summary><b>📑 Detalhes do Programa</b></summary>
 
-##### Siga estes passos para instalar o Stellar:
+```shell
+Nome do Programa: Stellar
+Data de Criação: 01/06/2024
+Versão: v0.0.0 (Em Desenvolvimento)
+Tamanho: 17MB
+Idiomas: Apenas espanhol
+Criador: Keiji821
+```
+</details>
 
-```shell script
+<details>
+<summary><b>📥 Passos de Instalação</b></summary>
+
+Execute estes comandos sequencialmente:
+
+```shell
 pkg update && pkg upgrade
 ```
 
-```shell script
+```shell
 pkg install git -y
 ```
 
-```shell script
+```shell
 git clone https://github.com/Keiji821/Stellar
 ```
 
-```shell script
+```shell
 cd Stellar
 ```
 
-```shell script
+```shell
 bash install.sh
 ```
 
-##### Após executar `bash install.sh`, tudo será instalado automaticamente (garanta uma conexão estável com a internet). Após a instalação, sua sessão no Termux será reiniciada. Para o funcionamento adequado do TOR, recomenda-se fechar e reabrir completamente o Termux.
+Após executar `bash install.sh`, o sistema de instalação será iniciado. Garanta conexão estável à internet. O Termux reiniciará após a instalação - recomenda-se fechar completamente para o correto funcionamento do `TOR`.
 
 </details>
 
 <details>
-<summary><b>📑 Funcionalidades</b></summary>
+<summary><b>🧩 Funcionalidades</b></summary>
 
-##### O Stellar OS oferece um conjunto de comandos focados em OSINT e hacking (todos opcionais). O objetivo principal permanece sendo a personalização do Termux.
+Stellar maximiza capacidades do `Bash` sem depender do `Zsh`:
 
-#### `🔧` Sistema
-| Comando       | Descrição |  
-|--------------|-------------|  
-| `reload`     | Recarrega o banner do sistema |  
-| `user-config`| Personalize sua interface e perfil Stellar |  
-| `uninstall`  | Remove completamente o Stellar |  
-| `update`     | Atualiza o Stellar a partir do GitHub |  
-| `bash`       | Reinicia a sessão do terminal |  
-| `history -c` | Limpa o histórico de comandos |  
-| `reset`      | Redefine o terminal para o estado padrão |  
-| `my`         | Exibe seu perfil no Stellar |  
+> Principais Recursos
+```shell
+• Banner personalizável/cores de fundo
+• Painel de informações do dispositivo
+• Camada de segurança TOR
+• Personalização de cor de fundo
+• Comandos utilitários essenciais
+• termux-properties aprimorado
+• Sistema nativo command-not-found
+• Bloqueio por impressão digital
+• Integração Termux-API
+• Variáveis Termux-X11 pré-configuradas
+```
 
-#### `🛠️` Utilitários
-| Comando         | Descrição |  
-|----------------|-------------|  
-| `ia`           | Serviço de API de IA gratuito |  
-| `ia-image`     | Gerador de imagens com IA |  
-| `translator`   | Tradução em tempo real |  
-| `myip`         | Mostra seu IP público |  
-| `passwordgen`  | Gera senhas seguras |  
-| `encrypt-file` | Ferramenta de criptografia de arquivos |  
+> Dependências APT
+```shell
+• python
+• cloudflared 
+• tor
+• nmap
+• exiftool
+• nodejs
+• termux-api
+• dnsutils
+• lsd
+• x11-repo
+• termux-x11-nightly
+• root-repo
+```
 
-#### `📡` OSINT (Coleta de Informações)  
-| Comando         | Descrição |  
-|----------------|-------------|  
-| `ipinfo`       | Obtém informações de endereço IP |  
-| `urlinfo`      | Ferramenta de análise de URL |  
-| `userfinder`   | Busca de usuários em múltiplas plataformas |  
-| `phoneinfo`    | Consulta de números telefônicos |  
-| `metadatainfo` | Extração de metadados de arquivos |  
-| `emailsearch`  | Ferramenta de busca de e-mails |  
+> Dependências PIP
+```shell   
+• beautifulsoup4
+• pyfiglet
+• phonenumbers
+• psutil
+• PySocks
+• requests
+• rich
+• "rich[jupyter]"
+• lolcat
+• discord
+• fake_useragent
+• pycryptodome
+```
+</details>
 
-#### `📱` Discord
-| Comando                | Descrição |  
-|-----------------------|-------------|  
-| `userinfo`            | Obtém informações de usuário (usando ID) |  
-| `serverinfo`          | Obtém informações de servidor (usando ID) |  
-| `searchinvites`       | Busca por convites do Discord |  
-| `inviteinfo`          | Analisa links de convite |  
-| `role-mapper`         | Mapeamento de cargos (requer ID do servidor) |  
-| `mutual-servers`      | Verifica servidores em comum entre usuários |  
-| `webhook-mass-spam`   | Ferramenta de spam em webhooks |  
-| `mass-delete-channels`| Exclusão em massa de canais (apenas servidores próprios) |  
+<details>
+<summary><b>📀 Lista de Comandos</b></summary>
 
-#### `📸` Instagram OSINT 
-| Comando        | Descrição |  
-|---------------|-------------|  
-| `profileinfo` | Extração de metadados de perfil do Instagram |  
+> **🔧 SISTEMA**  
+```bash
+reload       │ Recarregar sistema de banner  
+user-config  │ Central de personalização
+my           │ Exibir perfil Stellar
+uninstall    │ Desinstalar completamente  
+update       │ Atualizar do GitHub  
+bash         │ Reiniciar sessão terminal   
+reset        │ Restaurar estado padrão
+delete       | atalho para rm -rf
+move         | atalho para mv
+copy         | atalho para cp
+```
 
-#### `🛡️` Testes de Penetração 
-| Comando    | Descrição |  
-|-----------|-------------|  
-| `ddos`    | Ferramenta de ataque DDoS (IP+porta) |  
-| `tunnel`  | Hospeda imagem que captura IPs de visitantes |  
+> **🛠️ UTILITÁRIOS**  
+```bash
+ia           │ Serviço de IA com API gratuita  
+ia-image     │ Gerador de imagens por IA  
+traductor    │ Tradutor em tempo real  
+myip         │ Verificar IP público  
+passwordgen  │ Gerador de senhas seguras  
+encrypt-file │ Criptografar arquivos  
+```
 
-##### O Stellar executa o TOR em segundo plano continuamente para proteção de anonimato.
+> **🌐 OSINT**  
+```bash
+ipinfo       │ Analisar informações de IP  
+urlinfo      │ Analisador de URLs  
+userfinder   │ Busca de usuários multiplataforma  
+phoneinfo    │ Consulta de número telefônico  
+metadatainfo │ Extrair metadados de arquivos  
+emailsearch  │ Busca de emails  
+```
 
+> **📱 DISCORD**  
+```bash
+userinfo           │ Informações de usuário (ID)  
+serverinfo         │ Informações de servidor (ID)  
+searchinvites      │ Buscar convites  
+inviteinfo         │ Analisar convites  
+role-mapper        │ Mapear permissões de cargos  
+mutual-servers     │ Servidores em comum  
+webhook-mass-spam  │ Spam em webhooks  
+mass-delete-channels │ Excluir canais em massa  
+```
+
+> **📸 INSTAGRAM**  
+```bash
+profileinfo  │ Metadados de perfil  
+```
+
+> **⚡ TESTES DE PENETRAÇÃO**  
+```bash
+ddos        │ Ataque DDoS (IP+porta)  
+tunnel      │ Capturar IPs de visitantes  
+```
 </details>
 
 <details>
 <summary><b>📄 Guia de Uso</b></summary>
 
-##### Uso simples - após a instalação, use o Termux normalmente. O comando `user-config` permite personalizar:
-- Exibição de arte ASCII
+Após instalação, use `user-config` para personalizar:
+- Arte ASCII do banner
 - Esquemas de cores
-- Cores de fundo (incluindo temas claro/escuro)
-- Usuário e método de verificação
+- Fundo do terminal (modos claro/escuro)
+- Outros elementos visuais
 
-##### O comando `user-config` também permite personalização completa do tema do Termux, incluindo mudança de fundo escuro para claro/azul, etc.
-
+Oferece assistente interativo de personalização.
 </details>
 
-#
-
-# `🖋️` Autor
+<details>
+<summary><b>🌹 Autores</b></summary>
 
 ```diff
-+ Keiji821 (Desenvolvedor)
++ Keiji821 (Desenvolvedor Principal)
 ```
 
-##### Para dúvidas ou colaborações, entre em contato
+##### Colaboração/Consultas
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
@@ -157,10 +225,11 @@ bash install.sh
   </a>
 </p>
 
-##### `❤️` Ajude o Projeto
+##### `❤️` Doações 
 
-Se você gosta deste projeto e o acha útil, considere apoiar seu desenvolvimento com uma doação de qualquer valor.
+Se desejar apoiar o projeto:
 
-[![Doar pelo Binance](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Doar&labelColor=black&message=763579717)](https://pay.binance.com/en)
+[![Doação Binance](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Doar&labelColor=black&message=763579717)](https://pay.binance.com/en)
 
-[![Doar pelo PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Doar&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+[![Doação PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Doar&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+</details>
