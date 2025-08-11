@@ -10,10 +10,8 @@ import subprocess
 from rich.console import Console
 from rich.text import Text
 from rich.style import Style
-from rich.panel import Panel
 from rich.table import Table
 from rich.columns import Columns
-from rich import box
 
 console = Console()
 
@@ -22,7 +20,7 @@ system_dir = os.path.expanduser("~/Stellar/lang_es/config/system")
 
 def generar_paleta():
     def color_rgb():
-        return (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255))
+        return (random.randint(100, 255), (random.randint(100, 255)), (random.randint(100, 255)))
     return {
         'titulo': color_rgb(),
         'clave': color_rgb(),
@@ -131,15 +129,7 @@ def crear_panel(info, panel_width=None):
     t.add_row("", f"{info['DiscoUsado']} / {info['DiscoTotal']}")
 
     t.add_row("IP:", Text(info["IP"], style=estilo_rgb(paleta['borde'])))
-
-    return Panel(
-        t,
-        title=Text("♥", style=estilo_rgb(paleta['titulo'])),
-        border_style=estilo_rgb(paleta['borde']),
-        padding=(1, 2),
-        width=panel_width,
-        box=box.SQUARE
-    )
+    return t
 
 if __name__ == "__main__":
     os.system('clear' if os.name == 'posix' else 'cls')
