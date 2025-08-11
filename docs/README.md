@@ -55,25 +55,25 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 # Contenido 
 
 <details>
-<summary><b>📦 Detalles del programa</b></summary>
+<summary><b>Detalles del programa</b></summary>
 
 ```shell script
-📄 Nombre del programa: Stellar
-🗓️ Fecha de creación: 01/06/2024
-🔌 Versión: v0.0.0 (Aún en desarrollo)
-📦 Tamaño del programa: 17mb
-📜 Idiomas del programa: Solo español
-🌹 Creador: Keiji821
+>>> Nombre del programa: Stellar
+>>> Fecha de creación: 01/06/2024
+>>> Versión: v0.0.0 (Aún en desarrollo)
+>>> Tamaño del programa: 17mb
+>>> Idiomas del programa: Solo español
+>>> Creador: Keiji821
 ```
 </details>
 
 <details>
-<summary><b>🖼️ Galería</b></summary>
+<summary><b>Galería</b></summary>
 
 </details>
 
 <details>
-<summary><b>🔖 Pasos de instalación</b></summary>
+<summary><b>Pasos de instalación</b></summary>
 
 Para instalar Stellar debe seguir los siguientes pasos:
 
@@ -102,7 +102,7 @@ Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡ase
 </details>
 
 <details>
-<summary><b>🧩 Características</b></summary>
+<summary><b>Características</b></summary>
 
 
 Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
@@ -158,7 +158,7 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 </details>
 
 <details>
-<summary><b>🔌 Comandos</b></summary>
+<summary><b>Comandos</b></summary>
   
 #### `🔧` Sistema
 | Comando       | Descripción |  
@@ -217,7 +217,7 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 </details>
 
 <details>
-<summary><b>📄 Guía de uso</b></summary>
+<summary><b>Guía de uso</b></summary>
 
 El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `user-config` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
@@ -226,7 +226,7 @@ El comando `user-config` también permite modificar el tema de termux el tema de
 </details>
 
 <details>
-<summary><b>🖋️ Autores</b></summary>
+<summary><b>Autores</b></summary>
 
 ```diff
 + Keiji821 (Desarrollador)
