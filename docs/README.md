@@ -75,7 +75,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 <details>
 <summary><b>🔖 Pasos de instalación</b></summary>
 
-##### Para instalar Stellar debe seguir los siguientes pasos:
+Para instalar Stellar debe seguir los siguientes pasos:
 
 ```shell script
 pkg update && pkg upgrade
@@ -97,7 +97,7 @@ cd Stellar
 bash install.sh
 ```
 
-##### Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡asegurese de tener una buena conexión a internet para la correcta instalación! luego de haberse instalado Stellar su sesión de Termux de reiniciará, es recomendable que cierres Termux luego de instalar Stellar para que funcione correctamente `TOR`
+Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡asegurese de tener una buena conexión a internet para la correcta instalación! luego de haberse instalado Stellar su sesión de Termux de reiniciará, es recomendable que cierres Termux luego de instalar Stellar para que funcione correctamente `TOR`
 
 </details>
 
