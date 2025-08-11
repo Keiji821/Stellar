@@ -111,6 +111,7 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 
 ```shell script
 • Poder personalizar un banner y sus colores así como el fondo del mismo
+• Tabla debajo del banner con información de su dispositivo
 • Seguridad, otorga una capa de protección con TOR
 • Poder personalizar el color de fondo para Termux
 • Comandos y utilidades básicas para el sistema de Stellar
