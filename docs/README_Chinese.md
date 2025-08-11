@@ -237,5 +237,3 @@ tunnel      │ 访客IP捕获
 
 [![PayPal捐赠](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=捐赠&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
 </details>
-
-（注：保留所有技术术语及品牌名称原文，功能描述根据中文表达习惯进行了优化调整）
