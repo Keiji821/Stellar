@@ -113,10 +113,11 @@ def render_bar(pct, color, width=20):
     return Text("█" * filled + "░" * (width - filled), style=estilo_rgb(color))
 
 def crear_panel(info, panel_width=None):
-    console.print("\n")
     t = Table.grid(expand=False)
     t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
+
+    t.add_row("", "")
 
     for key in ["☕ Usuario", "📅 Fecha", "🕛 Hora", "🧸 Celular", "📦 OS", "💿 Kernel", "🐚 Shell", "📀 Terminal"]:
         t.add_row(f"{key}: ", info[key])
