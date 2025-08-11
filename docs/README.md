@@ -55,6 +55,17 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 #
 
 <details>
+<summary><b>📦 Detalles del programa</b></summary>
+• Nombre del programa: Stellar
+• Fecha de creación: 01/06/2024
+• Versión: v0.0.0 (Aún en desarrollo)
+• Tamaño del programa: 17mb
+• Idiomas del programa: Solo español
+• Creador: Keiji821
+
+</details>
+
+<details>
 <summary><b>🔖 Pasos de instalación</b></summary>
 
 ##### Para instalar Stellar debe seguir los siguientes pasos:
@@ -84,7 +95,7 @@ bash install.sh
 </details>
 
 <details>
-<summary><b>📑 Características</b></summary>
+<summary><b>🔌 Comandos</b></summary>
 
 ##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
   
