@@ -40,7 +40,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 ## `📄` Información de estado
 
-`⚠️` Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.
+`⚠️` Próximamente soporte dentro del programa para el idioma japonés, chino, coreano, ingles y portugués.
 
 `⚠️` In-program support for Japanese, Chinese, Korean, English, and Portuguese is coming soon.
 
