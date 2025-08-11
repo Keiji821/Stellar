@@ -28,8 +28,8 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 
 <p align="center">
-  <kbd><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg" width="400"></kbd>
-  <kbd><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg" width="400"></kbd>
+  <kbd><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg?ex=689ad917&is=68998797&hm=07e3faa38dbbb41dae7ea0a14f584281f5a6c4fd0c27a09dac33c1757906724f&" width="400"></kbd>
+  <kbd><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg?ex=689ad917&is=68998797&hm=66c48b9d67e2735dc24de4154b13571f611212686dfeaa6c429e5ed22e47bf45&" width="400"></kbd>
 </p>
 
 ## `🗃️` Documentation 
