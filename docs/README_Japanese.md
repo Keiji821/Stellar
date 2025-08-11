@@ -4,11 +4,11 @@
 
 ![オープンソース](https://img.shields.io/badge/オープンソース-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![メンテナンス中](https://img.shields.io/badge/メンテナンス中(はい)-2ea44f?style=for-the-badge)
 
-<h4>使用技術:</h4>
+<h4>開発言語</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
-[![JavaScript Runtime](https://img.shields.io/badge/JavaScript_Runtime-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
+![Bash](https://img.shields.io/badge/Shellスクリプト-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+[![JavaScriptランタイム](https://img.shields.io/badge/JavaScriptランタイム-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
 
 </div>
 
@@ -19,137 +19,205 @@
 
 <div align="center">
 
-Stellarは`Python`、`Bash`、`Node.js`で開発されたプログラムで、`Termux`の見た目を改善し、新しい機能を追加します。
+Stellarは`Python`、`Bash`、`NodeJS`で開発されたプログラムで、`Termux`の地味な見た目を刷新し、新しい機能を追加します。
 
-ハッキングやOSINT向けのツールも含まれていますが、主な目的はTermuxのカスタマイズ性を高めることです。
+ハッキングやOSINT向けのコマンドツールを含んでいますが、主な目的は多層的なカスタマイズでTermuxのビジュアルを向上させることです。
 
 </div>
 
-#
+## `🗃️` ドキュメント 
 
-⚠️ `近日対応予定: 日本語、中国語、韓国語、英語、ポルトガル語のサポート`
+- [英語ドキュメント](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
+- [日本語ドキュメント](https://github.com/Keiji821/Stellar/blob/master/docs/README_Japanese.md)
+- [中国語ドキュメント](https://github.com/Keiji821/Stellar/blob/master/docs/README_Chinese.md)
+- [韓国語ドキュメント](https://github.com/Keiji821/Stellar/blob/master/docs/README_Korean.md)
+- [ポルトガル語ドキュメント](https://github.com/Keiji821/Stellar/blob/master/docs/README_Portuguese.md)
 
-⚠️ `現在も開発中です - バグが含まれている可能性があります`
+## `📄` ステータス情報
 
-`📌` Stellarへの貢献やバグ報告は、Discordで`keiji100`までご連絡ください
+`⚠️` 近日対応予定：日本語、中国語、韓国語、英語、ポルトガル語のUIサポート
 
-#
+`⚠️` 現在開発中 - バグが含まれる可能性あり
+
+`📌` コントリビューションやバグ報告はDiscordで：`keiji100`
+
+## `📜` コンテンツ
 
 <details>
-<summary><b>🔖 インストール方法</b></summary>
+<summary><b>📑 プログラム詳細</b></summary>
 
-##### Stellarをインストールする手順:
+```shell
+プログラム名: Stellar
+作成日: 2024/06/01
+バージョン: v0.0.0 (開発中)
+サイズ: 17MB
+対応言語: スペイン語のみ
+開発者: Keiji821
+```
+</details>
 
-```shell script
+<details>
+<summary><b>📥 インストール手順</b></summary>
+
+以下のコマンドを順に実行:
+
+```shell
 pkg update && pkg upgrade
 ```
 
-```shell script
+```shell
 pkg install git -y
 ```
 
-```shell script
+```shell
 git clone https://github.com/Keiji821/Stellar
 ```
 
-```shell script
+```shell
 cd Stellar
 ```
 
-```shell script
+```shell
 bash install.sh
 ```
 
-##### `bash install.sh`を実行すると自動的にインストールされます（安定したインターネット接続が必要です）。インストール後、Termuxセッションが再起動します。TORを正しく機能させるため、Termuxを完全に閉じてから再度開くことを推奨します。
+`bash install.sh`実行後、インストールシステムが起動します。安定したインターネット接続が必要です。インストール後Termuxが再起動します - `TOR`機能を正しく動作させるため完全に終了することを推奨します。
 
 </details>
 
 <details>
-<summary><b>📑 機能一覧</b></summary>
+<summary><b>🧩 機能</b></summary>
 
-##### Stellar OSはOSINTやハッキング向けのコマンドを提供します（全てオプション）。主な目的はTermuxのカスタマイズです。
+Stellarは`Zsh`に依存せず`Bash`の機能を最大限活用：
 
-#### `🔧` システム
-| コマンド       | 説明 |  
-|--------------|-------------|  
-| `reload`     | システムバナーを再読み込み |  
-| `user-config`| Stellarのインターフェースとプロフィールをカスタマイズする |  
-| `uninstall`  | Stellarを完全にアンインストール |  
-| `update`     | GitHubからStellarを更新 |  
-| `bash`       | ターミナルセッションを再起動 |  
-| `history -c` | コマンド履歴を消去 |  
-| `reset`      | ターミナルを初期状態にリセット |  
-| `my`         | Stellarプロフィールを表示 |    
+> 主要機能
+```shell
+• カスタマイズ可能なバナー/背景色
+• デバイス情報パネル
+• TORセキュリティ層
+• Termux背景色カスタマイズ
+• 基本ユーティリティコマンド
+• 強化版termux-properties
+• ネイティブcommand-not-foundハンドラー
+• 指紋認証ロック画面
+• Termux-API統合
+• Termux-X11環境変数
+```
 
-#### `🛠️` ユーティリティ
-| コマンド         | 説明 |  
-|----------------|-------------|  
-| `ia`           | 無料AI APIサービス |  
-| `ia-image`     | AI画像生成ツール |  
-| `translator`   | リアルタイム翻訳 |  
-| `myip`         | 公開IPを表示 |  
-| `passwordgen`  | 安全なパスワード生成 |  
-| `encrypt-file` | ファイル暗号化ツール |  
+> APT依存関係
+```shell
+• python
+• cloudflared 
+• tor
+• nmap
+• exiftool
+• nodejs
+• termux-api
+• dnsutils
+• lsd
+• x11-repo
+• termux-x11-nightly
+• root-repo
+```
 
-#### `📡` OSINT (情報収集)  
-| コマンド         | 説明 |  
-|----------------|-------------|  
-| `ipinfo`       | IPアドレス情報の取得 |  
-| `urlinfo`      | URL分析ツール |  
-| `userfinder`   | 複数プラットフォームでのユーザー検索 |  
-| `phoneinfo`    | 電話番号検索 |  
-| `metadatainfo` | ファイルメタデータ抽出 |  
-| `emailsearch`  | メール検索ツール |  
+> PIP依存関係
+```shell   
+• beautifulsoup4
+• pyfiglet
+• phonenumbers
+• psutil
+• PySocks
+• requests
+• rich
+• "rich[jupyter]"
+• lolcat
+• discord
+• fake_useragent
+• pycryptodome
+```
+</details>
 
-#### `📱` Discord
-| コマンド                | 説明 |  
-|-----------------------|-------------|  
-| `userinfo`            | ユーザー情報取得(ID使用) |  
-| `serverinfo`          | サーバー情報取得(ID使用) |  
-| `searchinvites`       | Discord招待リンク検索 |  
-| `inviteinfo`          | 招待リンク分析 |  
-| `role-mapper`         | サーバーロールマッピング(サーバーID必要) |  
-| `mutual-servers`      | ユーザー間の共通サーバー確認 |  
-| `webhook-mass-spam`   | Webhookスパムツール |  
-| `mass-delete-channels`| チャンネル一括削除(所有サーバーのみ) |  
+<details>
+<summary><b>📀 コマンド一覧</b></summary>
 
-#### `📸` Instagram OSINT 
-| コマンド        | 説明 |  
-|---------------|-------------|  
-| `profileinfo` | Instagramプロフィールメタデータ抽出 |  
+> **🔧 システム**  
+```bash
+reload       │ バナーシステム再読み込み  
+user-config  │ カスタマイズセンター
+my           │ Stellarプロファイル表示
+uninstall    │ 完全アンインストール  
+update       │ GitHubから更新  
+bash         │ ターミナルセッション再起動   
+reset        │ デフォルト状態に復元
+delete       | rm -rf ショートカット
+move         | mv ショートカット
+copy         | cp ショートカット
+```
 
-#### `🛡️` ペネトレーションテスト 
-| コマンド    | 説明 |  
-|-----------|-------------|  
-| `ddos`    | DDoS攻撃ツール(IP+ポート) |  
-| `tunnel`  | 訪問者のIPを取得する画像をホスト |  
+> **🛠️ ユーティリティ**  
+```bash
+ia           │ 無料API AIサービス  
+ia-image     │ AI画像生成  
+traductor    │ リアルタイム翻訳  
+myip         │ 公開IP確認  
+passwordgen  │ 安全なパスワード生成  
+encrypt-file │ ファイル暗号化  
+```
 
-##### StellarはバックグラウンドでTORを実行し、匿名性を保護します。
+> **🌐 OSINT**  
+```bash
+ipinfo       │ IP情報分析  
+urlinfo      │ URL解析  
+userfinder   │ クロスプラットフォームユーザー検索  
+phoneinfo    │ 電話番号調査  
+metadatainfo │ ファイルメタデータ抽出  
+emailsearch  │ メール検索  
+```
 
+> **📱 Discord**  
+```bash
+userinfo           │ ユーザー情報(ID)  
+serverinfo         │ サーバー情報(ID)  
+searchinvites      │ 招待リンク検索  
+inviteinfo         │ 招待分析  
+role-mapper        │ ロール権限マッピング  
+mutual-servers     │ 共通サーバー  
+webhook-mass-spam  │ Webhookスパム  
+mass-delete-channels │ チャンネル一括削除  
+```
+
+> **📸 Instagram**  
+```bash
+profileinfo  │ プロフィールメタデータ  
+```
+
+> **⚡ ペネトレーションテスト**  
+```bash
+ddos        │ DDoS攻撃(IP+ポート)  
+tunnel      │ 訪問者IP取得  
+```
 </details>
 
 <details>
 <summary><b>📄 使用ガイド</b></summary>
 
-##### 使い方は簡単です。インストール後、通常通りTermuxを使用できます。`user-config`コマンドで以下をカスタマイズ可能:
-- ASCIIアートの表示
+インストール後、`user-config`で以下をカスタマイズ可能:
+- バナーASCIIアート
 - カラースキーム
-- 背景色（ライト/ダークテーマ含む）
-- ユーザーと検証方法 
+- ターミナル背景（ライト/ダークモード）
+- その他ビジュアル要素
 
-##### `user-config`コマンドではTermuxのテーマ全体をカスタマイズでき、ダークからライト/ブルー背景などに変更できます。
-
+インタラクティブなカスタマイズウィザードを提供
 </details>
 
-#
-
-# `🖋️` 作者
+<details>
+<summary><b>🌹 作者</b></summary>
 
 ```diff
-+ Keiji821 (開発者)
++ Keiji821 (リード開発者)
 ```
 
-##### 質問や協力の依頼はこちらまで
+##### コラボレーション/相談
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
@@ -157,10 +225,11 @@ bash install.sh
   </a>
 </p>
 
-##### `❤️` 寄付のお願い
+##### `❤️` 寄付
 
-このプロジェクトが気に入り、役に立った場合は、任意の金額で開発をサポートしていただけると幸いです。
+プロジェクトを支援したい場合:
 
-[![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=寄付&labelColor=black&message=763579717)](https://pay.binance.com/en)
+[![Binance寄付](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=寄付&labelColor=black&message=763579717)](https://pay.binance.com/en)
 
-[![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=寄付&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+[![PayPal寄付](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=寄付&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+</details>
