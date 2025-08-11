@@ -91,8 +91,8 @@ def obtener_info():
             continue
 
     return {
-        "☕ Usuario": usuario,
-        "📅 Fecha": now.strftime("%Y-%m-%d"),
+        "Usuario": usuario,
+        "Fecha": now.strftime("%Y-%m-%d"),
         "Hora": now.strftime("%I:%M %p"),
         "Celular": obtener_modelo_celular(),
         "OS": f"{platform.machine()}",
