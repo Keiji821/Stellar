@@ -105,18 +105,49 @@ bash install.sh
 <summary><b>🧩 Características</b></summary>
 
 ```shell script
+Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
+
+>>> Características y cambios 
+
+• Poder personalizar un banner y sus colores así como el fondo del mismo
+• Seguridad, otorga una capa de protección con TOR
+• Poder personalizar el color de fondo para Termux
+• Comandos y utilidades básicas para el sistema de Stellar
+• Se aplica un termux-properties mejorado 
+• Un nuevo command-not-found nativo de Stellar 
+• Bloqueó de seguridad de pantalla por huella digital para Termux
+• Integración con la API de Termux
+• Importación predeterminada de las variables de Termux-X11
+
 >>> Dependencias APT
 
-• Python
-• Cloudflared 
-• Tor
-• Nmap
-• Exiftool
-• Nodejs
-• 
+• python
+• cloudflared 
+• tor
+• nmap
+• exiftool
+• nodejs
+• termux-api
+• dnsutils
+• lsd
+• x11-repo
+• termux-x11-nightly
+• root-repo
 
-
-
+>>> Dependencias PIP
+   
+• beautifulsoup4
+• pyfiglet
+• phonenumbers
+• psutil
+• PySocks
+• requests
+• rich
+• "rich[jupyter]"
+• lolcat
+• discord
+• fake_useragent
+• pycryptodome
 ```
 
 </details>
