@@ -52,7 +52,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 `📌` Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
 
-> Nombre del programa: Stellar
+Nombre del programa: Stellar
 Fecha de creación: 01/06/2024
 Versión: v0.0.0 (Aún en desarrollo)
 Tamaño del programa: 17mb
