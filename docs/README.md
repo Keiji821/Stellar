@@ -42,7 +42,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 #
 
-`⚠️` Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.`
+`⚠️` Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.
 
 `⚠️` In-program support for Japanese, Chinese, Korean, English, and Portuguese is coming soon.
 
@@ -52,7 +52,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 `📌` Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
 
-#
+# Contenido 
 
 <details>
 <summary><b>📦 Detalles del programa</b></summary>
