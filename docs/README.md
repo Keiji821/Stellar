@@ -171,9 +171,9 @@ uninstall    │ Desinstala Stellar completamente
 update       │ Actualiza desde GitHub  
 bash         │ Reinicia la sesión de terminal   
 reset        │ Restablece terminal a estado inicial
-delete | alias de rm -rf 
-move | alias de mv
-copy | alias de cp
+delete       | alias de rm -rf 
+move         | alias de mv
+copy         | alias de cp
 ```
 
 
