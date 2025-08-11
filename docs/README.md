@@ -104,7 +104,7 @@ bash install.sh
 <details>
 <summary><b>🧩 Características</b></summary>
 
-```shell script
+
 Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
 
 >>> Características y cambios 
@@ -148,8 +148,6 @@ Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como prov
 • discord
 • fake_useragent
 • pycryptodome
-```
-
 </details>
 
 <details>
