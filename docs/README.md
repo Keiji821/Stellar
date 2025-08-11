@@ -26,7 +26,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 </div>
 
-### `🗃️` Documentación/Documentation 
+#### `🗃️` Documentación/Documentation 
 
 - [Documentation in English](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
 
