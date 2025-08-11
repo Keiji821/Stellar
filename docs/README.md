@@ -105,7 +105,7 @@ Luego de ejecutar el `bash install.sh` todo se instalará automáticamente ¡ase
 <summary><b>🧩 Características</b></summary>
 
 
-Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
+Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
 
 > Características y cambios 
 
