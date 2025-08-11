@@ -53,7 +53,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 ## `📜` Contenido
 
 <details>
-<summary><b>Detalles del programa</b></summary>
+<summary><b>📑 Detalles del programa</b></summary>
 
 ```shell script
 Nombre del programa: Stellar
