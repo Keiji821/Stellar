@@ -57,7 +57,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 <details>
 <summary><b>📦 Detalles del programa</b></summary>
 
-`📄` Nombre del programa: Stellar
+\n`📄` Nombre del programa: Stellar
 `🗓️` Fecha de creación: `01/06/2024`
 `🔌` Versión: `v0.0.0` (Aún en desarrollo)
 `📦` Tamaño del programa: `17mb`
