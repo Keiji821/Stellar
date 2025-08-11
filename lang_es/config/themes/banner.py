@@ -129,7 +129,7 @@ def crear_panel(info, panel_width=None):
     t.add_row("💾 Almacenamiento:", disco_bar)
     t.add_row("", f"{info['DiscoUsado']} / {info['DiscoTotal']}")
 
-    t.add_row("🔒 IP:", Text(info["IP"], style=estilo_rgb(paleta['borde'])))
+    t.add_row("🔒 IP:", Text(info["🔒 IP"], style=estilo_rgb(paleta['borde'])))
     return t
 
 if __name__ == "__main__":
