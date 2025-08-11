@@ -165,13 +165,15 @@ Stellar incluye una selección de comandos para su uso los cuales son:
 > **🔧 SISTEMA**  
 ```bash
 reload       │ Recarga el banner del sistema  
-user-config  │ Personaliza banner y perfil  
+user-config  │ Personaliza banner y perfil
+my           │ Muestra tu perfil de Stellar
 uninstall    │ Desinstala Stellar completamente  
 update       │ Actualiza desde GitHub  
-bash         │ Reinicia la sesión de terminal  
-history -c   │ Borra historial de comandos  
-reset        │ Restablece terminal a estado inicial  
-my           │ Muestra tu perfil de Stellar  
+bash         │ Reinicia la sesión de terminal   
+reset        │ Restablece terminal a estado inicial
+delete | alias de rm -rf 
+move | alias de mv
+copy | alias de cp
 ```
 
 
