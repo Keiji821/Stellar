@@ -12,6 +12,7 @@ from rich.text import Text
 from rich.style import Style
 from rich.table import Table
 from rich.columns import Columns
+from rich.panel import Panel
 
 console = Console()
 
@@ -27,7 +28,10 @@ def generar_paleta():
         'valor': color_rgb(),
         'memoria': color_rgb(),
         'disco': color_rgb(),
-        'borde': color_rgb()
+        'borde': color_rgb(),
+        'barra_memoria': color_rgb(),
+        'barra_disco': color_rgb(),
+        'fondo': color_rgb()
     }
 
 def estilo_rgb(color):
@@ -91,45 +95,65 @@ def obtener_info():
             continue
 
     return {
-        " Usuario": usuario,
-        " Fecha": now.strftime("%Y-%m-%d"),
-        " Hora": now.strftime("%I:%M %p"),
-        " Celular": obtener_modelo_celular(),
-        " OS": f"{platform.machine()}",
-        " Kernel": platform.release(),
-        " Shell": os.path.basename(os.getenv("SHELL", "bash")),
-        " Terminal": os.getenv("TERM", "unknown"),
+        "usuario": usuario,
+        "fecha": now.strftime("%Y-%m-%d"),
+        "hora": now.strftime("%I:%M %p"),
+        "celular": obtener_modelo_celular(),
+        "os": f"{platform.machine()}",
+        "kernel": platform.release(),
+        "shell": os.path.basename(os.getenv("SHELL", "bash")),
+        "terminal": os.getenv("TERM", "unknown"),
         "MemoriaPorcentaje": vm.percent,
         "MemoriaTotal": f"{vm.total//(1024**2):,} MB",
         "MemoriaUsada": f"{vm.used//(1024**2):,} MB",
         "DiscoPorcentaje": du.percent,
         "DiscoTotal": f"{du.total//(1024**3):,} GB",
         "DiscoUsado": f"{du.used//(1024**3):,} GB",
-        " IP": ip
+        "ip": ip
     }
 
-def render_bar(pct, color, width=20):
-    filled = int(pct * width / 100)
-    return Text("█" * filled + "░" * (width - filled), style=estilo_rgb(color))
+def crear_barra(pct, color):
+    bar_color = f"rgb({color[0]},{color[1]},{color[2]})"
+    return f"[{bar_color}]{'█' * int(pct/5)}{'░' * (20 - int(pct/5))}[/] {pct}%"
 
 def crear_panel(info, panel_width=None):
-    t = Table.grid(expand=False)
-    t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
-    t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
+    t = Table(show_header=False, show_lines=False,
+              border_style=estilo_rgb(paleta['borde']),
+              box=None, padding=(0,1,0,0))
 
-    for key in [" Usuario", " Fecha", " Hora", " Celular", " OS", " Kernel", " Shell", " Terminal"]:
-        t.add_row(f"{key}: ", info[key])
+    t.add_column(style=estilo_rgb(paleta['clave']), justify="right", min_width=12)
+    t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=24)
 
-    memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
-    t.add_row(" Memoria:", memoria_bar)
+    def nf_row(icon, text, value):
+        icon_part = Text(icon, style=Style(color="white", bold=True))
+        text_part = Text(f" {text}", style=estilo_rgb(paleta['clave']))
+        return icon_part + text_part, value
+
+    t.add_row(*nf_row("󰀄", "Usuario", info["usuario"]))
+    t.add_row(*nf_row("󰃭", "Fecha", info["fecha"]))
+    t.add_row(*nf_row("󰥔", "Hora", info["hora"]))
+    t.add_row(*nf_row("󰄛", "Celular", info["celular"]))
+    t.add_row(*nf_row("󰌽", "OS", info["os"]))
+    t.add_row(*nf_row("󰘚", "Kernel", info["kernel"]))
+    t.add_row(*nf_row("󰆍", "Shell", info["shell"]))
+    t.add_row(*nf_row("󰇊", "Terminal", info["terminal"]))
+    t.add_row(*nf_row("󰍛", "Memoria",
+              crear_barra(info['MemoriaPorcentaje'], paleta['barra_memoria'])))
     t.add_row("", f"{info['MemoriaUsada']} / {info['MemoriaTotal']}")
-
-    disco_bar = render_bar(info['DiscoPorcentaje'], paleta['disco'])
-    t.add_row(" Almacenamiento:", disco_bar)
+    t.add_row(*nf_row("󰋊", "Almacenamiento",
+              crear_barra(info['DiscoPorcentaje'], paleta['barra_disco'])))
     t.add_row("", f"{info['DiscoUsado']} / {info['DiscoTotal']}")
+    t.add_row(*nf_row("󰩠", "IP",
+              Text(info["ip"], style=estilo_rgb(paleta['borde']))))
 
-    t.add_row(" IP:", Text(info[" IP"], style=estilo_rgb(paleta['borde'])))
-    return t
+
+    colors_row = " ".join(f"[rgb({paleta[c][0]},{paleta[c][1]},{paleta[c][2]})]▀▀▀[/]"
+                     for c in ['clave', 'valor', 'memoria', 'disco', 'borde'])
+    t.add_row(*nf_row("󰝤", "Paleta", colors_row))
+
+    return Panel(t, title=Text("󱓞 System Info", style=Style(color="white", bold=True)),
+                border_style=estilo_rgb(paleta['borde']),
+                padding=(1,2))
 
 if __name__ == "__main__":
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -144,10 +168,10 @@ if __name__ == "__main__":
     if terminal_cols >= (banner_width + min_panel_width + espacio_entre):
         panel_width = terminal_cols - banner_width - espacio_entre
         panel = crear_panel(info, panel_width)
-        contenido = Columns([text_banner, panel], expand=False)
+        contenido = Columns([text_banner, panel], expand=False, equal=False)
     else:
         panel = crear_panel(info)
-        contenido = Columns([text_banner, panel], expand=True)
+        contenido = Columns([text_banner, panel], expand=True, equal=False)
 
     console.print(contenido)
-    console.print("\n" * 3)
+    console.print("\n" * 1)
