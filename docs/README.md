@@ -160,60 +160,65 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 <details>
 <summary><b>Comandos</b></summary>
   
-#### `🔧` Sistema
-| Comando       | Descripción |  
-|--------------|-------------|  
-| `reload`     | Recarga el banner del sistema. |  
-| `user-config`         | Personaliza el banner y tu perfil de Stellar. |  
-| `uninstall`  | Desinstala Stellar por completo. |  
-| `update`     | Actualiza Stellar desde GitHub. |  
-| `bash`       | Reinicia la sesión de terminal. |  
-| `history -c` | Elimina el historial de comandos de la terminal. |  
-| `reset`      | Restablece la terminal a su estado inicial. |  
-| `my`         | Muestra tu perfil de Stellar. |  
+> **🔧 SISTEMA**  
+```bash
+reload       │ Recarga el banner del sistema  
+user-config  │ Personaliza banner y perfil  
+uninstall    │ Desinstala Stellar completamente  
+update       │ Actualiza desde GitHub  
+bash         │ Reinicia la sesión de terminal  
+history -c   │ Borra historial de comandos  
+reset        │ Restablece terminal a estado inicial  
+my           │ Muestra tu perfil de Stellar  
+```
 
-#### `🛠️` Utilidades
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `ia`            | Servicio de IA con API gratuita. |  
-| `ia-image`      | Generador de imágenes con IA. |  
-| `traductor`     | Traducción en tiempo real. |  
-| `myip`          | Muestra tu IP pública. |  
-| `passwordgen`   | Genera contraseñas seguras. |  
-| `encrypt-file`  | Encripta archivos. |  
 
-#### `📡` OSINT (Búsqueda de información)  
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `ipinfo`        | Obtiene información de una IP. |  
-| `urlinfo`       | Analiza URLs. |  
-| `userfinder`    | Busca usuarios en múltiples plataformas. |  
-| `phoneinfo`     | Obtiene información de un número telefónico. |  
-| `metadatainfo`  | Extrae metadatos de archivos. |  
-| `emailsearch`   | Búsqueda de correos electrónicos. |  
+> **🛠️ UTILIDADES**  
+```bash
+ia           │ Servicio de IA con API gratuita  
+ia-image     │ Generador de imágenes con IA  
+traductor    │ Traducción en tiempo real  
+myip         │ Muestra tu IP pública  
+passwordgen  │ Genera contraseñas seguras  
+encrypt-file │ Encripta archivos  
+```
 
-#### `📱` Discord
-| Comando               | Descripción |  
-|----------------------|-------------|  
-| `userinfo`           | Obtiene información de un usuario (ID). |  
-| `serverinfo`         | Obtiene información de un servidor (ID). |  
-| `searchinvites`      | Busca invitaciones de Discord. |  
-| `inviteinfo`         | Analiza enlaces de invitación. |  
-| `role-mapper`        | Mapea roles usando el ID del servidor. |  
-| `mutual-servers`     | Verifica servidores en común entre usuarios. |  
-| `webhook-mass-spam`  | Envía mensajes masivos a un webhook. |  
-| `mass-delete-channels` | Elimina canales masivamente (en servidores propios). |  
 
-#### `📸` Instagram OSINT 
-| Comando          | Descripción |  
-|-----------------|-------------|  
-| `profileinfo`   | Extrae metadatos de perfiles de Instagram. |  
+> **🌐 OSINT**  
+```bash
+ipinfo       │ Obtiene información de una IP  
+urlinfo      │ Analiza URLs  
+userfinder   │ Busca usuarios en plataformas  
+phoneinfo    │ Información de número telefónico  
+metadatainfo │ Extrae metadatos de archivos  
+emailsearch  │ Búsqueda de correos electrónicos  
+```
 
-#### `🛡️` Pentesting 
-| Comando       | Descripción |  
-|--------------|-------------|  
-| `ddos`       | Realiza un ataque DDoS (IP + puerto). |  
-| `tunnel`     | Expone una imagen que captura la IP del visitante. |  
+
+> **📱 DISCORD**  
+```bash
+userinfo           │ Info de usuario (ID)  
+serverinfo         │ Info de servidor (ID)  
+searchinvites      │ Busca invitaciones  
+inviteinfo         │ Analiza invitaciones  
+role-mapper        │ Mapea roles (Server ID)  
+mutual-servers     │ Servidores en común  
+webhook-mass-spam  │ Spam a webhooks  
+mass-delete-channels │ Elimina canales masivamente  
+```
+
+
+> **📸 INSTAGRAM**  
+```bash
+profileinfo  │ Metadatos de perfiles  
+```
+
+
+> **⚡ PENTESTING**  
+```bash
+ddos        │ Ataque DDoS (IP + puerto)  
+tunnel      │ Captura IPs de visitantes  
+```
 </details>
 
 <details>
