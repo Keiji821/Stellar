@@ -56,17 +56,18 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 <details>
 <summary><b>📦 Detalles del programa</b></summary>
-• Nombre del programa: Stellar
 
-• Fecha de creación: 01/06/2024
+##### • Nombre del programa: Stellar
 
-• Versión: v0.0.0 (Aún en desarrollo)
+##### • Fecha de creación: 01/06/2024
 
-• Tamaño del programa: 17mb
+##### • Versión: v0.0.0 (Aún en desarrollo)
 
-• Idiomas del programa: Solo español
+##### • Tamaño del programa: 17mb
 
-• Creador: Keiji821
+##### • Idiomas del programa: Solo español
+
+##### • Creador: Keiji821
 
 </details>
 
