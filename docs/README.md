@@ -42,13 +42,13 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 #
 
-⚠️ `Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.`
+`⚠️` Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.`
 
-⚠️ `In-program support for Japanese, Chinese, Korean, English, and Portuguese is coming soon.`
+`⚠️` In-program support for Japanese, Chinese, Korean, English, and Portuguese is coming soon.
 
-⚠️ `Aún en constante desarrollo, pueden haber fallos.`
+`⚠️` Aún en constante desarrollo, pueden haber fallos.
 
-⚠️ `Still under constant development, there may be errors.`
+`⚠️` Still under constant development, there may be errors.
 
 `📌` Si desea aportar a Stellar o reportar un error o fallo dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
 
