@@ -159,6 +159,8 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 
 <details>
 <summary><b>Comandos</b></summary>
+
+Stellar incluye una selección de comandos para su uso los cuales son:
   
 > **🔧 SISTEMA**  
 ```bash
