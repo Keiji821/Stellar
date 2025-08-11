@@ -102,6 +102,26 @@ bash install.sh
 </details>
 
 <details>
+<summary><b>🧩 Características</b></summary>
+
+```shell script
+>>> Dependencias APT
+
+• Python
+• Cloudflared 
+• Tor
+• Nmap
+• Exiftool
+• Nodejs
+• 
+
+
+
+```
+
+</details>
+
+<details>
 <summary><b>🔌 Comandos</b></summary>
   
 #### `🔧` Sistema
