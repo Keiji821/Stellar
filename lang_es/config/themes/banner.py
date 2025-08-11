@@ -91,21 +91,21 @@ def obtener_info():
             continue
 
     return {
-        "Usuario": usuario,
-        "Fecha": now.strftime("%Y-%m-%d"),
-        "Hora": now.strftime("%I:%M %p"),
-        "Celular": obtener_modelo_celular(),
-        "OS": f"{platform.machine()}",
-        "Kernel": platform.release(),
-        "Shell": os.path.basename(os.getenv("SHELL", "bash")),
-        "Terminal": os.getenv("TERM", "unknown"),
+        "☕ Usuario": usuario,
+        "📅 Fecha": now.strftime("%Y-%m-%d"),
+        "🕛 Hora": now.strftime("%I:%M %p"),
+        "🧸 Celular": obtener_modelo_celular(),
+        "📦 OS": f"{platform.machine()}",
+        "💿Kernel": platform.release(),
+        "🐚 Shell": os.path.basename(os.getenv("SHELL", "bash")),
+        "📀Terminal": os.getenv("TERM", "unknown"),
         "MemoriaPorcentaje": vm.percent,
         "MemoriaTotal": f"{vm.total//(1024**2):,} MB",
         "MemoriaUsada": f"{vm.used//(1024**2):,} MB",
         "DiscoPorcentaje": du.percent,
         "DiscoTotal": f"{du.total//(1024**3):,} GB",
         "DiscoUsado": f"{du.used//(1024**3):,} GB",
-        "IP": ip
+        "🔒 IP": ip
     }
 
 def render_bar(pct, color, width=20):
