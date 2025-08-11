@@ -66,11 +66,6 @@ Creador: Keiji821
 </details>
 
 <details>
-<summary><b>Galería</b></summary>
-
-</details>
-
-<details>
 <summary><b>Pasos de instalación</b></summary>
 
 Para instalar Stellar debe seguir los siguientes pasos:
