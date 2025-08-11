@@ -107,8 +107,9 @@ bash install.sh
 
 Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
 
->>> Características y cambios 
+> Características y cambios 
 
+```shell script
 • Poder personalizar un banner y sus colores así como el fondo del mismo
 • Seguridad, otorga una capa de protección con TOR
 • Poder personalizar el color de fondo para Termux
@@ -118,9 +119,11 @@ Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como prov
 • Bloqueó de seguridad de pantalla por huella digital para Termux
 • Integración con la API de Termux
 • Importación predeterminada de las variables de Termux-X11
+```
 
->>> Dependencias APT
+> Dependencias APT
 
+```shell script
 • python
 • cloudflared 
 • tor
@@ -133,9 +136,11 @@ Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como prov
 • x11-repo
 • termux-x11-nightly
 • root-repo
+```
 
->>> Dependencias PIP
-   
+> Dependencias PIP
+
+```shell script   
 • beautifulsoup4
 • pyfiglet
 • phonenumbers
@@ -148,6 +153,7 @@ Stellar es un programa que exprime todo lo posible a Bash sin usar ZSH como prov
 • discord
 • fake_useragent
 • pycryptodome
+```
 </details>
 
 <details>
