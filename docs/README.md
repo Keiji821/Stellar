@@ -24,6 +24,9 @@ Stellar, es un programa hecho en `python`, `bash` y `nodejs` para mejorar la abu
 
 Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y osint se centra en mejorar la apariencia de termux otorgando capas de personalización.
 
+</div>
+
+
 <p align="center">
   <kbd><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg" width="400"></kbd>
   <kbd><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg" width="400"></kbd>
