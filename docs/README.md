@@ -66,7 +66,7 @@ Creador: Keiji821
 </details>
 
 <details>
-<summary><b>Pasos de instalación</b></summary>
+<summary><b>📥 Pasos de instalación</b></summary>
 
 Para instalar Stellar debe seguir los siguientes pasos:
 
@@ -95,7 +95,7 @@ Luego de ejecutar el `bash install.sh` se iniciará el sistema de instalación d
 </details>
 
 <details>
-<summary><b>Características</b></summary>
+<summary><b>🧩 Características</b></summary>
 
 
 Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como proveedor para la personalización de Termux, incluye diferentes modificaciones y dependencias las cuales son las siguientes:
@@ -151,7 +151,7 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 </details>
 
 <details>
-<summary><b>Comandos</b></summary>
+<summary><b>📀 Comandos</b></summary>
 
 Stellar incluye una selección de comandos para su uso los cuales son:
   
@@ -219,7 +219,7 @@ tunnel      │ Captura IPs de visitantes
 </details>
 
 <details>
-<summary><b>Guía de uso</b></summary>
+<summary><b>📄 Guía de uso</b></summary>
 
 El uso es simple, se instala y empiece a usar su termux como normalmente lo hace y con el comando `user-config` puede modificar aspectos del banner ya sea hacer que se muestre el arte ascii que usted desee así como ponerle color y también un fondo ya sea de color blanco o cualquier otro.
 
@@ -228,7 +228,7 @@ El comando `user-config` también permite modificar el tema de termux el tema de
 </details>
 
 <details>
-<summary><b>Autores</b></summary>
+<summary><b>🌹 Autores</b></summary>
 
 ```diff
 + Keiji821 (Desarrollador)
