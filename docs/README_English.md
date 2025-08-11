@@ -4,7 +4,7 @@
 
 ![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/Maintained_(Yes)-2ea44f?style=for-the-badge)
 
-<h4>Built With:</h4>
+<h4>Built With</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
@@ -19,138 +19,205 @@
 
 <div align="center">
 
-Stellar is a program built with `Python`, `Bash` and `Node.js` designed to enhance the default appearance of `Termux`, giving it a fresh look while adding new functionality.
+Stellar is a program built with `Python`, `Bash`, and `NodeJS` designed to enhance the dull appearance of `Termux` by giving it a fresh new look while adding new functionalities.
 
-While it includes some command-line tools focused on hacking and OSINT, its primary purpose is to improve Termux's visual interface with extensive customization options.
+Although it includes some hacking and OSINT-oriented command tools, its primary focus is improving Termux's appearance through multiple layers of customization.
 
 </div>
 
-#
+## `🗃️` Documentation 
 
-⚠️ `Support for Japanese, Chinese, Korean, English, and Portuguese coming soon.`
+- [English Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
+- [Japanese Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Japanese.md)
+- [Chinese Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Chinese.md)
+- [Korean Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Korean.md)
+- [Portuguese Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Portuguese.md)
 
-⚠️ `Still under constant development, there may be errors.`
+## `📄` Status Information
 
-`📌` To contribute to Stellar or report any bugs/issues, contact me on Discord: `keiji100`
+`⚠️` Coming soon: In-program support for Japanese, Chinese, Korean, English, and Portuguese languages.
 
-#
+`⚠️` Still under active development - may contain bugs.
+
+`📌` To contribute to Stellar or report bugs, contact me on Discord: `keiji100`
+
+## `📜` Contents
 
 <details>
-<summary><b>🔖 Installation Steps</b></summary>
+<summary><b>📑 Program Details</b></summary>
 
-##### Follow these steps to install Stellar:
+```shell
+Program Name: Stellar
+Creation Date: 06/01/2024
+Version: v0.0.0 (Under Development)
+Program Size: 17MB
+Languages: Spanish only
+Creator: Keiji821
+```
+</details>
 
-```shell script
+<details>
+<summary><b>📥 Installation Steps</b></summary>
+
+Run these commands sequentially:
+
+```shell
 pkg update && pkg upgrade
 ```
 
-```shell script
+```shell
 pkg install git -y
 ```
 
-```shell script
+```shell
 git clone https://github.com/Keiji821/Stellar
 ```
 
-```shell script
+```shell
 cd Stellar
 ```
 
-```shell script
+```shell
 bash install.sh
 ```
 
-##### After running `bash install.sh`, everything will install automatically (ensure you have stable internet connection). After installation completes, your Termux session will restart. For proper TOR functionality, it's recommended to fully close and reopen Termux.
+After executing `bash install.sh`, the installation system will launch. Ensure stable internet connection for proper installation. Termux will restart after installation - we recommend fully closing Termux for `TOR` to function correctly.
 
 </details>
 
 <details>
-<summary><b>📑 Features</b></summary>
+<summary><b>🧩 Features</b></summary>
 
-##### Stellar OS provides a collection of commands focused on OSINT and hacking (all optional). The primary goal remains Termux customization. Included command scripts:
+Stellar maximizes `Bash` capabilities without relying on `Zsh` for Termux customization, including:
 
-#### `🔧` System
-| Command       | Description |  
-|--------------|-------------|  
-| `reload`     | Reloads the system banner |  
-| `ui`         | Customize banner appearance and colors |  
-| `uninstall`  | Completely removes Stellar |  
-| `update`     | Updates Stellar from GitHub |  
-| `bash`       | Restarts terminal session |  
-| `history -c` | Clears terminal command history |  
-| `reset`      | Resets terminal to default state |  
-| `my`         | Displays your Stellar profile |  
-| `userconf`   | Configure your Stellar profile |  
+> Core Features
+```shell
+• Customizable banner colors/background
+• Device information status panel
+• TOR security layer
+• Termux background color customization
+• Essential utility commands
+• Enhanced termux-properties
+• Native command-not-found handler
+• Fingerprint lock screen security
+• Termux-API integration
+• Termux-X11 environment variables
+```
 
-#### `🛠️` Utilities
-| Command         | Description |  
-|----------------|-------------|  
-| `ia`           | Free AI API service |  
-| `ia-image`     | AI image generator |  
-| `translator`   | Real-time translation |  
-| `myip`         | Shows your public IP |  
-| `passwordgen`  | Generates secure passwords |  
-| `encrypt-file` | File encryption tool |  
+> APT Dependencies
+```shell
+• python
+• cloudflared 
+• tor
+• nmap
+• exiftool
+• nodejs
+• termux-api
+• dnsutils
+• lsd
+• x11-repo
+• termux-x11-nightly
+• root-repo
+```
 
-#### `📡` OSINT (Information Gathering)  
-| Command         | Description |  
-|----------------|-------------|  
-| `ipinfo`       | Retrieves IP address information |  
-| `urlinfo`      | URL analysis tool |  
-| `userfinder`   | Cross-platform user search |  
-| `phoneinfo`    | Phone number lookup |  
-| `metadatainfo` | File metadata extraction |  
-| `emailsearch`  | Email search utility |  
+> PIP Dependencies
+```shell   
+• beautifulsoup4
+• pyfiglet
+• phonenumbers
+• psutil
+• PySocks
+• requests
+• rich
+• "rich[jupyter]"
+• lolcat
+• discord
+• fake_useragent
+• pycryptodome
+```
+</details>
 
-#### `📱` Discord
-| Command                | Description |  
-|-----------------------|-------------|  
-| `userinfo`            | Gets user information (by ID) |  
-| `serverinfo`          | Gets server information (by ID) |  
-| `searchinvites`       | Discord invite search |  
-| `inviteinfo`          | Invite link analyzer |  
-| `role-mapper`         | Server role mapper (requires server ID) |  
-| `mutual-servers`      | Checks shared servers between users |  
-| `webhook-mass-spam`   | Webhook spam tool |  
-| `mass-delete-channels`| Mass channel deletion (owner servers only) |  
+<details>
+<summary><b>📀 Command List</b></summary>
 
-#### `📸` Instagram OSINT 
-| Command        | Description |  
-|---------------|-------------|  
-| `profileinfo` | Instagram profile metadata extraction |  
+> **🔧 SYSTEM**  
+```bash
+reload       │ Reload banner system  
+user-config  │ Customization center
+my           │ Show Stellar profile
+uninstall    │ Complete uninstall  
+update       │ Update from GitHub  
+bash         │ Restart terminal session   
+reset        │ Restore default state
+delete       | rm -rf shortcut
+move         | mv shortcut
+copy         | cp shortcut
+```
 
-#### `🛡️` Pentesting 
-| Command    | Description |  
-|-----------|-------------|  
-| `ddos`    | DDoS attack tool (IP + port) |  
-| `tunnel`  | Hosts an image that captures visitor IPs |  
+> **🛠️ UTILITIES**  
+```bash
+ia           │ Free API AI service  
+ia-image     │ AI image generator  
+traductor    │ Real-time translator  
+myip         │ Public IP check  
+passwordgen  │ Secure password generator  
+encrypt-file │ File encryption  
+```
 
-##### Stellar runs TOR in the background continuously for anonymity protection.
+> **🌐 OSINT**  
+```bash
+ipinfo       │ IP intelligence  
+urlinfo      │ URL analyzer  
+userfinder   │ Cross-platform user search  
+phoneinfo    │ Phone number lookup  
+metadatainfo │ File metadata extraction  
+emailsearch  │ Email search  
+```
 
+> **📱 DISCORD**  
+```bash
+userinfo           │ User info (ID)  
+serverinfo         │ Server info (ID)  
+searchinvites      │ Invite search  
+inviteinfo         │ Invite analysis  
+role-mapper        │ Role permission mapping  
+mutual-servers     │ Shared servers  
+webhook-mass-spam  │ Webhook spam  
+mass-delete-channels │ Bulk channel deletion  
+```
+
+> **📸 INSTAGRAM**  
+```bash
+profileinfo  │ Profile metadata  
+```
+
+> **⚡ PENTESTING**  
+```bash
+ddos        │ DDoS attack (IP+port)  
+tunnel      │ Visitor IP capture  
+```
 </details>
 
 <details>
 <summary><b>📄 Usage Guide</b></summary>
 
-##### Simple to use - after installation, use Termux as normal. The `user-config` command lets you customize:
-- ASCII art display
+After installation, use `user-config` to customize:
+- Banner ASCII art
 - Color schemes
-- Background colors (including light/dark themes)
-- User and verification method 
+- Terminal background (light/dark modes)
+- Other visual elements
 
-##### The `user-config` command also allows complete Termux theme customization, including changing from dark to light/blue backgrounds.
-
+The command provides interactive customization wizard.
 </details>
 
-#
-
-# `🖋️` Authors
+<details>
+<summary><b>🌹 Authors</b></summary>
 
 ```diff
-+ Keiji821 (Developer)
++ Keiji821 (Lead Developer)
 ```
 
-##### Contact me for questions or collaborations.
+##### Contact for collaboration/consultation
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
@@ -158,10 +225,11 @@ bash install.sh
   </a>
 </p>
 
-##### `❤️` Support the Project 
+##### `❤️` Donations 
 
-If you enjoy this project and find it useful, please consider supporting its development by making a donation of any amount.
+If you find this project valuable, consider supporting its development:
 
 [![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717)](https://pay.binance.com/en)
 
 [![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+</details>
