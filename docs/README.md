@@ -26,6 +26,13 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 </div>
 
+<table align="center">
+  <tr>
+    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg?ex=689ad917&is=68998797&hm=07e3faa38dbbb41dae7ea0a14f584281f5a6c4fd0c27a09dac33c1757906724f&" width="400"></td>
+    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg?ex=689ad917&is=68998797&hm=66c48b9d67e2735dc24de4154b13571f611212686dfeaa6c429e5ed22e47bf45&" width="400"></td>
+  </tr>
+</table>
+
 ## `🗃️` Documentation 
 
 - [Documentation in English](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
@@ -251,12 +258,3 @@ Si te gustó y te gusta este proyecto y te resulta útil considera apoyar a este
 
 [![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
 </details>
-
-# `🖼️` Imágenes 
-
-<table align="center">
-  <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg?ex=689ad917&is=68998797&hm=07e3faa38dbbb41dae7ea0a14f584281f5a6c4fd0c27a09dac33c1757906724f&" width="400"></td>
-    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg?ex=689ad917&is=68998797&hm=66c48b9d67e2735dc24de4154b13571f611212686dfeaa6c429e5ed22e47bf45&" width="400"></td>
-  </tr>
-</table>
