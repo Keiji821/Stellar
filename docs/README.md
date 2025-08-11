@@ -40,7 +40,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 - [Documentação em português](https://github.com/Keiji821/Stellar/blob/master/docs/README_Portuguese.md)
 
-#
+# Información de estado
 
 `⚠️` Próximamente soporte dentro del programa para el idioma, japonés, chino, coreano, ingles y portugués.
 
