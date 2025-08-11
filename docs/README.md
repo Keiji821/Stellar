@@ -103,10 +103,7 @@ bash install.sh
 
 <details>
 <summary><b>🔌 Comandos</b></summary>
-
-##### Stellar OS ofrece una selección de comandos, orientados al osint y hacking, estos comandos son de uso opcional el propósito principal de este proyecto es darle una nueva cara a termux sin necesidad de nada complejo, los comandos (scripts) que incluye Stellar OS son los siguientes:
   
-
 #### `🔧` Sistema
 | Comando       | Descripción |  
 |--------------|-------------|  
@@ -161,9 +158,6 @@ bash install.sh
 |--------------|-------------|  
 | `ddos`       | Realiza un ataque DDoS (IP + puerto). |  
 | `tunnel`     | Expone una imagen que captura la IP del visitante. |  
-
-##### Stellar también incluye en segundo plano una capa de protección con `TOR` ejecutándose en todo momento en su termux para su anonimato.
-
 </details>
 
 <details>
