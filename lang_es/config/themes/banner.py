@@ -91,14 +91,14 @@ def obtener_info():
             continue
 
     return {
-        "Usuario": usuario,
-        "Fecha": now.strftime("%Y-%m-%d"),
-        "Hora": now.strftime("%I:%M %p"),
-        "Celular": obtener_modelo_celular(),
-        "OS": f"{platform.machine()}",
-        "Kernel": platform.release(),
-        "Shell": os.path.basename(os.getenv("SHELL", "bash")),
-        "Terminal": os.getenv("TERM", "unknown"),
+        "☕ Usuario": usuario,
+        "📅 Fecha": now.strftime("%Y-%m-%d"),
+        "🕛 Hora": now.strftime("%I:%M %p"),
+        "🧸 Celular": obtener_modelo_celular(),
+        "📦 OS": f"{platform.machine()}",
+        "💿 Kernel": platform.release(),
+        "🐚 Shell": os.path.basename(os.getenv("SHELL", "bash")),
+        "📀 Terminal": os.getenv("TERM", "unknown"),
         "MemoriaPorcentaje": vm.percent,
         "MemoriaTotal": f"{vm.total//(1024**2):,} MB",
         "MemoriaUsada": f"{vm.used//(1024**2):,} MB",
@@ -113,6 +113,7 @@ def render_bar(pct, color, width=20):
     return Text("█" * filled + "░" * (width - filled), style=estilo_rgb(color))
 
 def crear_panel(info, panel_width=None):
+    console.print("\n")
     t = Table.grid(expand=False)
     t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
@@ -121,14 +122,14 @@ def crear_panel(info, panel_width=None):
         t.add_row(f"{key}: ", info[key])
 
     memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
-    t.add_row("Memoria:", memoria_bar)
+    t.add_row("💽 Memoria:", memoria_bar)
     t.add_row("", f"{info['MemoriaUsada']} / {info['MemoriaTotal']}")
 
     disco_bar = render_bar(info['DiscoPorcentaje'], paleta['disco'])
-    t.add_row("Almacenamiento:", disco_bar)
+    t.add_row("💾 Almacenamiento:", disco_bar)
     t.add_row("", f"{info['DiscoUsado']} / {info['DiscoTotal']}")
 
-    t.add_row("IP:", Text(info["IP"], style=estilo_rgb(paleta['borde'])))
+    t.add_row("🔒 IP:", Text(info["IP"], style=estilo_rgb(paleta['borde'])))
     return t
 
 if __name__ == "__main__":
