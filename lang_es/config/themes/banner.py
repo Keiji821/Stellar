@@ -105,7 +105,7 @@ def obtener_info():
         "DiscoPorcentaje": du.percent,
         "DiscoTotal": f"{du.total//(1024**3):,} GB",
         "DiscoUsado": f"{du.used//(1024**3):,} GB",
-        "IP": ip
+        "🔒 IP": ip
     }
 
 def render_bar(pct, color, width=20):
@@ -118,7 +118,7 @@ def crear_panel(info, panel_width=None):
     t.add_column(style=estilo_rgb(paleta['clave']), justify="left", min_width=18)
     t.add_column(style=estilo_rgb(paleta['valor']), justify="left", min_width=30)
 
-    for key in ["Usuario", "Fecha", "Hora", "Celular", "OS", "Kernel", "Shell", "Terminal"]:
+    for key in ["☕ Usuario", "📅 Fecha", "🕛 Hora", "🧸 Celular", "📦 OS", "💿 Kernel", "🐚 Shell", "📀 Terminal"]:
         t.add_row(f"{key}: ", info[key])
 
     memoria_bar = render_bar(info['MemoriaPorcentaje'], paleta['memoria'])
