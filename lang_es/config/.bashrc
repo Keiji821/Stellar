@@ -72,7 +72,6 @@ if [ -f login_method.txt ]; then
         termux-toast -c red -b black -g medium "🔐 Verificación de huella requerida"
 
         response=$(termux-fingerprint)
-
         auth_result=$(echo "$response" | grep -o '"auth_result": "[^"]*' | cut -d'"' -f4)
 
         case "$auth_result" in
@@ -80,25 +79,25 @@ if [ -f login_method.txt ]; then
                 termux-toast -c green -b black -g medium "✅ Autenticación exitosa"
                 ;;
             "AUTH_RESULT_FAILURE")
-                termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión...."
-                {
-                    pkill -9 -f "bash" 2>/dev/null
-                    pkill -9 -f "com.termux" 2>/dev/null
-                    history -c && rm -f ~/.bash_history
-                    sleep 0.5
-                    pkill -9 -f "termux" 2>/dev/null
-                } & disown
+                termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión..."
+                nohup bash -c '
+                    pkill -9 -f "/data/data/com.termux/files/usr/bin/bash"
+                    pkill -9 -f "com.termux"
+                    am stopservice com.termux/.app.TermuxService
+                    sleep 1
+                    pkill -9 -f "termux"
+                ' >/dev/null 2>&1 &
                 exit 1
                 ;;
             *)
-                printf "${Rojo_Brillante}❌ Error en la verificación - Cerrando sesión..."
-                {
-                    pkill -9 -f "bash" 2>/dev/null
-                    pkill -9 -f "com.termux" 2>/dev/null
-                    history -c && rm -f ~/.bash_history
-                    sleep 0.5
-                    pkill -9 -f "termux" 2>/dev/null
-                } & disown
+                termux-toast -c red -b black -g medium "❌ Error en verificación - Cerrando sesión..."
+                nohup bash -c '
+                    pkill -9 -f "/data/data/com.termux/files/usr/bin/bash"
+                    pkill -9 -f "com.termux"
+                    am stopservice com.termux/.app.TermuxService
+                    sleep 1
+                    pkill -9 -f "termux"
+                ' >/dev/null 2>&1 &
                 exit 1
                 ;;
         esac
