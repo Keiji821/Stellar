@@ -426,13 +426,14 @@ extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
 EOF
 cd
 
-termux-x11 :0 &
-export DISPLAY=:0
-
 alias ls='lsd --icon-theme unicode'
 alias delete='rm -rf'
 alias move='mv'
 alias copy='cp'
+x11() {
+termux-x11 :0 &
+export DISPLAY=:0
+}
 
 command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
