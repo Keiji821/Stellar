@@ -72,6 +72,7 @@ if [ -f login_method.txt ]; then
         termux-toast -c red -b black -g medium "🔐 Verificación de huella requerida"
 
         response=$(termux-fingerprint)
+
         auth_result=$(echo "$response" | grep -o '"auth_result": "[^"]*' | cut -d'"' -f4)
 
         case "$auth_result" in
@@ -79,16 +80,16 @@ if [ -f login_method.txt ]; then
                 termux-toast -c green -b black -g medium "✅ Autenticación exitosa"
                 ;;
             "AUTH_RESULT_FAILURE")
-                termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión..."
-                sleep 3
+                termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión...."
+                sleep 5
                 pkill -9 -f "com.termux"
                 am stopservice com.termux/.app.TermuxService
                 pkill -9 -f "termux"
                 exit 1
                 ;;
             *)
-                termux-toast -c red -b black -g medium "❌ Error en verificación - Cerrando sesión..."
-                sleep 3
+                printf "${Rojo_Brillante}❌ Error en la verificación - Cerrando sesión..."
+                sleep 5 
                 pkill -9 -f "com.termux"
                 am stopservice com.termux/.app.TermuxService
                 pkill -9 -f "termux"
