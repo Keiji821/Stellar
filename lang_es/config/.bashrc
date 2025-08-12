@@ -80,24 +80,18 @@ if [ -f login_method.txt ]; then
                 ;;
             "AUTH_RESULT_FAILURE")
                 termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión..."
-                nohup bash -c '
-                    pkill -9 -f "/data/data/com.termux/files/usr/bin/bash"
-                    pkill -9 -f "com.termux"
-                    am stopservice com.termux/.app.TermuxService
-                    sleep 1
-                    pkill -9 -f "termux"
-                ' >/dev/null 2>&1 &
+                pkill -9 -f "/data/data/com.termux/files/usr/bin/bash"
+                pkill -9 -f "com.termux"
+                am stopservice com.termux/.app.TermuxService
+                pkill -9 -f "termux"
                 exit 1
                 ;;
             *)
                 termux-toast -c red -b black -g medium "❌ Error en verificación - Cerrando sesión..."
-                nohup bash -c '
-                    pkill -9 -f "/data/data/com.termux/files/usr/bin/bash"
-                    pkill -9 -f "com.termux"
-                    am stopservice com.termux/.app.TermuxService
-                    sleep 1
-                    pkill -9 -f "termux"
-                ' >/dev/null 2>&1 &
+                pkill -9 -f "/data/data/com.termux/files/usr/bin/bash"
+                pkill -9 -f "com.termux"
+                am stopservice com.termux/.app.TermuxService
+                pkill -9 -f "termux"
                 exit 1
                 ;;
         esac
