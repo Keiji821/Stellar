@@ -170,8 +170,29 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
     cp ~/Stellar/lang_es/config/.bash_profile ~/.
     cp ~/Stellar/lang_es/config/.bashrc ~/.
-    cp ~/Stellar/fonts/font.ttf ~/termux
 fi
+
+cp ~/Stellar/fonts/font.ttf ~/termux
+cat > ~/.termux/color.properties << 'EOF'
+background=#0f111a
+foreground=#a6accd
+color0=#0f111a
+color1=#ff5370
+color2=#c3e88d
+color3=#ffcb6b
+color4=#82aaff
+color5=#c792ea
+color6=#89ddff
+color7=#a6accd
+color8=#3a3c4e
+color9=#ff5370
+color10=#c3e88d
+color11=#ffcb6b
+color12=#82aaff
+color13=#c792ea
+color14=#89ddff
+color15=#d0d0d0
+EOF
 
 if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finishing installation... ${Reset}"
