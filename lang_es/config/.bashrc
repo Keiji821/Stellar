@@ -80,6 +80,7 @@ if [ -f login_method.txt ]; then
                 ;;
             "AUTH_RESULT_FAILURE")
                 termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión..."
+                sleep 3
                 pkill -9 -f "com.termux"
                 am stopservice com.termux/.app.TermuxService
                 pkill -9 -f "termux"
@@ -87,6 +88,7 @@ if [ -f login_method.txt ]; then
                 ;;
             *)
                 termux-toast -c red -b black -g medium "❌ Error en verificación - Cerrando sesión..."
+                sleep 3
                 pkill -9 -f "com.termux"
                 am stopservice com.termux/.app.TermuxService
                 pkill -9 -f "termux"
