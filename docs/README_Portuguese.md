@@ -152,6 +152,7 @@ reset        │ Restaurar estado padrão
 delete       | atalho para rm -rf
 move         | atalho para mv
 copy         | atalho para cp
+x11          | atalho para atermux-x11 :0 & export DISPLAY=:0
 ```
 
 > **🛠️ UTILITÁRIOS**  
