@@ -67,30 +67,38 @@ cd ~/Stellar/lang_es/config/system
 
 if [ -f login_method.txt ]; then
     method=$(cat login_method.txt)
-    
+
     if [ "$method" = "termux-fingerprint" ]; then
         termux-toast -c red -b black -g medium "🔐 Verificación de huella requerida"
-        
+
         response=$(termux-fingerprint)
-        
+
         auth_result=$(echo "$response" | grep -o '"auth_result": "[^"]*' | cut -d'"' -f4)
-        
+
         case "$auth_result" in
             "AUTH_RESULT_SUCCESS")
                 termux-toast -c green -b black -g medium "✅ Autenticación exitosa"
                 ;;
             "AUTH_RESULT_FAILURE")
                 termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión...."
-                killall -9 bash 2>/dev/null
-                pkill -9 -u $(whoami) 2>/dev/null
-                history -c && rm -f ~/.bash_history
-                pkill -9 -f "com.termux" 2>/dev/null
+                {
+                    pkill -9 -f "bash" 2>/dev/null
+                    pkill -9 -f "com.termux" 2>/dev/null
+                    history -c && rm -f ~/.bash_history
+                    sleep 0.5
+                    pkill -9 -f "termux" 2>/dev/null
+                } & disown
                 exit 1
                 ;;
             *)
                 printf "${Rojo_Brillante}❌ Error en la verificación - Cerrando sesión..."
-                killall -9 bash 2>/dev/null
-                pkill -9 -u $(whoami) 2>/dev/null
+                {
+                    pkill -9 -f "bash" 2>/dev/null
+                    pkill -9 -f "com.termux" 2>/dev/null
+                    history -c && rm -f ~/.bash_history
+                    sleep 0.5
+                    pkill -9 -f "termux" 2>/dev/null
+                } & disown
                 exit 1
                 ;;
         esac
