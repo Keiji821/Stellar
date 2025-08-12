@@ -152,6 +152,7 @@ reset        │ デフォルト状態に復元
 delete       | rm -rf ショートカット
 move         | mv ショートカット
 copy         | cp ショートカット
+x11          | termux-x11 :0 & export DISPLAY=:0 ショートカット
 ```
 
 > **🛠️ ユーティリティ**  
