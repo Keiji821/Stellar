@@ -256,7 +256,7 @@ def banner_preview():
         
         texto_banner = Text(banner, style=estilo)
         
-        estilo_fondo = None
+        estilo_fondo = ""
         fondo_activado = fondo_path.exists() and fondo_path.read_text().strip() == "si"
         
         if fondo_activado:
@@ -273,7 +273,7 @@ def banner_preview():
             box=DOUBLE,
             width=ancho_panel,
             padding=(1, 2),
-            style=estilo_fondo
+            style=estilo_fondo or ""
         )
         console.print(Align.center(preview))
     else:
