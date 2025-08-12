@@ -152,6 +152,7 @@ reset        │ 기본 상태로 복원
 delete       | rm -rf 단축 명령
 move         | mv 단축 명령
 copy         | cp 단축 명령
+x11          | termux-x11 :0 & export DISPLAY=:0 단축 명령
 ```
 
 > **🛠️ 유틸리티**  
