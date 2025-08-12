@@ -53,7 +53,7 @@ Tachado="\033[9m"
 
 
 clear
-history -c
+history -c && rm -f ~/.bash_history
 cd
 
 
@@ -83,6 +83,8 @@ if [ -f login_method.txt ]; then
                 termux-toast -c red -b black -g medium "⛔ Autenticación fallida - Cerrando sesión...."
                 killall -9 bash 2>/dev/null
                 pkill -9 -u $(whoami) 2>/dev/null
+                history -c && rm -f ~/.bash_history
+                pkill -9 -f "com.termux" 2>/dev/null
                 exit 1
                 ;;
             *)
