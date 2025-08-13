@@ -47,10 +47,9 @@ Invertido="\033[7m"
 Oculto="\033[8m"
 Tachado="\033[9m"
 
-########################################
-#   Cleaning and starting              #
-########################################
-
+# ────────────────────────────────
+# █■► SECURITY LOCK FOR SCREEN ◄■█
+# ────────────────────────────────
 
 clear
 history -c && rm -f ~/.bash_history
