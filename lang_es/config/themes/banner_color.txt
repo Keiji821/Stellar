@@ -1,1 +1,1 @@
-bold green
+bright_green
