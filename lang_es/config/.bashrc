@@ -48,7 +48,7 @@ Oculto="\033[8m"
 Tachado="\033[9m"
 
 # ┌────────────────────────────────┐
-# │ Cleaning and starting                 │
+# │ Cleaning and starting              │
 # └────────────────────────────────┘
 
 
@@ -58,7 +58,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Security lock for the screen          │
+# │ Security lock for the screen       │
 # └────────────────────────────────┘
 
 
@@ -103,7 +103,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Definition of PS1 (input)             │
+# │ Definition of PS1 (input)          │
 # └────────────────────────────────┘
 
 
@@ -145,7 +145,7 @@ cd "$HOME"
 clear
 
 # ┌────────────────────────────────┐
-# │ Security                              │
+# │ Security                           │
 # └────────────────────────────────┘
 
 
@@ -163,7 +163,7 @@ tor --SocksPort $puerto \
     &>tor.txt &
 
 # ┌────────────────────────────────┐
-# │ Imports and banner                    │
+# │ Imports and banner                 │
 # └────────────────────────────────┘
 
 cp ~/Stellar/lang_es/config/.bash_profile ~/.
@@ -176,7 +176,7 @@ printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante
 
 
 # ┌────────────────────────────────┐
-# │ Definition of commands                │
+# │ Definition of commands             │
 # └────────────────────────────────┘
 
 # Sistema
@@ -386,7 +386,7 @@ encrypt-file() {
 }
 
 # ┌────────────────────────────────┐
-# │ Termux Properties and Modifications   │
+# │ Termux Properties and Modifications│
 # └────────────────────────────────┘
 
 cd ~/.termux
