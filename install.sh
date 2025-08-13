@@ -171,7 +171,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     cp ~/Stellar/lang_es/config/.bashrc ~/.
 fi
 
-cp ~/Stellar/fonts/font.ttf ~/termux
+cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
 cat > ~/.termux/color.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
