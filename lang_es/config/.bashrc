@@ -420,7 +420,7 @@ shortcut.previous-session = ctrl + 1
 shortcut.rename-session = ctrl + n
 
 bell-character = vibrate
-back-key=escape
+# back-key=escape
 
 # enforce-char-based-input = true
 # ctrl-space-workaround = true
