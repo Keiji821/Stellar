@@ -414,13 +414,13 @@ extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'], \
 # use-black-ui = true
 
 # disable-hardware-keyboard-shortcuts = true
-# shortcut.create-session = ctrl + t
-# shortcut.next-session = ctrl + 2
-# shortcut.previous-session = ctrl + 1
-# shortcut.rename-session = ctrl + n
+shortcut.create-session = ctrl + t
+shortcut.next-session = ctrl + 2
+shortcut.previous-session = ctrl + 1
+shortcut.rename-session = ctrl + n
 
-# bell-character = vibrate
-# back-key=escape
+bell-character = vibrate
+back-key=escape
 
 # enforce-char-based-input = true
 # ctrl-space-workaround = true
