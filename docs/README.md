@@ -98,7 +98,7 @@ cd Stellar
 bash install.sh
 ```
 
-Luego de ejecutar el `bash install.sh` se iniciará el sistema de instalación de `Stellar` ¡Asegurese de tener una buena conexión a internet para la correcta instalación de `Stellar`! luego de haberse instalado Stellar su sesión de `Termux` de reiniciará, es recomendable que cierres `Termux` luego de instalar `Stellar` para que funcione correctamente `TOR`
+Luego de ejecutar el `bash install.sh` se iniciará el sistema de instalación de `Stellar` ¡Asegurese de tener una buena conexión a internet para la correcta instalación de `Stellar`! luego de haberse instalado Stellar su sesión de `Termux` se reiniciará, es recomendable que cierres `Termux` luego de instalar `Stellar` para que funcione correctamente `TOR`
 
 </details>
 
