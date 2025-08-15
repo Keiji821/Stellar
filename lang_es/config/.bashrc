@@ -430,7 +430,7 @@ bell-character = vibrate
 EOF
 cd
 
-alias ls='lsd --icon-theme fancy'
+alias ls='lsd --icon-theme unicode'
 alias delete='rm -rf'
 alias move='mv'
 alias copy='cp'
