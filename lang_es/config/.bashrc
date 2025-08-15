@@ -28,8 +28,7 @@ export Fondo_Magenta="\033[45m"
 export Fondo_Cian="\033[46m"
 export Fondo_Blanco="\033[47m"
 
-export
-Fondo_Negro_Brillante="\033[0;100m"
+export Fondo_Negro_Brillante="\033[0;100m"
 export Fondo_Rojo_Brillante="\033[0;101m"
 export Fondo_Verde_Brillante="\033[0;102m"
 export Fondo_Amarillo_Brillante="\033[0;103m"
