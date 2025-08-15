@@ -48,7 +48,7 @@ export Oculto="\033[8m"
 export Tachado="\033[9m"
 
 # ┌────────────────────────────────┐
-# │ Clear and start                    │
+# │ Clear and start                │
 # └────────────────────────────────┘
 
 clear
@@ -57,7 +57,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Security lock for the screen       │
+# │ Security lock for the screen   │
 # └────────────────────────────────┘
 
 
@@ -102,7 +102,7 @@ cd
 
 
 # ┌────────────────────────────────┐
-# │ Definition of PS1 (input)          │
+# │ Definition of PS1 (input)      │
 # └────────────────────────────────┘
 
 
@@ -116,7 +116,7 @@ input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/lang_es/config/system/user.txt" 
 function cd() {
     builtin cd "$@" || return 1
     local current_dir="${PWD/#$HOME/\~}"
-    
+
     declare -A colors=(
         ["user"]="\033[1;32m"
         ["host"]="\033[1;31m"
@@ -128,14 +128,14 @@ function cd() {
 
     local git_branch=$(git branch --show-current 2>/dev/null)
     local git_info=""
-    
+
     if [ -n "$git_branch" ]; then
         git_info=" ${colors[symbol]}[${colors[git]}⎇ $git_branch${colors[symbol]}]"
     fi
 
     PS1="${colors[user]}${input}${colors[reset]}@${colors[host]}termux${colors[reset]}:${colors[path]}${current_dir}${git_info}${colors[reset]}"
     PS1+="\n${colors[symbol]}└─╼${colors[reset]} "
-    
+
     echo -ne "\033]0;${input}@termux: ${current_dir}\007"
 }
 
@@ -144,7 +144,7 @@ cd "$HOME"
 clear
 
 # ┌────────────────────────────────┐
-# │ Security                           │
+# │ Security                       │
 # └────────────────────────────────┘
 
 
@@ -162,7 +162,7 @@ tor --SocksPort $puerto \
     &>tor.txt &
 
 # ┌────────────────────────────────┐
-# │ Imports and banner                 │
+# │ Imports and banner             │
 # └────────────────────────────────┘
 
 cp ~/Stellar/lang_es/config/.bash_profile ~/.
@@ -175,7 +175,7 @@ printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante
 
 
 # ┌────────────────────────────────┐
-# │ Definition of commands             │
+# │ Definition of commands         │
 # └────────────────────────────────┘
 
 # Sistema
@@ -384,9 +384,9 @@ encrypt-file() {
     cd
 }
 
-# ┌────────────────────────────────┐
-# │ Termux Properties and Modifications│
-# └────────────────────────────────┘
+# ┌──────────────────────────────────────┐
+# │ Termux Properties and Modifications  │
+# └──────────────────────────────────────┘
 
 cd ~/.termux
 cat > termux.properties << 'EOF'
