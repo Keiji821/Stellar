@@ -47,9 +47,9 @@ export Invertido="\033[7m"
 export Oculto="\033[8m"
 export Tachado="\033[9m"
 
-# ━━━━━━━━━━━━━━━━━━━━
-#     Clear and Start
-# ━━━━━━━━━━━━━━━━━━━━
+# ┌────────────────────────────────┐
+# │ Clear and start                    │
+# └────────────────────────────────┘
 
 clear
 history -c && rm -f ~/.bash_history
