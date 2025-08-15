@@ -48,7 +48,7 @@ export Oculto="\033[8m"
 export Tachado="\033[9m"
 
 # ━━━━━━━━━━━━━━━━━━━━
-#    Clear and Start
+#     Clear and Start
 # ━━━━━━━━━━━━━━━━━━━━
 
 clear
