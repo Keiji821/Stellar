@@ -60,7 +60,6 @@ cd
 # │ Security lock for the screen   │
 # └────────────────────────────────┘
 
-
 # Método de desbloqueo - Huella dactilar
 cd ~/Stellar/lang_es/config/system
 
@@ -104,7 +103,6 @@ cd
 # ┌────────────────────────────────┐
 # │ Definition of PS1 (input)      │
 # └────────────────────────────────┘
-
 
 input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/lang_es/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
