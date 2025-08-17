@@ -147,7 +147,6 @@ clear
 # │ Security                       │
 # └────────────────────────────────┘
 
-
 pkill -f "tor"
 pkill -f "9052"
 export puerto="9052"
