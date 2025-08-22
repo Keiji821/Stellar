@@ -142,10 +142,14 @@ else:
 
             calling_code = str(data.get("location", {}).get("calling_code"))
 
-            continent = str(data.get("location", {}).get("continent"))
             continent_tr = {
-              'SA': 'Sudamérica',
-              'EU': 'Europa',
+    'SA': 'Sudamérica',
+    'EU': 'Europa',
+    'NA': 'Norteamérica',
+    'AS': 'Asia',
+    'AF': 'África',
+    'OC': 'Oceanía',
+    'AN': 'Antártida'
 }
             continentes = continent_tr.get(continent)
 
