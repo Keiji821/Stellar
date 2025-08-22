@@ -118,13 +118,13 @@ while True:
             calling_code = str(data.get("location", {}).get("calling_code"))
 
             continent_tr = {
-    'SA': 'South America',
-    'EU': 'Europe',
-    'NA': 'North America', 
+    'SA': 'Sudamérica',
+    'EU': 'Europa',
+    'NA': 'Norteamérica',
     'AS': 'Asia',
-    'AF': 'Africa',
-    'OC': 'Oceania',
-    'AN': 'Antarctica'
+    'AF': 'África',
+    'OC': 'Oceanía',
+    'AN': 'Antártida'
 }
             continentes = continent_tr.get(continent)
 
