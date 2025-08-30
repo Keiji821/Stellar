@@ -175,7 +175,7 @@ printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante
 # │ Definition of commands         │
 # └────────────────────────────────┘
 
-# »Sistema
+# Sistema
 
 menu() {
     cd ~/Stellar/lang_es/config
