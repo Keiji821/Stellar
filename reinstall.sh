@@ -87,7 +87,7 @@ printf "\n"
 
 # Reinstalador/Reinstaller - Stellar
 
-apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd x11-repo termux-x11-nightly root-repo)
+apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd x11-repo root-repo)
 pip_packages=(
     beautifulsoup4
     pyfiglet
