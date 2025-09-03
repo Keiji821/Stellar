@@ -129,7 +129,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
    
     apt install "${apt_packages[@]}" -y
     if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}"
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
         exit 1
     fi
 
@@ -137,7 +137,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
 
     pip3 install "${pip_packages[@]}"
     if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}"
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}\n"
         exit 1
     fi
 fi
@@ -148,7 +148,7 @@ if [[ "$language" == "English" || "$language" == "english" || "$language" == "en
 
     apt install "${apt_packages[@]}" -y
     if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some APT packages failed to install. Please review the previous errors. ${Reset}"
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some APT packages failed to install. Please review the previous errors. ${Reset}\n"
         exit 1
     fi
 
@@ -156,7 +156,7 @@ if [[ "$language" == "English" || "$language" == "english" || "$language" == "en
 
     pip3 install "${pip_packages[@]}"
     if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some PIP packages failed to install. Please review the previous errors. ${Reset}"
+        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some PIP packages failed to install. Please review the previous errors. ${Reset}\n"
         exit 1
     fi
 fi
