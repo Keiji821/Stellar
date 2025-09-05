@@ -117,6 +117,7 @@ while True:
 
             calling_code = str(data.get("location", {}).get("calling_code"))
 
+            continent = data.get('location', {}).get('continent')
             continent_tr = {
     'SA': 'Sudamérica',
     'EU': 'Europa',
