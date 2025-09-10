@@ -311,35 +311,9 @@ mutual-servers() {
     cd
 }
 
-# Osint/Instagram
-
 profileinfo() {
     cd ~/Stellar/lang_es/commands/osint/instagram
     python profileinfo.py
-    cd
-}
-
-# Pentest
-
-ddos() {
-    cd ~/Stellar/lang_es/commands/pentesting/main
-    node ddos.js
-    cd
-}
-
-# Networks
-
-traceroute() {
-    cd ~/Stellar/lang_es/commands/networks
-    python traceroute.py
-    cd
-}
-
-# Phishing
-
-tunnel() {
-    cd ~/Stellar/lang_es/commands/phishing
-    python tunnel.py
     cd
 }
 
@@ -378,6 +352,12 @@ passwordgen() {
 encrypt-file() {
     cd ~/Stellar/lang_es/commands/misc/tools
     python encrypt-file.py
+    cd
+}
+
+ddos() {
+    cd ~/Stellar/lang_es/commands/mis/tools
+    node ddos.js
     cd
 }
 
