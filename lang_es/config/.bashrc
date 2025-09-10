@@ -320,14 +320,20 @@ mutual-servers() {
 # Misc
 
 ia() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools/ia
     python iahttp.py
     cd
 }
 
 ia-image() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/lang_es/commands/misc/tools/ia
     python ia_image.py
+    cd
+}
+
+ia-config-apikey() {
+    cd ~/Stellar/lang_es/commands/misc/tools/ia
+    bash .py
     cd
 }
 
