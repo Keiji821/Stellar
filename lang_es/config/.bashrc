@@ -155,7 +155,7 @@ tor --SocksPort $puerto \
    --NumEntryGuards 3 \
    --CircuitBuildTimeout 60 \
    --ClientOnly 1 \
-   --AvoidDiskWrites 1 \ 
+   --AvoidDiskWrites 1 \
    &>tor.txt &
 
 # ┌────────────────────────────────┐
