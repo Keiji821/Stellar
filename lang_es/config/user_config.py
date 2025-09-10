@@ -322,8 +322,8 @@ def main_menu():
             display_header("¡HASTA PRONTO!")
             display_subtitle("Gracias por usar Stellar")
             time.sleep(2)
-            break
             os.system("python Stellar/config/themes/banner.py")
+            break
         else:
             display_error("Opción inválida")
             time.sleep(1)
