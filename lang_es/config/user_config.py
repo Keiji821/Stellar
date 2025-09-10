@@ -1,4 +1,5 @@
 import os
+from os import system
 import subprocess
 import time
 import shutil
@@ -322,6 +323,7 @@ def main_menu():
             display_subtitle("Gracias por usar Stellar")
             time.sleep(2)
             break
+            os.system("python Stellar/config/themes/banner.py")
         else:
             display_error("Opción inválida")
             time.sleep(1)
