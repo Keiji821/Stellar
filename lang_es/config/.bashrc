@@ -154,9 +154,7 @@ tor --SocksPort $PUERTO \
     --NumEntryGuards 3 \
     --CircuitBuildTimeout 30 \
     --ClientOnly 1 \
-    --AvoidDiskWrites 1 \
-    --DataDirectory "/tmp/tor-$PUERTO" \
-    &>/dev/null &
+    --AvoidDiskWrites 1 \ &
 
 # ┌────────────────────────────────┐
 # │ Imports and banner             │
