@@ -30,6 +30,7 @@ table.add_row("• traductor", "Traducción en tiempo real", "🟢 Activo")
 table.add_row("• myip", "Muestra tu IP real", "🟢 Activo")
 table.add_row("• passwordgen", "Genera contraseñas seguras para usar", "🟢 Activo")
 table.add_row("• encrypt-file", "Encripta archivos", "🟢 Activo")
+table.add_row("• ddos", "DDoS en NodeJS para pruebas y ataques", "🟠 Inestable")
 
 table.add_row("")
 table.add_row("[code]Discord", style="bold green")
