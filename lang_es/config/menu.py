@@ -51,7 +51,7 @@ table.add_row("• instagraminfo", "Obtiene metadatos del perfil", "❌ Dañado"
 table.add_row("• whois", "Obtiene información sobre dominios web", "🟡 ¡Pronto!")
 table.add_row("• dnslookup", "Consulta registros DNS", "🟡 ¡Pronto!")
 table.add_row("• subdomain", "Encuentra subdominios", "🟡 ¡Pronto!")
-table.add_row("• reverseip", "Dominios compartiendo misma IP", "🟡 ¡Pronto!")
+table.add_row("• virustotal", "Análisis mediante VirusTotal", "🟡 ¡Pronto!")
 
 table.add_row("")
 table.add_row("[code]Osint/Discord", style="bold green")
