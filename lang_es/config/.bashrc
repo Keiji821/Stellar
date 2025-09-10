@@ -272,6 +272,12 @@ userfinder() {
     cd
 }
 
+instagraminfo() {
+    cd ~/Stellar/lang_es/commands/osint/instagram
+    python profileinfo.py
+    cd
+}
+
 
 # Osint/Discord
 
@@ -308,12 +314,6 @@ role-mapper() {
 mutual-servers() {
     cd ~/Stellar/lang_es/commands/osint/discord
     python mutual_servers.py
-    cd
-}
-
-profileinfo() {
-    cd ~/Stellar/lang_es/commands/osint/instagram
-    python profileinfo.py
     cd
 }
 
