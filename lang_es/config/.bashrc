@@ -362,7 +362,7 @@ encrypt-file() {
 }
 
 ddos() {
-    cd ~/Stellar/lang_es/commands/mis/tools
+    cd ~/Stellar/lang_es/commands/misc/tools
     node ddos.js
     cd
 }
