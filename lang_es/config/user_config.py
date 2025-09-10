@@ -302,9 +302,9 @@ def main_menu():
         display_header("STELLAR")
         show_status()
         options = [
-            ("1", "Configuración de Banner"),
-            ("2", "Configurar Tema Termux"),
-            ("3", "Configuración del Sistema"),
+            ("1", "Configuración del banner"),
+            ("2", "Configurar el tema de termux"),
+            ("3", "Configuración del sistema"),
             ("0", "[bold bright_red]Salir[/]")
         ]
         menu_table = create_menu_table(options, width=60)
