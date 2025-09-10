@@ -145,14 +145,15 @@ clear
 # │ Security                       │
 # └────────────────────────────────┘
 
-pkill -f "tor.*9052"
-export PUERTO="9052"
-export ALL_PROXY="socks5h://localhost:${PUERTO}"
-tor --SocksPort $PUERTO \
+pkill -f "tor" 
+pkill -f "9052" 
+export puerto="9052" 
+export ALL_PROXY="socks5h://localhost:${puerto}" 
+tor --SocksPort $puerto \
     --NewCircuitPeriod 60 \
     --MaxCircuitDirtiness 600 \
-    --NumEntryGuards 3 \
-    --CircuitBuildTimeout 30 \
+    --NumEntryGuards 7 \
+    --CircuitBuildTimeout 60 \
     --ClientOnly 1 \
     --AvoidDiskWrites 1 \ &
 
