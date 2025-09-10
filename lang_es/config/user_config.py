@@ -71,7 +71,7 @@ TERMUX_THEMES = {
 def clear_screen():
     os.system("clear")
 
-def show_header(text):
+def display_header(text):
     width = min(shutil.get_terminal_size().columns - 4, 90)
     title = Text.assemble(
         ("★ ", "bold " + COLOR_ACCENT),
@@ -89,23 +89,23 @@ def show_header(text):
     console.print(panel, justify="center")
     console.print()
 
-def show_subtitle(text):
+def display_subtitle(text):
     console.print(Align.center(Text(f"» {text} «", style=COLOR_SECONDARY + " dim"), width=80))
     console.print()
 
-def show_error(message):
+def display_error(message):
     console.print(f"[{COLOR_ERROR}]✖ ERROR →[/] {message}", justify="center")
 
-def show_success(message):
+def display_success(message):
     console.print(f"[{COLOR_SUCCESS}]✓ ÉXITO →[/] {message}", justify="center")
 
-def show_warning(message):
+def display_warning(message):
     console.print(f"[{COLOR_WARNING}]⚠ ADVERTENCIA →[/] {message}", justify="center")
 
-def show_info(message):
+def display_info(message):
     console.print(f"[{COLOR_INFO}]ℹ INFORMACIÓN →[/] {message}", justify="center")
 
-def show_loading(message):
+def display_loading(message):
     with Progress(
         SpinnerColumn(spinner_name=SPINNER, style=COLOR_ACCENT),
         TextColumn("[progress.description]{task.description}"),
@@ -152,15 +152,15 @@ def create_status_table():
 
 def edit_banner_text():
     clear_screen()
-    show_header("EDITAR TEXTO DEL BANNER")
-    show_subtitle("Usa nano para personalizar tu banner")
+    display_header("EDITAR TEXTO DEL BANNER")
+    display_subtitle("Usa nano para personalizar tu banner")
 
     path = THEMES_DIR / "banner.txt"
     if not path.exists():
         path.write_text("Stellar Terminal\nPersonaliza tu experiencia")
 
     subprocess.run(["nano", str(path)])
-    show_success("Texto del banner editado correctamente")
+    display_success("Texto del banner editado correctamente")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def show_color_palette():
@@ -182,8 +182,8 @@ def show_color_palette():
 
 def change_banner_color():
     clear_screen()
-    show_header("CAMBIAR COLOR DEL BANNER")
-    show_subtitle("Selecciona un color de la paleta")
+    display_header("CAMBIAR COLOR DEL BANNER")
+    display_subtitle("Selecciona un color de la paleta")
 
     show_color_palette()
 
@@ -191,16 +191,16 @@ def change_banner_color():
         color = Prompt.ask(f"[{COLOR_ACCENT}]» Seleccione color para el banner →[/]").strip().lower()
         if is_valid_color(color):
             break
-        show_error(f"Color '{color}' no válido. Intente nuevamente")
+        display_error(f"Color '{color}' no válido. Intente nuevamente")
 
     (THEMES_DIR / "banner_color.txt").write_text(color)
-    show_success(f"Color del banner actualizado: [{color}]{color}[/]")
+    display_success(f"Color del banner actualizado: [{color}]{color}[/]")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def change_banner_background_color():
     clear_screen()
-    show_header("CAMBIAR COLOR DE FONDO DEL BANNER")
-    show_subtitle("Selecciona un color de fondo")
+    display_header("CAMBIAR COLOR DE FONDO DEL BANNER")
+    display_subtitle("Selecciona un color de fondo")
 
     show_color_palette()
 
@@ -208,15 +208,15 @@ def change_banner_background_color():
         color = Prompt.ask(f"[{COLOR_ACCENT}]» Seleccione color para el fondo →[/]").strip().lower()
         if is_valid_color(color):
             break
-        show_error(f"Color '{color}' no válido. Intente nuevamente")
+        display_error(f"Color '{color}' no válido. Intente nuevamente")
 
     (THEMES_DIR / "banner_background_color.txt").write_text(color)
-    show_success(f"Color de fondo actualizado: [{color}]{color}[/]")
+    display_success(f"Color de fondo actualizado: [{color}]{color}[/]")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def toggle_banner_background():
     clear_screen()
-    show_header("ACTIVAR/DESACTIVAR FONDO DEL BANNER")
+    display_header("ACTIVAR/DESACTIVAR FONDO DEL BANNER")
 
     path = THEMES_DIR / "banner_background.txt"
     current_background = "no"
@@ -229,15 +229,15 @@ def toggle_banner_background():
     if Confirm.ask(f"[{COLOR_ACCENT}]» ¿{status} fondo del banner?[/]", default=True):
         new_status = "no" if current_background == "si" else "si"
         path.write_text(new_status)
-        show_success(f"Fondo del banner [bold {color_status}]{status}[/]")
+        display_success(f"Fondo del banner [bold {color_status}]{status}[/]")
     else:
-        show_info("Operación cancelada")
+        display_info("Operación cancelada")
 
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def banner_preview():
     clear_screen()
-    show_header("VISTA PREVIA DEL BANNER")
+    display_header("VISTA PREVIA DEL BANNER")
 
     path = THEMES_DIR / "banner.txt"
     color_path = THEMES_DIR / "banner_color.txt"
@@ -277,14 +277,14 @@ def banner_preview():
         )
         console.print(Align.center(preview))
     else:
-        show_warning("No se encontró archivo de banner")
+        display_warning("No se encontró archivo de banner")
 
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configure_banner():
     while True:
         clear_screen()
-        show_header("CONFIGURACIÓN DEL BANNER")
+        display_header("CONFIGURACIÓN DEL BANNER")
 
         options = [
             ("1", "Editar texto del banner"),
@@ -313,7 +313,7 @@ def configure_banner():
         elif option == "0": 
             break
         else: 
-            show_error("Opción inválida")
+            display_error("Opción inválida")
             time.sleep(1)
 
 def show_themes():
@@ -347,8 +347,8 @@ def show_themes():
 
 def choose_default_theme():
     clear_screen()
-    show_header("SELECCIONAR TEMA PREDEFINIDO")
-    show_subtitle("Elige un tema de la lista")
+    display_header("SELECCIONAR TEMA PREDEFINIDO")
+    display_subtitle("Elige un tema de la lista")
 
     show_themes()
 
@@ -356,28 +356,28 @@ def choose_default_theme():
     if theme in TERMUX_THEMES:
         TERMUX_COLORS_PATH.write_text(TERMUX_THEMES[theme])
         subprocess.run(["termux-reload-settings"])
-        show_success(f"Tema [bold]{theme}[/] aplicado")
-        show_loading("Aplicando configuración")
+        display_success(f"Tema [bold]{theme}[/] aplicado")
+        display_loading("Aplicando configuración")
     else:
-        show_error("Tema no válido")
+        display_error("Tema no válido")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def create_custom_theme():
     clear_screen()
-    show_header("CREAR TEMA PERSONALIZADO")
-    show_subtitle("Usa nano para crear tu propio tema")
+    display_header("CREAR TEMA PERSONALIZADO")
+    display_subtitle("Usa nano para crear tu propio tema")
 
     if not TERMUX_COLORS_PATH.exists():
         TERMUX_COLORS_PATH.write_text("# Personaliza tu tema\nbackground=#000000\nforeground=#FFFFFF\n")
 
     subprocess.run(["nano", str(TERMUX_COLORS_PATH)])
     subprocess.run(["termux-reload-settings"])
-    show_success("Tema personalizado configurado")
+    display_success("Tema personalizado configurado")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def list_current_theme():
     clear_screen()
-    show_header("TEMA ACTUAL TERMUX")
+    display_header("TEMA ACTUAL TERMUX")
 
     if TERMUX_COLORS_PATH.exists():
         theme = TERMUX_COLORS_PATH.read_text()
@@ -390,14 +390,14 @@ def list_current_theme():
         )
         console.print(Align.center(panel))
     else:
-        show_warning("No hay tema configurado")
+        display_warning("No hay tema configurado")
 
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configure_termux_theme():
     while True:
         clear_screen()
-        show_header("CONFIGURAR EL TEMA DE TERMUX")
+        display_header("CONFIGURAR EL TEMA DE TERMUX")
 
         options = [
             ("1", "Elegir tema predefinido"),
@@ -420,27 +420,27 @@ def configure_termux_theme():
         elif option == "0": 
             break
         else: 
-            show_error("Opción inválida")
+            display_error("Opción inválida")
             time.sleep(1)
 
-def edit_user():
+def modify_user():
     clear_screen()
-    show_header("EDITAR USUARIO")
+    display_header("EDITAR USUARIO")
     user_path = SYSTEM_DIR / "user.txt"
 
     while True:
         new_user = Prompt.ask(f"[{COLOR_ACCENT}]» Ingrese nuevo nombre de usuario →[/]").strip()
         if new_user:
             user_path.write_text(new_user)
-            show_success(f"Usuario [bold]{new_user}[/] configurado")
+            display_success(f"Usuario [bold]{new_user}[/] configurado")
             break
-        show_error("Nombre de usuario no válido")
+        display_error("Nombre de usuario no válido")
 
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def show_user():
     clear_screen()
-    show_header("USUARIO ACTUAL")
+    display_header("USUARIO ACTUAL")
     
     user_path = SYSTEM_DIR / "user.txt"
     if user_path.exists():
@@ -454,14 +454,14 @@ def show_user():
         )
         console.print(Align.center(panel))
     else:
-        show_warning("No hay usuario configurado")
+        display_warning("No hay usuario configurado")
     
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def configure_system():
     while True:
         clear_screen()
-        show_header("CONFIGURACIÓN DEL SISTEMA")
+        display_header("CONFIGURACIÓN DEL SISTEMA")
         
         options = [
             ("1", "Editar nombre de usuario"),
@@ -475,18 +475,18 @@ def configure_system():
         option = Prompt.ask(f"\n[{COLOR_ACCENT}]» Seleccione una opción →[/]")
         
         if option == "1":
-            edit_user()
+            modify_user()
         elif option == "2":
             show_user()
         elif option == "0":
             break
         else:
-            show_error("Opción inválida")
+            display_error("Opción inválida")
             time.sleep(1)
 
 def show_status():
     clear_screen()
-    show_header("ESTADO DEL SISTEMA")
+    display_header("ESTADO DEL SISTEMA")
     
     status_table = create_status_table()
     
@@ -516,7 +516,7 @@ def show_status():
 def main_menu():
     while True:
         clear_screen()
-        show_header("STELLAR")
+        display_header("STELLAR")
         
         options = [
             ("1", "Configuración de Banner"),
@@ -541,12 +541,12 @@ def main_menu():
             show_status()
         elif option == "0":
             clear_screen()
-            show_header("¡HASTA PRONTO!")
-            show_subtitle("Gracias por usar Stellar")
+            display_header("¡HASTA PRONTO!")
+            display_subtitle("Gracias por usar Stellar")
             time.sleep(2)
             break
         else:
-            show_error("Opción inválida")
+            display_error("Opción inválida")
             time.sleep(1)
 
 if __name__ == "__main__":
@@ -554,10 +554,10 @@ if __name__ == "__main__":
         main_menu()
     except KeyboardInterrupt:
         clear_screen()
-        show_header("PROGRAMA INTERRUMPIDO")
-        show_warning("El programa fue interrumpido por el usuario")
+        display_header("PROGRAMA INTERRUMPIDO")
+        display_warning("El programa fue interrumpido por el usuario")
     except Exception as e:
         clear_screen()
-        show_header("ERROR INESPERADO")
-        show_error(f"Ocurrió un error: {str(e)}")
+        display_header("ERROR INESPERADO")
+        display_error(f"Ocurrió un error: {str(e)}")
         console.input(f"\n[{COLOR_INFO}]Pulsa Enter para salir →[/]")
