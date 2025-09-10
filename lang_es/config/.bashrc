@@ -333,7 +333,7 @@ ia-image() {
 
 ia-config-apikey() {
     cd ~/Stellar/lang_es/commands/misc/tools/ia
-    bash .py
+    bash config-api_key.sh
     cd
 }
 
