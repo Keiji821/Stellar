@@ -1,5 +1,6 @@
 import requests
 import os
+from os import system
 from rich.progress import Progress, SpinnerColumn
 from rich.console import Console
 from rich.table import Table
@@ -225,6 +226,7 @@ else:
 
 
             console.print(table)
+            os.system("rm -rf ip_address.txt")
             console.print(" ")
         except requests.exceptions.RequestException as e:
             console.print(f"[bold red]Error de red: {e}[/bold red]")
