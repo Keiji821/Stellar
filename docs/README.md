@@ -222,8 +222,7 @@ profileinfo  │ Metadatos de perfiles
 
 > **⚡ PENTESTING**  
 ```bash
-ddos        │ Ataque DDoS (IP + puerto)  
-tunnel      │ Captura IPs de visitantes  
+ddos        │ Ataque DDoS (IP + puerto)    
 ```
 </details>
 
