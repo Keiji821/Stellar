@@ -170,7 +170,7 @@ def show_status():
         user_status += f" ({user_path.read_text().strip()})"
     status_table.add_row("Usuario", user_status)
 
-    login_status = "✅ Activado" if LOGIN_METHOD_PATH.exists() and LOGIN_METHOD_PATH.read_text().strip().lower() == "si" else "❌ Desactivado"
+    login_status = "✅ Activado" if LOGIN_METHOD_PATH.exists() and LOGIN_METHOD_PATH.read_text().strip().lower() == "termux-fingerprint" else "❌ Desactivado"
     status_table.add_row("Huella digital", login_status)
 
     termux_api_status = "✅ Instalado" if check_termux_api() else "❌ No instalado"
@@ -187,12 +187,12 @@ def toggle_fingerprint_login():
         console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
         return
 
-    current = LOGIN_METHOD_PATH.exists() and LOGIN_METHOD_PATH.read_text().strip().lower() == "si"
+    current = LOGIN_METHOD_PATH.exists() and LOGIN_METHOD_PATH.read_text().strip().lower() == "termux-fingerprint"
     status = "DESACTIVAR" if current else "ACTIVAR"
     if Confirm.ask(f"[{COLOR_ACCENT}]» ¿{status} autenticación por huella?[/]", default=True):
-        new_value = "no" if current else "si"
+        new_value = "no" if current else "termux-fingerprint"
         LOGIN_METHOD_PATH.write_text(new_value)
-        display_success(f"Autenticación por huella [bold]{'activada' if new_value == 'si' else 'desactivada'}[/]")
+        display_success(f"Autenticación por huella [bold]{'activada' if new_value == 'termux-fingerprint' else 'desactivada'}[/]")
     else:
         display_info("Operación cancelada")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
