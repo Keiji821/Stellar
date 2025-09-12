@@ -47,7 +47,7 @@ table.add_row("• userfinder", "Busca un nombre de usuario en el internet", "�
 table.add_row("• phoneinfo", "Obtiene información de un número de teléfono", "🟢 Activo")
 table.add_row("• metadatainfo", "Extrae metadatos de imágenes y documentos", "🟢 Activo")
 table.add_row("• emailsearch", "Búsqueda de emails", "🟢 Activo")
-table.add_row("• instagraminfo", "Obtiene metadatos del perfil", "❌ Dañado")
+table.add_row("• instagraminfo", "Obtiene metadatos del perfil", "🟢 Activo")
 table.add_row("• whois", "Obtiene información sobre dominios web", "🟡 ¡Pronto!")
 table.add_row("• dnslookup", "Consulta registros DNS", "🟡 ¡Pronto!")
 table.add_row("• subdomain", "Encuentra subdominios", "🟡 ¡Pronto!")
