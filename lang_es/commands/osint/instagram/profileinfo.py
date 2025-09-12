@@ -16,25 +16,20 @@ class InstagramScraper:
         self.session = requests.Session()
         self.ua = UserAgent()
         self.timeout = 30
-        self.max_retries = 3
-        self.delay_range = (5, 12)
+        self.max_retries = 5
+        self.delay_range = (8, 18)
         self.console = Console()
-        
+
         self.headers = {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
             'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, br',
             'DNT': '1',
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1',
             'Sec-Fetch-Dest': 'document',
             'Sec-Fetch-Mode': 'navigate',
             'Sec-Fetch-Site': 'none',
-            'Sec-Fetch-User': '?1',
-            'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120"',
-            'Sec-Ch-Ua-Mobile': '?0',
-            'Sec-Ch-Ua-Platform': '"Windows"',
-            'x-ig-app-id': '936619743392459'
+            'Sec-Fetch-User': '?1'
         }
 
         self.status = "Inicializado"
@@ -63,45 +58,6 @@ class InstagramScraper:
         delay_time = random.uniform(*self.delay_range)
         time.sleep(delay_time)
 
-    def fetch_via_api(self, username):
-        try:
-            api_url = f"https://i.instagram.com/api/v1/users/web_profile_info/?username={username}"
-            
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
-                'X-IG-App-ID': '936619743392459',
-                'Accept': '*/*',
-                'Accept-Language': 'es-ES,es;q=0.9',
-                'Origin': 'https://www.instagram.com',
-                'Referer': f'https://www.instagram.com/{username}/',
-                'Connection': 'keep-alive',
-            }
-            
-            response = self.session.get(api_url, headers=headers, timeout=self.timeout)
-            
-            if response.status_code == 200:
-                data = response.json()
-                if 'data' in data and 'user' in data['data']:
-                    user_data = data['data']['user']
-                    return {
-                        'username': user_data['username'],
-                        'full_name': user_data.get('full_name', ''),
-                        'biography': user_data.get('biography', ''),
-                        'followers': user_data['edge_followed_by']['count'],
-                        'following': user_data['edge_follow']['count'],
-                        'posts': user_data['edge_owner_to_timeline_media']['count'],
-                        'profile_pic': user_data.get('profile_pic_url_hd', 'No disponible'),
-                        'is_private': user_data['is_private'],
-                        'is_verified': user_data.get('is_verified', False),
-                        'url': f"https://www.instagram.com/{username}/",
-                        'status': 'success',
-                        'source': 'api'
-                    }
-            return None
-        except Exception as e:
-            self.log_message(f"Error en API: {str(e)}", "WARNING")
-            return None
-
     def fetch_html(self, username):
         self.stats['total_requests'] += 1
 
@@ -112,7 +68,7 @@ class InstagramScraper:
 
                 self.random_delay()
 
-                user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                user_agent = self.ua.random
                 headers = self.headers.copy()
                 headers.update({
                     'User-Agent': user_agent,
@@ -134,15 +90,10 @@ class InstagramScraper:
                     return None
                 elif response.status_code == 429:
                     self.log_message("Límite de tasa excedido, aumentando pausa", "WARNING")
-                    self.delay_range = (self.delay_range[0] + 3, self.delay_range[1] + 8)
-                    time.sleep(10)
+                    self.delay_range = (self.delay_range[0] + 5, self.delay_range[1] + 10)
                     continue
-                elif response.status_code == 403:
-                    self.log_message("Acceso prohibido (posible bloqueo)", "ERROR")
-                    return None
                 else:
                     self.log_message(f"Respuesta HTTP: {response.status_code}", "WARNING")
-                    continue
 
             except requests.exceptions.Timeout:
                 self.log_message("Tiempo de espera agotado", "ERROR")
@@ -155,46 +106,22 @@ class InstagramScraper:
         self.stats['failed'] += 1
         return None
 
-    def extract_shared_data(self, html):
-        try:
-            pattern = r'window\._sharedData\s*=\s*({.*?});'
-            match = re.search(pattern, html, re.DOTALL)
-            if match:
-                json_str = match.group(1)
-                return json.loads(json_str)
-        except Exception as e:
-            self.log_message(f"Error extrayendo sharedData: {str(e)}", "WARNING")
-        return None
-
     def extract_profile_data(self, html, username):
         try:
-            api_data = self.fetch_via_api(username)
-            if api_data:
-                return api_data
-
             soup = BeautifulSoup(html, 'html.parser')
-            
-            shared_data = self.extract_shared_data(html)
-            if shared_data and 'entry_data' in shared_data:
+
+            script_data = soup.find_all('script', type='application/ld+json')
+            profile_data = {}
+
+            for script in script_data:
                 try:
-                    user_data = shared_data['entry_data']['ProfilePage'][0]['graphql']['user']
-                    return {
-                        'username': user_data['username'],
-                        'full_name': user_data.get('full_name', ''),
-                        'biography': user_data.get('biography', ''),
-                        'followers': user_data['edge_followed_by']['count'],
-                        'following': user_data['edge_follow']['count'],
-                        'posts': user_data['edge_owner_to_timeline_media']['count'],
-                        'profile_pic': user_data.get('profile_pic_url_hd', 'No disponible'),
-                        'is_private': user_data['is_private'],
-                        'is_verified': user_data.get('is_verified', False),
-                        'url': f"https://www.instagram.com/{username}/",
-                        'status': 'success',
-                        'source': 'shared_data'
-                    }
-                except (KeyError, IndexError) as e:
-                    self.log_message(f"Error parsing sharedData: {str(e)}", "WARNING")
-            
+                    data = json.loads(script.string)
+                    if isinstance(data, dict) and '@type' in data and data['@type'] == 'Person':
+                        profile_data = data
+                        break
+                except:
+                    continue
+
             meta_description = soup.find('meta', property='og:description')
             title = soup.find('title')
             meta_image = soup.find('meta', property='og:image')
@@ -203,58 +130,28 @@ class InstagramScraper:
                 self.log_message("Datos críticos faltantes en el perfil", "WARNING")
                 return None
 
-            stats_patterns = [
-                r'([\d,]+)\s*seguidores',
-                r'([\d,]+)\s*seguidos',
-                r'([\d,]+)\s*publicaciones'
-            ]
-            
-            description_text = meta_description.get('content', '')
-            followers = following = posts = 0
-            
-            followers_match = re.search(stats_patterns[0], description_text)
-            if followers_match:
-                followers = int(followers_match.group(1).replace(',', ''))
-            
-            following_match = re.search(stats_patterns[1], description_text)
-            if following_match:
-                following = int(following_match.group(1).replace(',', ''))
-            
-            posts_match = re.search(stats_patterns[2], description_text)
-            if posts_match:
-                posts = int(posts_match.group(1).replace(',', ''))
-            
-            full_name = ""
-            name_element = soup.find('h1', string=re.compile(r'[^\s]'))
-            if name_element:
-                full_name = name_element.get_text().strip()
-            else:
-                title_text = title.get_text() if title else ""
-                full_name = title_text.split('(')[0].replace('• Instagram', '').strip()
-            
+            stats_pattern = r'([\d,]+) seguidores, ([\d,]+) seguidos, ([\d,]+) publicaciones'
+            stats_match = re.search(stats_pattern, meta_description['content'])
+
+            full_name = profile_data.get('name', '') if profile_data else title.text.split('(')[0].replace('• Instagram', '').strip()
             if len(full_name) > 80:
                 full_name = full_name[:77] + '...'
 
-            bio_element = soup.find('meta', property='og:description')
-            biography = bio_element.get('content', '').split('-')[0].strip() if bio_element else ''
+            biography = profile_data.get('description', '') if profile_data else meta_description['content'].split('-')[0].strip()
             if len(biography) > 150:
                 biography = biography[:147] + '...'
-
-            is_private = 'Privado' in (title.get_text() if title else "") or 'Esta cuenta es privada' in html
 
             return {
                 'username': username,
                 'full_name': full_name,
                 'biography': biography,
-                'followers': followers,
-                'following': following,
-                'posts': posts,
-                'profile_pic': meta_image.get('content', 'No disponible') if meta_image else 'No disponible',
-                'is_private': is_private,
-                'is_verified': False,
+                'followers': int(stats_match.group(1).replace(',', '')) if stats_match else 0,
+                'following': int(stats_match.group(2).replace(',', '')) if stats_match else 0,
+                'posts': int(stats_match.group(3).replace(',', '')) if stats_match else 0,
+                'profile_pic': meta_image['content'] if meta_image else 'No disponible',
+                'is_private': 'Privado' in title.text,
                 'url': f"https://www.instagram.com/{username}/",
-                'status': 'success',
-                'source': 'html'
+                'status': 'success'
             }
 
         except Exception as e:
@@ -265,11 +162,6 @@ class InstagramScraper:
         if not username:
             self.log_message("Nombre de usuario vacío", "ERROR")
             return {'status': 'error', 'message': 'Nombre de usuario vacío'}
-
-        api_profile = self.fetch_via_api(username)
-        if api_profile:
-            self.stats['success'] += 1
-            return api_profile
 
         html = self.fetch_html(username)
         if not html:
@@ -294,7 +186,7 @@ class InstagramScraper:
 
             task = progress.add_task("[cyan]Escaneando perfiles...", total=len(usernames))
 
-            with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
                 futures = {executor.submit(self.get_profile, username): username for username in usernames}
 
                 for future in concurrent.futures.as_completed(futures):
@@ -331,8 +223,6 @@ def show_results(profile, console):
         ("Siguiendo", f"{profile['following']:,}"),
         ("Publicaciones", f"{profile['posts']:,}"),
         ("Privado", "Sí" if profile['is_private'] else "No"),
-        ("Verificado", "Sí" if profile.get('is_verified', False) else "No"),
-        ("Fuente", profile.get('source', 'desconocida')),
         ("Enlace", profile['url']),
         ("Foto de perfil", profile['profile_pic'][:60] + "..." if len(profile['profile_pic']) > 60 else profile['profile_pic'])
     ]
