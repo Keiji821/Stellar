@@ -314,13 +314,14 @@ def show_results(profile, console):
         return
 
     table = Table(
-        title=f"[bold green]Información de @{profile['username']}[/bold green]", 
-        box=None,
-        show_header=False,
-        style="bold green"
+        title=f"[bold green]Información de Instagram: @{profile['username']}[/bold green]",
+        show_header=True,
+        header_style="bold magenta",
+        box=None
     )
-    table.add_column("Campo", style="bold cyan", width=20)
-    table.add_column("Valor", style="bold white")
+    
+    table.add_column("Campo", style="cyan", width=20)
+    table.add_column("Valor", style="white")
 
     fields = [
         ("Usuario", f"@{profile['username']}"),
@@ -357,18 +358,23 @@ if __name__ == "__main__":
             profile = scraper.get_profile(username)
             progress.update(task, completed=1)
 
+        console.print()
         show_results(profile, console)
+        console.print()
 
-        console.print("\n[bold yellow]Registro de ejecución:[/bold yellow]")
+        console.print("[bold yellow]Registro de ejecución:[/bold yellow]")
         for entry in scraper.logs:
             if "ERROR" in entry:
                 console.print(entry, style="bold red")
             elif "WARNING" in entry:
                 console.print(entry, style="bold yellow")
+            elif "SUCCESS" in entry:
+                console.print(entry, style="bold green")
             else:
                 console.print(entry, style="bold cyan")
 
-        console.print(f"\n[bold green]Estadísticas:[/bold green]")
+        console.print()
+        console.print("[bold green]Estadísticas:[/bold green]")
         console.print(f"Perfiles exitosos: {scraper.stats['success']}")
         console.print(f"Perfiles fallidos: {scraper.stats['failed']}")
         console.print(f"Solicitudes totales: {scraper.stats['total_requests']}")
