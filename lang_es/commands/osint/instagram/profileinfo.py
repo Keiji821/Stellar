@@ -16,8 +16,8 @@ class InstagramScraper:
         self.session = requests.Session()
         self.ua = UserAgent()
         self.timeout = 30
-        self.max_retries = 5
-        self.delay_range = (8, 18)
+        self.max_retries = 3
+        self.delay_range = (5, 12)
         self.console = Console()
 
         self.headers = {
@@ -29,7 +29,8 @@ class InstagramScraper:
             'Sec-Fetch-Dest': 'document',
             'Sec-Fetch-Mode': 'navigate',
             'Sec-Fetch-Site': 'none',
-            'Sec-Fetch-User': '?1'
+            'Sec-Fetch-User': '?1',
+            'x-ig-app-id': '936619743392459'
         }
 
         self.status = "Inicializado"
@@ -58,104 +59,53 @@ class InstagramScraper:
         delay_time = random.uniform(*self.delay_range)
         time.sleep(delay_time)
 
-    def fetch_html(self, username):
-        self.stats['total_requests'] += 1
-
-        for attempt in range(1, self.max_retries + 1):
-            try:
-                self.status = f"Intento {attempt}/{self.max_retries}"
-                self.log_message(f"Obteniendo perfil de @{username}")
-
-                self.random_delay()
-
-                user_agent = self.ua.random
-                headers = self.headers.copy()
-                headers.update({
-                    'User-Agent': user_agent,
-                    'Referer': 'https://www.instagram.com/'
-                })
-
-                response = self.session.get(
-                    f"https://www.instagram.com/{username}/",
-                    headers=headers,
-                    timeout=self.timeout,
-                    allow_redirects=True
-                )
-
-                if response.status_code == 200:
-                    self.log_message("Perfil obtenido correctamente", "SUCCESS")
-                    return response.text
-                elif response.status_code == 404:
-                    self.log_message("Perfil no encontrado (404)", "ERROR")
-                    return None
-                elif response.status_code == 429:
-                    self.log_message("Límite de tasa excedido, aumentando pausa", "WARNING")
-                    self.delay_range = (self.delay_range[0] + 5, self.delay_range[1] + 10)
-                    continue
-                else:
-                    self.log_message(f"Respuesta HTTP: {response.status_code}", "WARNING")
-
-            except requests.exceptions.Timeout:
-                self.log_message("Tiempo de espera agotado", "ERROR")
-            except requests.exceptions.TooManyRedirects:
-                self.log_message("Demasiadas redirecciones", "ERROR")
-            except requests.exceptions.RequestException as e:
-                self.log_message(f"Error de conexión: {str(e)}", "ERROR")
-
-        self.log_message(f"Fallo al obtener perfil después de {self.max_retries} intentos", "ERROR")
-        self.stats['failed'] += 1
-        return None
-
-    def extract_profile_data(self, html, username):
+    def fetch_via_api(self, username):
         try:
-            soup = BeautifulSoup(html, 'html.parser')
-
-            script_data = soup.find_all('script', type='application/ld+json')
-            profile_data = {}
-
-            for script in script_data:
-                try:
-                    data = json.loads(script.string)
-                    if isinstance(data, dict) and '@type' in data and data['@type'] == 'Person':
-                        profile_data = data
-                        break
-                except:
-                    continue
-
-            meta_description = soup.find('meta', property='og:description')
-            title = soup.find('title')
-            meta_image = soup.find('meta', property='og:image')
-
-            if not meta_description or not title:
-                self.log_message("Datos críticos faltantes en el perfil", "WARNING")
-                return None
-
-            stats_pattern = r'([\d,]+) seguidores, ([\d,]+) seguidos, ([\d,]+) publicaciones'
-            stats_match = re.search(stats_pattern, meta_description['content'])
-
-            full_name = profile_data.get('name', '') if profile_data else title.text.split('(')[0].replace('• Instagram', '').strip()
-            if len(full_name) > 80:
-                full_name = full_name[:77] + '...'
-
-            biography = profile_data.get('description', '') if profile_data else meta_description['content'].split('-')[0].strip()
-            if len(biography) > 150:
-                biography = biography[:147] + '...'
-
-            return {
-                'username': username,
-                'full_name': full_name,
-                'biography': biography,
-                'followers': int(stats_match.group(1).replace(',', '')) if stats_match else 0,
-                'following': int(stats_match.group(2).replace(',', '')) if stats_match else 0,
-                'posts': int(stats_match.group(3).replace(',', '')) if stats_match else 0,
-                'profile_pic': meta_image['content'] if meta_image else 'No disponible',
-                'is_private': 'Privado' in title.text,
-                'url': f"https://www.instagram.com/{username}/",
-                'status': 'success'
+            self.stats['total_requests'] += 1
+            self.log_message(f"Intentando API para @{username}")
+            
+            api_url = f"https://i.instagram.com/api/v1/users/web_profile_info/?username={username}"
+            
+            headers = {
+                'User-Agent': 'Instagram 76.0.0.15.395 Android (24/7.0; 640dpi; 1440x2560; samsung; SM-G930F; herolte; samsungexynos8890; en_US; 146536611)',
+                'X-IG-App-ID': '936619743392459',
+                'Accept': '*/*',
+                'Accept-Language': 'es-ES,es;q=0.9',
+                'Origin': 'https://www.instagram.com',
+                'Referer': f'https://www.instagram.com/{username}/',
+                'Connection': 'keep-alive',
             }
-
+            
+            self.random_delay()
+            response = self.session.get(api_url, headers=headers, timeout=self.timeout)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if 'data' in data and 'user' in data['data']:
+                    user_data = data['data']['user']
+                    self.log_message("Datos obtenidos via API correctamente", "SUCCESS")
+                    return {
+                        'username': user_data['username'],
+                        'full_name': user_data.get('full_name', ''),
+                        'biography': user_data.get('biography', ''),
+                        'followers': user_data['edge_followed_by']['count'],
+                        'following': user_data['edge_follow']['count'],
+                        'posts': user_data['edge_owner_to_timeline_media']['count'],
+                        'profile_pic': user_data.get('profile_pic_url_hd', 'No disponible'),
+                        'is_private': user_data['is_private'],
+                        'is_verified': user_data.get('is_verified', False),
+                        'url': f"https://www.instagram.com/{username}/",
+                        'status': 'success'
+                    }
+            elif response.status_code == 404:
+                self.log_message("Usuario no encontrado via API", "ERROR")
+            else:
+                self.log_message(f"Error API: {response.status_code}", "WARNING")
+                
+            return None
+            
         except Exception as e:
-            self.log_message(f"Error al analizar perfil: {str(e)}", "ERROR")
+            self.log_message(f"Error en API: {str(e)}", "WARNING")
             return None
 
     def get_profile(self, username):
@@ -163,16 +113,13 @@ class InstagramScraper:
             self.log_message("Nombre de usuario vacío", "ERROR")
             return {'status': 'error', 'message': 'Nombre de usuario vacío'}
 
-        html = self.fetch_html(username)
-        if not html:
-            return {'status': 'error', 'message': 'Error al obtener perfil'}
+        profile = self.fetch_via_api(username)
+        if profile:
+            self.stats['success'] += 1
+            return profile
 
-        profile = self.extract_profile_data(html, username)
-        if not profile:
-            return {'status': 'error', 'message': 'Error al analizar datos'}
-
-        self.stats['success'] += 1
-        return profile
+        self.stats['failed'] += 1
+        return {'status': 'error', 'message': 'Error al obtener datos del perfil'}
 
     def scan_multiple(self, usernames):
         results = []
@@ -186,7 +133,7 @@ class InstagramScraper:
 
             task = progress.add_task("[cyan]Escaneando perfiles...", total=len(usernames))
 
-            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
                 futures = {executor.submit(self.get_profile, username): username for username in usernames}
 
                 for future in concurrent.futures.as_completed(futures):
@@ -223,6 +170,7 @@ def show_results(profile, console):
         ("Siguiendo", f"{profile['following']:,}"),
         ("Publicaciones", f"{profile['posts']:,}"),
         ("Privado", "Sí" if profile['is_private'] else "No"),
+        ("Verificado", "Sí" if profile.get('is_verified', False) else "No"),
         ("Enlace", profile['url']),
         ("Foto de perfil", profile['profile_pic'][:60] + "..." if len(profile['profile_pic']) > 60 else profile['profile_pic'])
     ]
