@@ -1,4 +1,4 @@
-cp ~/Stellar/lang_es/config/.bashrc ~/.
+command cp ~/Stellar/lang_es/config/.bashrc ~/.
 
 preexec() {
     printf "${Gris}[INFO] ${Blanco_Brillante}Ejecutando comando: $1"
