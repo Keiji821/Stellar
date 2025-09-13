@@ -26,7 +26,7 @@ safe_move() {
         return 1
     fi
 
-    if mv -v "$1" "$2"; then
+    if command mv -v "$1" "$2"; then
         return 0
     else
         show_error "Falló al mover $1"
