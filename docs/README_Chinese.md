@@ -198,8 +198,7 @@ profileinfo  │ 个人资料元数据提取
 
 > **⚡ 渗透测试**  
 ```bash
-ddos        │ DDoS攻击(IP+端口)  
-tunnel      │ 访客IP捕获  
+ddos        │ DDoS攻击(IP+端口)   
 ```
 </details>
 
