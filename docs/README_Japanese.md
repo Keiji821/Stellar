@@ -149,7 +149,7 @@ uninstall    │ 完全アンインストール
 update       │ GitHubから更新  
 bash         │ ターミナルセッション再起動   
 reset        │ デフォルト状態に復元
-delete       | rm -rf ショートカット
+dstr         | rm -rf ショートカット
 move         | mv ショートカット
 copy         | cp ショートカット
 x11          | termux-x11 :0 & export DISPLAY=:0 ショートカット
@@ -194,8 +194,7 @@ profileinfo  │ プロフィールメタデータ
 
 > **⚡ ペネトレーションテスト**  
 ```bash
-ddos        │ DDoS攻撃(IP+ポート)  
-tunnel      │ 訪問者IP取得  
+ddos        │ DDoS攻撃(IP+ポート)   
 ```
 </details>
 
