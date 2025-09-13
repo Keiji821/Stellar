@@ -172,7 +172,7 @@ uninstall    │ Desinstala Stellar completamente
 update       │ Actualiza desde GitHub  
 bash         │ Reinicia la sesión de terminal   
 reset        │ Restablece terminal a estado inicial
-delete       | alias de rm -rf 
+dstr         | alias de rm -rf 
 move         | alias de mv
 copy         | alias de cp
 x11          | alias de termux-x11 :0 & export DISPLAY=:0
