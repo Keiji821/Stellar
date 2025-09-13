@@ -150,7 +150,7 @@ pkill -f "9052"
 pkill -f "9053"
 export tor-port="9052"
 export dns-port="9053"
-export ALL_PROXY="socks5h://localhost:${puerto}"
+export ALL_PROXY="socks5h://localhost:${tor-port}"
 tor --SocksPort $tor-port \
     --CircuitBuildTimeout 30 \
     --NumEntryGuards 2 \
