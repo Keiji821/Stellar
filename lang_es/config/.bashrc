@@ -145,18 +145,24 @@ clear
 # │ Security                       │
 # └────────────────────────────────┘
 
-pkill -f "tor"
-pkill -f "9052"
 export puerto="9052"
-export ALL_PROXY="socks5h://localhost:${puerto}"
-tor --SocksPort $puerto \
-   --NewCircuitPeriod 60 \
-   --MaxCircuitDirtiness 600 \
-   --NumEntryGuards 3 \
-   --CircuitBuildTimeout 60 \
-   --ClientOnly 1 \
-   --AvoidDiskWrites 1 \
-   &>tor.txt &
+
+if ss -lnt | grep -q ":${puerto} "; then
+    printf ""
+else
+    pkill -f "tor" 2>/dev/null
+    pkill -f "$puerto" 2>/dev/null
+    export ALL_PROXY="socks5h://localhost:${puerto}"
+    tor --SocksPort $puerto \
+       --NewCircuitPeriod 60 \
+       --MaxCircuitDirtiness 600 \
+       --NumEntryGuards 3 \
+       --CircuitBuildTimeout 60 \
+       --ClientOnly 1 \
+       --AvoidDiskWrites 1 \
+       &>tor.txt &
+fi
+
 
 # ┌────────────────────────────────┐
 # │ Imports and banner             │
