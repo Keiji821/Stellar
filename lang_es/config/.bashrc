@@ -416,9 +416,6 @@ EOF
 cd
 
 alias ls='lsd --icon-theme unicode'
-alias dstr='rm -rf'
-alias move='mv'
-alias copy='cp'
 x11() {
 termux-x11 :0 &
 export DISPLAY=:0
