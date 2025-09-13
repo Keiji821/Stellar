@@ -148,17 +148,17 @@ clear
 pkill -f "tor"
 pkill -f "9052"
 pkill -f "9053"
-export tor-port="9052"
-export dns-port="9053"
-export ALL_PROXY="socks5h://localhost:${tor-port}"
-tor --SocksPort $tor-port \
+export torport="9052"
+export dnsport="9053"
+export ALL_PROXY="socks5h://localhost:${torport}"
+tor --SocksPort $torport \
     --CircuitBuildTimeout 30 \
     --NumEntryGuards 2 \
     --NewCircuitPeriod 60 \
     --MaxCircuitDirtiness 600 \
     --ClientOnly 1 \
     --AvoidDiskWrites 1 \
-    --DNSPort $dns-port &>tor.txt &
+    --DNSPort $dnsport &>tor.txt &
 
 
 # ┌────────────────────────────────┐
