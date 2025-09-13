@@ -427,9 +427,6 @@ command_not_found_handle() {
 }
 
 export STELLAR_PROTECT="$HOME/Stellar"
-alias rm='rm -I --preserve-root'
-alias mv='mv -i'
-alias cp='cp -i'
 
 rm() {
   local p
@@ -437,7 +434,7 @@ rm() {
     [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && \
       { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p\n"; return 1; }
   done
-  command rm "$@"
+  command rm -I --preserve-root "$@"
 }
 
 mv() {
@@ -446,7 +443,7 @@ mv() {
     [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && \
       { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p\n"; return 1; }
   done
-  command mv "$@"
+  command mv -i "$@"
 }
 
 cp() {
@@ -455,5 +452,5 @@ cp() {
     [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && \
       { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p\n"; return 1; }
   done
-  command cp "$@"
+  command cp -i "$@"
 }
