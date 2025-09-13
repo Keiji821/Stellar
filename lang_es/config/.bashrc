@@ -428,3 +428,12 @@ command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
     return 127
 }
+
+export STELLAR_PROTECT="$HOME/Stellar"
+alias rm='rm -I --preserve-root'
+alias mv='mv -i'
+alias cp='cp -i'
+
+rm()  { for p in "$@"; do [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && { echo "${Amarill_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p"; return 1; }; done; command rm "$@"; }
+mv()  { for p in "$@"; do [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && { printf "${Amarill_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p"; return 1; }; done; command mv "$@"; }
+cp()  { for p in "$@"; do [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && { echo "${Amarill_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p"; return 1; }; done; command cp "$@"; }
