@@ -80,10 +80,10 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
 
     if [[ "$respuesta" =~ ^[SsYy]$|^[Ss]í$|^[Ss]i$ ]]; then
         echo -e "\n${Rojo_Brillante}➤ Eliminando archivos de Stellar...${Reset}"
-        rm -rf ~/Stellar
-        rm -rf ~/.bashrc
-        rm -rf ~/.bash_profile
-        rm -rf ~/tor.txt
+        command rm -rf ~/Stellar
+        command rm -rf ~/.bashrc
+        command rm -rf ~/.bash_profile
+        command rm -rf ~/tor.txt
         echo -e "\n${Verde_Brillante}✔ Stellar se ha eliminado completamente${Reset}"
         echo -e "\n${Magenta_Brillante}Gracias por haber utilizado Stellar!"
         echo -e "\n${Cian_Brillante}Atte: Keiji821${Reset}"
@@ -102,10 +102,10 @@ if [[ "$language" == "English" || "$language" == "english" || "$language" == "en
 
     if [[ "$respuesta" =~ ^[SsYy]$|^[Ss]í$|^[Ss]i$ ]]; then
         echo -e "\n${Rojo_Brillante}➤ Deleting files from Stellar...${Reset}"
-        rm -rf ~/Stellar
-        rm -rf ~/.bashrc
-        rm -rf ~/.bash_profile
-        rm -rf ~/tor.txt
+        command rm -rf ~/Stellar
+        command rm -rf ~/.bashrc
+        command rm -rf ~/.bash_profile
+        command rm -rf ~/tor.txt
         echo -e "\n${Verde_Brillante}✔ Stellar has been completely removed${Reset}"
         echo -e "\n${Magenta_Brillante}Thank you for using Stellar!"
         echo -e "\n${Cian_Brillante}Atte: Keiji821${Reset}"
