@@ -149,7 +149,7 @@ uninstall    │ Desinstalar completamente
 update       │ Atualizar do GitHub  
 bash         │ Reiniciar sessão terminal   
 reset        │ Restaurar estado padrão
-delete       | atalho para rm -rf
+dstr         | atalho para rm -rf
 move         | atalho para mv
 copy         | atalho para cp
 x11          | atalho para atermux-x11 :0 & export DISPLAY=:0
@@ -194,8 +194,7 @@ profileinfo  │ Metadados de perfil
 
 > **⚡ TESTES DE PENETRAÇÃO**  
 ```bash
-ddos        │ Ataque DDoS (IP+porta)  
-tunnel      │ Capturar IPs de visitantes  
+ddos        │ Ataque DDoS (IP+porta)    
 ```
 </details>
 
