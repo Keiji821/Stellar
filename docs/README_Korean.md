@@ -149,7 +149,7 @@ uninstall    │ 완전 제거
 update       │ GitHub에서 업데이트  
 bash         │ 터미널 세션 재시작   
 reset        │ 기본 상태로 복원
-delete       | rm -rf 단축 명령
+dstr         | rm -rf 단축 명령
 move         | mv 단축 명령
 copy         | cp 단축 명령
 x11          | termux-x11 :0 & export DISPLAY=:0 단축 명령
@@ -195,7 +195,6 @@ profileinfo  │ 프로필 메타데이터
 > **⚡ 침투 테스트**  
 ```bash
 ddos        │ DDoS 공격(IP+포트)  
-tunnel      │ 방문자 IP 캡처  
 ```
 </details>
 
