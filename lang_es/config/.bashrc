@@ -165,7 +165,7 @@ tor --SocksPort $torport \
 # │ Imports and banner             │
 # └────────────────────────────────┘
 
-cp ~/Stellar/lang_es/config/.bash_profile ~/.
+command cp ~/Stellar/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/lang_es/config/themes
 clear
 python banner.py
