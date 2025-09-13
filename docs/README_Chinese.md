@@ -153,7 +153,7 @@ uninstall    │ 完全卸载程序
 update       │ 从GitHub更新  
 bash         │ 重启终端会话   
 reset        │ 恢复初始状态
-delete       | rm -rf快捷命令
+dstr         | rm -rf快捷命令
 move         | mv快捷命令
 copy         | cp快捷命令
 x11          | termux-x11 :0 & export DISPLAY=:0快捷命令
