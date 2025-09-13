@@ -416,7 +416,7 @@ EOF
 cd
 
 alias ls='lsd --icon-theme unicode'
-alias delete='rm -rf'
+alias dstr='rm -rf'
 alias move='mv'
 alias copy='cp'
 x11() {
