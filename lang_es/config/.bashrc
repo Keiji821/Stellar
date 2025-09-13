@@ -434,6 +434,30 @@ alias rm='rm -I --preserve-root'
 alias mv='mv -i'
 alias cp='cp -i'
 
-rm()  { for p in "$@"; do [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p"; return 1; }; done; command rm "$@"; }
-mv()  { for p in "$@"; do [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p"; return 1; }; done; command mv "$@"; }
-cp()  { for p in "$@"; do [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p"; return 1; }; done; command cp "$@"; }
+rm() {
+  local p
+  for p in "$@"; do
+    [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && \
+      { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p\n"; return 1; }
+  done
+  command rm "$@"
+}
+
+mv() {
+  local p
+  for p in "$@"; do
+    [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && \
+      { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p\n"; return 1; }
+  done
+  command mv "$@"
+}
+
+cp() {
+  local p
+  for p in "$@"; do
+    [[ "$(realpath "$p" 2>/dev/null)" == "$STELLAR_PROTECT"* ]] && \
+      { printf "${Amarillo_Brillante}[WARNING]${Blanco_Brillante} Protegido: $p\n"; return 1; }
+  done
+  command cp "$@"
+}
+
