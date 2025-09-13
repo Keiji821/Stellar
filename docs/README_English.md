@@ -150,7 +150,7 @@ uninstall    │ Complete uninstall
 update       │ Update from GitHub  
 bash         │ Restart terminal session   
 reset        │ Restore default state
-delete       | rm -rf shortcut
+dstr         | rm -rf shortcut
 move         | mv shortcut
 copy         | cp shortcut
 x11          | termux-x11 :0 & export DISPLAY=:0 shortcut
@@ -195,8 +195,7 @@ profileinfo  │ Profile metadata
 
 > **⚡ PENTESTING**  
 ```bash
-ddos        │ DDoS attack (IP+port)  
-tunnel      │ Visitor IP capture  
+ddos        │ DDoS attack (IP+port)
 ```
 </details>
 
