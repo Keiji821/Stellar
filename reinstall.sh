@@ -161,6 +161,9 @@ fi
 
 if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finishing installation... ${Reset}"
+    command cp ~/Stellar/lang_es/config/.bash_profile ~/.
+    command cp ~/Stellar/lang_es/config/.bashrc ~/.
+    command cp ~/Stellar/fonts/font.ttf ~/termux
 fi
 
 sleep 5
