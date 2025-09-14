@@ -202,13 +202,13 @@ instagraminfo | Obtiene los metadatos del perfil
 
 > **DISCORD**  
 ```bash
-userinfo           │ Info de usuario (ID)  
-serverinfo         │ Info de servidor (ID)  
-searchinvites      │ Busca invitaciones  
-inviteinfo         │ Analiza invitaciones  
-role-mapper        │ Mapea roles (Server ID)  
-mutual-servers     │ Servidores en común  
-webhook-mass-spam  │ Spam a webhooks  
+userinfo             │ Info de usuario (ID)  
+serverinfo           │ Info de servidor (ID)  
+searchinvites        │ Busca invitaciones  
+inviteinfo           │ Analiza invitaciones  
+role-mapper          │ Mapea roles (Server ID)  
+mutual-servers       │ Servidores en común  
+webhook-mass-spam    │ Spam a webhooks  
 mass-delete-channels │ Elimina canales masivamente  
 ```
 
