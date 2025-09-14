@@ -165,13 +165,14 @@ Stellar incluye una selección de comandos para su uso los cuales son:
   
 > **SISTEMA**  
 ```bash
-reload       │ Recarga el banner del sistema  
-user-config  │ Personaliza banner y perfil
-my           │ Muestra tu perfil de Stellar
-uninstall    │ Desinstala Stellar completamente  
-update       │ Actualiza desde GitHub  
-bash         │ Reinicia la sesión de terminal   
-reset        │ Restablece terminal a estado inicial
+menu         | Visualiza los comandos disponibles de Stellar y su estado  
+reload       | Recarga el banner del sistema  
+user-config  | Personaliza banner y perfil
+my           | Muestra tu perfil de Stellar
+uninstall    | Desinstala Stellar completamente  
+update       | Actualiza desde GitHub  
+bash         | Reinicia la sesión de terminal   
+reset        | Restablece terminal a estado inicial
 x11          | alias de termux-x11 :0 & export DISPLAY=:0
 ```
 
