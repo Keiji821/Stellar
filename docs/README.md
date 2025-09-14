@@ -163,7 +163,7 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 
 Stellar incluye una selección de comandos para su uso los cuales son:
   
-> **🔧 SISTEMA**  
+> **SISTEMA**  
 ```bash
 reload       │ Recarga el banner del sistema  
 user-config  │ Personaliza banner y perfil
@@ -172,14 +172,11 @@ uninstall    │ Desinstala Stellar completamente
 update       │ Actualiza desde GitHub  
 bash         │ Reinicia la sesión de terminal   
 reset        │ Restablece terminal a estado inicial
-dstr         | alias de rm -rf 
-move         | alias de mv
-copy         | alias de cp
 x11          | alias de termux-x11 :0 & export DISPLAY=:0
 ```
 
 
-> **🛠️ UTILIDADES**  
+> **UTILIDADES**  
 ```bash
 ia           │ Servicio de IA con API gratuita  
 ia-image     │ Generador de imágenes con IA  
@@ -187,21 +184,23 @@ traductor    │ Traducción en tiempo real
 myip         │ Muestra tu IP pública  
 passwordgen  │ Genera contraseñas seguras  
 encrypt-file │ Encripta archivos  
+ddos         │ Ataque DDoS (IP + puerto) 
 ```
 
 
-> **🌐 OSINT**  
+> **OSINT**  
 ```bash
-ipinfo       │ Obtiene información de una IP  
-urlinfo      │ Analiza URLs  
-userfinder   │ Busca usuarios en plataformas  
-phoneinfo    │ Información de número telefónico  
-metadatainfo │ Extrae metadatos de archivos  
-emailsearch  │ Búsqueda de correos electrónicos  
+ipinfo        │ Obtiene información de una IP  
+urlinfo       │ Analiza URLs  
+userfinder    │ Busca usuarios en plataformas  
+phoneinfo     │ Información de número telefónico  
+metadatainfo  │ Extrae metadatos de archivos  
+emailsearch   │ Búsqueda de correos electrónicos  
+Instagraminfo | Obtiene los metadatos del perfil
 ```
 
 
-> **📱 DISCORD**  
+> **DISCORD**  
 ```bash
 userinfo           │ Info de usuario (ID)  
 serverinfo         │ Info de servidor (ID)  
@@ -213,17 +212,6 @@ webhook-mass-spam  │ Spam a webhooks
 mass-delete-channels │ Elimina canales masivamente  
 ```
 
-
-> **📸 INSTAGRAM**  
-```bash
-profileinfo  │ Metadatos de perfiles  
-```
-
-
-> **⚡ PENTESTING**  
-```bash
-ddos        │ Ataque DDoS (IP + puerto)    
-```
 </details>
 
 <details>
