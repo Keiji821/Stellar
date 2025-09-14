@@ -179,38 +179,38 @@ x11          | alias de termux-x11 :0 & export DISPLAY=:0
 
 > **UTILIDADES**  
 ```bash
-ia           │ Servicio de IA con API gratuita  
-ia-image     │ Generador de imágenes con IA  
-traductor    │ Traducción en tiempo real  
-myip         │ Muestra tu IP pública  
-passwordgen  │ Genera contraseñas seguras  
-encrypt-file │ Encripta archivos  
-ddos         │ Ataque DDoS (IP + puerto) 
+ia           | Servicio de IA con API gratuita  
+ia-image     | Generador de imágenes con IA  
+traductor    | Traducción en tiempo real  
+myip         | Muestra tu IP pública  
+passwordgen  | Genera contraseñas seguras  
+encrypt-file | Encripta archivos  
+ddos         | Ataque DDoS (IP + puerto) 
 ```
 
 
 > **OSINT**  
 ```bash
-ipinfo        │ Obtiene información de una IP  
-urlinfo       │ Analiza URLs  
-userfinder    │ Busca usuarios en plataformas  
-phoneinfo     │ Información de número telefónico  
-metadatainfo  │ Extrae metadatos de archivos  
-emailsearch   │ Búsqueda de correos electrónicos  
+ipinfo        | Obtiene información de una IP  
+urlinfo       | Analiza URLs  
+userfinder    | Busca usuarios en plataformas  
+phoneinfo     | Información de número telefónico  
+metadatainfo  | Extrae metadatos de archivos  
+emailsearch   | Búsqueda de correos electrónicos  
 instagraminfo | Obtiene los metadatos del perfil
 ```
 
 
 > **DISCORD**  
 ```bash
-userinfo             │ Info de usuario (ID)  
-serverinfo           │ Info de servidor (ID)  
-searchinvites        │ Busca invitaciones  
-inviteinfo           │ Analiza invitaciones  
-role-mapper          │ Mapea roles (Server ID)  
-mutual-servers       │ Servidores en común  
-webhook-mass-spam    │ Spam a webhooks  
-mass-delete-channels │ Elimina canales masivamente  
+userinfo             | Info de usuario (ID)  
+serverinfo           | Info de servidor (ID)  
+searchinvites        | Busca invitaciones  
+inviteinfo           | Analiza invitaciones  
+role-mapper          | Mapea roles (Server ID)  
+mutual-servers       | Servidores en común  
+webhook-mass-spam    | Spam a webhooks  
+mass-delete-channels | Elimina canales masivamente  
 ```
 
 </details>
