@@ -196,7 +196,7 @@ userfinder    │ Busca usuarios en plataformas
 phoneinfo     │ Información de número telefónico  
 metadatainfo  │ Extrae metadatos de archivos  
 emailsearch   │ Búsqueda de correos electrónicos  
-Instagraminfo | Obtiene los metadatos del perfil
+instagraminfo | Obtiene los metadatos del perfil
 ```
 
 
