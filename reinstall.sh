@@ -159,6 +159,7 @@ if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "s
     command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
 fi
 
+mkdir .termux
 cat > ~/.termux/color.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
