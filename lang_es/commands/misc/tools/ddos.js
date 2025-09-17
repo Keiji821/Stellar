@@ -83,7 +83,7 @@ class DDoSAttack {
         this.target = await this.resolveDNS(target);
         this.port = await this.inputNumber('Puerto (1-65535): ', 1, 65535);
         this.duration = await this.inputNumber('Duración (segundos): ', 1, 3600);
-        this.threads = await this.inputNumber('Número de hilos: ', 1, os.cpus().length * 2);
+        this.threads = await this.inputNumber('Número de hilos: ', 1, Math.max(1, os.cpus()?.length || 1) * 2);
 
         console.log('\n\x1b[1;36m=== Resumen ===\x1b[0m');
         console.log(`Objetivo: ${this.target}`);
