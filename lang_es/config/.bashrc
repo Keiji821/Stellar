@@ -417,9 +417,10 @@ cd
 
 alias ls='lsd --icon-theme unicode'
 x11() {
-termux-x11 :0 &
-export DISPLAY=:0
+    termux-x11 :0 &
+    export DISPLAY=:0
 }
+
 
 command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
