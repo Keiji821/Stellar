@@ -29,8 +29,8 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 <table align="center">
   <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg?ex=689ad917&is=68998797&hm=07e3faa38dbbb41dae7ea0a14f584281f5a6c4fd0c27a09dac33c1757906724f&" width="500"></td>
-    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg?ex=689ad917&is=68998797&hm=66c48b9d67e2735dc24de4154b13571f611212686dfeaa6c429e5ed22e47bf45&" width="500"></td>
+    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg?ex=68fd10d7&is=68fbbf57&hm=a66c8f8bc3b13c0403969271bdf565a4621731038f9afcaa65e33882a48533ba&" width="500"></td>
+    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg?ex=68fd10d7&is=68fbbf57&hm=c75eaa3087367339ee6cdab62cd323666a5d008c38eff3c140dd833583b75dc7&" width="500"></td>
   </tr>
 </table>
 
