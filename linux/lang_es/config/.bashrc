@@ -47,6 +47,8 @@ export Invertido="\033[7m"
 export Oculto="\033[8m"
 export Tachado="\033[9m"
 
+if [ -n "$PS1" ]; then
+
 # ┌────────────────────────────────┐
 # │ Clear and start                │
 # └────────────────────────────────┘
@@ -58,7 +60,6 @@ cd
 # ┌────────────────────────────────┐
 # │ Definition of PS1 (input)      │
 # └────────────────────────────────┘
-
 
 os=$(grep '^NAME=' /etc/os-release | cut -d'"' -f2)
 whoami=$(whoami)
@@ -362,14 +363,14 @@ ddos() {
     cd
 }
 
-
-
 alias ls='lsd --icon-theme unicode'
 
 command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
     return 127
 }
+
+fi
 
 export STELLAR_PROTECT="$HOME/Stellar"
 
