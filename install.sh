@@ -56,7 +56,7 @@ banner="""
 ███████╗████████╗███████╗██╗     ██╗      █████╗ ██████╗ 
 ██╔════╝╚══██╔══╝██╔════╝██║     ██║     ██╔══██╗██╔══██╗
 ███████╗   ██║   █████╗  ██║     ██║     ███████║██████╔╝
-╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██║██╔══██╗
+╚════██║   ██║   ██╔══╝  ██║     ██║     ██╔══██╗██╔══██╗
 ███████║   ██║   ███████╗███████╗███████╗██║  ██║██║  ██║
 ╚══════╝   ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
 
@@ -90,20 +90,20 @@ pip_packages=(
 spanish() {
     printf "${Verde_Brillante}"
     read -p "[${system}] ¿Desea comenzar con el proceso de instalación? (s/n): " next1
-    
+
     if [[ "$next1" == "n" ]]; then
         printf "${Verde_Brillante}[${system}] ${Reset}¡Hasta luego!\n"
         exit 1
     fi
-    
+
     if [[ "$next1" == "s" ]]; then
         printf "${Verde_Brillante}"
         read -p "[${system}] Escoja su plataforma (Termux/Linux): " plataform
-        
+
         if [[ "$plataform" == "Termux" ]]; then
             printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación de dependencias?\nPueden haber efectos no deseados\n"
             read -p "» (s/n): " skip_install
-            
+
             if [[ "$skip_install" == "s" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Instalando configuraciones basicas....\n"
                 cd
@@ -136,7 +136,7 @@ EOF
                 sleep 3
                 exit 1
             fi
-            
+
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación....\n"
                 pkg install "${apt_packages[@]}" -y
@@ -145,14 +145,14 @@ EOF
                     exit 1
                 fi
                 printf "\n"
-                
+
                 printf "${Cian_Brillante}[${system}] ${Reset}Instalando paquetes Python globalmente...\n"
                 pip3 install "${pip_packages[@]}"
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}\n"
                     exit 1
                 fi
-                
+
                 cd
                 mkdir -p .termux
                 cat > ~/.termux/color.properties << 'EOF'
@@ -179,7 +179,7 @@ EOF
                 command cp ~/Stellar/termux/lang_es/config/.bashrc ~/. 2>/dev/null
                 mkdir -p ~/.termux/fonts
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/.termux/fonts/ 2>/dev/null
-                
+
                 printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!\n"
                 printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos...\n"
                 sleep 3
@@ -187,11 +187,11 @@ EOF
                 exit 1
             fi
         fi
-        
+
         if [[ "$plataform" == "linux" ]] || [[ "$plataform" == "Linux" ]]; then
             printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación de dependencias?\nPueden haber efectos no deseados\n"
             read -p "» (s/n): " skip_install
-            
+
             if [[ "$skip_install" == "s" ]]; then
                 command cp ~/Stellar/linux/lang_es/config/.bash_profile ~/. 2>/dev/null
                 command cp ~/Stellar/linux/lang_es/config/.bashrc ~/. 2>/dev/null
@@ -199,7 +199,7 @@ EOF
                 sleep 3
                 exit 1
             fi
-            
+
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación....\n"
                 sudo apt install "${apt_packages[@]}" -y
@@ -207,9 +207,9 @@ EOF
                     printf "\n${Rojo_Brillante}[!][${system}]${Amarillo_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
                     exit 1
                 fi
-                
+
                 printf "\n"
-                
+
                 printf "${Cian_Brillante}[${system}] ${Reset}Probando instalación de paquetes PIP globalmente...\n"
                 pip3 install --user beautifulsoup4 2>/dev/null
                 if [[ $? -eq 0 ]]; then
@@ -237,7 +237,7 @@ EOF
                         exit 1
                     fi
                 fi
-                
+
                 printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!\n"
                 printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos...\n"
                 sleep 3
@@ -251,20 +251,20 @@ EOF
 english() {
     printf "${Verde_Brillante}"
     read -p "[${system}] Do you want to start the installation process? (y/n): " next1
-    
+
     if [[ "$next1" == "n" ]]; then
         printf "${Verde_Brillante}[${system}] ${Reset}Goodbye!\n"
         exit 1
     fi
-    
+
     if [[ "$next1" == "y" ]]; then
         printf "${Verde_Brillante}"
         read -p "[${system}] Choose your platform (Termux/Linux): " plataform
-        
+
         if [[ "$plataform" == "Termux" ]]; then
             printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?\nThere may be unwanted effects\n"
             read -p "» (y/n): " skip_install
-            
+
             if [[ "$skip_install" == "y" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Installing basic configurations....\n"
                 cd
@@ -297,7 +297,7 @@ EOF
                 sleep 3
                 exit 1
             fi
-            
+
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Starting installation....\n"
                 pkg install "${apt_packages[@]}" -y
@@ -306,14 +306,14 @@ EOF
                     exit 1
                 fi
                 printf "\n"
-                
+
                 printf "${Cian_Brillante}[${system}] ${Reset}Installing Python packages globally...\n"
                 pip3 install "${pip_packages[@]}"
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante} Failed to install some PIP packages. Check previous errors. ${Reset}\n"
                     exit 1
                 fi
-                
+
                 cd
                 mkdir -p .termux
                 cat > ~/.termux/color.properties << 'EOF'
@@ -340,7 +340,7 @@ EOF
                 command cp ~/Stellar/termux/lang_en/config/.bashrc ~/. 2>/dev/null
                 mkdir -p ~/.termux/fonts
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/.termux/fonts/ 2>/dev/null
-                
+
                 printf "${Verde_Brillante}[${system}] ${Reset}Done!\n"
                 printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds...\n"
                 sleep 3
@@ -348,11 +348,11 @@ EOF
                 exit 1
             fi
         fi
-        
+
         if [[ "$plataform" == "Linux" ]] || [[ "$plataform" == "linux" ]]; then
             printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?\nThere may be unwanted effects\n"
             read -p "» (y/n): " skip_install
-            
+
             if [[ "$skip_install" == "y" ]]; then
                 command cp ~/Stellar/linux/lang_en/config/.bash_profile ~/. 2>/dev/null
                 command cp ~/Stellar/linux/lang_en/config/.bashrc ~/. 2>/dev/null
@@ -360,7 +360,7 @@ EOF
                 sleep 3
                 exit 1
             fi
-            
+
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Starting installation....\n"
                 sudo apt install "${apt_packages[@]}" -y
@@ -368,9 +368,9 @@ EOF
                     printf "\n${Rojo_Brillante}[!][${system}]${Amarillo_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
                     exit 1
                 fi
-                
+
                 printf "\n"
-                
+
                 printf "${Cian_Brillante}[${system}] ${Reset}Testing PIP package installation globally...\n"
                 pip3 install --user beautifulsoup4 2>/dev/null
                 if [[ $? -eq 0 ]]; then
@@ -398,7 +398,7 @@ EOF
                         exit 1
                     fi
                 fi
-                
+
                 printf "${Verde_Brillante}[${system}] ${Reset}Done!\n"
                 printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds...\n"
                 sleep 3
