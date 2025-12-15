@@ -4,27 +4,6 @@ STELLAR_DIR="$HOME/Stellar"
 CONFIG_SYSTEM_DIR="$STELLAR_DIR/linux/lang_es/config/system"
 CONFIG_THEMES_DIR="$STELLAR_DIR/linux/lang_es/config/themes"
 
-export Gris="\033[1;30m"
-export Negro="\033[0;30m"
-export Rojo="\033[0;31m"
-export Verde="\033[0;32m"
-export Amarillo="\033[0;33m"
-export Azul="\033[0;34m"
-export Magenta="\033[0;35m"
-export Cian="\033[0;36m"
-export Blanco="\033[0;37m"
-
-export Negro_Brillante="\033[1;30m"
-export Rojo_Brillante="\033[1;31m"
-export Verde_Brillante="\033[1;32m"
-export Amarillo_Brillante="\033[1;33m"
-export Azul_Brillante="\033[1;34m"
-export Magenta_Brillante="\033[1;35m"
-export Cian_Brillante="\033[1;36m"
-export Blanco_Brillante="\033[1;37m"
-
-export Reset="\033[0m"
-
 show_progress() {
     echo -e "${Azul_Brillante}➤ ${Blanco}$1...${Reset}"
 }
