@@ -100,6 +100,7 @@ clear
 # │ Security                       │
 # └────────────────────────────────┘
 
+tor_enable() {
 pkill -f "tor"
 pkill -f "9052"
 pkill -f "9053"
@@ -114,6 +115,19 @@ tor --SocksPort $torport \
     --ClientOnly 1 \
     --AvoidDiskWrites 1 \
     --DNSPort $dnsport &>tor.txt &
+sleep 5
+printf "${Verde_Brillante}[INFO] ${Verde_Brillante}Tor ha sido activado"
+}
+
+tor_disable() {
+unset torport
+unset dnsport
+unset ALL_PROXY
+pkill -f "tor"
+pkill -f "9052"
+pkill -f "9053"
+printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
+}
 
 
 # ┌────────────────────────────────┐
