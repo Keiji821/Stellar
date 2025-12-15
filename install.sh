@@ -71,7 +71,7 @@ printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
 
-apt_packages=(python tor exiftool nmap termux-api dnsutils nodejs lsd root-repo)
+apt_packages=(python tor exiftool nmap dnsutils nodejs lsd)
 pip_packages=(
     beautifulsoup4
     pyfiglet
@@ -139,6 +139,8 @@ EOF
 
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación....\n"
+                pkg install termux-api -y
+                pkg install root-repo -y
                 pkg install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Rojo_Brillante}[!][${system}]${Amarillo_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
@@ -300,6 +302,8 @@ EOF
 
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Starting installation....\n"
+                pkg install termux-api -y
+                pkg install root-repo -y
                 pkg install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Rojo_Brillante}[!][${system}]${Amarillo_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
