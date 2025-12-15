@@ -6,6 +6,10 @@ preexec() {
 
 }
 
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
+
 if [ -n "$BASH_VERSION" ]; then
     trap 'preexec "$BASH_COMMAND"' DEBUG
 fi
