@@ -181,7 +181,7 @@ uninstall() {
 }
 
 update() {
-    cd ~/Stellar/lang_es
+    cd ~/Stellar/linux/lang_es
     bash update.sh
     cd
 }
