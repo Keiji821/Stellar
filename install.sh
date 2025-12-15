@@ -204,6 +204,8 @@ EOF
 
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación....\n"
+                command cp ~/Stellar/linux/lang_es/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/linux/lang_es/config/.bashrc ~/. 2>/dev/null
                 sudo apt install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Rojo_Brillante}[!][${system}]${Amarillo_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
@@ -222,7 +224,7 @@ EOF
                         exit 1
                     fi
                 else
-                    apt install python3-venv
+                    apt install python3.12-venv
                     printf "${Amarillo_Brillante}[${system}] ${Reset}No se pueden instalar paquetes PIP globalmente, creando entorno virtual...\n"
                     python3 -m venv venv
                     if [[ $? -eq 0 ]]; then
@@ -386,7 +388,7 @@ EOF
                         exit 1
                     fi
                 else
-                    apt install python3-venv
+                    apt install python3.12-venv
                     printf "${Amarillo_Brillante}[${system}] ${Reset}Cannot install PIP packages globally, creating virtual environment...\n"
                     python3 -m venv venv
                     if [[ $? -eq 0 ]]; then
