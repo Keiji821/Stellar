@@ -71,7 +71,7 @@ printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
 
-apt_packages=(python tor exiftool nmap dnsutils nodejs lsd)
+apt_packages=(python3 tor exiftool nmap dnsutils nodejs lsd)
 pip_packages=(
     beautifulsoup4
     pyfiglet
