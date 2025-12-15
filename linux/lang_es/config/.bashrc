@@ -137,7 +137,10 @@ printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
 command cp ~/Stellar/linux/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/linux/lang_es/config/themes
 clear
-python banner.py
+data=(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.txt)
+if [[ "$data" == "y" ]]; then
+    python banner.py
+fi
 cd
 printf "${Gris}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
 printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante}menu${Reset} para ver los comandos disponibles.\n"
