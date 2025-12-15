@@ -127,8 +127,8 @@ color13=#c792ea
 color14=#89ddff
 color15=#d0d0d0
 EOF
-                command cp ~/Stellar/lang_es/config/.bash_profile ~/. 2>/dev/null
-                command cp ~/Stellar/lang_es/config/.bashrc ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_es/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_es/config/.bashrc ~/. 2>/dev/null
                 mkdir -p ~/.termux/fonts
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/.termux/fonts/ 2>/dev/null
                 printf "${Cian_Brillante}[${system}] ${Reset}¡Listo!\nCerrando programa en 3 segundos\n"
@@ -174,8 +174,8 @@ color13=#c792ea
 color14=#89ddff
 color15=#d0d0d0
 EOF
-                command cp ~/Stellar/lang_es/config/.bash_profile ~/. 2>/dev/null
-                command cp ~/Stellar/lang_es/config/.bashrc ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_es/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_es/config/.bashrc ~/. 2>/dev/null
                 mkdir -p ~/.termux/fonts
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/.termux/fonts/ 2>/dev/null
                 
@@ -192,8 +192,8 @@ EOF
             read -p "» (s/n): " skip_install
             
             if [[ "$skip_install" == "s" ]]; then
-                command cp ~/Stellar/lang_es/config/.bash_profile ~/. 2>/dev/null
-                command cp ~/Stellar/lang_es/config/.bashrc ~/. 2>/dev/null
+                command cp ~/Stellar/linux/lang_es/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/linux/lang_es/config/.bashrc ~/. 2>/dev/null
                 printf "${Cian_Brillante}[${system}] ${Reset}¡Listo!\nCerrando programa en 3 segundos\n"
                 sleep 3
                 exit 1
@@ -288,8 +288,8 @@ color13=#c792ea
 color14=#89ddff
 color15=#d0d0d0
 EOF
-                command cp ~/Stellar/lang_en/config/.bash_profile ~/. 2>/dev/null
-                command cp ~/Stellar/lang_en/config/.bashrc ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_en/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_en/config/.bashrc ~/. 2>/dev/null
                 mkdir -p ~/.termux/fonts
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/.termux/fonts/ 2>/dev/null
                 printf "${Cian_Brillante}[${system}] ${Reset}Done!\nClosing program in 3 seconds\n"
@@ -335,8 +335,8 @@ color13=#c792ea
 color14=#89ddff
 color15=#d0d0d0
 EOF
-                command cp ~/Stellar/lang_en/config/.bash_profile ~/. 2>/dev/null
-                command cp ~/Stellar/lang_en/config/.bashrc ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_en/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/termux/lang_en/config/.bashrc ~/. 2>/dev/null
                 mkdir -p ~/.termux/fonts
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/.termux/fonts/ 2>/dev/null
                 
@@ -353,8 +353,8 @@ EOF
             read -p "» (y/n): " skip_install
             
             if [[ "$skip_install" == "y" ]]; then
-                command cp ~/Stellar/lang_en/config/.bash_profile ~/. 2>/dev/null
-                command cp ~/Stellar/lang_en/config/.bashrc ~/. 2>/dev/null
+                command cp ~/Stellar/linux/lang_en/config/.bash_profile ~/. 2>/dev/null
+                command cp ~/Stellar/linux/lang_en/config/.bashrc ~/. 2>/dev/null
                 printf "${Cian_Brillante}[${system}] ${Reset}Done!\nClosing program in 3 seconds\n"
                 sleep 3
                 exit 1
