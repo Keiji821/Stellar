@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 STELLAR_DIR="$HOME/Stellar"
-CONFIG_SYSTEM_DIR="$STELLAR_DIR/lang_es/config/system"
-CONFIG_THEMES_DIR="$STELLAR_DIR/lang_es/config/themes"
+CONFIG_SYSTEM_DIR="$STELLAR_DIR/linux/lang_es/config/system"
+CONFIG_THEMES_DIR="$STELLAR_DIR/linux/lang_es/config/themes"
 
 show_progress() {
     echo -e "${Azul_Brillante}➤ ${Blanco}$1...${Reset}"
