@@ -61,7 +61,7 @@ banner="""
 
                                    @Instalador/Installer"""
 
-printf "${Azul_Brillante} ${banner} ${Reset}"
+printf "${Azul_Brillante}${banner}${Reset}"
 printf "\n"
 printf "\n${Magenta_Brillante}⭐ Created by: Keiji821 ${Reset}"
 printf "\n${Cian_Brillante}🔵 My Discord contact: ${Verde_Brillante}keiji100 ${Reset}"
@@ -90,18 +90,17 @@ spanish() {
     printf "${Verde_Brillante}"
     read -p "[${system}] ¿Desea comenzar con el proceso de instalación? (s/n): " next1
     if [[ "$next1" == "n" ]]; then
-        printf "${Verde_Brillante}[${system}] ${Reset}¡Hasta luego!"
+        printf "${Verde_Brillante}[${system}] ${Reset}¡Hasta luego!\n"
         exit 1
     fi
     if [[ "$next1" == "s" ]]; then
         printf "${Verde_Brillante}"
         read -p "[${system}] Escoja su plataforma (Termux/Linux): " plataform
         if [[ "$plataform" == "Termux" ]]; then
-            printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación
-            de dependencias?\nPueden haber efectos no deseados"
-            read -p "» (s/n)" skip_install
+            printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación\nde dependencias?\nPueden haber efectos no deseados\n"
+            read -p "» (s/n): " skip_install
             if [[ "$skip_install" == "s" ]]; then
-                printf "${Cian_Brillante}[${system}] ${Reset} Instalando configuraciones basicas...."
+                printf "${Cian_Brillante}[${system}] ${Reset}Instalando configuraciones basicas....\n"
                 cd
                 mkdir .termux
                 cat > ~/.termux/color.properties << 'EOF'
@@ -132,7 +131,7 @@ EOF
                 exit 1
             fi
             if [[ "$skip_install" == "n" ]]; then
-                printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación...."
+                printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación....\n"
                 pkg install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
@@ -173,8 +172,8 @@ EOF
                 command cp ~/Stellar/lang_es/config/.bashrc ~/.
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
                 
-                printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!"
-                printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos..."
+                printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!\n"
+                printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos...\n"
                 sleep 3
                 bash
                 exit 1
@@ -182,9 +181,8 @@ EOF
         fi
         
         if [[ "$plataform" == "linux" ]]; then
-            printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación
-            de dependencias?\nPueden haber efectos no deseados"
-            read -p "» (s/n)" skip_install
+            printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación\nde dependencias?\nPueden haber efectos no deseados\n"
+            read -p "» (s/n): " skip_install
             if [[ "$skip_install" == "s" ]]; then
                 command cp ~/Stellar/lang_es/config/.bash_profile ~/.
                 command cp ~/Stellar/lang_es/config/.bashrc ~/.
@@ -193,7 +191,7 @@ EOF
                 exit 1
             fi
             if [[ "$skip_install" == "n" ]]; then
-                printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación...."
+                printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación....\n"
                 sudo apt install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
@@ -230,10 +228,10 @@ EOF
                     fi
                 fi
                 
-                printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!"
-                printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos..."
+                printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!\n"
+                printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos...\n"
                 sleep 3
-                printf "${Verde_Brillante}[${system}] ${Reset}Reinicie su terminal para ver los cambios"
+                printf "${Verde_Brillante}[${system}] ${Reset}Reinicie su terminal para ver los cambios\n"
                 exit 1
             fi
         fi
@@ -245,18 +243,17 @@ english() {
     printf "${Verde_Brillante}"
     read -p "[${system}] Do you want to start the installation process? (y/n): " next1
     if [[ "$next1" == "n" ]]; then
-        printf "${Verde_Brillante}[${system}] ${Reset}Goodbye!"
+        printf "${Verde_Brillante}[${system}] ${Reset}Goodbye!\n"
         exit 1
     fi
     if [[ "$next1" == "y" ]]; then
         printf "${Verde_Brillante}"
         read -p "[${system}] Choose your platform (Termux/Linux): " plataform
         if [[ "$plataform" == "Termux" ]]; then
-            printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?
-            There may be unwanted effects"
-            read -p "» (y/n)" skip_install
+            printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?\nThere may be unwanted effects\n"
+            read -p "» (y/n): " skip_install
             if [[ "$skip_install" == "y" ]]; then
-                printf "${Cian_Brillante}[${system}] ${Reset} Installing basic configurations...."
+                printf "${Cian_Brillante}[${system}] ${Reset}Installing basic configurations....\n"
                 cd
                 mkdir .termux
                 cat > ~/.termux/color.properties << 'EOF'
@@ -287,7 +284,7 @@ EOF
                 exit 1
             fi
             if [[ "$skip_install" == "n" ]]; then
-                printf "${Cian_Brillante}[${system}] ${Reset}Starting installation...."
+                printf "${Cian_Brillante}[${system}] ${Reset}Starting installation....\n"
                 pkg install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
@@ -328,8 +325,8 @@ EOF
                 command cp ~/Stellar/lang_en/config/.bashrc ~/.
                 command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
                 
-                printf "${Verde_Brillante}[${system}] ${Reset}Done!"
-                printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds..."
+                printf "${Verde_Brillante}[${system}] ${Reset}Done!\n"
+                printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds...\n"
                 sleep 3
                 bash
                 exit 1
@@ -337,9 +334,8 @@ EOF
         fi
         
         if [[ "$plataform" == "Linux" ]]; then
-            printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?
-            There may be unwanted effects"
-            read -p "» (y/n)" skip_install
+            printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?\nThere may be unwanted effects\n"
+            read -p "» (y/n): " skip_install
             if [[ "$skip_install" == "y" ]]; then
                 command cp ~/Stellar/lang_en/config/.bash_profile ~/.
                 command cp ~/Stellar/lang_en/config/.bashrc ~/.
@@ -348,7 +344,7 @@ EOF
                 exit 1
             fi
             if [[ "$skip_install" == "n" ]]; then
-                printf "${Cian_Brillante}[${system}] ${Reset}Starting installation...."
+                printf "${Cian_Brillante}[${system}] ${Reset}Starting installation....\n"
                 sudo apt install "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
@@ -385,10 +381,10 @@ EOF
                     fi
                 fi
                 
-                printf "${Verde_Brillante}[${system}] ${Reset}Done!"
-                printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds..."
+                printf "${Verde_Brillante}[${system}] ${Reset}Done!\n"
+                printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds...\n"
                 sleep 3
-                printf "${Verde_Brillante}[${system}] ${Reset}Restart your terminal to see the changes"
+                printf "${Verde_Brillante}[${system}] ${Reset}Restart your terminal to see the changes\n"
                 exit 1
             fi
         fi
@@ -397,17 +393,12 @@ EOF
 }
 
 printf "${Verde_Brillante}"
-read -p "Choose you language (Spanish/English): " language
-
+read -p "Choose your language (Spanish/English): " language
 
 if [[ "$language" == "Spanish" || "$language" == "Español" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" || "$language" == "Es" ]]; then
-
     spanish
-    
 fi
 
 if [[ "$language" == "English" || "$language" == "english" || "$language" == "EN" || "$language" == "En" || "$language" == "en" || "$language" == "Us" ]]; then
-
     english
-    
 fi
