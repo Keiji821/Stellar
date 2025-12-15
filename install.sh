@@ -222,6 +222,7 @@ EOF
                         exit 1
                     fi
                 else
+                    apt install python3-venv
                     printf "${Amarillo_Brillante}[${system}] ${Reset}No se pueden instalar paquetes PIP globalmente, creando entorno virtual...\n"
                     python3 -m venv venv
                     if [[ $? -eq 0 ]]; then
@@ -385,6 +386,7 @@ EOF
                         exit 1
                     fi
                 else
+                    apt install python3-venv
                     printf "${Amarillo_Brillante}[${system}] ${Reset}Cannot install PIP packages globally, creating virtual environment...\n"
                     python3 -m venv venv
                     if [[ $? -eq 0 ]]; then
