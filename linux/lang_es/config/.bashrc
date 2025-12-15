@@ -59,7 +59,9 @@ cd
 # │ Definition of PS1 (input)      │
 # └────────────────────────────────┘
 
-input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/linux/lang_es/config/system/user.txt" 2>/dev/null || {
+
+os=$(grep '^NAME=' /etc/os-release | cut -d'"' -f2)
+input=$(whoami 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
     echo "$input" > "$HOME/Stellar/linux/lang_es/config/system/user.txt"
@@ -86,7 +88,7 @@ function cd() {
         git_info=" ${colors[symbol]}[${colors[git]}⎇ $git_branch${colors[symbol]}]"
     fi
 
-    PS1="${colors[user]}${input}${colors[reset]}@${colors[host]}linux${colors[reset]}:${colors[path]}${current_dir}${git_info}${colors[reset]}"
+    PS1="${colors[user]}${input}${colors[reset]}@${colors[host]}${os}${colors[reset]}:${colors[path]}${current_dir}${git_info}${colors[reset]}"
     PS1+="\n${colors[symbol]}└─╼${colors[reset]} "
 
     echo -ne "\033]0;${input}@termux: ${current_dir}\007"
