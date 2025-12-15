@@ -86,7 +86,7 @@ function cd() {
         git_info=" ${colors[symbol]}[${colors[git]}⎇ $git_branch${colors[symbol]}]"
     fi
 
-    PS1="${colors[user]}${input}${colors[reset]}@${colors[host]}termux${colors[reset]}:${colors[path]}${current_dir}${git_info}${colors[reset]}"
+    PS1="${colors[user]}${input}${colors[reset]}@${colors[host]}linux${colors[reset]}:${colors[path]}${current_dir}${git_info}${colors[reset]}"
     PS1+="\n${colors[symbol]}└─╼${colors[reset]} "
 
     echo -ne "\033]0;${input}@termux: ${current_dir}\007"
