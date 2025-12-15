@@ -1,4 +1,6 @@
 #!/bin/bash
+if [ -n "$PS1" ]; then
+
 source venv/bin/activate
 export Gris="\033[1;30m"
 export Negro="\033[0;30m"
@@ -46,8 +48,6 @@ export Parpadeo="\033[5m"
 export Invertido="\033[7m"
 export Oculto="\033[8m"
 export Tachado="\033[9m"
-
-if [ -n "$PS1" ]; then
 
 # ┌────────────────────────────────┐
 # │ Clear and start                │
