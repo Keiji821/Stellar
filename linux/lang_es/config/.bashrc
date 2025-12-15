@@ -53,6 +53,7 @@ export Tachado="\033[9m"
 
 clear
 history -c && rm -f ~/.bash_history
+source venv/bin/activate
 cd
 
 # ┌────────────────────────────────┐
