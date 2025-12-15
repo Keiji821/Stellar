@@ -71,7 +71,7 @@ printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
 
-apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd root-repo)
+apt_packages=(python tor exiftool nmap dnsutils nodejs lsd)
 pip_packages=(
     beautifulsoup4
     pyfiglet
@@ -97,6 +97,8 @@ reinstall_clean() {
     
     if [[ "$plataform" == "Termux" ]]; then
         printf "${Cian_Brillante}[${system}] ${Reset}Reinstalando paquetes APT...\n"
+        pkg reinstall termux-api -y
+        pkg reinstall root-repo -y
         pkg reinstall "${apt_packages[@]}" -y 2>/dev/null || pkg install "${apt_packages[@]}" -y
         
         printf "${Cian_Brillante}[${system}] ${Reset}Reinstalando paquetes PIP...\n"
@@ -398,7 +400,9 @@ EOF
 
             if [[ "$skip_install" == "n" ]]; then
                 printf "${Cian_Brillante}[${system}] ${Reset}Starting installation....\n"
-                pkg install "${apt_packages[@]}" -y
+                pkg reinstall termux-api -y
+                pkg reinstall root-repo -y
+                pkg reinstall "${apt_packages[@]}" -y
                 if [[ $? -ne 0 ]]; then
                     printf "\n${Rojo_Brillante}[!][${system}]${Amarillo_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
                     exit 1
