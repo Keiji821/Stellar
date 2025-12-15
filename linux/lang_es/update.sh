@@ -4,6 +4,27 @@ STELLAR_DIR="$HOME/Stellar"
 CONFIG_SYSTEM_DIR="$STELLAR_DIR/linux/lang_es/config/system"
 CONFIG_THEMES_DIR="$STELLAR_DIR/linux/lang_es/config/themes"
 
+export Gris="\033[1;30m"
+export Negro="\033[0;30m"
+export Rojo="\033[0;31m"
+export Verde="\033[0;32m"
+export Amarillo="\033[0;33m"
+export Azul="\033[0;34m"
+export Magenta="\033[0;35m"
+export Cian="\033[0;36m"
+export Blanco="\033[0;37m"
+
+export Negro_Brillante="\033[1;30m"
+export Rojo_Brillante="\033[1;31m"
+export Verde_Brillante="\033[1;32m"
+export Amarillo_Brillante="\033[1;33m"
+export Azul_Brillante="\033[1;34m"
+export Magenta_Brillante="\033[1;35m"
+export Cian_Brillante="\033[1;36m"
+export Blanco_Brillante="\033[1;37m"
+
+export Reset="\033[0m"
+
 show_progress() {
     echo -e "${Azul_Brillante}➤ ${Blanco}$1...${Reset}"
 }
@@ -34,8 +55,38 @@ safe_move() {
     fi
 }
 
+safe_copy() {
+    if [[ ! -f "$1" ]]; then
+        show_warning "Archivo no encontrado para copiar: $1"
+        return 1
+    fi
+
+    if command cp -v "$1" "$2"; then
+        return 0
+    else
+        show_error "Falló al copiar $1"
+        return 1
+    fi
+}
+
+create_backup() {
+    local backup_dir="$HOME/stellar_backup_$(date +%Y%m%d_%H%M%S)"
+    mkdir -p "$backup_dir"
+    echo "$backup_dir"
+}
+
 backup_config() {
     show_progress "Resguardando archivos de configuración"
+
+    local backup_dir=$(create_backup)
+
+    safe_copy "$CONFIG_SYSTEM_DIR/user.txt" "$backup_dir/" || return 1
+    safe_copy "$CONFIG_SYSTEM_DIR/login_method.txt" "$backup_dir/" || return 1
+    safe_copy "$CONFIG_SYSTEM_DIR/password.txt" "$backup_dir/" || return 1
+    safe_copy "$CONFIG_THEMES_DIR/banner.txt" "$backup_dir/" || return 1
+    safe_copy "$CONFIG_THEMES_DIR/banner_color.txt" "$backup_dir/" || return 1
+    safe_copy "$CONFIG_THEMES_DIR/banner_background.txt" "$backup_dir/" || return 1
+    safe_copy "$CONFIG_THEMES_DIR/banner_background_color.txt" "$backup_dir/" || return 1
 
     safe_move "$CONFIG_SYSTEM_DIR/user.txt" "$HOME" || return 1
     safe_move "$CONFIG_SYSTEM_DIR/login_method.txt" "$HOME" || return 1
@@ -45,25 +96,73 @@ backup_config() {
     safe_move "$CONFIG_THEMES_DIR/banner_background.txt" "$HOME" || return 1
     safe_move "$CONFIG_THEMES_DIR/banner_background_color.txt" "$HOME" || return 1
 
+    show_success "Backup creado en: $backup_dir"
+    return 0
+}
+
+check_git() {
+    if ! command -v git &>/dev/null; then
+        show_error "Git no está instalado"
+        return 1
+    fi
+
+    if [[ ! -d "$STELLAR_DIR/.git" ]]; then
+        show_error "No es un repositorio Git válido"
+        return 1
+    fi
+
     return 0
 }
 
 update_repository() {
     show_progress "Actualizando repositorio Stellar"
 
+    if ! check_git; then
+        return 1
+    fi
+
     if ! cd "$STELLAR_DIR"; then
         show_error "No se pudo acceder al directorio $STELLAR_DIR"
         return 1
     fi
 
-    if ! git stash push -m "Auto-stash before update"; then
-        show_warning "Falló el stash de cambios"
+    local has_changes=false
+    if ! git diff --quiet || ! git diff --staged --quiet; then
+        has_changes=true
+        show_warning "Hay cambios sin guardar en el repositorio"
+        if git stash push -m "Auto-stash before update $(date +%Y-%m-%d_%H:%M:%S)"; then
+            show_success "Cambios guardados en stash"
+        else
+            show_error "Falló al guardar cambios en stash"
+            return 1
+        fi
     fi
 
+    show_progress "Descargando actualizaciones"
+    if git fetch origin; then
+        show_success "Actualizaciones descargadas"
+    else
+        show_error "Falló al descargar actualizaciones"
+        return 1
+    fi
+
+    show_progress "Aplicando actualizaciones"
     if git pull --rebase --autostash; then
+        show_success "Actualizaciones aplicadas"
+        if [[ "$has_changes" == true ]]; then
+            show_progress "Restaurando cambios guardados"
+            if git stash pop; then
+                show_success "Cambios restaurados"
+            else
+                show_warning "Hubo conflictos al restaurar cambios. Revisa git stash list"
+            fi
+        fi
         return 0
     else
-        show_error "Falló al actualizar el repositorio"
+        show_error "Falló al aplicar actualizaciones"
+        if [[ "$has_changes" == true ]]; then
+            show_warning "Cambios guardados en stash. Usa 'git stash pop' para restaurarlos"
+        fi
         return 1
     fi
 }
@@ -82,7 +181,36 @@ restore_config() {
     return 0
 }
 
+verify_update() {
+    show_progress "Verificando actualización"
+
+    if ! cd "$STELLAR_DIR"; then
+        return 1
+    fi
+
+    local current_commit=$(git rev-parse HEAD)
+    local remote_commit=$(git rev-parse origin/main 2>/dev/null || git rev-parse origin/master 2>/dev/null)
+
+    if [[ -z "$remote_commit" ]]; then
+        show_warning "No se pudo verificar commit remoto"
+        return 1
+    fi
+
+    if [[ "$current_commit" == "$remote_commit" ]]; then
+        show_success "Repositorio actualizado correctamente"
+        return 0
+    else
+        show_error "El repositorio no está actualizado"
+        return 1
+    fi
+}
+
 main() {
+    echo -e "${Azul_Brillante}╔══════════════════════════════════════╗${Reset}"
+    echo -e "${Azul_Brillante}║     ACTUALIZADOR DE STELLAR           ║${Reset}"
+    echo -e "${Azul_Brillante}╚══════════════════════════════════════╝${Reset}"
+    echo ""
+
     if ! backup_config; then
         show_warning "Algunos archivos no se resguardaron"
     fi
@@ -96,7 +224,12 @@ main() {
         show_warning "Algunas configuraciones no se restauraron"
     fi
 
-    show_success "Actualización completada - Configuración preservada"
+    if verify_update; then
+        show_success "Actualización completada exitosamente"
+        show_success "Configuración preservada y actualizada"
+    else
+        show_warning "Actualización completada con advertencias"
+    fi
 }
 
-main
+main "$@"
