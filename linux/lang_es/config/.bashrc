@@ -200,12 +200,12 @@ my() {
 
 banner_enable() {
     echo "y" > ~/Stellar/linux/lang_es/config/themes/isbanner.txt
-    printf "${Verde_Brillante}[INFO] ${Reset}El banner ha sido habilitado"
+    printf "\n${Verde_Brillante}[INFO] ${Reset}El banner ha sido habilitado\n"
 }
 
 banner_disable() {
     echo "n" > ~/Stellar/linux/lang_es/config/themes/isbanner.txt
-    printf "${Rojo_Brillante}[INFO] ${Reset}El banner ha sido deshabilitado"
+    printf "\n${Rojo_Brillante}[INFO] ${Reset}El banner ha sido deshabilitado\n"
 }
 
 # Discord
