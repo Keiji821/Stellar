@@ -1,4 +1,5 @@
 command cp ~/Stellar/linux/lang_es/config/.bashrc ~/.
+source venv/bin/activate
 
 preexec() {
     printf "${Gris}[INFO] ${Blanco_Brillante}Ejecutando comando: $1"
