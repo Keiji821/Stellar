@@ -61,7 +61,7 @@ cd
 # └────────────────────────────────┘
 
 # Método de desbloqueo - Huella dactilar
-cd ~/Stellar/lang_es/config/system
+cd ~/Stellar/termux/lang_es/config/system
 
 if [ -f login_method.txt ]; then
     method=$(cat login_method.txt)
@@ -104,10 +104,10 @@ cd
 # │ Definition of PS1 (input)      │
 # └────────────────────────────────┘
 
-input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/lang_es/config/system/user.txt" 2>/dev/null || {
+input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/termux/lang_es/config/system/user.txt" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
-    echo "$input" > "$HOME/Stellar/config/system/user.txt"
+    echo "$input" > "$HOME/Stellar/termux/lang_es/config/system/user.txt"
     echo "$input"
 })
 
@@ -165,8 +165,8 @@ tor --SocksPort $torport \
 # │ Imports and banner             │
 # └────────────────────────────────┘
 
-command cp ~/Stellar/lang_es/config/.bash_profile ~/.
-cd ~/Stellar/lang_es/config/themes
+command cp ~/Stellar/termux/lang_es/config/.bash_profile ~/.
+cd ~/Stellar/termux/lang_es/config/themes
 clear
 python banner.py
 cd
@@ -181,20 +181,20 @@ printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante
 # Sistema
 
 menu() {
-    cd ~/Stellar/lang_es/config
+    cd ~/Stellar/termux/lang_es/config
     python menu.py
     cd
 }
 
 reload() {
-    cd ~/Stellar/lang_es/config/themes
+    cd ~/Stellar/termux/lang_es/config/themes
     clear
     python banner.py
     cd
 }
 
 user-config() {
-    cd ~/Stellar/lang_es/config
+    cd ~/Stellar/termux/lang_es/config
     python user_config.py
     cd
 }
@@ -206,7 +206,7 @@ uninstall() {
 }
 
 update() {
-    cd ~/Stellar/lang_es
+    cd ~/Stellar/termux/lang_es
     bash update.sh
     cd
 }
@@ -218,7 +218,7 @@ reinstall() {
 }
 
 my() {
-    cd ~/Stellar/lang_es/config/system
+    cd ~/Stellar/termux/lang_es/config/system
     python user.py
     cd
 }
@@ -226,13 +226,13 @@ my() {
 # Discord
 
 weebhook-mass-spam() {
-    cd ~/Stellar/lang_es/commands/general/discord/weebhookraid
+    cd ~/Stellar/termux/lang_es/commands/general/discord/weebhookraid
     python weebhook_mass_spam.py
     cd
 }
 
 mass-delete-channels() {
-    cd ~/Stellar/lang_es/commands/general/discord/botraid
+    cd ~/Stellar/termux/lang_es/commands/general/discord/botraid
     python mass_delete_channels.py
     cd
 }
@@ -240,43 +240,43 @@ mass-delete-channels() {
 # Osint
 
 ipinfo() {
-    cd ~/Stellar/lang_es/commands/osint/main
+    cd ~/Stellar/termux/lang_es/commands/osint/main
     python ipinfo.py
     cd
 }
 
 phoneinfo() {
-    cd ~/Stellar/lang_es/commands/osint/main
+    cd ~/Stellar/termux/lang_es/commands/osint/main
     python phoneinfo.py
     cd
 }
 
 urlinfo() {
-    cd ~/Stellar/lang_es/commands/osint/main
+    cd ~/Stellar/termux/lang_es/commands/osint/main
     python urlinfo.py
     cd
 }
 
 metadatainfo() {
-    cd ~/Stellar/lang_es/commands/osint/main
+    cd ~/Stellar/termux/lang_es/commands/osint/main
     bash metadatainfo.sh
     cd
 }
 
 emailsearch() {
-    cd ~/Stellar/lang_es/commands/osint/main
+    cd ~/Stellar/termux/lang_es/commands/osint/main
     python emailfinder.py
     cd
 }
 
 userfinder() {
-    cd ~/Stellar/lang_es/commands/osint/main
+    cd ~/Stellar/termux/lang_es/commands/osint/main
     python userfinder.py
     cd
 }
 
 instagraminfo() {
-    cd ~/Stellar/lang_es/commands/osint/instagram
+    cd ~/Stellar/termux/lang_es/commands/osint/instagram
     python profileinfo.py
     cd
 }
@@ -285,37 +285,37 @@ instagraminfo() {
 # Osint/Discord
 
 userinfo() {
-    cd ~/Stellar/lang_es/commands/osint/discord
+    cd ~/Stellar/termux/lang_es/commands/osint/discord
     python userinfo.py
     cd
 }
 
 serverinfo() {
-    cd ~/Stellar/lang_es/commands/osint/discord
+    cd ~/Stellar/termux/lang_es/commands/osint/discord
     python serverinfo.py
     cd
 }
 
 searchinvites() {
-    cd ~/Stellar/lang_es/commands/osint/discord
+    cd ~/Stellar/termux/lang_es/commands/osint/discord
     python searchserverinvites.py
     cd
 }
 
 inviteinfo() {
-    cd ~/Stellar/lang_es/commands/osint/discord
+    cd ~/Stellar/termux/lang_es/commands/osint/discord
     python inviteinfo.py
     cd
 }
 
 role-mapper() {
-    cd ~/Stellar/lang_es/commands/osint/discord
+    cd ~/Stellar/termux/lang_es/commands/osint/discord
     python role_mapper.py
     cd
 }
 
 mutual-servers() {
-    cd ~/Stellar/lang_es/commands/osint/discord
+    cd ~/Stellar/termux/lang_es/commands/osint/discord
     python mutual_servers.py
     cd
 }
@@ -323,49 +323,49 @@ mutual-servers() {
 # Misc
 
 ia() {
-    cd ~/Stellar/lang_es/commands/misc/tools/ia
+    cd ~/Stellar/termux/lang_es/commands/misc/tools/ia
     python iahttp.py
     cd
 }
 
 ia-image() {
-    cd ~/Stellar/lang_es/commands/misc/tools/ia
+    cd ~/Stellar/termux/lang_es/commands/misc/tools/ia
     python ia_image.py
     cd
 }
 
 ia-config-apikey() {
-    cd ~/Stellar/lang_es/commands/misc/tools/ia
+    cd ~/Stellar/termux/lang_es/commands/misc/tools/ia
     bash config-api_key.sh
     cd
 }
 
 traductor() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/termux/lang_es/commands/misc/tools
     python traductor.py
     cd
 }
 
 myip() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/termux/lang_es/commands/misc/tools
     python myip.py
     cd
 }
 
 passwordgen() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/termux/lang_es/commands/misc/tools
     python passwordgen.py
     cd
 }
 
 encrypt-file() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/termux/lang_es/commands/misc/tools
     python encrypt-file.py
     cd
 }
 
 ddos() {
-    cd ~/Stellar/lang_es/commands/misc/tools
+    cd ~/Stellar/termux/lang_es/commands/misc/tools
     node ddos.js
     cd
 }
