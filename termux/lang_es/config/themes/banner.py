@@ -16,8 +16,8 @@ from rich.panel import Panel
 
 console = Console()
 
-themes_dir = os.path.expanduser("~/Stellar/lang_es/config/themes")
-system_dir = os.path.expanduser("~/Stellar/lang_es/config/system")
+themes_dir = os.path.expanduser("~/Stellar/termux/lang_es/config/themes")
+system_dir = os.path.expanduser("~/Stellar/termux/lang_es/config/system")
 
 def generate_palette():
     def color_rgb():
