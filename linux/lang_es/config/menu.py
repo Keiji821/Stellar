@@ -22,6 +22,8 @@ table.add_row("• bash", "Reinicia su sesión de la terminal", "🔐 Sistema")
 table.add_row("• reset", "Reestablece la terminal", "🔐 Sistema")
 table.add_row("• tor_enable", "Activa la protección TOR", "🔐 Sistema")
 table.add_row("• tor_disable", "Desactiva la protección TOR", "🔐 Sistema")
+table.add_row("• banner_enable", "Activa el banner Stellar", "🔐 Sistema")
+table.add_row("• banner_disable", "Desactiva el banner Stellar", "🔐 Sistema")
 
 table.add_row("")
 table.add_row("[code]Utilidades", style="bold green")
