@@ -44,6 +44,7 @@ backup_config() {
     safe_move "$CONFIG_THEMES_DIR/banner_color.txt" "$HOME" || return 1
     safe_move "$CONFIG_THEMES_DIR/banner_background.txt" "$HOME" || return 1
     safe_move "$CONFIG_THEMES_DIR/banner_background_color.txt" "$HOME" || return 1
+    safe_move "$CONFIG_THEMES_DIR/isbanner.txt" "$HOME" || return 1
 
     return 0
 }
@@ -78,6 +79,7 @@ restore_config() {
     safe_move "$HOME/banner_color.txt" "$CONFIG_THEMES_DIR/" || return 1
     safe_move "$HOME/banner_background.txt" "$CONFIG_THEMES_DIR/" || return 1
     safe_move "$HOME/banner_background_color.txt" "$CONFIG_THEMES_DIR/" || return 1
+    safe_move "$HOME/isbanner.txt" "$CONFIG_THEMES_DIR/" || return 1
 
     return 0
 }
