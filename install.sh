@@ -71,7 +71,7 @@ printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
 
-apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd root-repo)
+apt_packages=(python tor exiftool nmap termux-api dnsutils nodejs lsd root-repo)
 pip_packages=(
     beautifulsoup4
     pyfiglet
