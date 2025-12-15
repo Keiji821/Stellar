@@ -61,7 +61,7 @@ cd
 
 
 os=$(grep '^NAME=' /etc/os-release | cut -d'"' -f2)
-input=$(whoami 2>/dev/null || {
+input=$(whoami • hostname 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
     echo "$input" > "$HOME/Stellar/linux/lang_es/config/system/user.txt"
