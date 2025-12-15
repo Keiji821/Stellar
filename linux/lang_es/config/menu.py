@@ -20,6 +20,8 @@ table.add_row("• update", "Actualiza desde el repositorio de github", "🔐 Si
 table.add_row("• reinstall", "Reinstala Stellar en tu termux", "🔐 Sistema")
 table.add_row("• bash", "Reinicia su sesión de la terminal", "🔐 Sistema")
 table.add_row("• reset", "Reestablece la terminal", "🔐 Sistema")
+table.add_row("• tor_enable", "Activa la protección TOR", "🔐 Sistema")
+table.add_row("• tor_disable", "Desactiva la protección TOR", "🔐 Sistema")
 
 table.add_row("")
 table.add_row("[code]Utilidades", style="bold green")
