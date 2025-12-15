@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export Gris="\033[1;30m"
 export Negro="\033[0;30m"
 export Rojo="\033[0;31m"
@@ -45,6 +47,8 @@ export Invertido="\033[7m"
 export Oculto="\033[8m"
 export Tachado="\033[9m"
 
+export system="Stellar"
+
 clear
 
 banner="""
@@ -66,42 +70,6 @@ printf "\n"
 printf "\n${Rojo_Brillante}[!]${Blanco_Brillante} Note: The program is currently in Spanish,\nwith full English support coming soon. ${Reset}"
 printf "\n"
 
-# Inicio/Start - Stellar
-
-
-printf "${Amarillo_Brillante}"
-read -p "• Elija su idioma/Choose your language (Español/English): " language
-
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
-    printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar ha empezado a instalarse en su Termux/Terminal ${Reset}"
-fi
-
-sleep 3
-
-if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
-    printf "\n${Verde_Brillante}[+]${Verde_Brillante}${Blanco_Brillante} Stellar has started installing on your Termux/Terminal ${Reset}"
-fi
-
-sleep 3
-
-printf "\n"
-
-# Dependencias/Dependencies - Stellar
-
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Instalando dependencias necesarias para el correcto funcionamiento de Stellar ${Reset}"
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Esperé un momento... ${Reset}"
-fi
-
-sleep 3
-
-if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Installing dependencies required for Stellar to run properly ${Reset}"
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Please wait... ${Reset}"
-fi
-
-sleep 3
-
 apt_packages=(python tor cloudflared exiftool nmap termux-api dnsutils nodejs lsd root-repo)
 pip_packages=(
     beautifulsoup4
@@ -118,63 +86,25 @@ pip_packages=(
     pycryptodome
 )
 
-
-# Instalador/Installer - Stellar
-
-printf "\n"
-
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
-    printf "\n${Verde_Brillante}[+]${Amarillo_Brillante}${Blanco_Brillante} Empezando instalación... ${Reset}"
-    sleep 5
-   
-    apt install "${apt_packages[@]}" -y
-    if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
+spanish() {
+    printf "${Verde_Brillante}"
+    read -p "[${system}] ¿Desea comenzar con el proceso de instalación? (s/n): " next1
+    if [[ "$next1" == "n" ]]; then
+        printf "${Verde_Brillante}[${system}] ${Reset}¡Hasta luego!"
         exit 1
     fi
-
-    printf "\n"
-
-    pip3 install "${pip_packages[@]}"
-    if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}\n"
-        exit 1
-    fi
-fi
-
-if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
-    printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Starting installation... ${Reset}"
-    sleep 5
-
-    apt install "${apt_packages[@]}" -y
-    if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some APT packages failed to install. Please review the previous errors. ${Reset}\n"
-        exit 1
-    fi
-
-    printf "\n"
-
-    pip3 install "${pip_packages[@]}"
-    if [[ $? -ne 0 ]]; then
-        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Some PIP packages failed to install. Please review the previous errors. ${Reset}\n"
-        exit 1
-    fi
-fi
-
-printf "\n"
-
-sleep 3
-
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finalizando instalación... ${Reset}"
-    command cp ~/Stellar/lang_es/config/.bash_profile ~/.
-    command cp ~/Stellar/lang_es/config/.bashrc ~/.
-    command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
-    command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
-fi
-
-mkdir .termux
-cat > ~/.termux/color.properties << 'EOF'
+    if [[ "$next1" == "s" ]]; then
+        printf "${Verde_Brillante}"
+        read -p "[${system}] Escoja su plataforma (Termux/Linux): " plataform
+        if [[ "$plataform" == "Termux" ]]; then
+            printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación
+            de dependencias?\nPueden haber efectos no deseados"
+            read -p "» (s/n)" skip_install
+            if [[ "$skip_install" == "s" ]]; then
+                printf "${Cian_Brillante}[${system}] ${Reset} Instalando configuraciones basicas...."
+                cd
+                mkdir .termux
+                cat > ~/.termux/color.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
 color0=#0f111a
@@ -194,61 +124,290 @@ color13=#c792ea
 color14=#89ddff
 color15=#d0d0d0
 EOF
+                command cp ~/Stellar/lang_es/config/.bash_profile ~/.
+                command cp ~/Stellar/lang_es/config/.bashrc ~/.
+                command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
+                printf "${Cian_Brillante}[${system}] ${Reset}¡Listo!\nCerrando programa en 3 segundos\n"
+                sleep 3
+                exit 1
+            fi
+            if [[ "$skip_install" == "n" ]]; then
+                printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación...."
+                pkg install "${apt_packages[@]}" -y
+                if [[ $? -ne 0 ]]; then
+                    printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
+                    exit 1
+                fi
+                printf "\n"
+                
+                printf "${Cian_Brillante}[${system}] ${Reset}Instalando paquetes Python globalmente...\n"
+                pip3 install "${pip_packages[@]}"
+                if [[ $? -ne 0 ]]; then
+                    printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}\n"
+                    exit 1
+                fi
+                
+                cd
+                mkdir .termux
+                cat > ~/.termux/color.properties << 'EOF'
+background=#0f111a
+foreground=#a6accd
+color0=#0f111a
+color1=#ff5370
+color2=#c3e88d
+color3=#ffcb6b
+color4=#82aaff
+color5=#c792ea
+color6=#89ddff
+color7=#a6accd
+color8=#3a3c4e
+color9=#ff5370
+color10=#c3e88d
+color11=#ffcb6b
+color12=#82aaff
+color13=#c792ea
+color14=#89ddff
+color15=#d0d0d0
+EOF
+                command cp ~/Stellar/lang_es/config/.bash_profile ~/.
+                command cp ~/Stellar/lang_es/config/.bashrc ~/.
+                command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
+                
+                printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!"
+                printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos..."
+                sleep 3
+                bash
+                exit 1
+            fi
+        fi
+        
+        if [[ "$plataform" == "linux" ]]; then
+            printf "${Cian_Brillante}[${system}] ${Reset}¿Desea saltar proceso de instalación
+            de dependencias?\nPueden haber efectos no deseados"
+            read -p "» (s/n)" skip_install
+            if [[ "$skip_install" == "s" ]]; then
+                command cp ~/Stellar/lang_es/config/.bash_profile ~/.
+                command cp ~/Stellar/lang_es/config/.bashrc ~/.
+                printf "${Cian_Brillante}[${system}] ${Reset}¡Listo!\nCerrando programa en 3 segundos\n"
+                sleep 3
+                exit 1
+            fi
+            if [[ "$skip_install" == "n" ]]; then
+                printf "${Cian_Brillante}[${system}] ${Reset}Comenzando instalación...."
+                sudo apt install "${apt_packages[@]}" -y
+                if [[ $? -ne 0 ]]; then
+                    printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes APT. Revisa los errores anteriores. ${Reset}\n"
+                    exit 1
+                fi
+                
+                printf "\n"
+                
+                printf "${Cian_Brillante}[${system}] ${Reset}Probando instalación de paquetes PIP globalmente...\n"
+                pip3 install --user beautifulsoup4 2>/dev/null
+                if [[ $? -eq 0 ]]; then
+                    printf "${Verde_Brillante}[${system}] ${Reset}Se pueden instalar paquetes PIP globalmente.\n"
+                    pip3 install "${pip_packages[@]}"
+                    if [[ $? -ne 0 ]]; then
+                        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}\n"
+                        exit 1
+                    fi
+                else
+                    printf "${Amarillo_Brillante}[${system}] ${Reset}No se pueden instalar paquetes PIP globalmente, creando entorno virtual...\n"
+                    python3 -m venv venv
+                    if [[ $? -eq 0 ]]; then
+                        source venv/bin/activate
+                        printf "${Verde_Brillante}[${system}] ${Reset}Entorno virtual activado.\n"
+                        pip install "${pip_packages[@]}"
+                        if [[ $? -ne 0 ]]; then
+                            printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Falló la instalación de algunos paquetes PIP. Revisa los errores anteriores. ${Reset}\n"
+                            exit 1
+                        fi
+                        deactivate
+                        printf "${Verde_Brillante}[${system}] ${Reset}Entorno virtual creado en la carpeta 'venv'.\n"
+                    else
+                        printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante} No se pudo crear entorno virtual ni instalar globalmente. ${Reset}\n"
+                        exit 1
+                    fi
+                fi
+                
+                printf "${Verde_Brillante}[${system}] ${Reset}¡Hecho!"
+                printf "${Verde_Brillante}[${system}] ${Reset}Cerrando programa en 3 segundos..."
+                sleep 3
+                printf "${Verde_Brillante}[${system}] ${Reset}Reinicie su terminal para ver los cambios"
+                exit 1
+            fi
+        fi
+    fi
+    
+}
 
-if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
-    printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Finishing installation... ${Reset}"
-    command cp ~/Stellar/lang_es/config/.bash_profile ~/.
-    command cp ~/Stellar/lang_es/config/.bashrc ~/.
-    command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
+english() {
+    printf "${Verde_Brillante}"
+    read -p "[${system}] Do you want to start the installation process? (y/n): " next1
+    if [[ "$next1" == "n" ]]; then
+        printf "${Verde_Brillante}[${system}] ${Reset}Goodbye!"
+        exit 1
+    fi
+    if [[ "$next1" == "y" ]]; then
+        printf "${Verde_Brillante}"
+        read -p "[${system}] Choose your platform (Termux/Linux): " plataform
+        if [[ "$plataform" == "Termux" ]]; then
+            printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?
+            There may be unwanted effects"
+            read -p "» (y/n)" skip_install
+            if [[ "$skip_install" == "y" ]]; then
+                printf "${Cian_Brillante}[${system}] ${Reset} Installing basic configurations...."
+                cd
+                mkdir .termux
+                cat > ~/.termux/color.properties << 'EOF'
+background=#0f111a
+foreground=#a6accd
+color0=#0f111a
+color1=#ff5370
+color2=#c3e88d
+color3=#ffcb6b
+color4=#82aaff
+color5=#c792ea
+color6=#89ddff
+color7=#a6accd
+color8=#3a3c4e
+color9=#ff5370
+color10=#c3e88d
+color11=#ffcb6b
+color12=#82aaff
+color13=#c792ea
+color14=#89ddff
+color15=#d0d0d0
+EOF
+                command cp ~/Stellar/lang_en/config/.bash_profile ~/.
+                command cp ~/Stellar/lang_en/config/.bashrc ~/.
+                command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
+                printf "${Cian_Brillante}[${system}] ${Reset}Done!\nClosing program in 3 seconds\n"
+                sleep 3
+                exit 1
+            fi
+            if [[ "$skip_install" == "n" ]]; then
+                printf "${Cian_Brillante}[${system}] ${Reset}Starting installation...."
+                pkg install "${apt_packages[@]}" -y
+                if [[ $? -ne 0 ]]; then
+                    printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
+                    exit 1
+                fi
+                printf "\n"
+                
+                printf "${Cian_Brillante}[${system}] ${Reset}Installing Python packages globally...\n"
+                pip3 install "${pip_packages[@]}"
+                if [[ $? -ne 0 ]]; then
+                    printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some PIP packages. Check previous errors. ${Reset}\n"
+                    exit 1
+                fi
+                
+                cd
+                mkdir .termux
+                cat > ~/.termux/color.properties << 'EOF'
+background=#0f111a
+foreground=#a6accd
+color0=#0f111a
+color1=#ff5370
+color2=#c3e88d
+color3=#ffcb6b
+color4=#82aaff
+color5=#c792ea
+color6=#89ddff
+color7=#a6accd
+color8=#3a3c4e
+color9=#ff5370
+color10=#c3e88d
+color11=#ffcb6b
+color12=#82aaff
+color13=#c792ea
+color14=#89ddff
+color15=#d0d0d0
+EOF
+                command cp ~/Stellar/lang_en/config/.bash_profile ~/.
+                command cp ~/Stellar/lang_en/config/.bashrc ~/.
+                command cp ~/Stellar/fonts/fira-mono/font.ttf ~/termux
+                
+                printf "${Verde_Brillante}[${system}] ${Reset}Done!"
+                printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds..."
+                sleep 3
+                bash
+                exit 1
+            fi
+        fi
+        
+        if [[ "$plataform" == "Linux" ]]; then
+            printf "${Cian_Brillante}[${system}] ${Reset}Do you want to skip the dependency installation process?
+            There may be unwanted effects"
+            read -p "» (y/n)" skip_install
+            if [[ "$skip_install" == "y" ]]; then
+                command cp ~/Stellar/lang_en/config/.bash_profile ~/.
+                command cp ~/Stellar/lang_en/config/.bashrc ~/.
+                printf "${Cian_Brillante}[${system}] ${Reset}Done!\nClosing program in 3 seconds\n"
+                sleep 3
+                exit 1
+            fi
+            if [[ "$skip_install" == "n" ]]; then
+                printf "${Cian_Brillante}[${system}] ${Reset}Starting installation...."
+                sudo apt install "${apt_packages[@]}" -y
+                if [[ $? -ne 0 ]]; then
+                    printf "\n${Verde_Brillante}[!][${system}]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some APT packages. Check previous errors. ${Reset}\n"
+                    exit 1
+                fi
+                
+                printf "\n"
+                
+                printf "${Cian_Brillante}[${system}] ${Reset}Testing PIP package installation globally...\n"
+                pip3 install --user beautifulsoup4 2>/dev/null
+                if [[ $? -eq 0 ]]; then
+                    printf "${Verde_Brillante}[${system}] ${Reset}PIP packages can be installed globally.\n"
+                    pip3 install "${pip_packages[@]}"
+                    if [[ $? -ne 0 ]]; then
+                        printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some PIP packages. Check previous errors. ${Reset}\n"
+                        exit 1
+                    fi
+                else
+                    printf "${Amarillo_Brillante}[${system}] ${Reset}Cannot install PIP packages globally, creating virtual environment...\n"
+                    python3 -m venv venv
+                    if [[ $? -eq 0 ]]; then
+                        source venv/bin/activate
+                        printf "${Verde_Brillante}[${system}] ${Reset}Virtual environment activated.\n"
+                        pip install "${pip_packages[@]}"
+                        if [[ $? -ne 0 ]]; then
+                            printf "\n${Verde_Brillante}[!]${Amarillo_Brillante}${Blanco_Brillante} Failed to install some PIP packages. Check previous errors. ${Reset}\n"
+                            exit 1
+                        fi
+                        deactivate
+                        printf "${Verde_Brillante}[${system}] ${Reset}Virtual environment created in 'venv' folder.\n"
+                    else
+                        printf "\n${Rojo_Brillante}[!]${Amarillo_Brillante} Could not create virtual environment or install globally. ${Reset}\n"
+                        exit 1
+                    fi
+                fi
+                
+                printf "${Verde_Brillante}[${system}] ${Reset}Done!"
+                printf "${Verde_Brillante}[${system}] ${Reset}Closing program in 3 seconds..."
+                sleep 3
+                printf "${Verde_Brillante}[${system}] ${Reset}Restart your terminal to see the changes"
+                exit 1
+            fi
+        fi
+    fi
+    
+}
+
+printf "${Verde_Brillante}"
+read -p "Choose you language (Spanish/English): " language
+
+
+if [[ "$language" == "Spanish" || "$language" == "Español" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" || "$language" == "Es" ]]; then
+
+    spanish
+    
 fi
 
-sleep 5
+if [[ "$language" == "English" || "$language" == "english" || "$language" == "EN" || "$language" == "En" || "$language" == "en" || "$language" == "Us" ]]; then
 
-# Final/End - Stellar
-
-printf "\n"
-
-if [[ "$language" == "Español" || "$language" == "Spanish" || "$language" == "spanish" || "$language" == "español" || "$language" == "es" ]]; then
-    printf "\n${Verde_Brillante}✓${Blanco_Brillante} ¡Stellar se ha instalado correctamente!${Reset}"
-    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: Es recomendable que cierres Termux y lo vuelvas a abrir para que todo e incluyendo ${Rojo_Brillante}TOR${Blanco_Brillante} funcione correctamente ${Reset}"
-
-    Salir=""
-
-    while [[ "$Salir" != "Salir" ]]; do
-           
-        printf "\n${Verde_Brillante}¿Desea salir del programa?\n" 
-        read -p "Escriba (Salir) para continuar: " Salir
+    english
     
-        case "$Salir" in
-            Salir)
-                 printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Iniciando sesión en Stellar...${Reset}"
-        esac
-done
-
-
-   sleep 5
-   login
-fi
-
-
-if [[ "$language" == "English" || "$language" == "english" || "$language" == "en" ]]; then
-    printf "\n${Verde_Brillante}✓${Blanco_Brillante} Stellar has been installed successfully!${Reset}"    
-    printf "\n${Rojo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Nota: It is recommended that you close Termux and reopen it so that everything including ${Rojo_Brillante}TOR${Blanco_Brillante} work properly ${Reset}"
-
-    Exit=""
-
-    while [[ "$Exit" != "Exit" ]]; do
-    
-        printf "\n${Verde_Brillante}Do you want to exit the program?\n" 
-        read -p "Type (Exit) to continue: " Exit
-    
-        case "$Exit" in
-            Exit)
-                 printf "\n${Amarillo_Brillante}${Rojo_Brillante}[!]${Blanco_Brillante} Logging in to Stellar...${Reset}"
-        esac
-done    
-
-
-   sleep 5
-   login
 fi
