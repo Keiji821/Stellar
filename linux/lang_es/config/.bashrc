@@ -100,7 +100,7 @@ clear
 # │ Security                       │
 # └────────────────────────────────┘
 
-tor_enable() {
+tor-enable() {
 pkill -f "tor"
 pkill -f "9052"
 pkill -f "9053"
@@ -119,7 +119,7 @@ sleep 5
 printf "${Verde_Brillante}[INFO] ${Verde_Brillante}Tor ha sido activado"
 }
 
-tor_disable() {
+tor-disable() {
 unset torport
 unset dnsport
 unset ALL_PROXY
@@ -198,15 +198,17 @@ my() {
     cd
 }
 
-banner_enable() {
+banner-enable() {
     echo "y" > ~/Stellar/linux/lang_es/config/themes/isbanner.txt
     printf "${Verde_Brillante}[INFO] ${Reset}El banner ha sido habilitado"
     printf ""
+    printf ""
 }
 
-banner_disable() {
+banner-disable() {
     echo "n" > ~/Stellar/linux/lang_es/config/themes/isbanner.txt
     printf "${Rojo_Brillante}[INFO] ${Reset}El banner ha sido deshabilitado"
+    printf ""
     printf ""
 }
 
