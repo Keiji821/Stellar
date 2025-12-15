@@ -15,7 +15,7 @@ from rich.style import Style
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
 console = Console()
-STELLAR_DIR = Path("~/Stellar/lang_es").expanduser()
+STELLAR_DIR = Path("~/Stellar/termux/lang_es").expanduser()
 THEMES_DIR = STELLAR_DIR / "config/themes"
 SYSTEM_DIR = STELLAR_DIR / "config/system"
 TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
