@@ -19,7 +19,7 @@ STELLAR_DIR = Path("~/Stellar/termux/lang_es").expanduser()
 THEMES_DIR = STELLAR_DIR / "config/themes"
 SYSTEM_DIR = STELLAR_DIR / "config/system"
 TERMUX_COLORS_PATH = Path("~/.termux/colors.properties").expanduser()
-LOGIN_METHOD_PATH = SYSTEM_DIR / "login_method.txt"
+LOGIN_METHOD_PATH = SYSTEM_DIR / "login_method.st"
 THEMES_DIR.mkdir(parents=True, exist_ok=True)
 SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -152,11 +152,11 @@ def create_status_table():
 def show_status():
     status_table = create_status_table()
 
-    banner_path = THEMES_DIR / "banner.txt"
+    banner_path = THEMES_DIR / "banner.st" 
     banner_status = "✅ Configurado" if banner_path.exists() else "❌ No configurado"
     status_table.add_row("Banner", banner_status)
 
-    background_path = THEMES_DIR / "banner_background.txt"
+    background_path = THEMES_DIR / "banner_background.st" 
     background_enabled = background_path.exists() and background_path.read_text().strip() == "si"
     background_status = "✅ Activado" if background_enabled else "❌ Desactivado"
     status_table.add_row("Fondo de banner", background_status)
@@ -164,7 +164,7 @@ def show_status():
     termux_status = "✅ Configurado" if TERMUX_COLORS_PATH.exists() else "❌ No configurado"
     status_table.add_row("Tema Termux", termux_status)
 
-    user_path = SYSTEM_DIR / "user.txt"
+    user_path = SYSTEM_DIR / "user.st" 
     user_status = "✅ Configurado" if user_path.exists() else "❌ No configurado"
     if user_path.exists():
         user_status += f" ({user_path.read_text().strip()})"
@@ -332,7 +332,7 @@ def edit_banner_text():
     clear_screen()
     display_header("EDITAR TEXTO DEL BANNER")
     display_subtitle("Usa nano para personalizar tu banner")
-    path = THEMES_DIR / "banner.txt"
+    path = THEMES_DIR / "banner.st"
     if not path.exists():
         path.write_text("Stellar Terminal\nPersonaliza tu experiencia")
     subprocess.run(["nano", str(path)])
@@ -349,7 +349,7 @@ def change_banner_color():
         if is_valid_color(color):
             break
         display_error(f"Color '{color}' no válido. Intente nuevamente")
-    (THEMES_DIR / "banner_color.txt").write_text(color)
+    (THEMES_DIR / "banner_color.st").write_text(color)
     display_success(f"Color del banner actualizado: [{color}]{color}[/]")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
@@ -363,14 +363,14 @@ def change_banner_background_color():
         if is_valid_color(color):
             break
         display_error(f"Color '{color}' no válido. Intente nuevamente")
-    (THEMES_DIR / "banner_background_color.txt").write_text(color)
+    (THEMES_DIR / "banner_background_color.st").write_text(color)
     display_success(f"Color de fondo actualizado: [{color}]{color}[/]")
     console.input(f"\n[{COLOR_INFO}]Pulsa Enter para continuar →[/]")
 
 def toggle_banner_background():
     clear_screen()
     display_header("ACTIVAR/DESACTIVAR FONDO DEL BANNER")
-    path = THEMES_DIR / "banner_background.txt"
+    path = THEMES_DIR / "banner_background.st" 
     current_background = "no"
     if path.exists():
         current_background = path.read_text().strip()
@@ -387,10 +387,10 @@ def toggle_banner_background():
 def banner_preview():
     clear_screen()
     display_header("VISTA PREVIA DEL BANNER")
-    path = THEMES_DIR / "banner.txt"
-    color_path = THEMES_DIR / "banner_color.txt"
-    background_path = THEMES_DIR / "banner_background.txt"
-    background_color_path = THEMES_DIR / "banner_background_color.txt"
+    path = THEMES_DIR / "banner.st"
+    color_path = THEMES_DIR / "banner_color.st"
+    background_path = THEMES_DIR / "banner_background.st"
+    background_color_path = THEMES_DIR / "banner_background_color.st"
     if path.exists():
         banner = path.read_text()
         color = color_path.read_text().strip() if color_path.exists() else "bright_white"
@@ -507,7 +507,7 @@ def show_themes():
 def modify_user():
     clear_screen()
     display_header("EDITAR USUARIO")
-    user_path = SYSTEM_DIR / "user.txt"
+    user_path = SYSTEM_DIR / "user.st"
     while True:
         new_user = Prompt.ask(f"[{COLOR_ACCENT}]» Ingrese nuevo nombre de usuario →[/]").strip()
         if new_user:
@@ -520,7 +520,7 @@ def modify_user():
 def show_user():
     clear_screen()
     display_header("USUARIO ACTUAL")
-    user_path = SYSTEM_DIR / "user.txt"
+    user_path = SYSTEM_DIR / "user.st"
     if user_path.exists():
         user = user_path.read_text().strip()
         panel = Panel.fit(
