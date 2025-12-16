@@ -367,15 +367,20 @@ ddos() {
 
 PLUGINS_DIR="$HOME/Stellar/plugins"
 if [ -d "$PLUGINS_DIR" ]; then
+    plugin_count=0
     for plugin_script in "$PLUGINS_DIR"/*; do
         if [ -f "$plugin_script" ]; then
             plugin_name=$(basename "$plugin_script")
             command_name="${plugin_name%.*}"
             eval "_stellar_plugin_$command_name() { \"$plugin_script\" \"\$@\"; }"
             alias "$command_name"="_stellar_plugin_$command_name"
-            printf "${Gris}[PLUGIN]${Reset} Comando registrado: ${Cian}%s${Reset} -> ${Amarillo}%s${Reset}\n" "$command_name" "$plugin_name"
+            ((plugin_count++))
         fi
     done
+    
+    if [ $plugin_count -gt 0 ]; then
+        printf "${Gris}[INFO]${Reset} Plugins cargados: ${Cian}%d${Reset}\n" "$plugin_count"
+    fi
     
     original_command_not_found_handle=$(declare -f command_not_found_handle)
     eval "${original_command_not_found_handle/command_not_found_handle/original_command_not_found}"
