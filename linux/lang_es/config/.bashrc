@@ -366,6 +366,7 @@ ddos() {
 # │ Plugins system                │
 # └────────────────────────────────┘
 
+chmod +x ~/Stellar/plugins/*.sh ~/Stellar/plugins/*.py 2>/dev/null
 PLUGINS_DIR="$HOME/Stellar/plugins"
 if [ -d "$PLUGINS_DIR" ]; then
     plugin_count=0
