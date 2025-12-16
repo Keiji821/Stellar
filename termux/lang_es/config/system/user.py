@@ -8,8 +8,6 @@ import requests
 
 console = Console()
 
-# Sistema
-
 response = requests.get(f'https://api.ipapi.is/?ip=')
 data = response.json()
 
@@ -37,29 +35,25 @@ network = str(data.get("company", {}).get("network"))
 
 route = str(data.get("asn", {}).get("route"))
 
-with open("user.txt", encoding="utf-8") as f:
+with open("user.st", encoding="utf-8") as f:
     user = f.read().strip()
 
-with open("password.txt", encoding="utf-8") as f:
+with open("password.st", encoding="utf-8") as f:
     password = f.read().strip()
 
-with open("login_method.txt", encoding="utf-8") as f:
+with open("login_method.st", encoding="utf-8") as f:
     login_method = f.read().strip()
-
-# Ruta
 
 os.chdir(os.path.expanduser("~/Stellar/termux/lang_es/config/themes"))
 
-# Temas
-
-with open("banner.txt", encoding="utf-8") as f:
+with open("banner.st", encoding="utf-8") as f:
     bannerTable = f.read().strip()
     if bannerTable == "":
         bannerTable = "No configurado"
     if bannerTable != "":
         bannerTable = "Configurado"
 
-with open("banner_color.txt", encoding="utf-8") as f:
+with open("banner_color.st", encoding="utf-8") as f:
     banner_color = f.read().strip()
 
 if banner_color == "":
@@ -121,12 +115,12 @@ banner_color_tr = {
 }
 color_banner = banner_color_tr.get(banner_color)
 
-with open("banner_background.txt", encoding="utf-8") as f:
+with open("banner_background.st", encoding="utf-8") as f:
     banner_background = f.read().strip()
 if banner_background == "no":
     banner_background = "No configurado"
 
-with open("banner_background_color.txt", encoding="utf-8") as f:
+with open("banner_background_color.st", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
 if banner_background_color == "":
@@ -189,8 +183,6 @@ banner_background_color_tr = {
 
 color_background_banner = banner_background_color_tr.get(banner_background_color, banner_background_color)
 
-# Perfíl 
-            
 console.print("")
 table = Table(title="Perfil", title_justify="center", title_style="bold green")
 table.add_column(f"[bold green] Información", style="code", no_wrap=False)
@@ -226,9 +218,7 @@ table.add_row("Ruta", route)
 
 console.print(table, style="bright_white", justify="center")
 
-# Banner
-
-with open("banner.txt", encoding="utf-8") as f:
+with open("banner.st", encoding="utf-8") as f:
     bannerHeader = f.read().strip()
 
 styled_banner = Text.from_markup(
@@ -248,4 +238,3 @@ user_banner = Panel(
 console.print(user_banner, justify="center")
 
 console.print("")
-
