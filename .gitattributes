@@ -4,3 +4,4 @@
 *.st -diff
 *.st -merge
 *.st linguist-documentation=true
+*.st linguist-language=INI
