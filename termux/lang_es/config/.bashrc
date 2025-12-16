@@ -13,7 +13,6 @@ export Blanco="\033[0;37m"
 export Negro_Brillante="\033[1;30m"
 export Rojo_Brillante="\033[1;31m"
 export Verde_Brillante="\033[1;32m"
-export Amarillo_Brillante="\033[1;33m"
 export Azul_Brillante="\033[1;34m"
 export Magenta_Brillante="\033[1;35m"
 export Cian_Brillante="\033[1;36m"
@@ -55,7 +54,6 @@ clear
 history -c && rm -f ~/.bash_history
 cd
 
-
 # ┌────────────────────────────────┐
 # │ Security lock for the screen   │
 # └────────────────────────────────┘
@@ -63,8 +61,8 @@ cd
 # Método de desbloqueo - Huella dactilar
 cd ~/Stellar/termux/lang_es/config/system
 
-if [ -f login_method.txt ]; then
-    method=$(cat login_method.txt)
+if [ -f login_method.st ]; then
+    method=$(cat login_method.st)
 
     if [ "$method" = "termux-fingerprint" ]; then
         termux-toast -c red -b black -g medium "🔐 Verificación de huella requerida"
@@ -99,15 +97,14 @@ fi
 
 cd
 
-
 # ┌────────────────────────────────┐
 # │ Definition of PS1 (input)      │
 # └────────────────────────────────┘
 
-input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/termux/lang_es/config/system/user.txt" 2>/dev/null || {
+input=$(grep -v '^[[:space:]]*$' "$HOME/Stellar/termux/lang_es/config/system/user.st" 2>/dev/null || {
     echo -ne "\033[1;32mUsuario: \033[0m"
     read -r input
-    echo "$input" > "$HOME/Stellar/termux/lang_es/config/system/user.txt"
+    echo "$input" > "$HOME/Stellar/termux/lang_es/config/system/user.st"
     echo "$input"
 })
 
@@ -160,7 +157,6 @@ tor --SocksPort $torport \
     --AvoidDiskWrites 1 \
     --DNSPort $dnsport &>tor.txt &
 
-
 # ┌────────────────────────────────┐
 # │ Imports and banner             │
 # └────────────────────────────────┘
@@ -172,7 +168,6 @@ python banner.py
 cd
 printf "${Gris}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
 printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante}menu${Reset} para ver los comandos disponibles.\n"
-
 
 # ┌────────────────────────────────┐
 # │ Definition of commands         │
@@ -281,7 +276,6 @@ instagraminfo() {
     cd
 }
 
-
 # Osint/Discord
 
 userinfo() {
@@ -371,7 +365,7 @@ ddos() {
 }
 
 # ┌────────────────────────────────┐
-# │ Plugins system                │
+# │ Plugins system                 │
 # └────────────────────────────────┘
 
 chmod +x ~/Stellar/plugins/*.sh ~/Stellar/plugins/*.py 2>/dev/null
@@ -424,8 +418,8 @@ fi
 cd ~/.termux
 cat > termux.properties << 'EOF'
 # allow-external-apps = true
-# default-working-directory = /data/data/# com.termux/files/home
-# disable-terminal-session-change-toast = # true
+# default-working-directory = /data/data/com.termux/files/home
+# disable-terminal-session-change-toast = true
 # hide-soft-keyboard-on-startup = true
 # soft-keyboard-toggle-behaviour = enable/disable
 # terminal-transcript-rows = 2000
@@ -467,7 +461,6 @@ x11() {
     termux-x11 :0 &
     export DISPLAY=:0
 }
-
 
 command_not_found_handle() {
     echo -e "${Gris}[INFO] ${Blanco_Brillante}Comando no encontrado: $1"
