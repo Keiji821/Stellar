@@ -363,7 +363,9 @@ ddos() {
     cd
 }
 
-# Plugins 
+# ┌────────────────────────────────┐
+# │ Plugins system                │
+# └────────────────────────────────┘
 
 PLUGINS_DIR="$HOME/Stellar/plugins"
 if [ -d "$PLUGINS_DIR" ]; then
@@ -406,6 +408,10 @@ if [ -d "$PLUGINS_DIR" ]; then
         original_command_not_found "$@"
     }
 fi
+
+# ┌────────────────────────────────┐
+# │ Other configs                 │
+# └────────────────────────────────┘
 
 alias ls='lsd --icon-theme unicode'
 
