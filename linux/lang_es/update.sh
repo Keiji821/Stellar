@@ -37,9 +37,7 @@ safe_move() {
 backup_config() {
     show_progress "Resguardando archivos de configuración"
 
-    safe_move "$CONFIG_SYSTEM_DIR/user.txt" "$HOME" || return 1
     safe_move "$CONFIG_SYSTEM_DIR/login_method.txt" "$HOME" || return 1
-    safe_move "$CONFIG_SYSTEM_DIR/password.txt" "$HOME" || return 1
     safe_move "$CONFIG_THEMES_DIR/banner.txt" "$HOME" || return 1
     safe_move "$CONFIG_THEMES_DIR/banner_color.txt" "$HOME" || return 1
     safe_move "$CONFIG_THEMES_DIR/banner_background.txt" "$HOME" || return 1
@@ -72,9 +70,7 @@ update_repository() {
 restore_config() {
     show_progress "Restaurando configuraciones"
 
-    safe_move "$HOME/user.txt" "$CONFIG_SYSTEM_DIR/" || return 1
     safe_move "$HOME/login_method.txt" "$CONFIG_SYSTEM_DIR/" || return 1
-    safe_move "$HOME/password.txt" "$CONFIG_SYSTEM_DIR/" || return 1
     safe_move "$HOME/banner.txt" "$CONFIG_THEMES_DIR/" || return 1
     safe_move "$HOME/banner_color.txt" "$CONFIG_THEMES_DIR/" || return 1
     safe_move "$HOME/banner_background.txt" "$CONFIG_THEMES_DIR/" || return 1
