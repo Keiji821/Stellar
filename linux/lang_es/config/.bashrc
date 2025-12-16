@@ -140,7 +140,7 @@ printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
 command cp ~/Stellar/linux/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/linux/lang_es/config/themes
 clear
-data=$(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.txt)
+data=$(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.st)
 if [[ "$data" == "y" ]]; then
     python banner.py
 fi
@@ -164,7 +164,7 @@ menu() {
 reload() {
     cd ~/Stellar/linux/lang_es/config/themes
     clear
-    data=$(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.txt)
+    data=$(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.st)
     if [[ "$data" == "y" ]]; then
         python banner.py
     fi
@@ -202,14 +202,14 @@ my() {
 }
 
 banner-enable() {
-    echo "y" > ~/Stellar/linux/lang_es/config/themes/isbanner.txt
+    echo "y" > ~/Stellar/linux/lang_es/config/themes/isbanner.st
     printf "${Verde_Brillante}[INFO] ${Reset}El banner ha sido habilitado"
     printf ""
     printf "\n"
 }
 
 banner-disable() {
-    echo "n" > ~/Stellar/linux/lang_es/config/themes/isbanner.txt
+    echo "n" > ~/Stellar/linux/lang_es/config/themes/isbanner.st
     printf "${Rojo_Brillante}[INFO] ${Reset}El banner ha sido deshabilitado"
     printf ""
     printf "\n"
