@@ -37,14 +37,9 @@ network = str(data.get("company", {}).get("network"))
 
 route = str(data.get("asn", {}).get("route"))
 
-with open("user.txt", encoding="utf-8") as f:
-    user = f.read().strip()
+user = os.system("hostname") or os.system("whoami")
 
-with open("password.txt", encoding="utf-8") as f:
-    password = f.read().strip()
-
-with open("login_method.txt", encoding="utf-8") as f:
-    login_method = f.read().strip()
+login_method = os.system("cat login_method.st")
 
 # Ruta
 
@@ -210,7 +205,6 @@ table.add_row("")
 table.add_row("Seguridad", style="bold green")
 table.add_row("")
 table.add_row("Método de verificación", login_method)
-table.add_row("Contraseña", password)
 table.add_row("")
 table.add_row("Privacidad", style="bold green")
 table.add_row("")
