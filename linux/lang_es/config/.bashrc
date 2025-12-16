@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -n "$PS1" ]; then
-
+chmod +x ~/Stellar/plugins/*.sh ~/Stellar/plugins/*.py 2>/dev/null
 source venv/bin/activate
 export Gris="\033[1;30m"
 export Negro="\033[0;30m"
