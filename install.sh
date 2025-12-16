@@ -1,6 +1,6 @@
 #!/bin/bash
 cd
-
+ 
 export Gris="\033[1;30m"
 export Negro="\033[0;30m"
 export Rojo="\033[0;31m"
