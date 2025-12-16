@@ -1,1 +1,6 @@
-
+*.st linguist-detectable=false
+*.st linguist-language=Text
+*.st linguist-vendored=true
+*.st -diff
+*.st -merge
+*.st linguist-documentation=true
