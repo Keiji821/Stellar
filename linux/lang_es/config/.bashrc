@@ -363,6 +363,45 @@ ddos() {
     cd
 }
 
+# Plugins 
+
+PLUGINS_DIR="$HOME/Stellar/plugins"
+if [ -d "$PLUGINS_DIR" ]; then
+    for plugin_script in "$PLUGINS_DIR"/*; do
+        if [ -f "$plugin_script" ]; then
+            plugin_name=$(basename "$plugin_script")
+            command_name="${plugin_name%.*}"
+            eval "_stellar_plugin_$command_name() { \"$plugin_script\" \"\$@\"; }"
+            alias "$command_name"="_stellar_plugin_$command_name"
+            printf "${Gris}[PLUGIN]${Reset} Comando registrado: ${Cian}%s${Reset} -> ${Amarillo}%s${Reset}\n" "$command_name" "$plugin_name"
+        fi
+    done
+    
+    original_command_not_found_handle=$(declare -f command_not_found_handle)
+    eval "${original_command_not_found_handle/command_not_found_handle/original_command_not_found}"
+    
+    command_not_found_handle() {
+        local cmd="$1"
+        local plugin_path="$PLUGINS_DIR/$cmd".*
+        
+        for file in $plugin_path; do
+            if [ -f "$file" ]; then
+                echo -e "${Gris}[INFO]${Reset} El comando '${Blanco}$cmd${Reset}' existe como plugin (${Verde}$(basename "$file")${Reset}). ¿Quieres ejecutarlo? (s/n): "
+                read -n 1 -r
+                echo
+                if [[ $REPLY =~ ^[Ss]$ ]]; then
+                    "$file" "${@:2}"
+                    return $?
+                else
+                    return 127
+                fi
+            fi
+        done
+        
+        original_command_not_found "$@"
+    }
+fi
+
 alias ls='lsd --icon-theme unicode'
 
 command_not_found_handle() {
