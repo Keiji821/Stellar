@@ -1,6 +1,6 @@
 from rich.console import Console
 import os
-from os import system
+import subprocess
 from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
@@ -35,9 +35,21 @@ network = str(data.get("company", {}).get("network"))
 
 route = str(data.get("asn", {}).get("route"))
 
-user = os.system("hostname") or os.system("whoami")
+try:
+    result = subprocess.run(["hostname"], capture_output=True, text=True, check=True)
+    user = result.stdout.strip()
+except subprocess.CalledProcessError:
+    try:
+        result = subprocess.run(["whoami"], capture_output=True, text=True, check=True)
+        user = result.stdout.strip()
+    except subprocess.CalledProcessError:
+        user = "Desconocido"
 
-login_method = os.system("cat login_method.st")
+try:
+    result = subprocess.run(["cat", "login_method.st"], capture_output=True, text=True, check=True)
+    login_method = result.stdout.strip()
+except (subprocess.CalledProcessError, FileNotFoundError):
+    login_method = "No configurado"
 
 os.chdir(os.path.expanduser("~/Stellar/linux/lang_es/config/themes"))
 
