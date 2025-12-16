@@ -2,4 +2,3 @@
 .cache/
 venv/
 __pycache__
-plugins/
