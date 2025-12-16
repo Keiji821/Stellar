@@ -58,10 +58,10 @@ def process_style(string):
     return Style(color=color, bold=bold)
 
 palette = generate_palette()
-banner = read_file(f"{themes_dir}/banner.txt")
-col = read_file(f"{themes_dir}/banner_color.txt", "#6E97B7")
-bg = read_file(f"{themes_dir}/banner_background.txt", "no")
-bgcol = read_file(f"{themes_dir}/banner_background_color.txt", "#4D8FAC")
+banner = read_file(f"{themes_dir}/banner.st")
+col = read_file(f"{themes_dir}/banner_color.st", "#6E97B7")
+bg = read_file(f"{themes_dir}/banner_background.st", "no")
+bgcol = read_file(f"{themes_dir}/banner_background_color.st", "#4D8FAC")
 user = read_file(f"{system_dir}/user.txt", "Usuario")
 
 style = process_style(col)
