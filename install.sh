@@ -157,7 +157,7 @@ EOF
 
                 cd
                 mkdir -p .termux
-                cat > ~/.termux/color.properties << 'EOF'
+                cat > ~/.termux/colors.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
 color0=#0f111a
