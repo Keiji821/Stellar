@@ -108,7 +108,7 @@ spanish() {
                 printf "${Cian_Brillante}[${system}] ${Reset}Instalando configuraciones basicas....\n"
                 cd
                 mkdir -p .termux
-                cat > ~/.termux/color.properties << 'EOF'
+                cat > ~/.termux/colors.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
 color0=#0f111a
@@ -274,7 +274,7 @@ english() {
                 printf "${Cian_Brillante}[${system}] ${Reset}Installing basic configurations....\n"
                 cd
                 mkdir -p .termux
-                cat > ~/.termux/color.properties << 'EOF'
+                cat > ~/.termux/colors.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
 color0=#0f111a
@@ -323,7 +323,7 @@ EOF
 
                 cd
                 mkdir -p .termux
-                cat > ~/.termux/color.properties << 'EOF'
+                cat > ~/.termux/colors.properties << 'EOF'
 background=#0f111a
 foreground=#a6accd
 color0=#0f111a
