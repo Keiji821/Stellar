@@ -85,8 +85,8 @@ def main():
                 table.add_column(style=Style(color="white"), justify="left")
 
                 table.add_row(f"{icon_user} Usuario", user)
-                table.add_row(f"{icon_hora} Hora", hora)
-                table.add_row(f"{icon_fecha} Fecha", fecha)
+                table.add_row(f"{icon_hora} Hora", str(hora))
+                table.add_row(f"{icon_fecha} Fecha", str(fecha))
                 table.add_row(f"{icon_shell} Shell", shell)
                 table.add_row(f"{icon_cpu} Procesador", processor)
                 table.add_row(f"{icon_ram} RAM:", ram_bar)
