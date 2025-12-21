@@ -70,9 +70,13 @@ def main():
                 is_tor = str(data.get("is_tor"))
                 is_vpn = str(data.get("is_vpn"))
                 is_proxy = str(data.get("is_proxy"))
-                if is_tor or is_vpn or is_proxy == True:
-                    message_ip = "[bold green](IP Enmascarada)"
-                elif is_tor or is_vpn or is_proxy == False:
+                if is_tor == True:
+                    message_ip = "[bold green][!] [bold white]IP De ToR)"
+                elif is_vpn == True:
+                    message_ip = "[bold green][!] [bold white]IP De VpN"
+                elif is_proxy == True:
+                    message_ip = "[bold green][!] [bold white]IP De Proxy"
+                if is_tor or is_vpn or is_proxy == False:
                     message_ip = "[bold yellow](IP Pública)"
                 else:
                     message_ip = "[bold red](IP No identificada)"
