@@ -34,6 +34,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux2.jpg" width="500"></td>
   </tr>
 </table>
+
 `In Linux`
 <table align="center">
   <tr>
