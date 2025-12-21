@@ -20,8 +20,6 @@ processor = platform.machine()
 disk = psutil.disk_usage(os.path.expanduser("~"))
 hora = datetime.now().strftime("%H:%M:%S")
 fecha = datetime.now().strftime("%Y-%m-%d")
-
-
 os.chdir(os.path.expanduser(f"{ruta}"))
 
 # Funciones
