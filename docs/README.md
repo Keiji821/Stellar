@@ -43,7 +43,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
   </tr>
 </table>
 
-> Nothing changes in appearance, it remains the same.
+> Nothing changes in appearance, it remains the same. The screenshots are from the Stellar system in Spanish.
 
 ## `🗃️` Documentation 
 
