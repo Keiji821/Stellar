@@ -77,9 +77,9 @@ def main():
                 elif is_proxy == True:
                     message_ip = "[bold green][!] [bold white]IP De Proxy"
                 if is_tor or is_vpn or is_proxy == False:
-                    message_ip = "[bold yellow](IP Pública)"
+                    message_ip = "[bold yellow][!] [bold white](IP Pública)"
                 else:
-                    message_ip = "[bold red](IP No identificada)"
+                    message_ip = "[bold red][!] [bold white]IP No identificada)"
                 return message_ip
             except Exception as e:
                 console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
