@@ -12,17 +12,42 @@ import random
 
 console = Console()
 
-shell = os.path.basename(os.getenv("SHELL", "bash"))
-ram = psutil.virtual_memory()
-processor = platform.machine()
-system = platform.system()
-kernel = platform.release()
-version = platform.version()
-disk = psutil.disk_usage(os.path.expanduser("~"))
-hora = datetime.now().strftime("%H:%M:%S")
-fecha = datetime.now().strftime("%Y-%m-%d")
-
 # Funciones
+
+def data():
+    try:
+        os.chdir(os.path.expanduser("~/Stellar/termux/lang_es/config/system"))
+        with open("user.st", encoding="utf-8") as f:
+            user = f.read().strip()
+        if not user:
+            user = "Desconocido"
+        shell = psutil.Process().parent().name()
+        if not shell:
+            shell = "Desconocido"
+        ram = psutil.virtual_memory()
+        processor = platform.machine()
+        if not processor:
+            processor = "Desconocido"
+        system = platform.system()
+        if not system:
+            system = "Desconocido"
+        kernel = platform.release()
+        if not kernel:
+            kernel = "Desconocido"
+        version = platform.version()
+        if not version:
+            version = "Desconocido"
+        disk = psutil.disk_usage(os.path.expanduser("~"))
+        device = subprocess.getoutput("dmidecode -s system-product-name").strip()
+        hora = datetime.now().strftime("%H:%M:%S")
+        if not hora:
+            hora = "Desconocido"
+        fecha = datetime.now().strftime("%Y-%m-%d")
+        if not fecha:
+            fecha = "Desconocido"
+        return user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha
+    except Exception as e:
+        console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
 
 def http():
     try:
@@ -42,21 +67,20 @@ def http():
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         return "[bold red] No disponible"
 
+
 def create_bar(pct, color):
     try:
         bar_color = f"rgb({color[0]},{color[1]},{color[2]})"
         return f"[{bar_color}]{'█' * int(pct/5)}{'░' * (20 - int(pct/5))}[/] {pct}%"
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
+user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha = data()
 ram_bar = create_bar(ram.percent, (100, 200, 100))
 disk_bar = create_bar(disk.percent, (200, 150, 100))
 
 # Principal
 
 def main():
-    os.chdir(os.path.expanduser("~/Stellar/termux/lang_es/config/system"))
-    with open("user.st", encoding="utf-8") as f:
-        user = f.read().strip()
     os.chdir(os.path.expanduser("~/Stellar/termux/lang_es/config/themes"))
     with open("banner.st", encoding="utf-8") as f:
         banner = f.read().strip()
@@ -91,8 +115,13 @@ def main():
                 console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
                 message_ip = "[bold red][!] [bold white] Error al identificar IP"
                 return message_ip
+            except requests.exceptions.ConnectionError:
+                message_ip = "[bold red][!] [bold white]Sin conexión a internet"
+                return message_ip
         ip = http()
         message_ip = get_type_ip()
+        user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha = data()
+
         console.print(banner, style=f"{banner_color}")
         if banner_background == ("si", "sí"):
             bg_banner = Text(banner, style=Style(color=f"{banner_color}", bold=True, bgcolor=f"{banner_background_color}"))
@@ -110,6 +139,8 @@ def main():
                 icon_system = "󰌽"
                 icon_kernel = "󰘚"
                 icon_version = "󰇊"
+                icon_palette = ""
+                icon_device = ""
                 colors_list1 = [
                     "#00FF00", "#32CD32", "#008000", "#90EE90", "#00FF7F",
                     "#FFFF00", "#FFD700", "#FFA500", "#FF8C00", "#FF6347",
@@ -142,20 +173,21 @@ def main():
                 table.add_column(style=Style(color=f"{colors2}"), justify="right")
                 table.add_column(style=Style(color="bright_white"), justify="left")
 
-                table.add_row(f"{icon_user} Usuario", user)
+                table.add_row(f"{icon_user} Usuario", str(user))
                 table.add_row(f"{icon_hora} Hora", str(hora))
                 table.add_row(f"{icon_fecha} Fecha", str(fecha))
-                table.add_row(f"{icon_shell} Shell", shell)
-                table.add_row(f"{icon_system} Sistema", system)
-                table.add_row(f"{icon_kernel} Kernel", kernel)
-                table.add_row(f"{icon_version} Versión", version)
-                table.add_row(f"{icon_cpu} Procesador", processor)
+                table.add_row(f"{icon_shell} Shell", str(shell))
+                table.add_row(f"{icon_device} Dispositivo", str(device))
+                table.add_row(f"{icon_system} Sistema", str(system))
+                table.add_row(f"{icon_kernel} Kernel", str(kernel))
+                table.add_row(f"{icon_version} Versión", str(version))
+                table.add_row(f"{icon_cpu} Procesador", str(processor))
                 table.add_row(f"{icon_ram} RAM:", ram_bar)
                 table.add_row("", f"{ram.used//(1024**2):,} MB / {ram.total//(1024**2):,} MB")
                 table.add_row(f"{icon_disk} Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
                 table.add_row(f"{icon_ip} IP", str(ip), message_ip)
-
+                table.add_row(f"{icon_palette} Paleta/Colores", f"[{colors1}]▅▅▅▅ [{colors2}]▅▅▅▅ [{banner_color}]▅▅▅▅ [{banner_background_color}]▅▅▅▅") 
                 panel = Panel(table, title="Sistema", border_style=f"{colors1}")
                 console.print(panel)
             except Exception as e:
