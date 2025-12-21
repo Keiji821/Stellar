@@ -36,19 +36,17 @@ def http():
         ip = response.text
         if response.status_code == 200:
             response = requests.get("https://ident.me")
-            data = response.json()
-            ip = data.get("ip")
+            ip = response.text
             if response.status_code == 200:
                 response = requests.get("https://ifconfig.me/ip")
-                data = response.json()
-                ip = data.get("ip")
+                ip = response.text
                 if response.status_code == 200:
                     response = requests.get("https://api.ipify.org")
-                    data = response.json()
-                    ip = data.get("ip")
+                    ip = response.text
         return ip
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
+        return "[bold red] No disponible"
 
 
 
@@ -65,8 +63,7 @@ disk_bar = create_bar(disk.percent, (200, 150, 100))
 
 def main():
     try:
-        datos = http()
-        ip = datos["ip"]
+        ip = http()
         console.print(banner, style=f"{banner_color}")
         if banner_background == ("si", "sí"):
             bg_banner = Text(banner, style=Style(color=f"{banner_color}", bold=True, bgcolor=f"{banner_background_color}"))
