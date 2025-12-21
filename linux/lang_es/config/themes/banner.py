@@ -49,7 +49,7 @@ def data():
         fecha = datetime.now().strftime("%Y-%m-%d")
         if not fecha:
             fecha = "Desconocido"
-        return user, processor, shell, disk, ram, version, kernel, device, hora, fecha
+        return user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         
@@ -78,7 +78,7 @@ def create_bar(pct, color):
         return f"[{bar_color}]{'█' * int(pct/5)}{'░' * (20 - int(pct/5))}[/] {pct}%"
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
-user, processor, shell, disk, ram, version, kernel, device, hora, fecha = data()
+user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha = data()
 ram_bar = create_bar(ram.percent, (100, 200, 100))
 disk_bar = create_bar(disk.percent, (200, 150, 100))
 
@@ -123,7 +123,7 @@ def main():
                 return message_ip
         ip = http()
         message_ip = get_type_ip()
-        user, processor, shell, disk, ram, version, kernel, device, hora, fecha = data()
+        user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha = data()
         
         console.print(banner, style=f"{banner_color}")
         if banner_background == ("si", "sí"):
