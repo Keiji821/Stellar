@@ -36,13 +36,7 @@ def data():
         if not version:
             version = "Desconocido"
         disk = psutil.disk_usage(os.path.expanduser("~"))
-        device = subprocess.getoutput("getprop ro.product.model").strip()
-        if not device:
-            if os.path.exists('/sys/class/dmi/id/product_name'):
-                device = open('/sys/class/dmi/id/product_name').read().strip()
-                if not device:
-                    if os.path.exists('/proc/device-tree/model'):
-                        device = open('/proc/device-tree/model').read().strip('\x00')
+        device = subprocess.getoutput("dmidecode -s system-product-name").strip()
         hora = datetime.now().strftime("%H:%M:%S")
         if not hora:
             hora = "Desconocido"
