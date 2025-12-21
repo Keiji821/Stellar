@@ -1,9 +1,10 @@
-from rich.console import Console 
+from rich.console import Console
+from datetime import datetime
 from rich.panel import Panel
 from rich.table import Table
 from rich.style import Style
-from rich.text import Text
 import os, platform, psutil
+from rich.text import Text
 from os import system
 import subprocess 
 import requests
@@ -17,6 +18,9 @@ shell = psutil.Process().parent().name()
 ram = psutil.virtual_memory()
 processor = platform.machine()
 disk = psutil.disk_usage(os.path.expanduser("~"))
+hora = datetime.now()
+fecha = datetime.now().date()
+
 
 os.chdir(os.path.expanduser(f"{ruta}"))
 
@@ -39,8 +43,6 @@ def http():
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         return "[bold red] No disponible"
-
-
 
 def create_bar(pct, color):
     try:
@@ -70,18 +72,28 @@ def main():
             console.print(banner, style=f"{banner_color}")
         def banner():
             try:
+                icon_user = "󰀄"
+                icon_hora = "󰃭"
+                icon_fecha = "󰥔"
+                icon_ram = "󰍛"
+                icon_disk = "󰋊"
+                icon_cpu = "󰘚"
+                icon_shell = "󰆍"
+                icon_ip = "󰩠"
                 table = Table(show_header=False, show_lines=False, box=None)
                 table.add_column(style=Style(color="cyan"), justify="right")
                 table.add_column(style=Style(color="white"), justify="left")
 
-                table.add_row("󰀄 Usuario", user)
-                table.add_row("Shell", shell)
-                table.add_row("Procesador", processor)
-                table.add_row("RAM:", ram_bar)
+                table.add_row(f"{icon_user} Usuario", user)
+                table.add_row(f"{icon_hora} Hora", hora)
+                table.add_row(f"{icon_fecha} Fecha", fecha)
+                table.add_row(f"{icon_shell} Shell", shell)
+                table.add_row(f"{icon_cpu} Procesador", processor)
+                table.add_row(f"{icon_ram} RAM:", ram_bar)
                 table.add_row("", f"{ram.used//(1024**2):,} MB / {ram.total//(1024**2):,} MB")
-                table.add_row("Disco:", disk_bar)
+                table.add_row(f"{icon_disk} Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
-                table.add_row("IP", str(ip))
+                table.add_row(f"{icon_ip} IP", str(ip))
 
                 panel = Panel(table, title="Sistema", border_style="bold blue")
                 console.print(panel)
