@@ -28,16 +28,16 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 </div>
 
 <table align="center">
+`In Termux`
   <tr>
-    `In Termux`
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux1.jpg" width="500"></td>
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux2.jpg" width="500"></td>
   </tr>
 </table>
 
 <table align="center">
+`In Linux`
   <tr>
-    `In Linux`
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux1.jpg" width="500"></td>
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux2.jpg" width="500"></td>
   </tr>
