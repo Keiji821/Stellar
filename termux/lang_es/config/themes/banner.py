@@ -15,10 +15,10 @@ console = Console()
 shell = psutil.Process().parent().name() 
 ram = psutil.virtual_memory()
 processor = platform.machine()
-system = platform.system()
+system = "Android/Linux"
 kernel = platform.release()
-version = platform.version()
-disk = psutil.disk_usage(os.path.expanduser("~"))
+version = subprocess.getoutput("getprop ro.build.version.release")
+disk = psutil.disk_usage("/data/data/com.termux/files/home")
 hora = datetime.now().strftime("%H:%M:%S")
 fecha = datetime.now().strftime("%Y-%m-%d")
 
