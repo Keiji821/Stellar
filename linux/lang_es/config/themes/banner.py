@@ -53,7 +53,7 @@ def data():
         fecha = datetime.now().strftime("%Y-%m-%d")
         if not fecha:
             fecha = "Desconocido"
-        return user, processor, shell, disk, ram, cpu, version, kernel, device, hora, fecha
+        return user, processor, shell, disk, ram, version, kernel, device, hora, fecha
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         
