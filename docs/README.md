@@ -29,10 +29,21 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 <table align="center">
   <tr>
-    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344345305284661/Screenshot_20250811-0159123.jpg?ex=69215217&is=69200097&hm=be5f8a57daa6c36c76b3041518638c42ec04a56290862727bb2b04e722574436&" width="500"></td>
-    <td><img src="https://cdn.discordapp.com/attachments/1202078440371789884/1404344344990842960/Screenshot_20250811-0157413.jpg?ex=69215217&is=69200097&hm=a02106ccd8d77e9648a0ce4bc14acb4e38571ce7729129a93f6e301474ffa181&" width="500"></td>
+    `In Termux`
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux1.jpg" width="500"></td>
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux2.jpg" width="500"></td>
   </tr>
 </table>
+
+<table align="center">
+  <tr>
+    `In Linux`
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux1.jpg" width="500"></td>
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux2.jpg" width="500"></td>
+  </tr>
+</table>
+
+> 
 
 ## `🗃️` Documentation 
 
