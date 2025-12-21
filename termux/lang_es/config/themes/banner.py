@@ -48,6 +48,7 @@ def data():
         return user, processor, system, shell, disk, ram, version, kernel, device, hora, fecha
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
+        return
 
 def http():
     try:
