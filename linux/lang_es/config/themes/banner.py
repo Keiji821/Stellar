@@ -12,7 +12,7 @@ console = Console()
 
 ruta = "~/Stellar/linux/lang_es/config/themes"
 
-user = subprocess.Popen(["hostname"]) or subprocess.Popen(["whoami"]) 
+user = subprocess.getoutput(["hostname"]) or subprocess.getoutput(["whoami"]) 
 shell = psutil.Process().parent().name() 
 ram = psutil.virtual_memory()
 processor = platform.machine()
