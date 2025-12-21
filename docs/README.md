@@ -27,8 +27,8 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 </div>
 
-<table align="center">
 `In Termux`
+<table align="center">
   <tr>
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux1.jpg" width="500"></td>
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux2.jpg" width="500"></td>
