@@ -38,7 +38,7 @@ def data():
         if not version:
             version = "Desconocido"
         disk = psutil.disk_usage(os.path.expanduser("~"))
-        device = subprocess.getoutput("getprop ro.product.model").strip()
+        device = subprocess.getoutput("getprop ro.product.model").strip() or "Desconocido"
         hora = datetime.now().strftime("%H:%M:%S")
         if not hora:
             hora = "Desconocido"
