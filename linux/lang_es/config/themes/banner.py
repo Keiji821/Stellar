@@ -122,7 +122,7 @@ def main():
                 
                 table = Table(show_header=False, show_lines=False, box=None)
                 table.add_column(style=Style(color=f"{colors}"), justify="right")
-                table.add_column(style=Style(color="bold white"), justify="left")
+                table.add_column(style=Style(color="bright_white"), justify="left")
 
                 table.add_row(f"{icon_user} Usuario", user)
                 table.add_row(f"{icon_hora} Hora", str(hora))
