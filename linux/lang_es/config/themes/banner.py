@@ -8,7 +8,7 @@ from os import system
 
 console = Console()
 
-ruta = "~/Stellar/linux/config/themes"
+ruta = "root/Stellar/linux/config/themes"
 
 user = os.system("hostname") or os.system("whoami")
 shell = psutil.Process().parent().name() 
