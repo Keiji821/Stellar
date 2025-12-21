@@ -91,7 +91,7 @@ def main():
                 return message_ip
             except Exception as e:
                 console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
-                message_ip "[bold red] Error al identificar IP"
+                message_ip = "[bold red] Error al identificar IP"
                 return message_ip
         ip = http()
         message_ip = get_type_ip()
