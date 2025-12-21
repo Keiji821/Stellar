@@ -105,9 +105,24 @@ def main():
                 icon_system = "󰌽"
                 icon_kernel = "󰘚"
                 icon_version = "󰇊"
+                colors_list = [
+                    "#00FF00", "#32CD32", "#008000", "#90EE90", "#00FF7F",
+                    "#FFFF00", "#FFD700", "#FFA500", "#FF8C00", "#FF6347",
+                    "#0000FF", "#1E90FF", "#4169E1", "#00BFFF", "#87CEEB",
+                    "#00FFFF", "#40E0D0", "#20B2AA", "#008B8B", "#5F9EA0",
+                    "#FF1493", "#FF69B4", "#DB7093", "#C71585", "#FF00FF",
+                    "#8B0000", "#B22222", "#DC143C", "#FF4500", "#800000",
+                    "#9400D3", "#8A2BE2", "#4B0082", "#9932CC", "#BA55D3",
+                    "#FFFFFF", "#D3D3D3", "#A9A9A9", "#696969", "#000000",
+                    "#FFE4E1", "#FAF0E6", "#F5F5DC", "#F0FFF0", "#F0FFFF",
+                    "#FFF0F5", "#FFFAFA", "#F8F8FF", "#F5FFFA", "#FDF5E6",
+                    "#8B4513", "#D2691E", "#A0522D", "#CD853F", "#DEB887"
+                    ]
+                colors = random.choice(colors_list)
+                
                 table = Table(show_header=False, show_lines=False, box=None)
-                table.add_column(style=Style(color="cyan"), justify="right")
-                table.add_column(style=Style(color="white"), justify="left")
+                table.add_column(style=Style(color=f"{colors}"), justify="right")
+                table.add_column(style=Style(color="bold white"), justify="left")
 
                 table.add_row(f"{icon_user} Usuario", user)
                 table.add_row(f"{icon_hora} Hora", str(hora))
@@ -123,20 +138,6 @@ def main():
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
                 table.add_row(f"{icon_ip} IP", str(ip), message_ip)
                 
-                colors_list = [
-                    "#00FF00", "#32CD32", "#008000", "#90EE90", "#00FF7F",
-                    "#FFFF00", "#FFD700", "#FFA500", "#FF8C00", "#FF6347",
-                    "#0000FF", "#1E90FF", "#4169E1", "#00BFFF", "#87CEEB",
-                    "#00FFFF", "#40E0D0", "#20B2AA", "#008B8B", "#5F9EA0",
-                    "#FF1493", "#FF69B4", "#DB7093", "#C71585", "#FF00FF",
-                    "#8B0000", "#B22222", "#DC143C", "#FF4500", "#800000",
-                    "#9400D3", "#8A2BE2", "#4B0082", "#9932CC", "#BA55D3",
-                    "#FFFFFF", "#D3D3D3", "#A9A9A9", "#696969", "#000000",
-                    "#FFE4E1", "#FAF0E6", "#F5F5DC", "#F0FFF0", "#F0FFFF",
-                    "#FFF0F5", "#FFFAFA", "#F8F8FF", "#F5FFFA", "#FDF5E6",
-                    "#8B4513", "#D2691E", "#A0522D", "#CD853F", "#DEB887"
-                    ]
-                colors = random.choice(colors_list)
                 panel = Panel(table, title="Sistema", border_style=f"{colors}")
                 console.print(panel)
             except Exception as e:
