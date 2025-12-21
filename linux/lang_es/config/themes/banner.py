@@ -156,7 +156,7 @@ def main():
                 table.add_row(f"{icon_disk} Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
                 table.add_row(f"{icon_ip} IP", str(ip), message_ip)
-                table.add_row(f"{icon_palette} Paleta/Colores", f"{colors1}▅▅ {colors2}▅▅  {banner_color}▅▅ {banner_background_color}▅▅") 
+                table.add_row(f"{icon_palette} Paleta/Colores", f"[{colors1}]▅▅ [{colors2}]▅▅  [{banner_color}]▅▅ [{banner_background_color}]▅▅") 
                 panel = Panel(table, title="Sistema", border_style=f"{colors1}")
                 console.print(panel)
             except Exception as e:
