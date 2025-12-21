@@ -77,7 +77,11 @@ def main():
                     message_ip = "[bold green][!] [bold white]IP De VpN"
                 elif is_proxy == True:
                     message_ip = "[bold green][!] [bold white]IP De Proxy"
-                if is_tor or is_vpn or is_proxy == False:
+                if is_tor == False:
+                    message_ip = "[bold yellow][!] [bold white]IP Pública"
+                if is_vpn == False:
+                    message_ip = "[bold yellow][!] [bold white]IP Pública"
+                if is_proxy == False:
                     message_ip = "[bold yellow][!] [bold white]IP Pública"
                 else:
                     message_ip = "[bold red][!] [bold white]IP No identificada"
