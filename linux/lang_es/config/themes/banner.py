@@ -86,8 +86,8 @@ def main():
                 panel = Panel(table, title="Sistema", border_style="bold blue")
                 console.print(panel)
             except Exception as e:
-                console.print(f"[{bold red}][STELLAR] [{bold white}]Ha ocurrido un error en Stellar, error: [{bold red}]{e}")
+                console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         banner()
     except Exception as e:
-        console.print(f"[{bold red}][STELLAR] [{bold white}]Ha ocurrido un error en Stellar, error: [{bold red}]{e}")
+        console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
 main()
