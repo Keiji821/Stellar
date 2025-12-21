@@ -76,10 +76,12 @@ def main():
                 is_proxy = str(data.get("is_proxy"))
                 if is_tor == True:
                     message_ip = "[bold green][!] [bold white]IP De ToR)"
-                elif is_vpn == True:
-                    message_ip = "[bold green][!] [bold white]IP De VpN"
-                elif is_proxy == True:
-                    message_ip = "[bold green][!] [bold white]IP De Proxy"
+                elif is_tor == False:
+                    if is_vpn == True:
+                        message_ip = "[bold green][!] [bold white]IP De VpN"
+                    elif is_vpn == False:
+                        if is_proxy == True:
+                            message_ip = "[bold green][!] [bold white]IP De Proxy"
                 else:
                     message_ip = "[bold yellow][!] [bold white]IP Pública"
                 return message_ip
