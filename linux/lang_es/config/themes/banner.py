@@ -21,41 +21,43 @@ os.chdir(os.path.expanduser(f"{ruta}"))
 
 with open("banner.st", encoding="utf-8") as f:
     banner = f.read().strip()
-    
 with open("banner_color.st", encoding="utf-8") as f:
     banner_color = f.read().strip()
-    
 with open("banner_background.st", encoding="utf-8") as f:
     banner_background = f.read().strip()
-    
 with open("banner_background_color.st", encoding="utf-8") as f:
     banner_background_color = f.read().strip()
 
 # Funciones
 
 def http():
-    response = requests.get("https://ipinfo.io/ip")
-    data = response.json()
-    ip = data.get("ip")
-    if response.status_code == 200:
-        response = requests.get("https://ident.me")
-        data = response.json()
-        ip = data.get("ip")
+    try:
+        response = requests.get("https://ipinfo.io/ip")
+        ip = response.text
         if response.status_code == 200:
-            response = requests.get("https://ifconfig.me/ip")
+            response = requests.get("https://ident.me")
             data = response.json()
             ip = data.get("ip")
             if response.status_code == 200:
-                response = requests.get("https://api.ipify.org")
+                response = requests.get("https://ifconfig.me/ip")
                 data = response.json()
                 ip = data.get("ip")
-    return ip
-                
-            
+                if response.status_code == 200:
+                    response = requests.get("https://api.ipify.org")
+                    data = response.json()
+                    ip = data.get("ip")
+        return ip
+    except Exception as e:
+        console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
+
+
 
 def create_bar(pct, color):
-    bar_color = f"rgb({color[0]},{color[1]},{color[2]})"
-    return f"[{bar_color}]{'█' * int(pct/5)}{'░' * (20 - int(pct/5))}[/] {pct}%"
+    try:
+        bar_color = f"rgb({color[0]},{color[1]},{color[2]})"
+        return f"[{bar_color}]{'█' * int(pct/5)}{'░' * (20 - int(pct/5))}[/] {pct}%"
+    except Exception as e:
+        console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
 ram_bar = create_bar(ram.percent, (100, 200, 100))
 disk_bar = create_bar(disk.percent, (200, 150, 100))
 
@@ -74,7 +76,7 @@ def main():
                 table = Table(show_header=False, show_lines=False, box=None)
                 table.add_column(style=Style(color="cyan"), justify="right")
                 table.add_column(style=Style(color="white"), justify="left")
-                
+
                 table.add_row("Usuario", user)
                 table.add_row("Shell", shell)
                 table.add_row("Procesador", processor)
@@ -83,7 +85,7 @@ def main():
                 table.add_row("Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
                 table.add_row("IP", ip)
-                
+
                 panel = Panel(table, title="Sistema", border_style="bold blue")
                 console.print(panel)
             except Exception as e:
