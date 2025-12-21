@@ -18,8 +18,8 @@ shell = psutil.Process().parent().name()
 ram = psutil.virtual_memory()
 processor = platform.machine()
 disk = psutil.disk_usage(os.path.expanduser("~"))
-hora = datetime.now()
-fecha = datetime.now().date()
+hora = datetime.now().strftime("%H:%M:%S")
+fecha = datetime.now().strftime("%Y-%m-%d"))
 
 
 os.chdir(os.path.expanduser(f"{ruta}"))
