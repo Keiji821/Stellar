@@ -35,7 +35,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
   </tr>
 </table>
 
-`In Linux`
+`In Linux/SSH`
 <table align="center">
   <tr>
     <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux1.jpg" width="500"></td>
