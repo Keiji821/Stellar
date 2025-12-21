@@ -71,8 +71,7 @@ def http():
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         return "[bold red] No disponible"
 
-ram = data()
-disk = data()
+ram, disk = data()
 
 def create_bar(pct, color):
     try:
@@ -124,18 +123,7 @@ def main():
                 return message_ip
         ip = http()
         message_ip = get_type_ip()
-        ram = data()
-        processor = data()
-        device = data()
-        user = data()
-        system = data()
-        kernel = data()
-        version = data()
-        hora = data()
-        fecha = data()
-        disk = data()
-        cpu = data()
-        shell = data()
+        user, processor, shell, disk, ram, version, kernel, device, hora, fecha = data()
         
         console.print(banner, style=f"{banner_color}")
         if banner_background == ("si", "sí"):
