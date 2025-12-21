@@ -12,20 +12,51 @@ import random
 
 console = Console()
 
-user = subprocess.getoutput(["hostname"]) or subprocess.getoutput(["whoami"]) 
-shell = psutil.Process().parent().name() 
-ram = psutil.virtual_memory()
-processor = platform.machine()
-system = platform.system()
-kernel = platform.release()
-version = platform.version()
-disk = psutil.disk_usage(os.path.expanduser("~"))
-device = subprocess.getoutput("getprop ro.product.model").strip()
-hora = datetime.now().strftime("%H:%M:%S")
-fecha = datetime.now().strftime("%Y-%m-%d")
-
 # Funciones
 
+def data():
+    try:
+        user = subprocess.getoutput(["hostname"]) or subprocess.getoutput(["whoami"])
+        if not user:
+            user = "Desconocido"
+        shell = psutil.Process().parent().name()
+        if not shell:
+            shell = "Desconocido"
+        ram = psutil.virtual_memory()
+        if not ram:
+            ram = "Desconocido"
+        processor = platform.machine()
+        if not processor:
+            processor = "Desconocido"
+        system = platform.system()
+        if not system:
+            system = "Desconocido"
+        kernel = platform.release()
+        if not kernel:
+            kernel = "Desconocido"
+        version = platform.version()
+        if not version:
+            version = "Desconocido"
+        disk = psutil.disk_usage(os.path.expanduser("~"))
+        if not disk:
+            disk = "Desconocido"
+        device = subprocess.getoutput("getprop ro.product.model").strip()
+        if not device:
+            if os.path.exists('/sys/class/dmi/id/product_name'):
+                device = open('/sys/class/dmi/id/product_name').read().strip()
+                if not device:
+                    if os.path.exists('/proc/device-tree/model'):
+                        device = open('/proc/device-tree/model').read().strip('\x00')
+        hora = datetime.now().strftime("%H:%M:%S")
+        if not hora:
+            hora = "Desconocido"
+        fecha = datetime.now().strftime("%Y-%m-%d")
+        if not fecha:
+            fecha = "Desconocido"
+        return user, processor, shell, disk, ram, cpu, version, kernel, device, hora, fecha
+    except Exception as e:
+        console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
+        
 def http():
     try:
         response = requests.get("https://ipinfo.io/ip")
@@ -89,8 +120,24 @@ def main():
                 console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
                 message_ip = "[bold red][!] [bold white] Error al identificar IP"
                 return message_ip
+            except requests.exceptions.ConnectionError:
+                message_ip = "[bold red][!] [bold white]Sin conexión a internet"
+                return message_ip
         ip = http()
         message_ip = get_type_ip()
+        ram = data()
+        processor = data()
+        device = data()
+        user = data()
+        system = data()
+        kernel = data()
+        version = data()
+        hora = data()
+        fecha = data()
+        disk = data()
+        cpu = data()
+        shell = data()
+        
         console.print(banner, style=f"{banner_color}")
         if banner_background == ("si", "sí"):
             bg_banner = Text(banner, style=Style(color=f"{banner_color}", bold=True, bgcolor=f"{banner_background_color}"))
@@ -108,8 +155,8 @@ def main():
                 icon_system = "󰌽"
                 icon_kernel = "󰘚"
                 icon_version = "󰇊"
-                icon_palette = ""
-                icon_device = ""
+                icon_palette = ""
+                icon_device = ""
                 colors_list1 = [
                     "#00FF00", "#32CD32", "#008000", "#90EE90", "#00FF7F",
                     "#FFFF00", "#FFD700", "#FFA500", "#FF8C00", "#FF6347",
@@ -155,8 +202,8 @@ def main():
                 table.add_row("", f"{ram.used//(1024**2):,} MB / {ram.total//(1024**2):,} MB")
                 table.add_row(f"{icon_disk} Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
-                table.add_row(f"{icon_ip} IP", str(ip), message_ip)
-                table.add_row(f"{icon_palette} Paleta/Colores", f"[{colors1}]▅▅▅ [{colors2}]▅▅▅  [{banner_color}]▅▅▅ [{banner_background_color}]▅▅▅") 
+                table.add_row(f"{icon_ip} IP", str(ip), message_ip
+                table.add_row(f"{icon_palette} Paleta/Colores", f"[{colors1}]▅▅▅ [{colors2}]▅▅▅  [{banner_color}]▅▅ [{banner_background_color}]▅▅▅") 
                 panel = Panel(table, title="Sistema", border_style=f"{colors1}")
                 console.print(panel)
             except Exception as e:
