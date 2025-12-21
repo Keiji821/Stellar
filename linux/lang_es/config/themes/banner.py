@@ -88,6 +88,8 @@ def main():
             except Exception as e:
                 console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
         banner()
+        console.print("\n")
+        console.print("\n")
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
 main()
