@@ -105,7 +105,7 @@ def main():
                 icon_system = "󰌽"
                 icon_kernel = "󰘚"
                 icon_version = "󰇊"
-                colors_list = [
+                colors_list1 = [
                     "#00FF00", "#32CD32", "#008000", "#90EE90", "#00FF7F",
                     "#FFFF00", "#FFD700", "#FFA500", "#FF8C00", "#FF6347",
                     "#0000FF", "#1E90FF", "#4169E1", "#00BFFF", "#87CEEB",
@@ -118,10 +118,23 @@ def main():
                     "#FFF0F5", "#FFFAFA", "#F8F8FF", "#F5FFFA", "#FDF5E6",
                     "#8B4513", "#D2691E", "#A0522D", "#CD853F", "#DEB887"
                     ]
-                colors = random.choice(colors_list)
+                colors_list2 = [
+                    "#FF6B6B", "#FF9F43", "#FFD93D", "#6BCF7F", "#4D96FF",
+                    "#845EC2", "#D65DB1", "#FF5C8D", "#C34A36", "#FF8066",
+                    "#00C9A7", "#00D2FC", "#4FFBDF", "#A162E8", "#FEFFAC",
+                    "#5EFFB1", "#B465FF", "#FF8E8E", "#87FFAB", "#FFB8DE",
+                    "#7045AF", "#2B7DE9", "#2CEAA3", "#FFD166", "#EF476F",
+                    "#38B000", "#9B5DE5", "#F15BB5", "#00BBF9", "#00F5D4",
+                    "#B5E48C", "#D9ED92", "#FFD6FF", "#E2C2FF", "#A9D6E5",
+                    "#8AC926", "#1982C4", "#6A4C93", "#FF595E", "#FFCA3A",
+                    "#8AC926", "#1982C4", "#6A4C93", "#FF595E", "#FFCA3A",
+                    "#6A0572", "#AB83A1", "#3CBBB1", "#F0B67F", "#FE5F55"
+                    ]
+                colors1 = random.choice(colors_list1)
+                colors2 = random.choice(colors_list2)
                 
                 table = Table(show_header=False, show_lines=False, box=None)
-                table.add_column(style=Style(color=f"{colors}"), justify="right")
+                table.add_column(style=Style(color=f"{colors2}"), justify="right")
                 table.add_column(style=Style(color="bright_white"), justify="left")
 
                 table.add_row(f"{icon_user} Usuario", user)
@@ -138,7 +151,7 @@ def main():
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
                 table.add_row(f"{icon_ip} IP", str(ip), message_ip)
                 
-                panel = Panel(table, title="Sistema", border_style=f"{colors}")
+                panel = Panel(table, title="Sistema", border_style=f"{colors1}")
                 console.print(panel)
             except Exception as e:
                 console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
