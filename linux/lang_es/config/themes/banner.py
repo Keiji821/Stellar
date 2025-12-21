@@ -81,7 +81,7 @@ def main():
                 table.add_row("", f"{ram.used//(1024**2):,} MB / {ram.total//(1024**2):,} MB")
                 table.add_row("Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
-                table.add_row("IP", ip)
+                table.add_row("IP", str(ip))
 
                 panel = Panel(table, title="Sistema", border_style="bold blue")
                 console.print(panel)
