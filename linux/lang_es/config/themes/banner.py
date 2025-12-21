@@ -78,6 +78,9 @@ def main():
                 icon_cpu = "󰘚"
                 icon_shell = "󰆍"
                 icon_ip = "󰩠"
+                icon_system = "󰌽"
+                icon_kernel = "󰘚"
+                icon_version = "󰇊"
                 table = Table(show_header=False, show_lines=False, box=None)
                 table.add_column(style=Style(color="cyan"), justify="right")
                 table.add_column(style=Style(color="white"), justify="left")
@@ -86,6 +89,9 @@ def main():
                 table.add_row(f"{icon_hora} Hora", str(hora))
                 table.add_row(f"{icon_fecha} Fecha", str(fecha))
                 table.add_row(f"{icon_shell} Shell", shell)
+                table.add_row(f"{icon_system} Sistema", system)
+                table.add_row(f"{icon_kernel} Kernel", kernel)
+                table.add_row(f"{icon_version} Versión", version)
                 table.add_row(f"{icon_cpu} Procesador", processor)
                 table.add_row(f"{icon_ram} RAM:", ram_bar)
                 table.add_row("", f"{ram.used//(1024**2):,} MB / {ram.total//(1024**2):,} MB")
