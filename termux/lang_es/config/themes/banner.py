@@ -80,7 +80,11 @@ def main():
                     message_ip = "[bold green][!] [bold white]IP De VpN"
                 elif is_proxy == True:
                     message_ip = "[bold green][!] [bold white]IP De Proxy"
-                if is_tor or is_vpn or is_proxy == False:
+                if is_tor == False:
+                    message_ip = "[bold yellow][!] [bold white]IP Pública"
+                if is_vpn == False:
+                    message_ip = "[bold yellow][!] [bold white]IP Pública"
+                if is_proxy == False:
                     message_ip = "[bold yellow][!] [bold white]IP Pública"
                 else:
                     message_ip = "[bold red][!] [bold white]IP No identificada"
@@ -135,7 +139,7 @@ def main():
                     ]
                 colors1 = random.choice(colors_list1)
                 colors2 = random.choice(colors_list2)
-                
+
                 table = Table(show_header=False, show_lines=False, box=None)
                 table.add_column(style=Style(color=f"{colors2}"), justify="right")
                 table.add_column(style=Style(color="bright_white"), justify="left")
@@ -153,7 +157,7 @@ def main():
                 table.add_row(f"{icon_disk} Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
                 table.add_row(f"{icon_ip} IP", str(ip), message_ip)
-                
+
                 panel = Panel(table, title="Sistema", border_style=f"{colors1}")
                 console.print(panel)
             except Exception as e:
