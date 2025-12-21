@@ -71,10 +71,9 @@ def main():
             try:
                 response = requests.get(f"https://api.ipapi.is/?ip=")
                 data = response.json()
-                is_tor = str(data.get("is_tor"))
-                is_vpn = str(data.get("is_vpn"))
-                is_proxy = str(data.get("is_proxy"))
-                message_ip = "[bold yellow][!] [bold white]IP Pública"
+                is_tor = data.get("is_tor")
+                is_vpn = data.get("is_vpn")
+                is_proxy = data.get("is_proxy")
                 if is_tor == True:
                     message_ip = "[bold green][!] [bold white]IP De ToR)"
                 elif is_tor == False:
@@ -83,6 +82,8 @@ def main():
                     elif is_vpn == False:
                         if is_proxy == True:
                             message_ip = "[bold green][!] [bold white]IP De Proxy"
+                        elif is_proxy == False:
+                            message_ip = "[bold yellow][!] [bold white]IP Pública"
                 else:
                     message_ip = "[bold red][!] [bold white]IP No identificada"
                 return message_ip
