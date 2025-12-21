@@ -5,6 +5,7 @@ from rich.style import Style
 from rich.text import Text
 import os, platform, psutil
 from os import system
+import requests
 
 console = Console()
 
