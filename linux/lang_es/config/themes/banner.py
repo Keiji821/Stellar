@@ -77,12 +77,12 @@ def http():
 
 def create_bar(pct, color):
     try:
-        ram = data()
-        disk = data()
         bar_color = f"rgb({color[0]},{color[1]},{color[2]})"
         return f"[{bar_color}]{'█' * int(pct/5)}{'░' * (20 - int(pct/5))}[/] {pct}%"
     except Exception as e:
         console.print(f"[bold red][STELLAR] [bold white]Ha ocurrido un error en Stellar, error: [bold red]{e}")
+ram = data()
+disk = data()
 ram_bar = create_bar(ram.percent, (100, 200, 100))
 disk_bar = create_bar(disk.percent, (200, 150, 100))
 
