@@ -62,7 +62,7 @@ banner = read_file(f"{themes_dir}/banner.st")
 col = read_file(f"{themes_dir}/banner_color.st", "#6E97B7")
 bg = read_file(f"{themes_dir}/banner_background.st", "no")
 bgcol = read_file(f"{themes_dir}/banner_background_color.st", "#4D8FAC")
-user = read_file(f"{system_dir}/user.txt", "Usuario")
+user = os.system("hostname") or os.system("whoami")
 
 style = process_style(col)
 if bg.lower() in ("si", "sí", "yes"):
