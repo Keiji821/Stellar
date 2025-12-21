@@ -5,13 +5,14 @@ from rich.style import Style
 from rich.text import Text
 import os, platform, psutil
 from os import system
+import subprocess 
 import requests
 
 console = Console()
 
 ruta = "~/Stellar/linux/lang_es/config/themes"
 
-user = os.system("hostname") or os.system("whoami")
+user = subprocess.Popen(["hostname"]) or subprocess.Popen(["whoami"]) 
 shell = psutil.Process().parent().name() 
 ram = psutil.virtual_memory()
 processor = platform.machine()
