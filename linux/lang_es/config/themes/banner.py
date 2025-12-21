@@ -64,7 +64,7 @@ def main():
     with open("banner_background_color.st", encoding="utf-8") as f:
         banner_background_color = f.read().strip()
     try:
-                def get_type_ip():
+        def get_type_ip():
             try:
                 response = requests.get(f"https://api.ipapi.is/?ip=")
                 data = response.json()
