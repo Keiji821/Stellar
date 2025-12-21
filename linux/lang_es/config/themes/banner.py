@@ -20,6 +20,7 @@ system = platform.system()
 kernel = platform.release()
 version = platform.version()
 disk = psutil.disk_usage(os.path.expanduser("~"))
+device = subprocess.getoutput("getprop ro.product.model").strip()
 hora = datetime.now().strftime("%H:%M:%S")
 fecha = datetime.now().strftime("%Y-%m-%d")
 
@@ -107,6 +108,8 @@ def main():
                 icon_system = "󰌽"
                 icon_kernel = "󰘚"
                 icon_version = "󰇊"
+                icon_palette = ""
+                icon_device = ""
                 colors_list1 = [
                     "#00FF00", "#32CD32", "#008000", "#90EE90", "#00FF7F",
                     "#FFFF00", "#FFD700", "#FFA500", "#FF8C00", "#FF6347",
@@ -134,7 +137,7 @@ def main():
                     ]
                 colors1 = random.choice(colors_list1)
                 colors2 = random.choice(colors_list2)
-                
+
                 table = Table(show_header=False, show_lines=False, box=None)
                 table.add_column(style=Style(color=f"{colors2}"), justify="right")
                 table.add_column(style=Style(color="bright_white"), justify="left")
@@ -143,6 +146,7 @@ def main():
                 table.add_row(f"{icon_hora} Hora", str(hora))
                 table.add_row(f"{icon_fecha} Fecha", str(fecha))
                 table.add_row(f"{icon_shell} Shell", shell)
+                table.add_row(f"{icon_device} Dispositivo", )
                 table.add_row(f"{icon_system} Sistema", system)
                 table.add_row(f"{icon_kernel} Kernel", kernel)
                 table.add_row(f"{icon_version} Versión", version)
@@ -151,8 +155,8 @@ def main():
                 table.add_row("", f"{ram.used//(1024**2):,} MB / {ram.total//(1024**2):,} MB")
                 table.add_row(f"{icon_disk} Disco:", disk_bar)
                 table.add_row("", f"{disk.used//(1024**3):,} GB / {disk.total//(1024**3):,} GB")
-                table.add_row(f"{icon_ip} IP", str(ip), message_ip)
-                
+                table.add_row(f"{icon_ip} IP", str(ip), message_ip
+                table.add_row(f"{icon_palette} Paleta/Colores", f"{colors1}▅▅ {colors2}▅▅  {banner_color}▅▅ {banner_background_color}▅▅") 
                 panel = Panel(table, title="Sistema", border_style=f"{colors1}")
                 console.print(panel)
             except Exception as e:
