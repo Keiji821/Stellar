@@ -23,8 +23,6 @@ def data():
         if not shell:
             shell = "Desconocido"
         ram = psutil.virtual_memory()
-        if not ram:
-            ram = "Desconocido"
         processor = platform.machine()
         if not processor:
             processor = "Desconocido"
@@ -38,8 +36,6 @@ def data():
         if not version:
             version = "Desconocido"
         disk = psutil.disk_usage(os.path.expanduser("~"))
-        if not disk:
-            disk = "Desconocido"
         device = subprocess.getoutput("getprop ro.product.model").strip()
         if not device:
             if os.path.exists('/sys/class/dmi/id/product_name'):
