@@ -12,13 +12,13 @@ import random
 
 console = Console()
 
-shell = psutil.Process().parent().name() 
+shell = os.path.basename(os.getenv("SHELL", "bash"))
 ram = psutil.virtual_memory()
 processor = platform.machine()
-system = "Android/Linux"
+system = platform.system()
 kernel = platform.release()
-version = subprocess.getoutput("getprop ro.build.version.release")
-disk = psutil.disk_usage("/data/data/com.termux/files/home")
+version = platform.version()
+disk = psutil.disk_usage(os.path.expanduser("~"))
 hora = datetime.now().strftime("%H:%M:%S")
 fecha = datetime.now().strftime("%Y-%m-%d")
 
