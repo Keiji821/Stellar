@@ -43,7 +43,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
   </tr>
 </table>
 
-> 
+> Nothing changes in appearance, it remains the same.
 
 ## `🗃️` Documentation 
 
