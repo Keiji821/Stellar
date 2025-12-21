@@ -75,7 +75,7 @@ def main():
                 is_vpn = data.get("is_vpn")
                 is_proxy = data.get("is_proxy")
                 if is_tor == True:
-                    message_ip = "[bold green][!] [bold white]IP De ToR"
+                    message_ip = "[bold green][!] [bold white]IP De ToR 🧄"
                 elif is_tor == False:
                     if is_vpn == True:
                         message_ip = "[bold green][!] [bold white]IP De VpN"
