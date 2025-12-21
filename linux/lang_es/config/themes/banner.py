@@ -19,28 +19,19 @@ disk = psutil.disk_usage(os.path.expanduser("~"))
 
 os.chdir(os.path.expanduser(f"{ruta}"))
 
-with open("banner.st", encoding="utf-8") as f:
-    banner = f.read().strip()
-with open("banner_color.st", encoding="utf-8") as f:
-    banner_color = f.read().strip()
-with open("banner_background.st", encoding="utf-8") as f:
-    banner_background = f.read().strip()
-with open("banner_background_color.st", encoding="utf-8") as f:
-    banner_background_color = f.read().strip()
-
 # Funciones
 
 def http():
     try:
         response = requests.get("https://ipinfo.io/ip")
         ip = response.text
-        if response.status_code == 200:
+        if response.status_code != 200:
             response = requests.get("https://ident.me")
             ip = response.text
-            if response.status_code == 200:
+            if response.status_code != 200:
                 response = requests.get("https://ifconfig.me/ip")
                 ip = response.text
-                if response.status_code == 200:
+                if response.status_code != 200:
                     response = requests.get("https://api.ipify.org")
                     ip = response.text
         return ip
@@ -62,6 +53,14 @@ disk_bar = create_bar(disk.percent, (200, 150, 100))
 # Principal
 
 def main():
+    with open("banner.st", encoding="utf-8") as f:
+        banner = f.read().strip()
+    with open("banner_color.st", encoding="utf-8") as f:
+        banner_color = f.read().strip()
+    with open("banner_background.st", encoding="utf-8") as f:
+        banner_background = f.read().strip()
+    with open("banner_background_color.st", encoding="utf-8") as f:
+        banner_background_color = f.read().strip()
     try:
         ip = http()
         console.print(banner, style=f"{banner_color}")
