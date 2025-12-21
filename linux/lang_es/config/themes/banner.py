@@ -74,7 +74,7 @@ def main():
                 table.add_column(style=Style(color="cyan"), justify="right")
                 table.add_column(style=Style(color="white"), justify="left")
 
-                table.add_row("Usuario", user)
+                table.add_row("󰀄 Usuario", user)
                 table.add_row("Shell", shell)
                 table.add_row("Procesador", processor)
                 table.add_row("RAM:", ram_bar)
