@@ -17,7 +17,7 @@ user = subprocess.getoutput(["hostname"]) or subprocess.getoutput(["whoami"])
 shell = psutil.Process().parent().name() 
 ram = psutil.virtual_memory()
 processor = platform.machine()
-disk = psutil.disk_usage(os.path.expanduser("~")
+disk = psutil.disk_usage(os.path.expanduser("~"))
 hora = datetime.now().strftime("%H:%M:%S")
 fecha = datetime.now().strftime("%Y-%m-%d")
 
