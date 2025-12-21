@@ -21,7 +21,7 @@ def data():
             user = f.read().strip()
         if not user:
             user = "Desconocido"
-        shell = psutil.Process().parent().name()
+        shell = os.path.basename(os.getenv("SHELL", "bash"))
         if not shell:
             shell = "Desconocido"
         ram = psutil.virtual_memory()
