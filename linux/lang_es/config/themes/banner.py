@@ -180,7 +180,7 @@ def main():
                 table.add_row(f"{icon_hora} Hora", str(hora))
                 table.add_row(f"{icon_fecha} Fecha", str(fecha))
                 table.add_row(f"{icon_shell} Shell", shell)
-                table.add_row(f"{icon_device} Dispositivo", )
+                table.add_row(f"{icon_device} Dispositivo", device)
                 table.add_row(f"{icon_system} Sistema", system)
                 table.add_row(f"{icon_kernel} Kernel", kernel)
                 table.add_row(f"{icon_version} Versión", version)
