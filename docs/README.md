@@ -170,6 +170,15 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 </details>
 
 <details>
+<summary><b>🔨 Plugins</b></summary>
+
+__¿Como usar?__ puedes crear tus propios comandos para `Stellar` en cualquier lenguaje de programación, al iniciar `Stellar` este mismo cargará cada comando/plugin que hayas creado de manera automática para su uso.
+
+__¿Como creo un plugin?__ puedes hacer un plugin de cualquier cosa, en la siguiente ruta >>> `Stellar/plugins` haces `cd` o usas tu herramienta favorita para ir a la ruta y colocar tu plugin luego de eso reinicia tu terminal y `Stellar` lo cargará, lo puedes hacer en Bash, Python o JavaScript ya que son los lenguajes qué `Stellar` instala por defecto y no tendrás que instalar nada de último momento aunque claro también puedes crear en el lenguaje que desees Instalando el compilador de tu lenguaje de programación favorito.
+
+</details>
+
+<details>
 <summary><b>📀 Comandos</b></summary>
 
 Stellar incluye una selección de comandos para su uso los cuales son:
