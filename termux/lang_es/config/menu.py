@@ -68,4 +68,4 @@ table.add_row("• role-mapper", "Mapea roles apartir del ID del servidor", "�
 table.add_row("• mutual-servers", "Verifica si hay un servidor común entre usuarios", "🟢 Activo")
 
 console.print(table, style="bright_white", justify="center")
-console.print("")l
+console.print("")
