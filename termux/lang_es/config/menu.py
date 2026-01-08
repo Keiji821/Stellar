@@ -20,6 +20,10 @@ table.add_row("• update", "Actualiza desde el repositorio de github", "🔐 Si
 table.add_row("• reinstall", "Reinstala Stellar en tu termux", "🔐 Sistema")
 table.add_row("• bash", "Reinicia su sesión de la terminal", "🔐 Sistema")
 table.add_row("• reset", "Reestablece la terminal", "🔐 Sistema")
+table.add_row("• tor-enable", "Activa la protección TOR", "🔐 Sistema")
+table.add_row("• tor-disable", "Desactiva la protección TOR", "🔐 Sistema")
+table.add_row("• banner-enable", "Activa el banner Stellar", "🔐 Sistema")
+table.add_row("• banner-disable", "Desactiva el banner Stellar", "🔐 Sistema")
 
 table.add_row("")
 table.add_row("[code]Utilidades", style="bold green")
@@ -64,4 +68,4 @@ table.add_row("• role-mapper", "Mapea roles apartir del ID del servidor", "�
 table.add_row("• mutual-servers", "Verifica si hay un servidor común entre usuarios", "🟢 Activo")
 
 console.print(table, style="bright_white", justify="center")
-console.print("")
+console.print("")l
