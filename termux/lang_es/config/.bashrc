@@ -142,6 +142,7 @@ clear
 # │ Security                       │
 # └────────────────────────────────┘
 
+tor-enable() {
 pkill -f "tor"
 pkill -f "9052"
 pkill -f "9053"
@@ -156,6 +157,19 @@ tor --SocksPort $torport \
     --ClientOnly 1 \
     --AvoidDiskWrites 1 \
     --DNSPort $dnsport &>tor.txt &
+sleep 5
+printf "${Verde_Brillante}[INFO] ${Verde_Brillante}Tor ha sido activado"
+}
+
+tor-disable() {
+unset torport
+unset dnsport
+unset ALL_PROXY
+pkill -f "tor"
+pkill -f "9052"
+pkill -f "9053"
+printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
+}
 
 # ┌────────────────────────────────┐
 # │ Imports and banner             │
@@ -164,7 +178,10 @@ tor --SocksPort $torport \
 command cp ~/Stellar/termux/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/termux/lang_es/config/themes
 clear
-python banner.py
+data=$(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.st)
+if [[ "$data" == "y" ]]; then
+    python banner.py
+fi
 cd
 printf "${Gris}[INFO] ${Blanco_Brillante}Stellar se ha iniciado correctamente.\n"
 printf "${Gris}[INFO] ${Blanco_Brillante}Escriba ${Fondo_Azul}${Blanco_Brillante}menu${Reset} para ver los comandos disponibles.\n"
@@ -216,6 +233,20 @@ my() {
     cd ~/Stellar/termux/lang_es/config/system
     python user.py
     cd
+}
+
+banner-enable() {
+    echo "y" > ~/Stellar/termux/lang_es/config/themes/isbanner.st
+    printf "${Verde_Brillante}[INFO] ${Reset}El banner ha sido habilitado"
+    printf ""
+    printf "\n"
+}
+
+banner-disable() {
+    echo "n" > ~/Stellar/termux/lang_es/config/themes/isbanner.st
+    printf "${Rojo_Brillante}[INFO] ${Reset}El banner ha sido deshabilitado"
+    printf ""
+    printf "\n"
 }
 
 # Discord
