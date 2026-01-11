@@ -143,32 +143,32 @@ clear
 # └────────────────────────────────┘
 
 tor-enable() {
-pkill -f "tor"
-pkill -f "9052"
-pkill -f "9053"
-export torport="9052"
-export dnsport="9053"
-export ALL_PROXY="socks5h://localhost:${torport}"
-tor --SocksPort $torport \
-    --CircuitBuildTimeout 30 \
-    --NumEntryGuards 2 \
-    --NewCircuitPeriod 60 \
-    --MaxCircuitDirtiness 600 \
-    --ClientOnly 1 \
-    --AvoidDiskWrites 1 \
-    --DNSPort $dnsport &>tor.txt &
-sleep 5
-printf "${Verde_Brillante}[INFO] ${Verde_Brillante}Tor ha sido activado"
+    pkill -f "tor"
+    pkill -f "9052"
+    pkill -f "9053"
+    export torport="9052"
+    export dnsport="9053"
+    export ALL_PROXY="socks5h://localhost:${torport}"
+    tor --SocksPort $torport \
+        --CircuitBuildTimeout 30 \
+        --NumEntryGuards 2 \
+        --NewCircuitPeriod 60 \
+        --MaxCircuitDirtiness 600 \
+        --ClientOnly 1 \
+        --AvoidDiskWrites 1 \
+        --DNSPort $dnsport &>tor.txt &
+    sleep 5
+    printf "${Verde_Brillante}[INFO] ${Verde_Brillante}Tor ha sido activado"
 }
 
 tor-disable() {
-unset torport
-unset dnsport
-unset ALL_PROXY
-pkill -f "tor"
-pkill -f "9052"
-pkill -f "9053"
-printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
+    unset torport
+    unset dnsport
+    unset ALL_PROXY
+    pkill -f "tor"
+    pkill -f "9052"
+    pkill -f "9053"
+    printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
 }
 
 # ┌────────────────────────────────┐
@@ -178,7 +178,7 @@ printf "${Rojo_Brillante}[INFO] ${Verde_Brillante}Tor ha sido desactivado"
 command cp ~/Stellar/termux/lang_es/config/.bash_profile ~/.
 cd ~/Stellar/termux/lang_es/config/themes
 clear
-data=$(grep -o "y" ~/Stellar/linux/lang_es/config/themes/isbanner.st)
+data=$(grep -o "y" ~/Stellar/termux/lang_es/config/themes/isbanner.st)
 if [[ "$data" == "y" ]]; then
     python banner.py
 fi
