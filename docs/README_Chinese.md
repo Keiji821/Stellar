@@ -2,13 +2,13 @@
 
 <div align="center">
 
-![开源项目](https://img.shields.io/badge/开源-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![维护中](https://img.shields.io/badge/持续维护中(是)-2ea44f?style=for-the-badge)
+![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/维护%20(是)-2ea44f?style=for-the-badge)
 
-<h4>开发语言</h4>
+<h4>使用技术</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Bash](https://img.shields.io/badge/Shell脚本-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
-[![JavaScript运行时](https://img.shields.io/badge/JavaScript运行时-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
+![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+[![JavaScript Runtime](https://img.shields.io/badge/JavaScript_Runtime-Node.js-yellow?style=for-the-badge&logo=javascript&logoColor=white&color=f7df1e&labelColor=000000)](https://nodejs.org/)
 
 </div>
 
@@ -19,113 +19,109 @@
 
 <div align="center">
 
-Stellar 是一个基于 `Python`、`Bash` 和 `NodeJS` 开发的程序，旨在为单调的 `Termux` 终端赋予全新外观并增加实用功能。
+Stellar是一个用`python`、`bash`和`nodejs`开发的程序，旨在改善`termux`枯燥的外观，为其增添新的界面和功能。
 
-虽然包含部分黑客和OSINT工具命令，但其核心目标是提供多层级个性化定制，全面提升Termux的视觉体验。
+虽然它包含一些以命令形式提供的黑客和OSINT工具，但其主要重点是提供自定义层来改善termux的外观。
 
 </div>
 
-## `🗃️` 文档 
+`Stellar UI in Termux`
+<table align="center">
+  <tr>
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/resources/images/Stellar.jpg" width="500"></td>
+  </tr>
+</table>
 
-- [英文文档](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
-
-- [日语文档](https://github.com/Keiji821/Stellar/blob/master/docs/README_Japanese.md)
-
-- [中文文档](https://github.com/Keiji821/Stellar/blob/master/docs/README_Chinese.md)
-
-- [韩文文档](https://github.com/Keiji821/Stellar/blob/master/docs/README_Korean.md)
-
-- [葡萄牙语文档](https://github.com/Keiji821/Stellar/blob/master/docs/README_Portuguese.md)
+> 这张照片是使用Stellar在Termux终端中拍摄的。
 
 ## `📄` 状态信息
 
-`⚠️` 即将内置支持日语、中文、韩语、英语和葡萄牙语界面。
+`✅️` 多语言支持
+`✅️` 官方版本
 
-`⚠️` 程序仍在持续开发中，可能存在运行异常。
+`📌` 如果您想为Stellar做出贡献或报告程序中的错误，请通过用户名 `keiji100` 添加我的Discord联系我。
 
-`📌` 如需贡献代码或提交错误报告，请通过Discord联系开发者：`keiji100`
-
-## `📜` 项目内容
+## `📜` 内容
 
 <details>
 <summary><b>📑 程序详情</b></summary>
 
-```shell
-程序名称: Stellar
-创建日期: 2024/06/01
-当前版本: v0.0.0 (开发中)
-程序大小: 17MB
-支持语言: 仅西班牙语
-开发者: Keiji821
+```shell script
+程序名称：Stellar
+创建日期：2024年6月1日
+版本：v1.0.1 官方版本
+程序大小：27.4 MB
+支持语言：西班牙语、英语、日语、韩语、葡萄牙语、中文
+创建者：Keiji821
 ```
+
 </details>
 
 <details>
-<summary><b>📥 安装指南</b></summary>
+<summary><b>📥 安装步骤</b></summary>
 
-请按顺序执行以下命令：
+要安装Stellar，请按照以下步骤操作：
 
-```shell
-pkg update && pkg upgrade
+```shell script
+apt-get update -y && apt-get upgrade -y
 ```
 
-```shell
-pkg install git -y
+```shell script
+apt-get install git -y
 ```
 
-```shell
+```shell script
 git clone https://github.com/Keiji821/Stellar
 ```
 
-```shell
+```shell script
 cd Stellar
 ```
 
-```shell
-bash install.sh
+```shell script
+bash init.sh
 ```
 
-执行`bash install.sh`后将启动安装程序。为确保完整安装，请保持网络畅通。安装完成后Termux会自动重启，建议完全关闭Termux以保障`TOR`功能正常运作。
+执行bash init.sh后，Stellar的安装系统将启动。请确保您有良好的互联网连接以确保Stellar正确安装！Stellar安装完成后，您的Termux会话将重新启动。建议您在安装Stellar后关闭Termux。
 
 </details>
 
 <details>
-<summary><b>🧩 功能特性</b></summary>
+<summary><b>🧩 功能特点</b></summary>
 
-Stellar在不依赖`Zsh`的情况下，通过纯`Bash`实现Termux深度定制，包含以下功能模块：
+Stellar是一个充分利用Bash的程序，不使用Zsh作为Termux自定义的提供者。它包括以下不同的修改和依赖项：
 
-> 核心特性
-```shell
-• 可定制横幅图案/颜色及背景
-• 设备信息状态栏
-• 集成TOR匿名网络
-• Termux背景色自定义
-• 专用工具命令集
-• 增强型termux-properties配置
-• 原生command-not-found提示系统
-• 指纹锁屏安全模块
-• Termux-API深度集成
-• Termux-X11环境变量预配置
+功能和更改
+
+```shell script
+• 自定义横幅及其颜色和背景的功能
+• 设备信息显示在横幅下方的表格中
+• 安全性 - 通过TOR提供保护层
+• 自定义Termux背景颜色的功能
+• Stellar系统的基本命令和实用程序
+• 应用改进的termux-properties
+• 新的原生Stellar command-not-found
+• Termux的指纹屏幕安全锁
+• 与Termux API的集成
+• 默认导入Termux-X11变量
 ```
 
-> APT依赖
-```shell
+APT依赖项
+
+```shell script
 • python
 • cloudflared 
 • tor
 • nmap
 • exiftool
 • nodejs
-• termux-api
 • dnsutils
 • lsd
-• x11-repo
-• termux-x11-nightly
-• root-repo
 ```
 
-> PIP依赖
-```shell   
+PIP依赖项
+
+```shell script   
 • beautifulsoup4
 • pyfiglet
 • phonenumbers
@@ -139,89 +135,63 @@ Stellar在不依赖`Zsh`的情况下，通过纯`Bash`实现Termux深度定制�
 • fake_useragent
 • pycryptodome
 ```
+
+</details>
+
+<details>
+<summary><b>🔨 插件</b></summary>
+
+如何使用： 您可以用任何编程语言为Stellar创建自己的命令。启动Stellar时，它会自动加载您创建的每个命令/插件以供使用。
+
+如何创建插件： 您可以为任何功能创建插件。在以下路径 >>> Stellar/plugins，使用cd或您喜欢的工具进入该路径并放置您的插件。之后，重新启动您的终端，Stellar将加载它。您可以使用Bash、Python或JavaScript创建，因为这些是Stellar默认安装的语言，您无需在最后一刻安装任何东西。当然，您也可以通过安装您喜欢的编程语言的编译器来用该语言创建插件。
+
 </details>
 
 <details>
 <summary><b>📀 命令列表</b></summary>
 
-> **🔧 系统命令**  
+Stellar包含一系列可供使用的命令：
+
+系统命令
+
 ```bash
-reload       │ 重载横幅系统  
-user-config  │ 个性化配置中心
-my           │ 显示Stellar个人资料
-uninstall    │ 完全卸载程序  
-update       │ 从GitHub更新  
-bash         │ 重启终端会话   
-reset        │ 恢复初始状态
-dstr         | rm -rf快捷命令
-move         | mv快捷命令
-copy         | cp快捷命令
-x11          | termux-x11 :0 & export DISPLAY=:0快捷命令
+menu         | 显示可用的Stellar命令及其状态
+reload       | 重新加载系统横幅
+user-config  | 自定义横幅和个人资料
+manager      | 管理、安装和更新Stellar
+my           | 显示您的Stellar个人资料
+uninstall    | 完全卸载Stellar
+x11          | termux-x11 :0 & export DISPLAY=:0的别名
 ```
 
-> **🛠️ 实用工具**  
+OSINT命令
+
 ```bash
-ia           │ 免费API人工智能服务  
-ia-image     │ AI图像生成器  
-traductor    │ 实时翻译器  
-myip         │ 公网IP查询  
-passwordgen  │ 安全密码生成  
-encrypt-file │ 文件加密工具  
+ipinfo        | 获取IP信息
+urlinfo       | 分析URL
+phoneinfo     | 电话号码信息
+metadatainfo  | 提取文件元数据
 ```
 
-> **🌐 信息收集**  
-```bash
-ipinfo       │ IP情报分析  
-urlinfo      │ URL解析  
-userfinder   │ 跨平台用户搜索  
-phoneinfo    │ 电话号码溯源  
-metadatainfo │ 文件元数据提取  
-emailsearch  │ 邮箱地址检索  
-```
-
-> **📱 Discord工具**  
-```bash
-userinfo           │ 用户信息查询(ID)  
-serverinfo         │ 服务器信息(ID)  
-searchinvites      │ 邀请链接搜索  
-inviteinfo         │ 邀请详情分析  
-role-mapper        │ 角色权限映射  
-mutual-servers     │ 共同服务器查询  
-webhook-mass-spam  │ Webhook轰炸  
-mass-delete-channels │ 批量删除频道  
-```
-
-> **📸 Instagram工具**  
-```bash
-profileinfo  │ 个人资料元数据提取  
-```
-
-> **⚡ 渗透测试**  
-```bash
-ddos        │ DDoS攻击(IP+端口)   
-```
 </details>
 
 <details>
 <summary><b>📄 使用指南</b></summary>
 
-安装完成后，通过`user-config`命令可自定义：
-- 横幅ASCII艺术图案
-- 颜色主题方案
-- 终端背景色（支持浅色/深色切换）
-- 其他视觉元素
+使用方法很简单：安装后像平常一样开始使用termux。使用user-config命令可以修改横幅的各个方面，无论是显示您想要的ASCII艺术，还是添加颜色，以及设置背景（白色或其他颜色）。
 
-该命令提供交互式界面引导完成所有个性化设置。
+user-config命令还允许您修改termux的背景主题，将深色背景更改为白色或蓝色。
+
 </details>
 
 <details>
-<summary><b>🌹 开发团队</b></summary>
+<summary><b>🌹 作者</b></summary>
 
 ```diff
-+ Keiji821 (主开发者)
++ Keiji821 (开发者)
 ```
 
-##### 合作与咨询
+如有疑问或合作意向，请联系我。
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
@@ -229,11 +199,12 @@ ddos        │ DDoS攻击(IP+端口)
   </a>
 </p>
 
-##### `❤️` 支持项目
+❤️ 捐赠
 
-如果您认可这个项目，欢迎通过以下方式支持开发：
+如果您喜欢这个项目并觉得它有用，请考虑捐赠任意金额来支持这个项目及其开发。
 
-[![Binance捐赠](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=捐赠&labelColor=black&message=763579717)](https://pay.binance.com/en)
+https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717
 
-[![PayPal捐赠](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=捐赠&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com
+
 </details>
