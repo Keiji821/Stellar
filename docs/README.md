@@ -85,11 +85,11 @@ Creador: Keiji821
 Para instalar Stellar debe seguir los siguientes pasos:
 
 ```shell script
-pkg update && pkg upgrade
+apt-get update -y && apt-get upgrade -y
 ```
 
 ```shell script
-pkg install git -y
+apt-get install git -y
 ```
 
 ```shell script
@@ -104,7 +104,7 @@ cd Stellar
 bash init.sh
 ```
 
-Luego de ejecutar el `bash install.sh` se iniciará el sistema de instalación de `Stellar` ¡Asegurese de tener una buena conexión a internet para la correcta instalación de `Stellar`! luego de haberse instalado Stellar su sesión de `Termux` se reiniciará, es recomendable que cierres `Termux` luego de instalar `Stellar`
+Luego de ejecutar el `bash init.sh` se iniciará el sistema de instalación de `Stellar` ¡Asegurese de tener una buena conexión a internet para la correcta instalación de `Stellar`! luego de haberse instalado Stellar su sesión de `Termux` se reiniciará, es recomendable que cierres `Termux` luego de instalar `Stellar`
 
 </details>
 
