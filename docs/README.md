@@ -27,21 +27,13 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 </div>
 
-`In Termux`
+`Stellar UI in Termux`
 <table align="center">
   <tr>
-    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux1.jpg" width="500"></td>
-    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Termux2.jpg" width="500"></td>
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/resources/images/Stellar.jpg" width="500"></td>
   </tr>
 </table>
 
-`In Linux/SSH`
-<table align="center">
-  <tr>
-    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux1.jpg" width="500"></td>
-    <td><img src="https://github.com/Keiji821/Stellar/blob/master/images/Linux2.jpg" width="500"></td>
-  </tr>
-</table>
 
 > Nothing changes in appearance, it remains the same. The screenshots are from the Stellar system in Spanish.
 
