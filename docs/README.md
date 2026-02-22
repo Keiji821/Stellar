@@ -198,8 +198,6 @@ phoneinfo     | Información de número telefónico
 metadatainfo  | Extrae metadatos de archivos   
 ```
 
-```
-
 </details>
 
 <details>
