@@ -179,10 +179,9 @@ Stellar incluye una selección de comandos para su uso los cuales son:
 menu         | Visualiza los comandos disponibles de Stellar y su estado  
 reload       | Recarga el banner del sistema  
 user-config  | Personaliza banner y perfil
-manager      | Administra e instala Stellar
+manager      | Administra, instala y actualiza Stellar
 my           | Muestra tu perfil de Stellar
 uninstall    | Desinstala Stellar completamente  
-update       | Actualiza desde GitHub  
 x11          | alias de termux-x11 :0 & export DISPLAY=:0
 ```
 
