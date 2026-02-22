@@ -108,84 +108,10 @@ def config(option=None):
                 return
         
         elif option == "4":
-            subprocess.Popen(['clear'])
             time.sleep(1)
-            themes = (
-                "Stellar", "Horizon", "Everforest"
-                )
-            numbs = (
-                "1", "2", "3"
-                )
-            list_themes = Panel(f"""
-            
-            [bold blue][1][/bold blue] Stellar
-            [bold blue][2][/bold blue] Horizon
-            [bold blue][3][/bold blue] Everforest
-            
-            [bold blue][0][/bold blue] [code][bold red]{translate(category="user-config", type="default_theme_message")}[/bold red][/code]
-            
-            """, title=translate(category="user-config", type="themes_title_message"), border_style="bold cyan")
-            tips_banner = Panel(translate(category="user-config", type="tips_message"), border_style="bold cyan")
-            console.print(list_themes)
-            console.print(tips_banner)
-            theme_type = console.input(f"[bold green]{translate(category="user-config", type="enter_message")} [/bold green]")
-            if theme_type:
-                if theme_type == "0":
-                    os.system("rm -rf ~/.termux/colors.properties")
-                    subprocess.Popen(["termux-reload-settings"])
-                    console.print(f"[bold green][SUCCESS][/bold green] {translate(category="user-config", type="success_message")}")
-                    time.sleep(2)
-                    banner()
-                elif theme_type == "Stellar" or theme_type == "1":
-                    ruta = os.path.expanduser("~/Stellar/resources/themes")
-                    os.chdir(ruta)
-                    with open("stellar.stel", encoding="utf-8") as f:
-                        theme = f.read().strip()
-                    os.system(f"""
-cat > ~/.termux/colors.properties << 'EOF'
-{theme}
-EOF
-                    """)
-                    subprocess.Popen(["termux-reload-settings"])
-                    console.print(f"[bold green][SUCCESS][/bold green] {translate(category="user-config", type="success_message")}")
-                    time.sleep(2)
-                    banner()
-                elif theme_type == "Horizon" or theme_type == "2":
-                    ruta = os.path.expanduser("~/Stellar/resources/themes")
-                    os.chdir(ruta)
-                    with open("horizon.stel", encoding="utf-8") as f:
-                        theme = f.read().strip()
-                    os.system(f"""
-cat > ~/.termux/colors.properties << 'EOF'
-{theme}
-EOF
-                    """)
-                    subprocess.Popen(["termux-reload-settings"])
-                    console.print(f"[bold green][SUCCESS][/bold green] {translate(category="user-config", type="success_message")}")
-                    time.sleep(2)
-                    banner()
-                elif theme_type == "Everforest" or theme_type == "3":
-                    ruta = os.path.expanduser("~/Stellar/resources/themes")
-                    os.chdir(ruta)
-                    with open("everforest.stel", encoding="utf-8") as f:
-                        theme = f.read().strip()
-                    os.system(f"""
-cat > ~/.termux/colors.properties << 'EOF'
-{theme}
-EOF
-                    """)
-                    subprocess.Popen(["termux-reload-settings"])
-                    console.print(f"[bold green][SUCCESS][/bold green] {translate(category="user-config", type="success_message")}")
-                    time.sleep(2)
-                    banner()
-                else:
-                    console.print(f"[bold red][ERROR][/bold red] {translate(category="user-config", type="invalid_data_message")}")
-                    time.sleep(2)
-                    return
-            else:
-                console.print(f"[bold red][ERROR][/bold red] {translate(category="user-config", type="invalid_data_message")}")
-                time.sleep(2)
-                return
+            console.print(f"[bold cyan][INFO][/bold cyan] {translate(category="user-config", type="close_option_message")}")
+            time.sleep(2)
+            banner()       
         
         elif option == "5":
             time.sleep(1)
