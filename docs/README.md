@@ -183,49 +183,21 @@ Stellar incluye una selección de comandos para su uso los cuales son:
 menu         | Visualiza los comandos disponibles de Stellar y su estado  
 reload       | Recarga el banner del sistema  
 user-config  | Personaliza banner y perfil
+manager      | Administra e instala Stellar
 my           | Muestra tu perfil de Stellar
 uninstall    | Desinstala Stellar completamente  
 update       | Actualiza desde GitHub  
-bash         | Reinicia la sesión de terminal   
-reset        | Restablece terminal a estado inicial
 x11          | alias de termux-x11 :0 & export DISPLAY=:0
 ```
-
-
-> **UTILIDADES**  
-```bash
-ia           | Servicio de IA con API gratuita  
-ia-image     | Generador de imágenes con IA  
-traductor    | Traducción en tiempo real  
-myip         | Muestra tu IP pública  
-passwordgen  | Genera contraseñas seguras  
-encrypt-file | Encripta archivos  
-ddos         | Ataque DDoS (IP + puerto) 
-```
-
 
 > **OSINT**  
 ```bash
 ipinfo        | Obtiene información de una IP  
 urlinfo       | Analiza URLs  
-userfinder    | Busca usuarios en plataformas  
 phoneinfo     | Información de número telefónico  
-metadatainfo  | Extrae metadatos de archivos  
-emailsearch   | Búsqueda de correos electrónicos  
-instagraminfo | Obtiene los metadatos del perfil
+metadatainfo  | Extrae metadatos de archivos   
 ```
 
-
-> **DISCORD**  
-```bash
-userinfo             | Info de usuario (ID)  
-serverinfo           | Info de servidor (ID)  
-searchinvites        | Busca invitaciones  
-inviteinfo           | Analiza invitaciones  
-role-mapper          | Mapea roles (Server ID)  
-mutual-servers       | Servidores en común  
-webhook-mass-spam    | Spam a webhooks  
-mass-delete-channels | Elimina canales masivamente  
 ```
 
 </details>
