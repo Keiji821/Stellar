@@ -138,12 +138,8 @@ Stellar es un programa que exprime todo lo posible a `Bash` sin usar `Zsh` como 
 • nmap
 • exiftool
 • nodejs
-• termux-api
 • dnsutils
 • lsd
-• x11-repo
-• termux-x11-nightly
-• root-repo
 ```
 
 > Dependencias PIP
