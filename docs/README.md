@@ -72,9 +72,9 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 ```shell script
 Nombre del programa: Stellar
 Fecha de creación: 01/06/2024
-Versión: v0.0.0 (Aún en desarrollo)
-Tamaño del programa: 17mb
-Idiomas del programa: Solo español
+Versión: v1.0.1 Official version
+Tamaño del programa: 27.4 MB
+Idiomas del programa: Spanish, English, Japanese, Korean, Portuguese, Chinese
 Creador: Keiji821
 ```
 </details>
@@ -101,10 +101,10 @@ cd Stellar
 ```
 
 ```shell script
-bash install.sh
+bash init.sh
 ```
 
-Luego de ejecutar el `bash install.sh` se iniciará el sistema de instalación de `Stellar` ¡Asegurese de tener una buena conexión a internet para la correcta instalación de `Stellar`! luego de haberse instalado Stellar su sesión de `Termux` se reiniciará, es recomendable que cierres `Termux` luego de instalar `Stellar` para que funcione correctamente `TOR`
+Luego de ejecutar el `bash install.sh` se iniciará el sistema de instalación de `Stellar` ¡Asegurese de tener una buena conexión a internet para la correcta instalación de `Stellar`! luego de haberse instalado Stellar su sesión de `Termux` se reiniciará, es recomendable que cierres `Termux` luego de instalar `Stellar`
 
 </details>
 
