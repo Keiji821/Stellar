@@ -2,10 +2,9 @@
 
 <div align="center">
 
-![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/Maintained_(Yes)-2ea44f?style=for-the-badge)
+![Open Source](https://img.shields.io/badge/Open_Source-3DA639?style=for-the-badge&logo=open-source-initiative&logoColor=white) ![Maintained](https://img.shields.io/badge/Maintained%20(Yes)-2ea44f?style=for-the-badge)
 
-
-<h4>Built With</h4>
+<h4>Made with</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
@@ -20,109 +19,109 @@
 
 <div align="center">
 
-Stellar is a program built with `Python`, `Bash`, and `NodeJS` designed to enhance the dull appearance of `Termux` by giving it a fresh new look while adding new functionalities.
+Stellar is a program made with `python`, `bash` and `nodejs` to improve the boring appearance of `termux` by giving it a new look and adding new functionalities.
 
-Although it includes some hacking and OSINT-oriented command tools, its primary focus is improving Termux's appearance through multiple layers of customization.
+Although it includes some hacking and OSINT-oriented tools in the form of commands, it focuses on improving termux's appearance by providing customization layers.
 
 </div>
 
-## `🗃️` Documentation 
+`Stellar UI in Termux`
+<table align="center">
+  <tr>
+    <td><img src="https://github.com/Keiji821/Stellar/blob/master/resources/images/Stellar.jpg" width="500"></td>
+  </tr>
+</table>
 
-- [English Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_English.md)
-- [Japanese Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Japanese.md)
-- [Chinese Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Chinese.md)
-- [Korean Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Korean.md)
-- [Portuguese Documentation](https://github.com/Keiji821/Stellar/blob/master/docs/README_Portuguese.md)
+> This photo was taken from the Termux terminal using Stellar.
 
 ## `📄` Status Information
 
-`⚠️` Coming soon: In-program support for Japanese, Chinese, Korean, English, and Portuguese languages.
+`✅️` Multi-language support
+`✅️` Official version
 
-`⚠️` Still under active development - may contain bugs.
+`📌` If you want to contribute to Stellar or report a bug within the program, contact me on Discord by adding me with the username `keiji100`
 
-`📌` To contribute to Stellar or report bugs, contact me on Discord: `keiji100`
-
-## `📜` Contents
+## `📜` Content
 
 <details>
 <summary><b>📑 Program Details</b></summary>
 
-```shell
-Program Name: Stellar
-Creation Date: 06/01/2024
-Version: v0.0.0 (Under Development)
-Program Size: 17MB
-Languages: Spanish only
+```shell script
+Program name: Stellar
+Creation date: 01/06/2024
+Version: v1.0.1 Official version
+Program size: 27.4 MB
+Program languages: Spanish, English, Japanese, Korean, Portuguese, Chinese
 Creator: Keiji821
 ```
+
 </details>
 
 <details>
 <summary><b>📥 Installation Steps</b></summary>
 
-Run these commands sequentially:
+To install Stellar you must follow these steps:
 
-```shell
-pkg update && pkg upgrade
+```shell script
+apt-get update -y && apt-get upgrade -y
 ```
 
-```shell
-pkg install git -y
+```shell script
+apt-get install git -y
 ```
 
-```shell
+```shell script
 git clone https://github.com/Keiji821/Stellar
 ```
 
-```shell
+```shell script
 cd Stellar
 ```
 
-```shell
-bash install.sh
+```shell script
+bash init.sh
 ```
 
-After executing `bash install.sh`, the installation system will launch. Ensure stable internet connection for proper installation. Termux will restart after installation - we recommend fully closing Termux for `TOR` to function correctly.
+After executing bash init.sh, the Stellar installation system will start. Make sure you have a good internet connection for the correct installation of Stellar! After Stellar is installed, your Termux session will restart. It is recommended that you close Termux after installing Stellar.
 
 </details>
 
 <details>
 <summary><b>🧩 Features</b></summary>
 
-Stellar maximizes `Bash` capabilities without relying on `Zsh` for Termux customization, including:
+Stellar is a program that gets the most out of Bash without using Zsh as a provider for Termux customization. It includes different modifications and dependencies which are the following:
 
-> Core Features
-```shell
-• Customizable banner colors/background
-• Device information status panel
-• TOR security layer
-• Termux background color customization
-• Essential utility commands
-• Enhanced termux-properties
-• Native command-not-found handler
-• Fingerprint lock screen security
-• Termux-API integration
-• Termux-X11 environment variables
+Features and changes
+
+```shell script
+• Ability to customize a banner and its colors as well as its background
+• Table below the banner with your device information
+• Security, provides a protection layer with TOR
+• Ability to customize the background color for Termux
+• Basic commands and utilities for the Stellar system
+• Improved termux-properties applied
+• A new native Stellar command-not-found
+• Fingerprint screen security lock for Termux
+• Integration with Termux API
+• Default import of Termux-X11 variables
 ```
 
-> APT Dependencies
-```shell
+APT Dependencies
+
+```shell script
 • python
 • cloudflared 
 • tor
 • nmap
 • exiftool
 • nodejs
-• termux-api
 • dnsutils
 • lsd
-• x11-repo
-• termux-x11-nightly
-• root-repo
 ```
 
-> PIP Dependencies
-```shell   
+PIP Dependencies
+
+```shell script   
 • beautifulsoup4
 • pyfiglet
 • phonenumbers
@@ -136,89 +135,63 @@ Stellar maximizes `Bash` capabilities without relying on `Zsh` for Termux custom
 • fake_useragent
 • pycryptodome
 ```
+
 </details>
 
 <details>
-<summary><b>📀 Command List</b></summary>
+<summary><b>🔨 Plugins</b></summary>
 
-> **🔧 SYSTEM**  
+How to use? You can create your own commands for Stellar in any programming language. When starting Stellar, it will automatically load each command/plugin you have created for use.
+
+How do I create a plugin? You can make a plugin for anything. In the following path >>> Stellar/plugins you cd or use your favorite tool to go to the path and place your plugin. After that, restart your terminal and Stellar will load it. You can do it in Bash, Python or JavaScript since these are the languages that Stellar installs by default and you won't have to install anything at the last moment, although of course you can also create in the language you want by installing the compiler of your favorite programming language.
+
+</details>
+
+<details>
+<summary><b>📀 Commands</b></summary>
+
+Stellar includes a selection of commands for use, which are:
+
+SYSTEM
+
 ```bash
-reload       │ Reload banner system  
-user-config  │ Customization center
-my           │ Show Stellar profile
-uninstall    │ Complete uninstall  
-update       │ Update from GitHub  
-bash         │ Restart terminal session   
-reset        │ Restore default state
-dstr         | rm -rf shortcut
-move         | mv shortcut
-copy         | cp shortcut
-x11          | termux-x11 :0 & export DISPLAY=:0 shortcut
+menu         | Displays available Stellar commands and their status  
+reload       | Reloads the system banner  
+user-config  | Customize banner and profile
+manager      | Manage, install and update Stellar
+my           | Shows your Stellar profile
+uninstall    | Completely uninstall Stellar  
+x11          | alias for termux-x11 :0 & export DISPLAY=:0
 ```
 
-> **🛠️ UTILITIES**  
+OSINT
+
 ```bash
-ia           │ Free API AI service  
-ia-image     │ AI image generator  
-traductor    │ Real-time translator  
-myip         │ Public IP check  
-passwordgen  │ Secure password generator  
-encrypt-file │ File encryption  
+ipinfo        | Gets information from an IP  
+urlinfo       | Analyzes URLs  
+phoneinfo     | Phone number information  
+metadatainfo  | Extracts metadata from files   
 ```
 
-> **🌐 OSINT**  
-```bash
-ipinfo       │ IP intelligence  
-urlinfo      │ URL analyzer  
-userfinder   │ Cross-platform user search  
-phoneinfo    │ Phone number lookup  
-metadatainfo │ File metadata extraction  
-emailsearch  │ Email search  
-```
-
-> **📱 DISCORD**  
-```bash
-userinfo           │ User info (ID)  
-serverinfo         │ Server info (ID)  
-searchinvites      │ Invite search  
-inviteinfo         │ Invite analysis  
-role-mapper        │ Role permission mapping  
-mutual-servers     │ Shared servers  
-webhook-mass-spam  │ Webhook spam  
-mass-delete-channels │ Bulk channel deletion  
-```
-
-> **📸 INSTAGRAM**  
-```bash
-profileinfo  │ Profile metadata  
-```
-
-> **⚡ PENTESTING**  
-```bash
-ddos        │ DDoS attack (IP+port)
-```
 </details>
 
 <details>
 <summary><b>📄 Usage Guide</b></summary>
 
-After installation, use `user-config` to customize:
-- Banner ASCII art
-- Color schemes
-- Terminal background (light/dark modes)
-- Other visual elements
+Usage is simple: install it and start using your termux as you normally would. With the user-config command you can modify banner aspects, whether to display the ascii art you want, as well as add color and also a background, whether white or any other color.
 
-The command provides interactive customization wizard.
+The user-config command also allows you to modify the termux background theme, whether to change the dark background to a white or blue one.
+
 </details>
 
 <details>
 <summary><b>🌹 Authors</b></summary>
 
 ```diff
-+ Keiji821 (Lead Developer)
++ Keiji821 (Developer)
 ```
 
-##### Contact for collaboration/consultation
+Contact me for questions and collaborations.
 
 <p align="left">
   <a href="https://discord.com/users/983476283491110932">
@@ -226,11 +199,12 @@ The command provides interactive customization wizard.
   </a>
 </p>
 
-##### `❤️` Donations 
+❤️ Donations
 
-If you find this project valuable, consider supporting its development:
+If you liked and enjoyed this project and find it useful, consider supporting this project and its development by donating any amount you wish.
 
-[![Binance Donate](https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717)](https://pay.binance.com/en)
+https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717
 
-[![PayPal Donate](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com)](https://paypal.me/felixdppdcg69)
+https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com
+
 </details>
