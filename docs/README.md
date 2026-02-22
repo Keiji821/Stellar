@@ -35,7 +35,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 </table>
 
 
-> Nothing changes in appearance, it remains the same. The screenshots are from the Stellar system in Spanish.
+> This photo was taken from the Termux terminal using Stellar. 
 
 ## `🗃️` Documentation 
 
