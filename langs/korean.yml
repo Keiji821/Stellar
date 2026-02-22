@@ -1,0 +1,249 @@
+# ┌────────────────────────────────┐
+# │ Python Files                   │
+# │ Python 파일                    │
+# └────────────────────────────────┘
+
+user-config:
+  error_message: "예기치 않은 오류가 발생했습니다"
+  invalid_data_message: "유효한 값을 입력하세요"
+  success_message: "작업이 성공적으로 완료되었습니다"
+  enter_message: "값을 입력하세요:"
+  config_message: "Stellar 설정"
+  subtitle_message: "v1.0.1"
+  banner_config_message: "배너 설정"
+  banner_color_config_message: "배너 색상 설정"
+  banner_background_config_message: "배너 배경색 설정"
+  theme_config_message: "테마 설정"
+  font_config_message: "글꼴 설정"
+  user_config_message: "사용자 설정"
+  login_config_message: "로그인 유형 설정"
+  lang_config_message: "언어 변경"
+  exit_message: "종료"
+  leave_message: "다음에 봐요!"
+  banner_background_activate_message: "배너 배경을 활성화할까요? (y/n):"
+  banner_background_color_activate_message: "유효한 Rich 색상을 입력하세요"
+  banner_color_activate_message: "유효한 Rich 색상을 입력하세요"
+  hour_message: "시간"
+  time_message: "날짜"
+  user_message: "사용자"
+  unknown_message: "알 수 없음"
+  tips_message: "사용 가능한 옵션을 선택하세요"
+  themes_title_message: "테마"
+  fonts_title_message: "글꼴"
+  invalid_font_message: "잘못된 글꼴입니다"
+  invalid_theme_message: "잘못된 테마입니다"
+  close_option_message: "곧 출시 예정!"
+  langs_title_message: "언어"
+  default_theme_message: "기본 테마로 복원"
+banner:
+  user_unknown_message: "알 수 없음"
+  shell_unknown_message: "알 수 없음"
+  hour_unknown_message: "알 수 없음"
+  time_unknown_message: "알 수 없음"
+  device_unknown_message: "알 수 없음"
+  system_unknown_message: "알 수 없음"
+  kernel_unknown_message: "알 수 없음"
+  version_unknown_message: "알 수 없음"
+  processor_unknown_message: "알 수 없음"
+  ip_unknown_message: "[bold red][!] [bold white]IP 식별 오류"
+  ip_unknown2_message: "[bold red][!] [bold white]식별되지 않은 IP"
+  not_internet_message: "[bold red][!] [bold white]인터넷 연결 없음"
+  tor_ip_message: "[bold green][!] [bold white]Tor IP 🧄"
+  vpn_ip_message: "[bold yellow][!] [bold white]VPN IP 🔐"
+  proxy_ip_message: "[bold red][!] [bold white]프록시 IP 🔗"
+  public_ip_message: "[bold cyan][!] [bold white]공용 IP 🌐"
+  user_message: "사용자"
+  shell_message: "셸"
+  hour_message: "시간"
+  time_message: "날짜"
+  device_message: "장치"
+  system_message: "시스템"
+  kernel_message: "커널"
+  version_message: "버전"
+  processor_message: "프로세서"
+  ram_message: "RAM"
+  cpu_message: "CPU"
+  ip_message: "IP"
+  palette_colors_message: "팔레트/색상"
+  banner_title_message: "시스템"
+menu:
+  tips_message: "Stellar가 업데이트됨에 따라 더 많은 명령이 추가됩니다."
+  table_title_message: "목록"
+  table_command_message: "명령어"
+  table_description_message: "설명"
+  table_status_message: "상태"
+  table_system_message: "시스템"
+  table_osint_message: "Osint"
+  status_system_message: "🔐 시스템"
+  online_status_message: "🟢 활성"
+  idle_status_message: "🔴 비활성"
+  soon_status_message: "🟡 곧 출시!"
+  unstable_status_message: "🟠 불안정"
+  reload_message: "배너 새로고침"
+  user-config_message: "Stellar 환경 설정"
+  my_message: "프로필 보기"
+  manager_message: "Stellar 관리 및 업데이트"
+  bash_message: "bash 세션 다시 시작"
+  reset_message: "bash 세션 재설정"
+  tor-enable_message: "Tor 활성화"
+  tor-disable_message: "Tor 비활성화"
+  banner-enable_message: "배너 활성화"
+  banner-disable_message: "배너 비활성화"
+  ipinfo_message: "IP 정보 가져오기"
+  urlinfo_message: "URL 정보 가져오기"
+  phoneinfo_message: "전화번호 정보 가져오기"
+  metadatainfo_message: "파일 정보 가져오기"
+user:
+  title_user_message: "프로필"
+  banner_color_message: "배너 색상"
+  banner_background_color_message: "배너 배경색"
+  banner_background_message: "배너 배경?"
+  background_banner_active_message: "활성화됨"
+  background_banner_idle_message: "비활성화됨"
+  isbanner_message: "배너 활성화?"
+  isbanner_active_message: "활성화됨"
+  isbanner_inactive_message: "비활성화됨"
+  preferences_message: "기본 설정"
+  configurations_message: "구성"
+  red_message: "네트워크"
+  banner_message: "배너"
+  login_method_message: "로그인 유형"
+  soon_login_method_message: "곧 출시!"
+  password_message: "비밀번호"
+  soon_password_message: "곧 출시!"
+  ip_type_message: "IP 유형"
+ipinfo:
+  yes_message: "예"
+  not_message: "아니오"
+  ip_data_message: "IP 데이터"
+  information_message: "정보"
+  value_message: "값"
+  information_red_message: "네트워크 정보"
+  information_company_message: "회사 정보"
+  information_abuser_message: "악용자 정보"
+  information_asn_message: "ASN 정보"
+  information_geo_message: "지리 정보"
+  ip_message: "IP"
+  rir_message: "RIR"
+  not_assigned_ip_message: "할당되지 않은 IP입니다"
+  is_mobil_message: "모바일"
+  is_crawler_message: "크롤러"
+  is_datacenter_message: "데이터센터"
+  is_tor_message: "Tor"
+  is_proxy_message: "프록시"
+  is_vpn_message: "VPN"
+  is_abuser_message: "의심스러운 IP"
+  is_satellite_message: "위성"
+  network_message: "네트워크"
+  company_name_message: "회사명"
+  abuser_score_message: "악용자 점수"
+  abuser_type_message: "유형"
+  abuser_name_message: "악용자 이름"
+  address_message: "주소"
+  phone_message: "전화번호"
+  asn_message: "ASN"
+  route_message: "경로"
+  description_message: "설명"
+  active_message: "활성"
+  org_message: "조직"
+  asn_domain_message: "ASN 도메인"
+  abuse_message: "악용자"
+  asn_type_message: "ASN 유형"
+  created_message: "생성일"
+  updated_message: "업데이트일"
+  asn_rir_message: "ASN RIR"
+  continent_message: "대륙"
+  country_message: "국가"
+  state_message: "주/도"
+  city_message: "도시"
+  zip_code_message: "우편번호"
+  latitude_message: "위도"
+  longitude_message: "경도"
+  timezone_message: "시간대"
+  calling_code_message: "국가번호"
+  domain_message: "도메인"
+phoneinfo:
+  phone_message: "전화번호 정보"
+  information_extra_message: "추가 정보"
+  information_technique_message: "기술 정보"
+  country_and_address_message: "국가/주소"
+  company_phone_name_message: "통신사"
+  is_disposible_message: "일회용 가능"
+  is_valid_phone_message: "유효한 전화번호"
+  is_valid_phone_in_region_message: "지역에서 유효한 전화번호"
+  number_type_message: "전화번호 유형"
+  national_number_message: "국내 번호"
+  extension_message: "내선 번호"
+  south_america_message: "남아메리카"
+  europe_message: "유럽"
+  north_america_message: "북아메리카"
+  asia_message: "아시아"
+  africa_message: "아프리카"
+  oceania_message: "오세아니아"
+  antarctica_message: "남극"
+  region_message: "지역"
+  country_code_message: "국가 코드"
+  number_type_0_message: "알 수 없음"
+  number_type_1_message: "유선전화"
+  number_type_2_message: "휴대전화"
+  number_type_3_message: "무료전화"
+  number_type_4_message: "유료전화"
+  number_type_5_message: "비용 분담"
+  number_type_6_message: "VoIP"
+  number_type_7_message: "개인번호"
+  number_type_8_message: "무선호출기"
+  number_type_9_message: "UAN"
+  number_type_10_message: "음성메일"
+
+
+# ┌────────────────────────────────┐
+# │ Bash Files                     │
+# │ Bash 파일                      │
+# └────────────────────────────────┘
+
+# .bashrc
+init_message: Stellar가 성공적으로 시작되었습니다
+init2_message: 사용 가능한 명령을 보려면 ${Blue_Background}${Bright_White}menu${Reset}를 입력하세요.
+activate_tor_message: Tor가 활성화되었습니다
+deactivate_tor_message: Tor가 비활성화되었습니다
+banner_active_message: 배너가 활성화되었습니다
+banner_deactivate_message: 배너가 비활성화되었습니다
+protect_message: 보호됨
+load_plugins_message: 플러그인 로드됨
+load2_plugins_message: ${White}$cmd${Reset} 명령이 플러그인으로 존재합니다
+execute_command_message: 명령 실행 중
+command_not_found_message: 명령을 찾을 수 없습니다
+# init.sh
+install_message: 설치
+reinstall_message: 재설치
+update_message: 업데이트
+exit_message: 종료
+input_message: 값을 입력하세요
+info_message: 정보
+cache_clear_message: 캐시 지우기 (PIP/APT)
+solve_problems_message: 오류 해결 도구 (APT)
+verify_packages_message: 종속성 확인 (APT/PIP)
+invalid_data_message: 잘못된 데이터
+reset_message: 관리자 다시 시작
+verify_message: 필요한 종속성 확인 중
+success_verify_message: 모두 정상입니다!
+installing_dependencies_message: 종속성 설치 중
+success_installing_dependencies_message: 종속성이 성공적으로 설치되었습니다
+on_message: Stellar 설치 프로그램에 오신 것을 환영합니다!
+prepare_install_message: 설치 준비 중, 잠시만 기다려주세요....
+init_install_message: 설치 시작됨...
+install_alert_message: 설치 중
+success_install_message: 성공적으로 설치됨
+on_install_message: 프로그램 설치 중
+package_install_message: 설치 중
+failed_install_message: 실패함
+success_install_package_message: 성공
+success_apply_configs_message: 설정이 적용되었습니다
+on_stellar_message: Stellar 시작 중
+update_action_message: 프로그램 업데이트 중, 잠시만 기다려주세요....
+success_update_message: 업데이트 완료
+cache_clear_action_message: 캐시 지우는 중... (APT/PIP)
+success_cache_clear_message: 정리가 성공적으로 완료되었습니다
+info_descr_message: Stellar by Keiji821
+execute_solve_problems_message: 조치 적용 중....
+success_solve_problems_message: 조치가 성공적으로 적용되었습니다

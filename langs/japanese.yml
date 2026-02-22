@@ -1,0 +1,249 @@
+# ┌────────────────────────────────┐
+# │ Python Files                   │
+# │ Python ファイル                │
+# └────────────────────────────────┘
+
+user-config:
+  error_message: "予期しないエラーが発生しました"
+  invalid_data_message: "有効な値を入力してください"
+  success_message: "操作が正常に完了しました"
+  enter_message: "値を入力してください："
+  config_message: "Stellar 設定"
+  subtitle_message: "v1.0.1"
+  banner_config_message: "バナー設定"
+  banner_color_config_message: "バナーの色を設定"
+  banner_background_config_message: "バナーの背景色を設定"
+  theme_config_message: "テーマ設定"
+  font_config_message: "フォント設定"
+  user_config_message: "ユーザー設定"
+  login_config_message: "ログインタイプ設定"
+  lang_config_message: "言語変更"
+  exit_message: "終了"
+  leave_message: "さようなら！"
+  banner_background_activate_message: "バナーの背景を有効にしますか？ (y/n)："
+  banner_background_color_activate_message: "有効なRichカラーを入力してください"
+  banner_color_activate_message: "有効なRichカラーを入力してください"
+  hour_message: "時間"
+  time_message: "日付"
+  user_message: "ユーザー"
+  unknown_message: "不明"
+  tips_message: "利用可能なオプションを選択してください"
+  themes_title_message: "テーマ"
+  fonts_title_message: "フォント"
+  invalid_font_message: "無効なフォントです"
+  invalid_theme_message: "無効なテーマです"
+  close_option_message: "近日公開！"
+  langs_title_message: "言語"
+  default_theme_message: "デフォルトテーマに戻す"
+banner:
+  user_unknown_message: "不明"
+  shell_unknown_message: "不明"
+  hour_unknown_message: "不明"
+  time_unknown_message: "不明"
+  device_unknown_message: "不明"
+  system_unknown_message: "不明"
+  kernel_unknown_message: "不明"
+  version_unknown_message: "不明"
+  processor_unknown_message: "不明"
+  ip_unknown_message: "[bold red][!] [bold white]IP識別エラー"
+  ip_unknown2_message: "[bold red][!] [bold white]IP未識別"
+  not_internet_message: "[bold red][!] [bold white]インターネット未接続"
+  tor_ip_message: "[bold green][!] [bold white]Tor IP 🧄"
+  vpn_ip_message: "[bold yellow][!] [bold white]VPN IP 🔐"
+  proxy_ip_message: "[bold red][!] [bold white]プロキシIP 🔗"
+  public_ip_message: "[bold cyan][!] [bold white]パブリックIP 🌐"
+  user_message: "ユーザー"
+  shell_message: "シェル"
+  hour_message: "時間"
+  time_message: "日付"
+  device_message: "デバイス"
+  system_message: "システム"
+  kernel_message: "カーネル"
+  version_message: "バージョン"
+  processor_message: "プロセッサー"
+  ram_message: "RAM"
+  cpu_message: "CPU"
+  ip_message: "IP"
+  palette_colors_message: "パレット/カラー"
+  banner_title_message: "システム"
+menu:
+  tips_message: "Stellarのアップデートに伴い、より多くのコマンドが追加されます。"
+  table_title_message: "リスト"
+  table_command_message: "コマンド"
+  table_description_message: "説明"
+  table_status_message: "ステータス"
+  table_system_message: "システム"
+  table_osint_message: "OSINT"
+  status_system_message: "🔐 システム"
+  online_status_message: "🟢 アクティブ"
+  idle_status_message: "🔴 非アクティブ"
+  soon_status_message: "🟡 近日公開！"
+  unstable_status_message: "🟠 不安定"
+  reload_message: "バナーを更新"
+  user-config_message: "Stellar環境を設定"
+  my_message: "プロフィール表示"
+  manager_message: "Stellarの管理と更新"
+  bash_message: "bashセッション再起動"
+  reset_message: "bashセッションリセット"
+  tor-enable_message: "Tor有効化"
+  tor-disable_message: "Tor無効化"
+  banner-enable_message: "バナー有効化"
+  banner-disable_message: "バナー無効化"
+  ipinfo_message: "IP情報取得"
+  urlinfo_message: "URL情報取得"
+  phoneinfo_message: "電話番号情報取得"
+  metadatainfo_message: "ファイル情報取得"
+user:
+  title_user_message: "プロフィール"
+  banner_color_message: "バナー色"
+  banner_background_color_message: "バナー背景色"
+  banner_background_message: "バナー背景？"
+  background_banner_active_message: "有効"
+  background_banner_idle_message: "無効"
+  isbanner_message: "バナー有効？"
+  isbanner_active_message: "有効"
+  isbanner_inactive_message: "無効"
+  preferences_message: "設定"
+  configurations_message: "構成"
+  red_message: "ネットワーク"
+  banner_message: "バナー"
+  login_method_message: "ログインタイプ"
+  soon_login_method_message: "近日公開！"
+  password_message: "パスワード"
+  soon_password_message: "近日公開！"
+  ip_type_message: "IPタイプ"
+ipinfo:
+  yes_message: "はい"
+  not_message: "いいえ"
+  ip_data_message: "IPデータ"
+  information_message: "情報"
+  value_message: "値"
+  information_red_message: "ネットワーク情報"
+  information_company_message: "企業情報"
+  information_abuser_message: "不正利用者情報"
+  information_asn_message: "ASN情報"
+  information_geo_message: "地理情報"
+  ip_message: "IP"
+  rir_message: "RIR"
+  not_assigned_ip_message: "未割り当てIPです"
+  is_mobil_message: "モバイル"
+  is_crawler_message: "クローラー"
+  is_datacenter_message: "データセンター"
+  is_tor_message: "Tor"
+  is_proxy_message: "プロキシ"
+  is_vpn_message: "VPN"
+  is_abuser_message: "不審なIP"
+  is_satellite_message: "衛星"
+  network_message: "ネットワーク"
+  company_name_message: "会社名"
+  abuser_score_message: "不正利用者スコア"
+  abuser_type_message: "タイプ"
+  abuser_name_message: "不正利用者名"
+  address_message: "住所"
+  phone_message: "電話番号"
+  asn_message: "ASN"
+  route_message: "ルート"
+  description_message: "説明"
+  active_message: "アクティブ"
+  org_message: "組織"
+  asn_domain_message: "ASNドメイン"
+  abuse_message: "不正利用者"
+  asn_type_message: "ASNタイプ"
+  created_message: "作成日"
+  updated_message: "更新日"
+  asn_rir_message: "ASN RIR"
+  continent_message: "大陸"
+  country_message: "国"
+  state_message: "州/省"
+  city_message: "都市"
+  zip_code_message: "郵便番号"
+  latitude_message: "緯度"
+  longitude_message: "経度"
+  timezone_message: "タイムゾーン"
+  calling_code_message: "国番号"
+  domain_message: "ドメイン"
+phoneinfo:
+  phone_message: "電話番号情報"
+  information_extra_message: "追加情報"
+  information_technique_message: "技術情報"
+  country_and_address_message: "国/住所"
+  company_phone_name_message: "電話会社"
+  is_disposible_message: "使い捨て可能"
+  is_valid_phone_message: "有効な電話番号"
+  is_valid_phone_in_region_message: "地域で有効な電話番号"
+  number_type_message: "電話番号タイプ"
+  national_number_message: "国内番号"
+  extension_message: "内線番号"
+  south_america_message: "南アメリカ"
+  europe_message: "ヨーロッパ"
+  north_america_message: "北アメリカ"
+  asia_message: "アジア"
+  africa_message: "アフリカ"
+  oceania_message: "オセアニア"
+  antarctica_message: "南極"
+  region_message: "地域"
+  country_code_message: "国コード"
+  number_type_0_message: "不明"
+  number_type_1_message: "固定電話"
+  number_type_2_message: "携帯電話"
+  number_type_3_message: "フリーダイヤル"
+  number_type_4_message: "有料電話"
+  number_type_5_message: "費用分担"
+  number_type_6_message: "VoIP"
+  number_type_7_message: "個人番号"
+  number_type_8_message: "ポケットベル"
+  number_type_9_message: "UAN"
+  number_type_10_message: "ボイスメール"
+
+
+# ┌────────────────────────────────┐
+# │ Bash Files                     │
+# │ Bash ファイル                  │
+# └────────────────────────────────┘
+
+# .bashrc
+init_message: Stellarが正常に起動しました
+init2_message: 利用可能なコマンドを表示するには ${Blue_Background}${Bright_White}menu${Reset} と入力してください。
+activate_tor_message: Torが有効化されました
+deactivate_tor_message: Torが無効化されました
+banner_active_message: バナーが有効化されました
+banner_deactivate_message: バナーが無効化されました
+protect_message: 保護済み
+load_plugins_message: プラグイン読み込み完了
+load2_plugins_message: コマンド ${White}$cmd${Reset} はプラグインとして存在します
+execute_command_message: コマンド実行中
+command_not_found_message: コマンドが見つかりません
+# init.sh
+install_message: インストール
+reinstall_message: 再インストール
+update_message: 更新
+exit_message: 終了
+input_message: 値を入力してください
+info_message: 情報
+cache_clear_message: キャッシュクリア (PIP/APT)
+solve_problems_message: エラー解決ツール (APT)
+verify_packages_message: 依存関係確認 (APT/PIP)
+invalid_data_message: 無効なデータ
+reset_message: マネージャー再起動
+verify_message: 必要な依存関係を確認中
+success_verify_message: すべて正常です！
+installing_dependencies_message: 依存関係をインストール中
+success_installing_dependencies_message: 依存関係が正常にインストールされました
+on_message: Stellarインストーラーへようこそ！
+prepare_install_message: インストール準備中、しばらくお待ちください....
+init_install_message: インストール開始...
+install_alert_message: インストール中
+success_install_message: インストール成功
+on_install_message: プログラムインストール中
+package_install_message: インストール中
+failed_install_message: インストール失敗
+success_install_package_message: 成功
+success_apply_configs_message: 設定が適用されました
+on_stellar_message: Stellar起動中
+update_action_message: プログラム更新中、しばらくお待ちください....
+success_update_message: 更新完了
+cache_clear_action_message: キャッシュクリア中... (APT/PIP)
+success_cache_clear_message: クリーンアップが正常に完了しました
+info_descr_message: Stellar by Keiji821
+execute_solve_problems_message: 対策を適用中....
+success_solve_problems_message: 対策が正常に適用されました

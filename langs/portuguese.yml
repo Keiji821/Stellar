@@ -1,0 +1,249 @@
+# ┌────────────────────────────────┐
+# │ Python Files                   │
+# │ Arquivos Python                │
+# └────────────────────────────────┘
+
+user-config:
+  error_message: "Ocorreu um erro inesperado"
+  invalid_data_message: "Digite um valor válido"
+  success_message: "Operação realizada com sucesso"
+  enter_message: "Digite um valor:"
+  config_message: "Configuração do Stellar"
+  subtitle_message: "v1.0.1"
+  banner_config_message: "Configurar banner"
+  banner_color_config_message: "Configurar cor do banner"
+  banner_background_config_message: "Configurar cor de fundo do banner"
+  theme_config_message: "Configurar tema"
+  font_config_message: "Configurar fonte"
+  user_config_message: "Configurar usuário"
+  login_config_message: "Configurar tipo de login"
+  lang_config_message: "Mudar idioma"
+  exit_message: "Sair"
+  leave_message: "Até logo!"
+  banner_background_activate_message: "Deseja ativar o fundo do banner? (s/n):"
+  banner_background_color_activate_message: "Digite uma cor Rich válida"
+  banner_color_activate_message: "Digite uma cor Rich válida"
+  hour_message: "Hora"
+  time_message: "Data"
+  user_message: "Usuário"
+  unknown_message: "Desconhecido"
+  tips_message: "Selecione algumas das opções disponíveis"
+  themes_title_message: "Temas"
+  fonts_title_message: "Fontes"
+  invalid_font_message: "Fonte inválida"
+  invalid_theme_message: "Tema inválido"
+  close_option_message: "Em breve!"
+  langs_title_message: "Idiomas"
+  default_theme_message: "Restaurar tema padrão"
+banner:
+  user_unknown_message: "Desconhecido"
+  shell_unknown_message: "Desconhecido"
+  hour_unknown_message: "Desconhecido"
+  time_unknown_message: "Desconhecido"
+  device_unknown_message: "Desconhecido"
+  system_unknown_message: "Desconhecido"
+  kernel_unknown_message: "Desconhecido"
+  version_unknown_message: "Desconhecido"
+  processor_unknown_message: "Desconhecido"
+  ip_unknown_message: "[bold red][!] [bold white]Erro ao identificar IP"
+  ip_unknown2_message: "[bold red][!] [bold white]IP não identificado"
+  not_internet_message: "[bold red][!] [bold white]Sem conexão com a internet"
+  tor_ip_message: "[bold green][!] [bold white]IP Tor 🧄"
+  vpn_ip_message: "[bold yellow][!] [bold white]IP VPN 🔐"
+  proxy_ip_message: "[bold red][!] [bold white]IP de Proxy 🔗"
+  public_ip_message: "[bold cyan][!] [bold white]IP Público 🌐"
+  user_message: "Usuário"
+  shell_message: "Shell"
+  hour_message: "Hora"
+  time_message: "Data"
+  device_message: "Dispositivo"
+  system_message: "Sistema"
+  kernel_message: "Kernel"
+  version_message: "Versão"
+  processor_message: "Processador"
+  ram_message: "RAM"
+  cpu_message: "CPU"
+  ip_message: "IP"
+  palette_colors_message: "Paleta/Cores"
+  banner_title_message: "Sistema"
+menu:
+  tips_message: "À medida que o Stellar for atualizado, mais comandos serão adicionados."
+  table_title_message: "Lista"
+  table_command_message: "Comando"
+  table_description_message: "Descrição"
+  table_status_message: "Status"
+  table_system_message: "Sistema"
+  table_osint_message: "Osint"
+  status_system_message: "🔐 Sistema"
+  online_status_message: "🟢 Ativo"
+  idle_status_message: "🔴 Inativo"
+  soon_status_message: "🟡 Em breve!"
+  unstable_status_message: "🟠 Instável"
+  reload_message: "Atualizar banner"
+  user-config_message: "Configurar ambiente Stellar"
+  my_message: "Visualizar perfil"
+  manager_message: "Gerenciar e atualizar Stellar"
+  bash_message: "Reiniciar sessão bash"
+  reset_message: "Resetar sessão bash"
+  tor-enable_message: "Ativar Tor"
+  tor-disable_message: "Desativar Tor"
+  banner-enable_message: "Ativar banner"
+  banner-disable_message: "Desativar banner"
+  ipinfo_message: "Obter informações sobre IP"
+  urlinfo_message: "Obter informações sobre URL"
+  phoneinfo_message: "Obter informações sobre telefone"
+  metadatainfo_message: "Obter informações sobre arquivo"
+user:
+  title_user_message: "Perfil"
+  banner_color_message: "Cor do banner"
+  banner_background_color_message: "Cor de fundo do banner"
+  banner_background_message: "Fundo do banner?"
+  background_banner_active_message: "Ativado"
+  background_banner_idle_message: "Inativo"
+  isbanner_message: "Banner ativado?"
+  isbanner_active_message: "Ativado"
+  isbanner_inactive_message: "Inativo"
+  preferences_message: "Preferências"
+  configurations_message: "Configurações"
+  red_message: "Rede"
+  banner_message: "Banner"
+  login_method_message: "Tipo de login"
+  soon_login_method_message: "Em breve!"
+  password_message: "Senha"
+  soon_password_message: "Em breve!"
+  ip_type_message: "Tipo de IP"
+ipinfo:
+  yes_message: "Sim"
+  not_message: "Não"
+  ip_data_message: "Dados do IP"
+  information_message: "Informação"
+  value_message: "Valor"
+  information_red_message: "Informação de Rede"
+  information_company_message: "Informação da Empresa"
+  information_abuser_message: "Informação do Abusador"
+  information_asn_message: "Informação ASN"
+  information_geo_message: "Informação Geográfica"
+  ip_message: "IP"
+  rir_message: "RIR"
+  not_assigned_ip_message: "É um IP não atribuído"
+  is_mobil_message: "É móvel"
+  is_crawler_message: "É rastreador"
+  is_datacenter_message: "É datacenter"
+  is_tor_message: "É Tor"
+  is_proxy_message: "É proxy"
+  is_vpn_message: "É VPN"
+  is_abuser_message: "É IP suspeito"
+  is_satellite_message: "É satélite"
+  network_message: "Rede"
+  company_name_message: "Nome da empresa"
+  abuser_score_message: "Pontuação do abusador"
+  abuser_type_message: "Tipo"
+  abuser_name_message: "Nome do abusador"
+  address_message: "Endereço"
+  phone_message: "Telefone"
+  asn_message: "ASN"
+  route_message: "Rota"
+  description_message: "Descrição"
+  active_message: "Ativo"
+  org_message: "Organização"
+  asn_domain_message: "Domínio ASN"
+  abuse_message: "Abusador"
+  asn_type_message: "Tipo ASN"
+  created_message: "Criado em"
+  updated_message: "Atualizado em"
+  asn_rir_message: "RIR do ASN"
+  continent_message: "Continente"
+  country_message: "País"
+  state_message: "Estado"
+  city_message: "Cidade"
+  zip_code_message: "CEP"
+  latitude_message: "Latitude"
+  longitude_message: "Longitude"
+  timezone_message: "Fuso horário"
+  calling_code_message: "Código do país"
+  domain_message: "Domínio"
+phoneinfo:
+  phone_message: "Informação do telefone"
+  information_extra_message: "Informação adicional"
+  information_technique_message: "Informação técnica"
+  country_and_address_message: "País/Endereço"
+  company_phone_name_message: "Operadora"
+  is_disposible_message: "É descartável"
+  is_valid_phone_message: "É número válido"
+  is_valid_phone_in_region_message: "É válido na região"
+  number_type_message: "Tipo de número"
+  national_number_message: "Número nacional"
+  extension_message: "Ramal"
+  south_america_message: "América do Sul"
+  europe_message: "Europa"
+  north_america_message: "América do Norte"
+  asia_message: "Ásia"
+  africa_message: "África"
+  oceania_message: "Oceania"
+  antarctica_message: "Antártida"
+  region_message: "Região"
+  country_code_message: "Código do país"
+  number_type_0_message: "Desconhecido"
+  number_type_1_message: "Fixo"
+  number_type_2_message: "Celular"
+  number_type_3_message: "Gratuito"
+  number_type_4_message: "Tarifa premium"
+  number_type_5_message: "Custo compartilhado"
+  number_type_6_message: "VoIP"
+  number_type_7_message: "Pessoal"
+  number_type_8_message: "Pager"
+  number_type_9_message: "UAN"
+  number_type_10_message: "Correio de voz"
+
+
+# ┌────────────────────────────────┐
+# │ Bash Files                     │
+# │ Arquivos Bash                  │
+# └────────────────────────────────┘
+
+# .bashrc
+init_message: Stellar iniciado com sucesso
+init2_message: Digite ${Blue_Background}${Bright_White}menu${Reset} para ver comandos disponíveis.
+activate_tor_message: Tor foi ativado
+deactivate_tor_message: Tor foi desativado
+banner_active_message: Banner foi ativado
+banner_deactivate_message: Banner foi desativado
+protect_message: Protegido
+load_plugins_message: Plugins carregados
+load2_plugins_message: Comando ${White}$cmd${Reset} existe como plugin
+execute_command_message: Executando comando
+command_not_found_message: Comando não encontrado
+# init.sh
+install_message: Instalar
+reinstall_message: Reinstalar
+update_message: Atualizar
+exit_message: Sair
+input_message: Digite um valor
+info_message: Informação
+cache_clear_message: Limpar cache (PIP/APT)
+solve_problems_message: Solucionador de erros (APT)
+verify_packages_message: Verificar dependências (APT/PIP)
+invalid_data_message: Dado inválido
+reset_message: Reiniciar gerenciador
+verify_message: Verificando dependências necessárias
+success_verify_message: Tudo em ordem!
+installing_dependencies_message: Instalando dependências
+success_installing_dependencies_message: Dependências instaladas com sucesso
+on_message: Bem-vindo ao instalador do Stellar!
+prepare_install_message: Preparando instalação, aguarde....
+init_install_message: Instalação iniciada...
+install_alert_message: Instalando
+success_install_message: Instalado com sucesso
+on_install_message: Instalando programa
+package_install_message: Instalando
+failed_install_message: Falhou
+success_install_package_message: Sucesso
+success_apply_configs_message: Configurações aplicadas
+on_stellar_message: Iniciando Stellar
+update_action_message: Atualizando programa, aguarde....
+success_update_message: Atualização concluída
+cache_clear_action_message: Limpando cache... (APT/PIP)
+success_cache_clear_message: Limpeza realizada com sucesso
+info_descr_message: Stellar by Keiji821
+execute_solve_problems_message: Aplicando medidas....
+success_solve_problems_message: Medidas aplicadas com sucesso

@@ -1,0 +1,249 @@
+# ┌────────────────────────────────┐
+# │ Python Files                   │
+# │ Python 文件                    │
+# └────────────────────────────────┘
+
+user-config:
+  error_message: "发生意外错误"
+  invalid_data_message: "请输入有效值"
+  success_message: "操作成功完成"
+  enter_message: "输入值："
+  config_message: "Stellar 配置"
+  subtitle_message: "v1.0.1"
+  banner_config_message: "配置横幅"
+  banner_color_config_message: "配置横幅颜色"
+  banner_background_config_message: "配置横幅背景颜色"
+  theme_config_message: "配置主题"
+  font_config_message: "配置字体"
+  user_config_message: "配置用户"
+  login_config_message: "配置登录类型"
+  lang_config_message: "更改语言"
+  exit_message: "退出"
+  leave_message: "再见！"
+  banner_background_activate_message: "是否激活横幅背景？(y/n)："
+  banner_background_color_activate_message: "输入有效的 Rich 颜色"
+  banner_color_activate_message: "输入有效的 Rich 颜色"
+  hour_message: "小时"
+  time_message: "日期"
+  user_message: "用户"
+  unknown_message: "未知"
+  tips_message: "选择一些可用选项"
+  themes_title_message: "主题"
+  fonts_title_message: "字体"
+  invalid_font_message: "无效字体"
+  invalid_theme_message: "无效主题"
+  close_option_message: "即将推出！"
+  langs_title_message: "语言"
+  default_theme_message: "恢复默认主题"
+banner:
+  user_unknown_message: "未知"
+  shell_unknown_message: "未知"
+  hour_unknown_message: "未知"
+  time_unknown_message: "未知"
+  device_unknown_message: "未知"
+  system_unknown_message: "未知"
+  kernel_unknown_message: "未知"
+  version_unknown_message: "未知"
+  processor_unknown_message: "未知"
+  ip_unknown_message: "[bold red][!] [bold white]识别 IP 时出错"
+  ip_unknown2_message: "[bold red][!] [bold white]无法识别的 IP"
+  not_internet_message: "[bold red][!] [bold white]无网络连接"
+  tor_ip_message: "[bold green][!] [bold white]Tor IP 🧄"
+  vpn_ip_message: "[bold yellow][!] [bold white]VPN IP 🔐"
+  proxy_ip_message: "[bold red][!] [bold white]代理 IP 🔗"
+  public_ip_message: "[bold cyan][!] [bold white]公共 IP 🌐"
+  user_message: "用户"
+  shell_message: "Shell"
+  hour_message: "小时"
+  time_message: "日期"
+  device_message: "设备"
+  system_message: "系统"
+  kernel_message: "内核"
+  version_message: "版本"
+  processor_message: "处理器"
+  ram_message: "内存"
+  cpu_message: "CPU"
+  ip_message: "IP"
+  palette_colors_message: "调色板/颜色"
+  banner_title_message: "系统"
+menu:
+  tips_message: "随着 Stellar 的更新，将添加更多命令。"
+  table_title_message: "列表"
+  table_command_message: "命令"
+  table_description_message: "描述"
+  table_status_message: "状态"
+  table_system_message: "系统"
+  table_osint_message: "开源情报"
+  status_system_message: "🔐 系统"
+  online_status_message: "🟢 活跃"
+  idle_status_message: "🔴 非活跃"
+  soon_status_message: "🟡 即将推出！"
+  unstable_status_message: "🟠 不稳定"
+  reload_message: "刷新横幅"
+  user-config_message: "配置你的 Stellar 环境"
+  my_message: "查看个人资料"
+  manager_message: "管理和更新你的 Stellar"
+  bash_message: "重启 bash 会话"
+  reset_message: "重置 bash 会话"
+  tor-enable_message: "激活 Tor"
+  tor-disable_message: "停用 Tor"
+  banner-enable_message: "激活横幅"
+  banner-disable_message: "停用横幅"
+  ipinfo_message: "获取 IP 信息"
+  urlinfo_message: "获取 URL 信息"
+  phoneinfo_message: "获取电话号码信息"
+  metadatainfo_message: "获取文件信息"
+user:
+  title_user_message: "个人资料"
+  banner_color_message: "横幅颜色"
+  banner_background_color_message: "横幅背景颜色"
+  banner_background_message: "横幅背景？"
+  background_banner_active_message: "已激活"
+  background_banner_idle_message: "未激活"
+  isbanner_message: "横幅已激活？"
+  isbanner_active_message: "已激活"
+  isbanner_inactive_message: "未激活"
+  preferences_message: "偏好设置"
+  configurations_message: "配置"
+  red_message: "网络"
+  banner_message: "横幅"
+  login_method_message: "登录类型"
+  soon_login_method_message: "即将推出！"
+  password_message: "密码"
+  soon_password_message: "即将推出！"
+  ip_type_message: "IP 类型"
+ipinfo:
+  yes_message: "是"
+  not_message: "否"
+  ip_data_message: "IP 数据"
+  information_message: "信息"
+  value_message: "值"
+  information_red_message: "网络信息"
+  information_company_message: "公司信息"
+  information_abuser_message: "滥用者信息"
+  information_asn_message: "ASN 信息"
+  information_geo_message: "地理信息"
+  ip_message: "IP"
+  rir_message: "RIR"
+  not_assigned_ip_message: "这是未分配的 IP"
+  is_mobil_message: "是移动网络"
+  is_crawler_message: "是爬虫"
+  is_datacenter_message: "是数据中心"
+  is_tor_message: "是 Tor"
+  is_proxy_message: "是代理"
+  is_vpn_message: "是 VPN"
+  is_abuser_message: "是可疑 IP"
+  is_satellite_message: "是卫星"
+  network_message: "网络"
+  company_name_message: "公司名称"
+  abuser_score_message: "滥用者评分"
+  abuser_type_message: "类型"
+  abuser_name_message: "滥用者名称"
+  address_message: "地址"
+  phone_message: "电话号码"
+  asn_message: "ASN"
+  route_message: "路由"
+  description_message: "描述"
+  active_message: "活跃"
+  org_message: "组织"
+  asn_domain_message: "ASN 域名"
+  abuse_message: "滥用者"
+  asn_type_message: "ASN 类型"
+  created_message: "创建于"
+  updated_message: "更新于"
+  asn_rir_message: "ASN RIR"
+  continent_message: "洲"
+  country_message: "国家"
+  state_message: "州/省"
+  city_message: "城市"
+  zip_code_message: "邮政编码"
+  latitude_message: "纬度"
+  longitude_message: "经度"
+  timezone_message: "时区"
+  calling_code_message: "电话区号"
+  domain_message: "域名"
+phoneinfo:
+  phone_message: "电话号码信息"
+  information_extra_message: "附加信息"
+  information_technique_message: "技术信息"
+  country_and_address_message: "国家/地址"
+  company_phone_name_message: "电话公司"
+  is_disposible_message: "是否是一次性号码"
+  is_valid_phone_message: "是否是有效电话号码"
+  is_valid_phone_in_region_message: "电话号码在该地区是否有效"
+  number_type_message: "电话号码类型"
+  national_number_message: "国内号码"
+  extension_message: "分机号"
+  south_america_message: "南美洲"
+  europe_message: "欧洲"
+  north_america_message: "北美洲"
+  asia_message: "亚洲"
+  africa_message: "非洲"
+  oceania_message: "大洋洲"
+  antarctica_message: "南极洲"
+  region_message: "地区"
+  country_code_message: "国家代码"
+  number_type_0_message: "未知"
+  number_type_1_message: "固定电话"
+  number_type_2_message: "手机"
+  number_type_3_message: "免费电话"
+  number_type_4_message: "高费率电话"
+  number_type_5_message: "分摊费用"
+  number_type_6_message: "网络电话"
+  number_type_7_message: "个人号码"
+  number_type_8_message: "寻呼机"
+  number_type_9_message: "UAN"
+  number_type_10_message: "语音邮件"
+
+
+# ┌────────────────────────────────┐
+# │ Bash Files                     │
+# │ Bash 文件                      │
+# └────────────────────────────────┘
+
+# .bashrc
+init_message: Stellar 已成功启动
+init2_message: 输入 ${Blue_Background}${Bright_White}menu${Reset} 查看可用命令。
+activate_tor_message: Tor 已激活
+deactivate_tor_message: Tor 已停用
+banner_active_message: 横幅已激活
+banner_deactivate_message: 横幅已停用
+protect_message: 已保护
+load_plugins_message: 插件已加载
+load2_plugins_message: 命令 ${White}$cmd${Reset} 作为插件存在
+execute_command_message: 正在执行命令
+command_not_found_message: 命令未找到
+# init.sh
+install_message: 安装
+reinstall_message: 重新安装
+update_message: 更新
+exit_message: 退出
+input_message: 输入值
+info_message: 信息
+cache_clear_message: 清除缓存 (PIP/APT)
+solve_problems_message: 错误解决工具 (APT)
+verify_packages_message: 验证依赖项 (APT/PIP)
+invalid_data_message: 无效数据
+reset_message: 重启管理器
+verify_message: 正在验证所需的依赖项
+success_verify_message: 一切正常！
+installing_dependencies_message: 正在安装依赖项
+success_installing_dependencies_message: 依赖项安装成功
+on_message: 欢迎使用 Stellar 安装程序！
+prepare_install_message: 正在准备安装，请稍候....
+init_install_message: 安装已开始...
+install_alert_message: 正在安装
+success_install_message: 安装成功
+on_install_message: 正在安装程序
+package_install_message: 正在安装
+failed_install_message: 安装失败
+success_install_package_message: 成功
+success_apply_configs_message: 配置已应用
+on_stellar_message: 正在启动 Stellar
+update_action_message: 正在更新程序，请稍候....
+success_update_message: 更新完成
+cache_clear_action_message: 正在清除缓存... (APT/PIP)
+success_cache_clear_message: 清理成功完成
+info_descr_message: Stellar by Keiji821
+execute_solve_problems_message: 正在应用措施....
+success_solve_problems_message: 措施已成功应用
