@@ -337,7 +337,7 @@ update() {
     git stash > stellar_verify.log 
     git pull > stellar_verify.log
     sleep 1
-    printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_update_message}\a\n"
+    printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_update_message}\n"
 }
 
 verify_packages () {
