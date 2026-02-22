@@ -59,13 +59,8 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 
 ## `📄` Información de estado
 
-`⚠️` Próximamente soporte dentro del programa para el idioma japonés, chino, coreano, ingles y portugués.
-
-`⚠️` In-program support for Japanese, Chinese, Korean, English, and Portuguese is coming soon.
-
-`⚠️` Aún en constante desarrollo, pueden haber fallos.
-
-`⚠️` Still under constant development, there may be errors.
+`✅️` Multi-language support
+`✅️` Official version
 
 `📌` Si desea aportar a Stellar o reportar un error dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
 
