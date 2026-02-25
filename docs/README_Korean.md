@@ -205,6 +205,5 @@ user-config 명령어를 사용하면 termux의 배경 테마도 수정할 수 �
 
 https://img.shields.io/badge/Binance%20Pay-F0B90B?style=for-the-badge&logo=binance&logoColor=white&label=Donate&labelColor=black&message=763579717
 
-https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white&label=Donate&labelColor=003087&message=felixdppdcg69@gmail.com
 
 </details>
