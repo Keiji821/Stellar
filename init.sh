@@ -199,7 +199,7 @@ install() {
         for package in $apt_packages; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
             sleep 1
-            apt-get install $package -y > stellar_install.log
+            apt-get install $package -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
             if [[ $verify =~ $package ]]; then
@@ -208,7 +208,7 @@ install() {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
             for package in $pip_packages; do
-                pip install $package > stellar_install.log
+                pip install $package > stellar_verify.log
                 wait
                 verify=$(pip list | grep -i "^$package " | awk '{print $1}')
                 if [[ $verify =~ ^$package$ ]]; then
@@ -224,7 +224,7 @@ install() {
         for package in $apt_packages; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
             sleep 1
-            apt-get install $package -y > stellar_install.log
+            apt-get install $package -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
             if [[ $verify =~ $package ]]; then
@@ -233,7 +233,7 @@ install() {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
             for package in $pip_packages; do
-                pip install $package > stellar_install.log
+                pip install $package > stellar_verify.log
                 wait
                 verify=$(pip list | grep -i "^$package " | awk '{print $1}')
                 if [[ $verify =~ ^$package$ ]]; then
@@ -297,7 +297,7 @@ reinstall () {
         for package in $apt_packages; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
             sleep 1
-            apt-get install $package -y > stellar_install.log
+            apt-get install $package -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
             if [[ $verify =~ $package ]]; then
@@ -306,7 +306,7 @@ reinstall () {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi    
             for package in $pip_packages; do
-                pip install $package > stellar_install.log
+                pip install $package > stellar_verify.log
                 wait
                 verify=$(pip list | grep -i "^$package " | awk '{print $1}')
                 if [[ $verify =~ ^$package$ ]]; then
@@ -322,7 +322,7 @@ reinstall () {
         for package in $apt_packages; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
             sleep 1
-            apt-get install $package -y > stellar_install.log
+            apt-get install $package -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
             if [[ $verify =~ $package ]]; then
@@ -331,7 +331,7 @@ reinstall () {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
             for package in $pip_packages; do
-                pip install $package > stellar_install.log
+                pip install $package > stellar_verify.log
                 wait
                 verify=$(pip list | grep -i "^$package " | awk '{print $1}')
                 if [[ $verify =~ ^$package$ ]]; then
@@ -341,7 +341,7 @@ reinstall () {
                 fi
             done            
         done
-        
+
     fi   
 
     if [[ $platform == "termux" ]]; then
