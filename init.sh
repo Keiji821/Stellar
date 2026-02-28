@@ -172,6 +172,7 @@ apt_packages=(
     lsd
 )
 pip_packages=(
+    setuptools
     beautifulsoup4
     pyfiglet
     phonenumbers
@@ -189,6 +190,9 @@ pip_packages=(
 install() {
     printf "\a\n${Cian_Brillante} ! ${Reset} ${prepare_install_message}\n"
     sleep 2
+    cd ~/Stellar/resources/libraries/stellar-package-translate
+    pip install setuptools && pip install . > stellar_verify.log
+    wait
     cd $HOME
     if [[ -d ".termux" ]]; then
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
@@ -202,7 +206,17 @@ install() {
                 printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-            fi    
+            fi
+            for package in $pip_packages; do
+                pip install $package > stellar_install.log
+                wait
+                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+                if [[ $verify =~ ^$package$ ]]; then
+                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+                else
+                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+                fi
+            done
         done
         platform="termux"
     else
@@ -217,10 +231,20 @@ install() {
                 printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"            
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-            fi    
+            fi
+            for package in $pip_packages; do
+                pip install $package > stellar_install.log
+                wait
+                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+                if [[ $verify =~ ^$package$ ]]; then
+                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+                else
+                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+                fi
+            done            
         done
     fi   
-    
+
     if [[ $platform == "termux" ]]; then
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
         command cp ~/Stellar/termux/system/.bashrc ~/
@@ -264,6 +288,10 @@ install() {
 reinstall () {
     printf "${Cian_Brillante} ! ${Reset} $verify_message"
     sleep 2
+    cd ~/Stellar/resources/libraries/stellar-package-translate
+    pip install setuptools && pip install . > stellar_verify.log
+    wait
+    cd $HOME
     if [[ -d ".termux" ]]; then
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
         for package in $apt_packages; do
@@ -277,7 +305,17 @@ reinstall () {
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi    
-        done
+            for package in $pip_packages; do
+                pip install $package > stellar_install.log
+                wait
+                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+                if [[ $verify =~ ^$package$ ]]; then
+                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+                else
+                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+                fi
+            done       
+        done     
         platform="termux"
     else
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
@@ -291,10 +329,21 @@ reinstall () {
                 printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"            
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-            fi    
+            fi
+            for package in $pip_packages; do
+                pip install $package > stellar_install.log
+                wait
+                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+                if [[ $verify =~ ^$package$ ]]; then
+                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+                else
+                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+                fi
+            done            
         done
+        
     fi   
-    
+
     if [[ $platform == "termux" ]]; then
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
         command cp ~/Stellar/termux/system/.bashrc ~/
@@ -372,9 +421,9 @@ solve_problems() {
     if [[ -d ".termux" ]]; then
         pkg upgrade -y && pkg update -y > stellar_verify.log
         wait
-        pkg autoclean >stellar_verify.log
+        pkg autoclean > stellar_verify.log
         wait
-        pip cache purge >stellar_verify.log
+        pip cache purge > stellar_verify.log
         wait
         pip list --outdated | awk 'NR>2 {print $1}' | xargs -n1 pip install -U
         wait
@@ -402,13 +451,13 @@ info() {
 banner() {
         printf "${Verde_Brillante}${stellar_banner}${Reset}\n"
         printf "\n"
-        
+
         printf "\n${Cian_Brillante}╭──────────────────────────╮${Reset}\n"                         
         printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}1${Gris}]${Reset} ${install_message}             ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}2${Gris}]${Reset} ${reinstall_message}           ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}3${Gris}]${Reset} ${update_message}           ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}╰──────────────────────────╯${Reset}\n"
-        
+
         printf "\n${Cian_Brillante}╭────────────────────────────────────────╮${Reset}\n"
         printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}4${Gris}]${Reset} ${verify_packages_message}   ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}5${Gris}]${Reset} ${cache_clear_message}          ${Cian_Brillante}│\n"
@@ -416,7 +465,7 @@ banner() {
         printf "${Cian_Brillante}│ ${Gris}[${Cian_Brillante}7${Gris}]${Reset} ${reset_message}                  ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}│ ${Gris}[${Cian_Brillante}8${Gris}]${Reset} ${info_message}                        ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}╰────────────────────────────────────────╯${Reset}\n"
-        
+
         printf "\n${Cian_Brillante}╭────────────╮${Reset}\n"        
         printf "${Cian_Brillante}│ ${Gris}[${Rojo_Brillante}0${Gris}]${Reset} ${exit_message}  ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}╰────────────╯${Reset}\n"    
@@ -429,23 +478,23 @@ main() {
     do
         printf "\n ${Rojo_Brillante}➤ ${Verde_Brillante}${input_message}${Reset}:"
         read -p " " option
-        
+
         if [[ "${option}" == "1" ]]; then
             clear
             install
-            
+
         elif [[ "${option}" == "2" ]]; then
             clear
             reinstall
-        
+
         elif [[ "${option}" == "3" ]]; then
             clear
             update
-            
+
         elif [[ "${option}" == "4" ]]; then
             clear 
             verify_packages  
-             
+
         elif [[ "${option}" == "5" ]]; then
             clear   
             cache_clear
@@ -457,10 +506,10 @@ main() {
         elif [[ "${option}" == "7" ]]; then
             cd ~/Stellar
             bash init.sh
-            
+
         elif [[ "${option}" == "8" ]]; then
             info            
-            
+
         elif [[ "${option}" == "0" ]]; then
             clear
             reload() {
@@ -470,16 +519,16 @@ main() {
             }
             reload
             break  
-            
+
         elif [[ "${option}" == "" ]]; then
             printf "\n${Gris}[${Rojo_Brillante}!${Gris}]${Reset} ${invalid_data_message}\n"
             continue
-            
+
         else
             printf "\n"
             eval $option
         fi
-        
+
     done
 }
 
