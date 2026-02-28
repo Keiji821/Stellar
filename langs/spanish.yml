@@ -242,19 +242,6 @@ update_action_message: Actualizando programa porfavor espere....
 success_update_message: Actualización completada
 cache_clear_action_message: Limpiando cache... (APT/PIP)
 success_cache_clear_message: Limpieza realizada con éxito
-info_descr_message: |
-  Bienvenido al instalador de Stellar
-  aqui podras Administrar la instalación,
-  reinstalación e actualización del programa
-  este instalador esta diseñador para suplir una shell
-  interactiva útil si surge algún error o inconveniente
-  y usted puede solucionarlo mediante comandos aunque
-  el instalador incluye un solucionador de errores que es
-  la opción 6 podrían surgir otros errores el cual no cubra.
-  Para usuarios primerizos el proceso de instalación es simple
-  escriba 1 para empezar a instalar todo se hará automático al finalizar
-  su sesión de terminal se reiniciará y se mostrará la interfaz cambiada
-  a la de Stellar, diseñado principalmente para Termux pero con soporte a sistemas
-  linux completos.
+info_descr_message: Stellar By Keiji821
 execute_solve_problems_message: Aplicando medidas....
 success_solve_problems_message: Medidas aplicadas con éxito 
