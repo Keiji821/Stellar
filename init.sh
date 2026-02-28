@@ -218,7 +218,7 @@ install() {
                 fi
             done
         done
-        platform="termux"
+        export platform="termux"
     else
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
         for package in "${apt_packages[@]}"; do
@@ -316,7 +316,7 @@ reinstall () {
                 fi
             done       
         done     
-        platform="termux"
+        export platform="termux"
     else
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
         for package in $apt_packages; do
@@ -550,7 +550,7 @@ prepare() {
         echo english > ~/Stellar/configs/selected_lang.txt
     fi
     sleep 0.1
-    printf "\r${Cian_Brillante}︕ ${Reset} ${verify_message}\n"
+    printf "\r\n${Cian_Brillante}︕ ${Reset} ${verify_message}\n"
     sleep 0.1
     verify_apt=$(dpkg --get-selections | grep -v deinstall | grep lsd | awk '{print $1}')
     verify_pip=$(pip list 2>/dev/null | grep lolcat | awk '{print $1}')
