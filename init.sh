@@ -501,15 +501,14 @@ prepare() {
         echo english > ~/Stellar/configs/selected_lang.txt
     fi
     sleep 0.1
-    printf "\n"
-    printf "\n${on_message}\n" | lolcat -a -d 20
-    printf "\n"
-    sleep 4
     printf "\r${Cian_Brillante}︕ ${Reset} ${verify_message}\n"
-    sleep 3
+    sleep 0.1
     verify_apt=$(dpkg --get-selections | grep -v deinstall | grep lsd | awk '{print $1}')
     verify_pip=$(pip list 2>/dev/null | grep lolcat | awk '{print $1}')
     if [[ $verify_apt == "lsd" ]] && [[ $verify_pip == "lolcat" ]]; then
+        printf "\n"
+        printf "\n${on_message}\n" | lolcat -a -d 20
+        printf "\n"
         printf "\a\r${Verde_Brillante} ✓ ${Reset} ${success_verify_message}\n"
         sleep 2
         main
