@@ -163,43 +163,43 @@ eval "execute_solve_problems_message=\"$execute_solve_problems_message\""
 eval "success_solve_problems_message=\"$success_solve_problems_message\""
 
 apt_packages=(
-    python
-    tor 
-    exiftool 
-    nmap 
-    dnsutils 
-    nodejs 
-    lsd
+    "python"
+    "tor"
+    "exiftool" 
+    "nmap"
+    "dnsutils" 
+    "nodejs"
+    "lsd"
 )
 pip_packages=(
-    setuptools
-    beautifulsoup4
-    pyfiglet
-    phonenumbers
-    psutil
-    PySocks
-    requests
-    rich
+    "setuptools"
+    "beautifulsoup4"
+    "pyfiglet"
+    "phonenumbers"
+    "psutil"
+    "PySocks"
+    "requests"
+    "rich"
     "rich[jupyter]"
-    lolcat
-    discord
-    fake_useragent
-    pycryptodome
+    "lolcat"
+    "discord"
+    "fake_useragent"
+    "pycryptodome"
 )
 
 install() {
     printf "\a\n${Cian_Brillante} ! ${Reset} ${prepare_install_message}\n"
     sleep 2
     cd ~/Stellar/resources/libraries/stellar-package-translate
-    pip install setuptools && pip install . > stellar_verify.log
+    pip install setuptools > stellar_verify.log && pip install . > stellar_verify.log
     wait
     cd $HOME
     if [[ -d ".termux" ]]; then
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
-        for package in $apt_packages; do
+        for package in "${apt_packages[@]}"; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
             sleep 1
-            apt-get install $package -y > stellar_verify.log
+            apt-get install "$package" -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
             if [[ $verify =~ $package ]]; then
@@ -207,11 +207,11 @@ install() {
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
-            for package in $pip_packages; do
-                pip install $package > stellar_verify.log
+            for package in "${pip_packages[@]}"; do
+                pip install "$package" > stellar_verify.log
                 wait
                 verify=$(pip list | grep -i "^$package " | awk '{print $1}')
-                if [[ $verify =~ ^$package$ ]]; then
+                if [[ $verify =~ $package ]]; then
                     printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
                 else
                     printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
@@ -221,10 +221,10 @@ install() {
         platform="termux"
     else
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
-        for package in $apt_packages; do
+        for package in "${apt_packages[@]}"; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
             sleep 1
-            apt-get install $package -y > stellar_verify.log
+            apt-get install "$package" -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
             if [[ $verify =~ $package ]]; then
@@ -232,11 +232,11 @@ install() {
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
-            for package in $pip_packages; do
-                pip install $package > stellar_verify.log
+            for package in "${pip_packages[@]}"; do
+                pip install "$package" > stellar_verify.log
                 wait
                 verify=$(pip list | grep -i "^$package " | awk '{print $1}')
-                if [[ $verify =~ ^$package$ ]]; then
+                if [[ $verify =~ $package ]]; then
                     printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
                 else
                     printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
@@ -289,7 +289,7 @@ reinstall () {
     printf "${Cian_Brillante} ! ${Reset} $verify_message"
     sleep 2
     cd ~/Stellar/resources/libraries/stellar-package-translate
-    pip install setuptools && pip install . > stellar_verify.log
+    pip install setuptools > stellar_verify.log && pip install . > stellar_verify.log
     wait
     cd $HOME
     if [[ -d ".termux" ]]; then
