@@ -170,13 +170,13 @@ apt_packages=(
     "dnsutils" 
     "nodejs"
     "lsd"
+    "python-psutil"
 )
 pip_packages=(
     "setuptools"
     "beautifulsoup4"
     "pyfiglet"
     "phonenumbers"
-    "psutil"
     "PySocks"
     "requests"
     "rich"
