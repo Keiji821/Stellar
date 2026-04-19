@@ -180,7 +180,7 @@ pip_packages=(
     "PySocks"
     "requests"
     "rich"
-    "rich[jupyter]"
+    ""rich[jupyter]""
     "lolcat"
     "discord"
     "fake_useragent"
@@ -194,7 +194,7 @@ install() {
     pip install setuptools > stellar_verify.log && pip install . > stellar_verify.log
     wait
     cd $HOME
-    if [[ -d ".termux" ]]; then
+    if [[ -d "~/.termux" ]]; then
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
         for package in "${apt_packages[@]}"; do
             printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
@@ -202,23 +202,26 @@ install() {
             apt-get install "$package" -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
+            sleep 0.1
             if [[ $verify =~ $package ]]; then
                 printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
-            for package in "${pip_packages[@]}"; do
-                pip install "$package" > stellar_verify.log
-                wait
-                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
-                if [[ $verify =~ $package ]]; then
-                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
-                else
-                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-                fi
-            done
+        done    
+        
+        for package in "${pip_packages[@]}"; do
+            pip install "$package" > stellar_verify.log
+            wait
+            verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+            sleep 0.1
+            if [[ $verify =~ $package ]]; then
+                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+            else
+                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+            fi
         done
-        export platform="termux"
+        
     else
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
         for package in "${apt_packages[@]}"; do
@@ -227,25 +230,28 @@ install() {
             apt-get install "$package" -y > stellar_verify.log
             wait
             verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
+            sleep 0.1
             if [[ $verify =~ $package ]]; then
                 printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"            
             else
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
-            for package in "${pip_packages[@]}"; do
-                pip install "$package" > stellar_verify.log
-                wait
-                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
-                if [[ $verify =~ $package ]]; then
-                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
-                else
-                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-                fi
-            done            
+        done    
+            
+        for package in "${pip_packages[@]}"; do
+            pip install "$package" > stellar_verify.log
+            wait
+            verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+            sleep 0.1
+            if [[ $verify =~ $package ]]; then
+                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+            else
+                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+            fi
         done
     fi   
 
-    if [[ $platform == "termux" ]]; then
+    if [[ -d "~/.termux" ]]; then
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
         command cp ~/Stellar/termux/system/.bashrc ~/
         command cp ~/Stellar/termux/system/.bash_profile ~/
@@ -558,11 +564,11 @@ prepare() {
         printf "\n"
         printf "\n${on_message}\n" | lolcat -a -d 20
         printf "\n"
-        printf "\a\r${Verde_Brillante} ✓ ${Reset} ${success_verify_message}\n"
+        printf "\a\n\r${Verde_Brillante} ✓ ${Reset} ${success_verify_message}\n"
         sleep 2
         main
     else
-        printf "\r${Cian_Brillante}︕ ${Reset} ${installing_dependencies_message}\n"
+        printf "\r\n${Cian_Brillante}︕ ${Reset} ${installing_dependencies_message}\n"
         sleep 2
         apt-get install lsd -y > stellar_verify.log
         wait
@@ -570,7 +576,7 @@ prepare() {
         wait
         pip install lolcat > stellar_verify.log
         wait
-        printf "\a\r${Verde_Brillante} ✓ ${Reset} ${success_installing_dependencies_message}\n"
+        printf "\a\r\n${Verde_Brillante} ✓ ${Reset} ${success_installing_dependencies_message}\n"
         sleep 2
         main
     fi
