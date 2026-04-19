@@ -85,7 +85,7 @@ menu:
   manager_message: "Stellarの管理と更新"
   bash_message: "bashセッション再起動"
   reset_message: "bashセッションリセット"
-  tor-enable_message: "Tor有効化"
+  tor-enabale_message: "Tor有効化"
   tor-disable_message: "Tor無効化"
   banner-enable_message: "バナー有効化"
   banner-disable_message: "バナー無効化"
