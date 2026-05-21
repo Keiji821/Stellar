@@ -251,7 +251,7 @@ install() {
         done
     fi   
 
-    if [[ -d "~/.termux" ]]; then
+    if [[ -d "$HOME/termux" ]]; then
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
         command cp ~/Stellar/termux/system/.bashrc ~/
         command cp ~/Stellar/termux/system/.bash_profile ~/
