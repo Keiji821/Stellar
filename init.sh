@@ -209,7 +209,7 @@ install() {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
         done    
-        
+
         for package in "${pip_packages[@]}"; do
             pip install "$package" > stellar_verify.log
             wait
@@ -221,7 +221,7 @@ install() {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
         done
-        
+
     else
         printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
         for package in "${apt_packages[@]}"; do
@@ -237,7 +237,7 @@ install() {
                 printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
             fi
         done    
-            
+
         for package in "${pip_packages[@]}"; do
             pip install "$package" > stellar_verify.log
             wait
@@ -251,7 +251,111 @@ install() {
         done
     fi   
 
-    if [[ -d "$HOME/termux" ]]; then
+    if [[ -d "$HOME/.termux" ]]; then
+        printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
+        command cp ~/Stellar/termux/system/.bashrc ~/
+        command cp ~/Stellar/termux/system/.bash_profile ~/
+        command cp ~/Stellar/resources/fonts/fira-mono/font.ttf ~/.termux
+        theme=$(cat ~/Stellar/resources/themes/stellar.stel)
+        echo $theme > ~/.termux/colors.properties
+        termux-reload-settings
+        printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_apply_configs_message}\n"
+    else
+        printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
+        command cp ~/Stellar/linux/system/.bashrc ~/
+        command cp ~/Stellar/linux/system/.bash_profile ~/
+        source ~/Stellar/resources/themes/stellar.stel
+        echo -en "\033]11;${background}\007"
+        echo -en "\033]10;${foreground}\007"
+        echo -en "\033]4;0;${color0}\007"
+        echo -en "\033]4;1;${color1}\007"
+        echo -en "\033]4;2;${color2}\007"
+        echo -en "\033]4;3;${color3}\007"
+        echo -en "\033]4;4;${color4}\007"
+        echo -en "\033]4;5;${color5}\007"
+        echo -en "\033]4;6;${color6}\007"
+        echo -en "\033]4;7;${color7}\007"
+        echo -en "\033]4;8;${color8}\007"
+        echo -en "\033]4;9;${color9}\007"
+        echo -en "\033]4;10;${color10}\007"
+        echo -en "\033]4;11;${color11}\007"
+        echo -en "\033]4;12;${color12}\007"
+        echo -en "\033]4;13;${color13}\007"
+        echo -en "\033]4;14;${color14}\007"
+        echo -en "\033]4;15;${color15}\007"
+        printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_apply_configs_message}\n"
+    fi
+    printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_install_message}\n" 
+    printf "\a\n${Cian_Brillante} ! ${Reset} ${on_stellar_message}\n"  
+    sleep 2
+    bash
+}
+
+reinstall() {
+    printf "${Cian_Brillante} ! ${Reset} $verify_message"
+    sleep 2
+    cd ~/Stellar/resources/libraries/stellar-package-translate
+    pip install setuptools > stellar_verify.log && pip install . > stellar_verify.log
+    wait
+    cd $HOME
+    if [[ -d "~/.termux" ]]; then
+        printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
+        for package in "${apt_packages[@]}"; do
+            printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
+            sleep 1
+            apt-get install "$package" -y > stellar_verify.log
+            wait
+            verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
+            sleep 0.1
+            if [[ $verify =~ $package ]]; then
+                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+            else
+                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+            fi
+        done    
+
+        for package in "${pip_packages[@]}"; do
+            pip install "$package" > stellar_verify.log
+            wait
+            verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+            sleep 0.1
+            if [[ $verify =~ $package ]]; then
+                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+            else
+                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+            fi
+        done
+
+    else
+        printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
+        for package in "${apt_packages[@]}"; do
+            printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
+            sleep 1
+            apt-get install "$package" -y > stellar_verify.log
+            wait
+            verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
+            sleep 0.1
+            if [[ $verify =~ $package ]]; then
+                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"            
+            else
+                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+            fi
+        done    
+
+        for package in "${pip_packages[@]}"; do
+            pip install "$package" > stellar_verify.log
+            wait
+            verify=$(pip list | grep -i "^$package " | awk '{print $1}')
+            sleep 0.1
+            if [[ $verify =~ $package ]]; then
+                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
+            else
+                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
+            fi
+        done
+    fi   
+
+    if [[ -d "$HOME/.termux" ]]; then
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
         command cp ~/Stellar/termux/system/.bashrc ~/
         command cp ~/Stellar/termux/system/.bash_profile ~/
@@ -288,103 +392,13 @@ install() {
     printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_install_message}\n" 
     printf "\a\n${Cian_Brillante} ! ${Reset} ${on_stellar_message}\n"  
     sleep 2
+    printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_install_message}\n"
+    sleep 2
     bash
 }
 
-reinstall () {
-    printf "${Cian_Brillante} ! ${Reset} $verify_message"
-    sleep 2
-    cd ~/Stellar/resources/libraries/stellar-package-translate
-    pip install setuptools > stellar_verify.log && pip install . > stellar_verify.log
-    wait
-    cd $HOME
-    if [[ -d ".termux" ]]; then
-        printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
-        for package in $apt_packages; do
-            printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
-            sleep 1
-            apt-get install $package -y > stellar_verify.log
-            wait
-            verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
-            if [[ $verify =~ $package ]]; then
-                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
-            else
-                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-            fi    
-            for package in $pip_packages; do
-                pip install $package > stellar_verify.log
-                wait
-                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
-                if [[ $verify =~ ^$package$ ]]; then
-                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
-                else
-                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-                fi
-            done       
-        done     
-        export platform="termux"
-    else
-        printf "\a\n${Cian_Brillante} ! ${Reset} ${on_install_message}\n"
-        for package in $apt_packages; do
-            printf "\a\n${Amarillo_Brillante}   > ${Reset} ${package_install_message}: ${Subrayado}${package}${Reset}\n"
-            sleep 1
-            apt-get install $package -y > stellar_verify.log
-            wait
-            verify=$(dpkg --get-selections | grep -v deinstall | grep $package | awk '{print $1}')
-            if [[ $verify =~ $package ]]; then
-                printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"            
-            else
-                printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-            fi
-            for package in $pip_packages; do
-                pip install $package > stellar_verify.log
-                wait
-                verify=$(pip list | grep -i "^$package " | awk '{print $1}')
-                if [[ $verify =~ ^$package$ ]]; then
-                    printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_install_message}: ${Subrayado}${package}${Reset}\n"
-                else
-                    printf "\a\n${Rojo_Brillante}   X ${Reset} ${failed_install_message}: ${Subrayado}${package}${Reset}\n"
-                fi
-            done            
-        done
-
-    fi   
-
-    if [[ $platform == "termux" ]]; then
-        printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
-        command cp ~/Stellar/termux/system/.bashrc ~/
-        command cp ~/Stellar/termux/system/.bash_profile ~/
-        command cp ~/Stellar/resources/fonts/fira-mono/font.ttf ~/.termux
-        theme=$(cat ~/Stellar/resources/themes/stellar.stel)
-        echo $theme > ~/.termux/color.properties
-        termux-reload-settings
-        printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_apply_configs_message}\n"
-    else
-        printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
-        command cp ~/Stellar/linux/system/.bashrc ~/
-        command cp ~/Stellar/linux/system/.bash_profile ~/
-        source ~/Stellar/resources/themes/stellar.stel
-        echo -en "\033]11;${background}\007"
-        echo -en "\033]10;${foreground}\007"
-        echo -en "\033]4;0;${color0}\007"
-        echo -en "\033]4;1;${color1}\007"
-        echo -en "\033]4;2;${color2}\007"
-        echo -en "\033]4;3;${color3}\007"
-        echo -en "\033]4;4;${color4}\007"
-        echo -en "\033]4;5;${color5}\007"
-        echo -en "\033]4;6;${color6}\007"
-        echo -en "\033]4;7;${color7}\007"
-        echo -en "\033]4;8;${color8}\007"
-        echo -en "\033]4;9;${color9}\007"
-        echo -en "\033]4;10;${color10}\007"
-        echo -en "\033]4;11;${color11}\007"
-        echo -en "\033]4;12;${color12}\007"
-        echo -en "\033]4;13;${color13}\007"
-        echo -en "\033]4;14;${color14}\007"
-        echo -en "\033]4;15;${color15}\007"
-        printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_apply_configs_message}\n"
-    fi
-    printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_install_message}\n"
+uninstall() {
+    echo
 }
 
 update() {
