@@ -397,9 +397,6 @@ reinstall() {
     bash
 }
 
-uninstall() {
-    echo
-}
 
 update() {
     printf "\a\n${Cian_Brillante} ! ${Reset} ${update_action_message}"
