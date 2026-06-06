@@ -248,7 +248,7 @@ urlinfo() {
 
 metadatainfo() {
     cd ~/Stellar/termux/commands/osint/main
-    bash metadatainfo.sh
+    py metadatainfo.py
     cd
 }
 

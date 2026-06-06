@@ -95,6 +95,7 @@ execute_command_message=$(translate execute_command_message)
 install_message=$(translate install_message)
 reinstall_message=$(translate reinstall_message)
 update_message=$(translate update_message)
+uninstall_message=$(translate uninstall_message)
 exit_message=$(translate exit_message)
 input_message=$(translate input_message)
 info_message=$(translate info_message)
@@ -125,12 +126,15 @@ success_cache_clear_message=$(translate success_cache_clear_message)
 info_descr_message=$(translate info_descr_message)
 execute_solve_problems_message=$(translate execute_solve_problems_message)
 success_solve_problems_message=$(translate success_solve_problems_message)
+uninstall_on_message=$(translate uninstall_on_message)
+uninstall_completed=$(translate uninstall_completed_message)
 
 eval "command_not_found_message=\"$command_not_found_message\""
 eval "execute_command_message=\"$execute_command_message\""
 eval "install_message=\"$install_message\""
 eval "reinstall_message=\"$reinstall_message\""
 eval "update_message=\"$update_message\""
+eval "uninstall_message=\"$uninstall_message\""
 eval "exit_message=\"$exit_message\""
 eval "input_message=\"$input_message\""
 eval "info_message=\"$info_message\""
@@ -161,6 +165,8 @@ eval "success_cache_clear_message=\"$success_cache_clear_message\""
 eval "info_descr_message=\"$info_descr_message\""
 eval "execute_solve_problems_message=\"$execute_solve_problems_message\""
 eval "success_solve_problems_message=\"$success_solve_problems_message\""
+eval "uninstall_on_message=\"$uninstall_on_message\""
+eval "uninstall_completed=\"$uninstall_completed_message\""
 
 apt_packages=(
     "python"
@@ -180,11 +186,11 @@ pip_packages=(
     "PySocks"
     "requests"
     "rich"
-    ""rich[jupyter]""
     "lolcat"
     "discord"
     "fake_useragent"
     "pycryptodome"
+    "pyexiftool"
 )
 
 install() {
@@ -256,9 +262,8 @@ install() {
         command cp ~/Stellar/termux/system/.bashrc ~/
         command cp ~/Stellar/termux/system/.bash_profile ~/
         command cp ~/Stellar/resources/fonts/fira-mono/font.ttf ~/.termux
-        theme=$(cat ~/Stellar/resources/themes/stellar.stel)
-        echo $theme > ~/.termux/colors.properties
-        termux-reload-settings
+        cat ~/Stellar/resources/themes/stellar.stel > ~/.termux/colors.properties
+        termux-reload-settings &
         printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_apply_configs_message}\n"
     else
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
@@ -360,9 +365,8 @@ reinstall() {
         command cp ~/Stellar/termux/system/.bashrc ~/
         command cp ~/Stellar/termux/system/.bash_profile ~/
         command cp ~/Stellar/resources/fonts/fira-mono/font.ttf ~/.termux
-        theme=$(cat ~/Stellar/resources/themes/stellar.stel)
-        echo $theme > ~/.termux/color.properties
-        termux-reload-settings
+        cat ~/Stellar/resources/themes/stellar.stel > ~/.termux/colors.properties
+        termux-reload-settings &
         printf "\a\n${Verde_Brillante}   ✓ ${Reset} ${success_apply_configs_message}\n"
     else
         printf "\a\n${Amarillo_Brillante}   ! ${Reset} Aplicando configuraciones...\n"
@@ -393,6 +397,18 @@ reinstall() {
     printf "\a\n${Cian_Brillante} ! ${Reset} ${on_stellar_message}\n"  
     sleep 2
     printf "\a\n${Verde_Brillante} ✓ ${Reset} ${success_install_message}\n"
+    sleep 2
+    bash
+}
+
+uninstall() {
+    printf "\a${Cian_Brillante} ! ${Reset} $uninstall_on_message\n"
+    rm -rf ~/.bashrc
+    rm -rf ~/.bash_profile
+    rm -rf ~/stellar_verify.log
+    command rm -rf ~/Stellar
+    sleep 2
+    printf "\a${Cian_Brillante} ! ${Reset} $uninstall_completed_message"
     sleep 2
     bash
 }
@@ -473,14 +489,15 @@ banner() {
         printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}1${Gris}]${Reset} ${install_message}             ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}2${Gris}]${Reset} ${reinstall_message}           ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}3${Gris}]${Reset} ${update_message}           ${Cian_Brillante}│\n"
+        printf "${Cian_Brillante}│ ${Gris}[${Amarillo_Brillante}4${Gris}]${Reset} ${uninstall_message}          ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}╰──────────────────────────╯${Reset}\n"
 
         printf "\n${Cian_Brillante}╭────────────────────────────────────────╮${Reset}\n"
-        printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}4${Gris}]${Reset} ${verify_packages_message}   ${Cian_Brillante}│\n"
-        printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}5${Gris}]${Reset} ${cache_clear_message}          ${Cian_Brillante}│\n"
-        printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}6${Gris}]${Reset} ${solve_problems_message}      ${Cian_Brillante}│\n"
-        printf "${Cian_Brillante}│ ${Gris}[${Cian_Brillante}7${Gris}]${Reset} ${reset_message}                  ${Cian_Brillante}│\n"
-        printf "${Cian_Brillante}│ ${Gris}[${Cian_Brillante}8${Gris}]${Reset} ${info_message}                        ${Cian_Brillante}│\n"
+        printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}5${Gris}]${Reset} ${verify_packages_message}   ${Cian_Brillante}│\n"
+        printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}6${Gris}]${Reset} ${cache_clear_message}          ${Cian_Brillante}│\n"
+        printf "${Cian_Brillante}│ ${Gris}[${Verde_Brillante}7${Gris}]${Reset} ${solve_problems_message}      ${Cian_Brillante}│\n"
+        printf "${Cian_Brillante}│ ${Gris}[${Cian_Brillante}8${Gris}]${Reset} ${reset_message}                  ${Cian_Brillante}│\n"
+        printf "${Cian_Brillante}│ ${Gris}[${Cian_Brillante}9${Gris}]${Reset} ${info_message}                        ${Cian_Brillante}│\n"
         printf "${Cian_Brillante}╰────────────────────────────────────────╯${Reset}\n"
 
         printf "\n${Cian_Brillante}╭────────────╮${Reset}\n"        
@@ -497,35 +514,32 @@ main() {
         read -p " " option
 
         if [[ "${option}" == "1" ]]; then
-            clear
             install
 
         elif [[ "${option}" == "2" ]]; then
-            clear
             reinstall
 
         elif [[ "${option}" == "3" ]]; then
-            clear
             update
 
         elif [[ "${option}" == "4" ]]; then
-            clear 
-            verify_packages  
-
+            uninstall
+            
         elif [[ "${option}" == "5" ]]; then
-            clear   
-            cache_clear
+            verify_packages
 
         elif [[ "${option}" == "6" ]]; then
-            clear
-            solve_problems 
+            cache_clear
 
         elif [[ "${option}" == "7" ]]; then
-            cd ~/Stellar
-            bash init.sh
+            solve_problems
 
         elif [[ "${option}" == "8" ]]; then
-            info            
+            cd ~/Stellar
+            bash init.sh
+            
+        elif [[ "${option}" == "9" ]]; then
+            info                       
 
         elif [[ "${option}" == "0" ]]; then
             clear

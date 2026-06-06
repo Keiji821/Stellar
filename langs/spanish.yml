@@ -193,7 +193,73 @@ phoneinfo:
   number_type_8_message: "Busca personas"
   number_type_9_message: "UAN"
   number_type_10_message: "Buzón de voz"
-  
+metadatainfo:
+  metadatainfo_message: "Información del archivo"
+  main_message: "Principal"
+  route_message: "Ingrese la ruta del archivo"
+  archive_name_message: "Nombre del archivo"
+  date_time_original: "Fecha original"
+  date_time_digitized: "Fecha digitalizada"
+  date_time_modified: "Fecha modificación"
+  timezone: "Zona horaria original"
+  timezone_digitized: "Zona horaria digitalizada"
+  timezone_modified: "Zona horaria modificación"
+  create_date: "Fecha creación"
+  modify_date: "Fecha modificación XMP"
+  metadata_date: "Fecha metadatos"
+  file_size: "Tamaño del archivo"
+  file_name: "Nombre del archivo"
+  file_extension: "Extensión"
+  file_type: "Tipo de archivo"
+  mime_type: "Tipo MIME"
+  file_permissions: "Permisos"
+  camera_model: "Modelo de cámara"
+  camera_make: "Marca de cámara"
+  lens_model: "Modelo de lente"
+  lens_make: "Marca de lente"
+  iso: "ISO"
+  exposure_time: "Tiempo exposición"
+  aperture: "Apertura"
+  focal_length: "Distancia focal"
+  focal_length_35mm: "Dist. focal (35mm)"
+  flash: "Flash"
+  white_balance: "Balance blancos"
+  metering_mode: "Modo medición"
+  exposure_program: "Programa exposición"
+  exposure_compensation: "Compensación exposición"
+  digital_zoom: "Zoom digital"
+  dimensions: "Dimensiones"
+  bits_per_sample: "Bits por muestra"
+  compression: "Compresión"
+  color_space: "Espacio color"
+  orientation: "Orientación"
+  software: "Software"
+  artist: "Artista"
+  description: "Descripción"
+  author: "Autor"
+  copyright: "Copyright"
+  title: "Título"
+  gps_latitude: "Latitud"
+  gps_longitude: "Longitud"
+  gps_latitude_ref: "Referencia latitud"
+  gps_longitude_ref: "Referencia longitud"
+  gps_altitude: "Altitud"
+  gps_altitude_ref: "Referencia altitud"
+  gps_speed: "Velocidad GPS"
+  gps_track: "Dirección GPS"
+  gps_img_direction: "Dirección imagen"
+  gps_dest_latitude: "Latitud destino"
+  gps_dest_longitude: "Longitud destino"
+  gps_date_stamp: "Fecha GPS"
+  gps_time_stamp: "Hora GPS"
+  gps_h_positioning_error: "Error posicionamiento"
+  duration: "Duración"
+  frame_rate: "Fotogramas por segundo"
+  video_codec: "Codec de vídeo"
+  audio_codec: "Codec de audio"
+  bitrate: "Tasa de bits"
+urlinfo:
+  urlinfo_message: "Información de URL"    
 
 # ┌────────────────────────────────┐
 # │ Bash Files                     │
@@ -215,6 +281,7 @@ command_not_found_message: Comando no encontrado
 install_message: Instalar
 reinstall_message: Reinstalar
 update_message: Actualizar
+uninstall_message: Desinstalar
 exit_message: Salir
 input_message: Ingrese un valor
 info_message: Información
@@ -244,4 +311,6 @@ cache_clear_action_message: Limpiando cache... (APT/PIP)
 success_cache_clear_message: Limpieza realizada con éxito
 info_descr_message: Stellar By Keiji821
 execute_solve_problems_message: Aplicando medidas....
-success_solve_problems_message: Medidas aplicadas con éxito 
+success_solve_problems_message: Medidas aplicadas con éxito
+uninstall_on_message: Desinstalando Stellar....
+uninstall_completed_message: ¡Desinstalación completada! Gracias por usar Stellar :) ♥︎

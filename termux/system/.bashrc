@@ -248,7 +248,15 @@ urlinfo() {
 
 metadatainfo() {
     cd ~/Stellar/termux/commands/osint/main
-    bash metadatainfo.sh
+    python metadatainfo.py
+    cd
+}
+
+# Misc 
+
+chat-local() {
+    cd ~/Stellar/termux/commands/misc
+    python chat-local.py
     cd
 }
 
