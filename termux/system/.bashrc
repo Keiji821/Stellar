@@ -254,9 +254,9 @@ metadatainfo() {
 
 # Misc 
 
-chat-local() {
+chat() {
     cd ~/Stellar/termux/commands/misc
-    python chat-local.py
+    python chat.py
     cd
 }
 
