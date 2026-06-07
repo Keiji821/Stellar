@@ -15,7 +15,7 @@ async def receive_msg(reader, writer):
             print("\n")
             msg = Panel(f"""
 {mensaje}
-            """, title=f"[bold white]From[/bold white] [bold red]{ip_origen}[/bold red]", border_style="bold cyan")
+            """, title=f"[bold white]From[/bold white] [bold red]{ip_origen} [/bold red]", border_style="bold cyan")
             
             console.print(msg, justify="right")
             
