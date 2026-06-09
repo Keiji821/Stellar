@@ -191,6 +191,8 @@ pip_packages=(
     "fake_useragent"
     "pycryptodome"
     "pyexiftool"
+    "dnspython"
+    "python-whois"
 )
 
 install() {
