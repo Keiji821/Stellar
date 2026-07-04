@@ -206,7 +206,7 @@ El comando `user-config` también permite modificar el tema de termux el tema de
 ##### Contactame, para dudas y colaboraciones.
 
 <p align="left">
-  <a href="https://discord.com/users/983476283491110932">
+  <a href="https://discord.com/users/602625057017036803">
 <img src="https://img.shields.io/badge/Discord-Keiji-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
   </a>
 </p>
