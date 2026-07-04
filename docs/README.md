@@ -54,7 +54,7 @@ Aunque incluye algunas herramientas en forma de comandos orientadas al hacking y
 `✅️` Multi-language support
 `✅️` Official version
 
-`📌` Si desea aportar a Stellar o reportar un error dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji100`
+`📌` Si desea aportar a Stellar o reportar un error dentro del programa contacteme a mi Discord agregandome por el nombre de usuario de `keiji98`
 
 ## `📜` Contenido
 
